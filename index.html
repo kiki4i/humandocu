@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>휴먼다큐 · 세상에서 가장 슬픈 소식이지만, 가장 아름다운 기록이 되도록</title>
+<meta name="description" content="기계적인 부고 문자는 이제 그만. 고인의 생애를 담은 감동적인 모바일 부고를 3분 만에 만드세요. 베이직 무료 · 어드밴스드 29,000원 · 프리미엄 59,000원">
+<meta property="og:title" content="휴먼다큐 · 품격 있는 모바일 부고 서비스">
+<meta property="og:description" content="슬픔을 기록으로, 그리움을 위로로. 고인의 생애를 기리는 디지털 추모 아카이브.">
+<meta property="og:url" content="https://humandocu.com">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#18160f;--ink2:#3d3a30;--ink3:#7a7568;
+  --cream:#f9f6f0;--cream2:#f0ebe0;--cream3:#e5dece;
+  --gold:#9e8250;--gold2:#c8a96e;--gold3:#e8d4a8;
+  --teal:#2a6b5e;--teal-lt:#e0efeb;
+  --serif:'Cormorant Garamond','Noto Serif KR',Georgia,serif;
+  --sans:'Noto Sans KR',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --r:3px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.8;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 56px;background:rgba(24,22,15,.93);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,169,110,.12)}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:30px;height:30px;background:var(--gold2);border-radius:2px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:15px;color:var(--ink)}
+.logo-text{font-family:var(--serif);font-size:18px;color:var(--cream);letter-spacing:.04em}
+.nav-links{display:flex;gap:26px;list-style:none}
+.nav-links a{font-size:13px;color:rgba(249,246,240,.45);letter-spacing:.04em;transition:color .2s}
+.nav-links a:hover{color:var(--gold2)}
+.nav-right{display:flex;align-items:center;gap:14px}
+.nav-tel{font-size:12px;color:rgba(249,246,240,.3)}
+.nav-tel a{color:var(--gold2)}
+.nav-btn{font-size:13px;font-weight:500;color:var(--ink);background:var(--gold2);padding:9px 22px;border-radius:var(--r);transition:all .2s}
+.nav-btn:hover{background:var(--gold3)}
+
+/* HERO */
+.hero{min-height:100vh;background:var(--ink);display:flex;flex-direction:column;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(200,169,110,.08) 0%,transparent 60%),repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(200,169,110,.025) 80px),repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(200,169,110,.025) 80px);pointer-events:none}
+.hero-body{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:130px 48px 80px;position:relative;z-index:1;max-width:900px;margin:0 auto;width:100%}
+.hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:.22em;color:rgba(200,169,110,.55);text-transform:uppercase;margin-bottom:22px;display:flex;align-items:center;gap:12px;justify-content:center}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:26px;height:1px;background:var(--gold2);opacity:.4}
+.hero-title{font-family:var(--serif);font-size:clamp(36px,5.5vw,72px);font-weight:300;line-height:1.1;letter-spacing:-.02em;color:var(--cream);margin-bottom:16px}
+.hero-title em{display:block;font-style:italic;color:var(--gold2)}
+.hero-slogan{font-family:var(--serif);font-size:16px;font-style:italic;color:rgba(249,246,240,.42);line-height:1.9;margin-bottom:38px;max-width:500px}
+.hero-slogan strong{color:rgba(200,169,110,.65);font-weight:400}
+
+/* 요금 카드 */
+.hero-plans{display:flex;gap:2px;background:rgba(255,255,255,.06);border-radius:6px;overflow:visible;margin-bottom:32px;width:100%}
+.hplan{flex:1;padding:22px 18px;background:rgba(255,255,255,.03);transition:background .2s;cursor:pointer;position:relative;border-radius:0}
+.hplan:first-child{border-radius:6px 0 0 6px}
+.hplan:last-child{border-radius:0 6px 6px 0}
+.hplan:hover{background:rgba(255,255,255,.07)}
+.hplan.feat{background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.3);margin:-1px;z-index:1;border-radius:4px}
+.hplan-pip{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:500;background:var(--gold2);color:var(--ink);padding:3px 14px;border-radius:20px;white-space:nowrap;letter-spacing:.06em}
+.hplan-name{font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(249,246,240,.3);margin-bottom:7px}
+.hplan.feat .hplan-name{color:var(--gold2)}
+.hplan-price{font-family:var(--serif);font-size:30px;font-weight:300;color:var(--cream);line-height:1;margin-bottom:4px}
+.hplan-dur{font-size:10px;font-weight:500;padding:2px 9px;border-radius:20px;display:inline-block;margin-bottom:9px;letter-spacing:.06em}
+.hplan-dur.d5{background:rgba(255,255,255,.07);color:rgba(249,246,240,.35)}
+.hplan-dur.d49{background:rgba(42,107,94,.2);color:#7fd4c0}
+.hplan-dur.dinf{background:rgba(200,169,110,.15);color:var(--gold2)}
+.hplan-feats{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.hplan-feats li{font-size:11px;color:rgba(249,246,240,.38);list-style:none;display:flex;gap:5px;align-items:flex-start;text-align:left;line-height:1.4}
+.hplan-feats li::before{content:'—';color:var(--gold2);flex-shrink:0;font-size:10px;margin-top:1px}
+.hplan.feat .hplan-feats li{color:rgba(249,246,240,.62)}
+.hplan-btn{display:block;padding:9px;text-align:center;border-radius:var(--r);font-size:12px;font-weight:500;transition:all .2s}
+.hplan-btn.free{border:1px solid rgba(255,255,255,.1);color:rgba(249,246,240,.35)}
+.hplan-btn.free:hover{border-color:var(--gold2);color:var(--gold2)}
+.hplan-btn.main{background:var(--gold2);color:var(--ink)}
+.hplan-btn.main:hover{background:var(--gold3)}
+.hplan-btn.prem{border:1px solid rgba(200,169,110,.2);color:var(--gold2)}
+.hplan-btn.prem:hover{background:rgba(200,169,110,.1)}
+
+.hero-note{font-size:12px;color:rgba(249,246,240,.22)}
+.hero-note a{color:var(--gold2)}
+
+/* 공통 섹션 */
+.sec{padding:88px 56px}
+.si{max-width:1060px;margin:0 auto}
+.ey{font-size:11px;font-weight:500;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
+.tt{font-family:var(--serif);font-size:clamp(26px,3.2vw,46px);font-weight:300;line-height:1.2;letter-spacing:-.01em;color:var(--ink);margin-bottom:12px}
+.tt em{font-style:italic;color:var(--gold)}
+.sb{font-size:15px;color:var(--ink3);line-height:1.9;max-width:520px}
+.sh{margin-bottom:48px}
+.ctr{text-align:center}.ctr .sb{margin:12px auto 0}
+
+/* 비교 */
+.compare{background:var(--cream2)}
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(24,22,15,.08);border-radius:4px;overflow:hidden}
+.cc{background:var(--cream2);padding:34px 30px}
+.cc.sol{background:var(--cream)}
+.bdg{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;display:inline-block;padding:3px 11px;border-radius:20px;margin-bottom:14px}
+.bdg.old{background:rgba(24,22,15,.07);color:var(--ink3)}
+.bdg.new{background:rgba(158,130,80,.1);color:var(--gold)}
+.chead{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:12px}
+.obox{background:rgba(24,22,15,.04);border:1px solid rgba(24,22,15,.08);border-radius:var(--r);padding:16px;font-size:13px;color:var(--ink3);line-height:1.9;margin-bottom:12px}
+.ofrom{font-size:10px;color:rgba(24,22,15,.22);margin-bottom:7px;padding-bottom:6px;border-bottom:1px solid rgba(24,22,15,.06)}
+.ck{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--ink3);margin-bottom:7px;line-height:1.5}
+.cki{width:16px;height:16px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:8px;margin-top:2px}
+.cki.x{background:rgba(24,22,15,.07);color:var(--ink3)}
+.cki.o{background:var(--teal-lt);color:var(--teal)}
+.scard{background:var(--cream);border:1px solid rgba(24,22,15,.09);border-radius:5px;overflow:hidden;box-shadow:0 6px 24px rgba(24,22,15,.06);margin-bottom:10px}
+.sc-top{background:var(--ink);padding:16px 20px;display:flex;gap:13px}
+.sc-ph{width:50px;height:64px;flex-shrink:0;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.sc-yr{font-size:9px;letter-spacing:.1em;color:rgba(200,169,110,.5);margin-bottom:3px}
+.sc-nm{font-family:var(--serif);font-size:17px;color:var(--cream);line-height:1.2;margin-bottom:2px}
+.sc-sb{font-size:10px;color:rgba(249,246,240,.38);line-height:1.5}
+.sc-bd{padding:14px 20px}
+.sc-qt{font-family:var(--serif);font-size:12px;font-style:italic;color:var(--ink2);line-height:1.8;border-left:2px solid rgba(158,130,80,.25);padding-left:11px;margin-bottom:10px}
+.sc-tg{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:9px}
+.sc-t{font-size:9px;padding:2px 8px;border-radius:20px;border:1px solid rgba(158,130,80,.2);color:var(--gold)}
+.sc-bs{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.sc-p{padding:7px;text-align:center;background:var(--ink);border-radius:var(--r);font-size:10px;font-weight:500;color:var(--cream)}
+.sc-m{padding:7px;text-align:center;border:1px solid rgba(24,22,15,.1);border-radius:var(--r);font-size:10px;color:var(--ink2)}
+
+/* UX */
+.ux-sec{background:var(--ink)}
+.ux-sec .tt{color:var(--cream)}
+.ux-sec .sb{color:rgba(249,246,240,.4)}
+.ux-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,255,255,.05);margin-top:48px}
+.us{background:rgba(255,255,255,.02);padding:28px 20px;position:relative}
+.us::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:rgba(200,169,110,.22);font-size:13px;z-index:1}
+.us:last-child::after{display:none}
+.us-num{font-family:var(--serif);font-size:32px;font-weight:300;color:rgba(200,169,110,.15);line-height:1;margin-bottom:9px}
+.us-ico{font-size:20px;margin-bottom:9px}
+.us-title{font-size:13px;font-weight:500;color:var(--cream);margin-bottom:5px}
+.us-desc{font-size:11px;color:rgba(249,246,240,.35);line-height:1.6}
+.us-time{margin-top:7px;font-size:10px;font-weight:500;color:var(--gold2);letter-spacing:.06em}
+
+/* 방명록 */
+.gb-sec{background:var(--cream)}
+.gb-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;margin-top:44px}
+.gb-mock{background:var(--cream);border:1px solid rgba(24,22,15,.09);border-radius:5px;overflow:hidden;box-shadow:0 10px 36px rgba(24,22,15,.07)}
+.gm-bar{background:var(--ink);padding:10px 14px;display:flex;align-items:center;gap:8px}
+.gm-dots{display:flex;gap:4px}
+.gmd{width:8px;height:8px;border-radius:50%}
+.gm-url{flex:1;text-align:center;font-size:9px;color:rgba(255,255,255,.18);font-family:monospace}
+.gm-body{padding:16px}
+.gm-ttl{font-size:11px;font-weight:500;color:var(--ink);margin-bottom:9px;padding-bottom:7px;border-bottom:1px solid rgba(24,22,15,.06);display:flex;justify-content:space-between;align-items:center}
+.gm-ttl span{color:var(--gold)}
+.gm-e{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid rgba(24,22,15,.05)}
+.gm-e:last-child{border-bottom:none}
+.gm-av{width:26px;height:26px;border-radius:50%;background:var(--cream2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:var(--ink3)}
+.gm-nm{font-size:10px;font-weight:500;color:var(--ink);margin-bottom:1px}
+.gm-msg{font-size:10px;color:var(--ink3);line-height:1.5}
+.gm-tm{font-size:9px;color:rgba(24,22,15,.22);margin-top:1px}
+.gm-add{margin-top:10px;padding:9px;border:1.5px dashed rgba(158,130,80,.22);border-radius:var(--r);text-align:center;font-size:10px;color:var(--gold)}
+.gb-r{}
+.gb-bdg{display:inline-flex;align-items:center;gap:6px;background:rgba(42,107,94,.1);border:1px solid rgba(42,107,94,.2);border-radius:20px;padding:4px 13px;font-size:10px;font-weight:500;color:var(--teal);margin-bottom:18px;letter-spacing:.06em}
+.d49-big{font-family:var(--serif);font-size:72px;font-weight:300;color:var(--gold);line-height:.9;margin-bottom:6px}
+.d49-lbl{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:12px}
+.d49-desc{font-size:14px;color:var(--ink3);line-height:1.9;margin-bottom:20px}
+.gb-feats{display:flex;flex-direction:column;gap:9px}
+.gbf{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid rgba(24,22,15,.06)}
+.gbf:first-child{border-top:1px solid rgba(24,22,15,.06)}
+.gbf-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;margin-top:6px}
+.gbf-txt{font-size:13px;color:var(--ink2);line-height:1.6}
+.gbf-txt strong{color:var(--ink);font-weight:500}
+
+/* 아카이브 브릿지 */
+.ab-sec{background:var(--ink);padding:88px 56px;position:relative;overflow:hidden}
+.ab-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(200,169,110,.05) 0%,transparent 70%);pointer-events:none}
+.ab-inner{max-width:880px;margin:0 auto;position:relative;z-index:1}
+.ab-flow{display:flex;align-items:stretch;gap:1px;margin:44px 0;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden}
+.ab-step{flex:1;padding:24px 18px;text-align:center;position:relative;background:rgba(255,255,255,.02)}
+.ab-step.hi{background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.2);margin:-1px;z-index:1}
+.ab-arr{position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-size:12px;color:rgba(200,169,110,.25);z-index:2}
+.ab-ico{font-size:24px;margin-bottom:8px}
+.ab-ttl{font-size:12px;font-weight:500;color:var(--cream);margin-bottom:5px;line-height:1.3}
+.ab-step.hi .ab-ttl{color:var(--gold2)}
+.ab-desc{font-size:10px;color:rgba(249,246,240,.3);line-height:1.6}
+.ab-step.hi .ab-desc{color:rgba(249,246,240,.5)}
+.ab-cta{display:inline-flex;align-items:center;gap:12px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.22);border-radius:var(--r);padding:16px 32px;transition:all .2s}
+.ab-cta:hover{background:rgba(200,169,110,.18);border-color:var(--gold2)}
+.ab-cta-t{font-size:14px;font-weight:500;color:var(--gold2);margin-bottom:2px}
+.ab-cta-s{font-size:12px;color:rgba(249,246,240,.35)}
+.ab-cta-arr{font-size:18px;color:var(--gold2)}
+
+/* 휴먼다큐 소개 */
+.hd-sec{background:var(--cream2)}
+.hd-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;margin-top:44px}
+.hd-svcs{display:flex;flex-direction:column;gap:2px;background:rgba(24,22,15,.07);border-radius:4px;overflow:hidden;margin-top:24px}
+.hd-svc{background:var(--cream2);padding:18px 20px;display:flex;gap:14px;align-items:flex-start;transition:background .2s}
+.hd-svc:hover{background:var(--cream3)}
+.hd-svc-n{font-family:var(--serif);font-size:20px;font-weight:300;color:rgba(158,130,80,.28);flex-shrink:0;line-height:1;margin-top:2px}
+.hd-svc-t{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px}
+.hd-svc-d{font-size:12px;color:var(--ink3);line-height:1.6}
+.hd-qt{font-family:var(--serif);font-size:clamp(18px,2.3vw,28px);font-weight:300;line-height:1.5;color:var(--ink);margin-bottom:16px}
+.hd-qt em{font-style:italic;color:var(--gold)}
+.hd-sub{font-size:14px;color:var(--ink3);line-height:1.9;margin-bottom:6px}
+.hd-attr{font-size:12px;color:var(--ink3);margin-bottom:22px}
+.hd-btn{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--cream);background:var(--ink);padding:11px 26px;border-radius:var(--r);transition:all .2s}
+.hd-btn:hover{background:var(--gold)}
+
+/* B2B */
+.b2b-sec{background:var(--cream)}
+.b2b-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start;margin-top:44px}
+.b2b-cards{display:flex;flex-direction:column;gap:9px}
+.b2b-card{background:var(--cream2);border:1px solid rgba(24,22,15,.07);border-radius:var(--r);padding:16px 18px;transition:border-color .2s}
+.b2b-card:hover{border-color:var(--gold)}
+.b2b-tag{font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.b2b-ttl{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.b2b-desc{font-size:12px;color:var(--ink3);line-height:1.6}
+.b2b-login-box{background:var(--ink);border-radius:5px;padding:26px;margin-bottom:16px}
+.b2b-ll{font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);margin-bottom:10px}
+.b2b-lt{font-family:var(--serif);font-size:20px;font-weight:300;color:var(--cream);margin-bottom:4px}
+.b2b-ls{font-size:12px;color:rgba(249,246,240,.32);margin-bottom:18px;line-height:1.6}
+.b2b-inp{width:100%;padding:10px 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);font-size:13px;color:var(--cream);font-family:var(--sans);outline:none;margin-bottom:7px;transition:border-color .2s}
+.b2b-inp:focus{border-color:var(--gold2)}
+.b2b-inp::placeholder{color:rgba(249,246,240,.22)}
+.b2b-sub{width:100%;padding:11px;background:var(--gold2);border:none;border-radius:var(--r);font-size:13px;font-weight:500;color:var(--ink);cursor:pointer;font-family:var(--sans);transition:background .2s;margin-top:3px}
+.b2b-sub:hover{background:var(--gold3)}
+.b2b-sgn{text-align:center;font-size:11px;color:rgba(249,246,240,.22);margin-top:9px}
+.b2b-sgn a{color:var(--gold2)}
+.b2b-stats{display:flex;gap:22px}
+.b2b-stat-n{font-family:var(--serif);font-size:24px;font-weight:300;color:var(--gold);line-height:1}
+.b2b-stat-l{font-size:11px;color:var(--ink3);margin-top:2px}
+
+/* 후기 */
+.testi-sec{background:var(--cream2)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(24,22,15,.07);margin-top:44px}
+.tcard{background:var(--cream2);padding:30px 24px}
+.stars{font-size:10px;color:var(--gold);letter-spacing:3px;margin-bottom:11px}
+.ttext{font-family:var(--serif);font-size:14px;font-style:italic;color:var(--ink2);line-height:1.85;margin-bottom:14px}
+.tby{font-size:11px;color:var(--ink3)}
+.tby span{color:var(--gold)}
+.tplan{font-size:10px;font-weight:500;padding:2px 7px;border-radius:20px;background:rgba(158,130,80,.1);color:var(--gold);margin-left:4px}
+
+/* FAQ */
+.faq-sec{background:var(--cream)}
+.faq-inner{max-width:660px;margin:0 auto}
+.faq-item{border-bottom:1px solid rgba(24,22,15,.07);overflow:hidden}
+.faq-q{padding:17px 0;font-size:14px;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;transition:color .2s}
+.faq-q:hover{color:var(--gold)}
+.faq-arr{font-size:16px;color:var(--gold);flex-shrink:0;transition:transform .3s}
+.faq-item.open .faq-arr{transform:rotate(45deg)}
+.faq-a{font-size:13px;color:var(--ink3);line-height:1.9;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+.faq-item.open .faq-a{max-height:200px;padding-bottom:16px}
+
+/* CTA */
+.cta-sec{padding:100px 56px;text-align:center;background:var(--ink);position:relative;overflow:hidden}
+.cta-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 100%,rgba(200,169,110,.06) 0%,transparent 65%);pointer-events:none}
+.cta-kicker{font-size:11px;font-weight:500;letter-spacing:.2em;color:rgba(200,169,110,.45);text-transform:uppercase;margin-bottom:16px;position:relative;z-index:1}
+.cta-tt{font-family:var(--serif);font-size:clamp(30px,4.2vw,54px);font-weight:300;line-height:1.2;color:var(--cream);margin-bottom:12px;position:relative;z-index:1}
+.cta-tt em{font-style:italic;color:var(--gold2)}
+.cta-sb{font-size:15px;color:rgba(249,246,240,.38);max-width:420px;margin:0 auto 36px;line-height:1.9;position:relative;z-index:1}
+.cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;margin-bottom:18px}
+.btn-g{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:500;color:var(--ink);background:var(--gold2);padding:13px 34px;border-radius:var(--r);transition:all .25s}
+.btn-g:hover{background:var(--gold3);transform:translateY(-2px)}
+.btn-gh{display:inline-flex;align-items:center;gap:7px;font-size:14px;color:rgba(249,246,240,.45);border:1px solid rgba(249,246,240,.14);padding:13px 34px;border-radius:var(--r);transition:all .25s}
+.btn-gh:hover{border-color:var(--gold2);color:var(--gold2)}
+.cta-contact{font-size:13px;color:rgba(249,246,240,.28);position:relative;z-index:1}
+.cta-contact a{color:var(--gold2)}
+
+/* FOOTER */
+footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px}
+.ft-logo{font-family:var(--serif);font-size:17px;color:var(--cream);margin-bottom:7px;letter-spacing:.04em}
+.ft-logo span{color:var(--gold2)}
+.ft-tag{font-size:12px;color:rgba(249,246,240,.2);line-height:1.8;margin-bottom:10px}
+.ft-ct{font-size:12px;color:rgba(249,246,240,.25);line-height:1.8}
+.ft-ct a{color:var(--gold2)}
+.ft-col-t{font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(249,246,240,.2);margin-bottom:11px}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:8px}
+.ft-links a{font-size:12px;color:rgba(249,246,240,.25);transition:color .2s}
+.ft-links a:hover{color:var(--gold2)}
+.ft-bot{background:#0a0908;padding:13px 56px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:7px;border-top:1px solid rgba(255,255,255,.04)}
+.ft-copy{font-size:11px;color:rgba(249,246,240,.14);letter-spacing:.04em}
+
+/* 카카오 버튼 */
+.kk-btn{position:fixed;bottom:24px;right:24px;z-index:150;width:48px;height:48px;border-radius:50%;background:#FEE500;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.16);font-size:20px;text-decoration:none;transition:transform .2s}
+.kk-btn:hover{transform:scale(1.1)}
+
+/* 모달 공통 입력 */
+.mi{width:100%;padding:10px 12px;border:1px solid var(--cream3);border-radius:var(--r);font-size:13px;font-family:var(--sans);outline:none;background:var(--cream)}
+.mi:focus{border-color:var(--gold)}
+
+/* MOBILE */
+@media(max-width:860px){
+  nav{padding:12px 20px}.nav-links{display:none}
+  .hero-body{padding:100px 20px 60px}
+  .hero-plans{flex-direction:column}
+  .hplan{border-radius:0!important}
+  .sec,.ab-sec,.cta-sec{padding:64px 20px}
+  .cmp-grid,.gb-grid,.hd-grid,.b2b-grid{grid-template-columns:1fr}
+  .ux-steps{grid-template-columns:1fr 1fr}.us::after{display:none}
+  .ab-flow{flex-direction:column}.ab-arr{display:none}
+  .testi-grid{grid-template-columns:1fr}
+  footer{grid-template-columns:1fr;gap:22px;padding:32px 20px}
+  .ft-bot{padding:12px 20px;flex-direction:column;gap:5px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">
+    <div class="logo-mark">H</div>
+    <span class="logo-text">휴먼다큐</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#compare">서비스</a></li>
+    <li><a href="#pricing">요금제</a></li>
+    <li><a href="#guestbook">방명록</a></li>
+    <li><a href="#archive">아카이브</a></li>
+    <li><a href="#b2b">장례지도사</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-tel">문의 <a href="tel:010-5305-6804">010-5305-6804</a></div>
+    <a href="#" onclick="openModal('advanced');return false;" class="nav-btn">부고 만들기 →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-body">
+    <div class="hero-eyebrow">humandocu.com · 모바일 부고 서비스</div>
+    <h1 class="hero-title">
+      세상에서 가장 슬픈 소식이지만,
+      <em>가장 아름다운 기록이 되도록</em>
+    </h1>
+    <p class="hero-slogan">기계적인 부고 문자는 이제 그만.<br><strong>고인의 생애가 담긴 링크 하나</strong>로 마음을 전하세요.</p>
+
+    <div class="hero-plans" id="pricing">
+      <div class="hplan" onclick="openModal('basic')">
+        <div class="hplan-name">베이직</div>
+        <div class="hplan-price">무료</div>
+        <span class="hplan-dur d5">5일 유지</span>
+        <ul class="hplan-feats">
+          <li>사진 1장 + 기본 문구</li>
+          <li>장례 일정·장소·계좌</li>
+          <li>카카오톡 공유</li>
+          <li>30분 자동 완성</li>
+        </ul>
+        <span class="hplan-btn free">무료로 시작하기</span>
+      </div>
+      <div class="hplan feat" onclick="openModal('advanced')">
+        <div class="hplan-pip">✦ 가장 많이 선택</div>
+        <div class="hplan-name">어드밴스드</div>
+        <div class="hplan-price">₩29,000</div>
+        <span class="hplan-dur d49">49재까지 함께</span>
+        <ul class="hplan-feats">
+          <li>AI 맞춤 추모 문구</li>
+          <li>사진 20장 생애 연대기</li>
+          <li>추모 영상 슬라이드쇼</li>
+          <li>조의금 QR 코드</li>
+          <li>디지털 방명록</li>
+          <li>발인 다음날 답례 문구</li>
+          <li>49재 후 아카이브 이관</li>
+        </ul>
+        <span class="hplan-btn main">지금 신청하기 →</span>
+      </div>
+      <div class="hplan" onclick="openModal('premium')">
+        <div class="hplan-name">프리미엄</div>
+        <div class="hplan-price">₩59,000</div>
+        <span class="hplan-dur dinf">영구 보존</span>
+        <ul class="hplan-feats">
+          <li>어드밴스드 전체 포함</li>
+          <li>AI 사진 복원·보정</li>
+          <li>고화질 영상 다운로드</li>
+          <li>디지털 액자 파일</li>
+          <li>1:1 전담 담당자</li>
+          <li>링크 영구 유지</li>
+        </ul>
+        <span class="hplan-btn prem">전담 상담 받기</span>
+      </div>
+    </div>
+    <p class="hero-note">문의: <a href="tel:010-5305-6804">010-5305-6804</a> &nbsp;·&nbsp; 전화·문자 모두 가능</p>
+  </div>
+</section>
+
+<!-- 비교 -->
+<section class="sec compare" id="compare">
+  <div class="si">
+    <div class="sh"><div class="ey">기존 vs 휴먼다큐</div><h2 class="tt">받는 사람의 마음이<br><em>완전히 달라집니다</em></h2></div>
+    <div class="cmp-grid">
+      <div class="cc">
+        <span class="bdg old">기존 문자 부고</span>
+        <div class="chead">매번 이런 문자를 받으셨을 겁니다</div>
+        <div class="obox"><div class="ofrom">✕ 문자 · 상조회사 발송</div>삼가 알립니다. 저희 부친 홍○○씨께서 별세하셨습니다.<br><br>발인: 3월 17일 오전 9시 · 장례식장: ○○병원 3호실<br>계좌: 신한 110-○○○-○○○○○○</div>
+        <div class="ck"><div class="cki x">✕</div>고인이 어떤 분인지 전혀 알 수 없음</div>
+        <div class="ck"><div class="cki x">✕</div>장례 후 사라지는 휘발성 정보</div>
+        <div class="ck"><div class="cki x">✕</div>상조회사 틀 — 개인화 불가</div>
+        <div class="ck"><div class="cki x">✕</div>감사 인사조차 남기지 못함</div>
+      </div>
+      <div class="cc sol">
+        <span class="bdg new">휴먼다큐 부고 링크</span>
+        <div class="chead">이렇게 달라집니다</div>
+        <div class="scard">
+          <div class="sc-top"><div class="sc-ph">🖼</div><div><div class="sc-yr">1943 — 2025 · 향년 82세</div><div class="sc-nm">김순자<br>金順子</div><div class="sc-sb">새벽마다 밥을 지으시던 어머니</div></div></div>
+          <div class="sc-bd"><div class="sc-qt">"삯바느질로 우리 학비를 대던 그 손이 이제는 쉬게 되었습니다. 어머니의 82년은 우리 모두의 역사였습니다."</div><div class="sc-tg"><span class="sc-t">▶ 추모 영상</span><span class="sc-t">생애 연대기</span><span class="sc-t">조의금 QR</span></div><div class="sc-bs"><div class="sc-p">▶ 추모 영상</div><div class="sc-m">📍 오시는 길</div></div></div>
+        </div>
+        <div class="ck"><div class="cki o">✓</div>고인의 얼굴·생애·이야기가 담김</div>
+        <div class="ck"><div class="cki o">✓</div>영상·연대기·일정·계좌 링크 하나에</div>
+        <div class="ck"><div class="cki o">✓</div>발인 다음날 답례 알림 자동 발송</div>
+        <div class="ck"><div class="cki o">✓</div>49재 후 영구 아카이브로 보존</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UX 5단계 -->
+<section class="sec ux-sec">
+  <div class="si">
+    <div class="sh ctr"><div class="ey" style="color:rgba(200,169,110,.5)">진행 방법</div><h2 class="tt" style="color:var(--cream)">5단계,<br><em>3분이면 됩니다</em></h2><p class="sb" style="margin:12px auto 0">입력은 최소화하되, 결과는 최고여야 합니다.</p></div>
+    <div class="ux-steps">
+      <div class="us"><div class="ab-arr">→</div><div class="us-num">01</div><div class="us-ico">📱</div><div class="us-title">생성</div><div class="us-desc">고인 정보 + 사진 업로드. 3분 입력.</div><div class="us-time">⏱ 3분</div></div>
+      <div class="us"><div class="ab-arr">→</div><div class="us-num">02</div><div class="us-ico">💬</div><div class="us-title">전달</div><div class="us-desc">카카오톡으로 링크 발송.</div><div class="us-time">베이직 30분 · 어드밴스드 1시간</div></div>
+      <div class="us"><div class="ab-arr">→</div><div class="us-num">03</div><div class="us-ico">🕯</div><div class="us-title">추모</div><div class="us-desc">방명록에 마음을 남기고 기억.</div><div class="us-time">49재 동안</div></div>
+      <div class="us"><div class="ab-arr">→</div><div class="us-num">04</div><div class="us-ico">✉️</div><div class="us-title">인사</div><div class="us-desc">발인 다음날 답례 알림 자동 발송.</div><div class="us-time">자동 알림</div></div>
+      <div class="us"><div class="us-num">05</div><div class="us-ico">🗂</div><div class="us-title">보관</div><div class="us-desc">49재 후 아카이브 이관.</div><div class="us-time">영구 보존</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 방명록 -->
+<section class="sec gb-sec" id="guestbook">
+  <div class="si">
+    <div class="sh"><div class="ey">디지털 방명록 · 어드밴스드 이상</div><h2 class="tt">기억은 함께 나눌 때<br><em>더 오래 남습니다</em></h2></div>
+    <div class="gb-grid">
+      <div class="gb-mock">
+        <div class="gm-bar"><div class="gm-dots"><div class="gmd" style="background:#ff5f57"></div><div class="gmd" style="background:#febc2e"></div><div class="gmd" style="background:#28c840"></div></div><div class="gm-url">humandocu.com/김순자 · 방명록</div></div>
+        <div class="gm-body">
+          <div class="gm-ttl">방명록 <span>12개</span> <span style="font-size:9px;color:var(--ink3);font-weight:300">· 상주 실시간 확인 가능</span></div>
+          <div class="gm-e"><div class="gm-av">이</div><div><div class="gm-nm">이○○ (중학교 친구)</div><div class="gm-msg">순자야, 너의 환한 웃음이 너무 그립다.</div><div class="gm-tm">3시간 전</div></div></div>
+          <div class="gm-e"><div class="gm-av">박</div><div><div class="gm-nm">박○○ (직장 동료)</div><div class="gm-msg">늘 따뜻하게 대해주셔서 감사했습니다.</div><div class="gm-tm">5시간 전</div></div></div>
+          <div class="gm-e"><div class="gm-av">김</div><div><div class="gm-nm">김○○ (이웃)</div><div class="gm-msg">밝게 웃으시던 모습이 눈에 선합니다.</div><div class="gm-tm">어제</div></div></div>
+          <div class="gm-add">+ 마음 남기기</div>
+        </div>
+      </div>
+      <div class="gb-r">
+        <div class="gb-bdg">✦ 어드밴스드 · 프리미엄 전용</div>
+        <div class="d49-big">49</div>
+        <div class="d49-lbl">49재까지 함께합니다</div>
+        <div class="d49-desc">사십구재는 고인이 돌아가신 후 49일째 되는 날입니다. 이 의미 있는 기간 동안 부고 링크가 유지되어, 가족과 조문객이 언제든 고인을 기억할 수 있습니다.</div>
+        <div class="gb-feats">
+          <div class="gbf"><div class="gbf-dot"></div><div class="gbf-txt"><strong>상주가 언제든지 실시간 확인</strong> — 방문자, 남겨진 말들</div></div>
+          <div class="gbf"><div class="gbf-dot"></div><div class="gbf-txt"><strong>발인 다음날 집계 이메일 자동 발송</strong> — 방명록 전체 기록 전달</div></div>
+          <div class="gbf"><div class="gbf-dot"></div><div class="gbf-txt"><strong>49재 종료 시 아카이브 이관 안내</strong> — 원클릭 영구 보존</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 아카이브 브릿지 -->
+<section class="ab-sec" id="archive">
+  <div class="ab-inner">
+    <div style="text-align:center">
+      <div class="ey" style="color:rgba(200,169,110,.45)">부고 서비스에서 아카이브로</div>
+      <h2 class="tt" style="color:var(--cream);text-align:center;margin-bottom:10px">부고 서비스는 <em>입구</em>입니다<br>본질은 <em>영구 기록</em>입니다</h2>
+      <p class="sb" style="color:rgba(249,246,240,.38);margin:0 auto;text-align:center">49재가 끝나는 날, 고인의 모든 기록이 영원히 살아있을 공간으로 이관됩니다.</p>
+    </div>
+    <div class="ab-flow">
+      <div class="ab-step"><div class="ab-arr">→</div><div class="ab-ico">📱</div><div class="ab-ttl">부고 링크 생성</div><div class="ab-desc">3분 입력<br>30분~1시간 완성</div></div>
+      <div class="ab-step"><div class="ab-arr">→</div><div class="ab-ico">🕯</div><div class="ab-ttl">49재 동안 추모</div><div class="ab-desc">방명록·영상<br>함께 기억</div></div>
+      <div class="ab-step hi"><div class="ab-arr">→</div><div class="ab-ico">🗂</div><div class="ab-ttl">49재 종료 · 이관 안내</div><div class="ab-desc">원클릭으로<br>아카이브로</div></div>
+      <div class="ab-step"><div class="ab-arr">→</div><div class="ab-ico">♾</div><div class="ab-ttl">영구 아카이브</div><div class="ab-desc">humandocu.com<br>에서 영원히</div></div>
+      <div class="ab-step"><div class="ab-ico">🔔</div><div class="ab-ttl">기일마다 알림</div><div class="ab-desc">49재·100일·1주기<br>잊지 않도록</div></div>
+    </div>
+    <div style="text-align:center">
+      <a href="#humandocu" class="ab-cta">
+        <div><div class="ab-cta-t">휴먼다큐 아카이브란?</div><div class="ab-cta-s">고인의 생애를 영원히 기록하는 공간 · 자세히 알아보기</div></div>
+        <div class="ab-cta-arr">↓</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 휴먼다큐 소개 -->
+<section class="sec hd-sec" id="humandocu">
+  <div class="si">
+    <div class="sh"><div class="ey">휴먼다큐 아카이브</div><h2 class="tt">모든 사람의 인생에는<br><em>기록이 필요합니다</em></h2></div>
+    <div class="hd-grid">
+      <div>
+        <p style="font-size:15px;color:var(--ink3);line-height:1.9;margin-bottom:20px">부고 서비스로 시작된 고인의 기록이 영구 아카이브로 이어집니다. 살아있는 동안 나의 인생을 미리 기록해 두는 것도 가능합니다.</p>
+        <div class="hd-svcs">
+          <div class="hd-svc"><div class="hd-svc-n">01</div><div><div class="hd-svc-t">부고 → 영구 아카이브 이관</div><div class="hd-svc-d">49재 종료 후 원클릭으로 고인의 모든 기록을 영구 보존합니다.</div></div></div>
+          <div class="hd-svc"><div class="hd-svc-n">02</div><div><div class="hd-svc-t">생애 연대기 · 인생 파일</div><div class="hd-svc-d">살아있는 동안 나의 인생을 사진·영상·글로 기록하는 개인 아카이브.</div></div></div>
+          <div class="hd-svc"><div class="hd-svc-n">03</div><div><div class="hd-svc-t">칠순·팔순 특별 선물</div><div class="hd-svc-d">부모님의 인생을 연대기로 만들어 드리는 세상에 단 하나뿐인 선물.</div></div></div>
+          <div class="hd-svc"><div class="hd-svc-n">04</div><div><div class="hd-svc-t">디지털 자서전</div><div class="hd-svc-d">라이프 에디터가 인터뷰를 진행하고 완성된 자서전을 제작합니다.</div></div></div>
+        </div>
+      </div>
+      <div class="hd-right-col" style="display:flex;flex-direction:column;justify-content:center">
+        <div class="hd-qt">노인 한 사람이 죽으면,<br><em>도서관 하나가<br>불타는 것과 같다</em></div>
+        <p class="hd-sub">우리는 삶을 살아가면서 최소 소설 몇 권을 써내려 갑니다. 나를 정리하는 과정에서 진짜 내가 누구인지 알게 됩니다. 그리고 그 기록은, 나보다 오래 살아남습니다.</p>
+        <p class="hd-attr">— 아마두 암파테 바 · 유네스코 연설, 1960</p>
+        <a href="tel:010-5305-6804" class="hd-btn">인생 기록 문의하기 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 장례지도사 -->
+<section class="sec b2b-sec" id="b2b">
+  <div class="si">
+    <div class="sh"><div class="ey">장례지도사 · 장례식장 파트너십</div><h2 class="tt">함께하면<br><em>모두가 이깁니다</em></h2></div>
+    <div class="b2b-grid">
+      <div class="b2b-cards">
+        <div class="b2b-card"><div class="b2b-tag">Easy Manager</div><div class="b2b-ttl">장례지도사 전용 관리 도구</div><div class="b2b-desc">담당 빈소 리스트 → 사진만 올리면 30분 내 완성.</div></div>
+        <div class="b2b-card"><div class="b2b-tag">Referral 수익</div><div class="b2b-ttl">실시간 정산 대시보드</div><div class="b2b-desc">생성한 부고에서 결제 즉시 정산금이 쌓입니다.</div></div>
+        <div class="b2b-card"><div class="b2b-tag">B2B Package</div><div class="b2b-ttl">영업 표준화 패키지</div><div class="b2b-desc">제휴 제안서 + QR 안내 카드 + 교육 매뉴얼 제공.</div></div>
+      </div>
+      <div>
+        <div class="b2b-login-box">
+          <div class="b2b-ll">장례지도사 전용</div>
+          <div class="b2b-lt">Easy Manager</div>
+          <div class="b2b-ls">파트너 장례지도사·장례식장만을 위한<br>별도 관리 시스템입니다.</div>
+          <input type="text" class="b2b-inp" placeholder="아이디">
+          <input type="password" class="b2b-inp" placeholder="비밀번호">
+          <button class="b2b-sub" onclick="alert('Easy Manager 서비스 준비 중입니다.\n제휴 문의: 010-5305-6804')">로그인 →</button>
+          <div class="b2b-sgn">계정이 없으신가요? <a href="tel:010-5305-6804">제휴 문의</a></div>
+        </div>
+        <div class="b2b-stats">
+          <div><div class="b2b-stat-n">30%</div><div class="b2b-stat-l">리퍼럴 수익</div></div>
+          <div><div class="b2b-stat-n">3분</div><div class="b2b-stat-l">작업 시간</div></div>
+          <div><div class="b2b-stat-n">0원</div><div class="b2b-stat-l">파트너 가입비</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 후기 -->
+<section class="sec testi-sec">
+  <div class="si">
+    <div class="sh ctr"><div class="ey">이용 후기</div><h2 class="tt">직접 경험하신<br><em>분들의 이야기</em></h2></div>
+    <div class="testi-grid">
+      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext">"장례 당일 신청했는데 30분 만에 완성됐어요. 조문객분들이 영상 보면서 다들 눈물을 흘리셨습니다."</p><div class="tby"><span>김○○</span> · 50대 · 서울 <span class="tplan">어드밴스드</span></div></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext">"발인 다음날 답례 알림이 왔는데, AI가 써준 문구가 너무 감동적이었어요. '이런 인사는 처음 받아봤다'고 연락이 왔습니다."</p><div class="tby"><span>박○○</span> · 40대 · 부산 <span class="tplan">어드밴스드</span></div></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext">"흑백 사진을 컬러로 복원해주셔서 아버지의 젊은 시절을 처음 컬러로 봤어요. 온 가족이 울었습니다."</p><div class="tby"><span>이○○</span> · 60대 · 대구 <span class="tplan">프리미엄</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec faq-sec" id="faq">
+  <div class="si">
+    <div class="sh ctr" style="max-width:660px;margin:0 auto 36px"><div class="ey">자주 묻는 질문</div><h2 class="tt"><em>궁금한 점</em>을 해결해 드립니다</h2></div>
+    <div class="faq-inner">
+      <div class="faq-item open"><div class="faq-q" onclick="faq(this)">베이직과 어드밴스드의 차이가 뭔가요?<span class="faq-arr">+</span></div><div class="faq-a">베이직은 사진 1장, 기본 문구로 30분 내 자동 완성되는 무료 서비스입니다. 어드밴스드는 AI 맞춤 추모 문구, 사진 20장 생애 연대기, 추모 영상, 방명록, 조의금 QR, 답례 문구까지 포함된 품격 있는 서비스로 49재까지 링크가 유지됩니다.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">얼마나 빨리 완성되나요?<span class="faq-arr">+</span></div><div class="faq-a">베이직은 30분 내 자동 완성됩니다. 어드밴스드는 1시간 내 기본 초안이 자동 생성되어 바로 부고를 보내실 수 있고, 12시간 안에 완성본이 전달됩니다.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">49재 이후에는 어떻게 되나요?<span class="faq-arr">+</span></div><div class="faq-a">49재 종료 시점에 자동으로 알림이 발송됩니다. "고인의 기록을 휴먼다큐 아카이브로 영구 보존하시겠습니까?" 원클릭으로 이관하시면 영원히 보존됩니다. 이후 기일마다 알림을 받아 고인을 기억할 수 있습니다.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">답례 알림은 어떻게 작동하나요?<span class="faq-arr">+</span></div><div class="faq-a">발인 다음날 자동으로 알림톡이 발송됩니다. AI가 고인의 정보를 바탕으로 개인화된 답례 문구를 작성해 드립니다. 방명록 집계 내용도 함께 이메일로 발송됩니다.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">스마트폰 조작이 서툰데 이용할 수 있나요?<span class="faq-arr">+</span></div><div class="faq-a">네, 카카오톡으로 사진을 보내주시면 저희가 대신 올려드립니다. 010-5305-6804로 연락 주시면 전화로 안내해 드립니다.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="cta-kicker">지금 바로 시작하세요</div>
+  <h2 class="cta-tt">슬픔을 기록으로,<br><em>그리움을 위로로</em></h2>
+  <p class="cta-sb">3분 입력으로 감동적인 부고 링크가 완성됩니다.<br>고인을 위한 마지막 예우를 품격 있게.</p>
+  <div class="cta-btns">
+    <a href="#" onclick="openModal('advanced');return false;" class="btn-g">지금 부고 만들기 →</a>
+    <a href="tel:010-5305-6804" class="btn-gh">📞 전화 상담</a>
+  </div>
+  <div class="cta-contact">📞 <a href="tel:010-5305-6804">010-5305-6804</a> &nbsp;·&nbsp; <a href="https://humandocu.com">humandocu.com</a></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="ft-logo">휴먼<span>다큐</span></div>
+    <p class="ft-tag">슬픔을 기록으로, 그리움을 위로로.<br>고인의 생애를 기리는 디지털 추모 아카이브.</p>
+    <div class="ft-ct">📞 <a href="tel:010-5305-6804">010-5305-6804</a><br>🌐 <a href="https://humandocu.com">humandocu.com</a></div>
+  </div>
+  <div>
+    <div class="ft-col-t">부고 서비스</div>
+    <ul class="ft-links"><li><a href="#pricing">베이직 (무료)</a></li><li><a href="#pricing">어드밴스드</a></li><li><a href="#pricing">프리미엄</a></li><li><a href="#guestbook">디지털 방명록</a></li></ul>
+  </div>
+  <div>
+    <div class="ft-col-t">휴먼다큐</div>
+    <ul class="ft-links"><li><a href="#archive">아카이브 이관</a></li><li><a href="#humandocu">인생 기록</a></li><li><a href="#humandocu">칠순·팔순 선물</a></li><li><a href="#humandocu">디지털 자서전</a></li></ul>
+  </div>
+  <div>
+    <div class="ft-col-t">안내</div>
+    <ul class="ft-links"><li><a href="#b2b">장례지도사 제휴</a></li><li><a href="#faq">FAQ</a></li><li><a href="#">이용약관</a></li><li><a href="#">개인정보처리방침</a></li></ul>
+  </div>
+</footer>
+<div class="ft-bot">
+  <span class="ft-copy">© 2026 휴먼다큐 · humandocu.com · All rights reserved.</span>
+  <span style="font-size:11px;color:rgba(249,246,240,.14)">부고 서비스 · 디지털 추모 아카이브</span>
+</div>
+
+<a href="tel:010-5305-6804" class="kk-btn" title="전화 상담">📞</a>
+
+<!-- 베이직 모달 -->
+<div id="modal-basic" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(24,22,15,.8);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--cream);border-radius:8px;max-width:480px;width:100%;max-height:90vh;overflow-y:auto">
+    <div style="padding:24px 24px 0;display:flex;justify-content:space-between;align-items:flex-start">
+      <div><div style="font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:4px">베이직 · 무료</div><div style="font-family:var(--serif);font-size:19px;font-weight:300;color:var(--ink)">기본 부고 정보 입력</div><div style="font-size:11px;color:var(--ink3);margin-top:2px">3분 작성 → 30분 자동 완성</div></div>
+      <button onclick="closeModal('basic')" style="background:none;border:none;font-size:18px;color:var(--ink3);cursor:pointer">✕</button>
+    </div>
+    <div style="padding:18px 24px;display:flex;flex-direction:column;gap:11px">
+      <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">고인 성함 *</label><input class="mi" type="text" placeholder="홍길동"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
+        <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">생년월일 *</label><input class="mi" type="text" placeholder="1943년 3월 5일"></div>
+        <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">별세일 *</label><input class="mi" type="text" placeholder="2025년 3월 15일"></div>
+      </div>
+      <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">발인 일시 *</label><input class="mi" type="text" placeholder="2025년 3월 17일 오전 9시"></div>
+      <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">장례식장 이름·주소 *</label><input class="mi" type="text" placeholder="○○병원 장례식장 3호실, 서울시..."></div>
+      <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">조의금 계좌 *</label><input class="mi" type="text" placeholder="신한은행 110-xxx-xxxxxx 홍○○"></div>
+      <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">고인 사진 1장 *</label><div style="border:1.5px dashed var(--cream3);border-radius:var(--r);padding:18px;text-align:center;cursor:pointer" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--cream3)'"><div style="font-size:20px;margin-bottom:4px">📷</div><div style="font-size:11px;color:var(--ink3)">클릭하거나 드래그해서 올리세요</div></div></div>
+      <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">신청자 연락처 *</label><input class="mi" type="tel" placeholder="010-xxxx-xxxx"></div>
+      <button onclick="alert('신청이 접수되었습니다.\n30분 내 링크가 전달됩니다.\n문의: 010-5305-6804');closeModal('basic')" style="width:100%;padding:12px;background:var(--ink);border:none;border-radius:var(--r);font-size:13px;font-weight:500;color:var(--cream);cursor:pointer;font-family:var(--sans);margin-top:3px">무료 부고 생성하기 →</button>
+      <div style="text-align:center;font-size:11px;color:var(--ink3)">30분 내 자동 완성 · 링크 5일 유지</div>
+    </div>
+  </div>
+</div>
+
+<!-- 어드밴스드 모달 -->
+<div id="modal-advanced" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(24,22,15,.8);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--cream);border-radius:8px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto">
+    <div style="background:var(--ink);padding:22px 24px;border-radius:8px 8px 0 0;display:flex;justify-content:space-between;align-items:flex-start">
+      <div><div style="font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2);margin-bottom:4px">어드밴스드 · ₩29,000</div><div style="font-family:var(--serif);font-size:19px;font-weight:300;color:var(--cream)">품격 있는 부고 신청</div><div style="font-size:11px;color:rgba(249,246,240,.38);margin-top:2px">1시간 내 초안 · 12시간 내 완성본</div></div>
+      <button onclick="closeModal('advanced')" style="background:none;border:none;font-size:18px;color:rgba(255,255,255,.35);cursor:pointer">✕</button>
+    </div>
+    <div style="padding:18px 24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:10px;font-weight:500;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;padding-bottom:6px;border-bottom:1px solid var(--cream3)">기본 정보</div>
+      <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">고인 성함 *</label><input class="mi" type="text" placeholder="예: 김순자"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
+        <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">생년월일 *</label><input class="mi" type="text" placeholder="1943년 3월 5일"></div>
+        <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">별세일 *</label><input class="mi" type="text" placeholder="2025년 3월 15일"></div>
+      </div>
+      <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">고인 한 줄 소개 * <span style="color:var(--ink3);font-weight:300">(핵심 문구가 됩니다)</span></label><input class="mi" type="text" placeholder="예: 평생 삯바느질로 자식들을 키우신 어머니"></div>
+      <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:6px">고인의 특징 (선택)</label><div style="display:flex;flex-wrap:wrap;gap:5px"><label style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--ink2);cursor:pointer;background:var(--cream2);padding:4px 10px;border-radius:20px;border:1px solid var(--cream3)"><input type="checkbox" style="accent-color:var(--gold)"> 묵묵히 헌신</label><label style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--ink2);cursor:pointer;background:var(--cream2);padding:4px 10px;border-radius:20px;border:1px solid var(--cream3)"><input type="checkbox" style="accent-color:var(--gold)"> 밝고 유머</label><label style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--ink2);cursor:pointer;background:var(--cream2);padding:4px 10px;border-radius:20px;border:1px solid var(--cream3)"><input type="checkbox" style="accent-color:var(--gold)"> 가족 최우선</label><label style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--ink2);cursor:pointer;background:var(--cream2);padding:4px 10px;border-radius:20px;border:1px solid var(--cream3)"><input type="checkbox" style="accent-color:var(--gold)"> 신앙이 깊다</label></div></div>
+      <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">기억에 남는 에피소드 (선택)</label><textarea class="mi" placeholder="예: 새벽 4시면 일어나 밥을 짓던 어머니의 모습..." style="resize:vertical;min-height:64px;line-height:1.6"></textarea></div>
+      <div style="font-size:10px;font-weight:500;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;padding-bottom:6px;border-bottom:1px solid var(--cream3)">장례 정보</div>
+      <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">발인 일시 *</label><input class="mi" type="text" placeholder="2025년 3월 17일 오전 9시"></div>
+      <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">장례식장 이름·주소 *</label><input class="mi" type="text" placeholder="○○병원 장례식장 3호실, 서울시..."></div>
+      <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">조의금 계좌 *</label><input class="mi" type="text" placeholder="신한은행 110-xxx-xxxxxx 김○○"></div>
+      <div style="font-size:10px;font-weight:500;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;padding-bottom:6px;border-bottom:1px solid var(--cream3)">사진 업로드</div>
+      <div style="border:1.5px dashed var(--cream3);border-radius:var(--r);padding:20px;text-align:center;cursor:pointer" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--cream3)'"><div style="font-size:22px;margin-bottom:5px">📷</div><div style="font-size:12px;font-weight:500;color:var(--ink2);margin-bottom:2px">사진을 드래그하거나 클릭</div><div style="font-size:10px;color:var(--ink3)">최대 20장 · 연대순 권장</div></div>
+      <div style="font-size:10px;font-weight:500;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;padding-bottom:6px;border-bottom:1px solid var(--cream3)">신청자 정보</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
+        <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">이름 *</label><input class="mi" type="text" placeholder="성함"></div>
+        <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">연락처 *</label><input class="mi" type="tel" placeholder="010-xxxx-xxxx"></div>
+      </div>
+      <div><label style="font-size:11px;font-weight:500;color:var(--ink2);display:block;margin-bottom:3px">결과물 받을 이메일 *</label><input class="mi" type="email" placeholder="example@email.com"></div>
+      <div style="background:var(--teal-lt);border-radius:var(--r);padding:10px 12px;border-left:3px solid var(--teal);font-size:12px;color:var(--teal)"><strong>결제 안내</strong> — 제출 후 29,000원 결제 링크가 문자로 발송됩니다.</div>
+      <button onclick="alert('신청이 접수되었습니다!\n곧 결제 링크가 문자로 발송됩니다.\n문의: 010-5305-6804');closeModal('advanced')" style="width:100%;padding:12px;background:var(--gold2);border:none;border-radius:var(--r);font-size:13px;font-weight:500;color:var(--ink);cursor:pointer;font-family:var(--sans);margin-top:3px">신청 접수하기 (₩29,000) →</button>
+      <div style="text-align:center;font-size:11px;color:var(--ink3)">1시간 내 초안 · 12시간 내 완성 · 49재 링크 유지</div>
+    </div>
+  </div>
+</div>
+
+<!-- 프리미엄 모달 -->
+<div id="modal-premium" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(24,22,15,.8);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--cream);border-radius:8px;max-width:380px;width:100%;padding:28px">
+    <div style="font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:7px">프리미엄 · ₩59,000</div>
+    <div style="font-family:var(--serif);font-size:20px;font-weight:300;color:var(--ink);margin-bottom:7px">1:1 전담 상담</div>
+    <p style="font-size:13px;color:var(--ink3);line-height:1.8;margin-bottom:22px">AI 사진 복원·고화질 영상·영구 보존 등 맞춤 서비스입니다. 전담 담당자가 직접 안내해 드립니다.</p>
+    <a href="tel:010-5305-6804" style="display:block;padding:12px;text-align:center;background:var(--ink);border-radius:var(--r);font-size:13px;font-weight:500;color:var(--cream);margin-bottom:8px">📞 010-5305-6804 전화하기</a>
+    <button onclick="closeModal('premium')" style="width:100%;padding:10px;background:none;border:1px solid var(--cream3);border-radius:var(--r);font-size:12px;color:var(--ink3);cursor:pointer;font-family:var(--sans)">닫기</button>
+  </div>
+</div>
+
+<script>
+function openModal(t){const m=document.getElementById('modal-'+t);if(!m)return;m.style.display='flex';document.body.style.overflow='hidden'}
+function closeModal(t){const m=document.getElementById('modal-'+t);if(!m)return;m.style.display='none';document.body.style.overflow=''}
+['basic','advanced','premium'].forEach(t=>{const m=document.getElementById('modal-'+t);if(m)m.addEventListener('click',e=>{if(e.target===m)closeModal(t)})});
+function faq(el){const item=el.parentElement;const open=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!open)item.classList.add('open')}
+window.addEventListener('scroll',()=>{document.getElementById('nav').style.padding=window.scrollY>60?'11px 56px':'16px 56px'});
+</script>
+</body>
+</html>
