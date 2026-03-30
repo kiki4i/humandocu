@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김갑다님 부고</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .obituary-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #2c3e50, #34495e);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.05) 10px,
+                rgba(255, 255, 255, 0.05) 20px
+            );
+            animation: slide 20s linear infinite;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(-50px); }
+            100% { transform: translateX(50px); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .info-section {
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-left: 5px solid #667eea;
+        }
+
+        .info-section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-section h3::before {
+            content: '▶';
+            margin-right: 10px;
+            color: #667eea;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .info-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-item strong {
+            color: #495057;
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .info-item span {
+            color: #2c3e50;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        .family-section {
+            background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+            border-left-color: #e74c3c;
+        }
+
+        .ceremony-section {
+            background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
+            border-left-color: #3498db;
+        }
+
+        .account-section {
+            background: linear-gradient(135deg, #f0fff4, #e6ffe6);
+            border-left-color: #27ae60;
+            text-align: center;
+        }
+
+        .account-number {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #27ae60;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .decorative-line {
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            margin: 30px 0;
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .obituary-container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .info-section {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="obituary-container">
+        <div class="header">
+            <h1>부 고</h1>
+            <div class="subtitle">삼가 고인의 명복을 빕니다</div>
+        </div>
+        
+        <div class="content">
+            <div class="info-section">
+                <h3>고인 정보</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>고인</strong>
+                        <span>김갑다 보 (33세)</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>생년월일</strong>
+                        <span>2026년 03월 29일</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>별세일</strong>
+                        <span>2026년 03월 31일</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="decorative-line"></div>
+
+            <div class="info-section">
+                <h3>고인 소개</h3>
+                <div class="info-item">
+                    <span>조</span>
+                </div>
+            </div>
+
+            <div class="info-section family-section">
+                <h3>유가족</h3>
+                <div class="info-item">
+                    <span>고</span>
+                </div>
+            </div>
+
+            <div class="info-section ceremony-section">
+                <h3>장례 일정</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>입관일시</strong>
+                        <span>2026-03-31</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>발인일시</strong>
+                        <span>2026-03-31</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>장지</strong>
+                        <span>보</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3>장례식장 정보</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>장례식장</strong>
+                        <span>가</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>주소</strong>
+                        <span>나</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section account-section">
+                <h3>조의금 계좌</h3>
+                <div class="account-number">1</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            삼가 고인의 명복을 빌며 유가족께 심심한 위로를 드립니다.
+        </div>
+    </div>
+</body>
+</html>
