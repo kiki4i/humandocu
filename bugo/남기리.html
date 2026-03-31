@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>부고 · 남기리</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1714;--ink2:#3d3a30;--ink3:#78716c;
+  --bg:#f5f3ef;--bg2:#ede9e2;--bg3:#e3ddd4;
+  --gold:#9a7d4a;--gold2:#c4a96e;
+  --white:#ffffff;
+  --serif:'Noto Serif KR',Georgia,serif;
+  --sans:'Noto Sans KR',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.7;max-width:480px;margin:0 auto;padding-bottom:40px;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+
+/* 헤더 */
+.header{background:#1a1714;padding:32px 24px 28px;text-align:center}
+.badge{font-size:10px;letter-spacing:.16em;color:rgba(200,169,110,.5);text-transform:uppercase;margin-bottom:14px}
+
+/* 십자가 */
+.cross{display:flex;justify-content:center;margin-bottom:12px}
+
+/* 이름 */
+.go{font-size:12px;color:rgba(200,169,110,.55);letter-spacing:.12em;margin-bottom:5px}
+.dname{font-size:30px;font-weight:300;color:#f5f3ef;font-family:var(--serif);margin-bottom:6px}
+.dsub{font-size:12px;color:rgba(249,246,240,.42);margin-bottom:6px}
+.ddate{font-size:11px;color:rgba(249,246,240,.3);letter-spacing:.06em}
+.ddate span{color:rgba(200,169,110,.6)}
+.bible{font-size:10px;color:rgba(200,169,110,.38);font-style:italic;font-family:var(--serif);margin-top:8px;letter-spacing:.04em}
+
+.divider{border:none;border-top:0.5px solid rgba(200,169,110,.18);margin:16px 0}
+
+/* 한줄평 */
+.oneline{font-size:14px;font-style:italic;color:rgba(249,246,240,.8);line-height:1.8;text-align:center;font-family:var(--serif);margin-bottom:12px;padding:0 4px}
+
+/* 추모 문구 */
+.tribute{border-left:2px solid rgba(200,169,110,.3);padding-left:12px}
+.tribute-text{font-size:12px;color:rgba(249,246,240,.52);line-height:1.85;font-family:var(--serif)}
+
+/* 섹션 */
+.section{background:var(--white);margin:6px 0;padding:18px 20px}
+.sec-title{font-size:10px;font-weight:500;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--bg3);display:flex;align-items:center;gap:6px}
+.sec-title::before{content:'';width:3px;height:13px;background:var(--gold2);border-radius:2px;flex-shrink:0}
+
+/* 유가족 */
+.family-row{display:flex;align-items:baseline;gap:10px;padding:7px 0;border-bottom:1px solid var(--bg2)}
+.family-row:last-child{border-bottom:none}
+.family-rel{font-size:12px;color:var(--gold);font-weight:500;min-width:48px}
+.family-name{font-size:14px;color:var(--ink)}
+.family-sub{font-size:11px;color:var(--ink3);margin-left:4px}
+
+/* 상가정보 */
+.info-row{display:flex;padding:8px 0;border-bottom:1px solid var(--bg2)}
+.info-row:last-child{border-bottom:none}
+.info-key{font-size:11px;color:var(--ink3);width:44px;flex-shrink:0;padding-top:2px}
+.info-val{font-size:13px;color:var(--ink);line-height:1.5;flex:1;font-weight:400}
+.info-val span{font-size:11px;color:var(--ink3);display:block;font-weight:300}
+
+/* 장례식장 */
+.place-name{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.place-addr{font-size:12px;color:var(--ink3);margin-bottom:12px;line-height:1.5}
+.map-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;background:#FEE500;border-radius:4px;font-size:13px;font-weight:700;color:#1a1714}
+
+/* 조의금 */
+.acct-box{background:var(--bg);border:1px solid var(--bg3);border-radius:4px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.acct-box:last-child{margin-bottom:0}
+.acct-icon{width:32px;height:32px;background:var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.acct-info{flex:1}
+.acct-bank{font-size:11px;color:var(--ink3);margin-bottom:2px}
+.acct-num{font-size:14px;font-weight:500;color:var(--ink)}
+.copy-btn{font-size:11px;font-weight:500;color:var(--gold);padding:5px 10px;border:1px solid rgba(154,125,74,.3);border-radius:3px;background:none;cursor:pointer;font-family:var(--sans)}
+
+/* 카카오톡 공유 */
+.share-btn{display:flex;align-items:center;justify-content:center;gap:7px;background:#FEE500;border-radius:4px;padding:14px;font-size:14px;font-weight:700;color:#1a1714;width:100%;border:none;cursor:pointer;font-family:var(--sans)}
+
+/* 푸터 */
+.page-footer{background:#1a1714;padding:16px;text-align:center;margin-top:6px}
+.footer-logo{font-family:var(--serif);font-size:13px;color:rgba(249,246,240,.45);margin-bottom:4px}
+.footer-logo span{color:var(--gold2)}
+.footer-url{font-size:10px;color:rgba(249,246,240,.25);margin-bottom:2px}
+.footer-tel{font-size:10px;color:rgba(200,169,110,.4)}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">부 고 訃 告</div>
+
+  <!-- 십자가 (기독교) -->
+  <div class="cross">
+    <svg width="22" height="26" viewBox="0 0 22 26" fill="none">
+      <rect x="9" y="0" width="4" height="26" rx="1" fill="rgba(200,169,110,0.45)"/>
+      <rect x="0" y="7" width="22" height="4" rx="1" fill="rgba(200,169,110,0.45)"/>
+    </svg>
+  </div>
+
+  <div class="go">故</div>
+  <div class="dname">남기리</div>
+  <div class="dsub"> · 90세</div>
+  <div class="ddate"><span>2026년 3월 31일</span> 소천</div>
+  <div class="bible">"내가 부활이요 생명이니" — 요한복음 11:25</div>
+
+  <div class="divider"></div>
+
+  <div class="oneline">"평생을 남을 위해 살아오신 분"</div>
+
+  <div class="tribute">
+    <div class="tribute-text">고인의 생전 덕을 기리며 삼가 고인의 명복을 빕니다.</div>
+  </div>
+</div>
+
+<!-- 유가족 -->
+<div class="section">
+  <div class="sec-title">유가족</div>
+  <div class="family-row"><span class="family-rel">배우자</span><span class="family-name">김스</span></div>
+  <div class="family-row"><span class="family-rel">아들</span><span class="family-name">조스</span></div>
+</div>
+
+<!-- 상가정보 -->
+<div class="section">
+  <div class="sec-title">상가 정보</div>
+  <div class="info-row"><span class="info-key">입관</span><div class="info-val">2026년 3월 31일</div></div>
+  <div class="info-row"><span class="info-key">발인</span><div class="info-val">2026년 3월 31일</div></div>
+  <div class="info-row"><span class="info-key">장지</span><div class="info-val"></div></div>
+</div>
+
+<!-- 장례식장 -->
+<div class="section">
+  <div class="sec-title">장례식장</div>
+  <div class="place-name">연화장</div>
+  <div class="place-addr">.</div>
+  <a href="https://map.kakao.com/link/search/연화장" target="_blank" class="map-btn">🗺 카카오맵으로 길찾기</a>
+</div>
+
+<!-- 조의금 -->
+<div class="section">
+  <div class="sec-title">조의금</div>
+  <div class="acct-box">
+    <div class="acct-icon">🏦</div>
+    <div class="acct-info"><div class="acct-bank"></div><div class="acct-num">100</div></div>
+    <button class="copy-btn" onclick="copyText('100')">복사</button>
+  </div>
+</div>
+
+<!-- 카카오톡 공유 -->
+<div class="section">
+  <button class="share-btn" onclick="shareKakao()">💬 카카오톡으로 부고 전달하기</button>
+</div>
+
+<!-- 푸터 -->
+<div class="page-footer">
+  <div class="footer-logo">휴먼<span>다큐</span>로 만들었습니다</div>
+  <div class="footer-url">www.humandocu.com</div>
+  <div class="footer-tel">문의 · 010-5305-6804</div>
+</div>
+
+<script>
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(()=>{
+    alert('복사되었습니다.\n' + text);
+  }).catch(()=>{
+    alert('복사할 내용: ' + text);
+  });
+}
+function shareKakao() {
+  if (navigator.share) {
+    navigator.share({
+      title: '부고 · 남기리',
+      text: '고 남기리님의 부고를 전합니다.',
+      url: window.location.href
+    });
+  } else {
+    navigator.clipboard.writeText(window.location.href).then(()=>{
+      alert('링크가 복사되었습니다.\n카카오톡에 붙여넣기 해주세요.');
+    });
+  }
+}
+</script>
+</body>
+</html>
