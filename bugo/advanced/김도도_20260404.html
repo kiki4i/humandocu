@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>부고 · 김도도</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1714;--ink2:#3d3a30;--ink3:#78716c;--bg:#f5f3ef;--bg2:#ede9e2;--bg3:#e3ddd4;--gold:#9a7d4a;--gold2:#c4a96e;--white:#ffffff;--serif:"Noto Serif KR",Georgia,serif;--sans:"Noto Sans KR",sans-serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.7;max-width:480px;margin:0 auto;padding-bottom:60px;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+.header{background:#1a1714;padding:0 0 28px;text-align:center}
+.photo-wrap{position:relative;width:100%;height:300px;overflow:hidden}
+.photo-main{width:100%;height:100%;background:linear-gradient(160deg,#c9a87c 0%,#e8d5b0 30%,#d4c4a0 60%,#b8a88c 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
+.photo-icon{font-size:64px;opacity:0.35}
+.photo-label{font-size:10px;letter-spacing:.14em;color:rgba(255,255,255,.6);background:rgba(0,0,0,.2);padding:4px 14px;border-radius:20px}
+.photo-gradient{position:absolute;bottom:0;left:0;right:0;height:180px;background:linear-gradient(transparent,#1a1714)}
+.badge{font-size:10px;letter-spacing:.16em;color:rgba(200,169,110,.5);text-transform:uppercase;padding-top:18px;margin-bottom:6px}
+.advanced-badge{display:inline-block;font-size:9px;letter-spacing:.14em;color:rgba(200,169,110,.8);border:1px solid rgba(200,169,110,.3);padding:3px 10px;border-radius:20px;margin-bottom:8px}
+.symbol{display:flex;justify-content:center;margin-bottom:8px}
+.name-row{display:flex;align-items:baseline;justify-content:center;gap:8px;margin-bottom:4px}
+.go{font-size:13px;color:rgba(200,169,110,.55);letter-spacing:.12em}
+.dname{font-size:34px;font-weight:400;color:#f5f3ef;font-family:var(--serif);letter-spacing:.04em}
+.dsub{font-size:12px;color:rgba(249,246,240,.42);margin-bottom:3px}
+.dbirth{font-size:11px;color:rgba(249,246,240,.28);letter-spacing:.04em;margin-bottom:3px}
+.ddate{font-size:11px;color:rgba(249,246,240,.3);letter-spacing:.06em}
+.ddate span{color:rgba(200,169,110,.6)}
+.bible{font-size:10px;color:rgba(200,169,110,.38);font-style:italic;font-family:var(--serif);margin-top:8px;letter-spacing:.04em;padding:0 20px}
+.divider{border:none;border-top:0.5px solid rgba(200,169,110,.18);margin:14px 24px}
+.oneline{font-size:15px;font-style:italic;color:rgba(249,246,240,.85);line-height:1.9;text-align:center;font-family:var(--serif);margin-bottom:14px;padding:0 20px}
+.tribute{border-left:2px solid rgba(200,169,110,.35);padding-left:14px;margin:0 24px}
+.tribute-text{font-size:13px;color:rgba(249,246,240,.55);line-height:1.9;font-family:var(--serif)}
+.section{background:var(--white);margin:6px 0;padding:18px 20px}
+.section-dark{background:#1e1b17;margin:6px 0;padding:20px 20px}
+.sec-title{font-size:10px;font-weight:500;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--bg3);display:flex;align-items:center;gap:6px}
+.sec-title::before{content:"";width:3px;height:13px;background:var(--gold2);border-radius:2px;flex-shrink:0}
+.sec-title-dark{font-size:10px;font-weight:500;letter-spacing:.14em;color:rgba(200,169,110,.6);text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(200,169,110,.15);display:flex;align-items:center;gap:6px}
+.sec-title-dark::before{content:"";width:3px;height:13px;background:rgba(200,169,110,.5);border-radius:2px;flex-shrink:0}
+.timeline-wrap{position:relative;padding-left:20px}
+.timeline-wrap::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:linear-gradient(to bottom,transparent,rgba(154,125,74,.4) 10%,rgba(154,125,74,.4) 90%,transparent)}
+.timeline-item{position:relative;padding:0 0 18px 20px}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-item::before{content:"";position:absolute;left:-15px;top:7px;width:7px;height:7px;border-radius:50%;border:1.5px solid rgba(154,125,74,.6);background:#fff}
+.timeline-year{font-size:11px;color:var(--gold);font-weight:500;letter-spacing:.06em;margin-bottom:2px}
+.timeline-desc{font-size:13px;color:var(--ink);line-height:1.6}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.gallery-item{aspect-ratio:1;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px}
+.gallery-item-wide{grid-column:span 2;aspect-ratio:2/1}
+.g1{background:linear-gradient(135deg,#c9956c,#e8c49a)}.g2{background:linear-gradient(135deg,#8ba888,#b8d4b0)}.g3{background:linear-gradient(135deg,#7899b8,#a8c4d8)}.g4{background:linear-gradient(135deg,#9888a8,#c4b4d0)}.g5{background:linear-gradient(135deg,#b8956c,#d4b88c)}
+.gallery-icon{font-size:28px;opacity:0.45}
+.gallery-label{font-size:10px;letter-spacing:.06em;color:rgba(255,255,255,.75);background:rgba(0,0,0,.22);padding:3px 10px;border-radius:10px}
+.family-row{display:flex;align-items:baseline;gap:10px;padding:7px 0;border-bottom:1px solid var(--bg2)}
+.family-row:last-child{border-bottom:none}
+.family-rel{font-size:12px;color:var(--gold);font-weight:500;min-width:48px}
+.family-name{font-size:14px;color:var(--ink)}
+.family-sub{font-size:11px;color:var(--ink3);margin-left:4px}
+.info-row{display:flex;padding:8px 0;border-bottom:1px solid var(--bg2)}
+.info-row:last-child{border-bottom:none}
+.info-key{font-size:11px;color:var(--ink3);width:44px;flex-shrink:0;padding-top:2px}
+.info-val{font-size:13px;color:var(--ink);line-height:1.5;flex:1;font-weight:400}
+.place-name{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:12px}
+.map-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;background:#FEE500;border-radius:4px;font-size:13px;font-weight:700;color:#1a1714}
+.notice-text{font-size:13px;color:var(--ink);line-height:1.7;padding:4px 0}
+.acct-box{background:var(--bg);border:1px solid var(--bg3);border-radius:4px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.acct-box:last-child{margin-bottom:0}
+.acct-icon{width:32px;height:32px;background:var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.acct-info{flex:1}
+.acct-bank{font-size:11px;color:var(--ink3);margin-bottom:2px}
+.acct-num{font-size:14px;font-weight:500;color:var(--ink)}
+.copy-btn{font-size:11px;font-weight:500;color:var(--gold);padding:5px 10px;border:1px solid rgba(154,125,74,.3);border-radius:3px;background:none;cursor:pointer;font-family:var(--sans)}
+.memorial-empty{text-align:center;padding:20px 0 10px}
+.memorial-empty-text{font-size:13px;color:rgba(249,246,240,.35);font-family:var(--serif);font-style:italic;line-height:1.8}
+.message-box{background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.15);border-radius:6px;padding:14px 16px;margin-bottom:10px;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.message-author{font-size:11px;color:rgba(200,169,110,.7);margin-bottom:4px;font-weight:500}
+.message-text{font-size:13px;color:rgba(249,246,240,.7);line-height:1.7;font-family:var(--serif)}
+.message-date{font-size:10px;color:rgba(249,246,240,.3);margin-top:6px}
+.more-btn{width:100%;padding:9px;background:none;border:1px solid rgba(200,169,110,.2);border-radius:4px;font-size:12px;color:rgba(200,169,110,.6);font-family:var(--sans);cursor:pointer;margin-bottom:14px;display:none}
+.message-form{border-top:1px solid rgba(200,169,110,.12);padding-top:14px;margin-top:4px}
+.message-name-input,.message-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:4px;padding:9px 12px;font-size:13px;color:rgba(249,246,240,.8);font-family:var(--sans);outline:none}
+.message-name-input{margin-bottom:8px}
+.message-name-input:focus,.message-input:focus{border-color:rgba(200,169,110,.5)}
+.message-name-input::placeholder,.message-input::placeholder{color:rgba(249,246,240,.25)}
+.message-input{resize:none;height:72px}
+.message-submit{width:100%;padding:11px;background:rgba(200,169,110,.15);border:1px solid rgba(200,169,110,.3);border-radius:4px;font-size:13px;font-weight:500;color:rgba(200,169,110,.9);font-family:var(--sans);cursor:pointer;margin-top:8px;transition:background .2s}
+.message-submit:hover{background:rgba(200,169,110,.25)}
+.message-count{font-size:11px;color:rgba(200,169,110,.5);margin-left:8px;font-weight:300}
+.share-btn{display:flex;align-items:center;justify-content:center;gap:7px;background:#FEE500;border-radius:4px;padding:14px;font-size:14px;font-weight:700;color:#1a1714;width:100%;border:none;cursor:pointer;font-family:var(--sans)}
+.thanks-box{background:#1e1b17;padding:24px 20px;text-align:center;margin-top:6px}
+.thanks-title{font-size:11px;letter-spacing:.12em;color:rgba(200,169,110,.5);margin-bottom:14px}
+.thanks-text{font-size:13px;color:rgba(249,246,240,.6);line-height:1.9;font-family:var(--serif);font-style:italic}
+.thanks-sign{font-size:12px;color:rgba(200,169,110,.5);margin-top:12px}
+.page-footer{background:#1a1714;padding:24px 20px 28px;text-align:center;margin-top:6px;border-top:1px solid rgba(200,169,110,.12)}
+.footer-main-text{font-family:var(--serif);font-size:15px;color:rgba(249,246,240,.5);line-height:1.9;margin-bottom:6px}
+.footer-main-text span{color:var(--gold2)}
+.footer-sub-text{font-size:11px;color:rgba(200,169,110,.38);letter-spacing:.04em;line-height:1.8;margin-bottom:16px}
+.footer-divider{border:none;border-top:0.5px solid rgba(200,169,110,.12);margin:14px 40px}
+.footer-btn-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.footer-btn{font-size:11px;font-weight:500;color:rgba(200,169,110,.7);padding:7px 14px;border:1px solid rgba(200,169,110,.25);border-radius:3px;background:none;font-family:var(--sans);text-decoration:none;display:inline-block}
+.footer-btn-primary{font-size:11px;font-weight:500;color:#1a1714;padding:7px 14px;border:none;border-radius:3px;background:rgba(200,169,110,.7);font-family:var(--sans);text-decoration:none;display:inline-block}
+.footer-info{font-size:10px;color:rgba(249,246,240,.2);margin-top:14px;line-height:1.7}
+.loading-msg{text-align:center;font-size:12px;color:rgba(249,246,240,.3);padding:16px 0;font-family:var(--serif)}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="photo-wrap">
+    <div class="photo-main"><span class="photo-icon">👤</span><span class="photo-label">영정 사진</span></div>
+    <div class="photo-gradient"></div>
+  </div>
+  <div class="badge">부 고 訃 告</div>
+  <div class="advanced-badge">✦ ADVANCED</div>
+  <div class="symbol"><svg width="22" height="26" viewBox="0 0 22 26" fill="none"><rect x="9" y="0" width="4" height="26" rx="1" fill="rgba(200,169,110,0.45)"/><rect x="0" y="7" width="22" height="4" rx="1" fill="rgba(200,169,110,0.45)"/></svg></div>
+  <div class="name-row"><span class="go">故</span><span class="dname">김도도</span></div>
+  <div class="dsub">권사 · 여 · 50세</div>
+  <div class="dbirth">1999.1.1 生</div>
+  <div class="ddate"><span>2026.4.3</span> 소천</div>
+  <div class="bible">"나는 부활이요 생명이다" — 요한 11:25</div>
+  <div class="divider"></div>
+  <div class="oneline">"어려움 속에서도 희망의 빛을 잃지 않으셨던 분"</div>
+  <div class="tribute"><div class="tribute-text">힘든 삶 가운데서도 늘 웃음을 잃지 않으시며 주변 사람들에게 용기를 주셨던 김도도 권사님. 가녀린 소녀 같은 외모와 달리 마음속에는 누구보다 강인한 의지를 품고 계셨습니다. 늘 "힘내!" 하며 격려해주시던 그 따뜻한 목소리가 우리 마음속에 영원히 기억될 것입니다. 고인의 사랑과 용기가 우리 모두에게 큰 가르침이 되었습니다.</div></div>
+</div>
+
+<div class="section">
+  <div class="sec-title">생애 연보</div>
+  <div class="timeline-wrap">
+    <div class="timeline-item"><div class="timeline-year">1999</div><div class="timeline-desc">강원도에서 태어나다</div></div>
+    <div class="timeline-item"><div class="timeline-year">어린시절</div><div class="timeline-desc">밝은 성격의 아이</div></div>
+    <div class="timeline-item"><div class="timeline-year">성년기</div><div class="timeline-desc">결혼하여 아이 3</div></div>
+    <div class="timeline-item"><div class="timeline-year">사회생활</div><div class="timeline-desc">제조업</div></div>
+  </div>
+</div>
+
+<div class="section" style="padding:18px 20px 14px">
+  <div class="sec-title">사진으로 보는 삶</div>
+  <div class="gallery">
+    <div class="gallery-item gallery-item-wide g1"><span class="gallery-icon">🖼</span><span class="gallery-label">가족과 함께</span></div>
+    <div class="gallery-item g2"><span class="gallery-icon">🖼</span><span class="gallery-label">젊은 시절</span></div>
+    <div class="gallery-item g3"><span class="gallery-icon">🖼</span><span class="gallery-label">결혼식</span></div>
+    <div class="gallery-item g4"><span class="gallery-icon">🖼</span><span class="gallery-label">봉사활동</span></div>
+    <div class="gallery-item g5"><span class="gallery-icon">🖼</span><span class="gallery-label">말년 사진</span></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-title">유가족</div>
+  <div class="family-row"><span class="family-rel">배우자</span><span class="family-name">김스</span></div>
+</div>
+
+<div class="section">
+  <div class="sec-title">상가 정보</div>
+  <div class="info-row"><span class="info-key">입관</span><div class="info-val">2026.4.4.</div></div>
+  <div class="info-row"><span class="info-key">발인</span><div class="info-val">2026.4.4.</div></div>
+  <div class="info-row"><span class="info-key">장지</span><div class="info-val">경기도 용인시 기흥구 서천로 127번길 11-5, 1층 116호(서천동,경희마크329)</div></div>
+</div>
+
+<div class="section">
+  <div class="sec-title">장례식장</div>
+  <div class="place-name">용인장례</div>
+  <a href="https://map.kakao.com/link/search/용인장례" target="_blank" class="map-btn">🗺 카카오맵으로 길찾기</a>
+</div>
+
+<div class="section">
+  <div class="sec-title">조의금 보내실 곳</div>
+  <div class="acct-box">
+    <div class="acct-icon">💳</div>
+    <div class="acct-info">
+      <div class="acct-bank">케이뱅크</div>
+      <div class="acct-num">100-100</div>
+    </div>
+    <button class="copy-btn" onclick="copyText('케이뱅크 100-100')">복사</button>
+  </div>
+</div>
+
+<div class="section-dark">
+  <div class="sec-title-dark">온라인 추모<span class="message-count" id="msgCount"></span></div>
+  <div id="loadingMsg" class="loading-msg">추모 글을 불러오는 중...</div>
+  <div id="emptyMsg" class="memorial-empty" style="display:none"><div class="memorial-empty-text">고인을 기억하는 첫 번째<br>추모 글을 남겨주세요</div></div>
+  <div id="messageList"></div>
+  <button class="more-btn" id="moreBtn" onclick="loadMore()">추모글 더 보기</button>
+  <div class="message-form">
+    <input class="message-name-input" id="nameInput" type="text" placeholder="성함 · 관계 (예: 김○○ · 친구)" maxlength="30">
+    <textarea class="message-input" id="textInput" placeholder="고인을 추모하는 글을 남겨주세요" maxlength="200"></textarea>
+    <button class="message-submit" id="submitBtn" onclick="submitMessage()">추모 글 남기기</button>
+  </div>
+</div>
+
+<div class="section">
+  <button class="share-btn" onclick="shareKakao()">💬 카카오톡으로 부고 전달하기</button>
+</div>
+
+<div class="thanks-box">
+  <div class="thanks-title">유 족 인 사</div>
+  <div class="thanks-text">"바쁘신 중에도 고인을 기억해 주시고<br>위로의 말씀을 전해주셔서 진심으로 감사드립니다.<br>고인이 평소 베풀어 주신 사랑과 은혜를<br>저희 가족이 이어가겠습니다."</div>
+  <div class="thanks-sign">상주 김스 올림</div>
+</div>
+
+<div class="page-footer">
+  <div class="footer-main-text">한 사람의 삶은 기억되어야 합니다.<br><span>휴먼다큐</span>가 그 곁에 있겠습니다.</div>
+  <div class="footer-sub-text">고인의 이야기를 소중히 담아<br>오래도록 기억될 수 있도록 함께합니다.</div>
+  <div class="footer-divider"></div>
+  <div class="footer-btn-row">
+    <a href="https://www.humandocu.com" target="_blank" class="footer-btn">휴먼다큐 둘러보기</a>
+    <a href="https://www.humandocu.com/archive/김도도" target="_blank" class="footer-btn-primary">故 김도도 생애 아카이브 →</a>
+  </div>
+  <div class="footer-info">www.humandocu.com · 010-5305-6804</div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, startAfter, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+  const firebaseConfig = {apiKey:"AIzaSyBLUc8MUfkUCD8pkfRPZw_CF_Is9ifuLG0",authDomain:"humandocu-93c65.firebaseapp.com",projectId:"humandocu-93c65",storageBucket:"humandocu-93c65.firebasestorage.app",messagingSenderId:"203773199656",appId:"1:203773199656:web:6c2c1ca7876066ef03bc1d"};
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const pageName = decodeURIComponent(location.pathname.split("/").pop().replace(".html","")) || "고인";
+  const colRef = collection(db, "guestbooks", pageName, "messages");
+  const PAGE_SIZE = 5;
+  let lastDoc = null, totalCount = 0;
+  function formatDate(ts){if(!ts)return"";const d=ts.toDate?ts.toDate():new Date(ts);return`${d.getFullYear()}. ${d.getMonth()+1}. ${d.getDate()}`;}
+  function renderMessage(data){const box=document.createElement("div");box.className="message-box";box.innerHTML=`<div class="message-author">${data.name}</div><div class="message-text">${data.text}</div><div class="message-date">${formatDate(data.createdAt)}</div>`;return box;}
+  async function loadMessages(){try{const q=query(colRef,orderBy("createdAt","desc"),limit(PAGE_SIZE));const snap=await getDocs(q);document.getElementById("loadingMsg").style.display="none";if(snap.empty){document.getElementById("emptyMsg").style.display="block";return;}totalCount=snap.size;snap.forEach(doc=>document.getElementById("messageList").appendChild(renderMessage(doc.data())));lastDoc=snap.docs[snap.docs.length-1];if(snap.size===PAGE_SIZE)document.getElementById("moreBtn").style.display="block";updateCount();}catch(e){document.getElementById("loadingMsg").style.display="none";document.getElementById("emptyMsg").style.display="block";}}
+  window.loadMore=async function(){if(!lastDoc)return;const q=query(colRef,orderBy("createdAt","desc"),limit(PAGE_SIZE),startAfter(lastDoc));const snap=await getDocs(q);snap.forEach(doc=>{document.getElementById("messageList").appendChild(renderMessage(doc.data()));totalCount++;});lastDoc=snap.docs[snap.docs.length-1];if(snap.size<PAGE_SIZE)document.getElementById("moreBtn").style.display="none";updateCount();};
+  function updateCount(){const el=document.getElementById("msgCount");if(totalCount>0)el.textContent=`${totalCount}개`;}
+  window.submitMessage=async function(){const name=document.getElementById("nameInput").value.trim();const text=document.getElementById("textInput").value.trim();if(!name||!text){alert("성함과 추모글을 입력해주세요.");return;}const btn=document.getElementById("submitBtn");btn.disabled=true;btn.textContent="등록 중...";try{await addDoc(colRef,{name,text,createdAt:serverTimestamp()});document.getElementById("nameInput").value="";document.getElementById("textInput").value="";document.getElementById("emptyMsg").style.display="none";const newMsg=renderMessage({name,text,createdAt:new Date()});document.getElementById("messageList").prepend(newMsg);totalCount++;updateCount();btn.textContent="등록되었습니다 ✓";setTimeout(()=>{btn.disabled=false;btn.textContent="추모 글 남기기";},2000);}catch(e){alert("등록 중 오류가 발생했습니다. 다시 시도해주세요.");btn.disabled=false;btn.textContent="추모 글 남기기";}};
+  loadMessages();
+</script>
+<script>
+function copyText(text){navigator.clipboard.writeText(text).then(()=>alert("복사되었습니다.\n"+text)).catch(()=>alert("복사할 내용: "+text));}
+function shareKakao(){if(navigator.share){navigator.share({title:"부고 · 김도도",text:"고 김도도님의 부고를 전합니다.",url:window.location.href});}else{navigator.clipboard.writeText(window.location.
