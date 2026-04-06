@@ -1,41 +1,22 @@
 {
-  "name": "휴먼다큐 · Human Docu",
+  "name": "휴먼다큐",
   "short_name": "휴먼다큐",
-  "description": "모든 사람의 인생에는 기록이 필요합니다. 자서전·인생파일·추모 영상·모바일 부고.",
+  "description": "세상에서 가장 슬픈 소식이지만, 가장 아름다운 기록이 되도록",
   "start_url": "/",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#1a1714",
-  "theme_color": "#1a1714",
+  "background_color": "#18160f",
+  "theme_color": "#18160f",
   "lang": "ko",
   "icons": [
     {
-      "src": "icons/icon-192.png",
+      "src": "/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
-      "src": "icons/icon-512.png",
+      "src": "/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     }
-  ],
-  "shortcuts": [
-    {
-      "name": "부고 서비스 신청",
-      "short_name": "부고 신청",
-      "description": "추모 영상·모바일 부고 신청",
-      "url": "/#pricing"
-    },
-    {
-      "name": "인생 기록 신청",
-      "short_name": "인생 기록",
-      "description": "자서전·연대기 신청",
-      "url": "/#everyone"
-    }
-  ],
-  "categories": ["lifestyle", "social"],
-  "screenshots": []
+  ]
 }
