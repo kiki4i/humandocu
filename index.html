@@ -47,10 +47,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 /* HERO */
 .hero{min-height:100vh;background:var(--ink);display:flex;flex-direction:column;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(200,169,110,.08) 0%,transparent 60%),repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(200,169,110,.025) 80px),repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(200,169,110,.025) 80px);pointer-events:none}
-.hero-body{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:130px 48px 80px;position:relative;z-index:1;max-width:1000px;margin:0 auto;width:100%}
+.hero-body{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:80px 48px 60px;position:relative;z-index:1;max-width:1000px;margin:0 auto;width:100%}
 .hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:.22em;color:rgba(200,169,110,.55);text-transform:uppercase;margin-bottom:22px;display:flex;align-items:center;gap:12px;justify-content:center}
 .hero-eyebrow::before,.hero-eyebrow::after{content:'';width:26px;height:1px;background:var(--gold2);opacity:.4}
-.hero-title{font-family:var(--serif);font-size:clamp(24px,4.8vw,68px);font-weight:300;line-height:1.2;letter-spacing:-.02em;color:var(--cream);margin-bottom:16px}
+.hero-title{font-family:var(--serif);font-size:clamp(28px,5.8vw,76px);font-weight:300;line-height:1.2;letter-spacing:-.02em;color:var(--cream);margin-bottom:16px}
 .hero-title em{display:block;font-style:italic;color:var(--gold2)}
 .hero-slogan{font-family:var(--serif);font-size:16px;font-style:italic;color:rgba(249,246,240,.42);line-height:1.9;margin-bottom:38px;max-width:500px}
 .hero-slogan strong{color:rgba(200,169,110,.65);font-weight:400}
@@ -328,10 +328,7 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
   <div class="hero-bg"></div>
   <div class="hero-body">
     <div class="hero-eyebrow">humandocu.com · 모바일 부고 서비스</div>
-    <h1 class="hero-title">
-      세상에서 가장 슬픈 소식이지만,
-      <em>가장 아름다운 기록이 되도록</em>
-    </h1>
+    <h1 class="hero-title">세상에서 가장 슬픈 소식이지만, <em>가장 아름다운 기록이 되도록</em></h1>
     <p class="hero-slogan">기계적인 부고 문자는 이제 그만.<br><strong>고인의 생애가 담긴 링크 하나</strong>로 마음을 전하세요.</p>
 
     <div class="hero-plans" id="pricing">
