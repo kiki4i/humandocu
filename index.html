@@ -56,31 +56,37 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .hero-slogan strong{color:rgba(200,169,110,.65);font-weight:400}
 
 /* 요금 카드 */
-.hero-plans{display:flex;gap:2px;background:rgba(255,255,255,.06);border-radius:6px;overflow:visible;margin-bottom:32px;width:100%}
-.hplan{flex:1;padding:22px 18px;background:rgba(255,255,255,.03);transition:background .2s;cursor:pointer;position:relative;border-radius:0}
-.hplan:first-child{border-radius:6px 0 0 6px}
-.hplan:last-child{border-radius:0 6px 6px 0}
+/* 서비스 카드 */
+.hero-plans{display:flex;gap:4px;background:transparent;border-radius:6px;overflow:visible;margin-bottom:32px;width:100%;align-items:stretch}
+.hplan{flex:1;padding:24px 18px;background:rgba(255,255,255,.04);transition:background .2s;cursor:pointer;position:relative;border-radius:4px;border:1px solid rgba(255,255,255,.1);margin:0;display:flex;flex-direction:column}
 .hplan:hover{background:rgba(255,255,255,.07)}
-.hplan.feat{background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.3);margin:-1px;z-index:1;border-radius:4px}
+.hplan.feat{background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.28);z-index:1;display:flex;flex-direction:column}
+.hplan.prem{background:rgba(200,169,110,.07);border:1px solid rgba(200,169,110,.35);display:flex;flex-direction:column}
 .hplan-pip{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:500;background:var(--gold2);color:var(--ink);padding:3px 14px;border-radius:20px;white-space:nowrap;letter-spacing:.06em}
-.hplan-name{font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(249,246,240,.3);margin-bottom:7px}
+.hplan-name{font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(249,246,240,.45);margin-bottom:7px}
 .hplan.feat .hplan-name{color:var(--gold2)}
+.hplan.prem .hplan-name{color:var(--gold2)}
 .hplan-price{font-family:var(--serif);font-size:30px;font-weight:300;color:var(--cream);line-height:1;margin-bottom:4px}
+.hplan.feat .hplan-price{color:var(--cream)}
+.hplan.prem .hplan-price{color:var(--gold2)}
 .hplan-dur{font-size:10px;font-weight:500;padding:2px 9px;border-radius:20px;display:inline-block;margin-bottom:9px;letter-spacing:.06em}
-.hplan-dur.d5{background:rgba(255,255,255,.07);color:rgba(249,246,240,.35)}
+.hplan-dur.d5{background:rgba(255,255,255,.07);color:rgba(249,246,240,.45)}
 .hplan-dur.d49{background:rgba(42,107,94,.2);color:#7fd4c0}
-.hplan-dur.dinf{background:rgba(200,169,110,.15);color:var(--gold2)}
-.hplan-feats{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
-.hplan-feats li{font-size:11px;color:rgba(249,246,240,.38);list-style:none;display:flex;gap:5px;align-items:flex-start;text-align:left;line-height:1.4}
-.hplan-feats li::before{content:'—';color:var(--gold2);flex-shrink:0;font-size:10px;margin-top:1px}
-.hplan.feat .hplan-feats li{color:rgba(249,246,240,.62)}
+.hplan-dur.dinf{background:rgba(200,169,110,.18);color:var(--gold2)}
+.hplan-feats{display:flex;flex-direction:column;gap:4px;margin-bottom:12px;flex-grow:1}
+.hplan-feats li{font-size:11px;color:rgba(249,246,240,.45);list-style:none;display:flex;gap:5px;align-items:flex-start;text-align:left;line-height:1.4}
+.hplan-feats li::before{content:'—';color:rgba(200,169,110,.5);flex-shrink:0;font-size:10px;margin-top:1px}
+.hplan.feat .hplan-feats li{color:rgba(249,246,240,.7)}
+.hplan.feat .hplan-feats li::before{color:var(--gold2)}
+.hplan.prem .hplan-feats li{color:rgba(249,246,240,.8)}
+.hplan.prem .hplan-feats li::before{color:var(--gold2)}
 .hplan-btn{display:block;padding:9px;text-align:center;border-radius:var(--r);font-size:12px;font-weight:500;transition:all .2s}
-.hplan-btn.free{border:1px solid rgba(255,255,255,.1);color:rgba(249,246,240,.35)}
+.hplan-btn.free{border:1px solid rgba(255,255,255,.15);color:rgba(249,246,240,.5)}
 .hplan-btn.free:hover{border-color:var(--gold2);color:var(--gold2)}
-.hplan-btn.main{background:var(--gold2);color:var(--ink)}
+.hplan-btn.main{background:var(--gold2);color:var(--ink);font-size:13px}
 .hplan-btn.main:hover{background:var(--gold3)}
-.hplan-btn.prem{border:1px solid rgba(200,169,110,.2);color:var(--gold2)}
-.hplan-btn.prem:hover{background:rgba(200,169,110,.1)}
+.hplan-btn.prem{background:var(--gold2);color:var(--ink)!important;font-size:13px;font-weight:600;padding:11px;border:none}
+.hplan-btn.prem:hover{background:var(--gold3)}
 
 .hero-note{font-size:12px;color:rgba(249,246,240,.22)}
 .hero-note a{color:var(--gold2)}
@@ -294,8 +300,13 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
   .nav-btn{display:none}
   .logo-text{white-space:nowrap}
   .hero-body{padding:100px 24px 60px;max-width:100%}
-  .hero-plans{flex-direction:column}
-  .hplan{border-radius:0!important}
+  .hero-plans{flex-direction:column;align-items:stretch}
+  .hplan{flex:unset!important;padding:18px 16px!important;margin:0 0 2px 0!important;border-radius:4px!important}
+  .hplan.feat{padding:22px 18px!important}
+  .hplan.prem{padding:26px 20px!important}
+  .hplan-price{font-size:24px!important}
+  .hplan.feat .hplan-price{font-size:28px!important}
+  .hplan.prem .hplan-price{font-size:32px!important}
   .sec,.ab-sec,.cta-sec{padding:64px 20px}
   .cmp-grid,.gb-grid,.hd-grid,.b2b-grid{grid-template-columns:1fr}
   .ux-steps{grid-template-columns:1fr 1fr}.us::after{display:none}
@@ -346,50 +357,57 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
     </p>
 
     <div class="hero-plans" id="pricing">
+      <!-- 베이직 -->
       <div class="hplan" onclick="window.location.href='https://tally.so/r/obogbP'">
         <div class="hplan-name">베이직</div>
         <div class="hplan-price">무료</div>
         <span class="hplan-dur d5">5일 유지</span>
         <ul class="hplan-feats">
-          <li>사진 1장 + 기본 문구</li>
-          <li>장례 일정·장소·계좌</li>
+          <li>5분 내 링크 생성 · 이메일 발송</li>
+          <li>AI 고품격 추모문구</li>
+          <li>장례 일정 · 장소 · 계좌</li>
+          <li>조의금 계좌 복사 버튼</li>
+          <li>장례식장 카카오맵 연동</li>
           <li>카카오톡 공유</li>
-          <li>30분 자동 완성</li>
         </ul>
         <span class="hplan-btn free">무료로 시작하기</span>
       </div>
+      <!-- 어드밴스드 -->
       <div class="hplan feat" onclick="openModal('advanced')">
         <div class="hplan-pip">✦ 가장 많이 선택</div>
         <div class="hplan-name">어드밴스드</div>
         <div class="hplan-price">₩29,000</div>
         <span class="hplan-dur d49">49재까지 함께</span>
         <ul class="hplan-feats">
-          <li>AI 맞춤 추모 문구</li>
-          <li>사진 20장 생애 연대기</li>
-          <li>추모 영상 슬라이드쇼</li>
-          <li>조의금 QR 코드</li>
-          <li>디지털 방명록</li>
-          <li>발인 다음날 답례 문구</li>
-          <li>49재 후 아카이브 이관</li>
+          <li>5분 내 초안 · 6시간 내 완성본</li>
+          <li>베이직 전체 포함</li>
+          <li>영정사진 1장 + 생애사진 5장</li>
+          <li>추모 영상 슬라이드쇼 · BGM</li>
+          <li>온라인 추모관 · 디지털 방명록</li>
+          <li>발인 다음날 답례 문구 자동 발송</li>
+          <li>휴먼다큐 아카이브 연결</li>
         </ul>
         <span class="hplan-btn main">지금 신청하기 →</span>
       </div>
-      <div class="hplan" onclick="window.location.href='tel:031-539-9709'">
+      <!-- 프리미엄 -->
+      <div class="hplan prem" onclick="openModal('advanced')" style="border:1px solid rgba(200,169,110,.35);background:rgba(200,169,110,.05)">
+        <div class="hplan-pip" style="background:var(--ink);color:var(--gold2);border:1px solid rgba(200,169,110,.3)">✦ 휴먼아카이브로 링크</div>
         <div class="hplan-name">프리미엄</div>
         <div class="hplan-price">₩59,000</div>
         <span class="hplan-dur dinf">영구 보존</span>
         <ul class="hplan-feats">
           <li>어드밴스드 전체 포함</li>
-          <li>AI 사진 복원·보정</li>
-          <li>고화질 영상 다운로드</li>
-          <li>디지털 액자 파일</li>
+          <li>생애사진 20장 연대기</li>
+          <li>동영상 5개 연동</li>
+          <li>AI 사진 복원 · 보정</li>
           <li>1:1 전담 담당자</li>
-          <li>링크 영구 유지</li>
+          <li>영구 보존 · 기일 알림</li>
+          <li>디지털 자서전 (추후 연결)</li>
+          <li>휴먼다큐 아카이브 영구 이관</li>
         </ul>
-        <span class="hplan-btn prem">전담 상담 받기</span>
+        <span class="hplan-btn prem" style="border-color:var(--gold2);color:var(--gold2)">지금 신청하기 →</span>
       </div>
     </div>
-    <p class="hero-note">문의: <a href="tel:031-539-9709">031-539-9709</a> &nbsp;·&nbsp; 전화·문자 모두 가능</p>
   </div>
 </section>
 
@@ -412,27 +430,26 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
         <div class="chead">이렇게 달라집니다</div>
         <div class="scard">
           <div class="sc-top"><div class="sc-ph">🖼</div><div><div class="sc-yr">1943 — 2025 · 향년 82세</div><div class="sc-nm">김순자<br>金順子</div><div class="sc-sb">새벽마다 밥을 지으시던 어머니</div></div></div>
-          <div class="sc-bd"><div class="sc-qt">"삯바느질로 우리 학비를 대던 그 손이 이제는 쉬게 되었습니다. 어머니의 82년은 우리 모두의 역사였습니다."</div><div class="sc-tg"><span class="sc-t">▶ 추모 영상</span><span class="sc-t">생애 연대기</span><span class="sc-t">조의금 QR</span></div><div class="sc-bs"><div class="sc-p">▶ 추모 영상</div><div class="sc-m">📍 오시는 길</div></div></div>
+          <div class="sc-bd"><div class="sc-qt">"삯바느질로 우리 학비를 대던 그 손이 이제는 쉬게 되었습니다. 어머니의 82년은 우리 모두의 역사였습니다."</div><div class="sc-tg"><span class="sc-t">▶ 추모 영상</span><span class="sc-t">생애 연대기</span><span class="sc-t">📍 카카오맵</span></div><div class="sc-bs"><div class="sc-p">▶ 추모 영상</div><div class="sc-m">📍 오시는 길</div></div></div>
         </div>
-        <div class="ck"><div class="cki o">✓</div>고인의 얼굴·생애·이야기가 담김</div>
-        <div class="ck"><div class="cki o">✓</div>영상·연대기·일정·계좌 링크 하나에</div>
-        <div class="ck"><div class="cki o">✓</div>발인 다음날 답례 알림 자동 발송</div>
-        <div class="ck"><div class="cki o">✓</div>49재 후 영구 아카이브로 보존</div>
+        <div class="ck"><div class="cki o">✓</div>고인의 생애·이야기가 담긴 링크 하나</div>
+        <div class="ck"><div class="cki o">✓</div>5분 내 링크 생성 · 카카오톡 즉시 공유</div>
+        <div class="ck"><div class="cki o">✓</div>발인 다음날 답례 문구 자동 발송</div>
+        <div class="ck"><div class="cki o">✓</div>49재 후 휴먼다큐 아카이브로 영구 보존</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- UX 5단계 -->
+<!-- UX 4단계 -->
 <section class="sec ux-sec">
   <div class="si">
-    <div class="sh ctr"><div class="ey" style="color:rgba(200,169,110,.5)">진행 방법</div><h2 class="tt" style="color:var(--cream)">5단계,<br><em>3분이면 됩니다</em></h2><p class="sb" style="margin:12px auto 0">입력은 최소화하되, 결과는 최고여야 합니다.</p></div>
-    <div class="ux-steps">
-      <div class="us"><div class="ab-arr">→</div><div class="us-num">01</div><div class="us-ico">📱</div><div class="us-title">생성</div><div class="us-desc">고인 정보 + 사진 업로드. 3분 입력.</div><div class="us-time">⏱ 3분</div></div>
-      <div class="us"><div class="ab-arr">→</div><div class="us-num">02</div><div class="us-ico">💬</div><div class="us-title">전달</div><div class="us-desc">카카오톡으로 링크 발송.</div><div class="us-time">베이직 30분 · 어드밴스드 1시간</div></div>
-      <div class="us"><div class="ab-arr">→</div><div class="us-num">03</div><div class="us-ico">🕯</div><div class="us-title">추모</div><div class="us-desc">방명록에 마음을 남기고 기억.</div><div class="us-time">49재 동안</div></div>
-      <div class="us"><div class="ab-arr">→</div><div class="us-num">04</div><div class="us-ico">✉️</div><div class="us-title">인사</div><div class="us-desc">발인 다음날 답례 알림 자동 발송.</div><div class="us-time">자동 알림</div></div>
-      <div class="us"><div class="us-num">05</div><div class="us-ico">🗂</div><div class="us-title">보관</div><div class="us-desc">49재 후 아카이브 이관.</div><div class="us-time">영구 보존</div></div>
+    <div class="sh ctr"><div class="ey" style="color:rgba(200,169,110,.5)">진행 방법</div><h2 class="tt" style="color:var(--cream)">4단계,<br><em>5분이면 됩니다</em></h2><p class="sb" style="margin:12px auto 0">입력은 최소화하되, 결과는 최고여야 합니다.</p></div>
+    <div class="ux-steps" style="grid-template-columns:repeat(4,1fr)">
+      <div class="us"><div class="ab-arr">→</div><div class="us-num">01</div><div class="us-ico">📱</div><div class="us-title">신청</div><div class="us-desc">고인 정보 입력. 언제든 가능.</div><div class="us-time">⏱ 3~5분 입력</div></div>
+      <div class="us"><div class="ab-arr">→</div><div class="us-num">02</div><div class="us-ico">⚡</div><div class="us-title">생성</div><div class="us-desc">AI가 추모문구 생성 · 링크 완성.</div><div class="us-time">5분 내 이메일 발송</div></div>
+      <div class="us"><div class="ab-arr">→</div><div class="us-num">03</div><div class="us-ico">💬</div><div class="us-title">공유</div><div class="us-desc">카카오톡으로 링크 전달.</div><div class="us-time">조문객 수백 명에게</div></div>
+      <div class="us"><div class="us-num">04</div><div class="us-ico">🗂</div><div class="us-title">보존</div><div class="us-desc">49재 후 아카이브 이관.</div><div class="us-time">영구 보존</div></div>
     </div>
   </div>
 </section>
@@ -443,7 +460,7 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
     <div class="sh"><div class="ey">디지털 방명록 · 어드밴스드 이상</div><h2 class="tt">기억은 함께 나눌 때<br><em>더 오래 남습니다</em></h2></div>
     <div class="gb-grid">
       <div class="gb-mock">
-        <div class="gm-bar"><div class="gm-dots"><div class="gmd" style="background:#ff5f57"></div><div class="gmd" style="background:#febc2e"></div><div class="gmd" style="background:#28c840"></div></div><div class="gm-url">humandocu.com/김순자 · 방명록</div></div>
+        <div class="gm-bar"><div class="gm-dots"><div class="gmd" style="background:#ff5f57"></div><div class="gmd" style="background:#febc2e"></div><div class="gmd" style="background:#28c840"></div></div><div class="gm-url">humandocu.com/김순자 · 온라인 추모관</div></div>
         <div class="gm-body">
           <div class="gm-ttl">방명록 <span>12개</span> <span style="font-size:9px;color:var(--ink3);font-weight:300">· 상주 실시간 확인 가능</span></div>
           <div class="gm-e"><div class="gm-av">이</div><div><div class="gm-nm">이○○ (중학교 친구)</div><div class="gm-msg">순자야, 너의 환한 웃음이 너무 그립다.</div><div class="gm-tm">3시간 전</div></div></div>
@@ -456,11 +473,12 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
         <div class="gb-bdg">✦ 어드밴스드 · 프리미엄 전용</div>
         <div class="d49-big">49</div>
         <div class="d49-lbl">49재까지 함께합니다</div>
-        <div class="d49-desc">사십구재는 고인이 돌아가신 후 49일째 되는 날입니다. 이 의미 있는 기간 동안 부고 링크가 유지되어, 가족과 조문객이 언제든 고인을 기억할 수 있습니다.</div>
+        <div class="d49-desc">사십구재는 고인이 돌아가신 후 49일째 되는 날입니다. 이 기간 동안 온라인 추모관이 유지되어 가족과 조문객이 언제든 고인을 기억하고 마음을 남길 수 있습니다.</div>
         <div class="gb-feats">
-          <div class="gbf"><div class="gbf-dot"></div><div class="gbf-txt"><strong>상주가 언제든지 실시간 확인</strong> — 방문자, 남겨진 말들</div></div>
-          <div class="gbf"><div class="gbf-dot"></div><div class="gbf-txt"><strong>발인 다음날 집계 이메일 자동 발송</strong> — 방명록 전체 기록 전달</div></div>
-          <div class="gbf"><div class="gbf-dot"></div><div class="gbf-txt"><strong>49재 종료 시 아카이브 이관 안내</strong> — 원클릭 영구 보존</div></div>
+          <div class="gbf"><div class="gbf-dot"></div><div class="gbf-txt"><strong>영정사진 + 생애사진 5장</strong> — 추모 슬라이드쇼·BGM</div></div>
+          <div class="gbf"><div class="gbf-dot"></div><div class="gbf-txt"><strong>상주가 실시간 확인</strong> — 방문자, 남겨진 말들</div></div>
+          <div class="gbf"><div class="gbf-dot"></div><div class="gbf-txt"><strong>발인 다음날 답례 문구 자동 발송</strong> — AI가 개인화하여 작성</div></div>
+          <div class="gbf"><div class="gbf-dot"></div><div class="gbf-txt"><strong>49재 후 휴먼다큐 아카이브 이관</strong> — 원클릭 영구 보존</div></div>
         </div>
       </div>
     </div>
@@ -476,10 +494,10 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
       <p class="sb" style="color:rgba(249,246,240,.38);margin:0 auto;text-align:center">49재가 끝나는 날, 고인의 모든 기록이 영원히 살아있을 공간으로 이관됩니다.</p>
     </div>
     <div class="ab-flow">
-      <div class="ab-step"><div class="ab-arr">→</div><div class="ab-ico">📱</div><div class="ab-ttl">부고 링크 생성</div><div class="ab-desc">3분 입력<br>30분~1시간 완성</div></div>
-      <div class="ab-step"><div class="ab-arr">→</div><div class="ab-ico">🕯</div><div class="ab-ttl">49재 동안 추모</div><div class="ab-desc">방명록·영상<br>함께 기억</div></div>
-      <div class="ab-step hi"><div class="ab-arr">→</div><div class="ab-ico">🗂</div><div class="ab-ttl">49재 종료 · 이관 안내</div><div class="ab-desc">원클릭으로<br>아카이브로</div></div>
-      <div class="ab-step"><div class="ab-arr">→</div><div class="ab-ico">♾</div><div class="ab-ttl">영구 아카이브</div><div class="ab-desc">humandocu.com<br>에서 영원히</div></div>
+      <div class="ab-step"><div class="ab-arr">→</div><div class="ab-ico">📱</div><div class="ab-ttl">부고 링크 생성</div><div class="ab-desc">5분 내<br>링크 완성</div></div>
+      <div class="ab-step"><div class="ab-arr">→</div><div class="ab-ico">🕯</div><div class="ab-ttl">49재 동안 추모</div><div class="ab-desc">온라인 추모관<br>방명록·영상</div></div>
+      <div class="ab-step hi"><div class="ab-arr">→</div><div class="ab-ico">🗂</div><div class="ab-ttl">49재 종료 · 이관</div><div class="ab-desc">원클릭으로<br>아카이브로</div></div>
+      <div class="ab-step"><div class="ab-arr">→</div><div class="ab-ico">♾</div><div class="ab-ttl">영구 아카이브</div><div class="ab-desc">humandocu.com<br>영원히 보존</div></div>
       <div class="ab-step"><div class="ab-ico">🔔</div><div class="ab-ttl">기일마다 알림</div><div class="ab-desc">49재·100일·1주기<br>잊지 않도록</div></div>
     </div>
     <div style="text-align:center">
@@ -500,9 +518,9 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
         <p style="font-size:15px;color:var(--ink3);line-height:1.9;margin-bottom:20px">부고 서비스로 시작된 고인의 기록이 영구 아카이브로 이어집니다. 살아있는 동안 나의 인생을 미리 기록해 두는 것도 가능합니다.</p>
         <div class="hd-svcs">
           <div class="hd-svc"><div class="hd-svc-n">01</div><div><div class="hd-svc-t">부고 → 영구 아카이브 이관</div><div class="hd-svc-d">49재 종료 후 원클릭으로 고인의 모든 기록을 영구 보존합니다.</div></div></div>
-          <div class="hd-svc"><div class="hd-svc-n">02</div><div><div class="hd-svc-t">생애 연대기 · 인생 파일</div><div class="hd-svc-d">살아있는 동안 나의 인생을 사진·영상·글로 기록하는 개인 아카이브.</div></div></div>
+          <div class="hd-svc"><div class="hd-svc-n">02</div><div><div class="hd-svc-t">생애 연대기 · 인생 파일</div><div class="hd-svc-d">사진 20장 + 이야기로 완성하는 나만의 디지털 생애 기록.</div></div></div>
           <div class="hd-svc"><div class="hd-svc-n">03</div><div><div class="hd-svc-t">칠순·팔순 특별 선물</div><div class="hd-svc-d">부모님의 인생을 연대기로 만들어 드리는 세상에 단 하나뿐인 선물.</div></div></div>
-          <div class="hd-svc"><div class="hd-svc-n">04</div><div><div class="hd-svc-t">디지털 자서전</div><div class="hd-svc-d">라이프 에디터가 인터뷰를 진행하고 완성된 자서전을 제작합니다.</div></div></div>
+          <div class="hd-svc"><div class="hd-svc-n">04</div><div><div class="hd-svc-t">디지털 자서전</div><div class="hd-svc-d">AI와 함께 편집하는 소규모 자서전 — 기일마다 살아있는 기억으로.</div></div></div>
         </div>
       </div>
       <div class="hd-right-col" style="display:flex;flex-direction:column;justify-content:center">
@@ -521,7 +539,7 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
     <div class="sh"><div class="ey">장례지도사 · 장례식장 파트너십</div><h2 class="tt">함께하면<br><em>모두가 이깁니다</em></h2></div>
     <div class="b2b-grid">
       <div class="b2b-cards">
-        <div class="b2b-card"><div class="b2b-tag">Easy Manager</div><div class="b2b-ttl">장례지도사 전용 관리 도구</div><div class="b2b-desc">담당 빈소 리스트 → 사진만 올리면 30분 내 완성.</div></div>
+        <div class="b2b-card"><div class="b2b-tag">Easy Manager</div><div class="b2b-ttl">장례지도사 전용 관리 도구</div><div class="b2b-desc">담당 빈소 정보 입력 → 5분 내 부고 링크 완성.</div></div>
         <div class="b2b-card"><div class="b2b-tag">Referral 수익</div><div class="b2b-ttl">실시간 정산 대시보드</div><div class="b2b-desc">생성한 부고에서 결제 즉시 정산금이 쌓입니다.</div></div>
         <div class="b2b-card"><div class="b2b-tag">B2B Package</div><div class="b2b-ttl">영업 표준화 패키지</div><div class="b2b-desc">제휴 제안서 + QR 안내 카드 + 교육 매뉴얼 제공.</div></div>
       </div>
@@ -537,7 +555,7 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
         </div>
         <div class="b2b-stats">
           <div><div class="b2b-stat-n">30%</div><div class="b2b-stat-l">리퍼럴 수익</div></div>
-          <div><div class="b2b-stat-n">3분</div><div class="b2b-stat-l">작업 시간</div></div>
+          <div><div class="b2b-stat-n">5분</div><div class="b2b-stat-l">링크 생성</div></div>
           <div><div class="b2b-stat-n">0원</div><div class="b2b-stat-l">파트너 가입비</div></div>
         </div>
       </div>
@@ -550,9 +568,9 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
   <div class="si">
     <div class="sh ctr"><div class="ey">이용 후기</div><h2 class="tt">직접 경험하신<br><em>분들의 이야기</em></h2></div>
     <div class="testi-grid">
-      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext">"장례 당일 신청했는데 30분 만에 완성됐어요. 조문객분들이 영상 보면서 다들 눈물을 흘리셨습니다."</p><div class="tby"><span>김○○</span> · 50대 · 서울 <span class="tplan">어드밴스드</span></div></div>
-      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext">"발인 다음날 답례 알림이 왔는데, AI가 써준 문구가 너무 감동적이었어요. '이런 인사는 처음 받아봤다'고 연락이 왔습니다."</p><div class="tby"><span>박○○</span> · 40대 · 부산 <span class="tplan">어드밴스드</span></div></div>
-      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext">"흑백 사진을 컬러로 복원해주셔서 아버지의 젊은 시절을 처음 컬러로 봤어요. 온 가족이 울었습니다."</p><div class="tby"><span>이○○</span> · 60대 · 대구 <span class="tplan">프리미엄</span></div></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext">"장례 당일 신청했는데 5분 만에 링크가 왔어요. 조문객분들이 추모 영상 보면서 다들 눈물을 흘리셨습니다."</p><div class="tby"><span>김○○</span> · 50대 · 서울 <span class="tplan">어드밴스드</span></div></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext">"발인 다음날 답례 문구가 자동으로 왔는데, AI가 써준 문구가 너무 감동적이었어요. '이런 인사는 처음 받아봤다'고 연락이 왔습니다."</p><div class="tby"><span>박○○</span> · 40대 · 부산 <span class="tplan">어드밴스드</span></div></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext">"흑백 사진을 복원해주셔서 아버지의 젊은 시절을 처음 봤어요. 49재가 지나도 아카이브에 남아있어 온 가족이 감사했습니다."</p><div class="tby"><span>이○○</span> · 60대 · 대구 <span class="tplan">프리미엄</span></div></div>
     </div>
   </div>
 </section>
@@ -562,11 +580,11 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
   <div class="si">
     <div class="sh ctr" style="max-width:660px;margin:0 auto 36px"><div class="ey">자주 묻는 질문</div><h2 class="tt"><em>궁금한 점</em>을 해결해 드립니다</h2></div>
     <div class="faq-inner">
-      <div class="faq-item open"><div class="faq-q" onclick="faq(this)">베이직과 어드밴스드의 차이가 뭔가요?<span class="faq-arr">+</span></div><div class="faq-a">베이직은 사진 1장, 기본 문구로 30분 내 자동 완성되는 무료 서비스입니다. 어드밴스드는 AI 맞춤 추모 문구, 사진 20장 생애 연대기, 추모 영상, 방명록, 조의금 QR, 답례 문구까지 포함된 품격 있는 서비스로 49재까지 링크가 유지됩니다.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="faq(this)">얼마나 빨리 완성되나요?<span class="faq-arr">+</span></div><div class="faq-a">베이직은 30분 내 자동 완성됩니다. 어드밴스드는 1시간 내 기본 초안이 자동 생성되어 바로 부고를 보내실 수 있고, 12시간 안에 완성본이 전달됩니다.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="faq(this)">49재 이후에는 어떻게 되나요?<span class="faq-arr">+</span></div><div class="faq-a">49재 종료 시점에 자동으로 알림이 발송됩니다. "고인의 기록을 휴먼다큐 아카이브로 영구 보존하시겠습니까?" 원클릭으로 이관하시면 영원히 보존됩니다. 이후 기일마다 알림을 받아 고인을 기억할 수 있습니다.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="faq(this)">답례 알림은 어떻게 작동하나요?<span class="faq-arr">+</span></div><div class="faq-a">발인 다음날 자동으로 알림톡이 발송됩니다. AI가 고인의 정보를 바탕으로 개인화된 답례 문구를 작성해 드립니다. 방명록 집계 내용도 함께 이메일로 발송됩니다.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="faq(this)">스마트폰 조작이 서툰데 이용할 수 있나요?<span class="faq-arr">+</span></div><div class="faq-a">네, 카카오톡으로 사진을 보내주시면 저희가 대신 올려드립니다. 031-539-9709로 연락 주시면 전화로 안내해 드립니다.</div></div>
+      <div class="faq-item open"><div class="faq-q" onclick="faq(this)">베이직과 어드밴스드의 차이가 뭔가요?<span class="faq-arr">+</span></div><div class="faq-a">베이직은 텍스트 중심의 부고 알림 서비스로 무료이며 5일간 유지됩니다. 어드밴스드는 영정사진·생애사진·추모 영상·온라인 추모관·방명록·답례 문구까지 포함된 완성형 서비스로 49재까지 유지되며 이후 아카이브로 이관됩니다.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">얼마나 빨리 완성되나요?<span class="faq-arr">+</span></div><div class="faq-a">베이직·어드밴스드 모두 신청 후 5분 내 링크가 이메일로 발송됩니다. 어드밴스드는 6시간 내 사진·영상이 포함된 완성본을 재발송해 드립니다.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">49재 이후에는 어떻게 되나요?<span class="faq-arr">+</span></div><div class="faq-a">49재 종료 시 자동으로 안내가 발송됩니다. 원클릭으로 휴먼다큐 아카이브에 이관하시면 영구 보존되며 기일마다 알림을 받으실 수 있습니다.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">답례 문구는 어떻게 발송되나요?<span class="faq-arr">+</span></div><div class="faq-a">발인 다음날 자동으로 AI가 고인의 정보를 바탕으로 개인화된 답례 문구를 작성하여 이메일로 발송합니다. 상주분이 직접 카카오톡으로 전달하시면 됩니다.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">스마트폰 조작이 서툰데 이용할 수 있나요?<span class="faq-arr">+</span></div><div class="faq-a">네, 전화나 문자로 도와드립니다. 📞 전화 031-539-9709 · 💬 문자 010-5305-6804로 연락 주시면 처음부터 안내해 드립니다.</div></div>
     </div>
   </div>
 </section>
@@ -586,7 +604,7 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
 <!-- FOOTER -->
 <footer>
   <div>
-    <div class="ft-logo">휴먼<span>다큐</span></div>
+    <div class="ft-logo">휴먼다큐<span>닷컴</span></div>
     <p class="ft-tag">슬픔을 기록으로, 그리움을 위로로.<br>고인의 생애를 기리는 디지털 추모 아카이브.</p>
     <div class="ft-ct">📞 <a href="tel:031-539-9709">031-539-9709</a><br>🌐 <a href="https://humandocu.com">humandocu.com</a></div>
   </div>
