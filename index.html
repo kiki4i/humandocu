@@ -291,8 +291,8 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
   .pc-only{display:none}.mo-only{display:block}
   nav{padding:10px 16px}.nav-links{display:none}
   .nav-tel{display:none}
+  .nav-btn{display:none}
   .logo-text{white-space:nowrap}
-  .nav-btn{padding:9px 16px;font-size:13px;white-space:nowrap}
   .hero-body{padding:100px 24px 60px;max-width:100%}
   .hero-plans{flex-direction:column}
   .hplan{border-radius:0!important}
@@ -332,12 +332,18 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-body">
-    <div class="hero-eyebrow">humandocu.com · 모바일 부고 서비스</div>
+    <div class="hero-eyebrow">
+      <span class="pc-only">humandocu.com · 모바일 부고 서비스</span>
+      <span class="mo-only">humandocu · 모바일 부고서비스</span>
+    </div>
     <h1 class="hero-title">
       <span class="pc-only">세상에서 가장 슬픈 소식이지만,<br><em>가장 아름다운 기록 되도록</em></span>
       <span class="mo-only">세상에서 가장 슬픈<br>소식이지만,<br><em>가장 아름다운<br>기록 되도록</em></span>
     </h1>
-    <p class="hero-slogan">기계적인 부고 문자는 이제 그만.<br><strong>고인의 생애가 담긴 링크 하나</strong>로 마음을 전하세요.</p>
+    <p class="hero-slogan">
+      <span class="pc-only">기계적인 부고 문자는 이제 그만.<br><strong>고인의 생애가 담긴 링크 하나</strong>로 마음을 전하세요.</span>
+      <span class="mo-only">기계적인 알림부고 문자는 이제 그만,<br>고인의 생애가 담긴 링크 하나로<br>마음을 전하세요.</span>
+    </p>
 
     <div class="hero-plans" id="pricing">
       <div class="hplan" onclick="window.location.href='https://tally.so/r/obogbP'">
