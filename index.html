@@ -431,10 +431,11 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
       <div class="cc sol">
         <span class="bdg new">휴먼다큐 — 이렇게 달라집니다</span>
         <!-- 탭 버튼 -->
+        <div style="font-size:11px;color:var(--gold);margin-bottom:8px;letter-spacing:.04em">👆 눌러서 비교해보세요</div>
         <div style="display:flex;gap:2px;margin-bottom:16px;background:rgba(24,22,15,.08);border-radius:4px;padding:3px">
-          <button onclick="showTab('basic')" id="tab-basic" style="flex:1;padding:7px;border:none;border-radius:3px;font-size:11px;font-weight:500;cursor:pointer;font-family:var(--sans);background:var(--ink);color:var(--gold2);transition:all .2s">🔹 베이직</button>
-          <button onclick="showTab('adv')" id="tab-adv" style="flex:1;padding:7px;border:none;border-radius:3px;font-size:11px;font-weight:500;cursor:pointer;font-family:var(--sans);background:transparent;color:var(--ink3);transition:all .2s">🔸 어드밴스드</button>
-          <button onclick="showTab('prem')" id="tab-prem" style="flex:1;padding:7px;border:none;border-radius:3px;font-size:11px;font-weight:500;cursor:pointer;font-family:var(--sans);background:transparent;color:var(--ink3);transition:all .2s">💎 프리미엄</button>
+          <button onclick="showTab('basic')" id="tab-basic" style="flex:1;padding:7px 4px;border:none;border-radius:3px;font-size:11px;font-weight:500;cursor:pointer;font-family:var(--sans);background:var(--ink);color:var(--gold2);transition:all .2s;white-space:nowrap">🔹 베이직</button>
+          <button onclick="showTab('adv')" id="tab-adv" style="flex:1;padding:7px 4px;border:none;border-radius:3px;font-size:11px;font-weight:500;cursor:pointer;font-family:var(--sans);background:transparent;color:var(--ink3);transition:all .2s;white-space:nowrap">🔸 어드밴스드</button>
+          <button onclick="showTab('prem')" id="tab-prem" style="flex:1;padding:7px 4px;border:none;border-radius:3px;font-size:11px;font-weight:500;cursor:pointer;font-family:var(--sans);background:transparent;color:var(--ink3);transition:all .2s;white-space:nowrap">💎 프리미엄</button>
         </div>
         <!-- 베이직 샘플 -->
         <div id="sample-basic">
