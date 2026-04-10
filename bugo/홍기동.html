@@ -6,228 +6,74 @@
   <title>부고 - 故 홍기동</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Noto Serif KR', Georgia, serif;
-      background: #f5f0e8;
-      color: #2c2c2c;
-      min-height: 100vh;
-    }
-    .wrapper {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    /* 헤더 */
-    .header {
-      background: #1a1a2e;
-      color: #e8e0d0;
-      text-align: center;
-      padding: 48px 32px;
-      border-radius: 4px 4px 0 0;
-    }
-    .header .symbol {
-      font-size: 36px;
-      margin-bottom: 16px;
-      opacity: 0.7;
-    }
-    .header .title-ko {
-      font-size: 13px;
-      letter-spacing: 6px;
-      opacity: 0.6;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-    }
-    .header h1 {
-      font-size: 42px;
-      font-weight: 300;
-      letter-spacing: 12px;
-      margin-bottom: 8px;
-    }
-    .header .rip-text {
-      font-size: 14px;
-      opacity: 0.55;
-      letter-spacing: 3px;
-      margin-top: 12px;
-    }
-
-    /* 날짜 배너 */
-    .dates-bar {
-      background: #2c2c2c;
-      color: #c8b89a;
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      padding: 16px;
-      font-size: 14px;
-      letter-spacing: 2px;
-    }
+    body { font-family: 'Noto Serif KR', Georgia, serif; background: #f5f0e8; color: #2c2c2c; min-height: 100vh; }
+    .wrapper { max-width: 680px; margin: 0 auto; padding: 20px; }
+    .header { background: #1a1a2e; color: #e8e0d0; text-align: center; padding: 48px 32px; border-radius: 4px 4px 0 0; }
+    .header .symbol { font-size: 36px; margin-bottom: 16px; opacity: 0.7; }
+    .header .title-ko { font-size: 13px; letter-spacing: 6px; opacity: 0.6; margin-bottom: 20px; }
+    .header h1 { font-size: 42px; font-weight: 300; letter-spacing: 12px; margin-bottom: 8px; }
+    .header .rip-text { font-size: 14px; opacity: 0.55; letter-spacing: 3px; margin-top: 12px; }
+    .dates-bar { background: #2c2c2c; color: #c8b89a; display: flex; justify-content: center; gap: 40px; padding: 16px; font-size: 14px; letter-spacing: 2px; }
     .dates-bar span { opacity: 0.5; margin: 0 8px; }
-
-    /* 성구 */
-    .verse-section {
-      background: #ede8de;
-      border-left: 3px solid #8b7355;
-      padding: 20px 28px;
-      margin: 0;
-      font-style: italic;
-      color: #5a4a3a;
-      font-size: 15px;
-      line-height: 1.7;
-    }
-
-    /* 추모 섹션 */
-    .tribute-section {
-      background: #fff;
-      padding: 40px 36px;
-    }
-    .one-liner {
-      font-size: 22px;
-      font-weight: 300;
-      color: #1a1a2e;
-      text-align: center;
-      margin-bottom: 28px;
-      line-height: 1.5;
-      letter-spacing: 1px;
-    }
-    .one-liner::before, .one-liner::after {
-      content: '— ';
-      opacity: 0.3;
-    }
-    .tribute-para {
-      font-size: 16px;
-      line-height: 2;
-      color: #3a3a3a;
-      text-align: justify;
-    }
-
-    /* 조의금 */
-    .donation-section {
-      background: #f9f5ef;
-      border: 1px solid #d4c9b5;
-      border-radius: 2px;
-      padding: 28px 36px;
-      margin-top: 1px;
-    }
-    .section-title {
-      font-size: 11px;
-      letter-spacing: 4px;
-      color: #8b7355;
-      margin-bottom: 16px;
-      text-transform: uppercase;
-    }
-    .bank-info {
-      font-size: 18px;
-      color: #2c2c2c;
-      letter-spacing: 1px;
-    }
-    .chief-mourner {
-      font-size: 14px;
-      color: #6a6a6a;
-      margin-top: 8px;
-    }
-
-    /* 카카오 공유 버튼 */
-    .share-section {
-      background: #fff;
-      padding: 28px 36px;
-      text-align: center;
-      border-top: 1px solid #e8e0d0;
-    }
-    .kakao-btn {
-      display: inline-block;
-      background: #FEE500;
-      color: #3A1D1D;
-      padding: 14px 32px;
-      border-radius: 4px;
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      letter-spacing: 1px;
-      cursor: pointer;
-      border: none;
-    }
-    .kakao-btn:hover { background: #e6cf00; }
-
-    /* 푸터 */
-    .footer {
-      background: #1a1a2e;
-      color: #5a5a7a;
-      text-align: center;
-      padding: 20px;
-      font-size: 12px;
-      letter-spacing: 2px;
-      border-radius: 0 0 4px 4px;
-    }
+    .verse-section { background: #ede8de; border-left: 3px solid #8b7355; padding: 20px 28px; font-style: italic; color: #5a4a3a; font-size: 15px; line-height: 1.7; }
+    .tribute-section { background: #fff; padding: 40px 36px; }
+    .one-liner { font-size: 22px; font-weight: 300; color: #1a1a2e; text-align: center; margin-bottom: 28px; line-height: 1.5; letter-spacing: 1px; }
+    .one-liner::before, .one-liner::after { content: '— '; opacity: 0.3; }
+    .tribute-para { font-size: 16px; line-height: 2; color: #3a3a3a; text-align: justify; }
+    .funeral-section, .donation-section { background: #f9f5ef; border: 1px solid #d4c9b5; padding: 28px 36px; margin-top: 1px; }
+    .section-title { font-size: 11px; letter-spacing: 4px; color: #8b7355; margin-bottom: 16px; text-transform: uppercase; }
+    .funeral-item { display: flex; gap: 16px; font-size: 15px; margin-bottom: 8px; color: #2c2c2c; }
+    .funeral-label { color: #8b7355; min-width: 60px; }
+    .funeral-notice { font-size: 13px; color: #6a6a6a; margin-top: 12px; padding-top: 12px; border-top: 1px solid #e0d8cc; }
+    .bank-info { font-size: 18px; color: #2c2c2c; letter-spacing: 1px; }
+    .chief-mourner { font-size: 14px; color: #6a6a6a; margin-top: 8px; }
+    .share-section { background: #fff; padding: 28px 36px; text-align: center; border-top: 1px solid #e8e0d0; }
+    .kakao-btn { display: inline-block; background: #FEE500; color: #3A1D1D; padding: 14px 32px; border-radius: 4px; font-size: 15px; font-weight: 600; cursor: pointer; border: none; letter-spacing: 1px; }
+    .footer { background: #1a1a2e; color: #5a5a7a; text-align: center; padding: 20px; font-size: 12px; letter-spacing: 2px; border-radius: 0 0 4px 4px; }
     .footer a { color: #8888aa; text-decoration: none; }
-
     @media (max-width: 480px) {
       .header h1 { font-size: 32px; letter-spacing: 8px; }
       .dates-bar { flex-direction: column; gap: 8px; text-align: center; }
-      .tribute-section, .donation-section, .share-section { padding: 24px 20px; }
+      .tribute-section, .funeral-section, .donation-section, .share-section { padding: 24px 20px; }
     }
   </style>
 </head>
 <body>
 <div class="wrapper">
-
-  <!-- 헤더 -->
   <div class="header">
     <div class="symbol">◈</div>
     <div class="title-ko">부 고</div>
     <h1>故 홍기동</h1>
     <div class="rip-text">영면하시다</div>
   </div>
-
-  <!-- 날짜 -->
   <div class="dates-bar">
-    <div>생 1940-01-01</div>
+    <div>생 1991-04-05</div>
     <span>|</span>
-    <div>졸 </div>
+    <div>졸 2026-04-08</div>
   </div>
-
-  <!-- 성구 -->
-  <div class="verse-section">
-    그 분의 삶은 우리 마음 속에 영원히 살아 숨쉽니다.
-  </div>
-
-  <!-- 추모 -->
+  <div class="verse-section">그 분의 삶은 우리 마음 속에 영원히 살아 숨쉽니다.</div>
   <div class="tribute-section">
-    <div class="one-liner">당신의 사랑, 영원히 우리 곁에 머뭅니다</div>
-    <p class="tribute-para">홍기동님께서 우리 곁을 떠나셨습니다. 함께했던 모든 순간들이 이제는 소중한 추억이 되어 가슴 깊이 남아있습니다. 당신이 보여주신 사랑과 온기는 결코 잊히지 않을 것입니다. 고이 잠드소서, 그리고 편히 쉬소서.</p>
+    <div class="one-liner">그 따뜻한 웃음, 영원히 우리 곁에 머뭅니다</div>
+    <p class="tribute-para">홍기동님은 언제나 환한 미소로 가족을 품어주신 따뜻한 분이셨습니다. 유머러스한 말씀 한마디로 주변을 밝히시고, 사랑하는 이들을 먼저 챙기시던 그 넉넉한 마음을 저희는 잊지 않겠습니다. 이제 편히 쉬시길 바라며, 남겨주신 사랑과 웃음을 가슴 깊이 간직하겠습니다. 고이 잠드소서.</p>
   </div>
-
-  <!-- 조의금 -->
   
-  <div class="donation-section">
-    <div class="section-title">조 의 금</div>
-    <div class="bank-info">0</div>
-    
+  <div class="funeral-section">
+    <div class="section-title">장 례 안 내</div>
+    <div class="funeral-item"><span class="funeral-label">장　　지</span><span>용인</span></div><div class="funeral-notice">화환은 정중히 사양하오니 너른 양해 부탁드립니다</div>
   </div>
-
-  <!-- 공유 -->
+  
   <div class="share-section">
-    <button class="kakao-btn" onclick="shareKakao()">
-      🔗 카카오톡으로 공유하기
-    </button>
+    <button class="kakao-btn" onclick="shareKakao()">🔗 카카오톡으로 공유하기</button>
   </div>
-
-  <!-- 푸터 -->
   <div class="footer">
-    <a href="https://humandocu.com">휴먼다큐닷컴이 함께 합니다</a>
-    &nbsp;·&nbsp; 2026년 04월 10일 발행
+    <a href="https://humandocu.com">휴먼다큐닷컴이 함께 합니다</a> &nbsp;·&nbsp; 2026년 04월 10일 발행
   </div>
-
 </div>
-
 <script>
 function shareKakao() {
   const url = encodeURIComponent(window.location.href);
   const text = encodeURIComponent("故 홍기동 님의 부고를 전합니다.");
-  window.open(
-    "https://story.kakao.com/share?url=" + url + "&text=" + text,
-    "_blank", "width=600,height=500"
-  );
+  window.open("https://story.kakao.com/share?url=" + url + "&text=" + text, "_blank", "width=600,height=500");
 }
 </script>
 </body>
