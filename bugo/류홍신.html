@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>부고 - 故 류홍신</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Noto Serif KR',Georgia,serif;background:#f5f0e8;color:#2c2c2c;min-height:100vh}
+    .wrapper{max-width:480px;margin:0 auto}
+
+    /* 히어로 */
+    .hero{width:100%;height:200px;background:#1a1a2e;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+    .hero img{width:100%;height:100%;object-fit:cover;opacity:1}
+    .hero-overlay{position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(transparent,#1a1a2e)}
+
+    /* 헤더 */
+    .header{background:#1a1a2e;color:#e8e0d0;text-align:center;padding:12px 20px 28px}
+    .symbol-wrap{margin-bottom:10px;height:44px;display:flex;align-items:center;justify-content:center}
+    .badge{font-size:10px;letter-spacing:5px;color:rgba(200,169,110,0.45);margin-bottom:10px}
+    .deceased-name{font-size:30px;font-weight:300;letter-spacing:4px;color:#f5f0e8;margin-bottom:6px}
+    .rip-text{font-size:12px;letter-spacing:3px;color:rgba(200,169,110,0.5)}
+
+    /* 날짜바 */
+    .dates-bar{background:#2c2c2c;color:#c8b89a;display:flex;justify-content:center;gap:20px;padding:12px 16px;font-size:13px;letter-spacing:1px}
+
+    /* 성구 */
+    .verse-section{background:#ede8de;border-left:3px solid #8b7355;padding:16px 20px;font-style:italic;color:#5a4a3a;font-size:13px;line-height:1.8}
+
+    /* 추모글 */
+    .tribute-section{background:#fff;padding:28px 20px}
+    .tribute-label{font-size:9px;letter-spacing:4px;color:#8b7355;margin-bottom:14px;text-align:center}
+    .one-liner{font-size:17px;font-weight:400;color:#1a1a2e;text-align:center;margin-bottom:18px;line-height:1.6;font-style:italic;word-break:keep-all}
+    .one-liner::before,.one-liner::after{content:'— ';opacity:0.25}
+    .tribute-para{font-size:14px;line-height:2.1;color:#3a3a3a;text-align:justify;word-break:keep-all}
+
+    /* 장례안내/조의금 공통 */
+    .info-section{background:#f9f5ef;border:0.5px solid #d4c9b5;padding:20px;margin-top:1px}
+    .section-title{font-size:9px;letter-spacing:4px;color:#8b7355;margin-bottom:14px}
+    .info-row{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start}
+    .info-lbl{color:#8b7355;min-width:52px;font-size:11px;padding-top:2px;letter-spacing:1px}
+    .info-val{flex:1;color:#2c2c2c;font-size:13px;line-height:1.7}
+    .map-btn{display:inline-block;margin-top:8px;font-size:11px;padding:6px 14px;border:0.5px solid #c8b89a;border-radius:20px;color:#8b7355;background:transparent;text-decoration:none}
+    .bank-info{font-size:17px;color:#2c2c2c;letter-spacing:1px;margin-bottom:4px}
+    .mourner-line{font-size:12px;color:#6a6a6a}
+
+    /* 공지 */
+    .notice-section{background:#f9f5ef;border-left:3px solid #c8b89a;padding:14px 20px;margin-top:1px;font-size:13px;color:#6a6a6a;line-height:1.9}
+
+    /* 공유 */
+    .share-section{background:#fff;padding:20px;text-align:center;margin-top:1px;border-top:0.5px solid #e8e0d0}
+    .kakao-btn{background:#FEE500;color:#3A1D1D;font-size:14px;font-weight:700;padding:14px 0;border-radius:4px;border:none;width:100%;cursor:pointer;letter-spacing:1px}
+
+    /* 어드밴스드 배너 */
+    .adv-banner{background:#0f0f1e;padding:28px 20px;text-align:center;margin-top:1px;border-top:1px solid rgba(200,169,110,0.12)}
+    .adv-eyebrow{font-size:9px;letter-spacing:4px;color:rgba(200,169,110,0.35);margin-bottom:12px}
+    .adv-title{color:#c8b89a;font-size:14px;letter-spacing:2px;margin-bottom:10px;font-weight:300}
+    .adv-desc{color:#8888aa;font-size:12px;line-height:1.9;margin-bottom:18px}
+    .adv-tags{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+    .adv-tag{background:rgba(200,169,110,0.07);border:0.5px solid rgba(200,169,110,0.2);color:#a09070;font-size:11px;padding:6px 14px;border-radius:20px}
+
+    /* 푸터 */
+    .footer{background:#1a1a2e;color:#5a5a7a;text-align:center;padding:16px;font-size:11px;letter-spacing:2px}
+    .footer a{color:#8888aa;text-decoration:none}
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- 히어로 이미지 -->
+  <div class="hero">
+    <img src="https://kiki4i.github.io/humandocu/assets/chrysanthemum.jpg"
+         onerror="this.style.display='none'"
+         alt="국화">
+    <div class="hero-overlay"></div>
+  </div>
+
+  <!-- 헤더 -->
+  <div class="header">
+    <div class="symbol-wrap"><span style="font-size:32px;color:rgba(200,169,110,0.6);line-height:1">卍</span></div>
+    <div class="badge">부 고</div>
+    <div class="deceased-name">故 류홍신</div>
+    <div class="rip-text">극락왕생하시다</div>
+  </div>
+
+  <!-- 날짜 -->
+  <div class="dates-bar">
+    <div>생 1964년 4월 16일</div>
+    <span style="opacity:0.3">|</span>
+    <div>졸 2026년 4월 11일</div>
+  </div>
+
+  <!-- 성구 -->
+  <div class="verse-section">"인연 따라 왔다가 인연 따라 가노니" — 화엄경</div>
+
+  <!-- 추모글 -->
+  <div class="tribute-section">
+    <div class="tribute-label">✦ 추 모 의 글 ✦</div>
+    <div class="one-liner">강인함 속에 피어난 따스한 사랑</div>
+    <p class="tribute-para">"식사는 하셨어요?" 그 한마디에 담긴 깊은 마음을 우리는 기억합니다. 강인한 의지로 삶을 이끌어 가시면서도, 언제나 자신보다 곁의 사람들을 먼저 살피셨던 어머니. 당신이 건네셨던 따스한 배려의 온기는 우리 가슴 속에 영원히 남아 빛날 것입니다.</p>
+  </div>
+
+  <!-- 장례 안내 -->
+  
+  <div class="info-section">
+    <div class="section-title">장 례 안 내</div>
+    
+    <div class="info-row">
+      <span class="info-lbl">입　　관</span>
+      <span class="info-val">2026년 4월 11일</span>
+    </div>
+  </div>
+
+  <!-- 조의금 -->
+  
+
+  <!-- 공지사항 -->
+  
+
+  <!-- 카카오 공유 -->
+  <div class="share-section">
+    <button class="kakao-btn" onclick="shareKakao()">🔗 카카오톡으로 공유하기</button>
+  </div>
+
+  <!-- 어드밴스드 배너 -->
+  <div class="adv-banner">
+    <div class="adv-eyebrow">HUMANDOCU</div>
+    <div class="adv-title">어드밴스드 · 프리미엄 부고</div>
+    <div class="adv-desc">고인의 사진, 동영상과 함께<br>더 깊고 따뜻한 추모의 공간을 마련합니다</div>
+    <div class="adv-tags">
+      <span class="adv-tag">온라인 추모관</span>
+      <span class="adv-tag">디지털 방명록</span>
+      <span class="adv-tag">휴먼 아카이브</span>
+    </div>
+  </div>
+
+  <!-- 푸터 -->
+  <div class="footer">
+    <a href="https://humandocu.com">휴먼다큐닷컴이 함께 합니다</a> &nbsp;·&nbsp; 2026년 04월 11일 발행
+  </div>
+
+</div>
+<script>
+function shareKakao() {
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent("故 류홍신 님의 부고를 전합니다.");
+  window.open("https://story.kakao.com/share?url=" + url + "&text=" + text, "_blank", "width=600,height=500");
+}
+</script>
+</body>
+</html>
