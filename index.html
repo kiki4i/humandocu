@@ -359,7 +359,7 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
 
     <div class="hero-plans" id="pricing">
       <!-- 베이직 -->
-      <div class="hplan" onclick="window.location.href='https://tally.so/r/obogbP'">
+      <div class="hplan">
         <div class="hplan-name">베이직</div>
         <div class="hplan-price">무료</div>
         <span class="hplan-dur d5">5일 유지</span>
@@ -371,10 +371,10 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
           <li>장례식장 카카오맵 연동</li>
           <li>카카오톡 공유</li>
         </ul>
-        <span class="hplan-btn free">무료로 시작하기</span>
+        <a href="https://tally.so/r/obogbP" class="hplan-btn free" style="display:block;text-align:center">무료로 시작하기</a>
       </div>
       <!-- 어드밴스드 -->
-      <div class="hplan feat" onclick="openModal('advanced')">
+      <div class="hplan feat">
         <div class="hplan-pip">✦ 가장 많이 선택</div>
         <div class="hplan-name">어드밴스드</div>
         <div class="hplan-price">₩29,000</div>
@@ -388,10 +388,10 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
           <li>발인 다음날 답례 문구 자동 발송</li>
           <li>휴먼다큐 아카이브 연결</li>
         </ul>
-        <span class="hplan-btn main">지금 신청하기 →</span>
+        <button onclick="openModal('advanced')" class="hplan-btn main" style="width:100%;cursor:pointer;font-family:var(--sans);border:none">지금 신청하기 →</button>
       </div>
       <!-- 프리미엄 -->
-      <div class="hplan prem" onclick="openModal('advanced')" style="border:1px solid rgba(200,169,110,.35);background:rgba(200,169,110,.05)">
+      <div class="hplan prem" style="border:1px solid rgba(200,169,110,.35);background:rgba(200,169,110,.05)">
         <div class="hplan-pip" style="background:var(--ink);color:var(--gold2);border:1px solid rgba(200,169,110,.3)">✦ 휴먼아카이브로 링크</div>
         <div class="hplan-name">프리미엄</div>
         <div class="hplan-price">₩59,000</div>
@@ -406,7 +406,7 @@ footer{background:#0d0c08;padding:40px 56px;display:grid;grid-template-columns:2
           <li>디지털 자서전 (추후 연결)</li>
           <li>휴먼다큐 아카이브 영구 이관</li>
         </ul>
-        <span class="hplan-btn prem" style="border-color:var(--gold2);color:var(--gold2)">지금 신청하기 →</span>
+        <button onclick="openModal('advanced')" class="hplan-btn prem" style="border-color:var(--gold2);color:var(--gold2);width:100%;cursor:pointer;font-family:var(--sans);border:none">지금 신청하기 →</button>
       </div>
     </div>
   </div>
