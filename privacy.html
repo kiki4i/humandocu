@@ -5,174 +5,227 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>개인정보처리방침 · 휴먼다큐</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#18160f;--ink2:#3d3a30;--ink3:#7a7568;--cream:#f9f6f0;--cream2:#f0ebe0;--gold:#9e8250;--gold2:#c8a96e;--serif:'Noto Serif KR',Georgia,serif;--sans:'Noto Sans KR',sans-serif;}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.8;-webkit-font-smoothing:antialiased}
-a{color:var(--gold);text-decoration:none}
-nav{background:rgba(24,22,15,.95);padding:14px 48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.logo{font-family:var(--serif);font-size:17px;color:#f9f6f0;letter-spacing:.04em}
-.logo span{color:var(--gold2)}
-.nav-back{font-size:12px;color:rgba(249,246,240,.4);transition:color .2s}
-.nav-back:hover{color:var(--gold2)}
-.wrap{max-width:760px;margin:0 auto;padding:64px 32px 100px}
-.page-label{font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
-.page-title{font-family:var(--serif);font-size:32px;font-weight:300;color:var(--ink);margin-bottom:6px}
-.page-date{font-size:12px;color:var(--ink3);margin-bottom:48px;padding-bottom:24px;border-bottom:1px solid rgba(24,22,15,.08)}
-h2{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--ink);margin:36px 0 12px;padding-bottom:8px;border-bottom:1px solid rgba(24,22,15,.06)}
-h3{font-size:14px;font-weight:500;color:var(--ink2);margin:20px 0 8px}
-p{font-size:14px;color:var(--ink2);line-height:1.9;margin-bottom:10px}
-ul,ol{padding-left:20px;margin-bottom:12px}
-li{font-size:14px;color:var(--ink2);line-height:1.9;margin-bottom:4px}
-.highlight-box{background:var(--cream2);border-left:3px solid var(--gold2);border-radius:0 4px 4px 0;padding:14px 18px;margin:16px 0;font-size:13px;color:var(--ink2);line-height:1.8}
-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
-th{background:var(--cream2);padding:10px 14px;text-align:left;font-weight:500;color:var(--ink);border:1px solid rgba(24,22,15,.08)}
-td{padding:10px 14px;color:var(--ink2);border:1px solid rgba(24,22,15,.08);vertical-align:top}
-footer{background:#0d0c08;padding:28px 48px;text-align:center;font-size:12px;color:rgba(249,246,240,.25)}
-footer a{color:var(--gold2)}
-@media(max-width:640px){.wrap{padding:40px 20px 80px}nav{padding:12px 20px}.page-title{font-size:24px}}
+:root{
+  --ink:#0f0d09;--ink2:#2d2a22;--ink3:#575349;
+  --cream:#f9f6f0;--cream2:#f0ebe0;--cream3:#e5dece;
+  --gold:#9e8250;--gold2:#c8a96e;--gold3:#e8d4a8;
+  --teal:#2a6b5e;--teal-lt:#e0efeb;
+  --serif:'Cormorant Garamond','Noto Serif KR',Georgia,serif;
+  --sans:'Noto Sans KR',sans-serif;
+  --r:3px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.9;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 56px;background:rgba(15,13,9,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,169,110,.15)}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:30px;height:30px;background:var(--gold2);border-radius:2px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:15px;color:var(--ink)}
+.logo-text{font-family:var(--serif);font-size:18px;color:var(--cream);letter-spacing:.04em}
+.nav-right{font-size:13px;color:rgba(249,246,240,.45)}
+.nav-right a{color:var(--gold2)}
+
+.page-hero{background:var(--ink);padding:120px 56px 64px;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 100%,rgba(200,169,110,.06) 0%,transparent 65%);pointer-events:none}
+.page-hero-inner{max-width:760px;margin:0 auto;position:relative;z-index:1}
+.page-ey{font-size:11px;font-weight:500;letter-spacing:.22em;color:rgba(200,169,110,.55);text-transform:uppercase;margin-bottom:14px}
+.page-title{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:300;color:var(--cream);line-height:1.2;margin-bottom:10px}
+.page-meta{font-size:13px;color:rgba(249,246,240,.35)}
+
+.content{max-width:760px;margin:0 auto;padding:64px 56px 96px}
+.article h2{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink);margin:44px 0 14px;padding-bottom:10px;border-bottom:1px solid rgba(24,22,15,.1)}
+.article h2:first-child{margin-top:0}
+.article h3{font-size:15px;font-weight:500;color:var(--ink);margin:22px 0 8px}
+.article p{font-size:15px;color:var(--ink2);line-height:1.9;margin-bottom:12px}
+.article ul,.article ol{padding-left:20px;margin-bottom:12px}
+.article li{font-size:15px;color:var(--ink2);line-height:1.9;margin-bottom:4px}
+.article table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:14px}
+.article th{background:var(--cream2);font-size:13px;font-weight:500;color:var(--ink);padding:10px 14px;border:1px solid rgba(24,22,15,.1);text-align:left}
+.article td{color:var(--ink2);padding:10px 14px;border:1px solid rgba(24,22,15,.08);vertical-align:top;line-height:1.7}
+.notice-box{background:var(--cream2);border-left:3px solid var(--gold2);border-radius:0 var(--r) var(--r) 0;padding:16px 20px;margin:20px 0}
+.notice-box p{margin:0;font-size:14px;color:var(--ink2)}
+.right-badge{display:inline-block;background:var(--teal-lt);color:var(--teal);font-size:12px;font-weight:500;padding:2px 10px;border-radius:20px;margin-bottom:8px}
+
+footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px}
+.ft-logo{font-family:var(--serif);font-size:18px;color:#f0ede8;margin-bottom:8px;letter-spacing:.04em}
+.ft-logo span{color:var(--gold2)}
+.ft-tag{font-size:13px;color:rgba(240,237,232,.55);line-height:1.8;margin-bottom:12px}
+.ft-ct{font-size:13px;color:rgba(240,237,232,.5);line-height:1.8}
+.ft-ct a{color:var(--gold2)}
+.ft-col-t{font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,237,232,.45);margin-bottom:12px}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:9px}
+.ft-links a{font-size:13px;color:rgba(240,237,232,.48);transition:color .2s}
+.ft-links a:hover{color:var(--gold2)}
+.ft-bot{background:#242424;padding:14px 56px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:7px;border-top:1px solid rgba(255,255,255,.07)}
+.ft-copy{font-size:12px;color:rgba(240,237,232,.35);letter-spacing:.04em}
+
+@media(max-width:768px){
+  nav{padding:10px 16px}
+  .page-hero{padding:90px 20px 44px}
+  .content{padding:44px 20px 72px}
+  .article table{font-size:13px}
+  footer{grid-template-columns:1fr;gap:22px;padding:32px 20px}
+  .ft-bot{padding:12px 20px;flex-direction:column;gap:5px}
+}
 </style>
 </head>
 <body>
+
 <nav>
-  <a href="https://humandocu.com" class="logo">휴먼<span>다큐</span></a>
-  <a href="https://humandocu.com" class="nav-back">← 홈으로</a>
+  <a href="/" class="logo">
+    <div class="logo-mark">H</div>
+    <span class="logo-text">휴먼다큐</span>
+  </a>
+  <div class="nav-right">📞 <a href="tel:031-539-9709">031-539-9709</a></div>
 </nav>
 
-<div class="wrap">
-  <div class="page-label">Legal</div>
-  <h1 class="page-title">개인정보처리방침</h1>
-  <p class="page-date">시행일: 2026년 1월 1일 &nbsp;·&nbsp; 최종 수정일: 2026년 4월 6일</p>
-
-  <p>휴먼다큐(이하 "회사")는 개인정보보호법, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 등 관련 법령에 따라 이용자의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 다음과 같이 개인정보처리방침을 수립·공개합니다.</p>
-
-  <h2>제1조 (수집하는 개인정보 항목 및 수집 방법)</h2>
-  <h3>수집 항목</h3>
-  <table>
-    <tr><th>구분</th><th>수집 항목</th><th>수집 목적</th></tr>
-    <tr>
-      <td>서비스 신청</td>
-      <td>신청자 성명, 연락처(휴대폰번호), 이메일 주소</td>
-      <td>서비스 제공, 결과물 전달, 고객 응대</td>
-    </tr>
-    <tr>
-      <td>고인 정보</td>
-      <td>고인 성명, 생년월일, 별세일, 사진, 생애 정보</td>
-      <td>부고 페이지 제작</td>
-    </tr>
-    <tr>
-      <td>결제 정보</td>
-      <td>결제 수단 정보(카드사, 결제 금액 등)</td>
-      <td>결제 처리 및 환불 (PG사 통해 처리)</td>
-    </tr>
-    <tr>
-      <td>방명록</td>
-      <td>작성자 이름, 추모 메시지</td>
-      <td>디지털 방명록 서비스 제공</td>
-    </tr>
-    <tr>
-      <td>자동 수집</td>
-      <td>IP 주소, 접속 로그, 쿠키</td>
-      <td>서비스 운영 및 보안</td>
-    </tr>
-  </table>
-  <h3>수집 방법</h3>
-  <ul>
-    <li>홈페이지 신청 폼(Tally) 입력</li>
-    <li>전화·문자·이메일 접수</li>
-    <li>카카오톡 메시지를 통한 파일 수신</li>
-    <li>서비스 이용 과정에서 자동 생성</li>
-  </ul>
-
-  <h2>제2조 (개인정보의 수집 및 이용 목적)</h2>
-  <ul>
-    <li>디지털 부고 페이지 제작 및 링크 제공</li>
-    <li>AI 추모 문구 생성 및 콘텐츠 제작</li>
-    <li>결제 처리 및 영수증 발행</li>
-    <li>서비스 완료 후 결과물 전달 (이메일, 문자)</li>
-    <li>발인 다음날 답례 알림 발송</li>
-    <li>49재 종료 알림 및 아카이브 이관 안내</li>
-    <li>고객 문의 및 불만 처리</li>
-    <li>서비스 개선을 위한 통계 분석</li>
-  </ul>
-
-  <h2>제3조 (개인정보의 보유 및 이용 기간)</h2>
-  <table>
-    <tr><th>항목</th><th>보유 기간</th><th>근거</th></tr>
-    <tr><td>서비스 신청 정보</td><td>서비스 종료 후 1년</td><td>분쟁 처리</td></tr>
-    <tr><td>결제 정보</td><td>결제일로부터 5년</td><td>전자상거래법</td></tr>
-    <tr><td>고인 정보·사진</td><td>링크 유지 기간 + 아카이브 이관 시 영구 보존</td><td>서비스 계약</td></tr>
-    <tr><td>방명록</td><td>링크 유지 기간</td><td>서비스 계약</td></tr>
-    <tr><td>접속 로그</td><td>3개월</td><td>통신비밀보호법</td></tr>
-  </table>
-  <p>단, 관계 법령에 의해 보존할 필요가 있는 경우 해당 법령에서 정한 기간 동안 보존합니다.</p>
-
-  <h2>제4조 (개인정보의 제3자 제공)</h2>
-  <p>회사는 원칙적으로 이용자의 개인정보를 제3자에게 제공하지 않습니다. 다만, 다음의 경우는 예외입니다.</p>
-  <ul>
-    <li>이용자가 사전에 동의한 경우</li>
-    <li>법령의 규정에 의거하거나 수사기관의 적법한 요청이 있는 경우</li>
-  </ul>
-
-  <h2>제5조 (개인정보 처리 위탁)</h2>
-  <table>
-    <tr><th>수탁 업체</th><th>위탁 업무</th><th>보유 기간</th></tr>
-    <tr><td>토스페이먼츠</td><td>결제 처리</td><td>결제일로부터 5년</td></tr>
-    <tr><td>Google (Firebase)</td><td>방명록 데이터 저장</td><td>링크 유지 기간</td></tr>
-    <tr><td>Google (Gmail)</td><td>이메일 발송</td><td>발송 즉시 삭제</td></tr>
-    <tr><td>Anthropic (Claude AI)</td><td>AI 추모 문구 생성</td><td>처리 후 미보관</td></tr>
-    <tr><td>GitHub Pages</td><td>부고 페이지 호스팅</td><td>링크 유지 기간</td></tr>
-  </table>
-
-  <h2>제6조 (이용자의 권리와 행사 방법)</h2>
-  <p>이용자는 언제든지 다음의 권리를 행사할 수 있습니다.</p>
-  <ul>
-    <li>개인정보 열람 요청</li>
-    <li>개인정보 정정·삭제 요청</li>
-    <li>개인정보 처리 정지 요청</li>
-    <li>부고 링크 비공개 또는 삭제 요청</li>
-  </ul>
-  <p>권리 행사는 이메일(mongmong4i@gmail.com) 또는 전화(031-539-9709)로 요청하시면 지체 없이 처리합니다.</p>
-
-  <h2>제7조 (개인정보의 안전성 확보 조치)</h2>
-  <ul>
-    <li>개인정보에 대한 접근 권한 최소화</li>
-    <li>비밀번호 암호화 저장</li>
-    <li>HTTPS를 통한 데이터 전송 암호화</li>
-    <li>외부 침입 탐지를 위한 보안 시스템 운영</li>
-    <li>개인정보 처리 직원 최소화 및 교육</li>
-  </ul>
-
-  <h2>제8조 (쿠키의 운용)</h2>
-  <p>회사는 서비스 이용 편의를 위해 쿠키(cookie)를 사용합니다. 쿠키는 웹사이트가 이용자의 컴퓨터 브라우저에 전송하는 소량의 정보입니다.</p>
-  <ul>
-    <li>이용자는 브라우저 설정을 통해 쿠키 저장을 거부할 수 있습니다.</li>
-    <li>쿠키 저장 거부 시 일부 서비스 이용에 어려움이 있을 수 있습니다.</li>
-  </ul>
-
-  <h2>제9조 (개인정보 보호 책임자)</h2>
-  <div class="highlight-box">
-    <strong>개인정보 보호 책임자</strong><br>
-    성명: 정재우<br>
-    직위: 대표<br>
-    이메일: mongmong4i@gmail.com<br>
-    전화: 031-539-9709<br><br>
-    개인정보 침해에 관한 신고·상담은 아래 기관에 문의하실 수 있습니다.<br>
-    · 개인정보분쟁조정위원회: www.kopico.go.kr / 1833-6972<br>
-    · 개인정보침해신고센터: privacy.kisa.or.kr / 118<br>
-    · 대검찰청 사이버수사과: www.spo.go.kr / 1301<br>
-    · 경찰청 사이버수사국: ecrm.cyber.go.kr / 182
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-ey">Privacy</div>
+    <h1 class="page-title">개인정보처리방침</h1>
+    <p class="page-meta">시행일: 2026년 1월 1일 &nbsp;·&nbsp; 최종 수정: 2026년 4월 27일</p>
   </div>
+</div>
 
-  <h2>제10조 (개인정보처리방침 변경)</h2>
-  <p>이 개인정보처리방침은 법령·정책 또는 보안 기술의 변경에 따라 내용이 추가·삭제·수정될 수 있으며, 변경 시 홈페이지를 통해 공지합니다.</p>
+<div class="content">
+  <div class="article">
+
+    <div class="notice-box" style="margin-top:0">
+      <p>휴먼다큐(이하 "회사")는 정보주체의 개인정보를 소중히 여기며, 「개인정보 보호법」 및 관련 법령을 준수하여 이용자의 권익을 보호합니다.</p>
+    </div>
+
+    <h2>제1조 (개인정보 처리의 목적)</h2>
+    <p>회사는 다음 목적을 위해 개인정보를 처리합니다. 처리한 개인정보는 다음 목적 이외의 용도로는 사용되지 않으며, 목적이 변경될 경우 사전에 동의를 구합니다.</p>
+    <ul>
+      <li>부고 페이지 제작 및 메모리얼 서비스 제공</li>
+      <li>서비스 신청·결제·이메일 발송</li>
+      <li>AI 추모문구·답례장 자동 생성</li>
+      <li>서비스 관련 안내 및 고객 문의 응대</li>
+    </ul>
+
+    <h2>제2조 (수집하는 개인정보 항목)</h2>
+    <h3>신청자 정보</h3>
+    <table>
+      <tr><th>구분</th><th>수집 항목</th><th>필수 여부</th></tr>
+      <tr><td>연락처</td><td>이메일 주소, 휴대폰 번호</td><td>필수</td></tr>
+    </table>
+
+    <h3>고인 정보</h3>
+    <table>
+      <tr><th>구분</th><th>수집 항목</th><th>필수 여부</th></tr>
+      <tr><td>기본 정보</td><td>고인 성함, 생년월일, 별세일</td><td>필수</td></tr>
+      <tr><td>장례 정보</td><td>발인 일시, 장례식장 이름·주소, 조의금 계좌</td><td>필수</td></tr>
+      <tr><td>추모 정보</td><td>고인 약력·소개, 유족 관계</td><td>선택</td></tr>
+      <tr><td>사진·영상</td><td>영정사진, 생애사진(어드밴스드), 육성 녹음(선택)</td><td>일부 필수</td></tr>
+    </table>
+
+    <h3>자동 수집 정보</h3>
+    <table>
+      <tr><th>구분</th><th>수집 항목</th></tr>
+      <tr><td>접속 기록</td><td>IP 주소, 브라우저 종류, 접속 일시, 서비스 이용 기록</td></tr>
+    </table>
+
+    <h2>제3조 (개인정보의 보유 및 이용 기간)</h2>
+    <table>
+      <tr><th>서비스</th><th>보유 기간</th><th>비고</th></tr>
+      <tr><td>베이직</td><td>서비스 종료 후 즉시 삭제<br>(신청일로부터 5일)</td><td>만료 후 30일 이내 완전 삭제</td></tr>
+      <tr><td>어드밴스드</td><td>서비스 종료 후 즉시 삭제<br>(신청일로부터 49일)</td><td>아카이브 이관 선택 시 별도 동의 후 보관</td></tr>
+      <tr><td>결제 정보</td><td>5년</td><td>전자상거래법에 따른 보존 의무</td></tr>
+      <tr><td>고객 문의 기록</td><td>3년</td><td>소비자보호법에 따른 보존 의무</td></tr>
+    </table>
+
+    <h2>제4조 (개인정보의 제3자 제공)</h2>
+    <p>회사는 정보주체의 동의 없이 개인정보를 제3자에게 제공하지 않습니다. 단, 다음의 경우는 예외로 합니다.</p>
+    <ul>
+      <li>법령에 따라 수사기관 등이 요청하는 경우</li>
+      <li>서비스 제공을 위해 필요한 최소한의 범위에서 업무 위탁을 하는 경우</li>
+    </ul>
+
+    <h2>제5조 (개인정보 처리 위탁)</h2>
+    <table>
+      <tr><th>수탁업체</th><th>위탁 내용</th></tr>
+      <tr><td>Google (Gmail API)</td><td>이메일 발송</td></tr>
+      <tr><td>Tally</td><td>신청 폼 데이터 수집</td></tr>
+      <tr><td>Kakao</td><td>카카오톡 링크 공유</td></tr>
+    </table>
+    <p>회사는 위탁 계약 시 개인정보 보호 관련 법령을 준수하도록 필요한 사항을 규정하고 이를 관리·감독합니다.</p>
+
+    <h2>제6조 (정보주체의 권리·의무)</h2>
+    <div class="right-badge">정보주체의 권리</div>
+    <p>이용자는 회사에 대해 언제든지 다음 각 호의 권리를 행사할 수 있습니다.</p>
+    <ul>
+      <li>개인정보 열람 요구</li>
+      <li>개인정보 오류 정정 요구</li>
+      <li>개인정보 삭제 요구</li>
+      <li>개인정보 처리 정지 요구</li>
+    </ul>
+    <p>위 권리 행사는 전화(031-539-9709) 또는 이메일(mongmong4i@gmail.com)로 요청할 수 있으며, 회사는 지체 없이 조치합니다.</p>
+
+    <h2>제7조 (개인정보의 파기)</h2>
+    <p>① 회사는 보유 기간이 경과하거나 처리 목적이 달성된 개인정보는 지체 없이 파기합니다.</p>
+    <p>② 전자적 파일 형태의 개인정보는 복구 불가능한 방법으로 영구 삭제합니다.</p>
+    <p>③ 종이 문서는 분쇄 또는 소각하여 파기합니다.</p>
+
+    <h2>제8조 (개인정보 보호를 위한 기술적·관리적 조치)</h2>
+    <ul>
+      <li>개인정보 접근 권한을 업무 필요자로 최소화</li>
+      <li>업로드된 사진·파일은 암호화 전송(HTTPS) 적용</li>
+      <li>외부 공격에 대비한 보안 점검 정기 실시</li>
+    </ul>
+
+    <h2>제9조 (개인정보 보호책임자)</h2>
+    <div class="notice-box">
+      <p><strong>개인정보 보호책임자</strong><br>
+      성명: 정재우 &nbsp;·&nbsp; 직책: 대표<br>
+      전화: <a href="tel:031-539-9709" style="color:var(--gold)">031-539-9709</a><br>
+      이메일: <a href="mailto:mongmong4i@gmail.com" style="color:var(--gold)">mongmong4i@gmail.com</a></p>
+    </div>
+    <p>이용자는 서비스를 이용하면서 발생한 모든 개인정보 보호 관련 문의·불만·피해구제 등에 관한 사항을 위 담당자에게 문의할 수 있습니다.</p>
+
+    <h2>제10조 (개인정보 침해 신고 및 상담)</h2>
+    <p>개인정보 침해에 관한 신고 및 상담은 아래 기관에 문의하실 수 있습니다.</p>
+    <ul>
+      <li>개인정보침해신고센터: privacy.kisa.or.kr / 국번없이 118</li>
+      <li>대검찰청 사이버범죄수사단: www.spo.go.kr / 02-3480-3573</li>
+      <li>경찰청 사이버안전국: cyberbureau.police.go.kr / 국번없이 182</li>
+    </ul>
+
+    <h2>제11조 (사업자 정보)</h2>
+    <div class="notice-box">
+      <p>상호: 휴먼다큐 &nbsp;·&nbsp; 대표자: 정재우<br>
+      사업자등록번호: 357-50-01268<br>
+      주소: 경기도 수원시 영통구 에듀타운로 106번길 46, 463호 (이의동, 광교더로프트)<br>
+      전화: <a href="tel:031-539-9709" style="color:var(--gold)">031-539-9709</a> &nbsp;·&nbsp; 이메일: <a href="mailto:mongmong4i@gmail.com" style="color:var(--gold)">mongmong4i@gmail.com</a></p>
+    </div>
+
+  </div>
 </div>
 
 <footer>
-  © 2026 휴먼다큐 · <a href="https://humandocu.com">humandocu.com</a> &nbsp;·&nbsp;
-  <a href="/terms.html">이용약관</a> &nbsp;·&nbsp;
-  <a href="/privacy.html">개인정보처리방침</a>
+  <div>
+    <div class="ft-logo">휴먼다큐<span>닷컴</span></div>
+    <p class="ft-tag">슬픔을 기록으로, 그리움을 위로로.<br>고인의 생애를 기리는 디지털 추모 아카이브.</p>
+    <div class="ft-ct">📞 <a href="tel:031-539-9709">031-539-9709</a><br>🌐 <a href="https://humandocu.com">humandocu.com</a></div>
+  </div>
+  <div>
+    <div class="ft-col-t">부고 서비스</div>
+    <ul class="ft-links"><li><a href="/#pricing">베이직 (무료)</a></li><li><a href="/#pricing">어드밴스드</a></li><li><a href="/#guestbook">디지털 방명록</a></li></ul>
+  </div>
+  <div>
+    <div class="ft-col-t">휴먼다큐</div>
+    <ul class="ft-links"><li><a href="/#archive">아카이브 이관</a></li><li><a href="/#humandocu">인생 기록</a></li><li><a href="/#humandocu">칠순·팔순 선물</a></li></ul>
+  </div>
+  <div>
+    <div class="ft-col-t">안내</div>
+    <ul class="ft-links"><li><a href="/#faq">FAQ</a></li><li><a href="/terms.html">이용약관</a></li><li><a href="/privacy.html">개인정보처리방침</a></li><li><a href="/refund.html">환불규정</a></li></ul>
+  </div>
 </footer>
+<div class="ft-bot">
+  <span class="ft-copy">© 2026 휴먼다큐 · humandocu.com · All rights reserved.</span>
+  <span style="font-size:12px;color:rgba(240,237,232,.35)">부고 서비스 · 디지털 추모 아카이브</span>
+</div>
 </body>
 </html>
