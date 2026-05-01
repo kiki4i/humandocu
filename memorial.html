@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>메모리얼 · 소중한 분을 영원히 기억합니다 · 휴먼다큐닷컴</title>
+<meta name="description" content="부고문, 답례장, 메모리얼 페이지. 고인의 이야기를 품격 있게 남깁니다. 베이직 무료 · 어드밴스드 29,000원">
+<meta property="og:title" content="메모리얼 · 휴먼다큐닷컴">
+<meta property="og:description" content="소중한 분을 영원히 기억합니다. 부고문 무료 · 어드밴스드 29,000원">
+<meta property="og:url" content="https://humandocu.com/memorial.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --serif:'Cormorant Garamond','Noto Serif KR',Georgia,serif;
+  --sans:'Noto Sans KR',sans-serif;
+  --ink:#0f0d09;--cream:#f9f6f0;
+  --gold:#9e8250;--gold2:#c8a96e;--gold3:#e8d4a8;
+  --r:4px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:#111;color:var(--cream);font-family:var(--sans);font-weight:300;line-height:1.9;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(10,10,10,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,169,110,.1)}
+.logo{font-family:var(--serif);font-size:14px;font-weight:300;color:#666;letter-spacing:.08em}
+.logo span{color:var(--gold2);font-weight:400}
+.nav-back{font-size:12px;color:var(--gold2);font-family:var(--sans);font-weight:300}
+
+/* HERO */
+.hero{padding:100px 20px 60px;text-align:center;background:#111;border-bottom:1px solid #222}
+.kicker{display:inline-block;font-size:10px;font-family:var(--sans);font-weight:400;letter-spacing:.2em;color:#666;background:#1e1e1e;padding:4px 16px;border-radius:20px;margin-bottom:24px;border:1px solid #2a2a2a}
+.hero h1{font-family:var(--serif);font-size:clamp(24px,6vw,42px);font-weight:300;color:#e8e8e8;line-height:1.7;letter-spacing:.08em;margin-bottom:18px}
+.hero-sub{font-size:13px;font-family:var(--sans);font-weight:300;color:#666;line-height:2.2;margin-bottom:36px}
+.btn-main{display:inline-block;background:#e8e8e8;color:#111;font-size:14px;font-family:var(--sans);font-weight:500;padding:14px 36px;border-radius:var(--r);letter-spacing:.06em;cursor:pointer;border:none}
+.btn-hint{display:block;font-size:11px;color:#555;font-family:var(--sans);font-weight:300;margin-top:10px}
+
+/* 서비스 카드 */
+.services{padding:48px 20px;background:#0e0e0e;border-bottom:1px solid #222}
+.sec-label{font-size:10px;font-family:var(--sans);font-weight:300;letter-spacing:.16em;color:#444;margin-bottom:20px;text-align:center}
+.svc-cards{display:flex;flex-direction:column;gap:10px}
+.svc-card{border:1px solid #252525;border-radius:8px;padding:22px 20px;background:#161616;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.svc-left{flex:1;min-width:0}
+.svc-tag{font-size:9px;font-family:var(--sans);font-weight:400;letter-spacing:.14em;color:#555;margin-bottom:6px}
+.svc-title{font-family:var(--serif);font-size:17px;font-weight:300;color:#ccc;letter-spacing:.04em;margin-bottom:5px}
+.svc-desc{font-size:11px;font-family:var(--sans);font-weight:300;color:#555;line-height:1.8}
+.svc-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0}
+.svc-price{font-size:14px;font-family:var(--serif);font-weight:300;color:#888}
+.svc-price strong{color:#e0e0e0;font-weight:400;font-size:16px}
+.svc-btn{font-size:11px;font-family:var(--sans);font-weight:300;color:#888;padding:7px 16px;border:1px solid #333;border-radius:var(--r);background:transparent;cursor:pointer;white-space:nowrap}
+
+/* 흐름 */
+.flow{padding:48px 20px;background:#111;border-bottom:1px solid #222}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px}
+.step{text-align:center;padding:20px 10px;background:#161616;border-radius:var(--r);border:1px solid #252525}
+.step-num{font-size:20px;font-family:var(--serif);font-weight:300;color:#333;margin-bottom:8px}
+.step-title{font-size:12px;font-family:var(--sans);font-weight:400;color:#aaa;margin-bottom:4px}
+.step-desc{font-size:10px;font-family:var(--sans);font-weight:300;color:#555;line-height:1.7}
+.step-time{margin-top:6px;font-size:10px;font-weight:500;color:var(--gold2);letter-spacing:.06em}
+
+/* 샘플 */
+.sample{padding:48px 20px;background:#0e0e0e;border-bottom:1px solid #222}
+.sample-card{border:1px solid #2a2a2a;border-radius:8px;overflow:hidden;background:#161616}
+.sample-header{padding:20px;border-bottom:1px solid #222}
+.sample-deceased{font-family:var(--serif);font-size:19px;font-weight:300;color:#ddd;letter-spacing:.08em;margin-bottom:5px}
+.sample-dates{font-size:11px;font-family:var(--sans);font-weight:300;color:#555}
+.sample-body{padding:20px;border-bottom:1px solid #222}
+.sample-text{font-family:var(--serif);font-size:14px;font-weight:300;color:#888;line-height:2.8;letter-spacing:.04em}
+.sample-text em{color:#bbb;font-style:normal}
+.sample-tags{padding:14px 20px;display:flex;gap:6px;flex-wrap:wrap}
+.sample-tag{font-size:10px;font-family:var(--sans);font-weight:300;color:#555;background:#1e1e1e;padding:4px 12px;border-radius:20px;border:1px solid #2a2a2a}
+
+/* 인용 */
+.quote{padding:48px 20px;text-align:center;background:#0a0a0a;border-bottom:1px solid #222}
+.quote-text{font-family:var(--serif);font-size:clamp(15px,4vw,20px);font-weight:300;color:#555;line-height:2.8;letter-spacing:.08em}
+.quote-text em{color:#888;font-style:normal}
+
+/* 하단 CTA */
+.bottom-cta{padding:60px 20px;text-align:center;background:#111;border-bottom:1px solid #222}
+.cta-text{font-family:var(--serif);font-size:clamp(18px,4.5vw,26px);font-weight:300;color:#ccc;line-height:1.9;letter-spacing:.06em;margin-bottom:30px}
+
+/* 연결 */
+.connect{padding:16px 20px;background:#161616;display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;border-bottom:1px solid #222}
+.connect span{font-size:11px;font-family:var(--sans);font-weight:300;color:#444}
+.connect a{font-size:11px;font-family:var(--sans);font-weight:300;color:var(--gold2)}
+
+/* 풋터 */
+footer{padding:20px;display:flex;justify-content:space-between;align-items:center;background:#0e0e0e;flex-wrap:wrap;gap:10px}
+.ft-logo{font-size:12px;font-family:var(--serif);font-weight:300;color:#444}
+.ft-links{display:flex;gap:14px}
+.ft-links a{font-size:11px;color:#444;font-family:var(--sans);font-weight:300}
+
+/* 카카오 버튼 */
+.kk-btn{position:fixed;bottom:24px;right:20px;z-index:150;width:48px;height:48px;border-radius:50%;background:#FEE500;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.4);font-size:20px;text-decoration:none}
+
+@media(min-width:640px){
+  nav{padding:14px 48px}
+  .hero{padding:120px 48px 72px}
+  .services,.flow,.sample,.quote,.bottom-cta{padding:64px 48px}
+  .steps{grid-template-columns:repeat(4,1fr)}
+  footer{padding:20px 48px}
+  .connect{padding:16px 48px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">휴먼다큐닷컴 <span>/ Memorial</span></div>
+  <a href="/" class="nav-back">← 처음으로</a>
+</nav>
+
+<div class="hero">
+  <div class="kicker">MEMORIAL</div>
+  <h1>소중한 분을<br>영원히 기억합니다</h1>
+  <p class="hero-sub">부고문, 답례장, 메모리얼 페이지.<br>고인의 이야기를 품격 있게 남깁니다.</p>
+  <a href="https://humandocu-server-production.up.railway.app/payment/advanced" target="_blank" class="btn-main">어드밴스드 신청하기 →</a>
+  <span class="btn-hint">₩29,000 · 49재까지 · 10분 내 완성</span>
+  <div style="margin-top:14px">
+    <a href="https://tally.so/r/obogbP" target="_blank" style="font-size:12px;font-family:'Noto Sans KR',sans-serif;font-weight:300;color:#555;text-decoration:underline">무료 베이직으로 먼저 써보기</a>
+  </div>
+</div>
+
+<div class="services">
+  <div class="sec-label">서비스 구성</div>
+  <div class="svc-cards">
+    <!-- 어드밴스드 — 주인공 -->
+    <div class="svc-card" style="border-color:var(--gold2);background:#1a1608;padding:24px 20px;flex-direction:column;align-items:stretch;gap:16px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div style="display:inline-block;font-size:10px;font-family:var(--sans);font-weight:500;letter-spacing:.12em;background:var(--gold2);color:#111;padding:3px 12px;border-radius:20px;margin-bottom:10px">✦ 가장 많이 선택</div>
+          <div class="svc-tag" style="color:var(--gold2)">ADVANCED</div>
+          <div class="svc-title" style="color:var(--gold3);font-size:20px">메모리얼 페이지 + 답례장</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0">
+          <div style="font-size:11px;font-family:var(--sans);font-weight:300;color:#666;margin-bottom:2px">49재까지</div>
+          <div style="font-family:var(--serif);font-size:28px;font-weight:300;color:#e0e0e0;line-height:1">₩29,000</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <div style="font-size:12px;font-family:var(--sans);font-weight:300;color:rgba(249,246,240,.7);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--gold2);flex-shrink:0">✅</span>10분 내 차별화된 부고문 이메일 도착</div>
+        <div style="font-size:12px;font-family:var(--sans);font-weight:300;color:rgba(249,246,240,.7);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--gold2);flex-shrink:0">✅</span>영정사진 액자 + 생애사진 5장 슬라이드쇼</div>
+        <div style="font-size:12px;font-family:var(--sans);font-weight:300;color:rgba(249,246,240,.7);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--gold2);flex-shrink:0">✅</span>메모리얼 페이지 · 디지털 방명록 (49일)</div>
+        <div style="font-size:12px;font-family:var(--sans);font-weight:300;color:rgba(249,246,240,.7);display:flex;gap:8px;align-items:flex-start"><span style="color:var(--gold2);flex-shrink:0">✅</span>발인 다음날 AI 답례장 2가지 버전 제공</div>
+      </div>
+      <a href="https://humandocu-server-production.up.railway.app/payment/advanced" target="_blank" style="display:block;width:100%;padding:15px;background:var(--gold2);border-radius:var(--r);font-size:16px;font-weight:500;color:#111;text-align:center;font-family:var(--sans);letter-spacing:.04em">카드 결제 후 신청하기 →</a>
+      <div style="text-align:center;font-size:11px;font-family:var(--sans);font-weight:300;color:#555">결제 즉시 신청 폼 연결 · 10분 내 부고문 도착</div>
+    </div>
+
+    <!-- 베이직 — 보조 -->
+    <div style="text-align:center;padding:16px 0 4px">
+      <span style="font-size:12px;font-family:var(--sans);font-weight:300;color:#444">일단 무료로 먼저 써보실 분 →&nbsp;</span>
+      <a href="https://tally.so/r/obogbP" target="_blank" style="font-size:12px;font-family:var(--sans);font-weight:400;color:var(--gold2);text-decoration:underline">베이직 무료 신청</a>
+      <span style="font-size:11px;font-family:var(--sans);font-weight:300;color:#444">&nbsp;(5일 유지 · AI 부고문)</span>
+    </div>
+  </div>
+</div>
+
+<div class="flow">
+  <div class="sec-label">이렇게 됩니다</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">정보 입력</div>
+      <div class="step-desc">탈리 폼으로<br>간단히 작성</div>
+      <div class="step-time">3분</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">AI 자동 완성</div>
+      <div class="step-desc">고품격 추모문구<br>자동 생성</div>
+      <div class="step-time">10분 이내</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">이메일 수령</div>
+      <div class="step-desc">링크와 함께<br>바로 전달</div>
+      <div class="step-time">즉시</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-title">카카오톡 공유</div>
+      <div class="step-desc">링크 하나로<br>모두에게 전달</div>
+      <div class="step-time">1번 터치</div>
+    </div>
+  </div>
+</div>
+
+<div class="sample">
+  <div class="sec-label">완성 예시</div>
+  <div class="sample-card">
+    <div class="sample-header">
+      <div class="sample-deceased">故 홍길동 님</div>
+      <div class="sample-dates">1948. 03. 12 — 2025. 04. 28 &nbsp;·&nbsp; 향년 77세</div>
+    </div>
+    <div class="sample-body">
+      <div class="sample-text">
+        평생을 <em>묵묵히 가족 곁을 지키셨던</em> 아버지께서<br>
+        2025년 4월 28일 새벽, 조용히 우리 곁을 떠나셨습니다.<br><br>
+        낮은 목소리로 건네던 격려 한마디,<br>
+        <em>그 온기는 우리 가슴에 영원히 남아 있습니다.</em>
+      </div>
+    </div>
+    <div class="sample-tags">
+      <div class="sample-tag">메모리얼 페이지</div>
+      <div class="sample-tag">방명록</div>
+      <div class="sample-tag">답례장</div>
+      <div class="sample-tag">49재까지 유지</div>
+    </div>
+  </div>
+</div>
+
+<div class="quote">
+  <div class="quote-text">
+    기억은 사라지지 않습니다.<br>
+    <em>제대로 남겨두면.</em>
+  </div>
+</div>
+
+<div class="bottom-cta">
+  <div class="cta-text">지금 시작하세요.<br>10분이면 충분합니다.</div>
+  <a href="https://humandocu-server-production.up.railway.app/payment/advanced" target="_blank" class="btn-main">어드밴스드 신청하기 →</a>
+  <span class="btn-hint">₩29,000 · 카드 결제 · 10분 내 부고문 도착</span>
+  <div style="margin-top:14px">
+    <a href="https://tally.so/r/obogbP" target="_blank" style="font-size:12px;font-family:'Noto Sans KR',sans-serif;font-weight:300;color:#555;text-decoration:underline">무료 베이직으로 먼저 써보기</a>
+  </div>
+</div>
+
+<div class="connect">
+  <span>생전에 식스샷을 남겨두셨다면 메모리얼에 자동 연결됩니다</span>
+  <a href="/sixshot.html">식스샷 보기 →</a>
+</div>
+
+<footer>
+  <div class="ft-logo">휴먼다큐닷컴</div>
+  <div class="ft-links">
+    <a href="/terms.html">이용약관</a>
+    <a href="/privacy.html">개인정보처리방침</a>
+    <a href="tel:031-539-9709">031-539-9709</a>
+  </div>
+</footer>
+
+<a href="tel:031-539-9709" class="kk-btn" title="전화 상담">📞</a>
+
+</body>
+</html>
