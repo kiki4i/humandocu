@@ -93,6 +93,34 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .sample-link-url{font-size:11px;font-family:monospace;color:var(--blue)}
 .sample-link-copy{font-size:10px;font-family:var(--sans);font-weight:400;color:var(--blue);cursor:pointer}
 
+/* TODAY SIXSHOT */
+.today-sec{padding:64px 48px;background:var(--purple-lt);border-bottom:1px solid var(--purple-md)}
+.today-sec-label{font-size:10px;font-family:var(--sans);font-weight:300;letter-spacing:.16em;color:#9070A8;text-align:center;margin-bottom:6px}
+.today-sec-sub{font-size:12px;font-family:var(--sans);font-weight:300;color:#B090D0;text-align:center;margin-bottom:24px}
+.today-card{max-width:680px;margin:0 auto;border:1px solid var(--purple-md);border-radius:8px;overflow:hidden;background:#fff}
+.today-loading{text-align:center;padding:48px;font-size:13px;color:#9070A8;font-family:var(--sans);font-weight:300}
+.today-loading::after{content:'';display:inline-block;width:14px;height:14px;border:2px solid var(--purple-md);border-top-color:var(--purple);border-radius:50%;animation:spin .8s linear infinite;margin-left:8px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+.today-header{padding:20px 28px;border-bottom:1px solid var(--purple-md);display:flex;align-items:center;gap:14px}
+.today-avatar{width:44px;height:44px;border-radius:50%;background:var(--purple-lt);border:1px solid var(--purple-md);display:flex;align-items:center;justify-content:center;font-size:18px;font-family:var(--serif);color:var(--purple);font-weight:400;flex-shrink:0}
+.today-name{font-family:var(--serif);font-size:16px;font-weight:400;color:#1A0A2A;margin-bottom:3px}
+.today-identity{font-size:11px;font-family:var(--sans);font-weight:300;color:#9070A8;line-height:1.7}
+.today-photos{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;padding:16px 28px;border-bottom:1px solid var(--purple-md)}
+.today-photo{aspect-ratio:1;border-radius:5px;border:1px solid var(--purple-md);overflow:hidden;background:var(--purple-lt)}
+.today-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.today-photo-empty{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:10px;font-family:var(--sans);font-weight:300;color:#B090D0;text-align:center;padding:4px;line-height:1.5}
+.today-poem-wrap{padding:22px 28px;border-bottom:1px solid var(--purple-md)}
+.today-poem-label{font-size:10px;font-family:var(--sans);font-weight:300;letter-spacing:.12em;color:#9070A8;margin-bottom:10px}
+.today-poem{font-family:var(--serif);font-size:15px;font-weight:300;color:#1A0A2A;line-height:2.8;letter-spacing:.06em;white-space:pre-line}
+.today-link-box{padding:16px 28px;display:flex;justify-content:center}
+.today-link-btn{display:inline-block;font-size:12px;font-family:var(--sans);font-weight:400;color:var(--purple);background:var(--purple-lt);padding:10px 28px;border-radius:20px;border:1px solid var(--purple-md);letter-spacing:.04em;transition:background .2s}
+.today-link-btn:hover{background:var(--purple-md)}
+.today-empty{text-align:center;padding:48px;font-size:13px;color:#9070A8;font-family:var(--sans);font-weight:300;line-height:2}
+@media(max-width:860px){
+  .today-sec{padding:52px 24px}
+  .today-photos{grid-template-columns:repeat(3,1fr)}
+}
+
 /* UPDATE */
 .update-sec{padding:32px 48px;text-align:center;background:#fff;border-bottom:1px solid rgba(160,96,200,.12)}
 .update-sec p{font-size:13px;font-family:var(--sans);font-weight:300;color:#9070A8;line-height:2}
@@ -243,6 +271,15 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
   </div>
 </div>
 
+<!-- TODAY SIXSHOT -->
+<div class="today-sec">
+  <div class="today-sec-label">✦ 오늘의 식스샷 ✦</div>
+  <div class="today-sec-sub">공개를 선택한 누군가의 이야기 — 운명처럼 만납니다</div>
+  <div class="today-card" id="today-card">
+    <div class="today-loading">불러오는 중</div>
+  </div>
+</div>
+
 <!-- UPDATE -->
 <div class="update-sec">
   <p><strong>언제든 수정할 수 있습니다.</strong><br>삶은 계속되니까요. 오늘의 나와 1년 후의 나는 다릅니다.<br>식스샷은 함께 자랍니다.</p>
@@ -288,6 +325,74 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
     <a href="tel:031-539-9709">031-539-9709</a>
   </div>
 </footer>
+
+<script>
+(function(){
+  var API = 'https://humandocu-server-production.up.railway.app/api/sixshot/random';
+  var card = document.getElementById('today-card');
+
+  fetch(API)
+    .then(function(r){ return r.json(); })
+    .then(function(res){
+      if(res.status !== 'ok' || !res.data){
+        card.innerHTML = '<div class="today-empty">오늘의 식스샷을 준비 중입니다 ✦<br><span style="font-size:11px;color:#C0A0D8;display:block;margin-top:8px">첫 번째 공개 식스샷을 기다리고 있어요</span></div>';
+        return;
+      }
+      var d = res.data;
+      var name = d.name || '';
+      var identity = d.identity || '';
+      var shots = d.shots || {};
+      var images = d.shot_images || {};
+      var poems = d.poems || '';
+      var doc_id = d.doc_id || '';
+
+      // [대표] 시만 추출
+      var rep_poem = '';
+      var lines = poems.split('\n');
+      var in_rep = false;
+      for(var i = 0; i < lines.length; i++){
+        var l = lines[i].trim();
+        if(l === '[대표]'){ in_rep = true; continue; }
+        if(l.indexOf('[SHOT') === 0){ break; }
+        if(in_rep && l) rep_poem += l + '\n';
+      }
+
+      // 사진 6장
+      var photos_html = '';
+      for(var j = 1; j <= 6; j++){
+        var img_url = images[String(j)] || '';
+        var cap = shots[String(j)] || '';
+        if(img_url){
+          photos_html += '<div class="today-photo"><img src="' + img_url + '" alt="SHOT ' + j + '" loading="lazy"></div>';
+        } else {
+          var short = cap.length > 14 ? cap.slice(0,14) + '…' : cap;
+          photos_html += '<div class="today-photo"><div class="today-photo-empty">' + short + '</div></div>';
+        }
+      }
+
+      var initial = name ? name.charAt(0) : '✦';
+
+      card.innerHTML =
+        '<div class="today-header">'
+        + '<div class="today-avatar">' + initial + '</div>'
+        + '<div>'
+        + '<div class="today-name">' + name + '</div>'
+        + '<div class="today-identity">' + identity + '</div>'
+        + '</div></div>'
+        + '<div class="today-photos">' + photos_html + '</div>'
+        + '<div class="today-poem-wrap">'
+        + '<div class="today-poem-label">AI가 다듬은 시</div>'
+        + '<div class="today-poem">' + rep_poem.trim() + '</div>'
+        + '</div>'
+        + (doc_id
+          ? '<div class="today-link-box"><a href="https://humandocu-server-production.up.railway.app/sixshot/' + doc_id + '" target="_blank" class="today-link-btn">이 사람의 식스샷 전체 보기 →</a></div>'
+          : '');
+    })
+    .catch(function(){
+      card.innerHTML = '<div class="today-empty">오늘의 식스샷을 준비 중입니다 ✦</div>';
+    });
+})();
+</script>
 
 </body>
 </html>
