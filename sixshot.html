@@ -15,9 +15,6 @@
   --serif:'Cormorant Garamond','Noto Serif KR',Georgia,serif;
   --sans:'Noto Sans KR',sans-serif;
   --r:4px;
-  --pink:#C060A0;
-  --pink-lt:#FDF0F8;
-  --pink-md:#F0C0E0;
   --blue:#4090C0;
   --blue-lt:#F0F8FF;
   --blue-md:#B0D4F0;
@@ -29,15 +26,11 @@
 html{scroll-behavior:smooth}
 body{background:#fff;color:#111;font-family:var(--sans);font-weight:300;line-height:1.9;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 a{text-decoration:none;color:inherit}
-
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 48px;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(160,96,200,.12)}
 .logo{font-family:var(--serif);font-size:14px;font-weight:300;color:#888;letter-spacing:.08em}
 .logo span{color:var(--purple);font-weight:400}
 .nav-back{font-size:12px;color:var(--purple);font-family:var(--sans);font-weight:300;cursor:pointer}
 @media(max-width:860px){nav{padding:12px 20px}}
-
-/* HERO */
 .hero{padding:120px 48px 72px;text-align:center;background:#fff;border-bottom:1px solid rgba(160,96,200,.12)}
 .kicker{display:inline-block;font-size:10px;font-family:var(--sans);font-weight:500;letter-spacing:.2em;color:var(--purple);background:var(--purple-lt);padding:4px 16px;border-radius:20px;margin-bottom:24px}
 .hero h1{font-family:var(--serif);font-size:clamp(22px,3.5vw,38px);font-weight:300;color:#1A0A2A;line-height:1.85;letter-spacing:.06em;margin-bottom:20px}
@@ -45,14 +38,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .btn-primary{display:inline-block;background:var(--purple);color:#fff;font-size:14px;font-family:var(--sans);font-weight:400;padding:13px 40px;border-radius:var(--r);letter-spacing:.06em;cursor:pointer;border:none;transition:background .2s}
 .btn-primary:hover{background:#6030A0}
 .btn-hint{display:block;font-size:11px;color:#C0A0D8;font-family:var(--sans);font-weight:300;margin-top:10px}
-
-/* HAIKU */
 .haiku-sec{padding:64px 48px;text-align:center;background:var(--blue-lt);border-bottom:1px solid var(--blue-md)}
 .sec-label{font-size:10px;font-family:var(--sans);font-weight:300;letter-spacing:.16em;color:#90B8D8;margin-bottom:20px}
 .haiku-text{font-family:var(--serif);font-size:clamp(16px,2.2vw,22px);font-weight:300;color:#0A1A2A;line-height:2.8;letter-spacing:.1em;margin-bottom:22px}
 .haiku-body{font-size:13px;font-family:var(--sans);font-weight:300;color:#6090B0;line-height:2.3;max-width:480px;margin:0 auto}
-
-/* BRIDGE */
 .bridge-sec{padding:64px 48px;text-align:center;background:#fff;border-bottom:1px solid rgba(160,96,200,.12)}
 .bridge-opener{font-family:var(--serif);font-size:clamp(16px,2vw,22px);font-weight:300;color:#2A1A3A;line-height:2.3;letter-spacing:.06em;margin-bottom:28px}
 .bridge-opener em{color:var(--purple);font-style:normal;font-weight:400}
@@ -61,8 +50,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .bridge-hook strong{color:var(--purple)}
 .bridge-body{font-size:13px;font-family:var(--sans);font-weight:300;color:#7858A0;line-height:2.3;margin-bottom:28px;max-width:520px;margin-left:auto;margin-right:auto}
 .bridge-link{display:inline-block;font-size:12px;font-family:var(--sans);font-weight:300;color:var(--blue);background:var(--blue-lt);padding:8px 22px;border-radius:20px;border:1px solid var(--blue-md);letter-spacing:.04em}
-
-/* HOW */
 .how-sec{padding:64px 48px;background:#FDFAFF;border-bottom:1px solid rgba(160,96,200,.12)}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px;max-width:800px;margin-left:auto;margin-right:auto}
 .step{text-align:center;padding:24px 14px;background:#fff;border-radius:var(--r);border:1px solid rgba(160,96,200,.15)}
@@ -70,8 +57,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .step-title{font-size:12px;font-family:var(--sans);font-weight:500;color:#2A1A3A;margin-bottom:6px}
 .step-desc{font-size:11px;font-family:var(--sans);font-weight:300;color:#9070A8;line-height:1.8}
 @media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
-
-/* SAMPLE */
 .sample-sec{padding:64px 48px;background:var(--blue-lt);border-bottom:1px solid var(--blue-md)}
 .sample-card{max-width:680px;margin:24px auto 0;border:1px solid var(--blue-md);border-radius:8px;overflow:hidden;background:#fff}
 .sample-header{padding:22px 28px;border-bottom:1px solid #E0F0FF;display:flex;align-items:center;gap:14px}
@@ -81,8 +66,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .sample-photos{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;padding:16px 28px;border-bottom:1px solid #E0F0FF}
 .sample-photo{aspect-ratio:1;border-radius:5px;border:1px solid #C8E4F8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:16px}
 .photo-cap{font-size:8px;font-family:var(--sans);font-weight:300;color:#A0B8C8;text-align:center;padding:0 3px;line-height:1.5}
-.ph1{background:#FFF0F8}.ph2{background:#F0F8FF}.ph3{background:#F8F0FF}
-.ph4{background:#F0FFF8}.ph5{background:#FFF8F0}.ph6{background:#F8F0F8}
+.ph1{background:#FFF0F8}.ph2{background:#F0F8FF}.ph3{background:#F8F0FF}.ph4{background:#F0FFF8}.ph5{background:#FFF8F0}.ph6{background:#F8F0F8}
 .sample-poem-wrap{padding:22px 28px;border-bottom:1px solid #E0F0FF}
 .sample-poem-label{font-size:10px;font-family:var(--sans);font-weight:300;letter-spacing:.12em;color:#90B8D0;margin-bottom:10px}
 .sample-poem{font-family:var(--serif);font-size:14px;font-weight:300;color:#1A2A3A;line-height:2.8;letter-spacing:.06em}
@@ -96,7 +80,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 /* TODAY SIXSHOT */
 .today-sec{padding:64px 48px;background:var(--purple-lt);border-bottom:1px solid var(--purple-md)}
 .today-sec-label{font-size:10px;font-family:var(--sans);font-weight:300;letter-spacing:.16em;color:#9070A8;text-align:center;margin-bottom:6px}
-.today-sec-sub{font-size:12px;font-family:var(--sans);font-weight:300;color:#B090D0;text-align:center;margin-bottom:24px}
+.today-sec-sub{font-size:12px;font-family:var(--sans);font-weight:300;color:#B090D0;text-align:center;margin-bottom:16px}
+.credit-bar{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:24px}
+.credit-badge{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--purple-md);border-radius:20px;padding:6px 16px;font-size:12px;font-family:var(--sans);font-weight:400;color:var(--purple)}
+.credit-badge .credit-num{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--purple);line-height:1}
+.credit-info-btn{font-size:11px;color:#B090D0;cursor:pointer;text-decoration:underline;font-family:var(--sans);font-weight:300}
 .today-card{max-width:680px;margin:0 auto;border:1px solid var(--purple-md);border-radius:8px;overflow:hidden;background:#fff}
 .today-loading{text-align:center;padding:48px;font-size:13px;color:#9070A8;font-family:var(--sans);font-weight:300}
 .today-loading::after{content:'';display:inline-block;width:14px;height:14px;border:2px solid var(--purple-md);border-top-color:var(--purple);border-radius:50%;animation:spin .8s linear infinite;margin-left:8px;vertical-align:middle}
@@ -106,9 +94,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .today-name{font-family:var(--serif);font-size:16px;font-weight:400;color:#1A0A2A;margin-bottom:3px}
 .today-identity{font-size:11px;font-family:var(--sans);font-weight:300;color:#9070A8;line-height:1.7}
 .today-photos{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;padding:16px 28px;border-bottom:1px solid var(--purple-md)}
-.today-photo{aspect-ratio:1;border-radius:5px;border:1px solid var(--purple-md);overflow:hidden;background:var(--purple-lt)}
+.today-photo{aspect-ratio:1;border-radius:5px;border:1px solid var(--purple-md);overflow:hidden;background:var(--purple-lt);position:relative}
 .today-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .today-photo-empty{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:10px;font-family:var(--sans);font-weight:300;color:#B090D0;text-align:center;padding:4px;line-height:1.5}
+.today-photo.locked img{filter:blur(6px);transform:scale(1.05)}
+.today-photo.locked .lock-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:16px;background:rgba(120,60,180,.15)}
+.today-unlock{padding:20px 28px;border-bottom:1px solid var(--purple-md);background:#FDFAFF;text-align:center}
+.today-unlock-msg{font-size:12px;font-family:var(--sans);font-weight:300;color:#9070A8;margin-bottom:14px;line-height:1.9}
+.today-unlock-btn{display:inline-block;background:var(--purple);color:#fff;font-size:13px;font-family:var(--sans);font-weight:400;padding:11px 28px;border-radius:var(--r);cursor:pointer;border:none;letter-spacing:.04em;transition:background .2s}
+.today-unlock-btn:hover{background:#6030A0}
+.today-unlock-sub{font-size:11px;color:#C0A0D8;margin-top:10px;font-family:var(--sans);font-weight:300}
+.today-no-credit{padding:20px 28px;border-bottom:1px solid var(--purple-md);background:#FDFAFF;text-align:center}
+.today-no-credit-msg{font-size:13px;font-family:var(--sans);font-weight:300;color:#9070A8;line-height:2;margin-bottom:16px}
+.today-get-credit-btn{display:inline-block;background:#fff;color:var(--purple);font-size:13px;font-family:var(--sans);font-weight:400;padding:11px 28px;border-radius:var(--r);cursor:pointer;border:1.5px solid var(--purple-md);letter-spacing:.04em;transition:all .2s}
+.today-get-credit-btn:hover{background:var(--purple-lt)}
 .today-poem-wrap{padding:22px 28px;border-bottom:1px solid var(--purple-md)}
 .today-poem-label{font-size:10px;font-family:var(--sans);font-weight:300;letter-spacing:.12em;color:#9070A8;margin-bottom:10px}
 .today-poem{font-family:var(--serif);font-size:15px;font-weight:300;color:#1A0A2A;line-height:2.8;letter-spacing:.06em;white-space:pre-line}
@@ -116,33 +115,35 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .today-link-btn{display:inline-block;font-size:12px;font-family:var(--sans);font-weight:400;color:var(--purple);background:var(--purple-lt);padding:10px 28px;border-radius:20px;border:1px solid var(--purple-md);letter-spacing:.04em;transition:background .2s}
 .today-link-btn:hover{background:var(--purple-md)}
 .today-empty{text-align:center;padding:48px;font-size:13px;color:#9070A8;font-family:var(--sans);font-weight:300;line-height:2}
-@media(max-width:860px){
-  .today-sec{padding:52px 24px}
-  .today-photos{grid-template-columns:repeat(3,1fr)}
-}
+@media(max-width:860px){.today-sec{padding:52px 24px}.today-photos{grid-template-columns:repeat(3,1fr)}}
 
-/* UPDATE */
+/* 모달 */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;align-items:flex-end;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal-box{background:#fff;width:100%;max-width:480px;border-radius:16px 16px 0 0;padding:32px 24px 40px;animation:slideUp .25s ease}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-title{font-family:var(--serif);font-size:18px;font-weight:400;color:#1A0A2A;margin-bottom:6px;letter-spacing:.04em}
+.modal-sub{font-size:12px;font-family:var(--sans);font-weight:300;color:#9070A8;margin-bottom:24px}
+.modal-row{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+.modal-icon{width:36px;height:36px;border-radius:50%;background:var(--purple-lt);border:1px solid var(--purple-md);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.modal-row-text{flex:1}
+.modal-row-title{font-size:13px;font-family:var(--sans);font-weight:500;color:#2A1A3A;margin-bottom:3px}
+.modal-row-desc{font-size:12px;font-family:var(--sans);font-weight:300;color:#9070A8;line-height:1.8}
+.modal-close{width:100%;padding:14px;background:var(--purple-lt);border:1px solid var(--purple-md);border-radius:var(--r);font-size:14px;font-family:var(--sans);font-weight:400;color:var(--purple);cursor:pointer;margin-top:8px;letter-spacing:.04em}
+
 .update-sec{padding:32px 48px;text-align:center;background:#fff;border-bottom:1px solid rgba(160,96,200,.12)}
 .update-sec p{font-size:13px;font-family:var(--sans);font-weight:300;color:#9070A8;line-height:2}
 .update-sec strong{color:var(--purple);font-weight:500}
-
-/* SHARE */
 .share-sec{padding:48px 48px;text-align:center;background:#FDFAFF;border-bottom:1px solid rgba(160,96,200,.12)}
 .share-badges{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px}
 .badge{font-size:11px;font-family:var(--sans);font-weight:300;color:var(--purple);background:var(--purple-lt);padding:7px 18px;border-radius:20px;border:1px solid var(--purple-md)}
-
-/* BOTTOM CTA */
 .bottom-cta{padding:72px 48px;text-align:center;background:linear-gradient(180deg,#FDFAFF 0%,var(--blue-lt) 100%);border-bottom:1px solid var(--blue-md)}
 .bottom-cta-text{font-family:var(--serif);font-size:clamp(18px,2.5vw,28px);font-weight:300;color:#1A0A2A;line-height:2;letter-spacing:.06em;margin-bottom:32px}
 .bottom-cta-text em{color:var(--purple);font-style:normal}
-
-/* CONNECT */
 .connect-strip{padding:16px 48px;background:var(--blue-lt);display:flex;justify-content:center;gap:12px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--blue-md)}
 .connect-strip span{font-size:11px;font-family:var(--sans);font-weight:300;color:#90B8D0}
 .connect-strip a{font-size:11px;font-family:var(--sans);font-weight:300;color:var(--blue);text-decoration:underline}
 .connect-dot{width:3px;height:3px;border-radius:50%;background:var(--blue-md)}
-
-/* FOOTER */
 footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:center;background:#FAFAFA;border-top:1px solid rgba(24,22,15,.07);flex-wrap:wrap;gap:10px}
 .ft-logo{font-size:12px;font-family:var(--serif);font-weight:300;color:#bbb}
 .ft-links{display:flex;gap:16px}
@@ -158,13 +159,11 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="logo">휴먼다큐닷컴 <span>/ Six Shot</span></div>
   <a href="/" class="nav-back">← 처음으로</a>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="kicker">SIX SHOT · 식스샷</div>
   <h1>오늘 끝났는데, 덤으로 받은 하루.<br>여섯 장이야 — 네 삶을 기념해봐.</h1>
@@ -173,7 +172,6 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
   <span class="btn-hint">무료 · 3분이면 완성 · 언제든 수정 가능</span>
 </div>
 
-<!-- HAIKU -->
 <div class="haiku-sec">
   <div class="sec-label">— 하이쿠 —</div>
   <div class="haiku-text">
@@ -188,7 +186,6 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
   </div>
 </div>
 
-<!-- BRIDGE -->
 <div class="bridge-sec">
   <div class="bridge-opener">사진은 남습니다.<br>당신이 고르든, <em>남이 고르든.</em></div>
   <div class="bridge-divider"></div>
@@ -206,34 +203,16 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
   <a href="/index.html#pricing" class="bridge-link">→ 부고·메모리얼 서비스와도 연결됩니다</a>
 </div>
 
-<!-- HOW -->
 <div class="how-sec">
   <div class="sec-label" style="text-align:center">이렇게 됩니다</div>
   <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-title">사진 6장 올리기</div>
-      <div class="step-desc">내 삶에서 가장<br>의미있는 순간들</div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-title">한 줄 설명</div>
-      <div class="step-desc">각 사진마다<br>짧게 써주세요</div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-title">AI가 다듬기</div>
-      <div class="step-desc">시와 총평으로<br>당신을 정의합니다</div>
-    </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <div class="step-title">링크로 공유</div>
-      <div class="step-desc">카톡·인스타·명함에<br>담으세요</div>
-    </div>
+    <div class="step"><div class="step-num">1</div><div class="step-title">사진 6장 올리기</div><div class="step-desc">내 삶에서 가장<br>의미있는 순간들</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-title">한 줄 설명</div><div class="step-desc">각 사진마다<br>짧게 써주세요</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-title">AI가 다듬기</div><div class="step-desc">시와 총평으로<br>당신을 정의합니다</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-title">링크로 공유</div><div class="step-desc">카톡·인스타·명함에<br>담으세요</div></div>
   </div>
 </div>
 
-<!-- SAMPLE -->
 <div class="sample-sec">
   <div class="sec-label" style="text-align:center;color:#90B8D0">완성하면 이렇게 됩니다 — 샘플</div>
   <div class="sample-card">
@@ -275,17 +254,19 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
 <div class="today-sec">
   <div class="today-sec-label">✦ 오늘의 식스샷 ✦</div>
   <div class="today-sec-sub">공개를 선택한 누군가의 이야기 — 운명처럼 만납니다</div>
+  <div class="credit-bar">
+    <div class="credit-badge">🎫 엿보기 크레딧 <span class="credit-num" id="credit-display">-</span>개</div>
+    <span class="credit-info-btn" onclick="openModal()">크레딧이 뭔가요?</span>
+  </div>
   <div class="today-card" id="today-card">
     <div class="today-loading">불러오는 중</div>
   </div>
 </div>
 
-<!-- UPDATE -->
 <div class="update-sec">
   <p><strong>언제든 수정할 수 있습니다.</strong><br>삶은 계속되니까요. 오늘의 나와 1년 후의 나는 다릅니다.<br>식스샷은 함께 자랍니다.</p>
 </div>
 
-<!-- SHARE -->
 <div class="share-sec">
   <div class="sec-label" style="text-align:center">이런 곳에 쓰세요</div>
   <div class="share-badges">
@@ -298,7 +279,6 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
   </div>
 </div>
 
-<!-- BOTTOM CTA -->
 <div class="bottom-cta">
   <div class="bottom-cta-text">
     지금 이 순간도<br>
@@ -309,14 +289,12 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
   <span class="btn-hint">무료 · 3분이면 완성 · 언제든 수정 가능</span>
 </div>
 
-<!-- CONNECT -->
 <div class="connect-strip">
   <span>식스샷에서 남긴 이야기가 메모리얼로 이어집니다</span>
   <div class="connect-dot"></div>
   <a href="/index.html#pricing">메모리얼 서비스 보기 →</a>
 </div>
 
-<!-- FOOTER -->
 <footer>
   <div class="ft-logo">휴먼다큐닷컴</div>
   <div class="ft-links">
@@ -326,69 +304,229 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
   </div>
 </footer>
 
-<script>
-(function(){
-  var API = 'https://humandocu-server-production.up.railway.app/api/sixshot/random';
-  var card = document.getElementById('today-card');
+<!-- 크레딧 안내 모달 -->
+<div class="modal-overlay" id="credit-modal" onclick="closeModal(event)">
+  <div class="modal-box">
+    <div class="modal-title">엿보기 크레딧이란?</div>
+    <div class="modal-sub">공개가 화폐입니다 — 내가 열면 남도 엿볼 수 있어요</div>
+    <div class="modal-row">
+      <div class="modal-icon">🎫</div>
+      <div class="modal-row-text">
+        <div class="modal-row-title">크레딧 1개 = 식스샷 10개 열람</div>
+        <div class="modal-row-desc">크레딧 1개를 쓰면 다른 사람의 이야기를 10개 볼 수 있어요</div>
+      </div>
+    </div>
+    <div class="modal-row">
+      <div class="modal-icon">🌟</div>
+      <div class="modal-row-text">
+        <div class="modal-row-title">공개 제출하면 크레딧 1개 즉시 지급</div>
+        <div class="modal-row-desc">식스샷을 만들고 공개를 선택하면 크레딧 1개가 바로 생깁니다</div>
+      </div>
+    </div>
+    <div class="modal-row">
+      <div class="modal-icon">☀️</div>
+      <div class="modal-row-text">
+        <div class="modal-row-title">매일 자동 충전 1개</div>
+        <div class="modal-row-desc">크레딧이 없어도 다음 날 다시 오면 1개가 자동으로 충전됩니다</div>
+      </div>
+    </div>
+    <button class="modal-close" onclick="closeModal()">확인</button>
+  </div>
+</div>
 
+<script>
+var CREDIT_KEY = 'hd_sixshot_credits';
+var LAST_CHARGE_KEY = 'hd_sixshot_last_charge';
+var VIEW_COUNT_KEY = 'hd_sixshot_view_count';
+
+function getCredits() {
+  var today = new Date().toISOString().slice(0, 10);
+  var lastCharge = localStorage.getItem(LAST_CHARGE_KEY) || '';
+  if (lastCharge !== today) {
+    var cur = parseInt(localStorage.getItem(CREDIT_KEY) || '0', 10);
+    localStorage.setItem(CREDIT_KEY, String(cur + 1));
+    localStorage.setItem(LAST_CHARGE_KEY, today);
+    localStorage.setItem(VIEW_COUNT_KEY, '0');
+  }
+  return parseInt(localStorage.getItem(CREDIT_KEY) || '0', 10);
+}
+
+function useCredit() {
+  var cur = getCredits();
+  if (cur <= 0) return false;
+  localStorage.setItem(CREDIT_KEY, String(cur - 1));
+  localStorage.setItem(VIEW_COUNT_KEY, '0');
+  return true;
+}
+
+function addCredit(n) {
+  var cur = parseInt(localStorage.getItem(CREDIT_KEY) || '0', 10);
+  localStorage.setItem(CREDIT_KEY, String(cur + (n || 1)));
+}
+
+function getViewCount() {
+  return parseInt(localStorage.getItem(VIEW_COUNT_KEY) || '0', 10);
+}
+
+function incViewCount() {
+  var v = getViewCount() + 1;
+  localStorage.setItem(VIEW_COUNT_KEY, String(v));
+  return v;
+}
+
+function updateCreditDisplay() {
+  var el = document.getElementById('credit-display');
+  if (el) el.textContent = getCredits();
+}
+
+// 공개 제출 후 크레딧 지급 (URL 파라미터)
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('submitted') === 'public') {
+    addCredit(1);
+    history.replaceState({}, '', window.location.pathname);
+    setTimeout(function() {
+      alert('🎫 크레딧 1개가 지급되었습니다!\n오늘의 식스샷을 열람할 수 있어요.');
+    }, 500);
+  }
+})();
+
+function openModal() {
+  document.getElementById('credit-modal').classList.add('open');
+}
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('credit-modal')) {
+    document.getElementById('credit-modal').classList.remove('open');
+  }
+}
+
+var API = 'https://humandocu-server-production.up.railway.app/api/sixshot/random';
+var card = document.getElementById('today-card');
+var _shotData = null;
+
+function renderCard(d, unlocked) {
+  var name = d.name || '';
+  var identity = d.identity || '';
+  var shots = d.shots || {};
+  var images = d.shot_images || {};
+  var poems = d.poems || '';
+  var doc_id = d.doc_id || '';
+
+  // [대표] 시 추출
+  var rep_poem = '';
+  var lines = poems.split('\n');
+  var in_rep = false;
+  for (var i = 0; i < lines.length; i++) {
+    var l = lines[i].trim();
+    if (l === '[대표]') { in_rep = true; continue; }
+    if (l.indexOf('[SHOT') === 0) { break; }
+    if (in_rep && l) rep_poem += l + '\n';
+  }
+
+  // 사진 6장 — 1번 항상 공개, 2~6 잠금 여부
+  var photos_html = '';
+  for (var j = 1; j <= 6; j++) {
+    var img_url = images[String(j)] || '';
+    var cap = shots[String(j)] || '';
+    var is_locked = !unlocked && j > 1;
+    if (img_url) {
+      if (is_locked) {
+        photos_html += '<div class="today-photo locked"><img src="' + img_url + '" alt="SHOT ' + j + '" loading="lazy"><div class="lock-icon">🔒</div></div>';
+      } else {
+        photos_html += '<div class="today-photo"><img src="' + img_url + '" alt="SHOT ' + j + '" loading="lazy"></div>';
+      }
+    } else {
+      var short = cap.length > 14 ? cap.slice(0, 14) + '…' : cap;
+      if (is_locked) {
+        photos_html += '<div class="today-photo locked"><div class="today-photo-empty">🔒</div></div>';
+      } else {
+        photos_html += '<div class="today-photo"><div class="today-photo-empty">' + short + '</div></div>';
+      }
+    }
+  }
+
+  var credits = getCredits();
+  var viewCount = getViewCount();
+  var unlock_html = '';
+
+  if (!unlocked) {
+    if (viewCount < 10) {
+      unlock_html =
+        '<div class="today-unlock">'
+        + '<div class="today-unlock-msg">SHOT 2~6은 잠겨 있어요.<br>크레딧 1개로 다른 사람의 식스샷을 10개 열람할 수 있습니다.</div>'
+        + '<button class="today-unlock-btn" onclick="unlockCard()">🎫 전체 보기</button>'
+        + '<div class="today-unlock-sub">남은 무료 열람: ' + (10 - viewCount) + '개 · 크레딧: ' + credits + '개</div>'
+        + '</div>';
+    } else if (credits > 0) {
+      unlock_html =
+        '<div class="today-unlock">'
+        + '<div class="today-unlock-msg">오늘 무료 열람을 모두 사용했어요.<br>크레딧 1개를 사용하면 10개를 더 볼 수 있습니다.</div>'
+        + '<button class="today-unlock-btn" onclick="unlockCard()">🎫 크레딧 1개 사용해서 전체 보기</button>'
+        + '<div class="today-unlock-sub">보유 크레딧: ' + credits + '개</div>'
+        + '</div>';
+    } else {
+      unlock_html =
+        '<div class="today-no-credit">'
+        + '<div class="today-no-credit-msg">'
+        + '크레딧이 없어요 😢<br>'
+        + '식스샷을 공개로 제출하면 크레딧 1개가 생겨요.<br>'
+        + '또는 내일 다시 오면 1개가 자동 충전됩니다.'
+        + '</div>'
+        + '<a href="https://tally.so/r/ZjGpk0" target="_blank" class="today-get-credit-btn">✨ 식스샷 만들고 크레딧 받기</a>'
+        + '</div>';
+    }
+  }
+
+  var initial = name ? name.charAt(0) : '✦';
+
+  card.innerHTML =
+    '<div class="today-header">'
+    + '<div class="today-avatar">' + initial + '</div>'
+    + '<div>'
+    + '<div class="today-name">' + name + '</div>'
+    + '<div class="today-identity">' + identity + '</div>'
+    + '</div></div>'
+    + '<div class="today-photos">' + photos_html + '</div>'
+    + unlock_html
+    + '<div class="today-poem-wrap">'
+    + '<div class="today-poem-label">AI가 다듬은 시</div>'
+    + '<div class="today-poem">' + rep_poem.trim() + '</div>'
+    + '</div>'
+    + (doc_id && unlocked
+      ? '<div class="today-link-box"><a href="https://humandocu-server-production.up.railway.app/sixshot/' + doc_id + '" target="_blank" class="today-link-btn">이 사람의 식스샷 전체 보기 →</a></div>'
+      : '');
+}
+
+function unlockCard() {
+  if (!_shotData) return;
+  var viewCount = getViewCount();
+  if (viewCount < 10) {
+    incViewCount();
+    renderCard(_shotData, true);
+    updateCreditDisplay();
+  } else if (useCredit()) {
+    incViewCount();
+    renderCard(_shotData, true);
+    updateCreditDisplay();
+  } else {
+    alert('크레딧이 없습니다.\n식스샷을 공개로 제출하거나 내일 다시 오세요!');
+  }
+}
+
+(function() {
+  getCredits();
+  updateCreditDisplay();
   fetch(API)
-    .then(function(r){ return r.json(); })
-    .then(function(res){
-      if(res.status !== 'ok' || !res.data){
+    .then(function(r) { return r.json(); })
+    .then(function(res) {
+      if (res.status !== 'ok' || !res.data) {
         card.innerHTML = '<div class="today-empty">오늘의 식스샷을 준비 중입니다 ✦<br><span style="font-size:11px;color:#C0A0D8;display:block;margin-top:8px">첫 번째 공개 식스샷을 기다리고 있어요</span></div>';
         return;
       }
-      var d = res.data;
-      var name = d.name || '';
-      var identity = d.identity || '';
-      var shots = d.shots || {};
-      var images = d.shot_images || {};
-      var poems = d.poems || '';
-      var doc_id = d.doc_id || '';
-
-      // [대표] 시만 추출
-      var rep_poem = '';
-      var lines = poems.split('\n');
-      var in_rep = false;
-      for(var i = 0; i < lines.length; i++){
-        var l = lines[i].trim();
-        if(l === '[대표]'){ in_rep = true; continue; }
-        if(l.indexOf('[SHOT') === 0){ break; }
-        if(in_rep && l) rep_poem += l + '\n';
-      }
-
-      // 사진 6장
-      var photos_html = '';
-      for(var j = 1; j <= 6; j++){
-        var img_url = images[String(j)] || '';
-        var cap = shots[String(j)] || '';
-        if(img_url){
-          photos_html += '<div class="today-photo"><img src="' + img_url + '" alt="SHOT ' + j + '" loading="lazy"></div>';
-        } else {
-          var short = cap.length > 14 ? cap.slice(0,14) + '…' : cap;
-          photos_html += '<div class="today-photo"><div class="today-photo-empty">' + short + '</div></div>';
-        }
-      }
-
-      var initial = name ? name.charAt(0) : '✦';
-
-      card.innerHTML =
-        '<div class="today-header">'
-        + '<div class="today-avatar">' + initial + '</div>'
-        + '<div>'
-        + '<div class="today-name">' + name + '</div>'
-        + '<div class="today-identity">' + identity + '</div>'
-        + '</div></div>'
-        + '<div class="today-photos">' + photos_html + '</div>'
-        + '<div class="today-poem-wrap">'
-        + '<div class="today-poem-label">AI가 다듬은 시</div>'
-        + '<div class="today-poem">' + rep_poem.trim() + '</div>'
-        + '</div>'
-        + (doc_id
-          ? '<div class="today-link-box"><a href="https://humandocu-server-production.up.railway.app/sixshot/' + doc_id + '" target="_blank" class="today-link-btn">이 사람의 식스샷 전체 보기 →</a></div>'
-          : '');
+      _shotData = res.data;
+      renderCard(_shotData, false);
     })
-    .catch(function(){
+    .catch(function() {
       card.innerHTML = '<div class="today-empty">오늘의 식스샷을 준비 중입니다 ✦</div>';
     });
 })();
