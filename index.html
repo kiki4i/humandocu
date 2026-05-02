@@ -311,140 +311,192 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
   </div>
 </nav>
 
-<!-- 홈 분기 섹션 — 모바일 퍼스트 -->
+<!-- 히어로 섹션 — 풀스크린 다크 -->
 <style>
-.home-split{
-  background:#fff;
-  padding:72px 20px 0;
-  border-bottom:1px solid rgba(24,22,15,.08);
+body{background:#0F0D09}
+.hs{
+  min-height:100vh;
+  background:#0F0D09;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:100px 24px 64px;
 }
-.home-split-inner{
-  max-width:480px;
-  margin:0 auto;
+.hs-eyebrow{
+  font-size:10px;
+  font-weight:400;
+  letter-spacing:.28em;
+  color:rgba(200,169,110,.45);
+  text-transform:uppercase;
+  margin-bottom:28px;
+  font-family:'Noto Sans KR',sans-serif;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.hs-eyebrow::before,.hs-eyebrow::after{
+  content:'';
+  width:28px;
+  height:1px;
+  background:#C8A96E;
+  opacity:.3;
+}
+.hs-title{
+  font-family:'Cormorant Garamond','Noto Serif KR',serif;
+  font-size:clamp(48px,11vw,92px);
+  font-weight:300;
+  color:#C8A96E;
+  letter-spacing:.04em;
+  line-height:1.1;
+  margin-bottom:18px;
   text-align:center;
-  padding-bottom:40px;
 }
-.home-eyebrow{
-  font-size:10px;font-weight:300;letter-spacing:.22em;color:#bbb;
-  margin-bottom:14px;font-family:'Noto Sans KR',sans-serif;
+.hs-sub{
+  font-size:14px;
+  color:rgba(249,246,240,.38);
+  font-family:'Noto Sans KR',sans-serif;
+  font-weight:300;
+  letter-spacing:.06em;
+  margin-bottom:52px;
+  text-align:center;
 }
-.home-title{
+.hs-cards{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  width:100%;
+  max-width:480px;
+}
+.hs-card-six{
+  background:#C8A96E;
+  border-radius:8px;
+  padding:32px 28px;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  transition:filter .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.hs-card-six:hover{filter:brightness(1.07)}
+.hs-card-six:active{filter:brightness(.92)}
+.hs-tag-six{
+  font-size:9px;
+  font-family:'Noto Sans KR',sans-serif;
+  font-weight:500;
+  letter-spacing:.22em;
+  color:rgba(15,13,9,.5);
+  margin-bottom:7px;
+  text-transform:uppercase;
+}
+.hs-title-six{
   font-family:'Cormorant Garamond','Noto Serif KR',serif;
-  font-size:32px;font-weight:300;color:#111;
-  letter-spacing:.1em;margin-bottom:10px;line-height:1.3;
+  font-size:clamp(20px,4.5vw,26px);
+  font-weight:400;
+  color:#0F0D09;
+  line-height:1.3;
+  margin-bottom:7px;
+  letter-spacing:.02em;
 }
-.home-sub{
-  font-size:12px;color:#bbb;font-family:'Noto Sans KR',sans-serif;
-  font-weight:300;letter-spacing:.04em;margin-bottom:36px;
+.hs-desc-six{
+  font-size:12px;
+  color:rgba(15,13,9,.58);
+  font-family:'Noto Sans KR',sans-serif;
+  font-weight:300;
+  line-height:1.7;
 }
-.home-cards{
-  display:flex;flex-direction:column;gap:12px;
+.hs-arrow{
+  font-size:28px;
+  flex-shrink:0;
+  font-weight:300;
+  line-height:1;
 }
-.home-card{
-  display:flex;flex-direction:row;align-items:center;
-  padding:22px 20px;border-radius:10px;
-  text-decoration:none;transition:opacity .2s;
-  text-align:left;gap:16px;
+.hs-card-six .hs-arrow{color:rgba(15,13,9,.4)}
+.hs-card-mem{
+  background:#1A2535;
+  border-radius:8px;
+  padding:32px 28px;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  transition:filter .2s;
+  border:1px solid rgba(200,169,110,.14);
+  -webkit-tap-highlight-color:transparent;
 }
-.home-card:active{opacity:.8}
-.home-card-six{background:#F8F0FF;border:1px solid #D8B0F0;}
-.home-card-mem{background:#F2F3F7;border:1px solid #CDD0DC;}
-.home-card-icon{
-  width:44px;height:44px;border-radius:10px;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+.hs-card-mem:hover{filter:brightness(1.12)}
+.hs-card-mem:active{filter:brightness(.88)}
+.hs-tag-mem{
+  font-size:9px;
+  font-family:'Noto Sans KR',sans-serif;
+  font-weight:500;
+  letter-spacing:.22em;
+  color:rgba(200,169,110,.55);
+  margin-bottom:7px;
+  text-transform:uppercase;
 }
-.home-card-six .home-card-icon{background:#ECD8FF;}
-.home-card-mem .home-card-icon{background:#DDE0EA;}
-.home-card-body{flex:1;min-width:0;}
-.home-card-tag{
-  font-size:9px;font-family:'Noto Sans KR',sans-serif;font-weight:500;
-  letter-spacing:.16em;margin-bottom:4px;
-}
-.home-card-six .home-card-tag{color:#9040C0;}
-.home-card-mem .home-card-tag{color:#505878;}
-.home-card-title{
+.hs-title-mem{
   font-family:'Cormorant Garamond','Noto Serif KR',serif;
-  font-size:17px;font-weight:400;line-height:1.5;letter-spacing:.02em;margin-bottom:4px;
+  font-size:clamp(20px,4.5vw,26px);
+  font-weight:400;
+  color:#F9F6F0;
+  line-height:1.3;
+  margin-bottom:7px;
+  letter-spacing:.02em;
 }
-.home-card-six .home-card-title{color:#1A0A2A;}
-.home-card-mem .home-card-title{color:#0E1020;}
-.home-card-desc{
-  font-size:11px;font-family:'Noto Sans KR',sans-serif;
-  font-weight:300;line-height:1.7;
+.hs-desc-mem{
+  font-size:12px;
+  color:rgba(249,246,240,.42);
+  font-family:'Noto Sans KR',sans-serif;
+  font-weight:300;
+  line-height:1.7;
 }
-.home-card-six .home-card-desc{color:#7848A8;}
-.home-card-mem .home-card-desc{color:#505878;}
-.home-card-arrow{
-  font-size:18px;flex-shrink:0;
-}
-.home-card-six .home-card-arrow{color:#B070E0;}
-.home-card-mem .home-card-arrow{color:#8890B0;}
-.home-connect{
-  margin-top:16px;font-size:10px;font-family:'Noto Sans KR',sans-serif;
-  font-weight:300;color:#ccc;letter-spacing:.02em;line-height:1.8;
+.hs-card-mem .hs-arrow{color:rgba(200,169,110,.38)}
+.hs-connect{
+  margin-top:22px;
+  font-size:10px;
+  font-family:'Noto Sans KR',sans-serif;
+  font-weight:300;
+  color:rgba(249,246,240,.18);
+  letter-spacing:.08em;
+  text-align:center;
 }
 @media(min-width:640px){
-  .home-split{padding:100px 40px 0;}
-  .home-split-inner{max-width:600px;padding-bottom:56px;}
-  .home-title{font-size:42px;}
-  .home-cards{flex-direction:row;gap:16px;}
-  .home-card{flex-direction:column;text-align:center;padding:32px 24px;gap:12px;}
-  .home-card-icon{width:52px;height:52px;}
-  .home-card-arrow{display:none;}
+  .hs-cards{max-width:560px}
+  .hs-card-six,.hs-card-mem{padding:40px 36px}
 }
 </style>
-<section class="home-split">
-  <div class="home-split-inner">
-    <div class="home-eyebrow">humandocu.com</div>
-    <h1 class="home-title">삶을 기록합니다</h1>
-    <p class="home-sub">지금의 나를, 그리고 소중한 사람을.</p>
-    <div class="home-cards">
-      <a href="/sixshot.html" class="home-card home-card-six">
-        <div class="home-card-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <rect x="2" y="4" width="8" height="6" rx="1" stroke="#9040C0" stroke-width="1.3"/>
-            <rect x="14" y="4" width="8" height="6" rx="1" stroke="#9040C0" stroke-width="1.3"/>
-            <rect x="2" y="14" width="8" height="6" rx="1" stroke="#9040C0" stroke-width="1.3"/>
-            <rect x="14" y="14" width="8" height="6" rx="1" stroke="#9040C0" stroke-width="1.3"/>
-          </svg>
-        </div>
-        <div class="home-card-body">
-          <div class="home-card-tag">SIX SHOT</div>
-          <div class="home-card-title">내 삶을 여섯 장으로 담습니다</div>
-          <div class="home-card-desc">사진 6장 · AI 시 · 나를 정의하는 한 문장</div>
-        </div>
-        <div class="home-card-arrow">›</div>
-      </a>
-      <a href="/memorial.html" class="home-card home-card-mem">
-        <div class="home-card-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="8" stroke="#505878" stroke-width="1.3"/>
-            <path d="M12 7v5l3 2" stroke="#505878" stroke-width="1.3" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="home-card-body">
-          <div class="home-card-tag">MEMORIAL</div>
-          <div class="home-card-title">소중한 분을 영원히 기억합니다</div>
-          <div class="home-card-desc">부고문 · 답례장 · 메모리얼 페이지</div>
-        </div>
-        <div class="home-card-arrow">›</div>
-      </a>
-    </div>
-    <div class="home-connect">두 서비스는 연결되어 있습니다</div>
+<section class="hs">
+  <div class="hs-eyebrow">humandocu.com</div>
+  <h1 class="hs-title">삶을 기록합니다</h1>
+  <p class="hs-sub">지금의 나를, 그리고 소중한 사람을.</p>
+  <div class="hs-cards">
+    <a href="/sixshot.html" class="hs-card-six">
+      <div style="flex:1;min-width:0">
+        <div class="hs-tag-six">SIX SHOT</div>
+        <div class="hs-title-six">나의 필모그래피</div>
+        <div class="hs-desc-six">사진 6장 · AI 시 · 나를 정의하는 한 문장</div>
+      </div>
+      <div class="hs-arrow">›</div>
+    </a>
+    <a href="/memorial.html" class="hs-card-mem">
+      <div style="flex:1;min-width:0">
+        <div class="hs-tag-mem">MEMORIAL</div>
+        <div class="hs-title-mem">디지털 부고·추모관</div>
+        <div class="hs-desc-mem">부고문 · 답례장 · 메모리얼 페이지</div>
+      </div>
+      <div class="hs-arrow">›</div>
+    </a>
   </div>
+  <div class="hs-connect">두 서비스는 연결되어 있습니다</div>
 </section>
-
-
-<style>
-.home-split-inner { padding-bottom: 60px; }
-body { background: #fff; }
-</style>
-<footer style="padding:20px;text-align:center;border-top:1px solid rgba(24,22,15,.07);background:#fafafa">
-  <p style="font-size:11px;color:#ccc;font-family:'Noto Sans KR',sans-serif;font-weight:300">
+<footer style="padding:20px;text-align:center;border-top:1px solid rgba(200,169,110,.1);background:#0F0D09">
+  <p style="font-size:11px;color:rgba(249,246,240,.25);font-family:'Noto Sans KR',sans-serif;font-weight:300">
     © 2026 휴먼다큐닷컴 &nbsp;·&nbsp;
-    <a href="/terms.html" style="color:#ccc">이용약관</a> &nbsp;·&nbsp;
-    <a href="/privacy.html" style="color:#ccc">개인정보처리방침</a> &nbsp;·&nbsp;
-    <a href="tel:031-539-9709" style="color:#ccc">031-539-9709</a>
+    <a href="/terms.html" style="color:rgba(249,246,240,.35)">이용약관</a> &nbsp;·&nbsp;
+    <a href="/privacy.html" style="color:rgba(249,246,240,.35)">개인정보처리방침</a> &nbsp;·&nbsp;
+    <a href="tel:031-539-9709" style="color:#C8A96E">031-539-9709</a>
   </p>
 </footer>
 </body>
