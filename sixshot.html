@@ -83,11 +83,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 /* TODAY SIXSHOT */
 .today-sec{padding:64px 48px;background:#1A1208;border-bottom:1px solid rgba(200,135,10,.25)}
 .today-sec-label{font-size:10px;font-family:var(--sans);font-weight:300;letter-spacing:.16em;color:#F5E8C8;text-align:center;margin-bottom:6px}
-.today-sec-sub{font-size:12px;font-family:var(--sans);font-weight:300;color:#C8A96E;text-align:center;margin-bottom:16px}
-.credit-bar{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:24px}
-.credit-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.35);border-radius:20px;padding:6px 16px;font-size:12px;font-family:var(--sans);font-weight:400;color:#F5E8C8}
-.credit-badge .credit-num{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--gold);line-height:1}
-.credit-info-btn{font-size:11px;color:var(--gold);cursor:pointer;text-decoration:underline;font-family:var(--sans);font-weight:300}
+.today-sec-sub{font-size:12px;font-family:var(--sans);font-weight:300;color:#C8A96E;text-align:center;margin-bottom:24px}
 .today-card{max-width:680px;margin:0 auto;border:1px solid var(--amber-md);border-radius:8px;overflow:hidden;background:#fff}
 .today-loading{text-align:center;padding:48px;font-size:13px;color:var(--ink2);font-family:var(--sans);font-weight:300}
 .today-loading::after{content:'';display:inline-block;width:14px;height:14px;border:2px solid var(--amber-md);border-top-color:var(--amber);border-radius:50%;animation:spin .8s linear infinite;margin-left:8px;vertical-align:middle}
@@ -107,10 +103,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .today-unlock-btn{display:inline-block;background:var(--gold);color:#1A1208;font-size:13px;font-family:var(--sans);font-weight:700;padding:11px 28px;border-radius:var(--r);cursor:pointer;border:none;letter-spacing:.04em;transition:background .2s}
 .today-unlock-btn:hover{background:#E8C97E}
 .today-unlock-sub{font-size:11px;color:var(--ink3);margin-top:10px;font-family:var(--sans);font-weight:300}
-.today-no-credit{padding:20px 28px;border-bottom:1px solid var(--amber-md);background:var(--amber-lt);text-align:center}
-.today-no-credit-msg{font-size:13px;font-family:var(--sans);font-weight:300;color:var(--ink2);line-height:2;margin-bottom:16px}
-.today-get-credit-btn{display:inline-block;background:#fff;color:var(--amber);font-size:13px;font-family:var(--sans);font-weight:400;padding:11px 28px;border-radius:var(--r);cursor:pointer;border:1.5px solid var(--amber-md);letter-spacing:.04em;transition:all .2s}
-.today-get-credit-btn:hover{background:var(--amber-lt)}
 .today-poem-wrap{padding:22px 28px;border-bottom:1px solid var(--amber-md)}
 .today-poem-label{font-size:10px;font-family:var(--sans);font-weight:300;letter-spacing:.12em;color:var(--ink3);margin-bottom:10px}
 .today-poem{font-family:var(--serif);font-size:15px;font-weight:300;color:var(--ink);line-height:2.8;letter-spacing:.06em;white-space:pre-line}
@@ -118,52 +110,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .today-link-btn{display:inline-block;font-size:12px;font-family:var(--sans);font-weight:400;color:var(--amber);background:var(--amber-lt);padding:10px 28px;border-radius:20px;border:1px solid var(--amber-md);letter-spacing:.04em;transition:background .2s}
 .today-link-btn:hover{background:var(--amber-md)}
 .today-empty{text-align:center;padding:48px;font-size:13px;color:var(--ink3);font-family:var(--sans);font-weight:300;line-height:2}
-@media(max-width:860px){.today-sec{padding:52px 24px}.today-photos{grid-template-columns:repeat(3,1fr)}}
 
 /* 다음 버튼 바 */
 .next-bar{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:20px}
 .btn-next-shot{background:transparent;color:#C8A96E;font-size:13px;font-family:var(--sans);font-weight:400;padding:11px 32px;border-radius:20px;border:1px solid rgba(200,169,110,.4);cursor:pointer;letter-spacing:.06em;transition:all .2s}
 .btn-next-shot:hover{background:rgba(200,169,110,.1);border-color:#C8A96E}
-.btn-next-shot:disabled{opacity:.4;cursor:not-allowed}
-.views-left-label{font-size:11px;color:rgba(200,169,110,.5);font-family:var(--sans);font-weight:300;letter-spacing:.04em}
 
-/* 모달 공통 */
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-
-/* 크레딧 안내 모달 */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;align-items:flex-end;justify-content:center}
-.modal-overlay.open{display:flex}
-.modal-box{background:#fff;width:100%;max-width:480px;border-radius:16px 16px 0 0;padding:32px 24px 40px;animation:slideUp .25s ease}
-.modal-title{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--ink);margin-bottom:6px;letter-spacing:.04em}
-.modal-sub{font-size:12px;font-family:var(--sans);font-weight:300;color:var(--ink2);margin-bottom:24px}
-.modal-row{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
-.modal-icon{width:36px;height:36px;border-radius:50%;background:var(--amber-lt);border:1px solid var(--amber-md);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.modal-row-text{flex:1}
-.modal-row-title{font-size:13px;font-family:var(--sans);font-weight:500;color:var(--ink);margin-bottom:3px}
-.modal-row-desc{font-size:12px;font-family:var(--sans);font-weight:300;color:var(--ink2);line-height:1.8}
-.modal-close{width:100%;padding:14px;background:var(--amber-lt);border:1px solid var(--amber-md);border-radius:var(--r);font-size:14px;font-family:var(--sans);font-weight:400;color:var(--amber);cursor:pointer;margin-top:8px;letter-spacing:.04em}
-
-/* 크레딧 구매 모달 */
-.buy-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1001;align-items:flex-end;justify-content:center}
-.buy-overlay.open{display:flex}
-.buy-box{background:#1A1208;width:100%;max-width:480px;border-radius:16px 16px 0 0;padding:32px 24px 44px;animation:slideUp .25s ease;border-top:1px solid rgba(200,169,110,.25)}
-.buy-title{font-family:var(--serif);font-size:20px;font-weight:300;color:#F5E8C8;margin-bottom:6px;letter-spacing:.04em}
-.buy-sub{font-size:12px;font-family:var(--sans);font-weight:300;color:rgba(200,169,110,.6);margin-bottom:24px;line-height:1.8}
-.buy-plans{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
-.buy-plan{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:16px 18px;cursor:pointer;transition:background .2s;-webkit-tap-highlight-color:transparent}
-.buy-plan:hover{background:rgba(255,255,255,.07)}
-.buy-plan.popular{background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.35)}
-.buy-plan.popular:hover{background:rgba(200,169,110,.16)}
-.buy-plan-body{flex:1}
-.buy-plan-name{font-size:13px;font-family:var(--sans);font-weight:400;color:#F5E8C8;margin-bottom:3px;display:flex;align-items:center;gap:7px}
-.buy-plan.popular .buy-plan-name{color:#C8A96E}
-.buy-plan-pip{font-size:8px;font-family:var(--sans);font-weight:500;letter-spacing:.1em;background:#C8A96E;color:#1A1208;padding:2px 7px;border-radius:20px}
-.buy-plan-desc{font-size:11px;font-family:var(--sans);font-weight:300;color:rgba(249,246,240,.4);line-height:1.7}
-.buy-plan-price{font-family:var(--serif);font-size:18px;font-weight:300;color:#F5E8C8;white-space:nowrap;flex-shrink:0}
-.buy-divider{text-align:center;font-size:10px;color:rgba(249,246,240,.2);font-family:var(--sans);margin:4px 0 14px;letter-spacing:.1em}
-.buy-make-btn{display:block;width:100%;padding:13px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.28);border-radius:var(--r);font-size:13px;font-family:var(--sans);font-weight:400;color:#C8A96E;cursor:pointer;text-align:center;letter-spacing:.04em;transition:background .2s;text-decoration:none}
-.buy-make-btn:hover{background:rgba(200,169,110,.18)}
-.buy-close{display:block;width:100%;padding:11px;background:transparent;border:none;font-size:12px;font-family:var(--sans);font-weight:300;color:rgba(249,246,240,.25);cursor:pointer;margin-top:8px;letter-spacing:.04em}
+@media(max-width:860px){.today-sec{padding:52px 24px}.today-photos{grid-template-columns:repeat(3,1fr)}}
 
 .update-sec{padding:32px 48px;text-align:center;background:#fff;border-bottom:1px solid var(--amber-md)}
 .update-sec p{font-size:13px;font-family:var(--sans);font-weight:300;color:var(--ink2);line-height:2}
@@ -271,17 +224,11 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
 <div class="today-sec">
   <div class="today-sec-label">✦ 오늘의 식스샷 ✦</div>
   <div class="today-sec-sub">공개를 선택한 누군가의 이야기 — 운명처럼 만납니다</div>
-  <div class="credit-bar">
-    <div class="credit-badge">🎫 크레딧 <span class="credit-num" id="credit-display">-</span>개</div>
-    <div class="credit-badge" style="background:rgba(200,169,110,.07);border-color:rgba(200,169,110,.2)">👁 <span id="views-badge">-</span>회 남음</div>
-    <span class="credit-info-btn" onclick="openInfoModal()">크레딧이 뭔가요?</span>
-  </div>
   <div class="today-card" id="today-card">
     <div class="today-loading">불러오는 중</div>
   </div>
   <div class="next-bar" id="next-bar">
     <button class="btn-next-shot" id="btn-next" onclick="loadNextShot()">다음 식스샷 보기 →</button>
-    <div class="views-left-label" id="views-left-label">오늘 -회 남음</div>
   </div>
 </div>
 
@@ -343,183 +290,26 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
   </div>
 </footer>
 
-<!-- 크레딧 안내 모달 -->
-<!-- 크레딧 안내 모달 -->
-<div class="modal-overlay" id="credit-modal" onclick="closeInfoModal(event)">
-  <div class="modal-box">
-    <div class="modal-title">엿보기 크레딧이란?</div>
-    <div class="modal-sub">크레딧 1개 = 열람 10회 — 공개 제출하면 무료로 받아요</div>
-    <div class="modal-row">
-      <div class="modal-icon">🎫</div>
-      <div class="modal-row-text">
-        <div class="modal-row-title">크레딧 1개 = 식스샷 10회 열람</div>
-        <div class="modal-row-desc">10회를 다 쓰면 크레딧 1개가 자동 차감되고 10회가 다시 충전됩니다</div>
-      </div>
-    </div>
-    <div class="modal-row">
-      <div class="modal-icon">🌟</div>
-      <div class="modal-row-text">
-        <div class="modal-row-title">공개 제출하면 크레딧 1개 즉시 지급</div>
-        <div class="modal-row-desc">식스샷을 만들고 공개를 선택하면 크레딧 1개가 바로 생깁니다</div>
-      </div>
-    </div>
-    <div class="modal-row">
-      <div class="modal-icon">☀️</div>
-      <div class="modal-row-text">
-        <div class="modal-row-title">매일 자동 충전 1개</div>
-        <div class="modal-row-desc">크레딧이 없어도 다음 날 다시 오면 1개가 자동으로 충전됩니다</div>
-      </div>
-    </div>
-    <div class="modal-row">
-      <div class="modal-icon">💳</div>
-      <div class="modal-row-text">
-        <div class="modal-row-title">크레딧 충전도 가능해요</div>
-        <div class="modal-row-desc">1,000원~5,000원으로 크레딧을 충전할 수 있습니다 (준비 중)</div>
-      </div>
-    </div>
-    <button class="modal-close" onclick="closeInfoModal()">확인</button>
-  </div>
-</div>
-
-<!-- 크레딧 구매 모달 -->
-<div class="buy-overlay" id="buy-modal" onclick="closeBuyModal(event)">
-  <div class="buy-box">
-    <div class="buy-title">크레딧 충전</div>
-    <div class="buy-sub">더 많은 식스샷을 만나보세요.<br>크레딧 1개 = 열람 10회</div>
-    <div class="buy-plans">
-      <div class="buy-plan" onclick="buyCredit(1, 1000)">
-        <div class="buy-plan-body">
-          <div class="buy-plan-name">기본</div>
-          <div class="buy-plan-desc">크레딧 1개 · 열람 10회</div>
-        </div>
-        <div class="buy-plan-price">1,000원</div>
-      </div>
-      <div class="buy-plan popular" onclick="buyCredit(3, 2500)">
-        <div class="buy-plan-body">
-          <div class="buy-plan-name">인기 <span class="buy-plan-pip">BEST</span></div>
-          <div class="buy-plan-desc">크레딧 3개 · 열람 30회</div>
-        </div>
-        <div class="buy-plan-price">2,500원</div>
-      </div>
-      <div class="buy-plan" onclick="buyCredit(10, 5000)">
-        <div class="buy-plan-body">
-          <div class="buy-plan-name">넉넉하게</div>
-          <div class="buy-plan-desc">크레딧 10개 · 열람 100회</div>
-        </div>
-        <div class="buy-plan-price">5,000원</div>
-      </div>
-    </div>
-    <div class="buy-divider">— 또는 —</div>
-    <a href="https://tally.so/r/ZjGpk0" target="_blank" class="buy-make-btn" onclick="closeBuyModal()">✨ 식스샷 새로 만들기 (공개 선택 시 크레딧 1개 무료)</a>
-    <button class="buy-close" onclick="closeBuyModal()">닫기</button>
-  </div>
-</div>
-
 <script>
-var CREDIT_KEY = 'hd_credit';
-var VIEW_KEY = 'hd_view_count';
-var LAST_CHARGE_KEY = 'hd_sixshot_last_charge';
-
-// 초기화: 첫 방문 시 10회 무료, 매일 크레딧 +1
-function initState() {
-  var today = new Date().toISOString().slice(0, 10);
-  var last = localStorage.getItem(LAST_CHARGE_KEY) || '';
-  if (localStorage.getItem(VIEW_KEY) === null) {
-    localStorage.setItem(VIEW_KEY, '10');
-    localStorage.setItem(LAST_CHARGE_KEY, today);
-  } else if (last !== today) {
-    var c = parseInt(localStorage.getItem(CREDIT_KEY) || '0', 10);
-    localStorage.setItem(CREDIT_KEY, String(c + 1));
-    localStorage.setItem(LAST_CHARGE_KEY, today);
-  }
-}
-
-function getCredits() {
-  return parseInt(localStorage.getItem(CREDIT_KEY) || '0', 10);
-}
-
-function getRemaining() {
-  return parseInt(localStorage.getItem(VIEW_KEY) || '0', 10);
-}
-
-function canView() {
-  return getRemaining() > 0 || getCredits() > 0;
-}
-
-// 열람 1회 차감. 잔여 0이면 크레딧 1개 소비 후 9회 충전.
-function useView() {
-  var rem = getRemaining();
-  if (rem > 0) {
-    localStorage.setItem(VIEW_KEY, String(rem - 1));
-    return true;
-  }
-  var c = getCredits();
-  if (c > 0) {
-    localStorage.setItem(CREDIT_KEY, String(c - 1));
-    localStorage.setItem(VIEW_KEY, '9');
-    return true;
-  }
-  return false;
-}
-
-function addCredit(n) {
-  var c = getCredits();
-  localStorage.setItem(CREDIT_KEY, String(c + (n || 1)));
-}
-
-function updateDisplay() {
-  var c = getCredits();
-  var r = getRemaining();
-  var el = document.getElementById('credit-display');
-  if (el) el.textContent = c;
-  var vb = document.getElementById('views-badge');
-  if (vb) vb.textContent = r;
-  var lbl = document.getElementById('views-left-label');
-  if (!lbl) return;
-  if (r > 0) {
-    lbl.textContent = '오늘 ' + r + '회 남음';
-  } else if (c > 0) {
-    lbl.textContent = '크레딧 ' + c + '개 보유 · 다음 열람 시 1개 차감';
-  } else {
-    lbl.textContent = '열람권 소진 — 충전이 필요합니다';
-  }
-}
-
-// URL 파라미터: submitted=public → 크레딧 +1
-(function() {
-  var params = new URLSearchParams(window.location.search);
-  if (params.get('submitted') === 'public') {
-    addCredit(1);
-    history.replaceState({}, '', window.location.pathname);
-    setTimeout(function() {
-      alert('🎫 크레딧 1개가 지급되었습니다!\n오늘의 식스샷을 열람할 수 있어요.');
-    }, 500);
-  }
-})();
-
-function openInfoModal() {
-  document.getElementById('credit-modal').classList.add('open');
-}
-function closeInfoModal(e) {
-  if (!e || e.target === document.getElementById('credit-modal')) {
-    document.getElementById('credit-modal').classList.remove('open');
-  }
-}
-function openBuyModal() {
-  document.getElementById('buy-modal').classList.add('open');
-}
-function closeBuyModal(e) {
-  if (!e || e.target === document.getElementById('buy-modal')) {
-    document.getElementById('buy-modal').classList.remove('open');
-  }
-}
-function buyCredit(amount, price) {
-  alert('결제 기능은 준비 중입니다 🙏\n곧 포트원 결제가 연동될 예정이에요.');
-}
-
+var TOKEN_KEY = 'hd_sixshot_token';
+var PAYMENT_URL = 'https://humandocu-server-production.up.railway.app/payment/sixshot';
 var API = 'https://humandocu-server-production.up.railway.app/api/sixshot/random';
 var card = document.getElementById('today-card');
 var _shotData = null;
+
+// URL ?token=xxx 처리: localStorage 저장 후 파라미터 제거
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var token = params.get('token');
+  if (token) {
+    localStorage.setItem(TOKEN_KEY, token);
+    history.replaceState({}, '', window.location.pathname);
+  }
+})();
+
+function hasToken() {
+  return !!localStorage.getItem(TOKEN_KEY);
+}
 
 function extractRepPoem(poems) {
   var rep = '';
@@ -563,26 +353,15 @@ function renderCard(d, unlocked) {
   var doc_id = d.doc_id || '';
   var rep_poem = extractRepPoem(poems);
   var photos_html = buildPhotosHTML(shots, images, unlocked);
-  var credits = getCredits();
-  var remaining = getRemaining();
   var unlock_html = '';
 
   if (!unlocked) {
-    if (canView()) {
-      unlock_html =
-        '<div class="today-unlock">'
-        + '<div class="today-unlock-msg">SHOT 2~6은 잠겨 있어요.<br>열람 1회를 사용해서 전체를 볼 수 있습니다.</div>'
-        + '<button class="today-unlock-btn" onclick="unlockCard()">👁 전체 보기</button>'
-        + '<div class="today-unlock-sub">남은 열람: ' + remaining + '회 · 크레딧: ' + credits + '개</div>'
-        + '</div>';
-    } else {
-      unlock_html =
-        '<div class="today-no-credit">'
-        + '<div class="today-no-credit-msg">열람권이 소진되었습니다 😢<br>크레딧을 충전하거나, 식스샷을 공개로 제출하면 크레딧 1개가 생겨요.</div>'
-        + '<button class="today-unlock-btn" onclick="openBuyModal()" style="margin-bottom:10px">💳 크레딧 충전하기</button><br>'
-        + '<a href="https://tally.so/r/ZjGpk0" target="_blank" class="today-get-credit-btn">✨ 식스샷 만들고 크레딧 받기</a>'
-        + '</div>';
-    }
+    unlock_html =
+      '<div class="today-unlock">'
+      + '<div class="today-unlock-msg">SHOT 2~6은 잠겨 있어요.<br>전체를 보려면 열람권이 필요합니다.</div>'
+      + '<button class="today-unlock-btn" onclick="goToPayment()">이 사람의 식스샷 전체보기</button>'
+      + '<div class="today-unlock-sub">5,000원 · 1년 무제한 열람</div>'
+      + '</div>';
   }
 
   var initial = name ? name.charAt(0) : '✦';
@@ -602,21 +381,15 @@ function renderCard(d, unlocked) {
     + (doc_id && unlocked
       ? '<div class="today-link-box"><a href="https://humandocu-server-production.up.railway.app/sixshot/' + doc_id + '" target="_blank" class="today-link-btn">이 사람의 식스샷 전체 보기 →</a></div>'
       : '');
-  updateDisplay();
 }
 
-function unlockCard() {
-  if (!_shotData) return;
-  if (useView()) {
-    renderCard(_shotData, true);
-  } else {
-    openBuyModal();
-  }
+function goToPayment() {
+  window.location.href = PAYMENT_URL;
 }
 
 function loadNextShot() {
-  if (!canView()) {
-    openBuyModal();
+  if (!hasToken()) {
+    window.location.href = PAYMENT_URL;
     return;
   }
   var btn = document.getElementById('btn-next');
@@ -628,28 +401,19 @@ function loadNextShot() {
       if (btn) btn.disabled = false;
       if (res.status !== 'ok' || !res.data) {
         card.innerHTML = '<div class="today-empty">준비 중인 식스샷이에요 ✦<br><span style="font-size:11px;display:block;margin-top:8px">잠시 후 다시 시도해주세요</span></div>';
-        updateDisplay();
         return;
       }
       _shotData = res.data;
-      if (!useView()) {
-        openBuyModal();
-        card.innerHTML = '<div class="today-empty">크레딧을 충전하면 볼 수 있어요 ✦</div>';
-        updateDisplay();
-        return;
-      }
       renderCard(_shotData, true);
     })
     .catch(function() {
       if (btn) btn.disabled = false;
       card.innerHTML = '<div class="today-empty">오늘의 식스샷을 준비 중입니다 ✦</div>';
-      updateDisplay();
     });
 }
 
 (function() {
-  initState();
-  updateDisplay();
+  var unlocked = hasToken();
   fetch(API)
     .then(function(r) { return r.json(); })
     .then(function(res) {
@@ -658,7 +422,7 @@ function loadNextShot() {
         return;
       }
       _shotData = res.data;
-      renderCard(_shotData, false);
+      renderCard(_shotData, unlocked);
     })
     .catch(function() {
       card.innerHTML = '<div class="today-empty">오늘의 식스샷을 준비 중입니다 ✦</div>';
