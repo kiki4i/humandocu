@@ -111,6 +111,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .today-link-btn:hover{background:var(--amber-md)}
 .today-empty{text-align:center;padding:48px;font-size:13px;color:var(--ink3);font-family:var(--sans);font-weight:300;line-height:2}
 
+/* 안내 문구 */
+.today-pricing-note{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px;margin-bottom:20px;font-size:11px;font-family:var(--sans);font-weight:300;color:rgba(200,169,110,.55);letter-spacing:.03em}
+.today-pricing-dot{color:rgba(200,169,110,.3)}
+
+/* 시 버전 토글 */
+.poem-ver-tabs{display:flex;gap:6px;margin-bottom:12px}
+.poem-ver-btn{font-size:10px;font-family:var(--sans);font-weight:400;color:var(--ink3);background:transparent;border:1px solid var(--amber-md);border-radius:20px;padding:3px 12px;cursor:pointer;letter-spacing:.04em;transition:all .15s}
+.poem-ver-btn.active{background:var(--amber-lt);color:var(--amber);border-color:var(--amber)}
+
 /* 다음 버튼 바 */
 .next-bar{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:20px}
 .btn-next-shot{background:transparent;color:#C8A96E;font-size:13px;font-family:var(--sans);font-weight:400;padding:11px 32px;border-radius:20px;border:1px solid rgba(200,169,110,.4);cursor:pointer;letter-spacing:.06em;transition:all .2s}
@@ -224,6 +233,13 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
 <div class="today-sec">
   <div class="today-sec-label">✦ 오늘의 식스샷 ✦</div>
   <div class="today-sec-sub">공개를 선택한 누군가의 이야기 — 운명처럼 만납니다</div>
+  <div class="today-pricing-note">
+    <span>작성은 무료</span>
+    <span class="today-pricing-dot">·</span>
+    <span>열람권 5,000원 / 1년</span>
+    <span class="today-pricing-dot">·</span>
+    <span>결제 후 받은 링크로 어느 기기에서든 열람 가능</span>
+  </div>
   <div class="today-card" id="today-card">
     <div class="today-loading">불러오는 중</div>
   </div>
@@ -318,10 +334,41 @@ function extractRepPoem(poems) {
   for (var i = 0; i < lines.length; i++) {
     var l = lines[i].trim();
     if (l === '[대표]') { in_rep = true; continue; }
-    if (l.indexOf('[SHOT') === 0) { break; }
+    if (l === '[대표2]' || l.indexOf('[SHOT') === 0) { break; }
     if (in_rep && l) rep += l + '\n';
   }
   return rep.trim();
+}
+
+function extractRepPoem2(poems) {
+  var rep = '';
+  var lines = poems.split('\n');
+  var in_rep = false;
+  for (var i = 0; i < lines.length; i++) {
+    var l = lines[i].trim();
+    if (l === '[대표2]') { in_rep = true; continue; }
+    if (in_rep && l.indexOf('[') === 0) { break; }
+    if (in_rep && l) rep += l + '\n';
+  }
+  return rep.trim();
+}
+
+function poemHtml(text) {
+  return text.split('\n').filter(function(l) { return l.trim(); }).map(function(l) {
+    return '<div style="line-height:2.4;font-size:15px;color:#2d2a22;font-family:Georgia,serif">' + l + '</div>';
+  }).join('');
+}
+
+var _repPoem1 = '';
+var _repPoem2 = '';
+
+function switchPoem(ver) {
+  var el = document.getElementById('today-poem-display');
+  if (!el) return;
+  var btns = document.querySelectorAll('.poem-ver-btn');
+  btns.forEach(function(b) { b.classList.remove('active'); });
+  btns[ver - 1].classList.add('active');
+  el.innerHTML = poemHtml(ver === 1 ? _repPoem1 : _repPoem2);
 }
 
 function buildPhotosHTML(shots, images, unlocked) {
@@ -351,7 +398,8 @@ function renderCard(d, unlocked) {
   var images = d.shot_images || {};
   var poems = d.poems || '';
   var doc_id = d.doc_id || '';
-  var rep_poem = extractRepPoem(poems);
+  _repPoem1 = extractRepPoem(poems);
+  _repPoem2 = extractRepPoem2(poems);
   var photos_html = buildPhotosHTML(shots, images, unlocked);
   var unlock_html = '';
 
@@ -362,6 +410,19 @@ function renderCard(d, unlocked) {
       + '<button class="today-unlock-btn" onclick="goToPayment()">이 사람의 식스샷 전체보기</button>'
       + '<div class="today-unlock-sub">5,000원 · 1년 무제한 열람</div>'
       + '</div>';
+  }
+
+  var poem_label_row;
+  if (_repPoem2) {
+    poem_label_row =
+      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">'
+      + '<div class="today-poem-label" style="margin-bottom:0">AI가 다듬은 시</div>'
+      + '<div class="poem-ver-tabs">'
+      + '<button class="poem-ver-btn active" onclick="switchPoem(1)">버전 1</button>'
+      + '<button class="poem-ver-btn" onclick="switchPoem(2)">버전 2</button>'
+      + '</div></div>';
+  } else {
+    poem_label_row = '<div class="today-poem-label">AI가 다듬은 시</div>';
   }
 
   var initial = name ? name.charAt(0) : '✦';
@@ -375,8 +436,8 @@ function renderCard(d, unlocked) {
     + '<div class="today-photos">' + photos_html + '</div>'
     + unlock_html
     + '<div class="today-poem-wrap">'
-    + '<div class="today-poem-label">AI가 다듬은 시</div>'
-    + '<div class="today-poem">' + rep_poem + '</div>'
+    + poem_label_row
+    + '<div class="today-poem" id="today-poem-display">' + poemHtml(_repPoem1) + '</div>'
     + '</div>'
     + (doc_id && unlocked
       ? '<div class="today-link-box"><a href="https://humandocu-server-production.up.railway.app/sixshot/' + doc_id + '" target="_blank" class="today-link-btn">이 사람의 식스샷 전체 보기 →</a></div>'
