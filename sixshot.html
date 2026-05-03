@@ -112,8 +112,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .today-empty{text-align:center;padding:48px;font-size:13px;color:var(--ink3);font-family:var(--sans);font-weight:300;line-height:2}
 
 /* 안내 문구 */
-.today-pricing-note{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px;margin-bottom:20px;font-size:11px;font-family:var(--sans);font-weight:300;color:rgba(200,169,110,.55);letter-spacing:.03em}
-.today-pricing-dot{color:rgba(200,169,110,.3)}
+.today-pricing-note{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px;margin-bottom:20px;font-size:11px;font-family:var(--sans);font-weight:300;color:rgba(200,169,110,.85);letter-spacing:.03em}
+.today-pricing-dot{color:rgba(200,169,110,.6)}
+.today-pricing-highlight{color:#C8A96E;font-weight:500}
 
 /* 시 버전 토글 */
 .poem-ver-tabs{display:flex;gap:6px;margin-bottom:12px}
@@ -236,7 +237,7 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
   <div class="today-pricing-note">
     <span>작성은 무료</span>
     <span class="today-pricing-dot">·</span>
-    <span>열람권 5,000원 / 1년</span>
+    <span>열람권 <span class="today-pricing-highlight">5,000원 / 1년</span></span>
     <span class="today-pricing-dot">·</span>
     <span>결제 후 받은 링크로 어느 기기에서든 열람 가능</span>
   </div>
