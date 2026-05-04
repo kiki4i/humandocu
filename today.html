@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>투.필 · 오늘의 필모그래피 · 휴먼다큐</title>
+<meta property="og:title" content="투.필 · 오늘의 필모그래피">
+<meta property="og:description" content="오늘 찍은 사진 6장. AI가 오늘의 당신을 시로 남깁니다.">
+<meta property="og:image" content="https://kiki4i.github.io/humandocu/sixshot_og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --serif:'Cormorant Garamond','Noto Serif KR',Georgia,serif;
+  --sans:'Noto Sans KR',sans-serif;
+  --dark:#0f0d09;
+  --gold:#C8A96E;
+  --amber:#C8870A;
+  --amber-lt:#FFF8ED;
+  --amber-md:#F5D9A0;
+  --ink:#1A1208;
+  --ink2:#5A4020;
+  --ink3:#8A6A3A;
+  --cream:#f9f6f0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--cream);font-family:var(--sans);font-size:16px;font-weight:300;line-height:1.9;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(15,13,9,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,169,110,.12)}
+.logo{font-family:var(--serif);font-size:15px;font-weight:300;color:rgba(249,246,240,.6);letter-spacing:.08em}
+.logo span{color:var(--gold)}
+.nav-back{font-size:13px;color:rgba(200,169,110,.5);letter-spacing:.04em}
+.nav-back:hover{color:var(--gold)}
+@media(max-width:640px){nav{padding:12px 20px}}
+
+/* HERO */
+.hero{padding:140px 48px 80px;text-align:center;background:var(--dark);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(200,169,110,.06) 0%,transparent 70%);pointer-events:none}
+.kicker{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.22em;color:var(--gold);background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.25);padding:5px 18px;border-radius:20px;margin-bottom:28px}
+.hero h1{font-family:var(--serif);font-size:clamp(26px,4vw,50px);font-weight:300;color:#f5e8c8;line-height:1.7;letter-spacing:.06em;margin-bottom:20px}
+.hero-sub{font-size:15px;color:rgba(200,169,110,.65);line-height:2.2;max-width:480px;margin:0 auto 40px}
+.btn-primary{display:inline-block;background:var(--gold);color:var(--dark);font-size:14px;font-weight:700;padding:14px 44px;border-radius:4px;letter-spacing:.06em;transition:background .2s}
+.btn-primary:hover{background:#b8994e}
+.btn-hint{display:block;font-size:12px;color:rgba(200,169,110,.45);margin-top:10px}
+@media(max-width:640px){.hero{padding:110px 24px 60px}}
+
+/* SECTION */
+.sec{padding:80px 48px;max-width:760px;margin:0 auto}
+@media(max-width:640px){.sec{padding:60px 24px}}
+
+/* 철학 섹션 */
+.philosophy{text-align:center;padding:80px 48px;border-top:1px solid rgba(200,169,110,.1)}
+.phil-quote{font-family:var(--serif);font-size:clamp(18px,2.5vw,28px);font-weight:300;color:#f5e8c8;line-height:2;letter-spacing:.06em;margin-bottom:16px}
+.phil-sub{font-size:14px;color:rgba(200,169,110,.5);line-height:2;max-width:480px;margin:0 auto}
+@media(max-width:640px){.philosophy{padding:60px 24px}}
+
+/* 이렇게 됩니다 */
+.sample-sec{padding:80px 48px;border-top:1px solid rgba(200,169,110,.1)}
+.sec-label{font-size:11px;letter-spacing:.2em;color:rgba(200,169,110,.5);margin-bottom:24px}
+.sample-card{border:1px solid rgba(200,169,110,.2);border-radius:8px;overflow:hidden;background:rgba(255,255,255,.02);max-width:620px;margin:0 auto}
+.sample-head{padding:20px 24px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(200,169,110,.12)}
+.s-avatar{width:42px;height:42px;border-radius:50%;background:rgba(200,169,110,.12);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:15px;color:var(--gold);flex-shrink:0}
+.s-name{font-family:var(--serif);font-size:15px;color:#f5e8c8;margin-bottom:2px}
+.s-meta{font-size:12px;color:rgba(200,169,110,.45)}
+.sample-photos{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;padding:14px 24px;border-bottom:1px solid rgba(200,169,110,.1)}
+.s-photo{aspect-ratio:1;border-radius:4px;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.12);display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(200,169,110,.35)}
+.sample-poem-wrap{padding:20px 24px}
+.s-poem-label{font-size:11px;letter-spacing:.16em;color:rgba(200,169,110,.4);margin-bottom:10px}
+.s-poem{font-family:var(--serif);font-size:15px;font-weight:300;line-height:2.8;letter-spacing:.06em;color:#f5e8c8}
+.sample-placeholder{padding:48px 24px;text-align:center;font-size:13px;color:rgba(200,169,110,.3);line-height:2.2}
+@media(max-width:640px){.sample-sec{padding:60px 24px}}
+
+/* 지금 누군가의 투.필 */
+.live-sec{padding:80px 48px;border-top:1px solid rgba(200,169,110,.1)}
+.live-card{border:1px solid rgba(200,169,110,.18);border-radius:8px;padding:24px;background:rgba(255,255,255,.02);max-width:480px;margin:20px auto 0}
+.live-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:16px;border-radius:4px;overflow:hidden}
+.live-photo{aspect-ratio:1;object-fit:cover;width:100%;display:block}
+.live-name{font-family:var(--serif);font-size:16px;color:#f5e8c8;margin-bottom:6px}
+.live-identity{font-size:13px;color:rgba(200,169,110,.55);line-height:1.8;margin-bottom:16px}
+.live-poem{font-family:var(--serif);font-size:14px;font-weight:300;line-height:2.4;letter-spacing:.04em;border-left:2px solid rgba(200,169,110,.25);padding-left:16px;color:rgba(245,232,200,.75)}
+.live-actions{display:flex;justify-content:center;gap:16px;margin-top:24px}
+.btn-next{background:transparent;border:1px solid rgba(200,169,110,.25);color:var(--gold);font-size:12px;font-family:var(--sans);font-weight:300;padding:8px 22px;border-radius:20px;cursor:pointer;letter-spacing:.06em;transition:all .2s}
+.btn-next:hover{background:rgba(200,169,110,.08);border-color:var(--gold)}
+.btn-view{font-size:12px;color:rgba(200,169,110,.4);border-bottom:1px solid rgba(200,169,110,.18);padding-bottom:2px;letter-spacing:.04em;cursor:pointer}
+.live-loading{text-align:center;padding:32px;font-size:13px;color:rgba(200,169,110,.35)}
+@media(max-width:640px){.live-sec{padding:60px 24px}}
+
+/* 하단 CTA */
+.cta{padding:80px 48px;text-align:center;border-top:1px solid rgba(200,169,110,.1)}
+.cta-title{font-family:var(--serif);font-size:clamp(20px,3vw,32px);font-weight:300;color:#f5e8c8;line-height:1.8;margin-bottom:12px;letter-spacing:.06em}
+.cta-sub{font-size:14px;color:rgba(200,169,110,.5);line-height:2;margin-bottom:36px}
+@media(max-width:640px){.cta{padding:60px 24px}}
+
+footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,169,110,.08)}
+.ft{font-size:11px;color:rgba(200,169,110,.2);letter-spacing:.08em}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/index.html" class="logo">휴먼다큐<span>닷컴</span></a>
+  <a href="/filmography.html" class="nav-back">← 필모그래피</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="kicker">투.필 · TODAY FILMOGRAPHY</div>
+  <h1>오늘을 기억하는<br>사람은 별로 없다</h1>
+  <p class="hero-sub">특별한 날만 기억한다고 생각하기 때문이다.<br>하지만 삶은 오늘의 연속이다.</p>
+  <a href="https://tally.so/r/Bz8LbR" target="_blank" class="btn-primary">나의 투.필 만들기 →</a>
+  <span class="btn-hint">무료 · 오늘 찍은 사진 6장 · 3분이면 완성</span>
+</div>
+
+<!-- 철학 -->
+<div class="philosophy">
+  <p class="phil-quote">
+    "어제도 아니고, 내일도 아닌<br>
+    지금 이 순간을 담으세요."
+  </p>
+  <p class="phil-sub">
+    오늘의 밥, 오늘의 하늘, 오늘의 사람 —<br>
+    아무것도 아닌 것 같은 오늘이 쌓여 인생이 됩니다.<br>
+    AI가 오늘의 당신을 한 편의 시로 남겨드립니다.
+  </p>
+</div>
+
+<!-- 이렇게 됩니다 -->
+<div class="sample-sec">
+  <div style="max-width:620px;margin:0 auto">
+    <div class="sec-label">이렇게 됩니다 — 투.필 샘플</div>
+    <div class="sample-card">
+      <div class="sample-placeholder">
+        곧 실제 샘플이 채워집니다<br>
+        <span style="font-size:11px;opacity:.5">오늘 찍은 사진 6장 + AI가 다듬은 시</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 지금 누군가의 투.필 -->
+<div class="live-sec">
+  <div style="max-width:480px;margin:0 auto">
+    <div class="sec-label" style="text-align:center">✦ 지금 누군가의 투.필</div>
+    <div class="live-card" id="live-card">
+      <div class="live-loading" id="live-loading">불러오는 중...</div>
+    </div>
+    <div class="live-actions">
+      <button class="btn-next" onclick="loadNext()">다음 투.필 보기 →</button>
+      <a href="/sixshot.html" class="btn-view">모두 보기</a>
+    </div>
+  </div>
+</div>
+
+<!-- 하단 CTA -->
+<div class="cta">
+  <div class="cta-title">오늘, 당신의 이야기를<br>시로 남겨드립니다</div>
+  <div class="cta-sub">사진 6장과 짧은 한 줄 — 그것으로 충분합니다.<br>AI가 오늘의 온도를 시로 담아드립니다.</div>
+  <a href="https://tally.so/r/Bz8LbR" target="_blank" class="btn-primary">니의 투.필 제출하기 →</a>
+  <span class="btn-hint">무료 · 결과는 이메일로 · 열람권 5,000원/1년</span>
+</div>
+
+<footer>
+  <div class="ft">© 2026 휴먼다큐 · humandocu.com · 031-539-9709</div>
+</footer>
+
+<script>
+const API = 'https://humandocu-server-production.up.railway.app/api/sixshot/random';
+
+function extractPoem(poems) {
+  if (!poems) return '';
+  var norm = poems.indexOf('\n') < 0 && poems.indexOf('[') >= 0
+    ? poems.replace(/\[/g, '\n[') : poems;
+  var lines = norm.split('\n');
+  var rep = '', in_rep = false;
+  for (var i = 0; i < lines.length; i++) {
+    var l = lines[i].trim();
+    if (l === '[대표]') { in_rep = true; continue; }
+    if (in_rep && l.startsWith('[')) break;
+    if (in_rep && l) rep += l + '\n';
+  }
+  return rep.trim();
+}
+
+async function loadNext() {
+  var card = document.getElementById('live-card');
+  card.innerHTML = '<div class="live-loading">불러오는 중...</div>';
+  try {
+    var res  = await fetch(API);
+    var json = await res.json();
+    if (json.status !== 'ok' || !json.data) {
+      card.innerHTML = '<div class="live-loading" style="opacity:.35">아직 공개된 투.필이 없어요</div>';
+      return;
+    }
+    var d = json.data;
+    var poem = extractPoem(d.poems);
+    var poemHtml = poem ? poem.split('\n').filter(function(l){return l.trim();}).map(function(l){
+      return '<div>' + l + '</div>';
+    }).join('') : '';
+
+    var imgs = d.shot_images || {};
+    var photosHtml = '';
+    for (var i = 1; i <= 3; i++) {
+      if (imgs[String(i)]) {
+        photosHtml += '<img class="live-photo" src="' + imgs[String(i)] + '" onerror="this.parentNode.removeChild(this)">';
+      }
+    }
+
+    card.innerHTML =
+      (photosHtml ? '<div class="live-photos">' + photosHtml + '</div>' : '') +
+      '<div class="live-name">' + (d.name || '') + '</div>' +
+      '<div class="live-identity">' + (d.identity || '') + '</div>' +
+      (poemHtml ? '<div class="live-poem">' + poemHtml + '</div>' : '') +
+      '<div style="margin-top:16px;text-align:right">' +
+      '<a href="https://humandocu-server-production.up.railway.app/sixshot/' + d.doc_id + '" target="_blank" style="font-size:12px;color:var(--gold);border-bottom:1px solid rgba(200,169,110,.3);padding-bottom:2px;letter-spacing:.04em">전체보기 →</a>' +
+      '</div>';
+  } catch(e) {
+    card.innerHTML = '<div class="live-loading" style="opacity:.3">잠시 후 다시 시도해주세요</div>';
+  }
+}
+
+loadNext();
+</script>
+
+</body>
+</html>
