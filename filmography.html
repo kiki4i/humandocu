@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>나의 필모그래피 · 휴먼다큐</title>
+<meta property="og:title" content="나의 필모그래피 · 휴먼다큐">
+<meta property="og:description" content="오늘을 기록하거나, 인생을 기록하거나. 당신의 방식으로.">
+<meta property="og:image" content="https://kiki4i.github.io/humandocu/sixshot_og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --serif:'Cormorant Garamond','Noto Serif KR',Georgia,serif;
+  --sans:'Noto Sans KR',sans-serif;
+  --dark:#0f0d09;
+  --dark2:#1a1208;
+  --ink:#1A1208;
+  --ink2:#5A4020;
+  --ink3:#8A6A3A;
+  --gold:#C8A96E;
+  --amber:#C8870A;
+  --amber-lt:#FFF8ED;
+  --amber-md:#F5D9A0;
+  --cream:#f9f6f0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:16px;font-weight:300;line-height:1.9;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(15,13,9,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,169,110,.15)}
+.logo{font-family:var(--serif);font-size:15px;font-weight:300;color:rgba(249,246,240,.7);letter-spacing:.08em}
+.logo span{color:var(--gold)}
+.nav-right{font-size:13px;color:rgba(249,246,240,.4)}
+@media(max-width:640px){nav{padding:12px 20px}}
+
+/* HERO */
+.hero{padding:140px 48px 80px;text-align:center;background:var(--dark);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(200,169,110,.06) 0%,transparent 70%);pointer-events:none}
+.hero-kicker{display:inline-block;font-size:11px;font-family:var(--sans);font-weight:500;letter-spacing:.22em;color:var(--gold);background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.25);padding:5px 18px;border-radius:20px;margin-bottom:28px}
+.hero h1{font-family:var(--serif);font-size:clamp(26px,4vw,52px);font-weight:300;color:#f5e8c8;line-height:1.7;letter-spacing:.06em;margin-bottom:20px}
+.hero-desc{font-size:16px;color:rgba(200,169,110,.7);line-height:2.2;max-width:520px;margin:0 auto 48px;font-family:var(--sans);font-weight:300}
+.hero-divider{width:1px;height:60px;background:linear-gradient(to bottom,transparent,rgba(200,169,110,.4),transparent);margin:0 auto}
+@media(max-width:640px){.hero{padding:110px 24px 60px}}
+
+/* SECTION COMMON */
+.section{padding:80px 48px}
+.section-kicker{font-size:11px;font-weight:500;letter-spacing:.22em;color:var(--gold);margin-bottom:16px;font-family:var(--sans)}
+.section-title{font-family:var(--serif);font-size:clamp(24px,3vw,40px);font-weight:300;color:var(--ink);line-height:1.6;margin-bottom:16px}
+.section-body{font-size:15px;color:var(--ink2);line-height:2.2;max-width:560px;margin-bottom:40px}
+@media(max-width:640px){.section{padding:60px 24px}}
+
+/* 투.필 섹션 */
+.today-sec{background:var(--dark);position:relative;overflow:hidden}
+.today-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 80% 50%,rgba(200,169,110,.04) 0%,transparent 60%);pointer-events:none}
+.today-sec .section-title{color:#f5e8c8}
+.today-sec .section-body{color:rgba(200,169,110,.7)}
+
+/* 인생 식스샷 섹션 */
+.life-sec{background:var(--amber-lt);border-top:1px solid var(--amber-md)}
+.life-sec .section-title{color:var(--ink)}
+.life-sec .section-body{color:var(--ink2)}
+
+/* 철학 인용 */
+.quote-block{border-left:2px solid var(--gold);padding:20px 28px;margin:32px 0;max-width:560px}
+.quote-text{font-family:var(--serif);font-size:clamp(17px,2vw,22px);font-weight:300;line-height:2;letter-spacing:.06em}
+.today-sec .quote-text{color:#f5e8c8}
+.life-sec .quote-text{color:var(--ink)}
+.quote-sub{font-size:13px;margin-top:10px;font-family:var(--sans);font-weight:300}
+.today-sec .quote-sub{color:rgba(200,169,110,.55)}
+.life-sec .quote-sub{color:var(--ink3)}
+
+/* 샘플 카드 */
+.sample-wrap{max-width:680px;margin:48px auto}
+.sample-label{font-size:11px;letter-spacing:.2em;font-family:var(--sans);font-weight:500;margin-bottom:16px}
+.today-sec .sample-label{color:rgba(200,169,110,.5)}
+.life-sec .sample-label{color:var(--ink3)}
+.sample-card{border-radius:8px;overflow:hidden;border:1px solid rgba(200,169,110,.25)}
+.today-sec .sample-card{background:rgba(255,255,255,.04)}
+.life-sec .sample-card{background:#fff;border-color:var(--amber-md)}
+.sample-head{padding:20px 24px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(200,169,110,.15)}
+.life-sec .sample-card .sample-head{border-bottom-color:var(--amber-md)}
+.s-avatar{width:42px;height:42px;border-radius:50%;background:rgba(200,169,110,.15);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:16px;color:var(--gold);flex-shrink:0}
+.s-name{font-family:var(--serif);font-size:15px;color:#f5e8c8;margin-bottom:2px}
+.life-sec .s-name{color:var(--ink)}
+.s-meta{font-size:12px;color:rgba(200,169,110,.5);font-family:var(--sans);font-weight:300}
+.life-sec .s-meta{color:var(--ink3)}
+.sample-photos{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;padding:14px 24px;border-bottom:1px solid rgba(200,169,110,.1)}
+.life-sec .sample-card .sample-photos{border-bottom-color:var(--amber-md)}
+.s-photo{aspect-ratio:1;border-radius:4px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.15);display:flex;align-items:center;justify-content:center;font-size:11px;font-family:var(--sans);color:rgba(200,169,110,.4)}
+.life-sec .s-photo{background:var(--amber-lt);border-color:var(--amber-md);color:var(--ink3)}
+.sample-poem-wrap{padding:20px 24px}
+.s-poem-label{font-size:11px;letter-spacing:.16em;font-family:var(--sans);font-weight:300;margin-bottom:10px;color:rgba(200,169,110,.5)}
+.life-sec .s-poem-label{color:var(--ink3)}
+.s-poem{font-family:var(--serif);font-size:15px;font-weight:300;line-height:2.6;letter-spacing:.06em;color:#f5e8c8}
+.life-sec .s-poem{color:var(--ink)}
+.sample-placeholder{padding:40px 24px;text-align:center;font-size:13px;color:rgba(200,169,110,.3);font-family:var(--sans);font-weight:300;line-height:2}
+.life-sec .sample-placeholder{color:var(--ink3)}
+
+/* 오늘의 누군가 카드 */
+.live-wrap{max-width:480px;margin:48px auto 0}
+.live-label{font-size:11px;letter-spacing:.2em;font-family:var(--sans);font-weight:500;margin-bottom:16px;text-align:center}
+.today-sec .live-label{color:rgba(200,169,110,.5)}
+.life-sec .live-label{color:var(--ink3)}
+.live-card{border-radius:8px;overflow:hidden;border:1px solid rgba(200,169,110,.2);padding:24px}
+.today-sec .live-card{background:rgba(255,255,255,.03)}
+.life-sec .live-card{background:#fff;border-color:var(--amber-md)}
+.live-name{font-family:var(--serif);font-size:16px;margin-bottom:6px}
+.today-sec .live-name{color:#f5e8c8}
+.life-sec .live-name{color:var(--ink)}
+.live-identity{font-size:13px;line-height:1.8;margin-bottom:16px;font-family:var(--sans);font-weight:300}
+.today-sec .live-identity{color:rgba(200,169,110,.6)}
+.life-sec .live-identity{color:var(--ink2)}
+.live-poem{font-family:var(--serif);font-size:14px;font-weight:300;line-height:2.4;letter-spacing:.04em;border-left:2px solid rgba(200,169,110,.3);padding-left:16px}
+.today-sec .live-poem{color:rgba(245,232,200,.75)}
+.life-sec .live-poem{color:var(--ink)}
+.live-loading{text-align:center;padding:20px;font-size:13px}
+.today-sec .live-loading{color:rgba(200,169,110,.4)}
+.life-sec .live-loading{color:var(--ink3)}
+.live-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:16px;border-radius:4px;overflow:hidden}
+.live-photo{aspect-ratio:1;object-fit:cover;width:100%;display:block}
+.live-photo-empty{aspect-ratio:1;background:rgba(200,169,110,.08);border-radius:4px}
+.live-sec-actions{display:flex;justify-content:center;gap:16px;margin-top:20px}
+.btn-next{background:transparent;border:1px solid rgba(200,169,110,.3);color:var(--gold);font-size:12px;font-family:var(--sans);font-weight:300;padding:8px 22px;border-radius:20px;cursor:pointer;letter-spacing:.06em;transition:all .2s}
+.btn-next:hover{background:rgba(200,169,110,.1);border-color:var(--gold)}
+.btn-view-all{font-size:12px;font-family:var(--sans);font-weight:300;color:rgba(200,169,110,.5);padding:8px 22px;cursor:pointer;letter-spacing:.04em;border-bottom:1px solid rgba(200,169,110,.2)}
+.life-sec .btn-next{border-color:var(--amber-md);color:var(--amber)}
+.life-sec .btn-next:hover{background:rgba(200,135,10,.06)}
+.life-sec .btn-view-all{color:var(--ink3);border-bottom-color:var(--amber-md)}
+
+/* CTA 버튼 */
+.cta-wrap{text-align:center;margin-top:56px;padding-top:48px;border-top:1px solid rgba(200,169,110,.15)}
+.life-sec .cta-wrap{border-top-color:var(--amber-md)}
+.btn-make{display:inline-block;padding:16px 52px;background:var(--gold);color:var(--dark);font-size:15px;font-family:var(--sans);font-weight:700;border-radius:4px;letter-spacing:.06em;cursor:pointer;transition:background .2s;border:none}
+.btn-make:hover{background:#b8994e}
+.btn-hint{display:block;font-size:12px;margin-top:10px;letter-spacing:.04em;font-family:var(--sans);font-weight:300}
+.today-sec .btn-hint{color:rgba(200,169,110,.5)}
+.life-sec .btn-hint{color:var(--ink3)}
+
+/* 연결 섹션 */
+.connect{background:var(--dark);padding:48px;text-align:center;border-top:1px solid rgba(200,169,110,.1)}
+.connect-text{font-family:var(--serif);font-size:clamp(15px,2vw,20px);font-weight:300;color:rgba(245,232,200,.5);line-height:2;letter-spacing:.06em;margin-bottom:20px}
+.connect-link{display:inline-block;font-size:13px;color:var(--gold);border-bottom:1px solid rgba(200,169,110,.3);padding-bottom:2px;letter-spacing:.06em}
+@media(max-width:640px){.connect{padding:48px 24px}}
+
+/* FOOTER */
+footer{background:#1a1208;padding:32px 48px;text-align:center;border-top:1px solid rgba(200,169,110,.1)}
+.ft-text{font-size:12px;color:rgba(200,169,110,.35);letter-spacing:.08em}
+@media(max-width:640px){footer{padding:32px 20px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/index.html" class="logo">휴먼다큐<span>닷컴</span></a>
+  <div class="nav-right">📞 031-539-9709</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">FILMOGRAPHY · 나의 필모그래피</div>
+  <h1>당신의 삶을<br>어떻게 기록하겠습니까</h1>
+  <p class="hero-desc">
+    오늘을 기록하거나, 인생을 기록하거나.<br>
+    어느 쪽이든 — 기록하지 않으면 사라집니다.
+  </p>
+  <div class="hero-divider"></div>
+</div>
+
+<!-- 투.필 섹션 -->
+<div class="today-sec section" id="today">
+  <div class="section-kicker">투.필 · TODAY FILMOGRAPHY</div>
+  <h2 class="section-title">오늘을 기억하는<br>사람은 별로 없다</h2>
+  <p class="section-body">특별한 날만 기억한다고 생각하기 때문이다. 하지만 삶은 오늘의 연속이다. 오늘 찍은 사진 6장, 짧은 한 줄 — 그것으로 충분하다. AI가 오늘의 당신을 시로 남긴다.</p>
+
+  <div class="quote-block">
+    <div class="quote-text">"어제도 아니고, 내일도 아닌<br>지금 이 순간을 담으세요."</div>
+    <div class="quote-sub">· 오늘의 사진 6장 · AI가 다듬은 시 · 지금의 당신</div>
+  </div>
+
+  <!-- 투.필 샘플 -->
+  <div class="sample-wrap">
+    <div class="sample-label">이렇게 됩니다 — 투.필 샘플</div>
+    <div class="sample-card">
+      <div class="sample-placeholder">
+        곧 실제 샘플이 채워집니다<br>
+        <span style="font-size:11px;opacity:.6">오늘의 사진 6장 + AI 시</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 지금 누군가의 투.필 -->
+  <div class="live-wrap">
+    <div class="live-label">✦ 지금 누군가의 투.필</div>
+    <div class="live-card" id="today-card">
+      <div class="live-loading" id="today-loading">불러오는 중...</div>
+    </div>
+    <div class="live-sec-actions">
+      <button class="btn-next" onclick="loadNext('today')">다음 투.필 보기 →</button>
+      <a href="/sixshot.html" class="btn-view-all">모두 보기</a>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-wrap">
+    <a href="https://tally.so/r/Bz8LbR" target="_blank" class="btn-make">나의 투.필 만들기 →</a>
+    <span class="btn-hint">무료 · 3분이면 완성 · 오늘 찍은 사진 6장</span>
+  </div>
+</div>
+
+<!-- 인생 식스샷 섹션 -->
+<div class="life-sec section" id="life">
+  <div class="section-kicker">인생 식스샷 · LIFE SIX SHOT</div>
+  <h2 class="section-title">당신의 인생을<br>단 6장으로 정리한다면</h2>
+  <p class="section-body">어떤 사진을 고르겠는가. 그 선택 자체가 당신이다. 유년, 청춘, 사랑, 고난, 지금 — 6장의 사진과 이야기로 만드는 나만의 인생 필모그래피.</p>
+
+  <div class="quote-block">
+    <div class="quote-text">"사진을 고르는 행위 자체가<br>자신을 이해하는 과정이다."</div>
+    <div class="quote-sub">· 인생 6장면 · AI가 다듬은 시 · 나만의 필모그래피 링크</div>
+  </div>
+
+  <!-- 인생 식스샷 샘플 (비욘드우) -->
+  <div class="sample-wrap">
+    <div class="sample-label">이렇게 됩니다 — 비욘드우님의 식스샷</div>
+    <div class="sample-card">
+      <div class="sample-head">
+        <div class="s-avatar">비</div>
+        <div>
+          <div class="s-name">비욘드우</div>
+          <div class="s-meta">왜 그리 알고 싶은게 많은지, 먹고 싶은게 많은지.. 늘 바쁘네..</div>
+        </div>
+      </div>
+      <div class="sample-photos">
+        <div class="s-photo" style="background-image:url('https://storage.tally.so/private/20171004_160933.jpg?id=KRONp8&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IktST05wOCIsImZvcm1JZCI6IlpqR3BrMCIsImlhdCI6MTc3NzgxMDUzM30.qlqaeF0l8fbvg9DPA7aOv1hIymMpn4TJ0Nv7IGpcJjY&signature=c40eac3ecb13a7c2a56d4fe0551a1c6857a3455e9037c8c292c3be98bd89b8bb');background-size:cover;background-position:center"></div>
+        <div class="s-photo" style="background-image:url('https://storage.tally.so/private/IMG_0021.jpg?id=oxgayX&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im94Z2F5WCIsImZvcm1JZCI6IlpqR3BrMCIsImlhdCI6MTc3NzgxMDUzM30.9cllR7uW1kjqxi5DgWFfpepWgcoyAcW7hX0nrfFYrYw&signature=25846571e240d32e09274848b76fce633447216c89ef100be09d534ea39ce0ef');background-size:cover;background-position:center"></div>
+        <div class="s-photo" style="background-image:url('https://storage.tally.so/private/20120721_115711.jpg.jpeg?id=pZ56rq&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InBaNTZycSIsImZvcm1JZCI6IlpqR3BrMCIsImlhdCI6MTc3NzgxMDUzM30.fbXQKheuwfYq3qIEIwovK6rcphFW_PyY4cIcv3BsX5Q&signature=5e28b9dedea2f8b38fc90f2193503c5352c9e6b6843502057cd9f8d8d8e724bd');background-size:cover;background-position:center"></div>
+        <div class="s-photo" style="background-image:url('https://storage.tally.so/private/20200222_173501.jpg?id=OVrel7&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ik9WcmVsNyIsImZvcm1JZCI6IlpqR3BrMCIsImlhdCI6MTc3NzgxMDUzM30.S8d04EReMfB95a89DRUYT63evRCRQ0DabNCXzZWNh8w&signature=c93e39f6929c521260e55a5582b13c9156365f931a55ea5670c208439667dec2');background-size:cover;background-position:center"></div>
+        <div class="s-photo" style="background-image:url('https://storage.tally.so/private/20170723_121136.jpg?id=pZ56Nb&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InBaNTZOYiIsImZvcm1JZCI6IlpqR3BrMCIsImlhdCI6MTc3NzgxMDUzM30.sVgZX6Ro8RnBvaMaU2ZkmhpQfcIF92ObXG2fpzg8hr0&signature=efd5afe224002ff2d6eb2f9517e3120510a23ddda9e60c81ec0dbdf9b6138212');background-size:cover;background-position:center"></div>
+        <div class="s-photo" style="background-image:url('https://storage.tally.so/private/IMG_5618.JPG?id=oxgaee&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im94Z2FlZSIsImZvcm1JZCI6IlpqR3BrMCIsImlhdCI6MTc3NzgxMDUzM30.GquEGaLMysi5gIl2xBSmxP8cx7PZEepxJ1jaTYYdrp4&signature=e93b0108d0b57045a50b59cd1c26342a070edd112604cb508f704653013d3bcf');background-size:cover;background-position:center"></div>
+      </div>
+      <div class="sample-poem-wrap">
+        <div class="s-poem-label">AI가 다듬은 시</div>
+        <div class="s-poem">
+          알고 싶은 것들이 나를 몰았다, 바람처럼<br>
+          형제들 사이에서 세상을 열던 손으로 아내의 손을 잡았고<br>
+          좀만 더 기다려, 내가 햇볕이 되면 갈게
+        </div>
+      </div>
+    </div>
+    <div style="text-align:right;margin-top:10px">
+      <a href="https://humandocu-server-production.up.railway.app/sixshot/eb9809fbcb85" target="_blank" style="font-size:12px;color:var(--amber);border-bottom:1px solid var(--amber-md);padding-bottom:2px;letter-spacing:.04em">비욘드우님의 전체 식스샷 보기 →</a>
+    </div>
+  </div>
+
+  <!-- 지금 누군가의 인생 식스샷 -->
+  <div class="live-wrap">
+    <div class="live-label" style="color:var(--ink3)">✦ 지금 누군가의 인생 식스샷</div>
+    <div class="live-card" id="life-card">
+      <div class="live-loading" id="life-loading" style="color:var(--ink3)">불러오는 중...</div>
+    </div>
+    <div class="live-sec-actions">
+      <button class="btn-next life-sec" onclick="loadNext('life')" style="border-color:var(--amber-md);color:var(--amber)">다음 식스샷 보기 →</button>
+      <a href="/sixshot.html" class="btn-view-all" style="color:var(--ink3);border-bottom-color:var(--amber-md)">모두 보기</a>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-wrap">
+    <a href="https://tally.so/r/ZjGpk0" target="_blank" class="btn-make" style="background:var(--amber)">나의 인생 식스샷 만들기 →</a>
+    <span class="btn-hint" style="color:var(--ink3)">무료 · 인생을 담은 6장면 · 나만의 필모그래피 링크</span>
+  </div>
+</div>
+
+<!-- 연결 -->
+<div class="connect">
+  <p class="connect-text">
+    오늘의 기록이 쌓이면 — 인생이 됩니다.<br>
+    식스샷에서 남긴 이야기가 메모리얼로 이어집니다.
+  </p>
+  <a href="/index.html#pricing" class="connect-link">휴먼다큐 전체 서비스 보기 →</a>
+</div>
+
+<footer>
+  <div class="ft-text">© 2026 휴먼다큐 · humandocu.com · 031-539-9709</div>
+</footer>
+
+<script>
+const API = 'https://humandocu-server-production.up.railway.app/api/sixshot/random';
+
+let todayData = null;
+let lifeData  = null;
+
+function extractPoem(poems) {
+  if (!poems) return '';
+  var norm = poems.indexOf('\n') < 0 && poems.indexOf('[') >= 0
+    ? poems.replace(/\[/g, '\n[') : poems;
+  var lines = norm.split('\n');
+  var rep = '', in_rep = false;
+  for (var i = 0; i < lines.length; i++) {
+    var l = lines[i].trim();
+    if (l === '[대표]') { in_rep = true; continue; }
+    if (in_rep && l.startsWith('[')) break;
+    if (in_rep && l) rep += l + '\n';
+  }
+  return rep.trim();
+}
+
+function renderCard(data, cardId, loadingId, isDark) {
+  var card = document.getElementById(cardId);
+  var loading = document.getElementById(loadingId);
+  if (!data || !data.doc_id) {
+    card.innerHTML = '<div class="live-loading" style="opacity:.4">아직 공개된 기록이 없어요</div>';
+    return;
+  }
+  var poem = extractPoem(data.poems);
+  var poemHtml = poem ? poem.split('\n').filter(function(l){return l.trim();}).map(function(l){
+    return '<div>' + l + '</div>';
+  }).join('') : '';
+
+  var photosHtml = '';
+  var imgs = data.shot_images || {};
+  for (var i = 1; i <= 3; i++) {
+    if (imgs[String(i)]) {
+      photosHtml += '<img class="live-photo" src="' + imgs[String(i)] + '" onerror="this.style.display=\'none\'">';
+    }
+  }
+
+  var nameColor  = isDark ? '#f5e8c8' : 'var(--ink)';
+  var metaColor  = isDark ? 'rgba(200,169,110,.55)' : 'var(--ink3)';
+  var poemColor  = isDark ? 'rgba(245,232,200,.75)' : 'var(--ink)';
+  var borderColor= isDark ? 'rgba(200,169,110,.25)' : 'var(--amber-md)';
+
+  card.innerHTML =
+    (photosHtml ? '<div class="live-photos">' + photosHtml + '</div>' : '') +
+    '<div style="font-family:var(--serif);font-size:16px;color:' + nameColor + ';margin-bottom:6px">' + (data.name || '') + '</div>' +
+    '<div style="font-size:13px;color:' + metaColor + ';line-height:1.8;margin-bottom:16px;font-family:var(--sans);font-weight:300">' + (data.identity || '') + '</div>' +
+    (poemHtml ? '<div style="font-family:var(--serif);font-size:14px;font-weight:300;line-height:2.4;letter-spacing:.04em;border-left:2px solid ' + borderColor + ';padding-left:16px;color:' + poemColor + '">' + poemHtml + '</div>' : '') +
+    '<div style="margin-top:16px;text-align:right"><a href="https://humandocu-server-production.up.railway.app/sixshot/' + data.doc_id + '" target="_blank" style="font-size:12px;color:var(--gold);border-bottom:1px solid rgba(200,169,110,.3);padding-bottom:2px;letter-spacing:.04em">전체보기 →</a></div>';
+}
+
+async function loadNext(type) {
+  var cardId    = type === 'today' ? 'today-card' : 'life-card';
+  var loadingId = type === 'today' ? 'today-loading' : 'life-loading';
+  var isDark    = type === 'today';
+  var card = document.getElementById(cardId);
+  card.innerHTML = '<div class="live-loading" style="opacity:.4">불러오는 중...</div>';
+  try {
+    var res = await fetch(API);
+    var json = await res.json();
+    if (json.status === 'ok') {
+      renderCard(json.data, cardId, loadingId, isDark);
+    }
+  } catch(e) {
+    card.innerHTML = '<div class="live-loading" style="opacity:.3">잠시 후 다시 시도해주세요</div>';
+  }
+}
+
+// 초기 로드
+loadNext('today');
+loadNext('life');
+</script>
+
+</body>
+</html>
