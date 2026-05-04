@@ -242,7 +242,7 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
     </div>
     <div class="sample-link-box">
       <span class="sample-link-url">humandocu.com/sixshot/eb9809fbcb85</span>
-      <a href="https://humandocu-server-production.up.railway.app/sixshot/eb9809fbcb85" target="_blank" class="sample-link-copy">전체보기 →</a>
+      <a href="https://humandocu-server-production-428d.up.railway.app/sixshot/eb9809fbcb85" target="_blank" class="sample-link-copy">전체보기 →</a>
     </div>
   </div>
 </div>
@@ -337,8 +337,8 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
 
 <script>
 var TOKEN_KEY = 'hd_sixshot_token';
-var PAYMENT_URL = 'https://humandocu-server-production.up.railway.app/payment/sixshot';
-var API = 'https://humandocu-server-production.up.railway.app/api/sixshot/random?type=sixshot';
+var PAYMENT_URL = 'https://humandocu-server-production-428d.up.railway.app/payment/sixshot';
+var API = 'https://humandocu-server-production-428d.up.railway.app/api/sixshot/random?type=sixshot';
 var card = document.getElementById('today-card');
 var _shotData = null;
 
@@ -482,7 +482,7 @@ function renderCard(d, unlocked) {
     + '<div class="today-poem" id="today-poem-display">' + poemHtml(_repPoem1) + '</div>'
     + '</div>'
     + (doc_id && unlocked
-      ? '<div class="today-link-box"><a href="https://humandocu-server-production.up.railway.app/sixshot/' + doc_id + '" target="_blank" class="today-link-btn">이 사람의 식스샷 전체 보기 →</a></div>'
+      ? '<div class="today-link-box"><a href="https://humandocu-server-production-428d.up.railway.app/sixshot/' + doc_id + '" target="_blank" class="today-link-btn">이 사람의 식스샷 전체 보기 →</a></div>'
       : '');
 }
 

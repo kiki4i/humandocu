@@ -155,7 +155,7 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,169,110
         </div>
       </div>
       <div style="padding:14px 24px;text-align:right;border-top:1px solid rgba(200,169,110,.1)">
-        <a href="https://humandocu-server-production.up.railway.app/sixshot/td1ccbebd1d6" target="_blank" style="font-size:12px;color:var(--gold);border-bottom:1px solid rgba(200,169,110,.3);padding-bottom:2px;letter-spacing:.04em">푸하하님의 전체 투.필 보기 →</a>
+        <a href="https://humandocu-server-production-428d.up.railway.app/sixshot/td1ccbebd1d6" target="_blank" style="font-size:12px;color:var(--gold);border-bottom:1px solid rgba(200,169,110,.3);padding-bottom:2px;letter-spacing:.04em">푸하하님의 전체 투.필 보기 →</a>
       </div>
     </div>
   </div>
@@ -188,7 +188,7 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,169,110
 </footer>
 
 <script>
-const API = 'https://humandocu-server-production.up.railway.app/api/sixshot/random?type=today';
+const API = 'https://humandocu-server-production-428d.up.railway.app/api/sixshot/random?type=today';
 
 function extractPoem(poems) {
   if (!poems) return '';
@@ -235,7 +235,7 @@ async function loadNext() {
       '<div class="live-identity">' + (d.identity || '') + '</div>' +
       (poemHtml ? '<div class="live-poem">' + poemHtml + '</div>' : '') +
       '<div style="margin-top:16px;text-align:right">' +
-      '<a href="https://humandocu-server-production.up.railway.app/sixshot/' + d.doc_id + '" target="_blank" style="font-size:12px;color:var(--gold);border-bottom:1px solid rgba(200,169,110,.3);padding-bottom:2px;letter-spacing:.04em">전체보기 →</a>' +
+      '<a href="https://humandocu-server-production-428d.up.railway.app/sixshot/' + d.doc_id + '" target="_blank" style="font-size:12px;color:var(--gold);border-bottom:1px solid rgba(200,169,110,.3);padding-bottom:2px;letter-spacing:.04em">전체보기 →</a>' +
       '</div>';
   } catch(e) {
     card.innerHTML = '<div class="live-loading" style="opacity:.3">잠시 후 다시 시도해주세요</div>';
