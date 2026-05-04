@@ -403,7 +403,7 @@ function buildPhotosHTML(shots, images, unlocked) {
 }
 
 function renderCard(d, unlocked) {
-  var name = d.name || '';
+  var name = d.nickname || d.name || '';
   var identity = d.identity || '';
   var shots = d.shots || {};
   var images = d.shot_images || {};
