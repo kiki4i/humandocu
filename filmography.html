@@ -27,17 +27,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .logo span{color:var(--gold)}
 @media(max-width:640px){nav{padding:12px 20px}}
 
-.wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 24px 80px;text-align:center;position:relative}
+.wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px 32px;text-align:center;position:relative}
 .wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 60%,rgba(200,169,110,.08) 0%,transparent 70%);pointer-events:none}
 
-.kicker{font-size:11px;font-weight:500;letter-spacing:.25em;color:#C8870A;margin-bottom:24px}
-.title{font-family:var(--serif);font-size:clamp(28px,5vw,56px);font-weight:300;color:#1A1208;line-height:1.6;letter-spacing:.06em;margin-bottom:16px}
-.sub{font-size:15px;color:#5A4020;line-height:2.2;max-width:380px;margin:0 auto 56px;font-weight:300}
+.kicker{font-size:11px;font-weight:500;letter-spacing:.25em;color:#C8870A;margin-bottom:16px}
+.title{font-family:var(--serif);font-size:20px;font-weight:400;color:#1A1208;line-height:1.5;letter-spacing:.04em;margin-bottom:12px}
+.sub{font-size:14px;color:#5A4020;line-height:1.9;max-width:340px;margin:0 auto 28px;font-weight:300}
 
-.cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:580px;width:100%}
-@media(max-width:500px){.cards{grid-template-columns:1fr;gap:16px;max-width:320px}}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:560px;width:100%}
+@media(max-width:500px){.cards{grid-template-columns:1fr;gap:10px;max-width:340px}}
 
-.card{border-radius:8px;padding:36px 28px;text-align:left;transition:all .25s;display:block;position:relative;overflow:hidden}
+.card{border-radius:8px;padding:24px;text-align:left;transition:all .25s;display:block;position:relative;overflow:hidden}
 .card:hover{transform:translateY(-3px)}
 
 .card-today{background:#FFF8ED;border:2px solid #C8A96E}
@@ -46,18 +46,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .card-life{background:#FDF6E8;border:2px solid rgba(200,135,10,.4)}
 .card-life:hover{background:rgba(200,135,10,.08);border-color:rgba(200,135,10,.35)}
 
-.badge{font-size:10px;font-weight:500;letter-spacing:.2em;display:inline-block;padding:3px 12px;border-radius:20px;margin-bottom:16px}
-.card-today .badge{color:var(--gold);background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.2)}
-.card-life .badge{color:rgba(200,135,10,.85);background:rgba(200,135,10,.08);border:1px solid rgba(200,135,10,.2)}
+.badge{font-size:10px;font-weight:500;letter-spacing:.2em;display:inline-block;padding:3px 12px;border-radius:20px;margin-bottom:12px}
+.card-today .badge{color:#7A5A1A;background:rgba(200,169,110,.14);border:1px solid rgba(200,169,110,.3)}
+.card-life .badge{color:#8B5E0A;background:rgba(200,135,10,.1);border:1px solid rgba(200,135,10,.3)}
 
-.card-title{font-family:var(--serif);font-size:clamp(22px,3vw,28px);font-weight:400;color:#1A1208;line-height:1.5;margin-bottom:10px;letter-spacing:.04em}
-.card-desc{font-size:13px;color:rgba(200,169,110,.55);line-height:1.9;font-weight:300;margin-bottom:22px}
-.card-life .card-desc{color:rgba(200,135,10,.5)}
+.card-title{font-family:var(--serif);font-size:20px;font-weight:400;color:#1A1208;line-height:1.4;margin-bottom:8px;letter-spacing:.03em}
+.card-desc{font-size:13px;color:#5A4020;line-height:1.7;font-weight:300;margin-bottom:16px}
+.card-life .card-desc{color:#5A4020}
 .card-arrow{font-size:12px;letter-spacing:.1em;transition:color .2s}
-.card-today .card-arrow{color:rgba(200,169,110,.4)}
+.card-today .card-arrow{color:#A0804A}
 .card-today:hover .card-arrow{color:var(--gold)}
-.card-life .card-arrow{color:rgba(200,135,10,.4)}
+.card-life .card-arrow{color:#A07030}
 .card-life:hover .card-arrow{color:var(--amber)}
+@media(min-width:640px){.wrap{padding:100px 40px 48px}.title{font-size:28px}.card-title{font-size:22px}}
 
 footer{padding:24px;text-align:center;border-top:1px solid rgba(200,169,110,.2);background:#F9F6F0}
 .ft{font-size:11px;color:#8A6A3A;letter-spacing:.08em}
