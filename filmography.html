@@ -19,20 +19,20 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
-body{background:var(--dark);color:var(--cream);font-family:var(--sans);font-weight:300;line-height:1.9;-webkit-font-smoothing:antialiased}
+body{background:#F9F6F0;color:#1A1208;font-family:var(--sans);font-weight:300;line-height:1.9;-webkit-font-smoothing:antialiased}
 a{text-decoration:none;color:inherit}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(15,13,9,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,169,110,.12)}
-.logo{font-family:var(--serif);font-size:15px;font-weight:300;color:rgba(249,246,240,.6);letter-spacing:.08em}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(249,246,240,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,169,110,.25)}
+.logo{font-family:var(--serif);font-size:15px;font-weight:300;color:#1A1208;letter-spacing:.08em}
 .logo span{color:var(--gold)}
 @media(max-width:640px){nav{padding:12px 20px}}
 
 .wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 24px 80px;text-align:center;position:relative}
-.wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 60%,rgba(200,169,110,.05) 0%,transparent 70%);pointer-events:none}
+.wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 60%,rgba(200,169,110,.08) 0%,transparent 70%);pointer-events:none}
 
-.kicker{font-size:11px;font-weight:500;letter-spacing:.25em;color:rgba(200,169,110,.5);margin-bottom:24px}
-.title{font-family:var(--serif);font-size:clamp(28px,5vw,56px);font-weight:300;color:#f5e8c8;line-height:1.6;letter-spacing:.06em;margin-bottom:16px}
-.sub{font-size:15px;color:rgba(200,169,110,.6);line-height:2.2;max-width:380px;margin:0 auto 56px;font-weight:300}
+.kicker{font-size:11px;font-weight:500;letter-spacing:.25em;color:#C8870A;margin-bottom:24px}
+.title{font-family:var(--serif);font-size:clamp(28px,5vw,56px);font-weight:300;color:#1A1208;line-height:1.6;letter-spacing:.06em;margin-bottom:16px}
+.sub{font-size:15px;color:#5A4020;line-height:2.2;max-width:380px;margin:0 auto 56px;font-weight:300}
 
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:580px;width:100%}
 @media(max-width:500px){.cards{grid-template-columns:1fr;gap:16px;max-width:320px}}
@@ -40,17 +40,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .card{border-radius:8px;padding:36px 28px;text-align:left;transition:all .25s;display:block;position:relative;overflow:hidden}
 .card:hover{transform:translateY(-3px)}
 
-.card-today{background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.25)}
+.card-today{background:#FFF8ED;border:2px solid #C8A96E}
 .card-today:hover{background:rgba(200,169,110,.1);border-color:rgba(200,169,110,.5)}
 
-.card-life{background:rgba(200,135,10,.04);border:1px solid rgba(200,135,10,.15)}
+.card-life{background:#FDF6E8;border:2px solid rgba(200,135,10,.4)}
 .card-life:hover{background:rgba(200,135,10,.08);border-color:rgba(200,135,10,.35)}
 
 .badge{font-size:10px;font-weight:500;letter-spacing:.2em;display:inline-block;padding:3px 12px;border-radius:20px;margin-bottom:16px}
 .card-today .badge{color:var(--gold);background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.2)}
 .card-life .badge{color:rgba(200,135,10,.85);background:rgba(200,135,10,.08);border:1px solid rgba(200,135,10,.2)}
 
-.card-title{font-family:var(--serif);font-size:clamp(22px,3vw,28px);font-weight:300;color:#f5e8c8;line-height:1.5;margin-bottom:10px;letter-spacing:.04em}
+.card-title{font-family:var(--serif);font-size:clamp(22px,3vw,28px);font-weight:400;color:#1A1208;line-height:1.5;margin-bottom:10px;letter-spacing:.04em}
 .card-desc{font-size:13px;color:rgba(200,169,110,.55);line-height:1.9;font-weight:300;margin-bottom:22px}
 .card-life .card-desc{color:rgba(200,135,10,.5)}
 .card-arrow{font-size:12px;letter-spacing:.1em;transition:color .2s}
@@ -59,8 +59,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .card-life .card-arrow{color:rgba(200,135,10,.4)}
 .card-life:hover .card-arrow{color:var(--amber)}
 
-footer{padding:24px;text-align:center;border-top:1px solid rgba(200,169,110,.08)}
-.ft{font-size:11px;color:rgba(200,169,110,.2);letter-spacing:.08em}
+footer{padding:24px;text-align:center;border-top:1px solid rgba(200,169,110,.2);background:#F9F6F0}
+.ft{font-size:11px;color:#8A6A3A;letter-spacing:.08em}
 </style>
 </head>
 <body>
