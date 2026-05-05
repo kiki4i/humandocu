@@ -498,7 +498,9 @@ function loadNextShot() {
   var btn = document.getElementById('btn-next');
   if (btn) btn.disabled = true;
   card.innerHTML = '<div class="today-loading">불러오는 중</div>';
-  fetch(API)
+  var currentId = (_shotData && _shotData.doc_id) ? _shotData.doc_id : '';
+  var url = API + (currentId ? '&exclude=' + currentId : '');
+  fetch(url)
     .then(function(r) { return r.json(); })
     .then(function(res) {
       if (btn) btn.disabled = false;

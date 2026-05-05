@@ -205,17 +205,21 @@ function extractPoem(poems) {
   return rep.trim();
 }
 
+let currentDocId = '';
+
 async function loadNext() {
   var card = document.getElementById('live-card');
   card.innerHTML = '<div class="live-loading">불러오는 중...</div>';
   try {
-    var res  = await fetch(API);
+    var url = API + (currentDocId ? '&exclude=' + currentDocId : '');
+    var res  = await fetch(url);
     var json = await res.json();
     if (json.status !== 'ok' || !json.data) {
       card.innerHTML = '<div class="live-loading" style="opacity:.35">아직 공개된 투.필이 없어요</div>';
       return;
     }
     var d = json.data;
+    currentDocId = d.doc_id || '';
     var poem = extractPoem(d.poems);
     var poemHtml = poem ? poem.split('\n').filter(function(l){return l.trim();}).map(function(l){
       return '<div>' + l + '</div>';
