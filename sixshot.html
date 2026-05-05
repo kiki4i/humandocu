@@ -331,7 +331,17 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
     <div class="access-modal-heading">5,000원으로 1년간<br>모든 식스샷을 무제한으로<br>열람하실 수 있어요.</div>
     <div class="access-modal-body">결제 후 이메일로 받은 링크로<br>어느 기기에서든 열람 가능합니다.</div>
     <button class="access-modal-buy" onclick="window.location.href=PAYMENT_URL">지금 열람권 구매하기 →</button>
-    <button class="access-modal-close" onclick="closeAccessModal()">닫기</button>
+    <div id="restore-area" style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(200,169,110,.2)">
+      <div style="font-size:13px;color:rgba(200,169,110,.7);margin-bottom:10px">이미 구매하셨나요?</div>
+      <input id="restore-email" type="email" placeholder="결제 시 입력한 이메일"
+        style="width:100%;padding:10px 14px;border:1px solid rgba(200,169,110,.3);border-radius:4px;background:rgba(255,255,255,.05);color:#f5e8c8;font-size:14px;font-family:inherit;box-sizing:border-box;margin-bottom:8px">
+      <button onclick="restoreToken()"
+        style="width:100%;padding:10px;background:transparent;border:1px solid rgba(200,169,110,.4);border-radius:4px;color:var(--gold);font-size:14px;font-family:inherit;cursor:pointer">
+        열람권 복구하기
+      </button>
+      <div id="restore-msg" style="font-size:12px;margin-top:8px;min-height:16px;color:rgba(200,169,110,.7)"></div>
+    </div>
+    <button class="access-modal-close" onclick="closeAccessModal()" style="margin-top:10px">닫기</button>
   </div>
 </div>
 
@@ -340,6 +350,32 @@ var TOKEN_KEY = 'hd_sixshot_token';
 var PAYMENT_URL = 'https://humandocu-server-production-428d.up.railway.app/payment/sixshot';
 var API = 'https://humandocu-server-production-428d.up.railway.app/api/sixshot/random?type=sixshot';
 var card = document.getElementById('today-card');
+
+async function restoreToken() {
+  var email = document.getElementById('restore-email').value.trim();
+  var msg = document.getElementById('restore-msg');
+  if (!email) { msg.textContent = '이메일을 입력해주세요'; return; }
+  msg.textContent = '확인 중...';
+  try {
+    var res = await fetch('https://humandocu-server-production-428d.up.railway.app/api/sixshot/token-by-email', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email: email})
+    });
+    var data = await res.json();
+    if (data.status === 'ok' && data.token) {
+      localStorage.setItem(TOKEN_KEY, data.token);
+      msg.style.color = '#4CAF50';
+      msg.textContent = '✓ 열람권이 복구됐어요! 잠시 후 열립니다.';
+      setTimeout(function(){ location.reload(); }, 1200);
+    } else {
+      msg.style.color = 'rgba(200,100,100,.8)';
+      msg.textContent = '해당 이메일로 구매 내역을 찾을 수 없어요';
+    }
+  } catch(e) {
+    msg.textContent = '오류가 발생했어요. 다시 시도해주세요';
+  }
+}
 var _shotData = null;
 
 // URL ?token=xxx 처리: localStorage 저장 후 파라미터 제거
