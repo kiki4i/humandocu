@@ -745,7 +745,7 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
 <script>
 function openModal(t){const m=document.getElementById('modal-'+t);if(!m)return;m.style.display='flex';document.body.style.overflow='hidden'}
 function showTab(plan){['basic','adv'].forEach(p=>{document.getElementById('sample-'+p).style.display=p===plan?'block':'none';const btn=document.getElementById('tab-'+p);btn.style.background=p===plan?'var(--ink)':'transparent';btn.style.color=p===plan?'var(--gold2)':'var(--ink3)';});}
-function closeModal(t){const m=document.getElementById('modal-'+t);if(!m)return;m.style.display='none';document.body.style.overflow=''}
+function closeModal(t){const m=document.getElementById('modal-'+t);if(!m)return;m.style.display='none';document.body.style.overflow='';document.body.style.overflowX='hidden'}
 ['basic','advanced'].forEach(t=>{const m=document.getElementById('modal-'+t);if(m)m.addEventListener('click',e=>{if(e.target===m)closeModal(t)})});
 function faq(el){const item=el.parentElement;const open=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!open)item.classList.add('open')}
 window.addEventListener('scroll',()=>{document.getElementById('nav').style.padding=window.scrollY>60?'11px 56px':'16px 56px'});
