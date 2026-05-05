@@ -36,28 +36,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 @media(max-width:640px){nav{padding:12px 20px}}
 
 /* HERO */
-.hero{padding:140px 48px 80px;text-align:center;background:#FFF8ED;position:relative;overflow:hidden}
+.hero{padding:100px 24px 48px;text-align:center;background:#FFF8ED;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(200,169,110,.06) 0%,transparent 70%);pointer-events:none}
 .kicker{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.22em;color:var(--gold);background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.25);padding:5px 18px;border-radius:20px;margin-bottom:28px}
-.hero h1{font-family:var(--serif);font-size:clamp(26px,4vw,50px);font-weight:300;color:#1A1208;line-height:1.7;letter-spacing:.06em;margin-bottom:20px}
-.hero-sub{font-size:15px;color:#5A4020;line-height:2.2;max-width:480px;margin:0 auto 40px}
+.hero h1{font-family:var(--serif);font-size:clamp(22px,5vw,38px);font-weight:400;color:#1A1208;line-height:1.6;letter-spacing:.04em;margin-bottom:14px}
+.hero-sub{font-size:14px;color:#5A4020;line-height:2;max-width:480px;margin:0 auto 24px}
 .btn-primary{display:inline-block;background:var(--gold);color:var(--dark);font-size:14px;font-weight:700;padding:14px 44px;border-radius:4px;letter-spacing:.06em;transition:background .2s}
 .btn-primary:hover{background:#b8994e}
 .btn-hint{display:block;font-size:12px;color:#8A6A3A;margin-top:10px}
 @media(max-width:640px){.hero{padding:110px 24px 60px}}
 
 /* SECTION */
-.sec{padding:80px 48px;max-width:760px;margin:0 auto}
+.sec{padding:48px 24px;max-width:680px;margin:0 auto}
 @media(max-width:640px){.sec{padding:60px 24px}}
 
 /* 철학 섹션 */
-.philosophy{text-align:center;padding:80px 48px;border-top:1px solid rgba(200,135,10,.15)}
-.phil-quote{font-family:var(--serif);font-size:clamp(18px,2.5vw,28px);font-weight:300;color:#1A1208;line-height:2;letter-spacing:.06em;margin-bottom:16px}
+.philosophy{text-align:center;padding:48px 24px;border-top:1px solid rgba(200,135,10,.15)}
+.phil-quote{font-family:var(--serif);font-size:clamp(16px,3vw,22px);font-weight:300;color:#1A1208;line-height:2;letter-spacing:.06em;margin-bottom:16px}
 .phil-sub{font-size:14px;color:#5A4020;line-height:2;max-width:480px;margin:0 auto}
 @media(max-width:640px){.philosophy{padding:60px 24px}}
 
 /* 이렇게 됩니다 */
-.sample-sec{padding:80px 48px;border-top:1px solid rgba(200,135,10,.15)}
+.sample-sec{padding:48px 24px;border-top:1px solid rgba(200,135,10,.15)}
 .sec-label{font-size:11px;letter-spacing:.2em;color:#C8870A;margin-bottom:24px}
 .sample-card{border:1px solid rgba(200,135,10,.2);border-radius:8px;overflow:hidden;background:#fff;max-width:620px;box-shadow:0 2px 12px rgba(200,135,10,.1);margin:0 auto}
 .sample-head{padding:20px 24px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(200,169,110,.12)}
@@ -73,7 +73,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 @media(max-width:640px){.sample-sec{padding:60px 24px}}
 
 /* 지금 누군가의 투.필 */
-.live-sec{padding:80px 48px;border-top:1px solid rgba(200,135,10,.15)}
+.live-sec{padding:48px 24px;border-top:1px solid rgba(200,135,10,.15)}
 .live-card{border:1px solid rgba(200,135,10,.2);border-radius:8px;padding:24px;background:#fff;max-width:480px;box-shadow:0 2px 12px rgba(200,135,10,.08);margin:20px auto 0}
 .live-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:16px;border-radius:4px;overflow:hidden}
 .live-photo{aspect-ratio:1;object-fit:cover;width:100%;display:block}
@@ -87,8 +87,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 @media(max-width:640px){.live-sec{padding:60px 24px}}
 
 /* 하단 CTA */
-.cta{padding:80px 48px;text-align:center;border-top:1px solid rgba(200,135,10,.15)}
-.cta-title{font-family:var(--serif);font-size:clamp(20px,3vw,32px);font-weight:300;color:#1A1208;line-height:1.8;margin-bottom:12px;letter-spacing:.06em}
+.cta{padding:48px 24px;text-align:center;border-top:1px solid rgba(200,135,10,.15)}
+.cta-title{font-family:var(--serif);font-size:clamp(18px,3vw,26px);font-weight:300;color:#1A1208;line-height:1.8;margin-bottom:12px;letter-spacing:.06em}
 .cta-sub{font-size:14px;color:#5A4020;line-height:2;margin-bottom:36px}
 @media(max-width:640px){.cta{padding:60px 24px}}
 
@@ -109,10 +109,10 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
   <h1>오늘을 기억하는<br>사람은 별로 없다</h1>
   <p class="hero-sub">특별한 날만 기억한다고 생각하기 때문이다.<br>하지만 삶은 오늘의 연속이다.</p>
   <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(200,135,10,.1);border:1px solid rgba(200,135,10,.2);border-radius:20px;padding:8px 20px;margin-bottom:28px;font-size:13px;color:#C8870A;font-family:var(--sans);font-weight:400;letter-spacing:.04em">
-    🎞️ 매일 올리면 나만의 필모그래피 앨범이 됩니다
+    🎞️ 이따금 올려두면 나만의 필모그래피 앨범이 만들어집니다
   </div>
   <a href="https://tally.so/r/Bz8LbR" target="_blank" class="btn-primary">나의 투.필 만들기 →</a>
-  <span class="btn-hint">무료 · 오늘 찍은 사진 6장 · 3분이면 완성</span>
+  <span class="btn-hint">무료 · 오늘 찍은 사진 6장 + 짧은 한 줄</span>
 </div>
 
 <!-- 철학 -->
