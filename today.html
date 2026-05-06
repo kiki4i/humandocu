@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>투.필 · 오늘의 필모그래피 · 휴먼다큐</title>
+<!-- 투.필 전용 PWA -->
+<link rel="manifest" href="/today-manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="투.필">
+<link rel="apple-touch-icon" href="/today-icon-192.png">
+<meta name="theme-color" content="#C8870A">
 <meta property="og:title" content="투.필 · 오늘의 필모그래피">
 <meta property="og:description" content="오늘 찍은 사진 6장. AI가 오늘의 당신을 시로 남깁니다.">
 <meta property="og:image" content="https://kiki4i.github.io/humandocu/sixshot_og.png">
@@ -186,6 +194,61 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 <footer>
   <div class="ft">© 2026 휴먼다큐 · humandocu.com · 031-539-9709</div>
 </footer>
+
+<!-- 홈화면 추가 유도 배너 -->
+<div id="pwa-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:999;background:#C8870A;color:#FFF8ED;padding:14px 20px 18px;text-align:center;font-size:13px;line-height:1.6;box-shadow:0 -2px 12px rgba(200,135,10,.3)">
+  <div style="max-width:480px;margin:0 auto;position:relative">
+    <button onclick="document.getElementById('pwa-banner').style.display='none'" style="position:absolute;right:0;top:0;background:none;border:none;color:#FFF8ED;font-size:18px;cursor:pointer;opacity:.7;padding:0 4px">×</button>
+    <div style="font-weight:500;margin-bottom:2px">📱 매일 쓰는 투.필, 홈화면에 추가하세요</div>
+    <div style="opacity:.85;font-size:12px" id="pwa-guide-text">아래 공유버튼 → "홈 화면에 추가"</div>
+  </div>
+</div>
+
+<script>
+// 홈화면 추가 유도 배너 — 앱으로 실행 중이면 숨김
+(function(){
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches
+                    || window.navigator.standalone === true;
+  if(isStandalone) return; // 이미 앱으로 실행 중
+
+  const dismissed = sessionStorage.getItem('pwa-banner-dismissed');
+  if(dismissed) return;
+
+  // Android Chrome: beforeinstallprompt 이벤트
+  let deferredPrompt;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    const banner = document.getElementById('pwa-banner');
+    const guide = document.getElementById('pwa-guide-text');
+    guide.textContent = '아래 버튼을 눌러 홈화면에 추가하세요';
+    banner.style.display = 'block';
+
+    // 배너 클릭 시 설치 프롬프트 실행
+    banner.addEventListener('click', async (ev) => {
+      if(ev.target.tagName === 'BUTTON') return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      banner.style.display = 'none';
+    }, {once:true});
+  });
+
+  // iOS Safari: beforeinstallprompt 없음 → 3초 후 배너 표시
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isSafari = /safari/i.test(navigator.userAgent) && !/chrome/i.test(navigator.userAgent);
+  if(isIOS && isSafari){
+    setTimeout(() => {
+      document.getElementById('pwa-guide-text').textContent = '하단 공유(□↑) 버튼 → "홈 화면에 추가"';
+      document.getElementById('pwa-banner').style.display = 'block';
+    }, 3000);
+  }
+
+  // 닫기 버튼
+  document.querySelector('#pwa-banner button').addEventListener('click', () => {
+    sessionStorage.setItem('pwa-banner-dismissed', '1');
+  });
+})();
+</script>
 
 <script>
 const API = 'https://humandocu-server-production-428d.up.railway.app/api/sixshot/random?type=today';
