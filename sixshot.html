@@ -171,8 +171,11 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
 <body>
 
 <nav>
-  <div class="logo">휴먼다큐닷컴 <span>/ Six Shot</span></div>
-  <a href="/" class="nav-back">← 처음으로</a>
+  <a href="/index.html" class="logo">휴먼다큐닷컴 <span>/ Six Shot</span></a>
+  <div style="display:flex;align-items:center;gap:10px">
+    <a href="/filmography.html" style="font-size:12px;color:var(--amber);letter-spacing:.04em;border:1px solid rgba(200,135,10,.35);border-radius:16px;padding:5px 14px;text-decoration:none;font-family:var(--sans)">필모그래피</a>
+    <a href="/index.html" style="font-size:12px;color:rgba(200,135,10,.6);letter-spacing:.04em;text-decoration:none;font-family:var(--sans)">홈</a>
+  </div>
 </nav>
 
 <div class="hero">
@@ -313,6 +316,31 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
 </div>
 
 <footer>
+  <!-- 다른 서비스 카드 -->
+  <div style="width:100%;max-width:480px;margin:0 auto 20px;display:flex;flex-direction:column;gap:10px">
+    <div style="font-size:11px;color:#9e8250;letter-spacing:.12em;text-align:center;margin-bottom:4px">휴먼다큐의 다른 서비스</div>
+    <a href="/today.html" style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:#fff;border:1px solid rgba(200,135,10,.25);border-radius:10px;text-decoration:none">
+      <div style="font-size:22px">📅</div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:#C8870A;margin-bottom:2px">투.필 · 오늘의 필모그래피</div>
+        <div style="font-size:11px;color:#8A6A3A;line-height:1.5">오늘 사진 6장 · 매일 쌓이는 나의 기록</div>
+      </div>
+      <div style="margin-left:auto;font-size:16px;color:rgba(200,135,10,.5)">→</div>
+    </a>
+    <a href="/memorial.html" style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:#fff;border:1px solid rgba(100,100,120,.15);border-radius:10px;text-decoration:none">
+      <div style="font-size:22px">🕯</div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:#555;margin-bottom:2px">디지털 부고 · 메모리얼</div>
+        <div style="font-size:11px;color:#8A6A3A;line-height:1.5">소중한 분의 마지막을 품격 있게</div>
+      </div>
+      <div style="margin-left:auto;font-size:16px;color:rgba(100,100,120,.3)">→</div>
+    </a>
+    <a href="/index.html" style="display:flex;align-items:center;gap:14px;padding:12px 18px;background:transparent;border:1px solid rgba(200,135,10,.15);border-radius:10px;text-decoration:none">
+      <div style="font-size:18px">🏠</div>
+      <div style="font-size:12px;color:#9e8250">휴먼다큐 홈으로</div>
+      <div style="margin-left:auto;font-size:14px;color:rgba(200,135,10,.4)">→</div>
+    </a>
+  </div>
   <div class="ft-logo">휴먼다큐닷컴</div>
   <div class="ft-links">
     <a href="/terms.html">이용약관</a>
