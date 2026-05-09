@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>투.필 만들기 · 휴먼다큐</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js';
+  const app = initializeApp({
+    apiKey: "AIzaSyBLUc8MUfkUCD8pkfRPZw_CF_Is9ifuLG0",
+    authDomain: "humandocu-93c65.firebaseapp.com",
+    projectId: "humandocu-93c65",
+    storageBucket: "humandocu-93c65.firebasestorage.app",
+    messagingSenderId: "203773199656",
+    appId: "1:203773199656:web:6c2c1ca7876066ef03bc1d"
+  });
+  const storage = getStorage(app);
+  window._fb = { storage, ref, uploadBytes, getDownloadURL };
+</script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{background:#F9F6F0;color:#1A1208;font-family:'Noto Sans KR',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased}
@@ -275,15 +289,22 @@ async function doSubmit() {
   }, 700);
 
   try {
-    // 리사이즈 후 payload
+    // Firebase Storage 업로드 후 URL로 서버 전송
+    const fb = window._fb;
     const shotPayload = [];
     for (let i = 0; i < 6; i++) {
       if (!shots[i]?.b64) continue;
+      // 리사이즈
       const resized = await resizeImg(shots[i].b64);
-      shotPayload.push({ image_b64: resized, caption: shots[i].caption || '', index: i+1 });
+      const blob = await (await fetch(resized)).blob();
+      const fname = `today/${Date.now()}_shot${i+1}_${Math.random().toString(36).slice(2,6)}.jpg`;
+      const sref = fb.ref(fb.storage, fname);
+      await fb.uploadBytes(sref, blob);
+      const url = await fb.getDownloadURL(sref);
+      shotPayload.push({ image_url: url, caption: shots[i].caption || '', index: i+1 });
     }
 
-    const res = await fetch(API + '/api/today/submit-b64', {
+    const res = await fetch(API + '/api/today/submit-url', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
