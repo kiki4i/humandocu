@@ -12,78 +12,67 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(249,246,240,
 .logo{font-family:'Noto Serif KR',serif;font-size:14px;color:#1A1208;text-decoration:none}
 .logo span{color:#C8A96E}
 .nav-back{font-size:13px;color:#C8870A;text-decoration:none}
-.wrap{max-width:520px;margin:0 auto;padding:80px 20px 80px}
+.wrap{max-width:520px;margin:0 auto;padding:76px 20px 100px}
 
-/* 섹션 구분 */
-.section{margin-bottom:40px;padding-bottom:36px;border-bottom:1px solid rgba(200,135,10,.1)}
-.section:last-of-type{border-bottom:none}
-.sec-num{font-size:10px;color:#C8870A;letter-spacing:.15em;margin-bottom:8px;font-weight:500}
-.sec-title{font-family:'Noto Serif KR',serif;font-size:18px;font-weight:300;color:#1A1208;margin-bottom:6px;line-height:1.5}
-.sec-sub{font-size:12px;color:#9e8250;line-height:1.8;margin-bottom:16px}
+/* 헤더 */
+.form-header{text-align:center;padding:28px 0 32px;border-bottom:1px solid rgba(200,135,10,.12);margin-bottom:32px}
+.form-kicker{font-size:11px;color:#9e8250;letter-spacing:.2em;margin-bottom:10px}
+.form-title{font-family:'Noto Serif KR',serif;font-size:22px;font-weight:300;color:#1A1208;margin-bottom:8px}
+.form-sub{font-size:13px;color:#8A6A3A;line-height:1.8}
+
+/* 질문 블록 */
+.q-block{margin-bottom:36px}
+.q-num{font-size:10px;color:#C8870A;letter-spacing:.15em;font-weight:500;margin-bottom:8px}
+.q-title{font-size:15px;font-weight:500;color:#1A1208;margin-bottom:4px;line-height:1.5}
+.q-sub{font-size:12px;color:#9e8250;line-height:1.7;margin-bottom:14px}
+.q-example{font-size:12px;color:#C8870A;line-height:1.8;margin-bottom:14px;padding:10px 14px;background:rgba(200,135,10,.06);border-radius:6px;border-left:2px solid rgba(200,135,10,.3)}
 
 /* 입력 */
-.field-label{font-size:12px;color:#8A6A3A;display:block;margin-bottom:6px;font-weight:400}
-input[type=text],input[type=email],textarea{width:100%;padding:12px 14px;border:1px solid rgba(200,135,10,.3);border-radius:8px;font-size:14px;font-family:inherit;background:#fff;color:#1A1208;outline:none;transition:border-color .2s;-webkit-appearance:none}
-input[type=text]:focus,input[type=email]:focus,textarea:focus{border-color:#C8870A}
-textarea{resize:none;line-height:1.7}
-input::placeholder,textarea::placeholder{color:#C8A96E;opacity:.7}
-.field{margin-bottom:14px}
+input[type=text],input[type=email]{width:100%;padding:13px 14px;border:1px solid rgba(200,135,10,.3);border-radius:8px;font-size:15px;font-family:inherit;background:#fff;color:#1A1208;outline:none;transition:border-color .2s}
+input[type=text]:focus,input[type=email]:focus{border-color:#C8870A;box-shadow:0 0 0 3px rgba(200,135,10,.08)}
+input::placeholder{color:#C8A96E;opacity:.7}
+textarea{width:100%;padding:13px 14px;border:1px solid rgba(200,135,10,.3);border-radius:8px;font-size:14px;font-family:inherit;background:#fff;color:#1A1208;outline:none;resize:none;line-height:1.7;transition:border-color .2s}
+textarea:focus{border-color:#C8870A;box-shadow:0 0 0 3px rgba(200,135,10,.08)}
+textarea::placeholder{color:#C8A96E;opacity:.7}
 
 /* 사진 그리드 */
-.shots-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:0}
-.shot-item{display:flex;flex-direction:column;gap:8px}
-.shot-box{aspect-ratio:4/3;border-radius:10px;overflow:hidden;position:relative;cursor:pointer;border:2px dashed rgba(200,135,10,.3);background:#FFF8ED;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;transition:border-color .2s}
-.shot-box:hover{border-color:#C8870A}
-.shot-box img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
-.shot-box .s-icon{font-size:24px;color:rgba(200,135,10,.4);z-index:1}
-.shot-box .s-num{font-size:10px;color:#9e8250;z-index:1;letter-spacing:.06em}
-.shot-box .s-change{position:absolute;bottom:6px;right:6px;z-index:2;background:rgba(200,135,10,.85);color:#FFF8ED;border:none;border-radius:4px;font-size:10px;padding:3px 8px;cursor:pointer;font-family:inherit}
-.shot-caption{padding:8px 12px;border:1px solid rgba(200,135,10,.25);border-radius:6px;font-size:12px;font-family:inherit;background:#fff;color:#1A1208;outline:none;width:100%;resize:none;line-height:1.5}
-.shot-caption:focus{border-color:#C8870A}
+.shots-grid{display:flex;flex-direction:column;gap:20px}
+.shot-row{background:#fff;border:1px solid rgba(200,135,10,.2);border-radius:12px;overflow:hidden}
+.shot-top{display:flex;align-items:center;gap:0}
+.shot-num-badge{background:#C8870A;color:#FFF8ED;font-size:11px;font-weight:600;padding:6px 12px;letter-spacing:.06em;flex-shrink:0}
+.shot-title{font-size:13px;color:#1A1208;padding:0 14px;font-weight:400}
+.shot-photo-area{position:relative;width:100%;aspect-ratio:4/3;background:#F9F6F0;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;border-top:1px solid rgba(200,135,10,.1);border-bottom:1px solid rgba(200,135,10,.1)}
+.shot-photo-area img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.shot-photo-area .ph-icon{font-size:32px;color:rgba(200,135,10,.35);z-index:1}
+.shot-photo-area .ph-text{font-size:13px;color:#9e8250;z-index:1}
+.shot-change-btn{position:absolute;bottom:10px;right:10px;z-index:2;background:rgba(200,135,10,.88);color:#FFF8ED;border:none;border-radius:5px;font-size:11px;padding:5px 12px;cursor:pointer;font-family:inherit;font-weight:500}
+.shot-caption-wrap{padding:12px 14px}
+.shot-caption{width:100%;padding:10px 12px;border:1px solid rgba(200,135,10,.2);border-radius:6px;font-size:13px;font-family:inherit;background:#F9F6F0;color:#1A1208;outline:none;resize:none;line-height:1.6}
+.shot-caption:focus{border-color:#C8870A;background:#fff}
+.shot-caption::placeholder{color:#C8A96E;opacity:.7}
 
 /* 토글 */
-.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:#fff;border:1px solid rgba(200,135,10,.2);border-radius:10px}
-.toggle{width:44px;height:24px;background:#ddd;border-radius:12px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:16px;background:#fff;border:1px solid rgba(200,135,10,.2);border-radius:10px;cursor:pointer}
+.toggle{width:46px;height:26px;background:#ddd;border-radius:13px;position:relative;transition:background .2s;flex-shrink:0}
 .toggle.on{background:#C8870A}
-.toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
 .toggle.on::after{transform:translateX(20px)}
 
-/* 제출 버튼 */
-.submit-wrap{position:fixed;bottom:0;left:0;right:0;background:rgba(249,246,240,.97);backdrop-filter:blur(12px);border-top:1px solid rgba(200,135,10,.15);padding:14px 20px}
-.submit-btn{width:100%;max-width:520px;margin:0 auto;display:block;padding:15px;background:#C8870A;color:#FFF8ED;border:none;border-radius:8px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;letter-spacing:.04em}
+/* 하단 고정 버튼 */
+.submit-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(249,246,240,.97);backdrop-filter:blur(14px);border-top:1px solid rgba(200,135,10,.15);padding:14px 20px 20px}
+.submit-btn{width:100%;max-width:520px;display:block;margin:0 auto;padding:16px;background:#C8870A;color:#FFF8ED;border:none;border-radius:8px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;letter-spacing:.06em;transition:background .2s}
+.submit-btn:hover{background:#A06008}
 .submit-btn:disabled{background:#c8a96e;cursor:not-allowed}
-.submit-hint{text-align:center;font-size:11px;color:#9e8250;margin-top:6px;max-width:520px;margin-left:auto;margin-right:auto}
+.submit-hint{text-align:center;font-size:11px;color:#9e8250;margin-top:7px;max-width:520px;margin-left:auto;margin-right:auto}
 
 /* 로딩 */
-.loading-overlay{display:none;position:fixed;inset:0;background:rgba(249,246,240,.97);z-index:999;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:20px}
-.loading-overlay.active{display:flex}
-.loading-icon{font-size:48px;animation:pulse 1.5s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.95)}}
-.loading-title{font-family:'Noto Serif KR',serif;font-size:20px;font-weight:300}
+.loading{display:none;position:fixed;inset:0;background:rgba(249,246,240,.97);z-index:999;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px}
+.loading.active{display:flex}
+.loading-icon{font-size:52px;animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.93)}}
+.loading-title{font-family:'Noto Serif KR',serif;font-size:20px;font-weight:300;color:#1A1208}
 .loading-sub{font-size:13px;color:#9e8250;line-height:2}
 .loading-dots{font-size:22px;color:#C8870A;letter-spacing:8px}
-
-/* 결과 */
-.result-overlay{display:none;position:fixed;inset:0;background:#F9F6F0;z-index:998;overflow-y:auto}
-.result-overlay.active{display:block}
-.result-wrap{max-width:520px;margin:0 auto;padding:80px 20px 60px}
-.result-nav{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(249,246,240,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,135,10,.2);padding:13px 20px;display:flex;align-items:center;justify-content:space-between}
-.result-header{text-align:center;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(200,135,10,.12)}
-.result-name{font-family:'Noto Serif KR',serif;font-size:22px;font-weight:300;margin-bottom:4px}
-.result-date{font-size:12px;color:#9e8250}
-.result-card{background:#fff;border:1px solid rgba(200,135,10,.15);border-radius:12px;padding:22px;margin-bottom:12px}
-.result-card-label{font-size:10px;color:#C8870A;letter-spacing:.15em;margin-bottom:12px;font-weight:500}
-.result-poem{font-family:'Noto Serif KR',serif;font-size:15px;font-weight:300;line-height:2.2;color:#1A1208;white-space:pre-line}
-.result-identity{background:rgba(200,135,10,.08);border-radius:8px;padding:14px;text-align:center;font-size:15px;font-weight:500;color:#C8870A;margin-bottom:12px}
-.result-overall{font-size:13px;line-height:1.9;color:#3D2E1A;white-space:pre-line}
-.action-row{display:flex;gap:10px;margin-bottom:10px;margin-top:4px}
-.btn-edit{flex:1;padding:12px;background:#fff;border:1.5px solid rgba(200,135,10,.4);border-radius:8px;font-size:13px;font-weight:500;color:#C8870A;cursor:pointer;font-family:inherit}
-.btn-save{flex:1;padding:12px;background:#C8870A;border:none;border-radius:8px;font-size:13px;font-weight:600;color:#FFF8ED;cursor:pointer;font-family:inherit}
-.share-box{background:#fff;border:1px solid rgba(200,135,10,.15);border-radius:12px;padding:20px;text-align:center;display:none;margin-top:4px}
-.share-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
-.btn-kakao{padding:10px 16px;background:#FEE500;border:none;border-radius:20px;font-size:13px;color:#3C1E1E;cursor:pointer;font-family:inherit;font-weight:600}
-.btn-email{padding:10px 16px;background:#fff;border:1px solid rgba(200,135,10,.4);border-radius:20px;font-size:13px;color:#C8870A;cursor:pointer;font-family:inherit}
-.btn-copy{padding:10px 16px;background:#fff;border:1px solid rgba(200,135,10,.25);border-radius:20px;font-size:13px;color:#9e8250;cursor:pointer;font-family:inherit}
 </style>
 </head>
 <body>
@@ -94,148 +83,125 @@ input::placeholder,textarea::placeholder{color:#C8A96E;opacity:.7}
 </nav>
 
 <div class="wrap">
-
-  <!-- 1. 이름 -->
-  <div class="section">
-    <div class="sec-num">01</div>
-    <div class="sec-title">이름 또는 닉네임</div>
-    <div class="sec-sub">결과 페이지에 표시됩니다</div>
-    <div class="field">
-      <input type="text" id="f-name" placeholder="예: 재우, 봄날, 김재우" maxlength="20">
-    </div>
+  <div class="form-header">
+    <div class="form-kicker">TODAY FILMOGRAPHY · 투.필</div>
+    <div class="form-title">오늘의 투.필 만들기</div>
+    <div class="form-sub">사진 6장 + 짧은 설명<br>AI가 오늘의 당신을 시로 남겨드립니다 · 무료</div>
   </div>
 
-  <!-- 2. 이메일 -->
-  <div class="section">
-    <div class="sec-num">02</div>
-    <div class="sec-title">이메일</div>
-    <div class="sec-sub">내 기록을 찾을 때 사용해요 · 광고 없음</div>
-    <div class="field">
-      <input type="email" id="f-email" placeholder="your@email.com">
-    </div>
+  <!-- 01 이름 -->
+  <div class="q-block">
+    <div class="q-num">01 · 이름</div>
+    <div class="q-title">이름을 알려주세요 <span style="color:#C8870A">*</span></div>
+    <div class="q-sub">결과 페이지에 표시됩니다</div>
+    <input type="text" id="f-name" placeholder="이름 입력..." maxlength="20">
   </div>
 
-  <!-- 3. 사진 6장 -->
-  <div class="section">
-    <div class="sec-num">03</div>
-    <div class="sec-title">오늘 사진 6장</div>
-    <div class="sec-sub">밥, 하늘, 사람, 물건 — 무엇이든 괜찮아요<br>각 사진 아래에 짧은 한 줄도 써주세요</div>
+  <!-- 01-b 닉네임 -->
+  <div class="q-block">
+    <div class="q-num">01-b · 닉네임 (선택)</div>
+    <div class="q-title">닉네임이 있으신가요?</div>
+    <div class="q-sub">없으시면 이름으로 표시됩니다</div>
+    <input type="text" id="f-nickname" placeholder="닉네임 입력..." maxlength="20">
+  </div>
+
+  <!-- 02 이메일 -->
+  <div class="q-block">
+    <div class="q-num">02 · 이메일</div>
+    <div class="q-title">이메일을 알려주세요 <span style="color:#C8870A">*</span></div>
+    <div class="q-sub">결과 링크가 이메일로 발송됩니다 · 광고 없음</div>
+    <input type="email" id="f-email" placeholder="your@email.com">
+  </div>
+
+  <!-- 03 사진 6장 -->
+  <div class="q-block">
+    <div class="q-num">03 · 오늘 사진 6장</div>
+    <div class="q-title">오늘 찍은 사진 6장을 올려주세요 <span style="color:#C8870A">*</span></div>
+    <div class="q-sub">밥, 하늘, 사람, 물건 — 무엇이든 괜찮아요<br>각 사진 아래에 짧은 설명도 써주세요</div>
     <div class="shots-grid" id="shots-grid"></div>
   </div>
 
-  <!-- 4. 오늘 하루 한 문장 -->
-  <div class="section">
-    <div class="sec-num">04</div>
-    <div class="sec-title">오늘 하루를 한 문장으로</div>
-    <div class="sec-sub">솔직하게, 짧게 — 그게 시가 됩니다<br><span style="color:#C8870A">예: "별거 없었는데 그리 나쁘지만은 않았다"<br>"왜 이렇게 꽁냥꽁냥 이야!"</span></div>
-    <textarea id="f-today" rows="2" placeholder="오늘 하루를 한 문장으로..."></textarea>
+  <!-- 04 오늘 하루 한 문장 -->
+  <div class="q-block">
+    <div class="q-num">04 · 오늘 하루</div>
+    <div class="q-title">오늘 하루를 한 문장으로 <span style="color:#C8870A">*</span></div>
+    <div class="q-example">
+      "별거 없었는데 그리 나쁘지만은 않았다"<br>
+      "왜 이렇게 꽁냥꽁냥 이야!"<br>
+      "오늘은 그냥 좀 쉬고 싶었다"
+    </div>
+    <textarea id="f-today" rows="2" placeholder="오늘 하루를 솔직하게 한 문장으로..."></textarea>
   </div>
 
-  <!-- 5. 누군가에게 한 마디 -->
-  <div class="section">
-    <div class="sec-num">05</div>
-    <div class="sec-title">누군가에게 한 마디</div>
-    <div class="sec-sub">💡 선택 안 하셔도 됩니다<br>오늘 떠오른 사람에게 전하고 싶은 말</div>
-    <div class="field">
-      <label class="field-label">대상 (선택)</label>
-      <input type="text" id="f-to" placeholder="예: 엄마, 친구 이름, 나 자신...">
-    </div>
-    <div class="field">
-      <label class="field-label">메시지 (선택)</label>
-      <textarea id="f-msg" rows="2" placeholder="전하고 싶은 말..."></textarea>
-    </div>
+  <!-- 05 누군가에게 -->
+  <div class="q-block">
+    <div class="q-num">05 · 누군가에게 한 마디</div>
+    <div class="q-title">💡 선택 안 하셔도 됩니다</div>
+    <div class="q-sub">오늘 떠오른 사람에게 전하고 싶은 말이 있다면</div>
+    <input type="text" id="f-to" placeholder="대상 (예: 엄마, 친구 이름, 나 자신...)" style="margin-bottom:10px">
+    <textarea id="f-msg" rows="2" placeholder="전하고 싶은 말..."></textarea>
   </div>
 
-  <!-- 6. 공개여부 -->
-  <div class="section">
-    <div class="sec-num">06</div>
-    <div class="sec-title">공개 설정</div>
-    <div class="sec-sub">공개하면 다른 사람들도 내 투.필을 볼 수 있어요</div>
+  <!-- 06 공개여부 -->
+  <div class="q-block">
+    <div class="q-num">06 · 공개 설정</div>
+    <div class="q-title">이 투.필을 공개할까요?</div>
+    <div class="q-sub">공개하면 다른 사람들도 내 투.필을 볼 수 있어요</div>
     <div class="toggle-row" onclick="togglePublic()">
       <div>
-        <div style="font-size:14px;color:#1A1208">공개</div>
-        <div style="font-size:11px;color:#9e8250;margin-top:2px">비공개 시 나만 볼 수 있는 링크로</div>
+        <div style="font-size:14px;font-weight:500;color:#1A1208">공개 — 다른 사람들도 볼 수 있어요</div>
+        <div style="font-size:11px;color:#9e8250;margin-top:3px">비공개 시 나만 볼 수 있는 링크로 발송</div>
       </div>
-      <div class="toggle on" id="public-toggle"></div>
+      <div class="toggle on" id="pub-toggle"></div>
     </div>
   </div>
 
-  <div style="height:80px"></div>
+  <div style="height:20px"></div>
 </div>
 
-<!-- 하단 고정 제출 버튼 -->
-<div class="submit-wrap">
-  <button class="submit-btn" id="submit-btn" onclick="submitForm()">✦ 투.필 완성하기</button>
-  <div class="submit-hint">무료 · AI가 시를 쓰는 데 약 30초~1분</div>
+<!-- 하단 제출 바 -->
+<div class="submit-bar">
+  <button class="submit-btn" id="submit-btn" onclick="doSubmit()">투.필 제출하기 →</button>
+  <div class="submit-hint">무료 · AI가 시를 쓰는 데 약 30초~1분 · 결과는 이 페이지에서 바로 확인</div>
 </div>
 
 <!-- 로딩 -->
-<div class="loading-overlay" id="loading">
+<div class="loading" id="loading">
   <div class="loading-icon">✦</div>
   <div class="loading-title">AI가 오늘을 시로 쓰고 있어요</div>
   <div class="loading-sub">사진과 하루를 읽고<br>당신만의 시를 만드는 중입니다</div>
   <div class="loading-dots" id="dots">•••</div>
 </div>
 
-<!-- 결과 -->
-<div class="result-overlay" id="result-overlay">
-  <div class="result-nav">
-    <span style="font-size:13px;color:#C8870A">✦ 투.필 완성</span>
-    <a href="/index.html" class="logo">휴먼다큐<span>닷컴</span></a>
-  </div>
-  <div class="result-wrap">
-    <div class="result-header">
-      <div class="result-name" id="r-name"></div>
-      <div class="result-date" id="r-date"></div>
-    </div>
-    <div class="result-card">
-      <div class="result-card-label">✦ 오늘을 담은 시</div>
-      <div class="result-poem" id="r-poem"></div>
-    </div>
-    <div class="result-identity" id="r-identity"></div>
-    <div class="result-card">
-      <div class="result-card-label">오늘 하루 총평</div>
-      <div class="result-overall" id="r-overall"></div>
-    </div>
-    <div class="action-row">
-      <button class="btn-edit" onclick="editForm()">✏️ 수정하기</button>
-      <button class="btn-save" id="save-btn" onclick="saveResult()">✓ 저장하기</button>
-    </div>
-    <div class="share-box" id="share-box">
-      <div style="font-size:12px;color:#9e8250">저장 완료! 공유하거나 이메일로 받으세요</div>
-      <div class="share-btns">
-        <button class="btn-kakao" onclick="kakaoShare()">카카오톡 공유</button>
-        <button class="btn-email" id="email-btn" onclick="emailSend()">📬 이메일로 받기</button>
-        <button class="btn-copy" onclick="copyLink()">🔗 링크 복사</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" crossorigin="anonymous"></script>
 <script>
 const API = 'https://humandocu-server-production-428d.up.railway.app';
 let isPublic = true;
-let resultData = null;
 let shots = Array(6).fill(null);
 let dotsTimer = null;
 
-// 사진 슬롯 초기화
+// 사진 슬롯 생성
 function initShots() {
   const grid = document.getElementById('shots-grid');
+  const titles = ['첫 번째 장면','두 번째 장면','세 번째 장면','네 번째 장면','다섯 번째 장면','마지막 장면'];
   grid.innerHTML = '';
   for (let i = 0; i < 6; i++) {
-    const item = document.createElement('div');
-    item.className = 'shot-item';
-    item.innerHTML = `
-      <div class="shot-box" id="sb${i}" onclick="pickPhoto(${i})">
-        <div class="s-icon">📷</div>
-        <div class="s-num">SHOT ${i+1}</div>
+    const row = document.createElement('div');
+    row.className = 'shot-row';
+    row.innerHTML = `
+      <div class="shot-top">
+        <div class="shot-num-badge">SHOT ${i+1}</div>
+        <div class="shot-title">${titles[i]}</div>
       </div>
-      <textarea class="shot-caption" id="cap${i}" rows="2"
-        placeholder="이 장면 한 줄로..."
-        oninput="if(shots[${i}])shots[${i}].caption=this.value"></textarea>`;
-    grid.appendChild(item);
+      <div class="shot-photo-area" id="spa${i}" onclick="pickPhoto(${i})">
+        <div class="ph-icon">📷</div>
+        <div class="ph-text">탭해서 사진 선택</div>
+      </div>
+      <div class="shot-caption-wrap">
+        <textarea class="shot-caption" id="cap${i}" rows="2"
+          placeholder="이 장면을 한 줄로 — 예: 오늘 점심, 퇴근길 하늘, 같이 웃은 사람"
+          oninput="if(shots[${i}])shots[${i}].caption=this.value"></textarea>
+      </div>`;
+    grid.appendChild(row);
   }
 }
 
@@ -248,10 +214,10 @@ function pickPhoto(i) {
     const reader = new FileReader();
     reader.onload = (ev) => {
       const b64 = ev.target.result;
-      shots[i] = {file, b64, caption: document.getElementById('cap'+i)?.value || ''};
-      const sb = document.getElementById('sb'+i);
-      sb.innerHTML = `<img src="${b64}"><button class="s-change" onclick="event.stopPropagation();pickPhoto(${i})">변경</button>`;
-      sb.onclick = () => pickPhoto(i);
+      shots[i] = {b64, caption: document.getElementById('cap'+i)?.value || ''};
+      const spa = document.getElementById('spa'+i);
+      spa.innerHTML = `<img src="${b64}"><button class="shot-change-btn" onclick="event.stopPropagation();pickPhoto(${i})">사진 바꾸기</button>`;
+      spa.onclick = () => pickPhoto(i);
     };
     reader.readAsDataURL(file);
   };
@@ -260,29 +226,31 @@ function pickPhoto(i) {
 
 function togglePublic() {
   isPublic = !isPublic;
-  document.getElementById('public-toggle').classList.toggle('on', isPublic);
+  document.getElementById('pub-toggle').classList.toggle('on', isPublic);
 }
 
-// 이미지를 Claude API용으로 리사이즈 (최대 1MB)
-async function resizeImage(b64, maxWidth=1024) {
-  return new Promise((resolve) => {
+// 이미지 리사이즈 (최대 800px, jpeg 0.75)
+async function resizeImg(b64) {
+  return new Promise(resolve => {
     const img = new Image();
     img.onload = () => {
+      const MAX = 800;
       let w = img.width, h = img.height;
-      if (w > maxWidth) { h = h * maxWidth / w; w = maxWidth; }
-      const canvas = document.createElement('canvas');
-      canvas.width = w; canvas.height = h;
-      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-      resolve(canvas.toDataURL('image/jpeg', 0.8));
+      if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+      const c = document.createElement('canvas');
+      c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      resolve(c.toDataURL('image/jpeg', 0.75));
     };
     img.src = b64;
   });
 }
 
-async function submitForm() {
-  const name  = document.getElementById('f-name').value.trim();
-  const email = document.getElementById('f-email').value.trim();
-  const today_sentence = document.getElementById('f-today').value.trim();
+async function doSubmit() {
+  const name     = document.getElementById('f-name').value.trim();
+  const nickname = document.getElementById('f-nickname').value.trim();
+  const email    = document.getElementById('f-email').value.trim();
+  const today_s  = document.getElementById('f-today').value.trim();
   const last_to  = document.getElementById('f-to').value.trim();
   const last_msg = document.getElementById('f-msg').value.trim();
 
@@ -292,10 +260,11 @@ async function submitForm() {
     if (cap && shots[i]) shots[i].caption = cap.value;
   }
 
-  const filled = shots.filter(s => s && s.b64);
+  const filled = shots.filter(s => s?.b64);
   if (!name)  { alert('이름을 입력해주세요'); return; }
   if (!email || !email.includes('@')) { alert('이메일을 입력해주세요'); return; }
   if (filled.length < 1) { alert('사진을 1장 이상 올려주세요'); return; }
+  if (!today_s) { alert('오늘 하루를 한 문장으로 써주세요'); return; }
 
   // 로딩
   document.getElementById('submit-btn').disabled = true;
@@ -306,111 +275,39 @@ async function submitForm() {
   }, 700);
 
   try {
-    // 사진 리사이즈 후 base64로 서버 전송
+    // 리사이즈 후 payload
     const shotPayload = [];
     for (let i = 0; i < 6; i++) {
       if (!shots[i]?.b64) continue;
-      const resized = await resizeImage(shots[i].b64);
-      shotPayload.push({
-        image_b64: resized,
-        caption: shots[i].caption || '',
-        index: i + 1
-      });
+      const resized = await resizeImg(shots[i].b64);
+      shotPayload.push({ image_b64: resized, caption: shots[i].caption || '', index: i+1 });
     }
 
     const res = await fetch(API + '/api/today/submit-b64', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        name, email,
+        name, nickname: nickname || name, email,
         is_public: isPublic,
         shots: shotPayload,
-        today_sentence,
-        last_to,
-        last_msg
+        today_sentence: today_s,
+        last_to, last_msg
       })
     });
     const data = await res.json();
     clearInterval(dotsTimer);
 
     if (!data.ok) throw new Error(data.error || '오류가 발생했어요');
-    resultData = data;
-    showResult(name, data);
+
+    // 결과 페이지로 이동
+    window.location.href = data.page_url;
 
   } catch(e) {
     clearInterval(dotsTimer);
     document.getElementById('loading').classList.remove('active');
     document.getElementById('submit-btn').disabled = false;
-    alert('오류: ' + e.message);
+    alert('오류: ' + e.message + '\n잠시 후 다시 시도해주세요');
   }
-}
-
-function showResult(name, data) {
-  document.getElementById('loading').classList.remove('active');
-  const today = new Date().toLocaleDateString('ko-KR', {year:'numeric', month:'long', day:'numeric', weekday:'short'});
-  document.getElementById('r-name').textContent = name + '님의 오늘';
-  document.getElementById('r-date').textContent = today;
-  document.getElementById('r-poem').textContent = data.poems?.['대표'] || '';
-  document.getElementById('r-identity').textContent = data.identity || '';
-  document.getElementById('r-overall').textContent = data.overall || '';
-  document.getElementById('result-overlay').classList.add('active');
-  window.scrollTo({top:0});
-}
-
-function editForm() {
-  document.getElementById('result-overlay').classList.remove('active');
-  document.getElementById('submit-btn').disabled = false;
-  window.scrollTo({top:0});
-}
-
-function saveResult() {
-  const btn = document.getElementById('save-btn');
-  btn.textContent = '✓ 저장됨'; btn.disabled = true;
-  document.getElementById('share-box').style.display = 'block';
-  document.getElementById('share-box').scrollIntoView({behavior:'smooth'});
-}
-
-function kakaoShare() {
-  if (!resultData) return;
-  if (!window.Kakao?.isInitialized()) Kakao.init('5b7821698a09c74f1d72c0b52165d557');
-  const name = document.getElementById('f-name').value.trim();
-  Kakao.Share.sendDefault({
-    objectType: 'feed',
-    content: {
-      title: name + '님의 오늘 · 투.필 TODAY FILMOGRAPHY',
-      description: resultData.identity || '사진 6장으로 담은 오늘',
-      imageUrl: 'https://humandocu.com/today_og.png',
-      link: {mobileWebUrl: resultData.page_url, webUrl: resultData.page_url}
-    },
-    buttons: [
-      {title: '전체 투.필 보기', link: {mobileWebUrl: resultData.page_url, webUrl: resultData.page_url}},
-      {title: '나도 만들기', link: {mobileWebUrl: 'https://humandocu.com/today-form.html', webUrl: 'https://humandocu.com/today-form.html'}}
-    ]
-  });
-}
-
-async function emailSend() {
-  if (!resultData) return;
-  const btn = document.getElementById('email-btn');
-  btn.textContent = '전송 중...'; btn.disabled = true;
-  try {
-    const res = await fetch(API + '/api/my/send-link', {
-      method: 'POST', headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        name: document.getElementById('f-name').value.trim(),
-        email: document.getElementById('f-email').value.trim()
-      })
-    });
-    const d = await res.json();
-    btn.textContent = d.ok ? '✓ 이메일 발송됨' : '📬 이메일로 받기';
-    if (!d.ok) btn.disabled = false;
-  } catch(e) { btn.textContent = '📬 이메일로 받기'; btn.disabled = false; }
-}
-
-function copyLink() {
-  if (!resultData?.page_url) return;
-  navigator.clipboard?.writeText(resultData.page_url)
-    .then(() => alert('링크가 복사됐어요!'));
 }
 
 initShots();
