@@ -254,7 +254,7 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
   <div class="today-pricing-note">
     <span>작성은 무료</span>
     <span class="today-pricing-dot">·</span>
-    <span>열람권 <span class="today-pricing-highlight">5,000원 / 1년</span></span>
+    
     <span class="today-pricing-dot">·</span>
     <span>결제 후 받은 링크로 어느 기기에서든 열람 가능</span>
   </div>
@@ -579,7 +579,7 @@ function loadNextShot() {
 }
 
 (function() {
-  var unlocked = hasToken();
+  var unlocked = true; // 열람권 제거 - 전체 무료
   fetch(API)
     .then(function(r) { return r.json(); })
     .then(function(res) {
