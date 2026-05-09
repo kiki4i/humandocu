@@ -11,10 +11,13 @@
   import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js';
 
   const firebaseConfig = {
-    apiKey: "AIzaSyC4Ql4Ql4Ql4Ql4Ql4Ql4Ql4Ql4Ql4Ql4",
+    apiKey: "AIzaSyBLUc8MUfkUCD8pkfRPZw_CF_Is9ifuLG0",
     authDomain: "humandocu-93c65.firebaseapp.com",
     projectId: "humandocu-93c65",
-    storageBucket: "humandocu-93c65.appspot.com",
+    storageBucket: "humandocu-93c65.firebasestorage.app",
+    messagingSenderId: "203773199656",
+    appId: "1:203773199656:web:6c2c1ca7876066ef03bc1d",
+    measurementId: "G-CFNRLHWQQR"
   };
 
   const fbApp = initializeApp(firebaseConfig);
@@ -108,6 +111,95 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(249,246,240,
   <a href="/today.html" class="logo nav-back">← 투.필</a>
   <a href="/index.html" class="logo">휴먼다큐<span>닷컴</span></a>
 </nav>
+
+<!-- HERO -->
+<div style="background:#F9F6F0;padding:80px 20px 48px;text-align:center;border-bottom:1px solid rgba(200,135,10,.1)">
+  <div style="max-width:480px;margin:0 auto">
+    <div style="font-size:11px;color:#9e8250;letter-spacing:.2em;margin-bottom:14px">투.필 · TODAY FILMOGRAPHY</div>
+    <h1 style="font-family:'Noto Serif KR',serif;font-size:28px;font-weight:300;color:#1A1208;line-height:1.35;margin-bottom:14px">오늘을 기억하는<br>사람은 별로 없다</h1>
+    <p style="font-size:14px;color:#6B5340;line-height:1.9;margin-bottom:20px">특별한 날만 기억한다고 생각하기 때문이다.<br>하지만 삶은 오늘의 연속이다.</p>
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(200,135,10,.08);border:1px solid rgba(200,135,10,.2);border-radius:20px;padding:8px 18px;font-size:13px;color:#C8870A;margin-bottom:20px">
+      🎞️ 이따금 올려두면 나만의 필모그래피 앨범이 만들어집니다
+    </div>
+    <div style="font-size:13px;color:#9e8250">사진 6장 + 한줄 설명 → AI가 시로 → 바로 결과 확인</div>
+  </div>
+</div>
+
+<!-- 철학 -->
+<div style="background:#fff;padding:40px 20px;text-align:center;border-bottom:1px solid rgba(200,135,10,.08)">
+  <div style="max-width:400px;margin:0 auto">
+    <p style="font-family:'Noto Serif KR',serif;font-size:17px;font-weight:300;color:#1A1208;line-height:2;margin-bottom:16px">
+      "어제도 아니고, 내일도 아닌<br>지금 이 순간을 담으세요."
+    </p>
+    <p style="font-size:13px;color:#6B5340;line-height:1.9">
+      오늘의 밥, 오늘의 하늘, 오늘의 사람 —<br>
+      아무것도 아닌 것 같은 오늘이 쌓여 인생이 됩니다.<br>
+      AI가 오늘의 당신을 한 편의 시로 남겨드립니다.
+    </p>
+  </div>
+</div>
+
+<!-- 이렇게 됩니다 -->
+<div style="background:#F9F6F0;padding:40px 20px;border-bottom:1px solid rgba(200,135,10,.1)">
+  <div style="max-width:480px;margin:0 auto">
+    <div style="font-size:11px;color:#9e8250;letter-spacing:.15em;text-align:center;margin-bottom:20px">이렇게 됩니다 — 투.필 샘플</div>
+    <div style="background:#fff;border:1px solid rgba(200,169,110,.2);border-radius:12px;overflow:hidden">
+      <div style="padding:18px 20px;border-bottom:1px solid rgba(200,169,110,.1);display:flex;align-items:center;gap:12px">
+        <div style="width:40px;height:40px;border-radius:50%;background:#C8A96E;display:flex;align-items:center;justify-content:center;font-family:'Noto Serif KR',serif;font-size:16px;color:#0f0d09;flex-shrink:0">푸</div>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:#1A1208">푸하하</div>
+          <div style="font-size:12px;color:#9e8250">오늘도 꿈은 가슴에 품고</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:2px">
+        <div style="aspect-ratio:1;background:#e8dece"></div>
+        <div style="aspect-ratio:1;background:#d4c4a8"></div>
+        <div style="aspect-ratio:1;background:#c8b090"></div>
+        <div style="aspect-ratio:1;background:#bca07a"></div>
+        <div style="aspect-ratio:1;background:#c8b090"></div>
+        <div style="aspect-ratio:1;background:#d4c4a8"></div>
+      </div>
+      <div style="padding:18px 20px;border-top:1px solid rgba(200,169,110,.1)">
+        <div style="font-size:11px;color:#C8870A;letter-spacing:.1em;margin-bottom:10px">AI가 다듬은 시</div>
+        <div style="font-family:'Noto Serif KR',serif;font-size:14px;font-weight:300;line-height:2;color:#1A1208">
+          최고의 날이냐고 묻는 건 아직 하루가 덜 끝나서일 거야<br>
+          맞아, 맞을 거야— 이 정도면<br>
+          오늘, 그냥 그런 날. 근데 왜 자꾸 생각나지.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 사용 방법 -->
+<div style="background:#fff;padding:36px 20px;border-bottom:1px solid rgba(200,135,10,.1)">
+  <div style="max-width:480px;margin:0 auto">
+    <div style="font-size:11px;color:#9e8250;letter-spacing:.15em;text-align:center;margin-bottom:20px">이렇게 하면 돼요</div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:flex-start;gap:14px">
+        <div style="width:28px;height:28px;border-radius:50%;background:#C8870A;color:#FFF8ED;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0">1</div>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:#1A1208;margin-bottom:3px">오늘 찍은 사진 6장 올리기</div>
+          <div style="font-size:12px;color:#9e8250">밥, 하늘, 사람, 물건 — 무엇이든 괜찮아요</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:14px">
+        <div style="width:28px;height:28px;border-radius:50%;background:#C8870A;color:#FFF8ED;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0">2</div>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:#1A1208;margin-bottom:3px">각 사진에 짧은 한 줄 쓰기</div>
+          <div style="font-size:12px;color:#9e8250">"오늘 점심" "퇴근길 하늘" — 짧아도 돼요</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:14px">
+        <div style="width:28px;height:28px;border-radius:50%;background:#C8870A;color:#FFF8ED;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0">3</div>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:#1A1208;margin-bottom:3px">제출하면 AI가 시를 씁니다</div>
+          <div style="font-size:12px;color:#9e8250">약 30초~1분 → 바로 결과 확인 → 수정 가능</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="wrap">
 
