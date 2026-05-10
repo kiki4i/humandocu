@@ -103,6 +103,23 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 
 footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,.15);background:#FFF8ED}
 .ft{font-size:11px;color:#8A6A3A;letter-spacing:.08em}
+.why-sec{background:#FFF8ED;padding:56px 24px;border-top:1px solid rgba(200,135,10,.15)}
+.why-inner{max-width:680px;margin:0 auto}
+.why-label{font-size:11px;letter-spacing:.12em;color:#C8870A;margin-bottom:12px;font-family:var(--sans)}
+.why-title{font-size:26px;line-height:1.4;color:#2C1A00;margin-bottom:16px;font-family:var(--serif)}
+.why-title em{color:#C8870A;font-style:normal}
+.why-desc{font-size:15px;color:#5C4A2A;line-height:1.8;margin-bottom:28px}
+.haiku-box{background:rgba(200,135,10,.08);border-left:3px solid #C8870A;padding:16px 20px;margin-bottom:28px;border-radius:0 8px 8px 0}
+.haiku-label{font-size:12px;font-weight:600;color:#C8870A;letter-spacing:.08em;margin-bottom:6px}
+.haiku-desc{font-size:13px;color:#5C4A2A;line-height:1.7;margin:0}
+.haiku-samples{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
+@media(max-width:500px){.haiku-samples{grid-template-columns:1fr}}
+.haiku-card{background:#fff;border:1px solid rgba(200,135,10,.2);border-radius:12px;padding:18px 16px}
+.haiku-photo-desc{font-size:12px;color:#8B7355;margin-bottom:12px}
+.haiku-poem{margin-bottom:12px}
+.haiku-line{font-size:16px;color:#2C1A00;line-height:2;font-family:var(--serif)}
+.haiku-tag{font-size:11px;color:#C8870A;font-weight:600;letter-spacing:.06em}
+.why-cta-desc{font-size:14px;color:#5C4A2A;line-height:1.8;text-align:center;margin-top:8px}
 </style>
 </head>
 <body>
@@ -139,6 +156,58 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
     AI가 오늘의 당신을 한 편의 시로 남겨드립니다.
   </p>
 </div>
+
+<!-- 차별점 + 하이쿠 섹션 -->
+<section class="why-sec">
+  <div class="why-inner">
+    <div class="why-label">인스타그램 · 블로그와 다른 점</div>
+    <h2 class="why-title">AI가 오늘의 당신을<br><em>하이쿠</em>로 남깁니다</h2>
+    <p class="why-desc">인스타는 사진을 올립니다. 블로그는 글을 씁니다.<br>투.필은 사진과 한 줄을 보고 <strong>AI가 직접 시를 지어드립니다.</strong><br>그것도 세계에서 가장 짧고 강렬한 시 형식 — 하이쿠로.</p>
+    <div class="haiku-box">
+      <div class="haiku-label">하이쿠(俳句)란?</div>
+      <p class="haiku-desc">5·7·5 음절의 일본 전통 시. 세상에서 가장 짧은 시 형식.<br>한 장면을 포착해 우주를 담습니다.</p>
+    </div>
+    <div class="haiku-samples">
+      <div class="haiku-card">
+        <div class="haiku-photo-desc">📸 오늘 먹은 라면 한 그릇</div>
+        <div class="haiku-poem">
+          <div class="haiku-line">뚜껑을 열었다</div>
+          <div class="haiku-line">김이 피어오르는 밤</div>
+          <div class="haiku-line">혼자여도 괜찮아</div>
+        </div>
+        <div class="haiku-tag">🍜 감성 버전</div>
+      </div>
+      <div class="haiku-card">
+        <div class="haiku-photo-desc">📸 오늘 먹은 라면 한 그릇</div>
+        <div class="haiku-poem">
+          <div class="haiku-line">나트륨 1800</div>
+          <div class="haiku-line">내일은 진짜 끊겠다고</div>
+          <div class="haiku-line">어제도 그랬다</div>
+        </div>
+        <div class="haiku-tag">😂 유머 버전</div>
+      </div>
+      <div class="haiku-card">
+        <div class="haiku-photo-desc">📸 퇴근길 노을</div>
+        <div class="haiku-poem">
+          <div class="haiku-line">버스가 떠났다</div>
+          <div class="haiku-line">노을은 기다려줬다</div>
+          <div class="haiku-line">오늘도 살았네</div>
+        </div>
+        <div class="haiku-tag">🌅 감성 버전</div>
+      </div>
+      <div class="haiku-card">
+        <div class="haiku-photo-desc">📸 퇴근길 노을</div>
+        <div class="haiku-poem">
+          <div class="haiku-line">버스 놓쳤다</div>
+          <div class="haiku-line">노을이 예쁜 척 한다</div>
+          <div class="haiku-line">택시비 나온다</div>
+        </div>
+        <div class="haiku-tag">😂 유머 버전</div>
+      </div>
+    </div>
+    <p class="why-cta-desc">같은 사진, 같은 한 줄 — AI가 매번 다른 시를 지어드립니다.<br>감성 버전과 유머 버전, 두 가지로.</p>
+  </div>
+</section>
 
 <!-- 이렇게 됩니다 -->
 <div class="sample-sec">
