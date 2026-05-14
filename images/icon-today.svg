@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#2D5016"/>
+  <!-- Film frame 1 -->
+  <rect x="8" y="20" width="36" height="60" rx="4" fill="#F5F0E8"/>
+  <!-- Film frame 2 -->
+  <rect x="56" y="20" width="36" height="60" rx="4" fill="#F5F0E8"/>
+  <!-- Perforations frame 1 (top) -->
+  <rect x="11" y="14" width="7" height="8" rx="1.5" fill="#2D5016"/>
+  <rect x="22" y="14" width="7" height="8" rx="1.5" fill="#2D5016"/>
+  <rect x="33" y="14" width="7" height="8" rx="1.5" fill="#2D5016"/>
+  <!-- Perforations frame 1 (bottom) -->
+  <rect x="11" y="78" width="7" height="8" rx="1.5" fill="#2D5016"/>
+  <rect x="22" y="78" width="7" height="8" rx="1.5" fill="#2D5016"/>
+  <rect x="33" y="78" width="7" height="8" rx="1.5" fill="#2D5016"/>
+  <!-- Perforations frame 2 (top) -->
+  <rect x="59" y="14" width="7" height="8" rx="1.5" fill="#2D5016"/>
+  <rect x="70" y="14" width="7" height="8" rx="1.5" fill="#2D5016"/>
+  <rect x="81" y="14" width="7" height="8" rx="1.5" fill="#2D5016"/>
+  <!-- Perforations frame 2 (bottom) -->
+  <rect x="59" y="78" width="7" height="8" rx="1.5" fill="#2D5016"/>
+  <rect x="70" y="78" width="7" height="8" rx="1.5" fill="#2D5016"/>
+  <rect x="81" y="78" width="7" height="8" rx="1.5" fill="#2D5016"/>
+  <!-- Inner image area frame 1 -->
+  <rect x="13" y="26" width="26" height="48" rx="2" fill="#3d6b20"/>
+  <!-- Inner image area frame 2 -->
+  <rect x="61" y="26" width="26" height="48" rx="2" fill="#3d6b20"/>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#1a1a2e"/>
+  <!-- Glow halo -->
+  <ellipse cx="50" cy="35" rx="18" ry="20" fill="#c8a96e" opacity="0.2"/>
+  <!-- Flame body (layered ellipses tapering upward) -->
+  <ellipse cx="50" cy="44" rx="9" ry="10" fill="#c8a96e"/>
+  <ellipse cx="50" cy="36" rx="8" ry="11" fill="#c8a96e"/>
+  <ellipse cx="50" cy="28" rx="5.5" ry="8" fill="#c8a96e"/>
+  <ellipse cx="50" cy="21" rx="3" ry="5" fill="#c8a96e"/>
+  <!-- Wick -->
+  <rect x="47.5" y="45" width="5" height="8" rx="1.5" fill="#c8a96e"/>
+  <!-- Wax melt drip -->
+  <rect x="36" y="50" width="28" height="5" rx="2.5" fill="#c8a96e" opacity="0.6"/>
+  <!-- Candle body -->
+  <rect x="38" y="52" width="24" height="36" rx="3" fill="#c8a96e"/>
+  <!-- Candle highlight -->
+  <rect x="43" y="56" width="4" height="26" rx="2" fill="#e8d4a8" opacity="0.35"/>
+</svg>
