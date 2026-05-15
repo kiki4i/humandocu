@@ -1446,7 +1446,7 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
-  <a href="https://tally.so/r/Bz8LbR" target="_blank" class="btn-primary"><span data-ko="나의 투*필 만들기 →" data-en="Create My Today Filmography →">나의 투*필 만들기 →</span></a>
+  <a id="cta-btn-top" href="https://tally.so/r/Bz8LbR" target="_blank" class="btn-primary"><span data-ko="나의 투*필 만들기 →" data-en="Create My Today Filmography →">나의 투*필 만들기 →</span></a>
 
 
 
@@ -2142,7 +2142,7 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
-  <a href="https://tally.so/r/Bz8LbR" target="_blank" class="btn-primary"><span data-ko="나의 투*필 만들기 →" data-en="Create My Today Filmography →">나의 투*필 만들기 →</span></a>
+  <a id="cta-btn-bottom" href="https://tally.so/r/Bz8LbR" target="_blank" class="btn-primary"><span data-ko="나의 투*필 만들기 →" data-en="Create My Today Filmography →">나의 투*필 만들기 →</span></a>
 
 
 
@@ -3485,6 +3485,12 @@ loadNext();
 
 
 
+
+    var EN_URL = 'https://tally.so/r/7RabJP';
+    var KO_URL = 'https://tally.so/r/Bz8LbR';
+    document.querySelectorAll('#cta-btn-top, #cta-btn-bottom').forEach(function(btn) {
+      btn.href = l === 'en' ? EN_URL : KO_URL;
+    });
 
     document.querySelectorAll('[data-ko]').forEach(function (el) {
 
