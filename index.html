@@ -2,7 +2,15 @@
 
 
 
+
+
+
+
 <html lang="ko">
+
+
+
+
 
 
 
@@ -10,7 +18,15 @@
 
 
 
+
+
+
+
 <meta charset="UTF-8">
+
+
+
+
 
 
 
@@ -18,7 +34,15 @@
 
 
 
+
+
+
+
 <title>휴먼다큐 · 삶을 기록합니다</title>
+
+
+
+
 
 
 
@@ -26,7 +50,15 @@
 
 
 
+
+
+
+
 <meta name="application-name" content="휴먼다큐">
+
+
+
+
 
 
 
@@ -34,7 +66,15 @@
 
 
 
+
+
+
+
 <meta name="apple-mobile-web-app-capable" content="yes">
+
+
+
+
 
 
 
@@ -42,7 +82,15 @@
 
 
 
+
+
+
+
 <meta name="apple-mobile-web-app-title" content="휴먼다큐">
+
+
+
+
 
 
 
@@ -50,7 +98,15 @@
 
 
 
+
+
+
+
 <meta name="theme-color" content="#1a1a2e">
+
+
+
+
 
 
 
@@ -58,7 +114,15 @@
 
 
 
+
+
+
+
 <meta property="og:description" content="오늘을 기록하고, 인생을 정리하고, 삶을 기념합니다">
+
+
+
+
 
 
 
@@ -66,7 +130,15 @@
 
 
 
+
+
+
+
 <meta property="og:image" content="https://humandocu.com/og_main.png">
+
+
+
+
 
 
 
@@ -74,7 +146,15 @@
 
 
 
+
+
+
+
 <meta property="og:image:height" content="630">
+
+
+
+
 
 
 
@@ -82,7 +162,15 @@
 
 
 
+
+
+
+
 <meta name="twitter:card" content="summary_large_image">
+
+
+
+
 
 
 
@@ -90,7 +178,15 @@
 
 
 
+
+
+
+
 <link rel="manifest" href="manifest.json">
+
+
+
+
 
 
 
@@ -98,7 +194,15 @@
 
 
 
+
+
+
+
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+
+
+
 
 
 
@@ -106,7 +210,15 @@
 
 
 
+
+
+
+
 :root {
+
+
+
+
 
 
 
@@ -114,7 +226,15 @@
 
 
 
+
+
+
+
   --ink:     #1A1208;
+
+
+
+
 
 
 
@@ -122,7 +242,15 @@
 
 
 
+
+
+
+
   --ink3:    #6B5340;
+
+
+
+
 
 
 
@@ -130,7 +258,15 @@
 
 
 
+
+
+
+
   --gold-dk: #A8843A;
+
+
+
+
 
 
 
@@ -138,7 +274,15 @@
 
 
 
+
+
+
+
   --navy:    #1A2535;
+
+
+
+
 
 
 
@@ -146,7 +290,15 @@
 
 
 
+
+
+
+
   --sans:    'Noto Sans KR',sans-serif;
+
+
+
+
 
 
 
@@ -154,7 +306,15 @@
 
 
 
+
+
+
+
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+
+
+
+
 
 
 
@@ -162,7 +322,15 @@ html { scroll-behavior:smooth; }
 
 
 
+
+
+
+
 body { background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:15px; font-weight:300; line-height:1.7; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+
+
+
+
 
 
 
@@ -174,43 +342,95 @@ a { text-decoration:none; color:inherit; }
 
 
 
+
+
+
+
+
+
+
+
 /* LANG BAR */
 
 
 
+
+
+
+
 #lang-bar {
+
   position:fixed; top:0; left:0; right:0; z-index:300;
+
   display:flex; justify-content:flex-start; align-items:center;
+
   height:44px; padding:0 16px; gap:6px;
+
   background:#ffffff;
+
   border-bottom:1px solid #e8e0d5;
+
   box-shadow:0 1px 4px rgba(0,0,0,.06);
+
   overflow-x:auto;
+
   scrollbar-width:none;
+
 }
+
 #lang-bar::-webkit-scrollbar { display:none; }
+
+
 
 .lang-btn {
 
+
+
   display:flex; align-items:center; gap:5px;
+
+
 
   background:transparent; border:1.5px solid #cccccc; cursor:pointer;
 
+
+
   font-size:13px; font-weight:600; letter-spacing:.03em;
+
+
 
   color:#333333; padding:4px 14px; border-radius:20px;
 
+
+
   font-family:var(--sans); transition:color .15s, background .15s, border-color .15s;
+
+
 
   line-height:1; white-space:nowrap;
 
+
+
 }
+
+
 
 .lang-btn .flag { font-size:16px; line-height:1; }
 
+
+
 .lang-btn:hover { background:#f5f1eb; border-color:#b8a87e; color:#111111; }
 
+
+
 .lang-btn.active { background:#c8a96e; border-color:#c8a96e; color:#ffffff; }
+
+
+
+
+
+
+
+
 
 
 
@@ -222,7 +442,15 @@ a { text-decoration:none; color:inherit; }
 
 
 
+
+
+
+
 nav {
+
+
+
+
 
 
 
@@ -230,7 +458,15 @@ nav {
 
 
 
+
+
+
+
   display:flex; align-items:center; justify-content:space-between;
+
+
+
+
 
 
 
@@ -238,7 +474,15 @@ nav {
 
 
 
+
+
+
+
   background:rgba(249,246,240,.97); backdrop-filter:blur(14px);
+
+
+
+
 
 
 
@@ -246,7 +490,15 @@ nav {
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -254,7 +506,15 @@ nav {
 
 
 
+
+
+
+
 .nav-logo-mark {
+
+
+
+
 
 
 
@@ -262,7 +522,15 @@ nav {
 
 
 
+
+
+
+
   background:var(--gold);
+
+
+
+
 
 
 
@@ -270,7 +538,15 @@ nav {
 
 
 
+
+
+
+
   font-family:var(--serif); font-size:13px; color:var(--ink);
+
+
+
+
 
 
 
@@ -278,11 +554,23 @@ nav {
 
 
 
+
+
+
+
 .nav-logo-text { font-family:var(--serif); font-size:16px; color:var(--ink); letter-spacing:.04em; }
 
 
 
+
+
+
+
 .nav-tel { font-size:13px; color:var(--ink3); }
+
+
+
+
 
 
 
@@ -294,7 +582,19 @@ nav {
 
 
 
+
+
+
+
+
+
+
+
 /* LANDING */
+
+
+
+
 
 
 
@@ -302,7 +602,15 @@ nav {
 
 
 
+
+
+
+
   min-height:100vh;
+
+
+
+
 
 
 
@@ -310,11 +618,23 @@ nav {
 
 
 
+
+
+
+
   padding:112px 20px 48px;
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -322,7 +642,15 @@ nav {
 
 
 
+
+
+
+
   width:100%; max-width:440px;
+
+
+
+
 
 
 
@@ -330,11 +658,23 @@ nav {
 
 
 
+
+
+
+
   text-align:center;
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -342,7 +682,15 @@ nav {
 
 
 
+
+
+
+
   display:flex; align-items:center; gap:10px;
+
+
+
+
 
 
 
@@ -350,11 +698,23 @@ nav {
 
 
 
+
+
+
+
   margin-bottom:16px;
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -362,7 +722,15 @@ nav {
 
 
 
+
+
+
+
 .landing-label::after { content:''; width:18px; height:1px; background:var(--gold); opacity:.7; }
+
+
+
+
 
 
 
@@ -370,7 +738,15 @@ nav {
 
 
 
+
+
+
+
   font-family:var(--serif); font-size:30px; font-weight:400;
+
+
+
+
 
 
 
@@ -378,7 +754,15 @@ nav {
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -386,11 +770,23 @@ nav {
 
 
 
+
+
+
+
   font-size:14px; font-weight:300; color:var(--ink2); letter-spacing:.05em; margin-bottom:10px;
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -398,11 +794,23 @@ nav {
 
 
 
+
+
+
+
   font-size:11px; color:var(--ink3); letter-spacing:.06em; margin-bottom:28px; line-height:2;
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -414,7 +822,19 @@ nav {
 
 
 
+
+
+
+
+
+
+
+
 /* CARDS */
+
+
+
+
 
 
 
@@ -422,7 +842,15 @@ nav {
 
 
 
+
+
+
+
 .card {
+
+
+
+
 
 
 
@@ -430,7 +858,15 @@ nav {
 
 
 
+
+
+
+
   padding:20px 20px;
+
+
+
+
 
 
 
@@ -438,7 +874,15 @@ nav {
 
 
 
+
+
+
+
   transition:transform .15s, box-shadow .15s;
+
+
+
+
 
 
 
@@ -446,7 +890,15 @@ nav {
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -458,7 +910,19 @@ nav {
 
 
 
+
+
+
+
+
+
+
+
 /* 투.필 — amber */
+
+
+
+
 
 
 
@@ -466,7 +930,15 @@ nav {
 
 
 
+
+
+
+
   background:#C8870A;
+
+
+
+
 
 
 
@@ -474,7 +946,15 @@ nav {
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -486,7 +966,19 @@ nav {
 
 
 
+
+
+
+
+
+
+
+
 /* 식스샷 — gold */
+
+
+
+
 
 
 
@@ -494,7 +986,15 @@ nav {
 
 
 
+
+
+
+
   background:#C8A96E;
+
+
+
+
 
 
 
@@ -502,7 +1002,15 @@ nav {
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -514,7 +1022,19 @@ nav {
 
 
 
+
+
+
+
+
+
+
+
 /* 메모리얼 — navy */
+
+
+
+
 
 
 
@@ -522,7 +1042,15 @@ nav {
 
 
 
+
+
+
+
   background:#1A2535;
+
+
+
+
 
 
 
@@ -530,7 +1058,15 @@ nav {
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -542,7 +1078,19 @@ nav {
 
 
 
+
+
+
+
+
+
+
+
 .card-body { flex:1; min-width:0; text-align:left; }
+
+
+
+
 
 
 
@@ -550,11 +1098,23 @@ nav {
 
 
 
+
+
+
+
 .card-today .card-lbl { color:rgba(255,248,237,.65); }
 
 
 
+
+
+
+
 .card-six .card-lbl   { color:rgba(15,13,9,.5); }
+
+
+
+
 
 
 
@@ -566,7 +1126,19 @@ nav {
 
 
 
+
+
+
+
+
+
+
+
 .card-ttl { font-family:var(--serif); font-size:20px; font-weight:400; line-height:1.3; margin-bottom:4px; }
+
+
+
+
 
 
 
@@ -574,7 +1146,15 @@ nav {
 
 
 
+
+
+
+
 .card-six .card-ttl   { color:#0F0D09; }
+
+
+
+
 
 
 
@@ -586,7 +1166,19 @@ nav {
 
 
 
+
+
+
+
+
+
+
+
 .card-dsc { font-size:12px; font-weight:300; line-height:1.6; }
+
+
+
+
 
 
 
@@ -594,7 +1186,15 @@ nav {
 
 
 
+
+
+
+
 .card-six .card-dsc   { color:rgba(15,13,9,.62); }
+
+
+
+
 
 
 
@@ -606,7 +1206,19 @@ nav {
 
 
 
+
+
+
+
+
+
+
+
 .card-btn {
+
+
+
+
 
 
 
@@ -614,7 +1226,15 @@ nav {
 
 
 
+
+
+
+
   font-size:12px; font-weight:600; font-family:var(--sans);
+
+
+
+
 
 
 
@@ -622,7 +1242,15 @@ nav {
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -630,7 +1258,15 @@ nav {
 
 
 
+
+
+
+
 .card-today:hover .card-btn { background:rgba(255,248,237,.3); }
+
+
+
+
 
 
 
@@ -638,11 +1274,23 @@ nav {
 
 
 
+
+
+
+
 .card-six:hover .card-btn { background:rgba(15,13,9,.3); }
 
 
 
+
+
+
+
 .card-mem .card-btn   { background:transparent; color:#C8A96E; border:1.5px solid rgba(200,169,110,.55); }
+
+
+
+
 
 
 
@@ -654,7 +1302,19 @@ nav {
 
 
 
+
+
+
+
+
+
+
+
 .card-arrow { font-size:22px; font-weight:300; line-height:1; flex-shrink:0; }
+
+
+
+
 
 
 
@@ -662,7 +1322,15 @@ nav {
 
 
 
+
+
+
+
 .card-six .card-arrow   { color:rgba(15,13,9,.35); }
+
+
+
+
 
 
 
@@ -674,7 +1342,19 @@ nav {
 
 
 
+
+
+
+
+
+
+
+
 /* 무료 배지 */
+
+
+
+
 
 
 
@@ -682,7 +1362,15 @@ nav {
 
 
 
+
+
+
+
   display:inline-block; font-size:10px; font-weight:500; letter-spacing:.08em;
+
+
+
+
 
 
 
@@ -690,11 +1378,23 @@ nav {
 
 
 
+
+
+
+
 }
 
 
 
+
+
+
+
 .card-today .badge-free { background:rgba(255,248,237,.2); color:#FFF8ED; }
+
+
+
+
 
 
 
@@ -706,11 +1406,27 @@ nav {
 
 
 
+
+
+
+
+
+
+
+
 /* 연결 안내 */
 
 
 
+
+
+
+
 .landing-connect { margin-top:20px; font-size:11px; color:var(--ink3); letter-spacing:.08em; line-height:2; }
+
+
+
+
 
 
 
@@ -722,7 +1438,19 @@ nav {
 
 
 
+
+
+
+
+
+
+
+
 /* FOOTER */
+
+
+
+
 
 
 
@@ -730,7 +1458,15 @@ footer { padding:16px 20px; text-align:center; border-top:1px solid rgba(200,135
 
 
 
+
+
+
+
 footer p { font-size:12px; color:var(--ink3); font-weight:300; line-height:2.2; }
+
+
+
+
 
 
 
@@ -738,7 +1474,15 @@ footer a { color:var(--ink2); }
 
 
 
+
+
+
+
 footer a:hover { color:var(--gold-dk); }
+
+
+
+
 
 
 
@@ -750,7 +1494,19 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
+
+
+
+
 @media (min-width:640px) {
+
+
+
+
 
 
 
@@ -758,7 +1514,15 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
   .landing { padding:132px 40px 60px; }
+
+
+
+
 
 
 
@@ -766,7 +1530,15 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
   .landing-title { font-size:36px; }
+
+
+
+
 
 
 
@@ -774,7 +1546,15 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
   .card-ttl { font-size:22px; }
+
+
+
+
 
 
 
@@ -782,11 +1562,23 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
 </style>
 
 
 
+
+
+
+
 </head>
+
+
+
+
 
 
 
@@ -798,21 +1590,51 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
+
+
+
+
 <!-- LANG BAR -->
+
+
+
+
 
 
 
 <div id="lang-bar">
 
+
+
   <button class="lang-btn active" data-lang="KO"><span class="flag">🇰🇷</span> 한국어</button>
+
+
 
   <button class="lang-btn" data-lang="EN"><span class="flag">🇺🇸</span> English</button>
 
+
+
   <button class="lang-btn" data-lang="JP"><span class="flag">🇯🇵</span> 日本語</button>
+
+
 
   <button class="lang-btn" data-lang="ZH"><span class="flag">🇨🇳</span> 中文</button>
 
+
+
 </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -824,7 +1646,15 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
   <a href="/" class="nav-logo">
+
+
+
+
 
 
 
@@ -832,7 +1662,15 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
     <span class="nav-logo-text">휴먼다큐</span>
+
+
+
+
 
 
 
@@ -840,7 +1678,15 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
-  <div class="nav-tel">문의 <a href="tel:031-539-9709">031-539-9709</a></div>
+
+
+
+
+  <div class="nav-tel"><span data-ko="문의" data-en="Contact">문의</span> <a href="tel:031-539-9709">031-539-9709</a></div>
+
+
+
+
 
 
 
@@ -852,7 +1698,19 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
+
+
+
+
 <section class="landing">
+
+
+
+
 
 
 
@@ -864,19 +1722,47 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
+
+
+
+
     <div class="landing-label">humandocu.com</div>
 
 
 
-    <h1 class="landing-title">삶을 기록합니다</h1>
 
 
 
-    <p class="landing-sub">오늘을 · 인생을 · 그리고 당신을</p>
+
+    <h1 class="landing-title" data-ko="삶을 기록합니다" data-en="Record Your Life">삶을 기록합니다</h1>
 
 
 
-    <p class="landing-flow">투.필로 오늘을 담고 → 식스샷으로 인생을 정리하고<br>→ 메모리얼로 삶을 기념합니다</p>
+
+
+
+
+    <p class="landing-sub" data-ko="오늘을 · 인생을 · 그리고 당신을" data-en="Today · Your Life · And You">오늘을 · 인생을 · 그리고 당신을</p>
+
+
+
+
+
+
+
+    <p class="landing-flow" data-ko="투.필로 오늘을 담고 → 식스샷으로 인생을 정리하고<br>→ 메모리얼로 삶을 기념합니다" data-en="Capture today in 6 photos · Organize your life with Six Shot · Celebrate life with Memorial">투.필로 오늘을 담고 → 식스샷으로 인생을 정리하고<br>→ 메모리얼로 삶을 기념합니다</p>
+
+
+
+
+
+
+
+
 
 
 
@@ -892,7 +1778,23 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
+
+
+
+
     <div class="cards">
+
+
+
+
+
+
+
+
 
 
 
@@ -904,7 +1806,15 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
       <a href="/today.html" class="card card-today">
+
+
+
+
 
 
 
@@ -912,19 +1822,39 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
           <div class="card-lbl">투.필 · TODAY FILMOGRAPHY <span class="badge-free">무료</span></div>
 
 
 
-          <div class="card-ttl">오늘을 기록하다</div>
 
 
 
-          <div class="card-dsc">오늘 찍은 사진 6장 · AI가 오늘의 당신을 시로 남깁니다<br>매일 쌓이면 나만의 필모그래피가 됩니다</div>
+
+          <div class="card-ttl" data-ko="오늘을 기록하다" data-en="Record Today">오늘을 기록하다</div>
 
 
 
-          <div class="card-btn">오늘 기록하기 →</div>
+
+
+
+
+          <div class="card-dsc" data-ko="오늘 찍은 사진 6장 · AI가 오늘의 당신을 시로 남깁니다<br>매일 쌓이면 나만의 필모그래피가 됩니다" data-en="6 photos from today · AI turns them into a poem just for you<br>Every day adds to your personal filmography">오늘 찍은 사진 6장 · AI가 오늘의 당신을 시로 남깁니다<br>매일 쌓이면 나만의 필모그래피가 됩니다</div>
+
+
+
+
+
+
+
+          <div class="card-btn" data-ko="오늘 기록하기 →" data-en="Record Today →">오늘 기록하기 →</div>
+
+
+
+
 
 
 
@@ -932,11 +1862,27 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
         <div class="card-arrow">›</div>
 
 
 
+
+
+
+
       </a>
+
+
+
+
+
+
+
+
 
 
 
@@ -948,7 +1894,15 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
       <a href="/sixshot.html" class="card card-six">
+
+
+
+
 
 
 
@@ -956,19 +1910,39 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
           <div class="card-lbl">MY SIX SHOT · 인생 식스샷 <span class="badge-free">무료</span></div>
 
 
 
-          <div class="card-ttl">인생을 정리하다</div>
 
 
 
-          <div class="card-dsc">내 인생의 6장면 · AI가 나만의 필모그래피로<br>한 번의 정리로 평생의 기록이 됩니다</div>
+
+          <div class="card-ttl" data-ko="인생을 정리하다" data-en="Organize Your Life">인생을 정리하다</div>
 
 
 
-          <div class="card-btn">인생 정리하기 →</div>
+
+
+
+
+          <div class="card-dsc" data-ko="내 인생의 6장면 · AI가 나만의 필모그래피로<br>한 번의 정리로 평생의 기록이 됩니다" data-en="6 scenes of your life · AI turns them into your filmography<br>One session. A lifetime of memories.">내 인생의 6장면 · AI가 나만의 필모그래피로<br>한 번의 정리로 평생의 기록이 됩니다</div>
+
+
+
+
+
+
+
+          <div class="card-btn" data-ko="인생 정리하기 →" data-en="Start My Six Shot →">인생 정리하기 →</div>
+
+
+
+
 
 
 
@@ -976,11 +1950,27 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
         <div class="card-arrow">›</div>
 
 
 
+
+
+
+
       </a>
+
+
+
+
+
+
+
+
 
 
 
@@ -992,7 +1982,15 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
       <a href="/memorial.html" class="card card-mem">
+
+
+
+
 
 
 
@@ -1000,19 +1998,39 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
           <div class="card-lbl">PREMIUM MEMORIAL · 프리미엄 메모리얼</div>
 
 
 
-          <div class="card-ttl">삶을 기념하다</div>
 
 
 
-          <div class="card-dsc">품격 있는 부고문 · 답례장 · 메모리얼 페이지<br>소중한 분의 마지막을 아름답게 기록합니다</div>
+
+          <div class="card-ttl" data-ko="삶을 기념하다" data-en="Celebrate a Life">삶을 기념하다</div>
 
 
 
-          <div class="card-btn">자세히 보기 →</div>
+
+
+
+
+          <div class="card-dsc" data-ko="품격 있는 부고문 · 답례장 · 메모리얼 페이지<br>소중한 분의 마지막을 아름답게 기록합니다" data-en="Obituary · Thank-you letter · Memorial page<br>A beautiful record of a life well lived">품격 있는 부고문 · 답례장 · 메모리얼 페이지<br>소중한 분의 마지막을 아름답게 기록합니다</div>
+
+
+
+
+
+
+
+          <div class="card-btn" data-ko="자세히 보기 →" data-en="Learn More →">자세히 보기 →</div>
+
+
+
+
 
 
 
@@ -1020,11 +2038,27 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
         <div class="card-arrow">›</div>
 
 
 
+
+
+
+
       </a>
+
+
+
+
+
+
+
+
 
 
 
@@ -1040,7 +2074,23 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
-    <p class="landing-connect">세 서비스는 <span>연결</span>되어 있습니다</p>
+
+
+
+
+
+
+
+
+    <p class="landing-connect" data-ko="세 서비스는 <span>연결</span>되어 있습니다" data-en="All three services are connected">세 서비스는 <span>연결</span>되어 있습니다</p>
+
+
+
+
+
+
+
+
 
 
 
@@ -1052,7 +2102,19 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
 </section>
+
+
+
+
+
+
+
+
 
 
 
@@ -1064,19 +2126,39 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
   <p>
 
 
 
-    © 2026 휴먼다큐닷컴 &nbsp;·&nbsp;
 
 
 
-    <a href="/terms.html">이용약관</a> &nbsp;·&nbsp;
+
+    <span data-ko="© 2026 휴먼다큐닷컴" data-en="© 2026 humandocu.com">© 2026 휴먼다큐닷컴</span> &nbsp;·&nbsp;
 
 
 
-    <a href="/privacy.html">개인정보처리방침</a> &nbsp;·&nbsp;
+
+
+
+
+    <a href="/terms.html" data-ko="이용약관" data-en="Terms of Service">이용약관</a> &nbsp;·&nbsp;
+
+
+
+
+
+
+
+    <a href="/privacy.html" data-ko="개인정보처리방침" data-en="Privacy Policy">개인정보처리방침</a> &nbsp;·&nbsp;
+
+
+
+
 
 
 
@@ -1084,7 +2166,15 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
   </p>
+
+
+
+
 
 
 
@@ -1096,55 +2186,45 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
+
+
+
+
 <script>
-
-
-
 (function () {
-
-
-
-  var saved = localStorage.getItem('lang') || 'KO';
-
-
-
-  document.querySelectorAll('.lang-btn').forEach(function (btn) {
-
-
-
-    btn.classList.toggle('active', btn.dataset.lang === saved);
-
-
-
-    btn.addEventListener('click', function () {
-
-
-
-      localStorage.setItem('lang', this.dataset.lang);
-
-
-
-      document.querySelectorAll('.lang-btn').forEach(function (b) { b.classList.remove('active'); });
-
-
-
-      this.classList.add('active');
-
-
-
+  function applyLang(lang) {
+    var l = lang.toLowerCase();
+    document.querySelectorAll('[data-ko]').forEach(function (el) {
+      var text = el.getAttribute('data-' + l);
+      if (text) el.innerHTML = text;
     });
-
-
-
+    document.querySelectorAll('.lang-btn').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+  }
+  var saved = localStorage.getItem('lang') || 'KO';
+  applyLang(saved);
+  document.querySelectorAll('.lang-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var lang = this.dataset.lang;
+      localStorage.setItem('lang', lang);
+      applyLang(lang);
+    });
   });
-
-
-
 })();
-
-
-
 </script>
+
+
+
+
+
+
+
+
 
 
 
@@ -1156,7 +2236,15 @@ footer a:hover { color:var(--gold-dk); }
 
 
 
+
+
+
+
 </html>
+
+
+
+
 
 
 
