@@ -2,7 +2,15 @@
 
 
 
+
+
+
+
 <html lang="ko">
+
+
+
+
 
 
 
@@ -10,7 +18,15 @@
 
 
 
+
+
+
+
 <meta charset="UTF-8">
+
+
+
+
 
 
 
@@ -18,7 +34,15 @@
 
 
 
+
+
+
+
 <title>투*필 · 오늘의 필모그래피 · 휴먼다큐</title>
+
+
+
+
 
 
 
@@ -26,7 +50,15 @@
 
 
 
+
+
+
+
 <meta name="description" content="오늘의 두 컷, 나의 기록">
+
+
+
+
 
 
 
@@ -34,7 +66,15 @@
 
 
 
+
+
+
+
 <link rel="manifest" href="/today-manifest.json">
+
+
+
+
 
 
 
@@ -42,7 +82,15 @@
 
 
 
+
+
+
+
 <meta name="apple-mobile-web-app-capable" content="yes">
+
+
+
+
 
 
 
@@ -50,7 +98,15 @@
 
 
 
+
+
+
+
 <meta name="apple-mobile-web-app-title" content="투*필">
+
+
+
+
 
 
 
@@ -58,7 +114,15 @@
 
 
 
+
+
+
+
 <meta name="theme-color" content="#2D5016">
+
+
+
+
 
 
 
@@ -66,7 +130,15 @@
 
 
 
+
+
+
+
 <meta property="og:description" content="오늘 찍은 사진 6장. AI가 오늘의 당신을 시로 남깁니다.">
+
+
+
+
 
 
 
@@ -74,7 +146,15 @@
 
 
 
+
+
+
+
 <meta property="og:image:width" content="1200">
+
+
+
+
 
 
 
@@ -82,7 +162,15 @@
 
 
 
+
+
+
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
+
+
+
 
 
 
@@ -90,7 +178,15 @@
 
 
 
+
+
+
+
 <style>
+
+
+
+
 
 
 
@@ -98,7 +194,15 @@
 
 
 
+
+
+
+
   --serif:'Cormorant Garamond','Noto Serif KR',Georgia,serif;
+
+
+
+
 
 
 
@@ -106,7 +210,15 @@
 
 
 
+
+
+
+
   --dark:#0f0d09;
+
+
+
+
 
 
 
@@ -114,7 +226,15 @@
 
 
 
+
+
+
+
   --amber:#C8870A;
+
+
+
+
 
 
 
@@ -122,7 +242,15 @@
 
 
 
+
+
+
+
   --amber-md:#F5D9A0;
+
+
+
+
 
 
 
@@ -130,7 +258,15 @@
 
 
 
+
+
+
+
   --ink2:#5A4020;
+
+
+
+
 
 
 
@@ -138,11 +274,23 @@
 
 
 
+
+
+
+
   --cream:#f9f6f0;
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -150,7 +298,15 @@
 
 
 
+
+
+
+
 html{scroll-behavior:smooth}
+
+
+
+
 
 
 
@@ -158,7 +314,15 @@ body{background:#FFF8ED;color:#1A1208;font-family:var(--sans);font-size:16px;fon
 
 
 
+
+
+
+
 a{text-decoration:none;color:inherit}
+
+
+
+
 
 
 
@@ -166,7 +330,15 @@ a{text-decoration:none;color:inherit}
 
 
 
+
+
+
+
 #lang-bar {
+
+
+
+
 
 
 
@@ -174,7 +346,15 @@ a{text-decoration:none;color:inherit}
 
 
 
+
+
+
+
   display:flex; justify-content:flex-start; align-items:center;
+
+
+
+
 
 
 
@@ -182,7 +362,15 @@ a{text-decoration:none;color:inherit}
 
 
 
+
+
+
+
   background:#ffffff;
+
+
+
+
 
 
 
@@ -190,7 +378,15 @@ a{text-decoration:none;color:inherit}
 
 
 
+
+
+
+
   box-shadow:0 1px 4px rgba(0,0,0,.06);
+
+
+
+
 
 
 
@@ -198,11 +394,23 @@ a{text-decoration:none;color:inherit}
 
 
 
+
+
+
+
   scrollbar-width:none;
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -210,7 +418,15 @@ a{text-decoration:none;color:inherit}
 
 
 
+
+
+
+
 .lang-btn {
+
+
+
+
 
 
 
@@ -218,7 +434,15 @@ a{text-decoration:none;color:inherit}
 
 
 
+
+
+
+
   background:transparent; border:1.5px solid #cccccc; cursor:pointer;
+
+
+
+
 
 
 
@@ -226,7 +450,15 @@ a{text-decoration:none;color:inherit}
 
 
 
+
+
+
+
   color:#333333; padding:4px 14px; border-radius:20px;
+
+
+
+
 
 
 
@@ -234,7 +466,15 @@ a{text-decoration:none;color:inherit}
 
 
 
+
+
+
+
   line-height:1; white-space:nowrap;
+
+
+
+
 
 
 
@@ -242,11 +482,23 @@ a{text-decoration:none;color:inherit}
 
 
 
+
+
+
+
 .lang-btn .flag { font-size:16px; line-height:1; }
 
 
 
+
+
+
+
 .lang-btn:hover { background:#f5f1eb; border-color:#b8a87e; color:#111111; }
+
+
+
+
 
 
 
@@ -262,7 +514,23 @@ a{text-decoration:none;color:inherit}
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(255,248,237,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,135,10,.2)}
+
+
+
+
 
 
 
@@ -270,7 +538,15 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .logo span{color:var(--gold)}
+
+
+
+
 
 
 
@@ -278,7 +554,15 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .nav-back:hover{color:var(--gold)}
+
+
+
+
 
 
 
@@ -290,7 +574,19 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
+
+
+
+
 /* HERO */
+
+
+
+
 
 
 
@@ -298,7 +594,15 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(200,169,110,.06) 0%,transparent 70%);pointer-events:none}
+
+
+
+
 
 
 
@@ -306,7 +610,15 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .hero h1{font-family:var(--serif);font-size:22px;font-weight:400;color:#1A1208;line-height:1.5;letter-spacing:.04em;margin-bottom:12px}
+
+
+
+
 
 
 
@@ -314,7 +626,15 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .btn-primary{display:inline-block;background:var(--gold);color:var(--dark);font-size:14px;font-weight:700;padding:12px 36px;border-radius:4px;letter-spacing:.06em;transition:background .2s}
+
+
+
+
 
 
 
@@ -322,7 +642,15 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .btn-hint{display:block;font-size:12px;color:#6B5A3A;margin-top:8px}
+
+
+
+
 
 
 
@@ -334,7 +662,19 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
+
+
+
+
 /* SECTION */
+
+
+
+
 
 
 
@@ -346,7 +686,19 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
+
+
+
+
 /* 철학 섹션 */
+
+
+
+
 
 
 
@@ -354,11 +706,23 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .phil-quote{font-family:var(--serif);font-size:20px;font-weight:300;color:#1A1208;line-height:1.8;letter-spacing:.05em;margin-bottom:12px}
 
 
 
+
+
+
+
 .phil-sub{font-size:14px;color:#5A4020;line-height:1.8;max-width:440px;margin:0 auto}
+
+
+
+
 
 
 
@@ -370,7 +734,19 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
+
+
+
+
 /* 이렇게 됩니다 */
+
+
+
+
 
 
 
@@ -378,7 +754,15 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .sec-label{font-size:11px;letter-spacing:.2em;color:#C8870A;margin-bottom:16px}
+
+
+
+
 
 
 
@@ -386,7 +770,15 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .sample-head{padding:16px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(200,169,110,.12)}
+
+
+
+
 
 
 
@@ -394,7 +786,15 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .s-name{font-family:var(--serif);font-size:15px;color:#1A1208;margin-bottom:2px}
+
+
+
+
 
 
 
@@ -402,7 +802,15 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .sample-photos{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;padding:12px 20px;border-bottom:1px solid rgba(200,169,110,.1)}
+
+
+
+
 
 
 
@@ -410,7 +818,15 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .sample-poem-wrap{padding:16px 20px}
+
+
+
+
 
 
 
@@ -418,11 +834,23 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .s-poem{font-family:var(--serif);font-size:14px;font-weight:300;line-height:1.8;letter-spacing:.04em;color:#1A1208}
 
 
 
+
+
+
+
 .sample-placeholder{padding:32px 20px;text-align:center;font-size:13px;color:#8A6A3A;line-height:2}
+
+
+
+
 
 
 
@@ -434,7 +862,19 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
+
+
+
+
 /* 지금 누군가의 투*필 */
+
+
+
+
 
 
 
@@ -442,7 +882,15 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .live-card{border:1px solid rgba(200,135,10,.2);border-radius:8px;padding:20px;background:#fff;max-width:460px;box-shadow:0 2px 10px rgba(200,135,10,.08);margin:16px auto 0}
+
+
+
+
 
 
 
@@ -450,7 +898,15 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .live-photo{aspect-ratio:1;object-fit:cover;width:100%;display:block}
+
+
+
+
 
 
 
@@ -458,7 +914,15 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .live-identity{font-size:13px;color:#5A4020;line-height:1.7;margin-bottom:14px}
+
+
+
+
 
 
 
@@ -466,7 +930,15 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .live-actions{display:flex;justify-content:center;gap:16px;margin-top:20px}
+
+
+
+
 
 
 
@@ -474,11 +946,23 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .btn-next:hover{background:#a86d08}
 
 
 
+
+
+
+
 .live-loading{text-align:center;padding:24px;font-size:13px;color:#6B5A3A}
+
+
+
+
 
 
 
@@ -490,7 +974,19 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
+
+
+
+
 /* 하단 CTA */
+
+
+
+
 
 
 
@@ -498,11 +994,23 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
 .cta-title{font-family:var(--serif);font-size:22px;font-weight:300;color:#1A1208;line-height:1.6;margin-bottom:10px;letter-spacing:.04em}
 
 
 
+
+
+
+
 .cta-sub{font-size:14px;color:#5A4020;line-height:1.8;margin-bottom:24px}
+
+
+
+
 
 
 
@@ -514,7 +1022,19 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 
 
 
+
+
+
+
+
+
+
+
 footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,.15);background:#FFF8ED}
+
+
+
+
 
 
 
@@ -522,7 +1042,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
 .why-sec{background:#FFF8ED;padding:56px 24px;border-top:1px solid rgba(200,135,10,.15)}
+
+
+
+
 
 
 
@@ -530,7 +1058,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
 .why-label{font-size:11px;letter-spacing:.12em;color:#C8870A;margin-bottom:12px;font-family:var(--sans)}
+
+
+
+
 
 
 
@@ -538,7 +1074,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
 .why-title em{color:#C8870A;font-style:normal}
+
+
+
+
 
 
 
@@ -546,7 +1090,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
 .haiku-box{background:rgba(200,135,10,.08);border-left:3px solid #C8870A;padding:16px 20px;margin-bottom:28px;border-radius:0 8px 8px 0}
+
+
+
+
 
 
 
@@ -554,7 +1106,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
 .haiku-desc{font-size:13px;color:#5C4A2A;line-height:1.7;margin:0}
+
+
+
+
 
 
 
@@ -562,7 +1122,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
 @media(max-width:500px){.haiku-samples{grid-template-columns:1fr}}
+
+
+
+
 
 
 
@@ -570,7 +1138,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
 .haiku-photo-desc{font-size:12px;color:#8B7355;margin-bottom:12px}
+
+
+
+
 
 
 
@@ -578,7 +1154,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
 .haiku-line{font-size:16px;color:#2C1A00;line-height:2;font-family:var(--serif)}
+
+
+
+
 
 
 
@@ -586,7 +1170,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
 .why-cta-desc{font-size:14px;color:#5C4A2A;line-height:1.8;text-align:center;margin-top:8px}
+
+
+
+
 
 
 
@@ -594,7 +1186,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
 .legal-inner{max-width:680px;margin:0 auto}
+
+
+
+
 
 
 
@@ -602,7 +1202,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
 .legal-item{font-size:12px;color:#8B7355;line-height:1.9;padding-left:14px;position:relative;margin-bottom:4px}
+
+
+
+
 
 
 
@@ -610,11 +1218,23 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
 </style>
 
 
 
+
+
+
+
 </head>
+
+
+
+
 
 
 
@@ -626,7 +1246,19 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
+
+
+
+
 <!-- LANG BAR -->
+
+
+
+
 
 
 
@@ -634,7 +1266,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   <button class="lang-btn active" data-lang="KO"><span class="flag">🇰🇷</span> 한국어</button>
+
+
+
+
 
 
 
@@ -642,7 +1282,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   <button class="lang-btn" data-lang="JP"><span class="flag">🇯🇵</span> 日本語</button>
+
+
+
+
 
 
 
@@ -650,7 +1298,19 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
 </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -662,7 +1322,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   <a href="/index.html" class="logo">휴먼다큐<span>닷컴</span></a>
+
+
+
+
 
 
 
@@ -670,7 +1338,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     <a href="/filmography.html" style="font-size:12px;color:#C8870A;letter-spacing:.04em;border:1px solid rgba(200,135,10,.35);border-radius:16px;padding:5px 14px;text-decoration:none;font-family:var(--sans)">필모그래피</a>
+
+
+
+
 
 
 
@@ -678,7 +1354,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   </div>
+
+
+
+
 
 
 
@@ -690,7 +1374,19 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
+
+
+
+
 <!-- HERO -->
+
+
+
+
 
 
 
@@ -698,7 +1394,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   <div class="kicker" data-ko="투*필 · TODAY FILMOGRAPHY" data-en="Tu·Fil · TODAY FILMOGRAPHY">투*필 · TODAY FILMOGRAPHY</div>
+
+
+
+
 
 
 
@@ -706,7 +1410,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   <p class="hero-sub" data-ko="특별한 날만 기억한다고 생각하기 때문이다.<br>하지만 삶은 오늘의 연속이다." data-en="Because we think only special days are worth remembering.<br>But life is made of ordinary todays.">특별한 날만 기억한다고 생각하기 때문이다.<br>하지만 삶은 오늘의 연속이다.</p>
+
+
+
+
 
 
 
@@ -714,7 +1426,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     🎞️ 이따금 올려두면 나만의 필모그래피 앨범이 만들어집니다
+
+
+
+
 
 
 
@@ -722,7 +1442,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   <a href="https://tally.so/r/Bz8LbR" target="_blank" class="btn-primary"><span data-ko="나의 투*필 만들기 →" data-en="Create My Today Filmography →">나의 투*필 만들기 →</span></a>
+
+
+
+
 
 
 
@@ -730,7 +1458,19 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
 </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -742,7 +1482,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
 <div class="philosophy">
+
+
+
+
 
 
 
@@ -750,7 +1498,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     &ldquo;어제도 아니고, 내일도 아닌<br>
+
+
+
+
 
 
 
@@ -758,7 +1514,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   </p>
+
+
+
+
 
 
 
@@ -766,7 +1530,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     오늘의 밥, 오늘의 하늘, 오늘의 사람 —<br>
+
+
+
+
 
 
 
@@ -774,11 +1546,23 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     AI가 오늘의 당신을 한 편의 시로 남겨드립니다.
 
 
 
+
+
+
+
   </p>
+
+
+
+
 
 
 
@@ -790,7 +1574,19 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
+
+
+
+
 <!-- 차별점 + 하이쿠 섹션 -->
+
+
+
+
 
 
 
@@ -798,7 +1594,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   <div class="why-inner">
+
+
+
+
 
 
 
@@ -806,7 +1610,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     <h2 class="why-title" data-ko="AI가 오늘의 당신을<br><em>하이쿠</em>로 남깁니다" data-en="AI captures today's you<br>in a <em>haiku</em>">AI가 오늘의 당신을<br><em>하이쿠</em>로 남깁니다</h2>
+
+
+
+
 
 
 
@@ -814,7 +1626,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     <div class="haiku-box">
+
+
+
+
 
 
 
@@ -822,11 +1642,23 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
       <p class="haiku-desc" data-ko="5·7·5 음절로 이루어진 일본의 전통 시 형식으로, 자연과 감각적 순간을 압축적으로 담습니다. 단 17음절 안에 하나의 장면을 완성합니다." data-en="A traditional Japanese poetic form of 5·7·5 syllables, capturing nature and sensory moments in a compressed form. A single scene completed in just 17 syllables.">5·7·5 음절로 이루어진 일본의 전통 시 형식으로, 자연과 감각적 순간을 압축적으로 담습니다. 단 17음절 안에 하나의 장면을 완성합니다.</p>
 
 
 
+
+
+
+
     </div>
+
+
+
+
 
 
 
@@ -834,7 +1666,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
       <div class="haiku-card">
+
+
+
+
 
 
 
@@ -842,7 +1682,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
         <div class="haiku-poem">
+
+
+
+
 
 
 
@@ -850,7 +1698,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
           <div class="haiku-line" data-ko="뚜껑 열던 그 순간도" data-en="even lifting the lid">뚜껑 열던 그 순간도</div>
+
+
+
+
 
 
 
@@ -858,7 +1714,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
         </div>
+
+
+
+
 
 
 
@@ -866,11 +1730,23 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
       </div>
 
 
 
+
+
+
+
       <div class="haiku-card">
+
+
+
+
 
 
 
@@ -878,7 +1754,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
         <div class="haiku-poem">
+
+
+
+
 
 
 
@@ -886,7 +1770,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
           <div class="haiku-line" data-ko="내일부터 하기로 했다" data-en="tomorrow, I decided">내일부터 하기로 했다</div>
+
+
+
+
 
 
 
@@ -894,7 +1786,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
         </div>
+
+
+
+
 
 
 
@@ -902,7 +1802,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
       </div>
+
+
+
+
 
 
 
@@ -910,11 +1818,23 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
         <div class="haiku-photo-desc" data-ko="📸 퇴근길 노을" data-en="📸 The sunset on my way home">📸 퇴근길 노을</div>
 
 
 
+
+
+
+
         <div class="haiku-poem">
+
+
+
+
 
 
 
@@ -922,7 +1842,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
           <div class="haiku-line" data-ko="멈춰서 하늘 봤다" data-en="I stopped to look at the sky">멈춰서 하늘 봤다</div>
+
+
+
+
 
 
 
@@ -930,7 +1858,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
         </div>
+
+
+
+
 
 
 
@@ -938,7 +1874,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
       </div>
+
+
+
+
 
 
 
@@ -946,7 +1890,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
         <div class="haiku-photo-desc" data-ko="📸 퇴근길 노을" data-en="📸 The sunset on my way home">📸 퇴근길 노을</div>
+
+
+
+
 
 
 
@@ -954,7 +1906,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
           <div class="haiku-line" data-ko="카메라 켰다" data-en="I opened my camera">카메라 켰다</div>
+
+
+
+
 
 
 
@@ -962,7 +1922,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
           <div class="haiku-line" data-ko="내일 또 온다" data-en="it'll come again">내일 또 온다</div>
+
+
+
+
 
 
 
@@ -970,7 +1938,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
         <div class="haiku-tag" data-ko="😂 유머 버전" data-en="😂 Humorous">😂 유머 버전</div>
+
+
+
+
 
 
 
@@ -978,7 +1954,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     </div>
+
+
+
+
 
 
 
@@ -986,7 +1970,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   </div>
+
+
+
+
 
 
 
@@ -1002,7 +1994,23 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- 지금 누군가의 투*필 -->
+
+
+
+
 
 
 
@@ -1010,7 +2018,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   <div style="max-width:480px;margin:0 auto">
+
+
+
+
 
 
 
@@ -1018,7 +2034,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     <div class="live-card" id="live-card">
+
+
+
+
 
 
 
@@ -1026,7 +2050,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     </div>
+
+
+
+
 
 
 
@@ -1034,7 +2066,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
       <button class="btn-next" onclick="loadNext()" data-ko="다음 투*필 보기 →" data-en="Next →">다음 투*필 보기 →</button>
+
+
+
+
 
 
 
@@ -1042,11 +2082,27 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   </div>
 
 
 
+
+
+
+
 </div>
+
+
+
+
+
+
+
+
 
 
 
@@ -1058,7 +2114,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
 <div class="cta">
+
+
+
+
 
 
 
@@ -1066,11 +2130,23 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   <div class="cta-sub" data-ko="사진 6장과 짧은 한 줄 — 그것으로 충분합니다.<br>AI가 오늘의 온도를 시로 담아드립니다." data-en="6 photos and a short line — that's all it takes.<br>AI captures the feeling of your today in verse.">사진 6장과 짧은 한 줄 — 그것으로 충분합니다.<br>AI가 오늘의 온도를 시로 담아드립니다.</div>
 
 
 
-  <a href="https://tally.so/r/Bz8LbR" target="_blank" class="btn-primary">나의 투*필 만들기 →</a>
+
+
+
+
+  <a href="https://tally.so/r/Bz8LbR" target="_blank" class="btn-primary"><span data-ko="나의 투*필 만들기 →" data-en="Create My Today Filmography →">나의 투*필 만들기 →</span></a>
+
+
+
+
 
 
 
@@ -1078,7 +2154,27 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1098,7 +2194,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   <div class="legal-inner">
+
+
+
+
 
 
 
@@ -1106,7 +2210,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     <p class="legal-item" data-ko="업로드하신 사진의 저작권은 본인에게 있으며, 타인의 사진을 무단으로 사용하지 마세요." data-en="You retain copyright of uploaded photos. Do not use others' photos without permission.">업로드하신 사진의 저작권은 본인에게 있으며, 타인의 사진을 무단으로 사용하지 마세요.</p>
+
+
+
+
 
 
 
@@ -1114,7 +2226,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     <p class="legal-item" data-ko="AI가 생성한 시의 저작권은 서비스 정책에 따르며, 상업적 이용은 별도 문의 바랍니다." data-en="Copyright of AI-generated poems follows our service policy. Contact us for commercial use.">AI가 생성한 시의 저작권은 서비스 정책에 따르며, 상업적 이용은 별도 문의 바랍니다.</p>
+
+
+
+
 
 
 
@@ -1122,11 +2242,23 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     <p class="legal-item" data-ko="공개 설정된 투*필은 실시간 섹션에 노출될 수 있습니다." data-en="Public Today Filmography entries may appear in the live section.">공개 설정된 투*필은 실시간 섹션에 노출될 수 있습니다.</p>
 
 
 
+
+
+
+
   </div>
+
+
+
+
 
 
 
@@ -1138,7 +2270,19 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
+
+
+
+
 <footer>
+
+
+
+
 
 
 
@@ -1146,7 +2290,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   <div style="max-width:480px;margin:0 auto 24px;display:flex;flex-direction:column;gap:10px">
+
+
+
+
 
 
 
@@ -1154,7 +2306,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     <a href="/sixshot.html" style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:#fff;border:1px solid rgba(200,135,10,.25);border-radius:10px;text-decoration:none">
+
+
+
+
 
 
 
@@ -1162,7 +2322,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
       <div>
+
+
+
+
 
 
 
@@ -1170,11 +2338,23 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
         <div style="font-size:11px;color:#8A6A3A;line-height:1.5" data-ko="내 인생의 6장면 · AI가 필모그래피로" data-en="6 scenes of my life · AI turns them into a filmography">내 인생의 6장면 · AI가 필모그래피로</div>
 
 
 
+
+
+
+
       </div>
+
+
+
+
 
 
 
@@ -1182,7 +2362,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     </a>
+
+
+
+
 
 
 
@@ -1190,7 +2378,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
       <div style="font-size:22px">🕯</div>
+
+
+
+
 
 
 
@@ -1198,7 +2394,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
         <div style="font-size:13px;font-weight:600;color:#555;margin-bottom:2px" data-ko="디지털 부고 · 메모리얼" data-en="Digital Obituary · Memorial">디지털 부고 · 메모리얼</div>
+
+
+
+
 
 
 
@@ -1206,7 +2410,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
       </div>
+
+
+
+
 
 
 
@@ -1214,7 +2426,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     </a>
+
+
+
+
 
 
 
@@ -1222,7 +2442,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
       <div style="font-size:18px">🏠</div>
+
+
+
+
 
 
 
@@ -1230,7 +2458,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
       <div style="margin-left:auto;font-size:16px;color:#C8870A">→</div>
+
+
+
+
 
 
 
@@ -1238,11 +2474,23 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   </div>
 
 
 
+
+
+
+
   <div class="ft" data-ko="© 2026 휴먼다큐 · humandocu.com · 031-539-9709" data-en="© 2026 Humandocu · humandocu.com · 031-539-9709">© 2026 휴먼다큐 · humandocu.com · 031-539-9709</div>
+
+
+
+
 
 
 
@@ -1254,7 +2502,19 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
+
+
+
+
 <!-- 홈화면 추가 유도 배너 -->
+
+
+
+
 
 
 
@@ -1262,7 +2522,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   <div style="max-width:480px;margin:0 auto;position:relative">
+
+
+
+
 
 
 
@@ -1270,7 +2538,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     <div style="font-weight:500;margin-bottom:2px" data-ko="📱 매일 쓰는 투*필, 홈화면에 추가하세요" data-en="📱 Use Today Filmography daily — add to your home screen">📱 매일 쓰는 투*필, 홈화면에 추가하세요</div>
+
+
+
+
 
 
 
@@ -1278,7 +2554,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   </div>
+
+
+
+
 
 
 
@@ -1290,7 +2574,19 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
+
+
+
+
 <script>
+
+
+
+
 
 
 
@@ -1298,7 +2594,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
 (function(){
+
+
+
+
 
 
 
@@ -1306,7 +2610,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
                     || window.navigator.standalone === true;
+
+
+
+
 
 
 
@@ -1318,7 +2630,19 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
+
+
+
+
   const dismissed = sessionStorage.getItem('pwa-banner-dismissed');
+
+
+
+
 
 
 
@@ -1330,7 +2654,19 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
+
+
+
+
   // Android Chrome: beforeinstallprompt 이벤트
+
+
+
+
 
 
 
@@ -1338,7 +2674,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   window.addEventListener('beforeinstallprompt', (e) => {
+
+
+
+
 
 
 
@@ -1346,7 +2690,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     deferredPrompt = e;
+
+
+
+
 
 
 
@@ -1354,11 +2706,23 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     const guide = document.getElementById('pwa-guide-text');
 
 
 
+
+
+
+
     guide.textContent = '아래 버튼을 눌러 홈화면에 추가하세요';
+
+
+
+
 
 
 
@@ -1370,7 +2734,19 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
+
+
+
+
     // 배너 클릭 시 설치 프롬프트 실행
+
+
+
+
 
 
 
@@ -1378,7 +2754,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
       if(ev.target.tagName === 'BUTTON') return;
+
+
+
+
 
 
 
@@ -1386,7 +2770,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
       const { outcome } = await deferredPrompt.userChoice;
+
+
+
+
 
 
 
@@ -1394,11 +2786,27 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     }, {once:true});
 
 
 
+
+
+
+
   });
+
+
+
+
+
+
+
+
 
 
 
@@ -1410,7 +2818,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+
+
+
+
 
 
 
@@ -1418,7 +2834,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   if(isIOS && isSafari){
+
+
+
+
 
 
 
@@ -1426,7 +2850,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
       document.getElementById('pwa-guide-text').textContent = '하단 공유(□↑) 버튼 → "홈 화면에 추가"';
+
+
+
+
 
 
 
@@ -1434,11 +2866,27 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
     }, 3000);
 
 
 
+
+
+
+
   }
+
+
+
+
+
+
+
+
 
 
 
@@ -1450,7 +2898,15 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   document.querySelector('#pwa-banner button').addEventListener('click', () => {
+
+
+
+
 
 
 
@@ -1458,11 +2914,23 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
   });
 
 
 
+
+
+
+
 })();
+
+
+
+
 
 
 
@@ -1474,7 +2942,19 @@ footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,
 
 
 
+
+
+
+
+
+
+
+
 <script>
+
+
+
+
 
 
 
@@ -1486,7 +2966,19 @@ const API = 'https://humandocu-server-production.up.railway.app/api/sixshot/rand
 
 
 
+
+
+
+
+
+
+
+
 function extractPoem(poems) {
+
+
+
+
 
 
 
@@ -1494,7 +2986,15 @@ function extractPoem(poems) {
 
 
 
+
+
+
+
   var norm = poems.indexOf('\n') < 0 && poems.indexOf('[') >= 0
+
+
+
+
 
 
 
@@ -1502,7 +3002,15 @@ function extractPoem(poems) {
 
 
 
+
+
+
+
   var lines = norm.split('\n');
+
+
+
+
 
 
 
@@ -1510,7 +3018,15 @@ function extractPoem(poems) {
 
 
 
+
+
+
+
   for (var i = 0; i < lines.length; i++) {
+
+
+
+
 
 
 
@@ -1518,7 +3034,15 @@ function extractPoem(poems) {
 
 
 
+
+
+
+
     if (l === '[대표]') { in_rep = true; continue; }
+
+
+
+
 
 
 
@@ -1526,7 +3050,15 @@ function extractPoem(poems) {
 
 
 
+
+
+
+
     if (in_rep && l) rep += l + '\n';
+
+
+
+
 
 
 
@@ -1534,11 +3066,27 @@ function extractPoem(poems) {
 
 
 
+
+
+
+
   return rep.trim();
 
 
 
+
+
+
+
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -1554,7 +3102,19 @@ let currentDocId = '';
 
 
 
+
+
+
+
+
+
+
+
 async function loadNext() {
+
+
+
+
 
 
 
@@ -1562,7 +3122,15 @@ async function loadNext() {
 
 
 
+
+
+
+
   card.innerHTML = '<div class="live-loading">불러오는 중...</div>';
+
+
+
+
 
 
 
@@ -1570,7 +3138,15 @@ async function loadNext() {
 
 
 
+
+
+
+
     var url = API + (currentDocId ? '&exclude=' + currentDocId : '');
+
+
+
+
 
 
 
@@ -1578,7 +3154,15 @@ async function loadNext() {
 
 
 
+
+
+
+
     var json = await res.json();
+
+
+
+
 
 
 
@@ -1586,7 +3170,15 @@ async function loadNext() {
 
 
 
+
+
+
+
       card.innerHTML = '<div class="live-loading" style="color:#6B5A3A">아직 공개된 투*필이 없어요</div>';
+
+
+
+
 
 
 
@@ -1594,7 +3186,15 @@ async function loadNext() {
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -1602,7 +3202,15 @@ async function loadNext() {
 
 
 
+
+
+
+
     currentDocId = d.doc_id || '';
+
+
+
+
 
 
 
@@ -1610,11 +3218,23 @@ async function loadNext() {
 
 
 
+
+
+
+
     var poemHtml = poem ? poem.split('\n').filter(function(l){return l.trim();}).map(function(l){
 
 
 
+
+
+
+
       return '<div>' + l + '</div>';
+
+
+
+
 
 
 
@@ -1626,7 +3246,19 @@ async function loadNext() {
 
 
 
+
+
+
+
+
+
+
+
     var imgs = d.shot_images || {};
+
+
+
+
 
 
 
@@ -1634,7 +3266,15 @@ async function loadNext() {
 
 
 
+
+
+
+
     for (var i = 1; i <= 3; i++) {
+
+
+
+
 
 
 
@@ -1642,11 +3282,23 @@ async function loadNext() {
 
 
 
+
+
+
+
         photosHtml += '<img class="live-photo" src="' + imgs[String(i)] + '" onerror="this.parentNode.removeChild(this)">';
 
 
 
+
+
+
+
       }
+
+
+
+
 
 
 
@@ -1658,7 +3310,19 @@ async function loadNext() {
 
 
 
+
+
+
+
+
+
+
+
     card.innerHTML =
+
+
+
+
 
 
 
@@ -1666,7 +3330,15 @@ async function loadNext() {
 
 
 
+
+
+
+
       '<div class="live-name">' + (d.name || '') + '</div>' +
+
+
+
+
 
 
 
@@ -1674,7 +3346,15 @@ async function loadNext() {
 
 
 
+
+
+
+
       (poemHtml ? '<div class="live-poem">' + poemHtml + '</div>' : '') +
+
+
+
+
 
 
 
@@ -1682,7 +3362,15 @@ async function loadNext() {
 
 
 
+
+
+
+
       '<a href="https://humandocu-server-production.up.railway.app/sixshot/' + d.doc_id + '" target="_blank" style="display:inline-block;padding:10px 28px;background:#C8870A;color:#FFF8ED;font-size:13px;font-weight:600;border-radius:6px;text-decoration:none;letter-spacing:.06em">' + d.name + '님의 투*필 보기 →</a>' +
+
+
+
+
 
 
 
@@ -1690,7 +3378,15 @@ async function loadNext() {
 
 
 
+
+
+
+
   } catch(e) {
+
+
+
+
 
 
 
@@ -1698,7 +3394,15 @@ async function loadNext() {
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -1710,11 +3414,35 @@ async function loadNext() {
 
 
 
+
+
+
+
+
+
+
+
 loadNext();
 
 
 
+
+
+
+
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1730,7 +3458,15 @@ loadNext();
 
 
 
+
+
+
+
 (function () {
+
+
+
+
 
 
 
@@ -1738,7 +3474,15 @@ loadNext();
 
 
 
+
+
+
+
     var l = lang.toLowerCase();
+
+
+
+
 
 
 
@@ -1746,7 +3490,15 @@ loadNext();
 
 
 
+
+
+
+
       var text = el.getAttribute('data-' + l);
+
+
+
+
 
 
 
@@ -1754,7 +3506,15 @@ loadNext();
 
 
 
+
+
+
+
     });
+
+
+
+
 
 
 
@@ -1762,11 +3522,23 @@ loadNext();
 
 
 
+
+
+
+
       b.classList.toggle('active', b.dataset.lang === lang);
 
 
 
+
+
+
+
     });
+
+
+
+
 
 
 
@@ -1774,7 +3546,15 @@ loadNext();
 
 
 
+
+
+
+
   var saved = localStorage.getItem('lang') || 'KO';
+
+
+
+
 
 
 
@@ -1782,7 +3562,15 @@ loadNext();
 
 
 
+
+
+
+
   document.querySelectorAll('.lang-btn').forEach(function (btn) {
+
+
+
+
 
 
 
@@ -1790,7 +3578,15 @@ loadNext();
 
 
 
+
+
+
+
       var lang = this.dataset.lang;
+
+
+
+
 
 
 
@@ -1798,7 +3594,15 @@ loadNext();
 
 
 
+
+
+
+
       applyLang(lang);
+
+
+
+
 
 
 
@@ -1806,11 +3610,23 @@ loadNext();
 
 
 
+
+
+
+
   });
 
 
 
+
+
+
+
 })();
+
+
+
+
 
 
 
@@ -1822,7 +3638,19 @@ loadNext();
 
 
 
+
+
+
+
+
+
+
+
 </body>
+
+
+
+
 
 
 
@@ -1830,7 +3658,15 @@ loadNext();
 
 
 
+
+
+
+
 <!-- og updated Wed May  6 09:07:13 UTC 2026 -->
+
+
+
+
 
 
 
