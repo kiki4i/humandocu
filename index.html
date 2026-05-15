@@ -4408,13 +4408,13 @@ footer a:hover { color:var(--gold-dk); }
 
     document.querySelectorAll('.lang-btn').forEach(function (b) {
 
-      b.classList.toggle('active', b.dataset.lang === lang);
+      b.classList.toggle('active', b.dataset.lang.toLowerCase() === l);
 
     });
 
   }
 
-  var saved = localStorage.getItem('lang') || 'KO';
+  var saved = localStorage.getItem('lang') || 'ko';
 
   applyLang(saved);
 
