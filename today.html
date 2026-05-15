@@ -1,459 +1,918 @@
 <!DOCTYPE html>
+
 <html lang="ko">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>투*필 · 오늘의 필모그래피 · 휴먼다큐</title>
+
 <!-- 투*필 전용 PWA -->
+
 <meta name="description" content="오늘의 두 컷, 나의 기록">
+
 <meta name="application-name" content="투*필">
+
 <link rel="manifest" href="/today-manifest.json">
+
 <meta name="mobile-web-app-capable" content="yes">
+
 <meta name="apple-mobile-web-app-capable" content="yes">
+
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 <meta name="apple-mobile-web-app-title" content="투*필">
+
 <link rel="apple-touch-icon" href="/today-icon-192.png">
+
 <meta name="theme-color" content="#2D5016">
+
 <meta property="og:title" content="투*필 · 오늘의 필모그래피">
+
 <meta property="og:description" content="오늘 찍은 사진 6장. AI가 오늘의 당신을 시로 남깁니다.">
+
 <meta property="og:image" content="https://kiki4i.github.io/humandocu/today_og.png">
+
 <meta property="og:image:width" content="1200">
+
 <meta property="og:image:height" content="630">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
 <style>
+
 :root{
+
   --serif:'Cormorant Garamond','Noto Serif KR',Georgia,serif;
+
   --sans:'Noto Sans KR',sans-serif;
+
   --dark:#0f0d09;
+
   --gold:#C8A96E;
+
   --amber:#C8870A;
+
   --amber-lt:#FFF8ED;
+
   --amber-md:#F5D9A0;
+
   --ink:#1A1208;
+
   --ink2:#5A4020;
+
   --ink3:#8A6A3A;
+
   --cream:#f9f6f0;
+
 }
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
 html{scroll-behavior:smooth}
+
 body{background:#FFF8ED;color:#1A1208;font-family:var(--sans);font-size:16px;font-weight:300;line-height:1.9;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
 a{text-decoration:none;color:inherit}
+
 /* LANG BAR */
+
 #lang-bar {
+
   position:fixed; top:0; left:0; right:0; z-index:300;
+
   display:flex; justify-content:flex-start; align-items:center;
+
   height:44px; padding:0 16px; gap:6px;
+
   background:#ffffff;
+
   border-bottom:1px solid #e8e0d5;
+
   box-shadow:0 1px 4px rgba(0,0,0,.06);
+
   overflow-x:auto;
+
   scrollbar-width:none;
+
 }
+
 #lang-bar::-webkit-scrollbar { display:none; }
+
 .lang-btn {
+
   display:flex; align-items:center; gap:5px;
+
   background:transparent; border:1.5px solid #cccccc; cursor:pointer;
+
   font-size:13px; font-weight:600; letter-spacing:.03em;
+
   color:#333333; padding:4px 14px; border-radius:20px;
+
   font-family:var(--sans); transition:color .15s, background .15s, border-color .15s;
+
   line-height:1; white-space:nowrap;
+
 }
+
 .lang-btn .flag { font-size:16px; line-height:1; }
+
 .lang-btn:hover { background:#f5f1eb; border-color:#b8a87e; color:#111111; }
+
 .lang-btn.active { background:#c8a96e; border-color:#c8a96e; color:#ffffff; }
 
 
+
+
+
 nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(255,248,237,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,135,10,.2)}
+
 .logo{font-family:var(--serif);font-size:15px;font-weight:300;color:#1A1208;letter-spacing:.08em}
+
 .logo span{color:var(--gold)}
+
 .nav-back{font-size:13px;color:#C8870A;letter-spacing:.04em}
+
 .nav-back:hover{color:var(--gold)}
+
 @media(max-width:640px){nav{padding:12px 20px}}
 
+
+
 /* HERO */
+
 .hero{padding:116px 20px 32px;text-align:center;background:#FFF8ED;position:relative;overflow:hidden}
+
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(200,169,110,.06) 0%,transparent 70%);pointer-events:none}
+
 .kicker{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.22em;color:var(--gold);background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.25);padding:5px 18px;border-radius:20px;margin-bottom:28px}
+
 .hero h1{font-family:var(--serif);font-size:22px;font-weight:400;color:#1A1208;line-height:1.5;letter-spacing:.04em;margin-bottom:12px}
+
 .hero-sub{font-size:14px;color:#5A4020;line-height:1.8;max-width:440px;margin:0 auto 20px}
+
 .btn-primary{display:inline-block;background:var(--gold);color:var(--dark);font-size:14px;font-weight:700;padding:12px 36px;border-radius:4px;letter-spacing:.06em;transition:background .2s}
+
 .btn-primary:hover{background:#b8994e}
+
 .btn-hint{display:block;font-size:12px;color:#6B5A3A;margin-top:8px}
+
 @media(min-width:640px){.hero{padding:144px 40px 48px}.hero h1{font-size:30px}}
 
+
+
 /* SECTION */
+
 .sec{padding:32px 20px;max-width:680px;margin:0 auto}
 
+
+
 /* 철학 섹션 */
+
 .philosophy{text-align:center;padding:32px 20px;border-top:1px solid rgba(200,135,10,.15)}
+
 .phil-quote{font-family:var(--serif);font-size:20px;font-weight:300;color:#1A1208;line-height:1.8;letter-spacing:.05em;margin-bottom:12px}
+
 .phil-sub{font-size:14px;color:#5A4020;line-height:1.8;max-width:440px;margin:0 auto}
+
 @media(min-width:640px){.philosophy{padding:48px 40px}.phil-quote{font-size:24px}}
 
+
+
 /* 이렇게 됩니다 */
+
 .sample-sec{padding:32px 20px;border-top:1px solid rgba(200,135,10,.15)}
+
 .sec-label{font-size:11px;letter-spacing:.2em;color:#C8870A;margin-bottom:16px}
+
 .sample-card{border:1px solid rgba(200,135,10,.2);border-radius:8px;overflow:hidden;background:#fff;max-width:580px;box-shadow:0 2px 10px rgba(200,135,10,.1);margin:0 auto}
+
 .sample-head{padding:16px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(200,169,110,.12)}
+
 .s-avatar{width:38px;height:38px;border-radius:50%;background:rgba(200,169,110,.12);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:14px;color:var(--gold);flex-shrink:0}
+
 .s-name{font-family:var(--serif);font-size:15px;color:#1A1208;margin-bottom:2px}
+
 .s-meta{font-size:12px;color:#6B5A3A}
+
 .sample-photos{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;padding:12px 20px;border-bottom:1px solid rgba(200,169,110,.1)}
+
 .s-photo{aspect-ratio:1;border-radius:4px;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.12);display:flex;align-items:center;justify-content:center;font-size:11px;color:#6B5A3A}
+
 .sample-poem-wrap{padding:16px 20px}
+
 .s-poem-label{font-size:11px;letter-spacing:.16em;color:#6B5A3A;margin-bottom:8px}
+
 .s-poem{font-family:var(--serif);font-size:14px;font-weight:300;line-height:1.8;letter-spacing:.04em;color:#1A1208}
+
 .sample-placeholder{padding:32px 20px;text-align:center;font-size:13px;color:#8A6A3A;line-height:2}
+
 @media(min-width:640px){.sample-sec{padding:48px 40px}}
 
+
+
 /* 지금 누군가의 투*필 */
+
 .live-sec{padding:32px 20px;border-top:1px solid rgba(200,135,10,.15)}
+
 .live-card{border:1px solid rgba(200,135,10,.2);border-radius:8px;padding:20px;background:#fff;max-width:460px;box-shadow:0 2px 10px rgba(200,135,10,.08);margin:16px auto 0}
+
 .live-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:14px;border-radius:4px;overflow:hidden}
+
 .live-photo{aspect-ratio:1;object-fit:cover;width:100%;display:block}
+
 .live-name{font-family:var(--serif);font-size:16px;color:#1A1208;margin-bottom:4px}
+
 .live-identity{font-size:13px;color:#5A4020;line-height:1.7;margin-bottom:14px}
+
 .live-poem{font-family:var(--serif);font-size:14px;font-weight:300;line-height:1.8;letter-spacing:.04em;border-left:2px solid rgba(200,169,110,.3);padding-left:14px;color:#1A1208}
+
 .live-actions{display:flex;justify-content:center;gap:16px;margin-top:20px}
+
 .btn-next{background:#C8870A;border:none;color:#fff;font-size:14px;font-family:var(--sans);font-weight:600;padding:11px 24px;border-radius:4px;cursor:pointer;letter-spacing:.04em;transition:all .2s}
+
 .btn-next:hover{background:#a86d08}
+
 .live-loading{text-align:center;padding:24px;font-size:13px;color:#6B5A3A}
+
 @media(min-width:640px){.live-sec{padding:48px 40px}}
 
+
+
 /* 하단 CTA */
+
 .cta{padding:32px 20px;text-align:center;border-top:1px solid rgba(200,135,10,.15)}
+
 .cta-title{font-family:var(--serif);font-size:22px;font-weight:300;color:#1A1208;line-height:1.6;margin-bottom:10px;letter-spacing:.04em}
+
 .cta-sub{font-size:14px;color:#5A4020;line-height:1.8;margin-bottom:24px}
+
 @media(min-width:640px){.cta{padding:48px 40px}.cta-title{font-size:28px}}
 
+
+
 footer{padding:24px 48px;text-align:center;border-top:1px solid rgba(200,135,10,.15);background:#FFF8ED}
+
 .ft{font-size:11px;color:#8A6A3A;letter-spacing:.08em}
+
 .why-sec{background:#FFF8ED;padding:56px 24px;border-top:1px solid rgba(200,135,10,.15)}
+
 .why-inner{max-width:680px;margin:0 auto}
+
 .why-label{font-size:11px;letter-spacing:.12em;color:#C8870A;margin-bottom:12px;font-family:var(--sans)}
+
 .why-title{font-size:26px;line-height:1.4;color:#2C1A00;margin-bottom:16px;font-family:var(--serif)}
+
 .why-title em{color:#C8870A;font-style:normal}
+
 .why-desc{font-size:15px;color:#5C4A2A;line-height:1.8;margin-bottom:28px}
+
 .haiku-box{background:rgba(200,135,10,.08);border-left:3px solid #C8870A;padding:16px 20px;margin-bottom:28px;border-radius:0 8px 8px 0}
+
 .haiku-label{font-size:12px;font-weight:600;color:#C8870A;letter-spacing:.08em;margin-bottom:6px}
+
 .haiku-desc{font-size:13px;color:#5C4A2A;line-height:1.7;margin:0}
+
 .haiku-samples{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
+
 @media(max-width:500px){.haiku-samples{grid-template-columns:1fr}}
+
 .haiku-card{background:#fff;border:1px solid rgba(200,135,10,.2);border-radius:12px;padding:18px 16px}
+
 .haiku-photo-desc{font-size:12px;color:#8B7355;margin-bottom:12px}
+
 .haiku-poem{margin-bottom:12px}
+
 .haiku-line{font-size:16px;color:#2C1A00;line-height:2;font-family:var(--serif)}
+
 .haiku-tag{font-size:11px;color:#C8870A;font-weight:600;letter-spacing:.06em}
+
 .why-cta-desc{font-size:14px;color:#5C4A2A;line-height:1.8;text-align:center;margin-top:8px}
+
 .legal-sec{padding:32px 24px;background:#FAF6EF;border-top:1px solid rgba(200,135,10,.12)}
+
 .legal-inner{max-width:680px;margin:0 auto}
+
 .legal-title{font-size:11px;font-weight:600;letter-spacing:.1em;color:#8B7355;margin-bottom:12px;font-family:var(--sans)}
+
 .legal-item{font-size:12px;color:#8B7355;line-height:1.9;padding-left:14px;position:relative;margin-bottom:4px}
+
 .legal-item::before{content:"·";position:absolute;left:0;color:#C8870A}
+
 </style>
+
 </head>
+
 <body>
 
+
+
 <!-- LANG BAR -->
+
 <div id="lang-bar">
+
   <button class="lang-btn active" data-lang="KO"><span class="flag">🇰🇷</span> 한국어</button>
+
   <button class="lang-btn" data-lang="EN"><span class="flag">🇺🇸</span> English</button>
+
   <button class="lang-btn" data-lang="JP"><span class="flag">🇯🇵</span> 日本語</button>
+
   <button class="lang-btn" data-lang="ZH"><span class="flag">🇨🇳</span> 中文</button>
+
 </div>
+
+
 
 <nav>
+
   <a href="/index.html" class="logo">휴먼다큐<span>닷컴</span></a>
+
   <div style="display:flex;align-items:center;gap:10px">
+
     <a href="/filmography.html" style="font-size:12px;color:#C8870A;letter-spacing:.04em;border:1px solid rgba(200,135,10,.35);border-radius:16px;padding:5px 14px;text-decoration:none;font-family:var(--sans)">필모그래피</a>
+
     <a href="/index.html" style="font-size:12px;color:rgba(200,135,10,.6);letter-spacing:.04em;text-decoration:none;font-family:var(--sans)">홈</a>
+
   </div>
+
 </nav>
 
+
+
 <!-- HERO -->
+
 <div class="hero">
+
   <div class="kicker" data-ko="투*필 · TODAY FILMOGRAPHY" data-en="Tu·Fil · TODAY FILMOGRAPHY">투*필 · TODAY FILMOGRAPHY</div>
+
   <h1 data-ko="오늘을 기억하는<br>사람은 별로 없다" data-en="Few people remember ordinary days">오늘을 기억하는<br>사람은 별로 없다</h1>
+
   <p class="hero-sub" data-ko="특별한 날만 기억한다고 생각하기 때문이다.<br>하지만 삶은 오늘의 연속이다." data-en="Because we think only special days are worth remembering.<br>But life is made of ordinary todays.">특별한 날만 기억한다고 생각하기 때문이다.<br>하지만 삶은 오늘의 연속이다.</p>
+
   <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(200,135,10,.1);border:1px solid rgba(200,135,10,.2);border-radius:20px;padding:8px 20px;margin-bottom:28px;font-size:13px;color:#C8870A;font-family:var(--sans);font-weight:400;letter-spacing:.04em" data-ko="🎞️ 이따금 올려두면 나만의 필모그래피 앨범이 만들어집니다" data-en="🎞️ Post occasionally and build your own filmography album">
+
     🎞️ 이따금 올려두면 나만의 필모그래피 앨범이 만들어집니다
+
   </div>
+
   <a href="https://tally.so/r/Bz8LbR" target="_blank" class="btn-primary"><span data-ko="나의 투*필 만들기 →" data-en="Create My Today Filmography →">나의 투*필 만들기 →</span></a>
+
   <span class="btn-hint" data-ko="무료 · 사진 6장 + 한줄 설명 · 바로 결과 확인" data-en="Free · 6 photos + one line · See results instantly">무료 · 사진 6장 + 한줄 설명 · 바로 결과 확인</span>
+
 </div>
+
+
 
 <!-- 철학 -->
+
 <div class="philosophy">
+
   <p class="phil-quote" data-ko="&quot;어제도 아니고, 내일도 아닌<br>지금 이 순간을 담으세요.&quot;" data-en="&quot;Not yesterday, not tomorrow —<br>Capture this very moment.&quot;">
+
     &ldquo;어제도 아니고, 내일도 아닌<br>
+
     지금 이 순간을 담으세요.&rdquo;
+
   </p>
+
   <p class="phil-sub" data-ko="오늘의 밥, 오늘의 하늘, 오늘의 사람 —<br>아무것도 아닌 것 같은 오늘이 쌓여 인생이 됩니다.<br>AI가 오늘의 당신을 한 편의 시로 남겨드립니다." data-en="Today's meal, today's sky, today's people —<br>Ordinary days stack up to become a life.<br>AI turns today's you into a poem.">
+
     오늘의 밥, 오늘의 하늘, 오늘의 사람 —<br>
+
     아무것도 아닌 것 같은 오늘이 쌓여 인생이 됩니다.<br>
+
     AI가 오늘의 당신을 한 편의 시로 남겨드립니다.
+
   </p>
+
 </div>
 
+
+
 <!-- 차별점 + 하이쿠 섹션 -->
+
 <section class="why-sec">
+
   <div class="why-inner">
+
     <div class="why-label" data-ko="인스타그램 · 블로그와 다른 점" data-en="What makes us different from Instagram · blogs">인스타그램 · 블로그와 다른 점</div>
+
     <h2 class="why-title" data-ko="AI가 오늘의 당신을<br><em>하이쿠</em>로 남깁니다" data-en="AI captures today's you<br>in a <em>haiku</em>">AI가 오늘의 당신을<br><em>하이쿠</em>로 남깁니다</h2>
+
     <p class="why-desc" data-ko="인스타는 사진을 올립니다. 블로그는 글을 씁니다.<br>투*필은 사진과 한 줄을 보고 <strong>AI가 직접 시를 지어드립니다.</strong><br>그것도 세계에서 가장 짧고 강렬한 시 형식 — 하이쿠로." data-en="Instagram posts photos. Blogs post words.<br>Today Filmography reads your photos and one line — then AI writes you a poem.<br>In the world's shortest and most powerful poetic form — the haiku.">인스타는 사진을 올립니다. 블로그는 글을 씁니다.<br>투*필은 사진과 한 줄을 보고 <strong>AI가 직접 시를 지어드립니다.</strong><br>그것도 세계에서 가장 짧고 강렬한 시 형식 — 하이쿠로.</p>
+
     <div class="haiku-box">
+
       <div class="haiku-label" data-ko="하이쿠(俳句)란?" data-en="What is a Haiku (俳句)?">하이쿠(俳句)란?</div>
-      <p class="haiku-desc">5·7·5 음절로 이루어진 일본의 전통 시 형식으로, 단순한 일상의 한 장면 안에 깊은 감정과 여운을 담는 것이 특징입니다.<br>짧지만 강렬한 이 형식은 전세계적으로 사랑받으며, 오늘날에도 가장 보편적인 시 형식 중 하나로 남아 있습니다.<br>투*필은 AI가 당신의 사진과 한 줄을 읽고, 오늘의 당신을 하이쿠로 포착합니다.</p>
+
+      <p class="haiku-desc" data-ko="5·7·5 음절로 이루어진 일본의 전통 시 형식으로, 자연과 감각적 순간을 압축적으로 담습니다. 단 17음절 안에 하나의 장면을 완성합니다." data-en="A traditional Japanese poetic form of 5·7·5 syllables, capturing nature and sensory moments in a compressed form. A single scene completed in just 17 syllables.">5·7·5 음절로 이루어진 일본의 전통 시 형식으로, 자연과 감각적 순간을 압축적으로 담습니다. 단 17음절 안에 하나의 장면을 완성합니다.</p>
+
     </div>
+
     <div class="haiku-samples">
+
       <div class="haiku-card">
-        <div class="haiku-photo-desc">📸 오늘 먹은 라면 한 그릇</div>
+
+        <div class="haiku-photo-desc" data-ko="📸 오늘 먹은 라면 한 그릇" data-en="📸 A bowl of ramen I had today">📸 오늘 먹은 라면 한 그릇</div>
+
         <div class="haiku-poem">
+
           <div class="haiku-line">혼자였다</div>
+
           <div class="haiku-line">뚜껑 열던 그 순간도</div>
+
           <div class="haiku-line">맛있었다</div>
+
         </div>
-        <div class="haiku-tag">🍜 감성 버전</div>
+
+        <div class="haiku-tag" data-ko="🍜 감성 버전" data-en="🍜 Emotional">🍜 감성 버전</div>
+
       </div>
+
       <div class="haiku-card">
-        <div class="haiku-photo-desc">📸 오늘 먹은 라면 한 그릇</div>
+
+        <div class="haiku-photo-desc" data-ko="📸 오늘 먹은 라면 한 그릇" data-en="📸 A bowl of ramen I had today">📸 오늘 먹은 라면 한 그릇</div>
+
         <div class="haiku-poem">
+
           <div class="haiku-line">나트륨 1800</div>
+
           <div class="haiku-line">신장아 미안하다</div>
+
           <div class="haiku-line">내일도 먹겠다</div>
+
         </div>
-        <div class="haiku-tag">😂 유머 버전</div>
+
+        <div class="haiku-tag" data-ko="😂 유머 버전" data-en="😂 Humorous">😂 유머 버전</div>
+
       </div>
+
       <div class="haiku-card">
-        <div class="haiku-photo-desc">📸 퇴근길 노을</div>
+
+        <div class="haiku-photo-desc" data-ko="📸 퇴근길 노을" data-en="📸 The sunset on my way home">📸 퇴근길 노을</div>
+
         <div class="haiku-poem">
+
           <div class="haiku-line">버스가 떠났다</div>
+
           <div class="haiku-line">노을이 혼자 예뻤다</div>
+
           <div class="haiku-line">아무도 몰랐다</div>
+
         </div>
-        <div class="haiku-tag">🌅 감성 버전</div>
+
+        <div class="haiku-tag" data-ko="🌅 감성 버전" data-en="🌅 Emotional">🌅 감성 버전</div>
+
       </div>
+
       <div class="haiku-card">
-        <div class="haiku-photo-desc">📸 퇴근길 노을</div>
+
+        <div class="haiku-photo-desc" data-ko="📸 퇴근길 노을" data-en="📸 The sunset on my way home">📸 퇴근길 노을</div>
+
         <div class="haiku-poem">
+
           <div class="haiku-line">버스 놓쳤다</div>
+
           <div class="haiku-line">노을이 위로하는 척</div>
+
           <div class="haiku-line">택시비 나온다</div>
+
         </div>
-        <div class="haiku-tag">😂 유머 버전</div>
+
+        <div class="haiku-tag" data-ko="😂 유머 버전" data-en="😂 Humorous">😂 유머 버전</div>
+
       </div>
+
     </div>
+
     <p class="why-cta-desc" data-ko="같은 사진, 같은 한 줄 — AI가 매번 다른 시를 지어드립니다.<br>감성 버전과 유머 버전, 두 가지로." data-en="Same photo, same line — AI writes a different poem every time.<br>In two versions: emotional and humorous.">같은 사진, 같은 한 줄 — AI가 매번 다른 시를 지어드립니다.<br>감성 버전과 유머 버전, 두 가지로.</p>
+
   </div>
+
 </section>
 
 
+
+
+
 <!-- 지금 누군가의 투*필 -->
+
 <div class="live-sec">
+
   <div style="max-width:480px;margin:0 auto">
+
     <div class="sec-label" style="text-align:center" data-ko="✦ 지금 누군가의 투*필" data-en="✦ Someone's Today Filmography right now">✦ 지금 누군가의 투*필</div>
+
     <div class="live-card" id="live-card">
+
       <div class="live-loading" id="live-loading" data-ko="불러오는 중..." data-en="Loading...">불러오는 중...</div>
+
     </div>
+
     <div class="live-actions">
+
       <button class="btn-next" onclick="loadNext()" data-ko="다음 투*필 보기 →" data-en="Next →">다음 투*필 보기 →</button>
+
     </div>
+
   </div>
+
 </div>
 
+
+
 <!-- 하단 CTA -->
+
 <div class="cta">
+
   <div class="cta-title" data-ko="오늘, 당신의 이야기를<br>시로 남겨드립니다" data-en="Today, let AI turn your story into a poem">오늘, 당신의 이야기를<br>시로 남겨드립니다</div>
+
   <div class="cta-sub" data-ko="사진 6장과 짧은 한 줄 — 그것으로 충분합니다.<br>AI가 오늘의 온도를 시로 담아드립니다." data-en="6 photos and a short line — that's all it takes.<br>AI captures the feeling of your today in verse.">사진 6장과 짧은 한 줄 — 그것으로 충분합니다.<br>AI가 오늘의 온도를 시로 담아드립니다.</div>
+
   <a href="https://tally.so/r/Bz8LbR" target="_blank" class="btn-primary">나의 투*필 만들기 →</a>
+
   <span class="btn-hint" data-ko="무료 · 바로 결과 확인" data-en="Free · See results instantly">무료 · 바로 결과 확인</span>
+
 </div>
+
+
+
+
 
 
 
 <section class="legal-sec">
+
   <div class="legal-inner">
+
     <div class="legal-title" data-ko="📋 이용 전 확인사항" data-en="📋 Before You Start">📋 이용 전 확인사항</div>
-    <p class="legal-item">업로드하시는 사진의 저작권 및 사용 권한은 제출자 본인에게 있어야 합니다.</p>
-    <p class="legal-item">타인의 얼굴이 포함된 사진을 업로드할 경우, 해당 인물의 초상권 동의를 받으신 후 이용해 주세요.</p>
-    <p class="legal-item">AI가 생성한 시(詩)의 저작권은 휴먼다큐에 귀속되며, 개인 감상 목적의 사용은 자유롭게 허용됩니다.</p>
-    <p class="legal-item">제출하신 사진 및 내용은 서비스 운영 목적으로만 사용되며, 제3자에게 제공되지 않습니다.</p>
-    <p class="legal-item">공개를 선택하신 투*필은 서비스 내 다른 사용자에게 노출될 수 있습니다.</p>
+
+    <p class="legal-item" data-ko="업로드하신 사진의 저작권은 본인에게 있으며, 타인의 사진을 무단으로 사용하지 마세요." data-en="You retain copyright of uploaded photos. Do not use others' photos without permission.">업로드하신 사진의 저작권은 본인에게 있으며, 타인의 사진을 무단으로 사용하지 마세요.</p>
+
+    <p class="legal-item" data-ko="사진에 타인이 포함된 경우, 해당 인물의 동의를 받으시기 바랍니다." data-en="If your photos include other people, please obtain their consent.">사진에 타인이 포함된 경우, 해당 인물의 동의를 받으시기 바랍니다.</p>
+
+    <p class="legal-item" data-ko="AI가 생성한 시의 저작권은 서비스 정책에 따르며, 상업적 이용은 별도 문의 바랍니다." data-en="Copyright of AI-generated poems follows our service policy. Contact us for commercial use.">AI가 생성한 시의 저작권은 서비스 정책에 따르며, 상업적 이용은 별도 문의 바랍니다.</p>
+
+    <p class="legal-item" data-ko="입력하신 정보는 AI 시 생성에만 사용되며, 외부에 공개되지 않습니다." data-en="Your information is used solely for AI poem generation and will not be disclosed.">입력하신 정보는 AI 시 생성에만 사용되며, 외부에 공개되지 않습니다.</p>
+
+    <p class="legal-item" data-ko="공개 설정된 투*필은 실시간 섹션에 노출될 수 있습니다." data-en="Public Today Filmography entries may appear in the live section.">공개 설정된 투*필은 실시간 섹션에 노출될 수 있습니다.</p>
+
   </div>
+
 </section>
 
+
+
 <footer>
+
   <!-- 다른 서비스 카드 -->
+
   <div style="max-width:480px;margin:0 auto 24px;display:flex;flex-direction:column;gap:10px">
+
     <div style="font-size:11px;color:#9e8250;letter-spacing:.12em;text-align:center;margin-bottom:4px" data-ko="휴먼다큐의 다른 서비스" data-en="More from Humandocu">휴먼다큐의 다른 서비스</div>
+
     <a href="/sixshot.html" style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:#fff;border:1px solid rgba(200,135,10,.25);border-radius:10px;text-decoration:none">
+
       <div style="font-size:22px">🎞</div>
+
       <div>
+
         <div style="font-size:13px;font-weight:600;color:#C8870A;margin-bottom:2px" data-ko="인생 식스샷" data-en="Life Six Shot">인생 식스샷</div>
+
         <div style="font-size:11px;color:#8A6A3A;line-height:1.5" data-ko="내 인생의 6장면 · AI가 필모그래피로" data-en="6 scenes of my life · AI turns them into a filmography">내 인생의 6장면 · AI가 필모그래피로</div>
+
       </div>
+
       <div style="margin-left:auto;font-size:16px;color:rgba(200,135,10,.5)">→</div>
+
     </a>
+
     <a href="/memorial.html" style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:#fff;border:1px solid rgba(100,100,120,.15);border-radius:10px;text-decoration:none">
+
       <div style="font-size:22px">🕯</div>
+
       <div>
+
         <div style="font-size:13px;font-weight:600;color:#555;margin-bottom:2px" data-ko="디지털 부고 · 메모리얼" data-en="Digital Obituary · Memorial">디지털 부고 · 메모리얼</div>
+
         <div style="font-size:11px;color:#8A6A3A;line-height:1.5" data-ko="소중한 분의 마지막을 품격 있게" data-en="A dignified farewell for someone precious">소중한 분의 마지막을 품격 있게</div>
+
       </div>
+
       <div style="margin-left:auto;font-size:16px;color:rgba(100,100,120,.3)">→</div>
+
     </a>
+
     <a href="/index.html" style="display:flex;align-items:center;gap:14px;padding:13px 18px;background:#FFF8ED;border:1.5px solid rgba(200,135,10,.5);border-radius:10px;text-decoration:none">
+
       <div style="font-size:18px">🏠</div>
+
       <div style="font-size:13px;font-weight:600;color:#C8870A" data-ko="휴먼다큐 홈으로" data-en="Back to Humandocu Home">휴먼다큐 홈으로</div>
+
       <div style="margin-left:auto;font-size:16px;color:#C8870A">→</div>
+
     </a>
+
   </div>
+
   <div class="ft" data-ko="© 2026 휴먼다큐 · humandocu.com · 031-539-9709" data-en="© 2026 Humandocu · humandocu.com · 031-539-9709">© 2026 휴먼다큐 · humandocu.com · 031-539-9709</div>
+
 </footer>
 
+
+
 <!-- 홈화면 추가 유도 배너 -->
+
 <div id="pwa-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:999;background:#C8870A;color:#FFF8ED;padding:14px 20px 18px;text-align:center;font-size:13px;line-height:1.6;box-shadow:0 -2px 12px rgba(200,135,10,.3)">
+
   <div style="max-width:480px;margin:0 auto;position:relative">
+
     <button onclick="document.getElementById('pwa-banner').style.display='none'" style="position:absolute;right:0;top:0;background:none;border:none;color:#FFF8ED;font-size:18px;cursor:pointer;opacity:.7;padding:0 4px">×</button>
+
     <div style="font-weight:500;margin-bottom:2px" data-ko="📱 매일 쓰는 투*필, 홈화면에 추가하세요" data-en="📱 Use Today Filmography daily — add to your home screen">📱 매일 쓰는 투*필, 홈화면에 추가하세요</div>
+
     <div style="opacity:.85;font-size:12px" id="pwa-guide-text">아래 공유버튼 → "홈 화면에 추가"</div>
+
   </div>
+
 </div>
 
+
+
 <script>
+
 // 홈화면 추가 유도 배너 — 앱으로 실행 중이면 숨김
+
 (function(){
+
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches
+
                     || window.navigator.standalone === true;
+
   if(isStandalone) return; // 이미 앱으로 실행 중
 
+
+
   const dismissed = sessionStorage.getItem('pwa-banner-dismissed');
+
   if(dismissed) return;
 
+
+
   // Android Chrome: beforeinstallprompt 이벤트
+
   let deferredPrompt;
+
   window.addEventListener('beforeinstallprompt', (e) => {
+
     e.preventDefault();
+
     deferredPrompt = e;
+
     const banner = document.getElementById('pwa-banner');
+
     const guide = document.getElementById('pwa-guide-text');
+
     guide.textContent = '아래 버튼을 눌러 홈화면에 추가하세요';
+
     banner.style.display = 'block';
 
+
+
     // 배너 클릭 시 설치 프롬프트 실행
+
     banner.addEventListener('click', async (ev) => {
+
       if(ev.target.tagName === 'BUTTON') return;
+
       deferredPrompt.prompt();
+
       const { outcome } = await deferredPrompt.userChoice;
+
       banner.style.display = 'none';
+
     }, {once:true});
+
   });
+
+
 
   // iOS Safari: beforeinstallprompt 없음 → 3초 후 배너 표시
+
   const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+
   const isSafari = /safari/i.test(navigator.userAgent) && !/chrome/i.test(navigator.userAgent);
+
   if(isIOS && isSafari){
+
     setTimeout(() => {
+
       document.getElementById('pwa-guide-text').textContent = '하단 공유(□↑) 버튼 → "홈 화면에 추가"';
+
       document.getElementById('pwa-banner').style.display = 'block';
+
     }, 3000);
+
   }
+
+
 
   // 닫기 버튼
+
   document.querySelector('#pwa-banner button').addEventListener('click', () => {
+
     sessionStorage.setItem('pwa-banner-dismissed', '1');
+
   });
+
 })();
+
 </script>
 
+
+
 <script>
+
 const API = 'https://humandocu-server-production.up.railway.app/api/sixshot/random?type=today';
 
+
+
 function extractPoem(poems) {
+
   if (!poems) return '';
+
   var norm = poems.indexOf('\n') < 0 && poems.indexOf('[') >= 0
+
     ? poems.replace(/\[/g, '\n[') : poems;
+
   var lines = norm.split('\n');
+
   var rep = '', in_rep = false;
+
   for (var i = 0; i < lines.length; i++) {
+
     var l = lines[i].trim();
+
     if (l === '[대표]') { in_rep = true; continue; }
+
     if (in_rep && l.startsWith('[')) break;
+
     if (in_rep && l) rep += l + '\n';
+
   }
+
   return rep.trim();
+
 }
+
+
 
 let currentDocId = '';
 
+
+
 async function loadNext() {
+
   var card = document.getElementById('live-card');
+
   card.innerHTML = '<div class="live-loading">불러오는 중...</div>';
+
   try {
+
     var url = API + (currentDocId ? '&exclude=' + currentDocId : '');
+
     var res  = await fetch(url);
+
     var json = await res.json();
+
     if (json.status !== 'ok' || !json.data) {
+
       card.innerHTML = '<div class="live-loading" style="color:#6B5A3A">아직 공개된 투*필이 없어요</div>';
+
       return;
+
     }
+
     var d = json.data;
+
     currentDocId = d.doc_id || '';
+
     var poem = extractPoem(d.poems);
+
     var poemHtml = poem ? poem.split('\n').filter(function(l){return l.trim();}).map(function(l){
+
       return '<div>' + l + '</div>';
+
     }).join('') : '';
 
+
+
     var imgs = d.shot_images || {};
+
     var photosHtml = '';
+
     for (var i = 1; i <= 3; i++) {
+
       if (imgs[String(i)]) {
+
         photosHtml += '<img class="live-photo" src="' + imgs[String(i)] + '" onerror="this.parentNode.removeChild(this)">';
+
       }
+
     }
 
+
+
     card.innerHTML =
+
       (photosHtml ? '<div class="live-photos">' + photosHtml + '</div>' : '') +
+
       '<div class="live-name">' + (d.name || '') + '</div>' +
+
       '<div class="live-identity">' + (d.identity || '') + '</div>' +
+
       (poemHtml ? '<div class="live-poem">' + poemHtml + '</div>' : '') +
+
       '<div style="margin-top:18px;text-align:center">' +
+
       '<a href="https://humandocu-server-production.up.railway.app/sixshot/' + d.doc_id + '" target="_blank" style="display:inline-block;padding:10px 28px;background:#C8870A;color:#FFF8ED;font-size:13px;font-weight:600;border-radius:6px;text-decoration:none;letter-spacing:.06em">' + d.name + '님의 투*필 보기 →</a>' +
+
       '</div>';
+
   } catch(e) {
+
     card.innerHTML = '<div class="live-loading" style="color:#6B5A3A">잠시 후 다시 시도해주세요</div>';
+
   }
+
 }
 
+
+
 loadNext();
+
 </script>
+
+
+
 
 
 <script>
+
 (function () {
+
   function applyLang(lang) {
+
     var l = lang.toLowerCase();
+
     document.querySelectorAll('[data-ko]').forEach(function (el) {
+
       var text = el.getAttribute('data-' + l);
+
       if (text) el.innerHTML = text;
+
     });
+
     document.querySelectorAll('.lang-btn').forEach(function (b) {
+
       b.classList.toggle('active', b.dataset.lang === lang);
+
     });
+
   }
+
   var saved = localStorage.getItem('lang') || 'KO';
+
   applyLang(saved);
+
   document.querySelectorAll('.lang-btn').forEach(function (btn) {
+
     btn.addEventListener('click', function () {
+
       var lang = this.dataset.lang;
+
       localStorage.setItem('lang', lang);
+
       applyLang(lang);
+
     });
+
   });
+
 })();
+
 </script>
 
+
+
 </body>
+
 </html>
+
 <!-- og updated Wed May  6 09:07:13 UTC 2026 -->
+
