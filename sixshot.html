@@ -42,12 +42,37 @@
 html{scroll-behavior:smooth}
 body{background:#fff;color:#1A1208;font-family:var(--sans);font-size:16px;font-weight:300;line-height:1.9;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 a{text-decoration:none;color:inherit}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 48px;background:rgba(255,251,240,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,135,10,.18)}
+
+/* LANG BAR */
+#lang-bar{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  display:flex;justify-content:flex-start;align-items:center;
+  height:44px;padding:0 16px;gap:6px;
+  background:#ffffff;
+  border-bottom:1px solid #e8e0d5;
+  box-shadow:0 1px 4px rgba(0,0,0,.06);
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+#lang-bar::-webkit-scrollbar{display:none}
+.lang-btn{
+  display:flex;align-items:center;gap:5px;
+  background:transparent;border:1.5px solid #cccccc;cursor:pointer;
+  font-size:13px;font-weight:600;letter-spacing:.03em;
+  color:#333333;padding:4px 14px;border-radius:20px;
+  font-family:var(--sans);transition:color .15s,background .15s,border-color .15s;
+  line-height:1;white-space:nowrap;
+}
+.lang-btn .flag{font-size:16px;line-height:1}
+.lang-btn:hover{background:#f5f1eb;border-color:#b8a87e;color:#111111}
+.lang-btn.active{background:#c8a96e;border-color:#c8a96e;color:#ffffff}
+
+nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 48px;background:rgba(255,251,240,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,135,10,.18)}
 .logo{font-family:var(--serif);font-size:14px;font-weight:300;color:var(--ink3);letter-spacing:.08em}
 .logo span{color:var(--amber);font-weight:400}
 .nav-back{font-size:13px;color:var(--amber);font-family:var(--sans);font-weight:300;cursor:pointer}
 @media(max-width:860px){nav{padding:12px 20px}}
-.hero{padding:72px 20px 32px;text-align:center;background:var(--amber-lt);border-bottom:1px solid rgba(200,135,10,.25)}
+.hero{padding:116px 20px 32px;text-align:center;background:var(--amber-lt);border-bottom:1px solid rgba(200,135,10,.25)}
 .kicker{display:inline-block;font-size:11px;font-family:var(--sans);font-weight:500;letter-spacing:.2em;color:#7A5A1A;background:rgba(200,169,110,.15);border:1px solid rgba(200,169,110,.3);padding:4px 14px;border-radius:20px;margin-bottom:16px}
 .hero h1{font-family:var(--serif);font-size:22px;font-weight:400;color:#1A1208;line-height:1.5;letter-spacing:.04em;margin-bottom:12px}
 .hero-sub{font-size:14px;font-family:var(--sans);font-weight:300;color:#5A4020;line-height:1.8;margin-bottom:24px}
@@ -132,7 +157,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .btn-next-shot{background:transparent;color:#C8870A;font-size:15px;font-family:var(--sans);font-weight:400;padding:11px 32px;border-radius:20px;border:1px solid rgba(200,135,10,.4);cursor:pointer;letter-spacing:.06em;transition:all .2s}
 .btn-next-shot:hover{background:rgba(200,135,10,.1);border-color:#C8870A}
 
-@media(min-width:640px){.hero{padding:100px 40px 48px}.hero h1{font-size:30px}.haiku-sec,.bridge-sec,.how-sec,.sample-sec,.today-sec,.share-sec,.bottom-cta{padding:48px 40px}.update-sec{padding:32px 40px}}
+@media(min-width:640px){.hero{padding:140px 40px 48px}.hero h1{font-size:30px}.haiku-sec,.bridge-sec,.how-sec,.sample-sec,.today-sec,.share-sec,.bottom-cta{padding:48px 40px}.update-sec{padding:32px 40px}}
 @media(max-width:639px){.today-photos{grid-template-columns:repeat(3,1fr)}}
 
 .update-sec{padding:24px 20px;text-align:center;background:#fff;border-bottom:1px solid var(--amber-md)}
@@ -160,48 +185,131 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
 </head>
 <body>
 
+<div id="lang-bar">
+  <button class="lang-btn active" data-lang="KO"><span class="flag">🇰🇷</span> 한국어</button>
+  <button class="lang-btn" data-lang="EN"><span class="flag">🇺🇸</span> English</button>
+  <button class="lang-btn" data-lang="JP"><span class="flag">🇯🇵</span> 日本語</button>
+  <button class="lang-btn" data-lang="ZH"><span class="flag">🇨🇳</span> 中文</button>
+</div>
+
 <nav>
   <a href="/index.html" class="logo">휴먼다큐닷컴 <span>/ Six Shot</span></a>
   <div style="display:flex;align-items:center;gap:10px">
-    <a href="/filmography.html" style="font-size:12px;color:var(--amber);letter-spacing:.04em;border:1px solid rgba(200,135,10,.35);border-radius:16px;padding:5px 14px;text-decoration:none;font-family:var(--sans)">필모그래피</a>
-    <a href="/index.html" style="font-size:12px;color:rgba(200,135,10,.6);letter-spacing:.04em;text-decoration:none;font-family:var(--sans)">홈</a>
+    <a href="/filmography.html" style="font-size:12px;color:var(--amber);letter-spacing:.04em;border:1px solid rgba(200,135,10,.35);border-radius:16px;padding:5px 14px;text-decoration:none;font-family:var(--sans)" data-ko="필모그래피" data-en="Filmography" data-jp="フィルモグラフィー" data-zh="作品集">필모그래피</a>
+    <a href="/index.html" style="font-size:12px;color:rgba(200,135,10,.6);letter-spacing:.04em;text-decoration:none;font-family:var(--sans)" data-ko="홈" data-en="Home" data-jp="ホーム" data-zh="主页">홈</a>
   </div>
 </nav>
 
 <div class="hero">
   <div class="kicker">SIX SHOT · 식스샷</div>
-  <h1>내 삶에서 가장 빛나는 여섯 순간.<br>지금, 당신의 필모그래피를 만드세요.</h1>
-  <p class="hero-sub">사진 6장과 짧은 이야기를 올리면<br>AI가 시로 다듬고, 당신을 한 문장으로 정의합니다.</p>
-  <a href="https://tally.so/r/ZjGpk0" target="_blank" class="btn-primary">나의 오늘의 6장 만들기 →</a>
-  <span class="btn-hint">무료 · 3분이면 완성 · 언제든 수정 가능</span>
+  <h1
+    data-ko="내 삶에서 가장 빛나는 여섯 순간."
+    data-en="Six moments that defined your life."
+    data-jp="あなたの人生を輝かせた、六つの瞬間。"
+    data-zh="定义你人生的六个闪光瞬间。">내 삶에서 가장 빛나는 여섯 순간.</h1>
+  <p class="hero-sub"
+    data-ko="사진 6장과 짧은 이야기를 올리면<br>AI가 시로 다듬고, 당신을 한 문장으로 정의합니다."
+    data-en="Upload 6 photos with short stories.<br>AI turns them into poetry and defines you in one sentence."
+    data-jp="6枚の写真と短いエピソードをアップロードすると、<br>AIが詩に昇華し、あなたを一文で定義します。"
+    data-zh="上传6张照片与简短故事，<br>AI将为你创作诗歌，用一句话定义你。">사진 6장과 짧은 이야기를 올리면<br>AI가 시로 다듬고, 당신을 한 문장으로 정의합니다.</p>
+  <a href="https://tally.so/r/ZjGpk0" target="_blank" class="btn-primary cta-btn"
+    data-ko="나의 식스샷 만들기 →"
+    data-en="Create My Six Shot →"
+    data-jp="マイ·シックスショットを作る →"
+    data-zh="创建我的六镜头 →">나의 식스샷 만들기 →</a>
+  <span class="btn-hint"
+    data-ko="무료 · 3분이면 완성 · 언제든 수정 가능"
+    data-en="Free · Done in 3 min · Edit anytime"
+    data-jp="無料 · 3分で完成 · いつでも修正可能"
+    data-zh="免费 · 3分钟完成 · 随时可修改">무료 · 3분이면 완성 · 언제든 수정 가능</span>
 </div>
 
 <div class="haiku-sec">
-  <div class="sec-label">— 필모그래피 —</div>
-  <div class="haiku-text">
-    여섯 장의 사진,<br>
-    그 안에 담긴 한 사람 —<br>
-    이것이 당신의 이야기입니다
-  </div>
-  <div class="haiku-body">
-    누구의 삶이든 영화가 됩니다.<br>
-    가장 빛났던 순간, 가장 솔직했던 표정, 가장 나다운 하루.<br>
-    여섯 장으로 당신을 정의하세요.
-  </div>
+  <div class="sec-label"
+    data-ko="— 필모그래피 —"
+    data-en="— Filmography —"
+    data-jp="— フィルモグラフィー —"
+    data-zh="— 人生影集 —">— 필모그래피 —</div>
+  <div class="haiku-text"
+    data-ko="여섯 장의 사진,<br>그 안에 담긴 한 사람 —<br>이것이 당신의 이야기입니다"
+    data-en="Six photographs,<br>one person held within —<br>this is your story."
+    data-jp="六枚の写真、<br>その中に宿る一人の人 —<br>これがあなたの物語です"
+    data-zh="六张照片，<br>一个人的全部 —<br>这就是你的故事。">여섯 장의 사진,<br>그 안에 담긴 한 사람 —<br>이것이 당신의 이야기입니다</div>
+  <div class="haiku-body"
+    data-ko="누구의 삶이든 영화가 됩니다.<br>가장 빛났던 순간, 가장 솔직했던 표정, 가장 나다운 하루.<br>여섯 장으로 당신을 정의하세요."
+    data-en="Every life becomes a film.<br>Your brightest moment, your most honest expression, your most you day.<br>Define yourself in six."
+    data-jp="誰の人生も映画になります。<br>最も輝いた瞬間、最も素直だった表情、最も自分らしかった一日。<br>六枚であなたを定義してください。"
+    data-zh="每个人的生命都是一部电影。<br>最闪光的时刻，最真实的表情，最像自己的那一天。<br>用六张照片定义你自己。">누구의 삶이든 영화가 됩니다.<br>가장 빛났던 순간, 가장 솔직했던 표정, 가장 나다운 하루.<br>여섯 장으로 당신을 정의하세요.</div>
 </div>
 
 <div class="how-sec">
-  <div class="sec-label" style="text-align:center">이렇게 됩니다</div>
+  <div class="sec-label" style="text-align:center"
+    data-ko="이렇게 됩니다"
+    data-en="How It Works"
+    data-jp="こうなります"
+    data-zh="流程如下">이렇게 됩니다</div>
   <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-title">사진 6장 올리기</div><div class="step-desc">내 삶에서 가장<br>의미있는 순간들</div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-title">한 줄 설명</div><div class="step-desc">각 사진마다<br>짧게 써주세요</div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-title">AI가 다듬기</div><div class="step-desc">시와 총평으로<br>당신을 정의합니다</div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-title">링크로 공유</div><div class="step-desc">카톡·인스타·명함에<br>담으세요</div></div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title"
+        data-ko="사진 6장 올리기"
+        data-en="Upload 6 Photos"
+        data-jp="6枚の写真をアップ"
+        data-zh="上传6张照片">사진 6장 올리기</div>
+      <div class="step-desc"
+        data-ko="내 삶에서 가장<br>의미있는 순간들"
+        data-en="The most meaningful<br>moments of your life"
+        data-jp="人生で最も<br>意味のある瞬間"
+        data-zh="人生中最<br>有意义的瞬间">내 삶에서 가장<br>의미있는 순간들</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title"
+        data-ko="한 줄 설명"
+        data-en="Add One Line"
+        data-jp="一行メモ"
+        data-zh="一行描述">한 줄 설명</div>
+      <div class="step-desc"
+        data-ko="각 사진마다<br>짧게 써주세요"
+        data-en="Write a short note<br>for each photo"
+        data-jp="各写真に<br>短く書いてください"
+        data-zh="为每张照片<br>简短描述">각 사진마다<br>짧게 써주세요</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title"
+        data-ko="AI가 다듬기"
+        data-en="AI Writes Poetry"
+        data-jp="AIが詩を作成"
+        data-zh="AI创作诗歌">AI가 다듬기</div>
+      <div class="step-desc"
+        data-ko="시와 총평으로<br>당신을 정의합니다"
+        data-en="Your life defined<br>in verse"
+        data-jp="詩と総評で<br>あなたを定義します"
+        data-zh="用诗歌与总结<br>定义你的人生">시와 총평으로<br>당신을 정의합니다</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-title"
+        data-ko="링크로 공유"
+        data-en="Share Your Link"
+        data-jp="リンクで共有"
+        data-zh="链接分享">링크로 공유</div>
+      <div class="step-desc"
+        data-ko="카톡·인스타·명함에<br>담으세요"
+        data-en="On KakaoTalk,<br>Instagram, or your card"
+        data-jp="LINE·Instagram·<br>名刺に添えて"
+        data-zh="分享到微信·<br>Instagram·名片">카톡·인스타·명함에<br>담으세요</div>
+    </div>
   </div>
 </div>
 
 <div class="sample-sec">
-  <div class="sec-label" style="text-align:center">완성하면 이렇게 됩니다</div>
+  <div class="sec-label" style="text-align:center"
+    data-ko="완성하면 이렇게 됩니다"
+    data-en="What It Looks Like"
+    data-jp="完成するとこうなります"
+    data-zh="完成后的样子">완성하면 이렇게 됩니다</div>
   <div class="sample-card">
     <div class="sample-header">
       <div class="sample-avatar">비</div>
@@ -232,95 +340,166 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
     </div>
     <div class="sample-link-box">
       <span class="sample-link-url">humandocu.com/sixshot/eb9809fbcb85</span>
-      <a href="https://humandocu-server-production.up.railway.app/sixshot/eb9809fbcb85" target="_blank" class="sample-link-copy">전체보기 →</a>
+      <a href="https://humandocu-server-production.up.railway.app/sixshot/eb9809fbcb85" target="_blank" class="sample-link-copy"
+        data-ko="전체보기 →"
+        data-en="View Full →"
+        data-jp="全体を見る →"
+        data-zh="查看全文 →">전체보기 →</a>
     </div>
   </div>
 </div>
 
 <!-- TODAY SIXSHOT -->
 <div class="today-sec">
-  <div class="today-sec-label">✦ 오늘의 식스샷 ✦</div>
-  <div class="today-sec-sub">공개를 선택한 누군가의 이야기 — 운명처럼 만납니다</div>
+  <div class="today-sec-label"
+    data-ko="✦ 오늘의 식스샷 ✦"
+    data-en="✦ Someone's Six Shot ✦"
+    data-jp="✦ 今日のシックスショット ✦"
+    data-zh="✦ 今日六镜头 ✦">✦ 오늘의 식스샷 ✦</div>
+  <div class="today-sec-sub"
+    data-ko="공개를 선택한 누군가의 이야기 — 운명처럼 만납니다"
+    data-en="A story from someone who chose to share — meet them by chance"
+    data-jp="公開を選んだ誰かの物語 — 運命のように出会います"
+    data-zh="某人选择公开的故事 — 与你不期而遇">공개를 선택한 누군가의 이야기 — 운명처럼 만납니다</div>
   <div class="today-card" id="today-card">
     <div class="today-loading">불러오는 중</div>
   </div>
   <div class="next-bar" id="next-bar">
-    <button class="btn-next-shot" id="btn-next" onclick="handleNextShot()">다음 식스샷 보기 →</button>
+    <button class="btn-next-shot" id="btn-next" onclick="handleNextShot()"
+      data-ko="다음 식스샷 보기 →"
+      data-en="Next Six Shot →"
+      data-jp="次のシックスショット →"
+      data-zh="下一个六镜头 →">다음 식스샷 보기 →</button>
   </div>
 </div>
 
 <div class="update-sec">
-  <p><strong>언제든 수정할 수 있습니다.</strong><br>삶은 계속되니까요. 오늘의 나와 1년 후의 나는 다릅니다.<br>식스샷은 함께 자랍니다.</p>
+  <p
+    data-ko="<strong>언제든 수정할 수 있습니다.</strong><br>삶은 계속되니까요. 오늘의 나와 1년 후의 나는 다릅니다.<br>식스샷은 함께 자랍니다."
+    data-en="<strong>You can update it anytime.</strong><br>Life keeps going. The you of today differs from the you of a year from now.<br>Your Six Shot grows with you."
+    data-jp="<strong>いつでも修正できます。</strong><br>人生は続くから。今日の自分と1年後の自分は違います。<br>シックスショットは一緒に成長します。"
+    data-zh="<strong>随时可以更新。</strong><br>生活还在继续。今天的你和一年后的你不一样。<br>六镜头与你一起成长。"><strong>언제든 수정할 수 있습니다.</strong><br>삶은 계속되니까요. 오늘의 나와 1년 후의 나는 다릅니다.<br>식스샷은 함께 자랍니다.</p>
 </div>
 
 <div class="share-sec">
-  <div class="sec-label" style="text-align:center">이런 곳에 쓰세요</div>
+  <div class="sec-label" style="text-align:center"
+    data-ko="이런 곳에 쓰세요"
+    data-en="Where to Use It"
+    data-jp="こんな場所で使えます"
+    data-zh="适用场景">이런 곳에 쓰세요</div>
   <div class="share-badges">
-    <div class="badge">카카오톡 프로필</div>
-    <div class="badge">인스타 바이오 링크</div>
-    <div class="badge">디지털 명함</div>
-    <div class="badge">자기소개</div>
-    <div class="badge">연말 회고</div>
-    <div class="badge">생일 기념</div>
+    <div class="badge" data-ko="카카오톡 프로필" data-en="KakaoTalk Profile" data-jp="LINEプロフィール" data-zh="微信个人页">카카오톡 프로필</div>
+    <div class="badge" data-ko="인스타 바이오 링크" data-en="Instagram Bio Link" data-jp="Instagramプロフ" data-zh="Instagram简介链接">인스타 바이오 링크</div>
+    <div class="badge" data-ko="디지털 명함" data-en="Digital Business Card" data-jp="デジタル名刺" data-zh="数字名片">디지털 명함</div>
+    <div class="badge" data-ko="자기소개" data-en="Self-Introduction" data-jp="自己紹介" data-zh="自我介绍">자기소개</div>
+    <div class="badge" data-ko="연말 회고" data-en="Year-End Reflection" data-jp="年末の振り返り" data-zh="年终回顾">연말 회고</div>
+    <div class="badge" data-ko="생일 기념" data-en="Birthday Milestone" data-jp="誕生日記念" data-zh="生日纪念">생일 기념</div>
   </div>
 </div>
 
 <div class="bridge-sec">
-  <div class="bridge-opener">사진은 남습니다.<br>당신이 고르든, <em>남이 고르든.</em></div>
+  <div class="bridge-opener"
+    data-ko="사진은 남습니다.<br>당신이 고르든, <em>남이 고르든.</em>"
+    data-en="Photos remain.<br>Whether you choose them, <em>or someone else does.</em>"
+    data-jp="写真は残ります。<br>あなたが選ぶにせよ、<em>誰かが選ぶにせよ。</em>"
+    data-zh="照片会留存。<br>无论是你选，<em>还是别人替你选。</em>">사진은 남습니다.<br>당신이 고르든, <em>남이 고르든.</em></div>
   <div class="bridge-divider"></div>
-  <div class="bridge-hook">
-    당신의 인생을 사진 6장으로 남긴다면,<br>
-    지금 바로 고를 수 있나요?<br><br>
-    <strong>당신이 직접 고르지 않으면, 남이 고릅니다.</strong>
-  </div>
-  <div class="bridge-body">
-    장례식장 한켠에서 가족이 허둥지둥 고르는 사진 말고,<br>
-    지금 내가 직접 골라두는 것 —<br>
-    그게 가족에게 줄 수 있는 마지막 선물입니다.<br><br>
-    그러니까, 지금 바로. 재밌게.
-  </div>
-  <a href="/index.html#pricing" class="bridge-link">→ 부고·메모리얼 서비스와도 연결됩니다</a>
+  <div class="bridge-hook"
+    data-ko="당신의 인생을 사진 6장으로 남긴다면,<br>지금 바로 고를 수 있나요?<br><br><strong>당신이 직접 고르지 않으면, 남이 고릅니다.</strong>"
+    data-en="If your life were told in six photos,<br>could you choose them right now?<br><br><strong>If you don't choose, someone else will.</strong>"
+    data-jp="あなたの人生を6枚の写真で残すなら、<br>今すぐ選べますか？<br><br><strong>あなたが選ばなければ、誰かが選びます。</strong>"
+    data-zh="如果你的人生要用6张照片留存，<br>你现在能立刻选出来吗？<br><br><strong>不是你选，就是别人替你选。</strong>">당신의 인생을 사진 6장으로 남긴다면,<br>지금 바로 고를 수 있나요?<br><br><strong>당신이 직접 고르지 않으면, 남이 고릅니다.</strong></div>
+  <div class="bridge-body"
+    data-ko="장례식장 한켠에서 가족이 허둥지둥 고르는 사진 말고,<br>지금 내가 직접 골라두는 것 —<br>그게 가족에게 줄 수 있는 마지막 선물입니다.<br><br>그러니까, 지금 바로. 재밌게."
+    data-en="Not the photos a family rushes to find at a funeral hall,<br>but ones you chose yourself, now —<br>that's the last gift you can give them.<br><br>So, right now. And make it fun."
+    data-jp="葬儀場で家族が慌てて選ぶ写真ではなく、<br>今自分で選んでおくこと —<br>それが家族へ贈れる最後のプレゼントです。<br><br>だから、今すぐ。楽しみながら。"
+    data-zh="不是家人在葬礼上慌乱翻找的那些，<br>而是你现在亲自挑选留下的——<br>这是你能给家人的最后一份礼物。<br><br>所以，就是现在。轻松来做。">장례식장 한켠에서 가족이 허둥지둥 고르는 사진 말고,<br>지금 내가 직접 골라두는 것 —<br>그게 가족에게 줄 수 있는 마지막 선물입니다.<br><br>그러니까, 지금 바로. 재밌게.</div>
+  <a href="/index.html#pricing" class="bridge-link"
+    data-ko="→ 부고·메모리얼 서비스와도 연결됩니다"
+    data-en="→ Also connects to our memorial service"
+    data-jp="→ 訃報·メモリアルサービスとも連携します"
+    data-zh="→ 也与讣告·纪念服务相连">→ 부고·메모리얼 서비스와도 연결됩니다</a>
 </div>
 
 <div class="bottom-cta">
-  <div class="bottom-cta-text">
-    지금 이 순간도<br>
-    <em>당신의 여섯 장 중 하나입니다.</em><br>
-    기념해 보세요.
-  </div>
-  <a href="https://tally.so/r/ZjGpk0" target="_blank" class="btn-primary">나의 오늘의 6장 만들기 →</a>
-  <span class="btn-hint">무료 · 3분이면 완성 · 언제든 수정 가능</span>
+  <div class="bottom-cta-text"
+    data-ko="지금 이 순간도<br><em>당신의 여섯 장 중 하나입니다.</em><br>기념해 보세요."
+    data-en="This very moment<br><em>could be one of your six.</em><br>Capture it."
+    data-jp="この瞬間も<br><em>あなたの六枚のうちの一枚です。</em><br>記念してみましょう。"
+    data-zh="此刻<br><em>也是你六张之一。</em><br>记录下来吧。">지금 이 순간도<br><em>당신의 여섯 장 중 하나입니다.</em><br>기념해 보세요.</div>
+  <a href="https://tally.so/r/ZjGpk0" target="_blank" class="btn-primary cta-btn"
+    data-ko="나의 식스샷 만들기 →"
+    data-en="Create My Six Shot →"
+    data-jp="マイ·シックスショットを作る →"
+    data-zh="创建我的六镜头 →">나의 식스샷 만들기 →</a>
+  <span class="btn-hint"
+    data-ko="무료 · 3분이면 완성 · 언제든 수정 가능"
+    data-en="Free · Done in 3 min · Edit anytime"
+    data-jp="無料 · 3分で完成 · いつでも修正可能"
+    data-zh="免费 · 3分钟完成 · 随时可修改">무료 · 3분이면 완성 · 언제든 수정 가능</span>
 </div>
 
 <div class="connect-strip">
-  <span>식스샷에서 남긴 이야기가 메모리얼로 이어집니다</span>
+  <span
+    data-ko="식스샷에서 남긴 이야기가 메모리얼로 이어집니다"
+    data-en="Your Six Shot story connects to our memorial service"
+    data-jp="シックスショットの記録がメモリアルへとつながります"
+    data-zh="六镜头的故事与纪念服务相连">식스샷에서 남긴 이야기가 메모리얼로 이어집니다</span>
   <div class="connect-dot"></div>
-  <a href="/index.html#pricing">메모리얼 서비스 보기 →</a>
+  <a href="/index.html#pricing"
+    data-ko="메모리얼 서비스 보기 →"
+    data-en="View Memorial Service →"
+    data-jp="メモリアルサービスを見る →"
+    data-zh="查看纪念服务 →">메모리얼 서비스 보기 →</a>
 </div>
 
 <footer>
   <!-- 다른 서비스 카드 -->
   <div style="width:100%;max-width:480px;margin:0 auto 20px;display:flex;flex-direction:column;gap:10px">
-    <div style="font-size:11px;color:#9e8250;letter-spacing:.12em;text-align:center;margin-bottom:4px">휴먼다큐의 다른 서비스</div>
+    <div style="font-size:11px;color:#9e8250;letter-spacing:.12em;text-align:center;margin-bottom:4px"
+      data-ko="휴먼다큐의 다른 서비스"
+      data-en="Other Services"
+      data-jp="他のサービス"
+      data-zh="其他服务">휴먼다큐의 다른 서비스</div>
     <a href="/today.html" style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:#fff;border:1px solid rgba(200,135,10,.25);border-radius:10px;text-decoration:none">
       <div style="font-size:22px">📅</div>
       <div>
-        <div style="font-size:13px;font-weight:600;color:#C8870A;margin-bottom:2px">투*필 · 오늘의 필모그래피</div>
-        <div style="font-size:11px;color:#8A6A3A;line-height:1.5">오늘 사진 6장 · 매일 쌓이는 나의 기록</div>
+        <div style="font-size:13px;font-weight:600;color:#C8870A;margin-bottom:2px"
+          data-ko="투*필 · 오늘의 필모그래피"
+          data-en="Tu·Fil · Today Filmography"
+          data-jp="투*필 · 今日のフィルモグラフィー"
+          data-zh="투*필 · 今日影集">투*필 · 오늘의 필모그래피</div>
+        <div style="font-size:11px;color:#8A6A3A;line-height:1.5"
+          data-ko="오늘 사진 6장 · 매일 쌓이는 나의 기록"
+          data-en="6 photos today · Your record, day by day"
+          data-jp="今日の写真6枚 · 毎日積み重なる記録"
+          data-zh="今日6张照片 · 每天积累的记录">오늘 사진 6장 · 매일 쌓이는 나의 기록</div>
       </div>
       <div style="margin-left:auto;font-size:16px;color:rgba(200,135,10,.5)">→</div>
     </a>
     <a href="/memorial.html" style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:#fff;border:1px solid rgba(100,100,120,.15);border-radius:10px;text-decoration:none">
       <div style="font-size:22px">🕯</div>
       <div>
-        <div style="font-size:13px;font-weight:600;color:#555;margin-bottom:2px">디지털 부고 · 메모리얼</div>
-        <div style="font-size:11px;color:#8A6A3A;line-height:1.5">소중한 분의 마지막을 품격 있게</div>
+        <div style="font-size:13px;font-weight:600;color:#555;margin-bottom:2px"
+          data-ko="디지털 부고 · 메모리얼"
+          data-en="Digital Memorial"
+          data-jp="デジタル訃報 · メモリアル"
+          data-zh="数字讣告 · 纪念">디지털 부고 · 메모리얼</div>
+        <div style="font-size:11px;color:#8A6A3A;line-height:1.5"
+          data-ko="소중한 분의 마지막을 품격 있게"
+          data-en="A dignified farewell for your loved ones"
+          data-jp="大切な方の最後を品格をもって"
+          data-zh="为挚爱的人留下有尊严的告别">소중한 분의 마지막을 품격 있게</div>
       </div>
       <div style="margin-left:auto;font-size:16px;color:rgba(100,100,120,.3)">→</div>
     </a>
     <a href="/index.html" style="display:flex;align-items:center;gap:14px;padding:13px 18px;background:#FFF8ED;border:1.5px solid rgba(200,135,10,.5);border-radius:10px;text-decoration:none">
       <div style="font-size:18px">🏠</div>
-      <div style="font-size:13px;font-weight:600;color:#C8870A">휴먼다큐 홈으로</div>
+      <div style="font-size:13px;font-weight:600;color:#C8870A"
+        data-ko="휴먼다큐 홈으로"
+        data-en="Back to Humandocu"
+        data-jp="휴먼다큐ホームへ"
+        data-zh="返回 Humandocu 主页">휴먼다큐 홈으로</div>
       <div style="margin-left:auto;font-size:16px;color:#C8870A">→</div>
     </a>
   </div>
@@ -339,7 +518,6 @@ var card = document.getElementById('today-card');
 var _shotData = null;
 
 function tokenizePoems(poems) {
-  // [태그] 기준으로 분리 — 줄바꿈 없이 한 줄로 저장된 경우도 처리
   return poems.replace(/(\[)/g, '\n$1').split('\n');
 }
 
@@ -485,6 +663,32 @@ function loadNextShot() {
     .catch(function() {
       card.innerHTML = '<div class="today-empty">오늘의 식스샷을 준비 중입니다 ✦</div>';
     });
+})();
+</script>
+
+<script>
+(function () {
+  function applyLang(lang) {
+    var l = lang.toLowerCase();
+    document.querySelectorAll('[data-ko]').forEach(function (el) {
+      var text = el.getAttribute('data-' + l);
+      if (text) el.innerHTML = text;
+    });
+    document.querySelectorAll('.lang-btn').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+  }
+
+  var saved = localStorage.getItem('lang') || 'KO';
+  applyLang(saved);
+
+  document.querySelectorAll('.lang-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var lang = this.dataset.lang;
+      localStorage.setItem('lang', lang);
+      applyLang(lang);
+    });
+  });
 })();
 </script>
 
