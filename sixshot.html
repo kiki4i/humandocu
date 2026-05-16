@@ -201,7 +201,7 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
 </nav>
 
 <div class="hero">
-  <div class="kicker">SIX SHOT · 식스샷</div>
+  <div class="kicker" data-ko="SIX SHOT · 식스샷" data-en="SIX SHOT · Life Six Shot" data-jp="SIX SHOT · 人生シックスショット" data-zh="SIX SHOT · 人生六拍">SIX SHOT · 식스샷</div>
   <h1
     data-ko="내 삶에서 가장 빛나는 여섯 순간."
     data-en="Six moments that defined your life."
@@ -362,7 +362,7 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
     data-jp="公開を選んだ誰かの物語 — 運命のように出会います"
     data-zh="某人选择公开的故事 — 与你不期而遇">공개를 선택한 누군가의 이야기 — 운명처럼 만납니다</div>
   <div class="today-card" id="today-card">
-    <div class="today-loading">불러오는 중</div>
+    <div class="today-loading" id="today-loading-init" data-ko="불러오는 중" data-en="Loading..." data-jp="読み込み中..." data-zh="加载中...">불러오는 중</div>
   </div>
   <div class="next-bar" id="next-bar">
     <button class="btn-next-shot" id="btn-next" onclick="handleNextShot()"
@@ -505,8 +505,8 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
   </div>
   <div class="ft-logo">휴먼다큐닷컴</div>
   <div class="ft-links">
-    <a href="/terms.html">이용약관</a>
-    <a href="/privacy.html">개인정보처리방침</a>
+    <a href="/terms.html" data-ko="이용약관" data-en="Terms of Service" data-jp="利用規約" data-zh="用户协议">이용약관</a>
+    <a href="/privacy.html" data-ko="개인정보처리방침" data-en="Privacy Policy" data-jp="プライバシーポリシー" data-zh="隐私政策">개인정보처리방침</a>
     <a href="tel:031-539-9709">031-539-9709</a>
   </div>
 </footer>
@@ -629,7 +629,9 @@ function handleNextShot() {
 function loadNextShot() {
   var btn = document.getElementById('btn-next');
   if (btn) btn.disabled = true;
-  card.innerHTML = '<div class="today-loading">불러오는 중</div>';
+  var _ld = {KO:'불러오는 중', EN:'Loading...', JP:'読み込み中...', ZH:'加载中...'};
+  var _ld_t = _ld[(localStorage.getItem('lang')||'KO').toUpperCase()] || '불러오는 중';
+  card.innerHTML = '<div class="today-loading">' + _ld_t + '</div>';
   var currentId = (_shotData && _shotData.doc_id) ? _shotData.doc_id : '';
   var url = API + (currentId ? '&exclude=' + currentId : '');
   fetch(url)
