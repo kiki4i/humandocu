@@ -36,7 +36,7 @@ a{text-decoration:none;color:inherit}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 56px;background:rgba(15,13,9,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,169,110,.15)}
+nav{position:fixed;top:36px;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 56px;background:rgba(15,13,9,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,169,110,.15)}
 .logo{display:flex;align-items:center;gap:10px}
 .logo-mark{width:30px;height:30px;background:var(--gold2);border-radius:2px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:15px;color:var(--ink)}
 .logo-text{font-family:var(--serif);font-size:18px;color:var(--cream);letter-spacing:.04em}
@@ -296,7 +296,7 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
 }
 
 /* LANG BAR */
-#lang-bar{position:fixed;bottom:0;left:0;right:0;z-index:300;display:flex;justify-content:center;gap:6px;padding:8px 12px;background:rgba(15,13,9,.97);border-top:1px solid rgba(200,169,110,.15);overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none}
+#lang-bar{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;justify-content:center;gap:6px;padding:8px 12px;background:rgba(15,13,9,.97);border-bottom:1px solid rgba(200,169,110,.15);overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none}
 #lang-bar::-webkit-scrollbar{display:none}
 .lang-btn{display:flex;align-items:center;gap:5px;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:400;border:1px solid rgba(200,169,110,.25);background:transparent;color:rgba(249,246,240,.6);cursor:pointer;white-space:nowrap;font-family:var(--sans);transition:all .2s;letter-spacing:.04em}
 .lang-btn .flag{font-size:14px;line-height:1}
@@ -314,6 +314,12 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
 </style>
 </head>
 <body>
+<div id="lang-bar">
+  <button class="lang-btn active" data-lang="KO"><span class="flag">🇰🇷</span> 한국어</button>
+  <button class="lang-btn" data-lang="EN"><span class="flag">🇺🇸</span> English</button>
+  <button class="lang-btn" data-lang="JP"><span class="flag">🇯🇵</span> 日本語</button>
+  <button class="lang-btn" data-lang="ZH"><span class="flag">🇨🇳</span> 中文</button>
+</div>
 
 <div id="lang-cs-banner">
   <div class="cs-icon">🚧</div>
@@ -340,12 +346,6 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
     <a href="#" onclick="openModal('advanced');return false;" class="nav-btn" data-ko="부고 만들기 →" data-en="Create Obituary →">부고 만들기 →</a>
   </div>
 </nav>
-<div id="lang-bar">
-  <button class="lang-btn active" data-lang="KO"><span class="flag">🇰🇷</span> 한국어</button>
-  <button class="lang-btn" data-lang="EN"><span class="flag">🇺🇸</span> English</button>
-  <button class="lang-btn" data-lang="JP"><span class="flag">🇯🇵</span> 日本語</button>
-  <button class="lang-btn" data-lang="ZH"><span class="flag">🇨🇳</span> 中文</button>
-</div>
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
@@ -406,10 +406,10 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
         <div style="font-size:12px;color:var(--gold);margin-bottom:8px;letter-spacing:.04em"><span data-ko="👆 눌러서 비교해보세요" data-en="👆 Tap to compare">👆 눌러서 비교해보세요</span></div>
         <!-- 프리미엄 샘플 -->
         <div id="sample-adv">
-          <div style="font-size:11px;color:var(--ink3);margin-bottom:8px;line-height:1.6">₩29,000 · 49일 유지 · 10분 내 부고문 도착</div>
+          <div style="font-size:11px;color:var(--ink3);margin-bottom:8px;line-height:1.6" data-ko="₩29,000 · 49일 유지 · 10분 내 부고문 도착" data-en="₩29,000 · 49 days · Obituary within 10 min">₩29,000 · 49일 유지 · 10분 내 부고문 도착</div>
           <div class="scard">
-            <div class="sc-top"><div class="sc-ph">🖼</div><div><div class="sc-yr">1943 — 2025 · 향년 82세</div><div class="sc-nm">김순자<br>金順子</div><div class="sc-sb">새벽마다 밥을 지으시던 어머니</div></div></div>
-            <div class="sc-bd"><div class="sc-qt">"삯바느질로 우리 학비를 대던 그 손이 이제는 쉬게 되었습니다."</div><div class="sc-tg"><span class="sc-t">▶ 추모 영상</span><span class="sc-t">생애 연대기</span><span class="sc-t">방명록</span></div><div class="sc-bs"><div class="sc-p">▶ 추모 영상</div><div class="sc-m">📍 오시는 길</div></div></div>
+            <div class="sc-top"><div class="sc-ph">🖼</div><div><div class="sc-yr" data-ko="1943 — 2025 · 향년 82세" data-en="1943 — 2025 · Age 82">1943 — 2025 · 향년 82세</div><div class="sc-nm">김순자<br>金順子</div><div class="sc-sb" data-ko="새벽마다 밥을 지으시던 어머니" data-en="A mother who rose before dawn to cook">새벽마다 밥을 지으시던 어머니</div></div></div>
+            <div class="sc-bd"><div class="sc-qt">"삯바느질로 우리 학비를 대던 그 손이 이제는 쉬게 되었습니다."</div><div class="sc-tg"><span class="sc-t" data-ko="▶ 추모 영상" data-en="▶ Memorial Video">▶ 추모 영상</span><span class="sc-t" data-ko="생애 연대기" data-en="Life Timeline">생애 연대기</span><span class="sc-t" data-ko="방명록" data-en="Guestbook">방명록</span></div><div class="sc-bs"><div class="sc-p" data-ko="▶ 추모 영상" data-en="▶ Memorial Video">▶ 추모 영상</div><div class="sc-m" data-ko="📍 오시는 길" data-en="📍 Directions">📍 오시는 길</div></div></div>
           </div>
           <div class="ck" style="margin-top:10px"><div class="cki o">✓</div><span data-ko="영정사진 액자 + 생애사진 5장 · BGM" data-en="Portrait frame + 5-photo life slideshow · BGM">영정사진 액자 + 생애사진 5장 · BGM</span></div>
           <div class="ck"><div class="cki o">✓</div><span data-ko="메모리얼 페이지 · 디지털 방명록" data-en="Memorial Page · Digital Guestbook">메모리얼 페이지 · 디지털 방명록</span></div>
@@ -480,7 +480,7 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
       </div>
     </div>
     <div style="margin-top:32px;text-align:center;padding:22px 28px;border:1px solid rgba(255,255,255,.08);border-radius:6px;max-width:700px;margin-left:auto;margin-right:auto;background:rgba(255,255,255,.03)">
-      <p style="font-family:var(--serif);font-size:16px;font-style:italic;color:rgba(249,246,240,.65);line-height:2">"질문 하나하나가 세상에 하나뿐인 추모글을 만드는 재료입니다.<br>디지털이지만 아날로그적 감성으로, 사람을 기억하고 기념합니다"</p>
+      <p style="font-family:var(--serif);font-size:16px;font-style:italic;color:rgba(249,246,240,.65);line-height:2" data-ko=””질문 하나하나가 세상에 하나뿐인 추모글을 만드는 재료입니다.<br>디지털이지만 아날로그적 감성으로, 사람을 기억하고 기념합니다”” data-en=””Every question becomes an ingredient for a tribute unlike any other.<br>Digital in form, but deeply human in spirit.””>”질문 하나하나가 세상에 하나뿐인 추모글을 만드는 재료입니다.<br>디지털이지만 아날로그적 감성으로, 사람을 기억하고 기념합니다”</p>
     </div>
   </div>
 </section>
@@ -493,7 +493,7 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
       <div class="gb-mock">
         <div class="gm-bar"><div class="gm-dots"><div class="gmd" style="background:#ff5f57"></div><div class="gmd" style="background:#febc2e"></div><div class="gmd" style="background:#28c840"></div></div><div class="gm-url">humandocu.com/김순자 · 온라인 추모관</div></div>
         <div class="gm-body">
-          <div class="gm-ttl">방명록 <span>12개</span> <span style="font-size:9px;color:var(--ink2);font-weight:300">· 프리미엄 · 상주 실시간 확인</span></div>
+          <div class="gm-ttl" data-ko="방명록 <span>12개</span> <span style='font-size:9px;color:var(--ink2);font-weight:300'>· 프리미엄 · 상주 실시간 확인</span>" data-en="Guestbook <span>12</span> <span style='font-size:9px;color:var(--ink2);font-weight:300'>· Premium · Live updates</span>">방명록 <span>12개</span> <span style="font-size:9px;color:var(--ink2);font-weight:300">· 프리미엄 · 상주 실시간 확인</span></div>
           <div class="gm-e"><div class="gm-av">이</div><div><div class="gm-nm">이○○ (중학교 친구)</div><div class="gm-msg">순자야, 너의 환한 웃음이 너무 그립다.</div><div class="gm-tm">3시간 전</div></div></div>
           <div class="gm-e"><div class="gm-av">박</div><div><div class="gm-nm">박○○ (직장 동료)</div><div class="gm-msg">늘 따뜻하게 대해주셔서 감사했습니다.</div><div class="gm-tm">5시간 전</div></div></div>
           <div class="gm-e"><div class="gm-av">김</div><div><div class="gm-nm">김○○ (이웃)</div><div class="gm-msg">밝게 웃으시던 모습이 눈에 선합니다.</div><div class="gm-tm">어제</div></div></div>
@@ -627,9 +627,9 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
         </div>
       </div>
       <div class="hd-right-col" style="display:flex;flex-direction:column;justify-content:center">
-        <div style="font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">— 아마두 암파테 바 · 유네스코 연설, 1960</div>
-        <div class="hd-qt" style="font-size:clamp(22px,2.8vw,38px);margin-bottom:20px">"노인 한 사람이 죽으면,<br><em>도서관 하나가<br>불타는 것과 같다"</em></div>
-        <p class="hd-sub">우리는 삶을 살아가면서 최소 소설 몇 권을 써내려 갑니다. 나를 정리하는 과정에서 진짜 내가 누구인지 알게 됩니다. 그리고 그 기록은, 나보다 오래 살아남습니다.</p>
+        <div style="font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:16px" data-ko="— 아마두 암파테 바 · 유네스코 연설, 1960" data-en="— Amadou Hampâté Bâ · UNESCO Speech, 1960">— 아마두 암파테 바 · 유네스코 연설, 1960</div>
+        <div class="hd-qt" style="font-size:clamp(22px,2.8vw,38px);margin-bottom:20px" data-ko="“노인 한 사람이 죽으면,<br><em>도서관 하나가<br>불타는 것과 같다”</em>" data-en="“When an elder dies,<br><em>a library<br>burns to the ground.”</em>">"노인 한 사람이 죽으면,<br><em>도서관 하나가<br>불타는 것과 같다"</em></div>
+        <p class="hd-sub" data-ko="우리는 삶을 살아가면서 최소 소설 몇 권을 써내려 갑니다. 나를 정리하는 과정에서 진짜 내가 누구인지 알게 됩니다. 그리고 그 기록은, 나보다 오래 살아남습니다." data-en="Each of us lives at least a few novels worth of life. In the act of recording yourself, you discover who you truly are &mdash; and that record outlasts you.">우리는 삶을 살아가면서 최소 소설 몇 권을 써내려 갑니다. 나를 정리하는 과정에서 진짜 내가 누구인지 알게 됩니다. 그리고 그 기록은, 나보다 오래 살아남습니다.</p>
         <a href="tel:031-539-9709" class="hd-btn" style="margin-top:22px" data-ko="인생 기록 문의하기 →" data-en="Inquire About Life Recording →">인생 기록 문의하기 →</a>
       </div>
     </div>
@@ -641,9 +641,9 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
   <div class="si">
     <div class="sh ctr"><div class="ey" data-ko="이용 후기" data-en="Reviews">이용 후기</div><h2 class="tt" data-ko="직접 경험하신<br><em>분들의 이야기</em>" data-en="Stories from those<br><em>who experienced it</em>">직접 경험하신<br><em>분들의 이야기</em></h2></div>
     <div class="testi-grid">
-      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext">"장례 당일 신청했는데 10분 만에 링크가 왔어요. 조문객분들이 추모 영상 보면서 다들 눈물을 흘리셨습니다."</p><div class="tby"><span>김○○</span> · 50대 · 서울 <span class="tplan">프리미엄</span></div></div>
-      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext">"발인 다음날 답례장이 자동으로 왔는데, AI가 써준 문구가 너무 감동적이었어요. '이런 인사는 처음 받아봤다'고 연락이 왔습니다."</p><div class="tby"><span>박○○</span> · 40대 · 부산 <span class="tplan">프리미엄</span></div></div>
-      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext">"흑백 사진을 복원해주셔서 아버지의 젊은 시절을 처음 봤어요. 49재가 지나도 아카이브에 남아있어 온 가족이 감사했습니다."</p><div class="tby"><span>이○○</span> · 60대 · 대구 <span class="tplan">프리미엄</span></div></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext" data-ko="“장례 당일 신청했는데 10분 만에 링크가 왔어요. 조문객분들이 추모 영상 보면서 다들 눈물을 흘리셨습니다.”" data-en="“I applied on the day of the funeral and the link arrived in 10 minutes. Every mourner cried watching the memorial video.”">"장례 당일 신청했는데 10분 만에 링크가 왔어요. 조문객분들이 추모 영상 보면서 다들 눈물을 흘리셨습니다."</p><div class="tby" data-ko="<span>김○○</span> · 50대 · 서울 <span class='tplan'>프리미엄</span>" data-en="<span>Kim ○○</span> · 50s · Seoul <span class='tplan'>Premium</span>"><span>김○○</span> · 50대 · 서울 <span class="tplan">프리미엄</span></div></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext" data-ko=""발인 다음날 답례장이 자동으로 왔는데, AI가 써준 문구가 너무 감동적이었어요. '이런 인사는 처음 받아봤다'고 연락이 왔습니다."" data-en=""The Letter of Gratitude arrived automatically the day after the funeral. The AI-written message was so moving — people told me they had never received anything like it."">"발인 다음날 답례장이 자동으로 왔는데, AI가 써준 문구가 너무 감동적이었어요. '이런 인사는 처음 받아봤다'고 연락이 왔습니다."</p><div class="tby" data-ko="<span>박○○</span> · 40대 · 부산 <span class='tplan'>프리미엄</span>" data-en="<span>Park ○○</span> · 40s · Busan <span class='tplan'>Premium</span>"><span>박○○</span> · 40대 · 부산 <span class="tplan">프리미엄</span></div></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p class="ttext" data-ko=""흑백 사진을 복원해주셔서 아버지의 젊은 시절을 처음 봤어요. 49재가 지나도 아카이브에 남아있어 온 가족이 감사했습니다."" data-en=""The restored black-and-white photos showed my father as a young man for the first time. Even after the 49-day period, it stays in the archive — our whole family is grateful."">"흑백 사진을 복원해주셔서 아버지의 젊은 시절을 처음 봤어요. 49재가 지나도 아카이브에 남아있어 온 가족이 감사했습니다."</p><div class="tby" data-ko="<span>이○○</span> · 60대 · 대구 <span class='tplan'>프리미엄</span>" data-en="<span>Lee ○○</span> · 60s · Daegu <span class='tplan'>Premium</span>"><span>이○○</span> · 60대 · 대구 <span class="tplan">프리미엄</span></div></div>
     </div>
   </div>
 </section>
@@ -729,7 +729,7 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
     <strong style="color:rgba(240,237,232,.6)">환불정책:</strong> 서비스 제공 전(링크 발송 전) 전액 환불 가능 · 서비스 제공 후 환불 불가 · 단, 서비스 하자 시 재제작 또는 환불
   </p>
 </div>
-<a href="tel:031-539-9709" class="kk-btn" title="전화 상담">📞</a>
+<a href="tel:031-539-9709" class="kk-btn" title="Call Us">📞</a>
 
 <!-- 프리미엄 모달 -->
 <div id="modal-advanced" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(15,13,9,.85);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:20px">
@@ -740,7 +740,7 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
     </div>
     <div style="padding:26px;display:flex;flex-direction:column;gap:16px;text-align:center">
       <div style="font-size:15px;color:var(--ink2);line-height:1.8" data-ko="아래 버튼을 눌러 신청 폼을 작성해 주세요." data-en="Please click the button below to fill out the application form.">아래 버튼을 눌러 신청 폼을 작성해 주세요.</div>
-      <div style="background:var(--cream2);border-radius:6px;padding:16px;font-size:13px;color:var(--ink3);line-height:2;text-align:left">
+      <div style="background:var(--cream2);border-radius:6px;padding:16px;font-size:13px;color:var(--ink3);line-height:2;text-align:left" data-ko="✦ 신청 즉시 · 10분 내 차별화된 부고문 이메일 도착<br>✦ 영정사진 액자 + 생애사진 5장 슬라이드쇼 · BGM<br>✦ 49재까지 메모리얼 페이지 유지<br>✦ 발인 다음날 AI 개인화 답례장 2가지 버전 제공" data-en="✦ Apply now · Obituary email within 10 minutes<br>✦ Portrait frame + 5-photo life slideshow · BGM<br>✦ Memorial Page preserved for 49 days<br>✦ AI-personalized Letter of Gratitude — 2 versions the day after the funeral">
         ✦ 신청 즉시 · 10분 내 차별화된 부고문 이메일 도착<br>
         ✦ 영정사진 액자 + 생애사진 5장 슬라이드쇼 · BGM<br>
         ✦ 49재까지 메모리얼 페이지 유지<br>
