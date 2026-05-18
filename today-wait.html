@@ -80,12 +80,10 @@
 
 <script>
 (function () {
-  var API_KEY = "AIzaSyBLUc8MUfkUCD8pkfRPZw_CF_Is9ifuLG0";
-  var PROJECT  = "humandocu-93c65";
-  var RESULT_BASE = "https://humandocu-server-production.up.railway.app/sixshot/";
-  var POLL_MS  = 10000;
-  var MAX_MS   = 5 * 60 * 1000;  // 5분
-  var WINDOW_MS = 10 * 60 * 1000; // 10분 이내 생성된 것만
+  var API_BASE    = "https://humandocu-server-production.up.railway.app";
+  var RESULT_BASE = API_BASE + "/sixshot/";
+  var POLL_MS  = 5000;
+  var MAX_MS   = 5 * 60 * 1000;
 
   var messages = [
     "AI가 사진을 읽고 있어요...",
@@ -123,42 +121,19 @@
   }
   setInterval(updateProgress, 500);
 
-  // Firestore runQuery
-  function queryFirestore() {
+  // 서버 API 폴링
+  function pollCheck() {
     if (!email) return;
-    var windowStart = new Date(Date.now() - WINDOW_MS).toISOString();
-    var url = "https://firestore.googleapis.com/v1/projects/" + PROJECT +
-              "/databases/(default)/documents:runQuery?key=" + API_KEY;
-    var body = JSON.stringify({
-      structuredQuery: {
-        from: [{collectionId: "sixshot"}],
-        where: {
-          compositeFilter: {
-            op: "AND",
-            filters: [
-              {fieldFilter: {field: {fieldPath: "type"},  op: "EQUAL",               value: {stringValue: "today"}}},
-              {fieldFilter: {field: {fieldPath: "email"}, op: "EQUAL",               value: {stringValue: email}}},
-              {fieldFilter: {field: {fieldPath: "created_at"}, op: "GREATER_THAN_OR_EQUAL", value: {stringValue: windowStart}}}
-            ]
-          }
-        },
-        orderBy: [{field: {fieldPath: "created_at"}, direction: "DESCENDING"}],
-        limit: 1
-      }
-    });
-
-    fetch(url, {method: "POST", headers: {"Content-Type": "application/json"}, body: body})
+    fetch(API_BASE + "/api/check-today?email=" + encodeURIComponent(email))
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        var doc = data && data[0] && data[0].document;
-        if (doc && doc.name) {
-          var docId = doc.name.split("/").pop();
+        if (data.status === "ready" && data.doc_id) {
           clearInterval(pollTimer);
           clearInterval(msgTimer);
           progressEl.style.width = "100%";
           msgEl.textContent = "완성됐어요! 이동합니다 ✦";
           setTimeout(function () {
-            window.location.href = RESULT_BASE + docId;
+            window.location.href = RESULT_BASE + data.doc_id;
           }, 800);
         }
       })
@@ -183,11 +158,11 @@
     return;
   }
 
-  // 첫 조회는 15초 후 시작 (AI 처리 최소 시간)
+  // 첫 조회는 20초 후 시작 (AI 처리 최소 시간)
   setTimeout(function () {
-    queryFirestore();
-    pollTimer = setInterval(queryFirestore, POLL_MS);
-  }, 15000);
+    pollCheck();
+    pollTimer = setInterval(pollCheck, POLL_MS);
+  }, 20000);
 })();
 </script>
 </body>
