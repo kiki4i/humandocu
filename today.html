@@ -68,58 +68,33 @@ a { text-decoration: none; color: inherit; }
 .fade-in-3 { animation: fadeUp .6s .3s ease both; }
 .fade-in-4 { animation: fadeUp .6s .45s ease both; }
 
-/* ── LANG BAR — 우상단 플로팅 ── */
-#lang-bar {
-  position: fixed;
-  top: 13px;
-  right: 16px;
-  z-index: 400;
-  display: flex;
-  gap: 4px;
-  background: none;
-  border: none;
-  box-shadow: none;
-  height: auto;
-  padding: 0;
-}
-.lang-btn {
-  display: inline-flex;
-  align-items: center;
-  background: rgba(255,248,237,.92);
-  border: 1px solid rgba(200,135,10,.3);
-  cursor: pointer;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .03em;
-  color: var(--ink3);
-  padding: 3px 9px;
-  border-radius: 20px;
-  font-family: var(--sans);
-  transition: all .18s;
-  line-height: 1.4;
-  white-space: nowrap;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-.lang-btn .flag { display: none; }
-.lang-btn:hover  { background: var(--cream); border-color: var(--amber); color: var(--amber); }
-.lang-btn.active { background: var(--amber); border-color: var(--amber); color: #fff; }
-
-/* ── NAV ── */
+/* ── NAV — 2줄 구조 ── */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 300;
-  height: 52px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  background: rgba(255,248,237,.96);
+  flex-direction: column;
+  background: rgba(255,248,237,.97);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
 }
+.nav-row1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px 7px;
+}
+.nav-row2 {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 20px 9px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-row2::-webkit-scrollbar { display: none; }
 .logo {
   font-family: var(--serif);
   font-size: 14px;
@@ -128,14 +103,10 @@ nav {
   letter-spacing: .1em;
 }
 .logo span { color: var(--gold); }
-.nav-back { font-size: 12px; color: var(--amber); letter-spacing: .04em; }
-.nav-back:hover { color: var(--gold); }
 .nav-links {
   display: flex;
   align-items: center;
   gap: 8px;
-  /* push left of lang-bar area */
-  margin-right: 120px;
 }
 .nav-pill {
   font-size: 11px;
@@ -154,14 +125,37 @@ nav {
   letter-spacing: .04em;
   font-family: var(--sans);
 }
-@media (max-width: 400px) {
-  .nav-links { margin-right: 100px; }
+
+/* ── LANG BUTTONS (nav 2줄) ── */
+#lang-bar {
+  display: contents; /* 자식들이 .nav-row2 안으로 흡수 */
 }
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: 1px solid rgba(200,135,10,.28);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .02em;
+  color: var(--ink3);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-family: var(--sans);
+  transition: all .18s;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.lang-btn .flag { font-size: 13px; line-height: 1; }
+.lang-btn:hover  { border-color: var(--amber); color: var(--amber); background: rgba(200,135,10,.06); }
+.lang-btn.active { background: var(--amber); border-color: var(--amber); color: #fff; }
 
 /* ── HERO ── */
 .hero {
-  padding: 110px 24px 56px;
-  text-align: center;
+  padding: 100px 24px 56px;
+  text-align: left;
   background: var(--cream);
   position: relative;
   overflow: hidden;
@@ -204,7 +198,7 @@ nav {
   color: var(--ink2);
   line-height: 2;
   max-width: 400px;
-  margin: 0 auto 24px;
+  margin: 0 0 24px;
   font-weight: 300;
 }
 .hero-badge {
@@ -274,7 +268,7 @@ nav {
 
 /* ── PHILOSOPHY ── */
 .philosophy {
-  text-align: center;
+  text-align: left;
   padding: var(--sec-gap) 24px;
   max-width: var(--max);
   margin: 0 auto;
@@ -296,7 +290,7 @@ nav {
   color: var(--ink2);
   line-height: 2;
   max-width: 420px;
-  margin: 0 auto;
+  margin: 0;
   font-weight: 300;
 }
 
@@ -400,7 +394,7 @@ nav {
   font-size: 13px;
   color: var(--ink2);
   line-height: 1.9;
-  text-align: center;
+  text-align: left;
   margin-top: 8px;
   font-family: var(--body-serif);
   font-weight: 300;
@@ -411,7 +405,7 @@ nav {
   padding: var(--sec-gap) 24px;
   max-width: var(--max);
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
 }
 .how-title {
   font-family: var(--serif);
@@ -583,7 +577,7 @@ nav {
 /* ── CTA SECTION ── */
 .cta {
   padding: var(--sec-gap) 24px;
-  text-align: center;
+  text-align: left;
   max-width: var(--max);
   margin: 0 auto;
 }
@@ -702,19 +696,21 @@ footer {
 
 <body>
 
-<!-- LANG BAR -->
-<div id="lang-bar">
-  <button class="lang-btn active" data-lang="KO"><span class="flag">🇰🇷</span> 한국어</button>
-  <button class="lang-btn" data-lang="EN"><span class="flag">🇺🇸</span> English</button>
-  <button class="lang-btn" data-lang="JP"><span class="flag">🇯🇵</span> 日本語</button>
-  <button class="lang-btn" data-lang="ZH"><span class="flag">🇨🇳</span> 中文</button>
-</div>
-
 <nav>
-  <a href="/index.html" class="logo">휴먼다큐<span>닷컴</span></a>
-  <div class="nav-links">
-    <a href="/filmography.html" class="nav-pill" data-ko="필모그래피" data-en="Filmography" data-jp="フィルモグラフィー" data-zh="作品集">필모그래피</a>
-    <a href="/index.html" class="nav-home" data-ko="홈" data-en="Home" data-jp="ホーム" data-zh="主页">홈</a>
+  <div class="nav-row1">
+    <a href="/index.html" class="logo">휴먼다큐<span>닷컴</span></a>
+    <div class="nav-links">
+      <a href="/filmography.html" class="nav-pill" data-ko="필모그래피" data-en="Filmography" data-jp="フィルモグラフィー" data-zh="作品集">필모그래피</a>
+      <a href="/index.html" class="nav-home" data-ko="홈" data-en="Home" data-jp="ホーム" data-zh="主页">홈</a>
+    </div>
+  </div>
+  <div class="nav-row2">
+    <div id="lang-bar">
+      <button class="lang-btn active" data-lang="KO"><span class="flag">🇰🇷</span> 한국어</button>
+      <button class="lang-btn" data-lang="EN"><span class="flag">🇺🇸</span> English</button>
+      <button class="lang-btn" data-lang="JP"><span class="flag">🇯🇵</span> 日本語</button>
+      <button class="lang-btn" data-lang="ZH"><span class="flag">🇨🇳</span> 中文</button>
+    </div>
   </div>
 </nav>
 
