@@ -365,10 +365,10 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
 <!-- TODAY SIXSHOT -->
 <div class="today-sec">
   <div class="today-sec-label"
-    data-ko="✦ 오늘의 식스샷 ✦"
-    data-en="✦ Someone's Six Shot ✦"
-    data-jp="✦ 今日のシックスショット ✦"
-    data-zh="✦ 今日六镜头 ✦">✦ 오늘의 식스샷 ✦</div>
+    data-ko="✦ 오늘의 식스샷"
+    data-en="✦ Someone's Six Shot"
+    data-jp="✦ 今日のシックスショット"
+    data-zh="✦ 今日六镜头">✦ 오늘의 식스샷</div>
   <div class="today-sec-sub"
     data-ko="공개를 선택한 누군가의 이야기 — 운명처럼 만납니다"
     data-en="A story from someone who chose to share — meet them by chance"
@@ -652,7 +652,7 @@ function loadNextShot() {
     .then(function(res) {
       if (btn) btn.disabled = false;
       if (res.status !== 'ok' || !res.data) {
-        card.innerHTML = '<div class="today-empty">준비 중인 식스샷이에요 ✦<br><span style="font-size:13px;display:block;margin-top:8px">잠시 후 다시 시도해주세요</span></div>';
+        card.innerHTML = '<div class="today-empty">준비 중인 식스샷이에요<br><span style="font-size:13px;display:block;margin-top:8px">잠시 후 다시 시도해주세요</span></div>';
         return;
       }
       _shotData = res.data;
@@ -660,7 +660,7 @@ function loadNextShot() {
     })
     .catch(function() {
       if (btn) btn.disabled = false;
-      card.innerHTML = '<div class="today-empty">오늘의 식스샷을 준비 중입니다 ✦</div>';
+      card.innerHTML = '<div class="today-empty">오늘의 식스샷을 준비 중입니다</div>';
     });
 }
 
@@ -669,14 +669,14 @@ function loadNextShot() {
     .then(function(r) { return r.json(); })
     .then(function(res) {
       if (res.status !== 'ok' || !res.data) {
-        card.innerHTML = '<div class="today-empty">오늘의 식스샷을 준비 중입니다 ✦<br><span style="font-size:13px;color:#C0A0D8;display:block;margin-top:8px">첫 번째 공개 식스샷을 기다리고 있어요</span></div>';
+        card.innerHTML = '<div class="today-empty">오늘의 식스샷을 준비 중입니다<br><span style="font-size:13px;color:#C0A0D8;display:block;margin-top:8px">첫 번째 공개 식스샷을 기다리고 있어요</span></div>';
         return;
       }
       _shotData = res.data;
       renderCard(_shotData);
     })
     .catch(function() {
-      card.innerHTML = '<div class="today-empty">오늘의 식스샷을 준비 중입니다 ✦</div>';
+      card.innerHTML = '<div class="today-empty">오늘의 식스샷을 준비 중입니다</div>';
     });
 })();
 </script>
