@@ -40,7 +40,7 @@
   --cream2: #FAF5EB;
   --border: rgba(200,135,10,.18);
   --max: 640px;
-  --sec-gap: 48px;
+  --sec-gap: 28px;
 }
 
 /* ── RESET ── */
@@ -52,9 +52,10 @@ body {
   font-family: var(--sans);
   font-size: 15px;
   font-weight: 300;
-  line-height: 1.9;
+  line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
 }
 a { text-decoration: none; color: inherit; }
 
@@ -68,29 +69,25 @@ a { text-decoration: none; color: inherit; }
 .fade-in-3 { animation: fadeUp .6s .3s ease both; }
 .fade-in-4 { animation: fadeUp .6s .45s ease both; }
 
-/* ── NAV — 2줄 구조 ── */
+/* ── NAV ── */
 nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 300;
+  position: sticky;
+  top: 0;
+  left: 0; right: 0;
+  z-index: 100;
   display: flex;
   flex-direction: column;
-  background: rgba(255,248,237,.97);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: #FFF8ED;
   border-bottom: 1px solid var(--border);
 }
 .nav-row1 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px 7px;
+  display: none;
 }
 .nav-row2 {
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 0 20px 9px;
+  padding: 7px 16px;
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -154,7 +151,7 @@ nav {
 
 /* ── HERO ── */
 .hero {
-  padding: 100px 24px 56px;
+  padding: 32px 24px 40px;
   text-align: left;
   background: var(--cream);
   position: relative;
@@ -194,12 +191,13 @@ nav {
 @media (min-width: 480px) { .hero h1 { font-size: 38px; } }
 .hero-sub {
   font-family: var(--body-serif);
-  font-size: 14px;
+  font-size: 15px;
   color: var(--ink2);
-  line-height: 2;
+  line-height: 1.6;
   max-width: 400px;
-  margin: 0 0 24px;
+  margin: 0 0 20px;
   font-weight: 300;
+  word-break: keep-all;
 }
 .hero-badge {
   display: inline-flex;
@@ -237,11 +235,7 @@ nav {
   box-shadow: 0 8px 24px rgba(200,135,10,.38);
 }
 .btn-hint {
-  display: block;
-  font-size: 11px;
-  color: var(--ink3);
-  margin-top: 10px;
-  letter-spacing: .04em;
+  display: none;
 }
 
 /* ── SECTION BASE ── */
@@ -275,23 +269,24 @@ nav {
 }
 .phil-quote {
   font-family: var(--serif);
-  font-size: 21px;
+  font-size: 22px;
   font-weight: 400;
   font-style: italic;
   color: var(--ink);
-  line-height: 1.7;
+  line-height: 1.55;
   letter-spacing: .03em;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
+  word-break: keep-all;
 }
-@media (min-width: 480px) { .phil-quote { font-size: 24px; } }
 .phil-sub {
   font-family: var(--body-serif);
-  font-size: 14px;
+  font-size: 15px;
   color: var(--ink2);
-  line-height: 2;
+  line-height: 1.6;
   max-width: 420px;
   margin: 0;
   font-weight: 300;
+  word-break: keep-all;
 }
 
 /* ── WHY SECTION ── */
@@ -308,21 +303,23 @@ nav {
 .why-label { font-size: 10px; letter-spacing: .2em; color: var(--amber); margin-bottom: 14px; font-family: var(--sans); font-weight: 500; text-transform: uppercase; }
 .why-title {
   font-family: var(--serif);
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 500;
   line-height: 1.4;
   color: var(--ink);
-  margin-bottom: 18px;
+  margin-bottom: 14px;
   letter-spacing: .02em;
+  word-break: keep-all;
 }
 .why-title em { color: var(--amber); font-style: italic; }
 .why-desc {
   font-family: var(--body-serif);
-  font-size: 14px;
+  font-size: 15px;
   color: var(--ink2);
-  line-height: 2;
-  margin-bottom: 28px;
+  line-height: 1.6;
+  margin-bottom: 20px;
   font-weight: 300;
+  word-break: keep-all;
 }
 
 /* ── HAIKU BOX ── */
@@ -334,7 +331,7 @@ nav {
   border-radius: 0 10px 10px 0;
 }
 .haiku-label { font-size: 11px; font-weight: 600; color: var(--amber); letter-spacing: .1em; margin-bottom: 6px; }
-.haiku-desc { font-size: 13px; color: var(--ink2); line-height: 1.8; margin: 0; }
+.haiku-desc { font-size: 13px; color: var(--ink2); line-height: 1.6; margin: 0; word-break: keep-all; }
 
 /* ── HAIKU SAMPLE CARDS ── */
 .haiku-samples {
@@ -409,18 +406,19 @@ nav {
 }
 .how-title {
   font-family: var(--serif);
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 500;
   color: var(--ink);
-  margin-bottom: 32px;
+  margin-bottom: 20px;
   letter-spacing: .03em;
+  word-break: keep-all;
 }
 .how-steps {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
   text-align: left;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 .how-step {
   display: flex;
@@ -452,16 +450,18 @@ nav {
   letter-spacing: .02em;
 }
 .how-text-body {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--ink2);
-  line-height: 1.8;
+  line-height: 1.6;
+  word-break: keep-all;
 }
 .how-final {
   font-family: var(--body-serif);
   font-size: 15px;
   font-weight: 400;
   color: var(--ink);
-  line-height: 1.8;
+  line-height: 1.6;
+  word-break: keep-all;
 }
 
 /* ── SAMPLE SECTION (이렇게 됩니다) ── */
@@ -583,21 +583,22 @@ nav {
 }
 .cta-title {
   font-family: var(--serif);
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 400;
   color: var(--ink);
-  line-height: 1.55;
+  line-height: 1.45;
   margin-bottom: 12px;
   letter-spacing: .03em;
+  word-break: keep-all;
 }
-@media (min-width: 480px) { .cta-title { font-size: 28px; } }
 .cta-sub {
   font-family: var(--body-serif);
-  font-size: 14px;
+  font-size: 15px;
   color: var(--ink2);
-  line-height: 2;
-  margin-bottom: 28px;
+  line-height: 1.6;
+  margin-bottom: 24px;
   font-weight: 300;
+  word-break: keep-all;
 }
 
 /* ── LEGAL ── */
@@ -619,10 +620,11 @@ nav {
 .legal-item {
   font-size: 12px;
   color: var(--ink3);
-  line-height: 1.9;
+  line-height: 1.6;
   padding-left: 14px;
   position: relative;
   margin-bottom: 4px;
+  word-break: keep-all;
 }
 .legal-item::before { content: "·"; position: absolute; left: 0; color: var(--amber); }
 
