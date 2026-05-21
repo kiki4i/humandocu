@@ -1069,6 +1069,12 @@ loadNext();
     document.querySelectorAll('.lang-btn').forEach(function (b) {
       b.classList.toggle('active', b.dataset.lang === lang);
     });
+
+    var formUrl = lang === 'EN' ? '/today-form-en.html' : '/today-form.html';
+    ['cta-btn-top', 'cta-btn-bottom'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.href = formUrl;
+    });
   }
 
   var saved = localStorage.getItem('lang') || 'KO';

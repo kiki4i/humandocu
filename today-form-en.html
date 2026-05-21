@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>투*필 만들기 · 휴먼다큐</title>
+<title>Create Tu·Fil · Humandocu</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -144,151 +144,151 @@ textarea::placeholder{color:var(--gold);opacity:.65}
 
 <nav>
   <div class="nav-row2">
-    <a href="/today.html" class="logo">투<span>*</span>필</a>
+    <a href="/today.html" class="logo">Tu<span>*</span>Fil</a>
     <div class="nav-sep"></div>
-    <span class="nav-pill">오늘의 투*필 만들기</span>
+    <span class="nav-pill">Create My Today Filmography</span>
     <div class="nav-sep"></div>
-    <a href="/today-form.html" class="lang-link active" title="한국어">🇰🇷</a>
-    <a href="/today-form-en.html" class="lang-link" title="English">🇺🇸</a>
+    <a href="/today-form.html" class="lang-link" title="한국어">🇰🇷</a>
+    <a href="/today-form-en.html" class="lang-link active" title="English">🇺🇸</a>
   </div>
 </nav>
 
 <div class="wrap">
   <div class="form-header">
-    <div class="form-kicker">TODAY FILMOGRAPHY · 투*필</div>
-    <div class="form-title">오늘을 기록하세요</div>
-    <div class="form-sub">사진 최대 6장 + 짧은 설명<br>AI가 오늘의 당신을 시로 남겨드립니다 · 무료</div>
+    <div class="form-kicker">TODAY FILMOGRAPHY · TU·FIL</div>
+    <div class="form-title">Record Your Day</div>
+    <div class="form-sub">Up to 6 photos + short captions<br>AI turns today's you into a poem · Free</div>
   </div>
 
-  <div class="autofill-notice" id="autofill-notice">✦ 지난번 정보를 불러왔어요. 수정하셔도 됩니다.</div>
+  <div class="autofill-notice" id="autofill-notice">✦ We filled in your info from last time. Feel free to edit.</div>
 
-  <!-- 01 이름 -->
+  <!-- 01 Name -->
   <div class="q-block">
-    <div class="q-num">01 · 이름</div>
-    <div class="q-title">이름을 알려주세요 <span style="color:var(--green)">*</span></div>
-    <div class="q-sub">결과 페이지에 표시됩니다</div>
-    <input type="text" id="f-name" placeholder="이름 입력..." maxlength="20" autocomplete="name">
+    <div class="q-num">01 · Name</div>
+    <div class="q-title">Your name <span style="color:var(--green)">*</span></div>
+    <div class="q-sub">Displayed on the result page</div>
+    <input type="text" id="f-name" placeholder="Enter your name..." maxlength="20" autocomplete="name">
   </div>
 
-  <!-- 02 닉네임 -->
+  <!-- 02 Nickname -->
   <div class="q-block">
-    <div class="q-num">02 · 닉네임 (선택)</div>
-    <div class="q-title">닉네임이 있으신가요?</div>
-    <div class="q-sub">💡 오늘의 나를 한 단어로. AI가 시 쓸 때 참고해요.<br>예: 월요일의 곰, 커피충전중</div>
-    <input type="text" id="f-nickname" placeholder="닉네임 입력..." maxlength="20">
+    <div class="q-num">02 · Nickname (optional)</div>
+    <div class="q-title">Got a nickname?</div>
+    <div class="q-sub">💡 Describe today's you in one word. AI uses it when writing your poem.<br>e.g. Monday bear, Coffee mode</div>
+    <input type="text" id="f-nickname" placeholder="Enter a nickname..." maxlength="20">
   </div>
 
-  <!-- 03 이메일 -->
+  <!-- 03 Email -->
   <div class="q-block">
-    <div class="q-num">03 · 이메일</div>
-    <div class="q-title">이메일을 알려주세요 <span style="color:var(--green)">*</span></div>
-    <div class="q-sub">결과 링크가 이메일로 발송됩니다 · 광고 없음</div>
+    <div class="q-num">03 · Email</div>
+    <div class="q-title">Your email <span style="color:var(--green)">*</span></div>
+    <div class="q-sub">Your result link will be sent by email · No spam</div>
     <input type="email" id="f-email" placeholder="your@email.com" autocomplete="email">
   </div>
 
-  <!-- 04 사진 -->
+  <!-- 04 Photos -->
   <div class="q-block">
-    <div class="q-num">04 · 오늘 사진 (최대 6장)</div>
-    <div class="q-title">오늘 찍은 사진을 올려주세요 <span style="color:var(--green)">*</span></div>
-    <div class="q-sub">밥, 하늘, 사람, 풍경 — 무엇이든 괜찮아요<br>사진마다 짧은 설명도 써주세요</div>
+    <div class="q-num">04 · Today's Photos (up to 6)</div>
+    <div class="q-title">Upload today's photos <span style="color:var(--green)">*</span></div>
+    <div class="q-sub">Food, sky, people, scenery — anything goes<br>Add a short caption to each photo</div>
     <div class="shots-stack" id="shots-stack"></div>
     <button class="add-shot-btn" id="add-shot-btn" onclick="addShot()" style="margin-top:14px">
-      <span>＋ 사진 추가</span>
+      <span>＋ Add Photo</span>
     </button>
   </div>
 
-  <!-- 05 오늘 하루 한 문장 -->
+  <!-- 05 Today in one sentence -->
   <div class="q-block">
-    <div class="q-num">05 · 오늘 하루</div>
-    <div class="q-title">오늘 하루를 한 문장으로 <span style="color:var(--green)">*</span></div>
+    <div class="q-num">05 · Today</div>
+    <div class="q-title">Today in one sentence <span style="color:var(--green)">*</span></div>
     <div class="q-example">
-      💡 오늘 진짜 솔직하게.<br>
-      예: "출근하기 싫었는데 점심이 구원이었음"
+      💡 Be honest about your day.<br>
+      e.g. "Hated going to work but lunch saved me"
     </div>
-    <textarea id="f-today" rows="2" placeholder="오늘 하루를 솔직하게 한 문장으로..."></textarea>
+    <textarea id="f-today" rows="2" placeholder="One honest sentence about your day..."></textarea>
   </div>
 
-  <!-- 06 누군가에게 (선택) -->
+  <!-- 06 A word for someone (optional) -->
   <div class="q-block">
-    <div class="q-num">06 · 누군가에게 한 마디 (선택)</div>
-    <div class="q-title">오늘 떠오른 사람에게 전하고 싶은 말이 있다면</div>
-    <div class="q-sub">💡 선택 안하셔도 됩니다</div>
-    <input type="text" id="f-to" placeholder="대상 (예: 엄마, 친구 이름, 나 자신...)" oninput="toggleMsg(this.value)">
+    <div class="q-num">06 · A Word for Someone (optional)</div>
+    <div class="q-title">Is there something you want to say to someone today?</div>
+    <div class="q-sub">💡 Totally optional</div>
+    <input type="text" id="f-to" placeholder="To (e.g. Mom, a friend's name, myself...)" oninput="toggleMsg(this.value)">
     <div id="msg-wrap" style="display:none;margin-top:10px">
-      <textarea id="f-msg" rows="2" placeholder="전하고 싶은 말..."></textarea>
+      <textarea id="f-msg" rows="2" placeholder="What you want to say..."></textarea>
     </div>
   </div>
 
-  <!-- 07 공개 여부 -->
+  <!-- 07 Visibility -->
   <div class="q-block">
-    <div class="q-num">07 · 공개 설정 <span style="color:var(--green)">*</span></div>
-    <div class="q-title">이 투*필을 공개할까요?</div>
-    <div class="q-sub">공개하면 다른 사람들도 내 투*필을 볼 수 있어요</div>
+    <div class="q-num">07 · Visibility <span style="color:var(--green)">*</span></div>
+    <div class="q-title">Make this Tu·Fil public?</div>
+    <div class="q-sub">Others will be able to see your Tu·Fil</div>
     <div class="radio-group">
       <label class="radio-card" id="rc-public">
         <input type="radio" name="visibility" value="public" checked onchange="setPublic(true)">
         <div class="radio-content">
-          <div class="radio-title">🌿 공개</div>
-          <div class="radio-desc">다른 사람들도 내 투*필을 볼 수 있어요</div>
+          <div class="radio-title">🌿 Public</div>
+          <div class="radio-desc">Anyone can view your Tu·Fil</div>
         </div>
       </label>
       <label class="radio-card" id="rc-private">
         <input type="radio" name="visibility" value="private" onchange="setPublic(false)">
         <div class="radio-content">
-          <div class="radio-title">🔒 비공개</div>
-          <div class="radio-desc">나만 볼 수 있는 링크로 발송</div>
+          <div class="radio-title">🔒 Private</div>
+          <div class="radio-desc">Sent as a private link only you can see</div>
         </div>
       </label>
     </div>
   </div>
 </div>
 
-<!-- 하단 제출 바 -->
+<!-- Submit bar -->
 <div class="submit-bar">
-  <button class="submit-btn" id="submit-btn" onclick="doSubmit()">투*필 제출하기 →</button>
-  <div class="submit-hint">무료 · AI 처리 약 30초~1분 · 결과는 이메일로도 발송</div>
+  <button class="submit-btn" id="submit-btn" onclick="doSubmit()">Submit My Today →</button>
+  <div class="submit-hint">Free · AI takes ~30–60 sec · Result sent by email too</div>
 </div>
 
-<!-- 대기 오버레이 -->
+<!-- Wait overlay -->
 <div id="wait-overlay">
   <div class="wo-rail"><div class="wo-fill" id="wo-fill"></div></div>
   <div class="wo-slides">
     <div class="wo-slide active" id="wo-s0">
       <div class="wo-check-ring"><span class="wo-check-icon">✦</span></div>
       <div class="wo-kicker">Today Filmography</div>
-      <div class="wo-title">제출이 완료되었습니다</div>
-      <div class="wo-body">AI가 사진과 오늘의 이야기를<br>읽고 있어요</div>
+      <div class="wo-title">Submission complete</div>
+      <div class="wo-body">AI is reading your photos<br>and today's story</div>
     </div>
     <div class="wo-slide" id="wo-s1">
-      <div class="wo-kicker">✦ 하이쿠란 무엇인가요?</div>
-      <div class="wo-title">5 · 7 · 5 음절의<br>짧은 시 형식입니다</div>
+      <div class="wo-kicker">✦ What is a Haiku?</div>
+      <div class="wo-title">A short poem of<br>5 · 7 · 5 syllables</div>
       <div class="wo-haiku-lines">
-        <div class="wo-haiku-line"><span class="wo-haiku-num">5</span><span class="wo-haiku-text"><span class="wo-haiku-accent">짧기 때문에</span></span></div>
-        <div class="wo-haiku-line"><span class="wo-haiku-num">7</span><span class="wo-haiku-text"><span class="wo-haiku-accent">오히려 본질만 남습니다</span></span></div>
-        <div class="wo-haiku-line"><span class="wo-haiku-num">5</span><span class="wo-haiku-text"><span class="wo-haiku-accent">오늘이 그래요</span></span></div>
+        <div class="wo-haiku-line"><span class="wo-haiku-num">5</span><span class="wo-haiku-text"><span class="wo-haiku-accent">Brief as it is</span></span></div>
+        <div class="wo-haiku-line"><span class="wo-haiku-num">7</span><span class="wo-haiku-text"><span class="wo-haiku-accent">only the essence remains</span></span></div>
+        <div class="wo-haiku-line"><span class="wo-haiku-num">5</span><span class="wo-haiku-text"><span class="wo-haiku-accent">Your today does too</span></span></div>
       </div>
-      <div class="wo-small">당신의 오늘도 그렇게 정리됩니다</div>
+      <div class="wo-small">Your day distilled to its essence</div>
     </div>
     <div class="wo-slide" id="wo-s2">
-      <div class="wo-kicker">오늘 하루 어떠셨나요?</div>
-      <div class="wo-title">별거 없었던 것 같아도</div>
-      <div class="wo-body">사진 한 장씩 고르다 보면<br>오늘이 보입니다</div>
+      <div class="wo-kicker">How was your day?</div>
+      <div class="wo-title">Even if nothing special happened</div>
+      <div class="wo-body">Going through each photo<br>reveals your day</div>
     </div>
     <div class="wo-slide" id="wo-s3">
-      <div class="wo-kicker">가끔 이렇게 정리하다 보면</div>
-      <div class="wo-title">1년 후엔<br>훌륭한 일기장이 됩니다</div>
+      <div class="wo-kicker">Keep doing this occasionally</div>
+      <div class="wo-title">A year from now<br>you'll have a wonderful diary</div>
       <div class="wo-stack-lines">
         <div class="wo-stack-line"></div>
         <div class="wo-stack-line"></div>
         <div class="wo-stack-line"></div>
       </div>
-      <div class="wo-body" style="margin-top:24px">오늘의 나, 기록해두세요</div>
-      <div class="wo-small">투*필은 매일 쌓입니다</div>
+      <div class="wo-body" style="margin-top:24px">Record today's you</div>
+      <div class="wo-small">Tu·Fil builds up every day</div>
     </div>
     <div class="wo-slide" id="wo-s4">
       <div class="wo-brand-H">H</div>
-      <div class="wo-brand-name">휴먼다큐닷컴</div>
-      <div class="wo-brand-tagline">우리는 삶을 기록합니다</div>
+      <div class="wo-brand-name">humandocu.com</div>
+      <div class="wo-brand-tagline">We document lives</div>
       <div class="wo-brand-url">humandocu.com</div>
     </div>
   </div>
@@ -305,12 +305,11 @@ textarea::placeholder{color:var(--gold);opacity:.65}
 const API = 'https://humandocu-server-production.up.railway.app';
 const LS_KEY = 'today_form_v1';
 const MAX_SHOTS = 6;
-const SHOT_TITLES = ['첫 번째 장면','두 번째 장면','세 번째 장면','네 번째 장면','다섯 번째 장면','마지막 장면'];
+const SHOT_TITLES = ['First Scene','Second Scene','Third Scene','Fourth Scene','Fifth Scene','Last Scene'];
 
 let isPublic = true;
-let shots = []; // [{b64, caption}]
+let shots = [];
 
-// ── localStorage 저장/로드 ──
 function saveLS() {
   try {
     const name = document.getElementById('f-name').value.trim();
@@ -344,18 +343,15 @@ function loadLS() {
   } catch(e) { return false; }
 }
 
-// ── 공개 라디오 ──
 function setPublic(val) {
   isPublic = val;
   document.querySelector(`input[name=visibility][value=${val ? 'public' : 'private'}]`).checked = true;
 }
 
-// ── 메시지 필드 토글 ──
 function toggleMsg(val) {
   document.getElementById('msg-wrap').style.display = val.trim() ? 'block' : 'none';
 }
 
-// ── 사진 슬롯 ──
 function renderShots() {
   const stack = document.getElementById('shots-stack');
   stack.innerHTML = '';
@@ -363,17 +359,17 @@ function renderShots() {
     const card = document.createElement('div');
     card.className = 'shot-card';
     const imgHtml = s.b64
-      ? `<img src="${s.b64}"><button class="shot-change-btn" onclick="event.stopPropagation();pickPhoto(${i})">바꾸기</button>`
-      : `<div class="ph-icon">📷</div><div class="ph-text">탭해서 사진 선택</div>`;
+      ? `<img src="${s.b64}"><button class="shot-change-btn" onclick="event.stopPropagation();pickPhoto(${i})">Change</button>`
+      : `<div class="ph-icon">📷</div><div class="ph-text">Tap to select photo</div>`;
     card.innerHTML = `
       <div class="shot-card-head">
         <div class="shot-badge">SHOT ${i+1}</div>
-        <div class="shot-label">${SHOT_TITLES[i] || (i+1)+'번째 장면'}</div>
+        <div class="shot-label">${SHOT_TITLES[i] || 'Scene '+(i+1)}</div>
       </div>
       <div class="shot-upload-area" id="spa${i}" onclick="pickPhoto(${i})">${imgHtml}</div>
       ${s.b64 ? `<div class="shot-caption-wrap">
         <textarea class="shot-caption" id="cap${i}" rows="2"
-          placeholder="이 장면을 한 줄로..."
+          placeholder="Describe this scene in one line..."
           oninput="shots[${i}].caption=this.value">${s.caption||''}</textarea>
       </div>` : ''}`;
     stack.appendChild(card);
@@ -385,7 +381,6 @@ function addShot() {
   if (shots.length >= MAX_SHOTS) return;
   shots.push({b64: null, caption: ''});
   renderShots();
-  // 새 슬롯 클릭 유도
   setTimeout(() => document.getElementById('spa'+(shots.length-1))?.scrollIntoView({behavior:'smooth',block:'center'}), 100);
 }
 
@@ -428,7 +423,7 @@ async function resizeImg(b64) {
   });
 }
 
-// ── 대기 오버레이 제어 ──
+// ── Wait overlay ──
 var _woSlideTimer = null;
 var _woProgTimer  = null;
 var _woCurSlide   = 0;
@@ -475,7 +470,7 @@ function finishWaitOverlay() {
   fill.style.width = '100%';
 }
 
-// ── 제출 ──
+// ── Submit ──
 async function doSubmit() {
   const name      = document.getElementById('f-name').value.trim();
   const nickname  = document.getElementById('f-nickname').value.trim();
@@ -484,17 +479,16 @@ async function doSubmit() {
   const last_to   = document.getElementById('f-to').value.trim();
   const last_msg  = document.getElementById('f-msg').value.trim();
 
-  // caption 동기화
   shots.forEach((s, i) => {
     const cap = document.getElementById('cap'+i);
     if (cap && s) s.caption = cap.value;
   });
 
   const filled = shots.filter(s => s?.b64);
-  if (!name)  { alert('이름을 입력해주세요'); return; }
-  if (!email || !email.includes('@')) { alert('이메일을 입력해주세요'); return; }
-  if (filled.length < 1) { alert('사진을 1장 이상 올려주세요'); return; }
-  if (!today_s) { alert('오늘 하루를 한 문장으로 써주세요'); return; }
+  if (!name)  { alert('Please enter your name'); return; }
+  if (!email || !email.includes('@')) { alert('Please enter your email'); return; }
+  if (filled.length < 1) { alert('Please upload at least one photo'); return; }
+  if (!today_s) { alert('Please describe your day in one sentence'); return; }
 
   saveLS();
   document.getElementById('submit-btn').disabled = true;
@@ -522,7 +516,7 @@ async function doSubmit() {
       })
     });
     const data = await res.json();
-    if (!res.ok || data.status === 'error') throw new Error(data.error || '오류가 발생했어요');
+    if (!res.ok || data.status === 'error') throw new Error(data.error || 'An error occurred');
     const doc_id = data.id || data.doc_id;
     finishWaitOverlay();
     setTimeout(function() {
@@ -531,34 +525,29 @@ async function doSubmit() {
   } catch(e) {
     hideWaitOverlay();
     document.getElementById('submit-btn').disabled = false;
-    alert('오류: ' + e.message);
+    alert('Error: ' + e.message);
   }
 }
 
-// ── 초기화 ──
+// ── Init ──
 (function init() {
-  // 기본 슬롯 2개
   shots.push({b64: null, caption: ''});
   shots.push({b64: null, caption: ''});
   renderShots();
 
-  // localStorage 자동완성
   const filled = loadLS();
   if (filled) {
     document.getElementById('autofill-notice').classList.add('show');
-    // last_to 복원됐으면 메시지 필드 보이기
     const to = document.getElementById('f-to').value.trim();
     if (to) document.getElementById('msg-wrap').style.display = 'block';
   }
 
-  // 이메일로 서버에서 프로필 조회 (localStorage에 이메일이 있을 때)
   const savedEmail = document.getElementById('f-email').value.trim();
   if (savedEmail) {
     fetch(API + '/api/today/profile?email=' + encodeURIComponent(savedEmail))
       .then(r => r.json())
       .then(d => {
         if (!d.found) return;
-        // 서버 값 우선 (localStorage보다 최신)
         if (d.name)     document.getElementById('f-name').value     = d.name;
         if (d.nickname) document.getElementById('f-nickname').value = d.nickname;
         if (d.identity) document.getElementById('f-today').value    = d.identity;
