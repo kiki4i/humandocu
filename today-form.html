@@ -353,7 +353,7 @@ async function resizeImg(b64) {
 }
 
 // ── 제출 ──
-async function doSubmit() {
+function doSubmit() {
   const name      = document.getElementById('f-name').value.trim();
   const nickname  = document.getElementById('f-nickname').value.trim();
   const email     = document.getElementById('f-email').value.trim().toLowerCase();
@@ -376,42 +376,30 @@ async function doSubmit() {
   // localStorage 저장
   saveLS();
 
-  // 로딩
-  document.getElementById('submit-btn').disabled = true;
-  document.getElementById('loading').classList.add('active');
+  const shotPayload = filled.map((s) => ({
+    image_b64: s.b64,
+    caption:   s.caption || '',
+    index:     shots.indexOf(s) + 1,
+  }));
 
-  try {
-    const shotPayload = filled.map((s, n) => ({
-      image_b64: s.b64,
-      caption:   s.caption || '',
-      index:     shots.indexOf(s) + 1,
-    }));
+  // 백그라운드 API 호출 (응답 기다리지 않음)
+  fetch(API + '/api/today/submit-b64', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      name,
+      nickname: nickname || name,
+      email,
+      is_public: isPublic,
+      shots: shotPayload,
+      today_sentence: today_s,
+      last_to,
+      last_msg,
+    })
+  }).catch(() => {});
 
-    const res = await fetch(API + '/api/today/submit-b64', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        name,
-        nickname: nickname || name,
-        email,
-        is_public: isPublic,
-        shots: shotPayload,
-        today_sentence: today_s,
-        last_to,
-        last_msg,
-      })
-    });
-    const data = await res.json();
-
-    if (!data.ok) throw new Error(data.error || '오류가 발생했어요');
-
-    window.location.href = '/today-wait.html?email=' + encodeURIComponent(email);
-
-  } catch(e) {
-    document.getElementById('loading').classList.remove('active');
-    document.getElementById('submit-btn').disabled = false;
-    alert('오류: ' + e.message + '\n잠시 후 다시 시도해주세요');
-  }
+  // 즉시 대기 화면으로 이동
+  window.location.href = '/today-wait.html?email=' + encodeURIComponent(email);
 }
 
 // ── 초기화 ──

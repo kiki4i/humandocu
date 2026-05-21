@@ -158,11 +158,11 @@
     return;
   }
 
-  // 첫 조회는 20초 후 시작 (AI 처리 최소 시간)
+  // 첫 조회는 5초 후 시작
   setTimeout(function () {
     pollCheck();
     pollTimer = setInterval(pollCheck, POLL_MS);
-  }, 20000);
+  }, 5000);
 })();
 </script>
 </body>
