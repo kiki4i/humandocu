@@ -99,13 +99,38 @@ textarea::placeholder{color:var(--gold);opacity:.65}
 .submit-btn:disabled{opacity:.55;cursor:not-allowed}
 .submit-hint{text-align:center;font-size:11px;color:var(--ink3);margin-top:7px;max-width:var(--max);margin-left:auto;margin-right:auto}
 
-/* ── LOADING OVERLAY ── */
-.loading{display:none;position:fixed;inset:0;background:rgba(255,248,237,.97);z-index:999;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px}
-.loading.active{display:flex}
-.loading-icon{font-size:48px;animation:bob 1.8s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.loading-title{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--ink);line-height:1.4}
-.loading-sub{font-size:13px;color:var(--ink2);line-height:2}
+/* ── 대기 오버레이 ── */
+#wait-overlay{display:none;position:fixed;inset:0;background:#0d0d0d;color:#f9f6f0;font-family:'Apple SD Gothic Neo','Noto Sans KR',sans-serif;-webkit-font-smoothing:antialiased;z-index:999}
+#wait-overlay.active{display:block}
+.wo-rail{position:absolute;top:0;left:0;right:0;height:2px;background:rgba(200,135,10,.15)}
+.wo-fill{height:100%;width:0%;background:#C8870A;border-radius:0 1px 1px 0;transition:width .6s ease}
+.wo-slides{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.wo-slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 32px;text-align:center;opacity:0;transition:opacity .9s ease;pointer-events:none}
+.wo-slide.active{opacity:1;pointer-events:auto}
+.wo-kicker{font-size:10px;letter-spacing:.28em;color:rgba(200,135,10,.65);text-transform:uppercase;margin-bottom:20px}
+.wo-title{font-size:22px;font-weight:300;color:#f9f6f0;line-height:1.5;margin-bottom:20px;letter-spacing:.02em}
+.wo-body{font-size:15px;color:rgba(249,246,240,.5);line-height:2.2;font-weight:300;letter-spacing:.02em}
+.wo-small{font-size:11px;color:rgba(200,135,10,.55);letter-spacing:.12em;margin-top:20px}
+.wo-check-ring{width:64px;height:64px;border-radius:50%;border:1.5px solid rgba(200,135,10,.4);display:flex;align-items:center;justify-content:center;margin:0 auto 28px;animation:wo-pulse 2.4s ease-in-out infinite}
+@keyframes wo-pulse{0%,100%{box-shadow:0 0 0 0 rgba(200,135,10,.15)}50%{box-shadow:0 0 0 10px rgba(200,135,10,0)}}
+.wo-check-icon{font-size:22px;color:#C8870A}
+.wo-haiku-lines{display:flex;flex-direction:column;gap:4px;margin-top:4px}
+.wo-haiku-line{display:flex;align-items:center;gap:12px;justify-content:center}
+.wo-haiku-num{font-size:9px;color:rgba(200,135,10,.4);letter-spacing:.12em;width:14px;text-align:right;flex-shrink:0}
+.wo-haiku-text{font-size:16px;color:rgba(249,246,240,.45);letter-spacing:.06em;font-weight:300}
+.wo-haiku-accent{color:rgba(249,246,240,.75)}
+.wo-stack-lines{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.wo-stack-line{height:1.5px;border-radius:1px;background:rgba(200,135,10,.18)}
+.wo-stack-line:nth-child(1){width:80px}
+.wo-stack-line:nth-child(2){width:120px}
+.wo-stack-line:nth-child(3){width:60px}
+.wo-brand-H{font-family:Georgia,serif;font-size:72px;font-weight:400;color:#C8870A;line-height:1;margin-bottom:20px;opacity:.9}
+.wo-brand-name{font-size:14px;letter-spacing:.22em;color:rgba(249,246,240,.65);margin-bottom:10px}
+.wo-brand-tagline{font-size:13px;color:rgba(249,246,240,.35);letter-spacing:.06em;line-height:1.9}
+.wo-brand-url{font-size:10px;color:rgba(200,135,10,.4);letter-spacing:.16em;margin-top:16px}
+.wo-dots{position:absolute;bottom:32px;left:0;right:0;display:flex;justify-content:center;gap:8px}
+.wo-dot{width:6px;height:6px;border-radius:50%;background:rgba(200,135,10,.2);transition:background .4s,transform .4s}
+.wo-dot.active{background:#C8870A;transform:scale(1.25)}
 
 /* ── AUTO-FILL BADGE ── */
 .autofill-notice{display:none;background:var(--green-lt);border:1px solid rgba(45,80,22,.2);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--green);margin-bottom:24px;line-height:1.6}
@@ -218,11 +243,56 @@ textarea::placeholder{color:var(--gold);opacity:.65}
   <div class="submit-hint">무료 · AI 처리 약 30초~1분 · 결과는 이메일로도 발송</div>
 </div>
 
-<!-- 로딩 오버레이 -->
-<div class="loading" id="loading">
-  <div class="loading-icon">✍️</div>
-  <div class="loading-title">AI가 오늘을 읽고 있어요</div>
-  <div class="loading-sub">사진과 하루를 담아<br>시를 쓰는 중입니다...</div>
+<!-- 대기 오버레이 -->
+<div id="wait-overlay">
+  <div class="wo-rail"><div class="wo-fill" id="wo-fill"></div></div>
+  <div class="wo-slides">
+    <div class="wo-slide active" id="wo-s0">
+      <div class="wo-check-ring"><span class="wo-check-icon">✦</span></div>
+      <div class="wo-kicker">Today Filmography</div>
+      <div class="wo-title">제출이 완료되었습니다</div>
+      <div class="wo-body">AI가 사진과 오늘의 이야기를<br>읽고 있어요</div>
+    </div>
+    <div class="wo-slide" id="wo-s1">
+      <div class="wo-kicker">✦ 하이쿠란 무엇인가요?</div>
+      <div class="wo-title">5 · 7 · 5 음절의<br>짧은 시 형식입니다</div>
+      <div class="wo-haiku-lines">
+        <div class="wo-haiku-line"><span class="wo-haiku-num">5</span><span class="wo-haiku-text"><span class="wo-haiku-accent">짧기 때문에</span></span></div>
+        <div class="wo-haiku-line"><span class="wo-haiku-num">7</span><span class="wo-haiku-text"><span class="wo-haiku-accent">오히려 본질만 남습니다</span></span></div>
+        <div class="wo-haiku-line"><span class="wo-haiku-num">5</span><span class="wo-haiku-text"><span class="wo-haiku-accent">오늘이 그래요</span></span></div>
+      </div>
+      <div class="wo-small">당신의 오늘도 그렇게 정리됩니다</div>
+    </div>
+    <div class="wo-slide" id="wo-s2">
+      <div class="wo-kicker">오늘 하루 어떠셨나요?</div>
+      <div class="wo-title">별거 없었던 것 같아도</div>
+      <div class="wo-body">사진 한 장씩 고르다 보면<br>오늘이 보입니다</div>
+    </div>
+    <div class="wo-slide" id="wo-s3">
+      <div class="wo-kicker">가끔 이렇게 정리하다 보면</div>
+      <div class="wo-title">1년 후엔<br>훌륭한 일기장이 됩니다</div>
+      <div class="wo-stack-lines">
+        <div class="wo-stack-line"></div>
+        <div class="wo-stack-line"></div>
+        <div class="wo-stack-line"></div>
+      </div>
+      <div class="wo-body" style="margin-top:24px">오늘의 나, 기록해두세요</div>
+      <div class="wo-small">투*필은 매일 쌓입니다</div>
+    </div>
+    <div class="wo-slide" id="wo-s4">
+      <div class="wo-brand-H">H</div>
+      <div class="wo-brand-name">휴먼다큐닷컴</div>
+      <div class="wo-brand-tagline">우리는 삶을 기록합니다</div>
+      <div class="wo-brand-url">humandocu.com</div>
+    </div>
+  </div>
+  <div class="wo-dots">
+    <div class="wo-dot active"></div>
+    <div class="wo-dot"></div>
+    <div class="wo-dot"></div>
+    <div class="wo-dot"></div>
+    <div class="wo-dot"></div>
+  </div>
 </div>
 
 <script>
@@ -352,8 +422,55 @@ async function resizeImg(b64) {
   });
 }
 
+// ── 대기 오버레이 제어 ──
+var _woSlideTimer = null;
+var _woProgTimer  = null;
+var _woCurSlide   = 0;
+var WO_SLIDES     = 5;
+var WO_SLIDE_MS   = 8000;
+
+function _woGoSlide(n) {
+  document.getElementById('wo-s' + _woCurSlide).classList.remove('active');
+  document.querySelectorAll('.wo-dot')[_woCurSlide].classList.remove('active');
+  _woCurSlide = n % WO_SLIDES;
+  document.getElementById('wo-s' + _woCurSlide).classList.add('active');
+  document.querySelectorAll('.wo-dot')[_woCurSlide].classList.add('active');
+}
+
+function showWaitOverlay() {
+  _woCurSlide = 0;
+  document.querySelectorAll('.wo-slide').forEach(function(s) { s.classList.remove('active'); });
+  document.querySelectorAll('.wo-dot').forEach(function(d) { d.classList.remove('active'); });
+  document.getElementById('wo-s0').classList.add('active');
+  document.querySelectorAll('.wo-dot')[0].classList.add('active');
+  document.getElementById('wo-fill').style.width = '0%';
+  document.getElementById('wait-overlay').classList.add('active');
+
+  _woSlideTimer = setInterval(function() { _woGoSlide(_woCurSlide + 1); }, WO_SLIDE_MS);
+
+  var startMs = Date.now();
+  _woProgTimer = setInterval(function() {
+    var pct = Math.min(((Date.now() - startMs) / 120000) * 92, 92);
+    document.getElementById('wo-fill').style.width = pct + '%';
+  }, 1000);
+}
+
+function hideWaitOverlay() {
+  clearInterval(_woSlideTimer);
+  clearInterval(_woProgTimer);
+  document.getElementById('wait-overlay').classList.remove('active');
+}
+
+function finishWaitOverlay() {
+  clearInterval(_woSlideTimer);
+  clearInterval(_woProgTimer);
+  var fill = document.getElementById('wo-fill');
+  fill.style.transition = 'width .4s ease';
+  fill.style.width = '100%';
+}
+
 // ── 제출 ──
-function doSubmit() {
+async function doSubmit() {
   const name      = document.getElementById('f-name').value.trim();
   const nickname  = document.getElementById('f-nickname').value.trim();
   const email     = document.getElementById('f-email').value.trim().toLowerCase();
@@ -374,6 +491,8 @@ function doSubmit() {
   if (!today_s) { alert('오늘 하루를 한 문장으로 써주세요'); return; }
 
   saveLS();
+  document.getElementById('submit-btn').disabled = true;
+  showWaitOverlay();
 
   const shotPayload = filled.map((s) => ({
     image_b64: s.b64,
@@ -381,24 +500,33 @@ function doSubmit() {
     index:     shots.indexOf(s) + 1,
   }));
 
-  // 백그라운드 API 호출 (응답 기다리지 않음)
-  fetch(API + '/api/today/submit-b64', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      name,
-      nickname: nickname || name,
-      email,
-      is_public: isPublic,
-      shots: shotPayload,
-      today_sentence: today_s,
-      last_to,
-      last_msg,
-    })
-  }).catch(() => {});
-
-  // 즉시 대기 화면으로 이동
-  window.location.href = '/today-wait.html?email=' + encodeURIComponent(email);
+  try {
+    const res = await fetch(API + '/api/today/submit-b64', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        name,
+        nickname: nickname || name,
+        email,
+        is_public: isPublic,
+        shots: shotPayload,
+        today_sentence: today_s,
+        last_to,
+        last_msg,
+      })
+    });
+    const data = await res.json();
+    if (!res.ok || data.status === 'error') throw new Error(data.error || '오류가 발생했어요');
+    const doc_id = data.id || data.doc_id;
+    finishWaitOverlay();
+    setTimeout(function() {
+      window.location.href = API + '/today/' + doc_id;
+    }, 500);
+  } catch(e) {
+    hideWaitOverlay();
+    document.getElementById('submit-btn').disabled = false;
+    alert('오류: ' + e.message);
+  }
 }
 
 // ── 초기화 ──
