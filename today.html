@@ -728,7 +728,7 @@ footer {
     🎞️ 이따금 올려두면 나만의 필모그래피 앨범이 만들어집니다
   </div>
 
-  <a id="cta-btn-top" href="https://tally.so/r/Bz8LbR" target="_blank" class="btn-primary fade-in-4"><span data-ko="나의 투*필 만들기 →" data-en="Create My Today Filmography →" data-jp="마이 투*필 만들기 →" data-zh="创建我的투*필 →">나의 투*필 만들기 →</span></a>
+  <a id="cta-btn-top" href="/today-form.html" class="btn-primary fade-in-4"><span data-ko="나의 투*필 만들기 →" data-en="Create My Today Filmography →" data-jp="마이 투*필 만들기 →" data-zh="创建我의투*필 →">나의 투*필 만들기 →</span></a>
   <span class="btn-hint" data-ko="사진 2~6장 + 한줄 설명 · 바로 결과 확인" data-en="2 to 6 photos + one line · See results instantly" data-jp="写真2〜6枚 + 一行説明 · すぐ結果を確認" data-zh="2〜6张照片 + 一行说明 · 立即查看结果">사진 2~6장 + 한줄 설명 · 바로 결과 확인</span>
 </div>
 
@@ -882,7 +882,7 @@ footer {
 
   <div class="cta-sub" data-ko="사진 2~6장과 짧은 한 줄 — 그것으로 충분합니다.<br>AI가 오늘의 온도를 시로 담아드립니다." data-en="2 to 6 photos and a short line — that's all it takes.<br>AI captures the feeling of your today in verse." data-jp="写真2〜6枚と短い一行 — それだけで十分です。<br>AIが今日の温度を詩にします。" data-zh="2〜6张照片和简短的一行 — 这就够了。<br>AI将今天的温度化为诗。">사진 2~6장과 짧은 한 줄 — 그것으로 충분합니다.<br>AI가 오늘의 온도를 시로 담아드립니다.</div>
 
-  <a id="cta-btn-bottom" href="https://tally.so/r/Bz8LbR" target="_blank" class="btn-primary"><span data-ko="나의 투*필 만들기 →" data-en="Create My Today Filmography →" data-jp="마이 투*필 만들기 →" data-zh="创建我의투*필 →">나의 투*필 만들기 →</span></a>
+  <a id="cta-btn-bottom" href="/today-form.html" class="btn-primary"><span data-ko="나의 투*필 만들기 →" data-en="Create My Today Filmography →" data-jp="마이 투*필 만들기 →" data-zh="创建我의투*필 →">나의 투*필 만들기 →</span></a>
   <span class="btn-hint" data-ko="무료 · 바로 결과 확인" data-en="Free · See results instantly" data-jp="無料 · すぐ結果を確認" data-zh="免费 · 立即查看结果">무료 · 바로 결과 확인</span>
 </div>
 
@@ -1061,12 +1061,6 @@ loadNext();
 (function () {
   function applyLang(lang) {
     var l = lang.toLowerCase();
-    var EN_URL = 'https://tally.so/r/7RabJP';
-    var KO_URL = 'https://tally.so/r/Bz8LbR';
-    document.querySelectorAll('#cta-btn-top, #cta-btn-bottom').forEach(function(btn) {
-      btn.href = l === 'en' ? EN_URL : KO_URL;
-    });
-
     document.querySelectorAll('[data-ko]').forEach(function (el) {
       var text = el.getAttribute('data-' + l);
       if (text) el.innerHTML = text;
