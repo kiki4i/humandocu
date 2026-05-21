@@ -6,163 +6,249 @@
 <title>투*필 만드는 중… · 휴먼다큐</title>
 <meta name="robots" content="noindex">
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%;background:#1a1714;font-family:'Noto Sans KR',sans-serif;color:#f9f6f0}
-  body{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;text-align:center}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:#0d0d0d;color:#f9f6f0;font-family:'Apple SD Gothic Neo','Noto Sans KR',sans-serif;-webkit-font-smoothing:antialiased}
+body{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
 
-  .logo{font-size:11px;letter-spacing:.25em;color:rgba(200,135,10,.5);margin-bottom:48px}
+/* ── 진행 바 ── */
+.progress-rail{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(200,135,10,.15);z-index:100}
+.progress-fill{height:100%;width:0%;background:#C8870A;border-radius:0 1px 1px 0;transition:width .6s ease}
 
-  /* 펜 + 줄 애니메이션 */
-  .pen-wrap{position:relative;width:64px;height:64px;margin:0 auto 40px}
-  .pen-icon{font-size:36px;animation:pen-bob 1.8s ease-in-out infinite;display:block}
-  @keyframes pen-bob{
-    0%,100%{transform:translateY(0) rotate(-15deg)}
-    50%{transform:translateY(-6px) rotate(-10deg)}
-  }
-  .pen-line{position:absolute;bottom:4px;left:50%;transform:translateX(-50%);
-    width:0;height:2px;background:#C8870A;border-radius:1px;
-    animation:draw-line 1.8s ease-in-out infinite}
-  @keyframes draw-line{
-    0%{width:0;opacity:1}
-    60%{width:48px;opacity:1}
-    100%{width:48px;opacity:0}
-  }
+/* ── 슬라이드 래퍼 ── */
+.slides{flex:1;position:relative;display:flex;align-items:center;justify-content:center}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 32px;text-align:center;opacity:0;transition:opacity .9s ease;pointer-events:none}
+.slide.active{opacity:1;pointer-events:auto}
 
-  /* 점 세 개 */
-  .dots{display:flex;gap:8px;justify-content:center;margin-bottom:32px}
-  .dot{width:7px;height:7px;border-radius:50%;background:#C8870A;opacity:.2;animation:pulse 1.4s ease-in-out infinite}
-  .dot:nth-child(2){animation-delay:.25s}
-  .dot:nth-child(3){animation-delay:.5s}
-  @keyframes pulse{0%,100%{opacity:.2;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+/* ── 공통 텍스트 ── */
+.kicker{font-size:10px;letter-spacing:.28em;color:rgba(200,135,10,.65);text-transform:uppercase;margin-bottom:20px}
+.slide-title{font-size:22px;font-weight:300;color:#f9f6f0;line-height:1.5;margin-bottom:20px;letter-spacing:.02em}
+.slide-body{font-size:15px;color:rgba(249,246,240,.5);line-height:2.2;font-weight:300;letter-spacing:.02em}
+.slide-small{font-size:11px;color:rgba(200,135,10,.55);letter-spacing:.12em;margin-top:20px}
 
-  .msg{font-size:17px;font-weight:300;color:#f9f6f0;line-height:1.8;min-height:54px;
-    transition:opacity .6s ease;letter-spacing:.02em}
-  .msg.fade{opacity:0}
+/* ── 슬라이드 1 — 체크 ── */
+.check-ring{width:64px;height:64px;border-radius:50%;border:1.5px solid rgba(200,135,10,.4);display:flex;align-items:center;justify-content:center;margin:0 auto 28px;animation:ring-pulse 2.4s ease-in-out infinite}
+@keyframes ring-pulse{0%,100%{box-shadow:0 0 0 0 rgba(200,135,10,.15)}50%{box-shadow:0 0 0 10px rgba(200,135,10,0)}}
+.check-icon{font-size:22px;color:#C8870A}
 
-  .sub{font-size:12px;color:rgba(249,246,240,.35);margin-top:16px;line-height:1.8}
+/* ── 슬라이드 2 — 하이쿠 ── */
+.haiku-lines{display:flex;flex-direction:column;gap:4px;margin-top:4px}
+.haiku-line{display:flex;align-items:center;gap:12px;justify-content:center}
+.haiku-num{font-size:9px;color:rgba(200,135,10,.4);letter-spacing:.12em;width:14px;text-align:right;flex-shrink:0}
+.haiku-text{font-size:16px;color:rgba(249,246,240,.45);letter-spacing:.06em;font-weight:300}
+.haiku-accent{color:rgba(249,246,240,.75)}
 
-  .timeout-box{display:none;margin-top:40px;padding:20px 24px;
-    border:1px solid rgba(200,135,10,.3);border-radius:12px;max-width:320px;width:100%}
-  .timeout-box p{font-size:14px;color:#C8870A;line-height:1.8;margin-bottom:12px}
-  .timeout-box a{display:inline-block;font-size:13px;color:rgba(249,246,240,.5);text-decoration:underline}
+/* ── 슬라이드 4 — 캘린더 느낌 ── */
+.stack-lines{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.stack-line{height:1.5px;border-radius:1px;background:rgba(200,135,10,.18)}
+.stack-line:nth-child(1){width:80px}
+.stack-line:nth-child(2){width:120px}
+.stack-line:nth-child(3){width:60px}
 
-  .progress-bar{width:100%;max-width:240px;height:2px;background:rgba(200,135,10,.15);
-    border-radius:1px;margin:28px auto 0;overflow:hidden}
-  .progress-fill{height:100%;width:0%;background:#C8870A;border-radius:1px;
-    transition:width .5s linear}
+/* ── 슬라이드 5 — 로고 ── */
+.brand-H{font-family:Georgia,serif;font-size:72px;font-weight:400;color:#C8870A;line-height:1;margin-bottom:20px;opacity:.9}
+.brand-name{font-size:14px;letter-spacing:.22em;color:rgba(249,246,240,.65);margin-bottom:10px}
+.brand-tagline{font-size:13px;color:rgba(249,246,240,.35);letter-spacing:.06em;line-height:1.9}
+.brand-url{font-size:10px;color:rgba(200,135,10,.4);letter-spacing:.16em;margin-top:16px}
+
+/* ── 점 인디케이터 ── */
+.dots-bar{position:fixed;bottom:32px;left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:100}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(200,135,10,.2);transition:background .4s,transform .4s}
+.dot.active{background:#C8870A;transform:scale(1.25)}
+
+/* ── 타임아웃 박스 ── */
+.timeout-wrap{display:none;flex-direction:column;align-items:center;justify-content:center;padding:48px 32px;text-align:center}
+.timeout-wrap.show{display:flex}
+.timeout-icon{font-size:36px;margin-bottom:20px}
+.timeout-title{font-size:18px;font-weight:300;color:#f9f6f0;margin-bottom:12px}
+.timeout-sub{font-size:13px;color:rgba(249,246,240,.4);line-height:2}
+.timeout-link{display:inline-block;margin-top:24px;font-size:12px;color:rgba(200,135,10,.6);border-bottom:1px solid rgba(200,135,10,.25);padding-bottom:2px}
 </style>
 </head>
 <body>
 
-<div class="logo">HUMANDOCU · 투*필</div>
+<div class="progress-rail"><div class="progress-fill" id="progress"></div></div>
 
-<div class="pen-wrap">
-  <span class="pen-icon">✍️</span>
-  <div class="pen-line"></div>
+<div class="slides" id="slides">
+
+  <!-- SLIDE 1 — 제출 완료 -->
+  <div class="slide active" id="s0">
+    <div class="check-ring"><span class="check-icon">✦</span></div>
+    <div class="kicker">Today Filmography</div>
+    <div class="slide-title">제출이 완료되었습니다</div>
+    <div class="slide-body">AI가 사진과 오늘의 이야기를<br>읽고 있어요</div>
+  </div>
+
+  <!-- SLIDE 2 — 하이쿠란? -->
+  <div class="slide" id="s1">
+    <div class="kicker">✦ 하이쿠란 무엇인가요?</div>
+    <div class="slide-title">5 · 7 · 5 음절의<br>짧은 시 형식입니다</div>
+    <div class="haiku-lines">
+      <div class="haiku-line">
+        <span class="haiku-num">5</span>
+        <span class="haiku-text"><span class="haiku-accent">짧기 때문에</span></span>
+      </div>
+      <div class="haiku-line">
+        <span class="haiku-num">7</span>
+        <span class="haiku-text"><span class="haiku-accent">오히려 본질만 남습니다</span></span>
+      </div>
+      <div class="haiku-line">
+        <span class="haiku-num">5</span>
+        <span class="haiku-text"><span class="haiku-accent">오늘이 그래요</span></span>
+      </div>
+    </div>
+    <div class="slide-small">당신의 오늘도 그렇게 정리됩니다</div>
+  </div>
+
+  <!-- SLIDE 3 — 오늘 하루 -->
+  <div class="slide" id="s2">
+    <div class="kicker">오늘 하루 어떠셨나요?</div>
+    <div class="slide-title">별거 없었던 것 같아도</div>
+    <div class="slide-body">사진 한 장씩 고르다 보면<br>오늘이 보입니다</div>
+  </div>
+
+  <!-- SLIDE 4 — 일기장 -->
+  <div class="slide" id="s3">
+    <div class="kicker">가끔 이렇게 정리하다 보면</div>
+    <div class="slide-title">1년 후엔<br>훌륭한 일기장이 됩니다</div>
+    <div class="stack-lines">
+      <div class="stack-line"></div>
+      <div class="stack-line"></div>
+      <div class="stack-line"></div>
+    </div>
+    <div class="slide-body" style="margin-top:24px">오늘의 나, 기록해두세요</div>
+    <div class="slide-small">투*필은 매일 쌓입니다</div>
+  </div>
+
+  <!-- SLIDE 5 — 브랜드 -->
+  <div class="slide" id="s4">
+    <div class="brand-H">H</div>
+    <div class="brand-name">휴먼다큐닷컴</div>
+    <div class="brand-tagline">우리는 삶을 기록합니다</div>
+    <div class="brand-url">humandocu.com</div>
+  </div>
+
+  <!-- 타임아웃 -->
+  <div class="timeout-wrap" id="timeout-wrap">
+    <div class="timeout-icon">📬</div>
+    <div class="timeout-title">이메일을 확인해주세요</div>
+    <div class="timeout-sub">시간이 조금 걸리고 있어요.<br>결과는 이메일로 보내드렸습니다.</div>
+    <a class="timeout-link" href="https://humandocu.com">← 홈으로 돌아가기</a>
+  </div>
+
 </div>
 
-<div class="dots">
+<div class="dots-bar" id="dots-bar">
+  <div class="dot active"></div>
   <div class="dot"></div>
   <div class="dot"></div>
   <div class="dot"></div>
-</div>
-
-<div class="msg" id="msg">AI가 사진을 읽고 있어요...</div>
-
-<div class="sub" id="sub">오늘의 하루를 시로 담는 중입니다<br>잠시만 기다려주세요</div>
-
-<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
-
-<div class="timeout-box" id="timeout-box">
-  <p>시간이 조금 걸리고 있어요.<br>결과는 이메일로 보내드렸습니다.</p>
-  <a href="https://humandocu.com">← 홈으로 돌아가기</a>
+  <div class="dot"></div>
 </div>
 
 <script>
 (function () {
-  var API_BASE    = "https://humandocu-server-production.up.railway.app";
-  var RESULT_BASE = API_BASE + "/today/";
-  var POLL_MS  = 5000;
-  var MAX_MS   = 5 * 60 * 1000;
+  var API_BASE   = "https://humandocu-server-production.up.railway.app";
+  var POLL_MS    = 5000;
+  var MAX_POLLS  = 60; // 5분 = 60 * 5초
+  var SLIDE_MS   = 8000;
+  var TOTAL_SLIDES = 5;
 
-  var messages = [
-    "AI가 사진을 읽고 있어요...",
-    "오늘의 감정을 찾고 있어요...",
-    "시를 쓰고 있어요...",
-    "거의 다 됐어요..."
-  ];
+  var params   = new URLSearchParams(window.location.search);
+  var email    = (params.get("email") || "").trim().toLowerCase();
 
-  // URL에서 email 추출
-  var params = new URLSearchParams(window.location.search);
-  var email  = (params.get("email") || "").trim().toLowerCase();
+  var progressEl   = document.getElementById("progress");
+  var slidesEl     = document.getElementById("slides");
+  var dotsEl       = document.getElementById("dots-bar");
+  var timeoutWrap  = document.getElementById("timeout-wrap");
+  var dots         = dotsEl.querySelectorAll(".dot");
 
-  var msgEl      = document.getElementById("msg");
-  var timeoutBox = document.getElementById("timeout-box");
-  var progressEl = document.getElementById("progress");
-  var msgIdx     = 0;
-  var started    = Date.now();
-  var pollTimer, msgTimer;
+  var curSlide   = 0;
+  var pollCount  = 0;
+  var pollTimer, slideTimer;
+  var done       = false;
 
-  // 메시지 순환
-  function nextMsg() {
-    msgEl.classList.add("fade");
-    setTimeout(function () {
-      msgIdx = (msgIdx + 1) % messages.length;
-      msgEl.textContent = messages[msgIdx];
-      msgEl.classList.remove("fade");
-    }, 600);
+  // ── 슬라이드 전환 ──
+  function goSlide(n) {
+    document.getElementById("s" + curSlide).classList.remove("active");
+    dots[curSlide].classList.remove("active");
+    curSlide = n % TOTAL_SLIDES;
+    document.getElementById("s" + curSlide).classList.add("active");
+    dots[curSlide].classList.add("active");
   }
-  msgTimer = setInterval(nextMsg, 3000);
 
-  // 진행 바 업데이트
+  function startSlides() {
+    slideTimer = setInterval(function () {
+      if (!done) goSlide(curSlide + 1);
+    }, SLIDE_MS);
+  }
+
+  // ── 진행 바 (폴링 횟수 기반) ──
   function updateProgress() {
-    var pct = Math.min(((Date.now() - started) / MAX_MS) * 100, 98);
+    var pct = Math.min((pollCount / MAX_POLLS) * 95, 95);
     progressEl.style.width = pct + "%";
   }
-  setInterval(updateProgress, 500);
 
-  // 서버 API 폴링
+  // ── 폴링 ──
   function pollCheck() {
-    if (!email) return;
+    if (done || !email) return;
+    pollCount++;
+    updateProgress();
+
+    if (pollCount > MAX_POLLS) {
+      onTimeout();
+      return;
+    }
+
     fetch(API_BASE + "/api/check-today?email=" + encodeURIComponent(email))
       .then(function (r) { return r.json(); })
       .then(function (data) {
         if (data.status === "ready" && data.doc_id) {
-          clearInterval(pollTimer);
-          clearInterval(msgTimer);
-          progressEl.style.width = "100%";
-          msgEl.textContent = "완성됐어요! 이동합니다 ✦";
-          setTimeout(function () {
-            window.location.href = RESULT_BASE + data.doc_id;
-          }, 800);
+          onReady(data.doc_id);
         }
       })
       .catch(function () {});
   }
 
-  // 타임아웃
-  function onTimeout() {
+  // ── 완료 ──
+  function onReady(doc_id) {
+    done = true;
     clearInterval(pollTimer);
-    clearInterval(msgTimer);
-    msgEl.textContent = "이메일을 확인해주세요 📬";
-    document.getElementById("sub").style.display = "none";
-    timeoutBox.style.display = "block";
+    clearInterval(slideTimer);
+    progressEl.style.transition = "width .4s ease";
     progressEl.style.width = "100%";
-    progressEl.style.background = "rgba(200,135,10,.3)";
+    setTimeout(function () {
+      window.location.href = API_BASE + "/today/" + doc_id;
+    }, 1000);
   }
-  setTimeout(onTimeout, MAX_MS);
 
-  // email 없으면 폴링 없이 타임아웃 메시지만
+  // ── 타임아웃 ──
+  function onTimeout() {
+    done = true;
+    clearInterval(pollTimer);
+    clearInterval(slideTimer);
+    // 슬라이드 숨기고 타임아웃 표시
+    for (var i = 0; i < TOTAL_SLIDES; i++) {
+      document.getElementById("s" + i).classList.remove("active");
+    }
+    dotsEl.style.display = "none";
+    timeoutWrap.classList.add("show");
+    progressEl.style.width = "100%";
+    progressEl.style.background = "rgba(200,135,10,.25)";
+  }
+
+  // ── 시작 ──
   if (!email) {
     onTimeout();
     return;
   }
 
-  // 첫 조회는 5초 후 시작
+  startSlides();
+
   setTimeout(function () {
     pollCheck();
     pollTimer = setInterval(pollCheck, POLL_MS);
   }, 5000);
+
 })();
 </script>
 </body>
