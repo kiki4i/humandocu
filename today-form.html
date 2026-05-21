@@ -353,7 +353,7 @@ async function resizeImg(b64) {
 }
 
 // ── 제출 ──
-function doSubmit() {
+async function doSubmit() {
   const name      = document.getElementById('f-name').value.trim();
   const nickname  = document.getElementById('f-nickname').value.trim();
   const email     = document.getElementById('f-email').value.trim().toLowerCase();
@@ -373,8 +373,13 @@ function doSubmit() {
   if (filled.length < 1) { alert('사진을 1장 이상 올려주세요'); return; }
   if (!today_s) { alert('오늘 하루를 한 문장으로 써주세요'); return; }
 
-  // localStorage 저장
   saveLS();
+
+  const btn = document.getElementById('submit-btn');
+  const loadingEl = document.getElementById('loading');
+  btn.disabled = true;
+  loadingEl.querySelector('.loading-title').textContent = '제출 중...';
+  loadingEl.classList.add('active');
 
   const shotPayload = filled.map((s) => ({
     image_b64: s.b64,
@@ -382,24 +387,29 @@ function doSubmit() {
     index:     shots.indexOf(s) + 1,
   }));
 
-  // 백그라운드 API 호출 (응답 기다리지 않음)
-  fetch(API + '/api/today/submit-b64', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      name,
-      nickname: nickname || name,
-      email,
-      is_public: isPublic,
-      shots: shotPayload,
-      today_sentence: today_s,
-      last_to,
-      last_msg,
-    })
-  }).catch(() => {});
-
-  // 즉시 대기 화면으로 이동
-  window.location.href = '/today-wait.html?email=' + encodeURIComponent(email);
+  try {
+    const res = await fetch(API + '/api/today/submit-b64', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        name,
+        nickname: nickname || name,
+        email,
+        is_public: isPublic,
+        shots: shotPayload,
+        today_sentence: today_s,
+        last_to,
+        last_msg,
+      })
+    });
+    const data = await res.json();
+    if (!res.ok || data.status === 'error') throw new Error(data.error || '오류가 발생했어요');
+    window.location.href = '/today-wait.html?email=' + encodeURIComponent(email) + '&doc_id=' + (data.id || data.doc_id || '');
+  } catch (e) {
+    loadingEl.classList.remove('active');
+    btn.disabled = false;
+    alert('오류: ' + e.message);
+  }
 }
 
 // ── 초기화 ──
