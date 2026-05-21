@@ -62,6 +62,15 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
 .timeout-title{font-size:18px;font-weight:300;color:#f9f6f0;margin-bottom:12px}
 .timeout-sub{font-size:13px;color:rgba(249,246,240,.4);line-height:2}
 .timeout-link{display:inline-block;margin-top:24px;font-size:12px;color:rgba(200,135,10,.6);border-bottom:1px solid rgba(200,135,10,.25);padding-bottom:2px}
+
+/* ── 사진 슬라이드쇼 ── */
+#photo-show{flex:1;display:none;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px 80px}
+#photo-show.on{display:flex}
+.p-frame{position:relative;width:min(340px,90vw);height:65vh;border-radius:10px;overflow:hidden;background:#111;flex-shrink:0}
+.p-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s ease}
+.p-img.on{opacity:1}
+.p-overlay{position:absolute;inset:0;background:rgba(0,0,0,.2);pointer-events:none}
+.p-copy{margin-top:20px;font-size:13px;color:rgba(249,246,240,.62);text-align:center;line-height:1.9;letter-spacing:.02em;padding:0 8px}
 </style>
 </head>
 <body>
@@ -138,6 +147,12 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
 
 </div>
 
+<!-- 사진 슬라이드쇼 -->
+<div id="photo-show">
+  <div id="p-frame"><div class="p-overlay"></div></div>
+  <div id="p-copy"></div>
+</div>
+
 <div class="dots-bar" id="dots-bar">
   <div class="dot active"></div>
   <div class="dot"></div>
@@ -150,9 +165,10 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
 (function () {
   var API_BASE   = "https://humandocu-server-production.up.railway.app";
   var POLL_MS    = 5000;
-  var MAX_POLLS  = 60; // 5분 = 60 * 5초
+  var MAX_POLLS  = 60;
   var SLIDE_MS   = 8000;
   var TOTAL_SLIDES = 5;
+  var PHOTO_MS   = 1500;
 
   var params   = new URLSearchParams(window.location.search);
   var email    = (params.get("email") || "").trim().toLowerCase();
@@ -161,14 +177,35 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
   var slidesEl     = document.getElementById("slides");
   var dotsEl       = document.getElementById("dots-bar");
   var timeoutWrap  = document.getElementById("timeout-wrap");
-  var dots         = dotsEl.querySelectorAll(".dot");
+  var photoShow    = document.getElementById("photo-show");
+  var pFrame       = document.getElementById("p-frame");
+  var pCopy        = document.getElementById("p-copy");
 
   var curSlide   = 0;
   var pollCount  = 0;
-  var pollTimer, slideTimer;
+  var pollTimer, slideTimer, photoTimer;
   var done       = false;
+  var photoMode  = false;
+  var photoIdx   = 0;
+  var photoList  = [];
 
-  // ── 슬라이드 전환 ──
+  // ── 언어 감지 ──
+  var COPY = {
+    ko: "지금 이 순간에도 누군가가 오늘을 기록하고 있습니다...",
+    en: "Someone out there is recording their today, right now...",
+    ja: "今この瞬間も、誰かが今日を記録しています...",
+    zh: "就在此刻，有人正在记录他们的今天..."
+  };
+  function getLang() {
+    var l = (params.get("lang") || localStorage.getItem("lang") || navigator.language || "ko").toLowerCase();
+    if (l.startsWith("ja")) return "ja";
+    if (l.startsWith("zh")) return "zh";
+    if (l.startsWith("en")) return "en";
+    return "ko";
+  }
+
+  // ── 텍스트 슬라이드 전환 ──
+  var dots = dotsEl.querySelectorAll(".dot");
   function goSlide(n) {
     document.getElementById("s" + curSlide).classList.remove("active");
     dots[curSlide].classList.remove("active");
@@ -176,14 +213,51 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
     document.getElementById("s" + curSlide).classList.add("active");
     dots[curSlide].classList.add("active");
   }
-
   function startSlides() {
     slideTimer = setInterval(function () {
       if (!done) goSlide(curSlide + 1);
     }, SLIDE_MS);
   }
 
-  // ── 진행 바 (폴링 횟수 기반) ──
+  // ── 사진 슬라이드쇼 ──
+  function startPhotoShow(urls) {
+    photoList = urls;
+    photoMode = true;
+
+    // img 엘리먼트 생성 (p-overlay 앞에 삽입)
+    var overlay = pFrame.querySelector(".p-overlay");
+    photoList.forEach(function (url, i) {
+      var img = document.createElement("img");
+      img.className = "p-img" + (i === 0 ? " on" : "");
+      img.src = url;
+      pFrame.insertBefore(img, overlay);
+    });
+
+    // dots 재생성
+    dotsEl.innerHTML = photoList.map(function (_, i) {
+      return '<div class="dot' + (i === 0 ? " active" : "") + '"></div>';
+    }).join("");
+
+    pCopy.textContent = COPY[getLang()];
+
+    slidesEl.style.display = "none";
+    photoShow.classList.add("on");
+
+    photoTimer = setInterval(nextPhoto, PHOTO_MS);
+  }
+
+  function nextPhoto() {
+    if (done) return;
+    var imgs = pFrame.querySelectorAll(".p-img");
+    var dotEls = dotsEl.querySelectorAll(".dot");
+    imgs[photoIdx].classList.remove("on");
+    dotEls[photoIdx].classList.remove("active");
+    photoIdx = (photoIdx + 1) % photoList.length;
+    imgs[photoIdx].classList.add("on");
+    dotEls[photoIdx].classList.add("active");
+  }
+
+  // ── 진행 바 ──
   function updateProgress() {
     var pct = Math.min((pollCount / MAX_POLLS) * 95, 95);
     progressEl.style.width = pct + "%";
@@ -194,18 +268,11 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
     if (done || !email) return;
     pollCount++;
     updateProgress();
-
-    if (pollCount > MAX_POLLS) {
-      onTimeout();
-      return;
-    }
-
+    if (pollCount > MAX_POLLS) { onTimeout(); return; }
     fetch(API_BASE + "/api/check-today?email=" + encodeURIComponent(email))
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        if (data.status === "ready" && data.doc_id) {
-          onReady(data.doc_id);
-        }
+        if (data.status === "ready" && data.doc_id) onReady(data.doc_id);
       })
       .catch(function () {});
   }
@@ -215,6 +282,7 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
     done = true;
     clearInterval(pollTimer);
     clearInterval(slideTimer);
+    clearInterval(photoTimer);
     progressEl.style.transition = "width .4s ease";
     progressEl.style.width = "100%";
     setTimeout(function () {
@@ -227,9 +295,14 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
     done = true;
     clearInterval(pollTimer);
     clearInterval(slideTimer);
-    // 슬라이드 숨기고 타임아웃 표시
-    for (var i = 0; i < TOTAL_SLIDES; i++) {
-      document.getElementById("s" + i).classList.remove("active");
+    clearInterval(photoTimer);
+    if (photoMode) {
+      photoShow.classList.remove("on");
+      slidesEl.style.display = "";
+    } else {
+      for (var i = 0; i < TOTAL_SLIDES; i++) {
+        document.getElementById("s" + i).classList.remove("active");
+      }
     }
     dotsEl.style.display = "none";
     timeoutWrap.classList.add("show");
@@ -238,12 +311,19 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
   }
 
   // ── 시작 ──
-  if (!email) {
-    onTimeout();
-    return;
-  }
+  if (!email) { onTimeout(); return; }
 
-  startSlides();
+  // 사진 가져오기 → 있으면 슬라이드쇼, 없으면 텍스트 슬라이드 fallback
+  fetch(API_BASE + "/api/today/public-photos")
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      if (data.photos && data.photos.length >= 2) {
+        startPhotoShow(data.photos);
+      } else {
+        startSlides();
+      }
+    })
+    .catch(function () { startSlides(); });
 
   setTimeout(function () {
     pollCheck();
