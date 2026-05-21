@@ -871,6 +871,7 @@ footer {
 
     <div class="live-actions">
       <button class="btn-next" onclick="loadNext()" data-ko="다음 투*필 보기 →" data-en="Next →" data-jp="次の투*필を見る →" data-zh="查看下一个투*필 →">다음 투*필 보기 →</button>
+      <button class="btn-next" id="btn-prev" onclick="loadPrev()" style="display:none" data-ko="← 이전 투*필 보기" data-en="← Previous" data-jp="← 前の투*필を見る" data-zh="← 查看上一个투*필">← 이전 투*필 보기</button>
     </div>
   </div>
 </div>
@@ -1013,13 +1014,45 @@ function extractPoem(poems) {
   return rep.trim();
 }
 
-let currentDocId = '';
+let seenHistory = [];
+let historyIdx = -1;
+
+function renderCard(d) {
+  var card = document.getElementById('live-card');
+  var poem = extractPoem(d.poems);
+  var poemHtml = poem ? poem.split('\n').filter(function(l){return l.trim();}).map(function(l){
+    return '<div>' + l + '</div>';
+  }).join('') : '';
+  var imgs = d.shot_images || {};
+  var photosHtml = '';
+  for (var i = 1; i <= 3; i++) {
+    if (imgs[String(i)]) {
+      photosHtml += '<img class="live-photo" src="' + imgs[String(i)] + '" onerror="this.parentNode.removeChild(this)">';
+    }
+  }
+  card.innerHTML =
+    (photosHtml ? '<div class="live-photos">' + photosHtml + '</div>' : '') +
+    '<div class="live-name">' + (d.name || '') + '</div>' +
+    '<div class="live-identity">' + (d.identity || '') + '</div>' +
+    (poemHtml ? '<div class="live-poem">' + poemHtml + '</div>' : '') +
+    '<div style="margin-top:18px;text-align:center">' +
+    '<a href="https://humandocu-server-production.up.railway.app/' + (d.type === 'today' ? 'today' : 'sixshot') + '/' + d.doc_id + '" target="_blank" style="display:inline-block;padding:10px 28px;background:#C8870A;color:#FFF8ED;font-size:13px;font-weight:600;border-radius:28px;text-decoration:none;letter-spacing:.06em;box-shadow:0 3px 12px rgba(200,135,10,.25)">' + d.name + '님의 투*필 보기 →</a>' +
+    '</div>';
+  document.getElementById('btn-prev').style.display = historyIdx > 0 ? '' : 'none';
+}
 
 async function loadNext() {
+  // 앞으로 이동 가능한 history가 있으면 API 호출 없이 이동
+  if (historyIdx < seenHistory.length - 1) {
+    historyIdx++;
+    renderCard(seenHistory[historyIdx]);
+    return;
+  }
   var card = document.getElementById('live-card');
   card.innerHTML = '<div class="live-loading">불러오는 중...</div>';
   try {
-    var url = API + (currentDocId ? '&exclude=' + currentDocId : '');
+    var currentDocId = historyIdx >= 0 ? seenHistory[historyIdx].doc_id : '';
+    var url = API + (currentDocId ? '&exclude=' + encodeURIComponent(currentDocId) : '');
     var res  = await fetch(url);
     var json = await res.json();
     if (json.status !== 'ok' || !json.data) {
@@ -1027,31 +1060,19 @@ async function loadNext() {
       return;
     }
     var d = json.data;
-    currentDocId = d.doc_id || '';
-    var poem = extractPoem(d.poems);
-    var poemHtml = poem ? poem.split('\n').filter(function(l){return l.trim();}).map(function(l){
-      return '<div>' + l + '</div>';
-    }).join('') : '';
-
-    var imgs = d.shot_images || {};
-    var photosHtml = '';
-    for (var i = 1; i <= 3; i++) {
-      if (imgs[String(i)]) {
-        photosHtml += '<img class="live-photo" src="' + imgs[String(i)] + '" onerror="this.parentNode.removeChild(this)">';
-      }
-    }
-
-    card.innerHTML =
-      (photosHtml ? '<div class="live-photos">' + photosHtml + '</div>' : '') +
-      '<div class="live-name">' + (d.name || '') + '</div>' +
-      '<div class="live-identity">' + (d.identity || '') + '</div>' +
-      (poemHtml ? '<div class="live-poem">' + poemHtml + '</div>' : '') +
-      '<div style="margin-top:18px;text-align:center">' +
-      '<a href="https://humandocu-server-production.up.railway.app/' + (d.type === 'today' ? 'today' : 'sixshot') + '/' + d.doc_id + '" target="_blank" style="display:inline-block;padding:10px 28px;background:#C8870A;color:#FFF8ED;font-size:13px;font-weight:600;border-radius:28px;text-decoration:none;letter-spacing:.06em;box-shadow:0 3px 12px rgba(200,135,10,.25)">' + d.name + '님의 투*필 보기 →</a>' +
-      '</div>';
+    seenHistory.push(d);
+    historyIdx = seenHistory.length - 1;
+    try { sessionStorage.setItem('seen_twofeels', JSON.stringify(seenHistory)); } catch(e) {}
+    renderCard(d);
   } catch(e) {
     card.innerHTML = '<div class="live-loading" style="color:#6B5A3A">잠시 후 다시 시도해주세요</div>';
   }
+}
+
+function loadPrev() {
+  if (historyIdx <= 0) return;
+  historyIdx--;
+  renderCard(seenHistory[historyIdx]);
 }
 
 loadNext();
