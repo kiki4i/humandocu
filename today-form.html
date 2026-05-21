@@ -84,13 +84,13 @@ textarea::placeholder{color:var(--gold);opacity:.65}
 .add-shot-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;background:#fff;border:1.5px dashed rgba(45,80,22,.3);border-radius:14px;font-size:14px;color:var(--green);font-family:inherit;font-weight:500;cursor:pointer;transition:background .2s,border-color .2s}
 .add-shot-btn:hover{background:var(--green-lt);border-color:var(--green)}
 
-/* ── TOGGLE ── */
-.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:16px;background:#fff;border:1px solid var(--border);border-radius:12px;cursor:pointer;transition:background .2s}
-.toggle-row:active{background:var(--cream2)}
-.toggle{width:46px;height:26px;background:#ddd;border-radius:13px;position:relative;transition:background .25s;flex-shrink:0}
-.toggle.on{background:var(--green)}
-.toggle::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .25s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
-.toggle.on::after{transform:translateX(20px)}
+/* ── RADIO ── */
+.radio-group{display:flex;flex-direction:column;gap:10px}
+.radio-card{display:flex;align-items:center;gap:14px;padding:14px 16px;background:#fff;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;transition:border-color .2s,background .2s}
+.radio-card:has(input:checked){border-color:var(--green);background:var(--green-lt)}
+.radio-card input[type=radio]{accent-color:var(--green);width:18px;height:18px;flex-shrink:0;cursor:pointer}
+.radio-title{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.radio-desc{font-size:11px;color:var(--ink3);line-height:1.5}
 
 /* ── SUBMIT BAR ── */
 .submit-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(255,248,237,.97);backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:14px 20px 22px;z-index:90}
@@ -143,7 +143,7 @@ textarea::placeholder{color:var(--gold);opacity:.65}
   <div class="q-block">
     <div class="q-num">02 · 닉네임 (선택)</div>
     <div class="q-title">닉네임이 있으신가요?</div>
-    <div class="q-sub">없으시면 이름으로 표시됩니다</div>
+    <div class="q-sub">💡 오늘의 나를 한 단어로. AI가 시 쓸 때 참고해요.<br>예: 월요일의 곰, 커피충전중</div>
     <input type="text" id="f-nickname" placeholder="닉네임 입력..." maxlength="20">
   </div>
 
@@ -171,9 +171,8 @@ textarea::placeholder{color:var(--gold);opacity:.65}
     <div class="q-num">05 · 오늘 하루</div>
     <div class="q-title">오늘 하루를 한 문장으로 <span style="color:var(--green)">*</span></div>
     <div class="q-example">
-      "별거 없었는데 그리 나쁘지만은 않았다"<br>
-      "왜 이렇게 꽁냥꽁냥 이야!"<br>
-      "오늘은 그냥 좀 쉬고 싶었다"
+      💡 오늘 진짜 솔직하게.<br>
+      예: "출근하기 싫었는데 점심이 구원이었음"
     </div>
     <textarea id="f-today" rows="2" placeholder="오늘 하루를 솔직하게 한 문장으로..."></textarea>
   </div>
@@ -182,22 +181,33 @@ textarea::placeholder{color:var(--gold);opacity:.65}
   <div class="q-block">
     <div class="q-num">06 · 누군가에게 한 마디 (선택)</div>
     <div class="q-title">오늘 떠오른 사람에게 전하고 싶은 말이 있다면</div>
-    <div class="q-sub">선택 안 하셔도 됩니다</div>
-    <input type="text" id="f-to" placeholder="대상 (예: 엄마, 친구 이름, 나 자신...)" style="margin-bottom:10px">
-    <textarea id="f-msg" rows="2" placeholder="전하고 싶은 말..."></textarea>
+    <div class="q-sub">💡 선택 안하셔도 됩니다</div>
+    <input type="text" id="f-to" placeholder="대상 (예: 엄마, 친구 이름, 나 자신...)" oninput="toggleMsg(this.value)">
+    <div id="msg-wrap" style="display:none;margin-top:10px">
+      <textarea id="f-msg" rows="2" placeholder="전하고 싶은 말..."></textarea>
+    </div>
   </div>
 
   <!-- 07 공개 여부 -->
   <div class="q-block">
-    <div class="q-num">07 · 공개 설정</div>
+    <div class="q-num">07 · 공개 설정 <span style="color:var(--green)">*</span></div>
     <div class="q-title">이 투*필을 공개할까요?</div>
     <div class="q-sub">공개하면 다른 사람들도 내 투*필을 볼 수 있어요</div>
-    <div class="toggle-row" onclick="togglePublic()">
-      <div>
-        <div style="font-size:14px;font-weight:500;color:var(--ink)" id="pub-label">공개 — 다른 사람들도 볼 수 있어요</div>
-        <div style="font-size:11px;color:var(--ink3);margin-top:3px">비공개 시 나만 볼 수 있는 링크로 발송</div>
-      </div>
-      <div class="toggle on" id="pub-toggle"></div>
+    <div class="radio-group">
+      <label class="radio-card" id="rc-public">
+        <input type="radio" name="visibility" value="public" checked onchange="setPublic(true)">
+        <div class="radio-content">
+          <div class="radio-title">🌿 공개</div>
+          <div class="radio-desc">다른 사람들도 내 투*필을 볼 수 있어요</div>
+        </div>
+      </label>
+      <label class="radio-card" id="rc-private">
+        <input type="radio" name="visibility" value="private" onchange="setPublic(false)">
+        <div class="radio-content">
+          <div class="radio-title">🔒 비공개</div>
+          <div class="radio-desc">나만 볼 수 있는 링크로 발송</div>
+        </div>
+      </label>
     </div>
   </div>
 </div>
@@ -258,15 +268,16 @@ function loadLS() {
   } catch(e) { return false; }
 }
 
-// ── 공개 토글 ──
+// ── 공개 라디오 ──
 function setPublic(val) {
   isPublic = val;
-  document.getElementById('pub-toggle').classList.toggle('on', isPublic);
-  document.getElementById('pub-label').textContent = isPublic
-    ? '공개 — 다른 사람들도 볼 수 있어요'
-    : '비공개 — 나만 볼 수 있어요';
+  document.querySelector(`input[name=visibility][value=${val ? 'public' : 'private'}]`).checked = true;
 }
-function togglePublic() { setPublic(!isPublic); }
+
+// ── 메시지 필드 토글 ──
+function toggleMsg(val) {
+  document.getElementById('msg-wrap').style.display = val.trim() ? 'block' : 'none';
+}
 
 // ── 사진 슬롯 ──
 function renderShots() {
@@ -405,7 +416,8 @@ async function doSubmit() {
 
 // ── 초기화 ──
 (function init() {
-  // 첫 슬롯 하나 먼저 추가
+  // 기본 슬롯 2개
+  shots.push({b64: null, caption: ''});
   shots.push({b64: null, caption: ''});
   renderShots();
 
@@ -413,6 +425,9 @@ async function doSubmit() {
   const filled = loadLS();
   if (filled) {
     document.getElementById('autofill-notice').classList.add('show');
+    // last_to 복원됐으면 메시지 필드 보이기
+    const to = document.getElementById('f-to').value.trim();
+    if (to) document.getElementById('msg-wrap').style.display = 'block';
   }
 
   // 이메일로 서버에서 프로필 조회 (localStorage에 이메일이 있을 때)
