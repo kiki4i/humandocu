@@ -155,7 +155,6 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
 
   var params   = new URLSearchParams(window.location.search);
   var email    = (params.get("email") || "").trim().toLowerCase();
-  var doc_id   = (params.get("doc_id") || "").trim();
 
   var progressEl   = document.getElementById("progress");
   var slidesEl     = document.getElementById("slides");
@@ -238,15 +237,6 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
   }
 
   // ── 시작 ──
-  if (doc_id) {
-    // 서버에서 doc_id 받은 경우 — 폴링 없이 바로 이동
-    progressEl.style.width = "100%";
-    setTimeout(function () {
-      window.location.href = API_BASE + "/today/" + doc_id;
-    }, 800);
-    return;
-  }
-
   if (!email) {
     onTimeout();
     return;
