@@ -1047,7 +1047,7 @@ async function loadNext() {
       '<div class="live-identity">' + (d.identity || '') + '</div>' +
       (poemHtml ? '<div class="live-poem">' + poemHtml + '</div>' : '') +
       '<div style="margin-top:18px;text-align:center">' +
-      '<a href="https://humandocu-server-production.up.railway.app/sixshot/' + d.doc_id + '" target="_blank" style="display:inline-block;padding:10px 28px;background:#C8870A;color:#FFF8ED;font-size:13px;font-weight:600;border-radius:28px;text-decoration:none;letter-spacing:.06em;box-shadow:0 3px 12px rgba(200,135,10,.25)">' + d.name + '님의 투*필 보기 →</a>' +
+      '<a href="https://humandocu-server-production.up.railway.app/' + (d.type === 'today' ? 'today' : 'sixshot') + '/' + d.doc_id + '" target="_blank" style="display:inline-block;padding:10px 28px;background:#C8870A;color:#FFF8ED;font-size:13px;font-weight:600;border-radius:28px;text-decoration:none;letter-spacing:.06em;box-shadow:0 3px 12px rgba(200,135,10,.25)">' + d.name + '님의 투*필 보기 →</a>' +
       '</div>';
   } catch(e) {
     card.innerHTML = '<div class="live-loading" style="color:#6B5A3A">잠시 후 다시 시도해주세요</div>';
