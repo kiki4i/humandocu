@@ -39,9 +39,10 @@ nav{position:sticky;top:0;left:0;right:0;z-index:100;background:var(--cream);bor
 .logo span{color:var(--gold)}
 .nav-sep{width:1px;height:14px;background:var(--border);flex-shrink:0}
 .nav-pill{font-size:11px;color:var(--green);letter-spacing:.04em;border:1px solid rgba(45,80,22,.3);border-radius:20px;padding:4px 12px;white-space:nowrap}
-.lang-link{font-size:15px;text-decoration:none;opacity:.35;transition:opacity .2s;flex-shrink:0;line-height:1}
-.lang-link.active{opacity:1}
-.lang-link:hover{opacity:.75}
+.lang-btn{display:inline-flex;align-items:center;gap:4px;background:transparent;border:1px solid rgba(200,135,10,.28);cursor:pointer;font-size:11px;font-weight:500;letter-spacing:.02em;color:var(--ink3);padding:4px 10px;border-radius:20px;font-family:var(--sans);transition:all .18s;line-height:1.4;white-space:nowrap;text-decoration:none}
+.lang-btn .flag{font-size:13px;line-height:1}
+.lang-btn:hover{border-color:var(--amber);color:var(--amber);background:rgba(200,135,10,.06)}
+.lang-btn.active{background:var(--amber);border-color:var(--amber);color:#fff}
 
 /* ── WRAP ── */
 .wrap{max-width:var(--max);margin:0 auto;padding:32px 20px 120px}
@@ -148,8 +149,8 @@ textarea::placeholder{color:var(--gold);opacity:.65}
     <div class="nav-sep"></div>
     <span class="nav-pill">오늘의 투*필 만들기</span>
     <div class="nav-sep"></div>
-    <a href="/today-form.html" class="lang-link active" title="한국어">🇰🇷</a>
-    <a href="/today-form-en.html" class="lang-link" title="English">🇺🇸</a>
+    <a href="/today-form.html" class="lang-btn active"><span class="flag">🇰🇷</span> 한국어</a>
+    <a href="/today-form-en.html" class="lang-btn"><span class="flag">🇺🇸</span> English</a>
   </div>
 </nav>
 
