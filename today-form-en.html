@@ -135,12 +135,14 @@ textarea::placeholder{color:var(--gold);opacity:.65}
 .wo-dot.active{background:#C8870A;transform:scale(1.25)}
 
 /* ── Photo slideshow (wait overlay) ── */
-.wo-photo-show{display:none;position:absolute;inset:0;overflow:hidden;z-index:1}
+.wo-photo-show{display:none;position:absolute;top:0;left:0;right:0;height:75vh;overflow:hidden;z-index:1}
 .wo-photo-show.active{display:block}
-.wo-photo-frame{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease}
+.wo-photo-frame{position:absolute;inset:0;width:100%;height:100%;background-size:contain;background-position:center;background-color:#000;background-repeat:no-repeat;opacity:0;transition:opacity 1.4s ease}
 .wo-photo-frame.active{opacity:1}
 .wo-photo-veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65) 0%,rgba(0,0,0,.15) 60%,rgba(0,0,0,.08) 100%)}
-.wo-photo-caption{position:absolute;bottom:72px;left:0;right:0;text-align:center;padding:0 40px;z-index:2}
+.wo-photo-caption{text-align:center;padding:0}
+.wo-photo-info{display:none;position:absolute;top:75vh;left:0;right:0;padding:20px 40px 0;text-align:center;z-index:2}
+.wo-photo-info.active{display:block}
 .wo-photo-cap-tag{font-size:9px;letter-spacing:.28em;color:rgba(200,135,10,.65);text-transform:uppercase;margin-bottom:10px}
 .wo-photo-cap-txt{font-size:15px;font-weight:300;color:rgba(249,246,240,.8);letter-spacing:.04em;line-height:1.9;transition:opacity .6s ease}
 .wo-photo-cap-txt.fade{opacity:0}
@@ -304,6 +306,7 @@ textarea::placeholder{color:var(--gold);opacity:.65}
     </div>
   </div>
   <div class="wo-photo-show" id="wo-photo-show"></div>
+  <div class="wo-photo-info" id="wo-photo-info"></div>
   <div class="wo-dots">
     <div class="wo-dot active"></div>
     <div class="wo-dot"></div>
@@ -483,7 +486,10 @@ function _woPhotoStart(photos) {
   var tx = document.createElement('div'); tx.className = 'wo-photo-cap-txt'; tx.id = 'wo-cap-txt';
   tx.textContent = _woNextCopy();
   cp.appendChild(tg); cp.appendChild(tx);
-  ps.appendChild(cp);
+  var pi = document.getElementById('wo-photo-info');
+  pi.innerHTML = '';
+  pi.appendChild(cp);
+  pi.classList.add('active');
   ps.querySelectorAll('.wo-photo-frame')[0].classList.add('active');
   ps.classList.add('active');
   document.querySelector('.wo-slides').style.display = 'none';
@@ -519,6 +525,8 @@ function showWaitOverlay() {
   document.querySelector('.wo-slides').style.display = '';
   document.getElementById('wo-photo-show').classList.remove('active');
   document.getElementById('wo-photo-show').innerHTML = '';
+  var _pi = document.getElementById('wo-photo-info');
+  if (_pi) { _pi.innerHTML = ''; _pi.classList.remove('active'); }
   document.getElementById('wait-overlay').classList.add('active');
 
   _woSlideTimer = setInterval(function() { _woGoSlide(_woCurSlide + 1); }, WO_SLIDE_MS);
