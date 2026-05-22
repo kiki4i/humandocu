@@ -1092,7 +1092,10 @@ loadNext();
       b.classList.toggle('active', b.dataset.lang === lang);
     });
 
-    var formUrl = lang === 'EN' ? '/today-form-en.html' : '/today-form.html';
+    var formUrl = lang === 'EN' ? '/today-form-en.html'
+                : lang === 'JP' ? '/today-form-jp.html'
+                : lang === 'ZH' ? '/today-form-zh.html'
+                : '/today-form.html';
     ['cta-btn-top', 'cta-btn-bottom'].forEach(function(id) {
       var el = document.getElementById(id);
       if (el) el.href = formUrl;

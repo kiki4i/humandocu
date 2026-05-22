@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创建我的 Today Film · Humandocu</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #2D5016;
+  --green-lt: rgba(45,80,22,.08);
+  --green-md: rgba(45,80,22,.18);
+  --amber: #C8870A;
+  --amber-lt: rgba(200,135,10,.08);
+  --gold: #C8A96E;
+  --ink: #1A1208;
+  --ink2: #5A4020;
+  --ink3: #8A6A3A;
+  --cream: #FFF8ED;
+  --cream2: #FAF5EB;
+  --border: rgba(200,135,10,.18);
+  --serif: 'Playfair Display','Noto Serif KR',Georgia,serif;
+  --sans: 'Noto Sans KR',sans-serif;
+  --max: 560px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:15px;font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;left:0;right:0;z-index:100;display:flex;flex-direction:column;background:var(--cream);border-bottom:1px solid var(--border)}
+.nav-row2{display:flex;align-items:center;gap:4px;padding:7px 16px;overflow-x:auto;scrollbar-width:none}
+.nav-row2::-webkit-scrollbar{display:none}
+#lang-bar{display:contents}
+.lang-btn{display:inline-flex;align-items:center;gap:4px;background:transparent;border:1px solid rgba(200,135,10,.28);cursor:pointer;font-size:11px;font-weight:500;letter-spacing:.02em;color:var(--ink3);padding:4px 10px;border-radius:20px;font-family:var(--sans);transition:all .18s;line-height:1.4;white-space:nowrap;text-decoration:none}
+.lang-btn .flag{font-size:13px;line-height:1}
+.lang-btn:hover{border-color:var(--amber);color:var(--amber);background:rgba(200,135,10,.06)}
+.lang-btn.active{background:var(--amber);border-color:var(--amber);color:#fff}
+
+/* ── WRAP ── */
+.wrap{max-width:var(--max);margin:0 auto;padding:32px 20px 120px}
+
+/* ── HEADER ── */
+.form-header{padding:0 0 28px;border-bottom:1px solid var(--border);margin-bottom:36px}
+.form-kicker{font-size:10px;letter-spacing:.22em;color:var(--green);font-weight:500;text-transform:uppercase;margin-bottom:10px}
+.form-title{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--ink);line-height:1.35;margin-bottom:10px}
+.form-sub{font-size:13px;color:var(--ink2);line-height:1.8}
+
+/* ── QUESTION BLOCK ── */
+.q-block{margin-bottom:36px}
+.q-num{font-size:10px;color:var(--green);letter-spacing:.18em;font-weight:500;text-transform:uppercase;margin-bottom:8px}
+.q-title{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px;line-height:1.5}
+.q-sub{font-size:12px;color:var(--ink3);line-height:1.7;margin-bottom:14px}
+.q-example{font-size:12px;color:var(--ink2);line-height:1.9;margin-bottom:14px;padding:12px 16px;background:var(--green-lt);border-radius:8px;border-left:3px solid rgba(45,80,22,.3)}
+
+/* ── INPUTS ── */
+input[type=text],input[type=email]{width:100%;padding:13px 16px;border:1px solid var(--border);border-radius:10px;font-size:15px;font-family:inherit;background:#fff;color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s}
+input[type=text]:focus,input[type=email]:focus{border-color:var(--green);box-shadow:0 0 0 3px var(--green-lt)}
+input::placeholder{color:var(--gold);opacity:.65}
+textarea{width:100%;padding:13px 16px;border:1px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;background:#fff;color:var(--ink);outline:none;resize:none;line-height:1.7;transition:border-color .2s,box-shadow .2s}
+textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px var(--green-lt)}
+textarea::placeholder{color:var(--gold);opacity:.65}
+
+/* ── SHOTS ── */
+.shots-stack{display:flex;flex-direction:column;gap:16px}
+.shot-card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.shot-card-head{display:flex;align-items:center;gap:0}
+.shot-badge{background:var(--green);color:#fff;font-size:10px;font-weight:600;padding:6px 14px;letter-spacing:.1em;flex-shrink:0}
+.shot-label{font-size:13px;color:var(--ink2);padding:0 14px}
+.shot-upload-area{position:relative;width:100%;aspect-ratio:4/3;background:var(--cream2);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);transition:background .2s}
+.shot-upload-area:active{background:#f0ece3}
+.shot-upload-area img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph-icon{font-size:28px;color:rgba(45,80,22,.3);z-index:1}
+.ph-text{font-size:12px;color:var(--ink3);z-index:1}
+.shot-change-btn{position:absolute;bottom:10px;right:10px;z-index:2;background:rgba(45,80,22,.85);color:#fff;border:none;border-radius:6px;font-size:11px;padding:5px 12px;cursor:pointer;font-family:inherit;font-weight:500}
+.shot-caption-wrap{padding:12px 14px}
+.shot-caption{width:100%;padding:10px 12px;border:1px solid rgba(45,80,22,.2);border-radius:8px;font-size:13px;font-family:inherit;background:var(--cream2);color:var(--ink);outline:none;resize:none;line-height:1.6;transition:border-color .2s}
+.shot-caption:focus{border-color:var(--green);background:#fff}
+.shot-caption::placeholder{color:var(--gold);opacity:.6}
+
+.add-shot-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;background:#fff;border:1.5px dashed rgba(45,80,22,.3);border-radius:14px;font-size:14px;color:var(--green);font-family:inherit;font-weight:500;cursor:pointer;transition:background .2s,border-color .2s}
+.add-shot-btn:hover{background:var(--green-lt);border-color:var(--green)}
+
+/* ── RADIO ── */
+.radio-group{display:flex;flex-direction:column;gap:10px}
+.radio-card{display:flex;align-items:center;gap:14px;padding:14px 16px;background:#fff;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;transition:border-color .2s,background .2s}
+.radio-card:has(input:checked){border-color:var(--green);background:var(--green-lt)}
+.radio-card input[type=radio]{accent-color:var(--green);width:18px;height:18px;flex-shrink:0;cursor:pointer}
+.radio-title{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.radio-desc{font-size:11px;color:var(--ink3);line-height:1.5}
+
+/* ── SUBMIT BAR ── */
+.submit-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(255,248,237,.97);backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:14px 20px 22px;z-index:90}
+.submit-btn{width:100%;max-width:var(--max);display:block;margin:0 auto;padding:16px;background:var(--green);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;letter-spacing:.06em;transition:background .2s,opacity .2s}
+.submit-btn:hover{background:#3a6a1c}
+.submit-btn:disabled{opacity:.55;cursor:not-allowed}
+.submit-hint{text-align:center;font-size:11px;color:var(--ink3);margin-top:7px;max-width:var(--max);margin-left:auto;margin-right:auto}
+
+/* ── 대기 오버레이 ── */
+#wait-overlay{display:none;position:fixed;inset:0;background:#0d0d0d;color:#f9f6f0;font-family:'Apple SD Gothic Neo','Noto Sans KR',sans-serif;-webkit-font-smoothing:antialiased;z-index:999}
+#wait-overlay.active{display:block}
+.wo-rail{position:absolute;top:0;left:0;right:0;height:2px;background:rgba(200,135,10,.15)}
+.wo-fill{height:100%;width:0%;background:#C8870A;border-radius:0 1px 1px 0;transition:width .6s ease}
+.wo-slides{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.wo-slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 32px;text-align:center;opacity:0;transition:opacity .9s ease;pointer-events:none}
+.wo-slide.active{opacity:1;pointer-events:auto}
+.wo-kicker{font-size:10px;letter-spacing:.28em;color:rgba(200,135,10,.65);text-transform:uppercase;margin-bottom:20px}
+.wo-title{font-size:22px;font-weight:300;color:#f9f6f0;line-height:1.5;margin-bottom:20px;letter-spacing:.02em}
+.wo-body{font-size:15px;color:rgba(249,246,240,.5);line-height:2.2;font-weight:300;letter-spacing:.02em}
+.wo-small{font-size:11px;color:rgba(200,135,10,.55);letter-spacing:.12em;margin-top:20px}
+.wo-check-ring{width:64px;height:64px;border-radius:50%;border:1.5px solid rgba(200,135,10,.4);display:flex;align-items:center;justify-content:center;margin:0 auto 28px;animation:wo-pulse 2.4s ease-in-out infinite}
+@keyframes wo-pulse{0%,100%{box-shadow:0 0 0 0 rgba(200,135,10,.15)}50%{box-shadow:0 0 0 10px rgba(200,135,10,0)}}
+.wo-check-icon{font-size:22px;color:#C8870A}
+.wo-haiku-lines{display:flex;flex-direction:column;gap:4px;margin-top:4px}
+.wo-haiku-line{display:flex;align-items:center;gap:12px;justify-content:center}
+.wo-haiku-num{font-size:9px;color:rgba(200,135,10,.4);letter-spacing:.12em;width:14px;text-align:right;flex-shrink:0}
+.wo-haiku-text{font-size:16px;color:rgba(249,246,240,.45);letter-spacing:.06em;font-weight:300}
+.wo-haiku-accent{color:rgba(249,246,240,.75)}
+.wo-stack-lines{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.wo-stack-line{height:1.5px;border-radius:1px;background:rgba(200,135,10,.18)}
+.wo-stack-line:nth-child(1){width:80px}
+.wo-stack-line:nth-child(2){width:120px}
+.wo-stack-line:nth-child(3){width:60px}
+.wo-brand-H{font-family:Georgia,serif;font-size:72px;font-weight:400;color:#C8870A;line-height:1;margin-bottom:20px;opacity:.9}
+.wo-brand-name{font-size:14px;letter-spacing:.22em;color:rgba(249,246,240,.65);margin-bottom:10px}
+.wo-brand-tagline{font-size:13px;color:rgba(249,246,240,.35);letter-spacing:.06em;line-height:1.9}
+.wo-brand-url{font-size:10px;color:rgba(200,135,10,.4);letter-spacing:.16em;margin-top:16px}
+.wo-dots{position:absolute;bottom:32px;left:0;right:0;display:flex;justify-content:center;gap:8px}
+.wo-dot{width:6px;height:6px;border-radius:50%;background:rgba(200,135,10,.2);transition:background .4s,transform .4s}
+.wo-dot.active{background:#C8870A;transform:scale(1.25)}
+
+/* ── Photo slideshow (wait overlay) ── */
+.wo-photo-show{display:none;position:absolute;inset:0;overflow:hidden;z-index:1}
+.wo-photo-show.active{display:block}
+.wo-photo-frame{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease}
+.wo-photo-frame.active{opacity:1}
+.wo-photo-veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65) 0%,rgba(0,0,0,.15) 60%,rgba(0,0,0,.08) 100%)}
+.wo-photo-caption{position:absolute;bottom:72px;left:0;right:0;text-align:center;padding:0 40px;z-index:2}
+.wo-photo-cap-tag{font-size:9px;letter-spacing:.28em;color:rgba(200,135,10,.65);text-transform:uppercase;margin-bottom:10px}
+.wo-photo-cap-txt{font-size:15px;font-weight:300;color:rgba(249,246,240,.8);letter-spacing:.04em;line-height:1.9;transition:opacity .6s ease}
+.wo-photo-cap-txt.fade{opacity:0}
+
+/* ── AUTO-FILL BADGE ── */
+.autofill-notice{display:none;background:var(--green-lt);border:1px solid rgba(45,80,22,.2);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--green);margin-bottom:24px;line-height:1.6}
+.autofill-notice.show{display:block}
+</style>
+</head>
+<body>
+<script>(function(){fetch('https://humandocu-server-production.up.railway.app/health').then(function(r){if(!r.ok)throw 0}).catch(function(){var b=document.createElement('div');b.style.cssText='position:fixed;top:0;left:0;right:0;z-index:99999;background:#c0392b;color:#fff;text-align:center;padding:12px 16px;font-size:14px;font-family:sans-serif;line-height:1.6';b.textContent='⚠️ 현재 서비스 점검 중입니다. 곧 복구하겠습니다. 불편을 드려 죄송합니다.';document.body.prepend(b)})})();</script>
+
+<nav>
+  <div class="nav-row2">
+    <div id="lang-bar">
+      <a href="/today-form.html" class="lang-btn"><span class="flag">🇰🇷</span> 한국어</a>
+      <a href="/today-form-en.html" class="lang-btn"><span class="flag">🇺🇸</span> English</a>
+      <a href="/today-form-jp.html" class="lang-btn"><span class="flag">🇯🇵</span> 日本語</a>
+      <a href="/today-form-zh.html" class="lang-btn active"><span class="flag">🇨🇳</span> 中文</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="form-header">
+    <div class="form-kicker">TODAY FILMOGRAPHY · TODAY FILM</div>
+    <div class="form-title">记录今天</div>
+    <div class="form-sub">最多6张照片 + 简短说明<br>AI将今天的你化为诗篇 · 免费</div>
+  </div>
+
+  <div class="autofill-notice" id="autofill-notice">✦ 已自动填入您上次的信息，可随时修改。</div>
+
+  <!-- 01 姓名 -->
+  <div class="q-block">
+    <div class="q-num">01 · 您的姓名</div>
+    <div class="q-title">请告诉我们您的姓名 <span style="color:var(--green)">*</span></div>
+    <div class="q-sub">将显示在结果页面上</div>
+    <input type="text" id="f-name" placeholder="请输入姓名..." maxlength="20" autocomplete="name">
+  </div>
+
+  <!-- 02 昵称 -->
+  <div class="q-block">
+    <div class="q-num">02 · 昵称（选填）</div>
+    <div class="q-title">您有昵称吗？</div>
+    <div class="q-sub">💡 用一个词形容今天的你。AI写诗时会参考。<br>例：周一的熊、咖啡补充中</div>
+    <input type="text" id="f-nickname" placeholder="请输入昵称..." maxlength="20">
+  </div>
+
+  <!-- 03 电子邮件 -->
+  <div class="q-block">
+    <div class="q-num">03 · 电子邮件</div>
+    <div class="q-title">请提供您的电子邮件 <span style="color:var(--green)">*</span></div>
+    <div class="q-sub">结果链接将通过邮件发送 · 无垃圾邮件</div>
+    <input type="email" id="f-email" placeholder="your@email.com" autocomplete="email">
+  </div>
+
+  <!-- 04 照片 -->
+  <div class="q-block">
+    <div class="q-num">04 · 今天的照片（最多6张）</div>
+    <div class="q-title">请上传今天的照片 <span style="color:var(--green)">*</span></div>
+    <div class="q-sub">食物、天空、人物、风景 — 什么都可以<br>每张照片请附上简短说明</div>
+    <div class="shots-stack" id="shots-stack"></div>
+    <button class="add-shot-btn" id="add-shot-btn" onclick="addShot()" style="margin-top:14px">
+      <span>＋ 添加照片</span>
+    </button>
+  </div>
+
+  <!-- 05 用一句话描述今天 -->
+  <div class="q-block">
+    <div class="q-num">05 · 今天一天</div>
+    <div class="q-title">用一句话描述今天 <span style="color:var(--green)">*</span></div>
+    <div class="q-example">
+      💡 诚实地描述今天。<br>
+      例："不想上班，但午饭拯救了我"
+    </div>
+    <textarea id="f-today" rows="2" placeholder="诚实地用一句话描述今天..."></textarea>
+  </div>
+
+  <!-- 06 给某人留言（选填） -->
+  <div class="q-block">
+    <div class="q-num">06 · 给某人留言（选填）</div>
+    <div class="q-title">今天有想对某人说的话吗？</div>
+    <div class="q-sub">💡 可以不填</div>
+    <input type="text" id="f-to" placeholder="收件人（例：妈妈、朋友的名字、自己...）" oninput="toggleMsg(this.value)">
+    <div id="msg-wrap" style="display:none;margin-top:10px">
+      <textarea id="f-msg" rows="2" placeholder="想说的话..."></textarea>
+    </div>
+  </div>
+
+  <!-- 07 公开设置 -->
+  <div class="q-block">
+    <div class="q-num">07 · 公开设置 <span style="color:var(--green)">*</span></div>
+    <div class="q-title">公开这篇 Today Film 吗？</div>
+    <div class="q-sub">公开后其他人也可以看到您的 Today Film</div>
+    <div class="radio-group">
+      <label class="radio-card" id="rc-public">
+        <input type="radio" name="visibility" value="public" checked onchange="setPublic(true)">
+        <div class="radio-content">
+          <div class="radio-title">🌿 公开</div>
+          <div class="radio-desc">其他人也可以看到您的 Today Film</div>
+        </div>
+      </label>
+      <label class="radio-card" id="rc-private">
+        <input type="radio" name="visibility" value="private" onchange="setPublic(false)">
+        <div class="radio-content">
+          <div class="radio-title">🔒 不公开</div>
+          <div class="radio-desc">仅以私人链接形式发送</div>
+        </div>
+      </label>
+    </div>
+  </div>
+</div>
+
+<!-- 提交栏 -->
+<div class="submit-bar">
+  <button class="submit-btn" id="submit-btn" onclick="doSubmit()">创建我的 Today Film →</button>
+  <div class="submit-hint">免费 · AI处理约30秒~1分钟 · 结果也会通过邮件发送</div>
+</div>
+
+<!-- 等待覆盖层 -->
+<div id="wait-overlay">
+  <div class="wo-rail"><div class="wo-fill" id="wo-fill"></div></div>
+  <div class="wo-slides">
+    <div class="wo-slide active" id="wo-s0">
+      <div class="wo-check-ring"><span class="wo-check-icon">✦</span></div>
+      <div class="wo-kicker">Today Filmography</div>
+      <div class="wo-title">提交完成</div>
+      <div class="wo-body">AI正在读取您的照片<br>和今天的故事</div>
+    </div>
+    <div class="wo-slide" id="wo-s1">
+      <div class="wo-kicker">✦ 什么是俳句？</div>
+      <div class="wo-title">5·7·5音节的<br>短诗形式</div>
+      <div class="wo-haiku-lines">
+        <div class="wo-haiku-line"><span class="wo-haiku-num">5</span><span class="wo-haiku-text"><span class="wo-haiku-accent">虽然简短</span></span></div>
+        <div class="wo-haiku-line"><span class="wo-haiku-num">7</span><span class="wo-haiku-text"><span class="wo-haiku-accent">只留下最本质的东西</span></span></div>
+        <div class="wo-haiku-line"><span class="wo-haiku-num">5</span><span class="wo-haiku-text"><span class="wo-haiku-accent">今天也是如此</span></span></div>
+      </div>
+      <div class="wo-small">您的今天也将这样被整理</div>
+    </div>
+    <div class="wo-slide" id="wo-s2">
+      <div class="wo-kicker">今天过得怎么样？</div>
+      <div class="wo-title">即使感觉没什么特别的</div>
+      <div class="wo-body">一张张浏览照片<br>今天便清晰可见</div>
+    </div>
+    <div class="wo-slide" id="wo-s3">
+      <div class="wo-kicker">坚持这样记录下去</div>
+      <div class="wo-title">一年后<br>将成为一本精彩的日记</div>
+      <div class="wo-stack-lines">
+        <div class="wo-stack-line"></div>
+        <div class="wo-stack-line"></div>
+        <div class="wo-stack-line"></div>
+      </div>
+      <div class="wo-body" style="margin-top:24px">记录今天的你</div>
+      <div class="wo-small">Today Film 每天都在积累</div>
+    </div>
+    <div class="wo-slide" id="wo-s4">
+      <div class="wo-brand-H">H</div>
+      <div class="wo-brand-name">humandocu.com</div>
+      <div class="wo-brand-tagline">我们记录人生</div>
+      <div class="wo-brand-url">humandocu.com</div>
+    </div>
+  </div>
+  <div class="wo-photo-show" id="wo-photo-show"></div>
+  <div class="wo-dots">
+    <div class="wo-dot active"></div>
+    <div class="wo-dot"></div>
+    <div class="wo-dot"></div>
+    <div class="wo-dot"></div>
+    <div class="wo-dot"></div>
+  </div>
+</div>
+
+<script>
+const API = 'https://humandocu-server-production.up.railway.app';
+const LS_KEY = 'today_form_zh_v1';
+const MAX_SHOTS = 6;
+const SHOT_TITLES = ['第一个场景','第二个场景','第三个场景','第四个场景','第五个场景','最后场景'];
+
+let isPublic = true;
+let shots = [];
+
+function saveLS() {
+  try {
+    const name = document.getElementById('f-name').value.trim();
+    const email = document.getElementById('f-email').value.trim().toLowerCase();
+    if (!name && !email) return;
+    localStorage.setItem(LS_KEY, JSON.stringify({
+      name,
+      nickname: document.getElementById('f-nickname').value.trim(),
+      email,
+      identity: document.getElementById('f-today').value.trim(),
+      last_to:  document.getElementById('f-to').value.trim(),
+      last_msg: document.getElementById('f-msg').value.trim(),
+      is_public: isPublic,
+    }));
+  } catch(e) {}
+}
+
+function loadLS() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) return false;
+    const d = JSON.parse(raw);
+    if (d.name)     document.getElementById('f-name').value     = d.name;
+    if (d.nickname) document.getElementById('f-nickname').value = d.nickname;
+    if (d.email)    document.getElementById('f-email').value    = d.email;
+    if (d.identity) document.getElementById('f-today').value   = d.identity;
+    if (d.last_to)  document.getElementById('f-to').value      = d.last_to;
+    if (d.last_msg) document.getElementById('f-msg').value     = d.last_msg;
+    if (typeof d.is_public === 'boolean') setPublic(d.is_public);
+    return !!(d.name || d.email);
+  } catch(e) { return false; }
+}
+
+function setPublic(val) {
+  isPublic = val;
+  document.querySelector(`input[name=visibility][value=${val ? 'public' : 'private'}]`).checked = true;
+}
+
+function toggleMsg(val) {
+  document.getElementById('msg-wrap').style.display = val.trim() ? 'block' : 'none';
+}
+
+function renderShots() {
+  const stack = document.getElementById('shots-stack');
+  stack.innerHTML = '';
+  shots.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'shot-card';
+    const imgHtml = s.b64
+      ? `<img src="${s.b64}"><button class="shot-change-btn" onclick="event.stopPropagation();pickPhoto(${i})">更换</button>`
+      : `<div class="ph-icon">📷</div><div class="ph-text">点击选择照片</div>`;
+    card.innerHTML = `
+      <div class="shot-card-head">
+        <div class="shot-badge">SHOT ${i+1}</div>
+        <div class="shot-label">${SHOT_TITLES[i] || '场景 '+(i+1)}</div>
+      </div>
+      <div class="shot-upload-area" id="spa${i}" onclick="pickPhoto(${i})">${imgHtml}</div>
+      ${s.b64 ? `<div class="shot-caption-wrap">
+        <textarea class="shot-caption" id="cap${i}" rows="2"
+          placeholder="用一句话描述这个场景..."
+          oninput="shots[${i}].caption=this.value">${s.caption||''}</textarea>
+      </div>` : ''}`;
+    stack.appendChild(card);
+  });
+  document.getElementById('add-shot-btn').style.display = shots.length >= MAX_SHOTS ? 'none' : 'flex';
+}
+
+function addShot() {
+  if (shots.length >= MAX_SHOTS) return;
+  shots.push({b64: null, caption: ''});
+  renderShots();
+  setTimeout(() => document.getElementById('spa'+(shots.length-1))?.scrollIntoView({behavior:'smooth',block:'center'}), 100);
+}
+
+function pickPhoto(i) {
+  const inp = document.createElement('input');
+  inp.type = 'file'; inp.accept = 'image/*';
+  inp.onchange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const b64 = await readFile(file);
+    const resized = await resizeImg(b64);
+    shots[i] = {b64: resized, caption: shots[i]?.caption || ''};
+    renderShots();
+    setTimeout(() => document.getElementById('cap'+i)?.focus(), 150);
+  };
+  inp.click();
+}
+
+function readFile(file) {
+  return new Promise(resolve => {
+    const r = new FileReader();
+    r.onload = e => resolve(e.target.result);
+    r.readAsDataURL(file);
+  });
+}
+
+async function resizeImg(b64) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => {
+      const MAX = 900;
+      let w = img.width, h = img.height;
+      if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+      const c = document.createElement('canvas');
+      c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      resolve(c.toDataURL('image/jpeg', 0.80));
+    };
+    img.src = b64;
+  });
+}
+
+// ── 等待覆盖层 ──
+var _woSlideTimer = null;
+var _woProgTimer  = null;
+var _woPhotoTimer = null;
+var _woPhotos     = [];
+var _woCurPhoto   = 0;
+var _woCurSlide   = 0;
+var WO_SLIDES     = 5;
+var WO_SLIDE_MS   = 3000;
+var WO_PHOTO_MS   = 3500;
+
+var WO_COPIES = [
+  '就在此刻，有人正在记录他们的今天',
+  '平凡的每一天，堆叠成不平凡的人生',
+  '记得今天的人，比你想象的要少',
+  '照片会留下来，无论是你选的还是别人选的',
+  'AI正在将今天化为一首诗',
+  '也许某人的今天，和你的今天很相似',
+];
+var _woCopies = []; var _woCopyIdx = 0;
+function _woShuffleCopies() {
+  var a = WO_COPIES.slice();
+  for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; }
+  _woCopies = a; _woCopyIdx = 0;
+}
+function _woNextCopy() {
+  if (_woCopyIdx >= _woCopies.length) _woShuffleCopies();
+  return _woCopies[_woCopyIdx++];
+}
+
+function _woPhotoStart(photos) {
+  _woPhotos = photos; _woCurPhoto = 0;
+  _woShuffleCopies();
+  var ps = document.getElementById('wo-photo-show');
+  ps.innerHTML = '';
+  photos.forEach(function(url) {
+    var fr = document.createElement('div');
+    fr.className = 'wo-photo-frame';
+    fr.style.backgroundImage = 'url(' + url + ')';
+    var vl = document.createElement('div'); vl.className = 'wo-photo-veil';
+    fr.appendChild(vl);
+    ps.appendChild(fr);
+  });
+  var cp = document.createElement('div'); cp.className = 'wo-photo-caption';
+  var tg = document.createElement('div'); tg.className = 'wo-photo-cap-tag'; tg.textContent = 'Today Filmography';
+  var tx = document.createElement('div'); tx.className = 'wo-photo-cap-txt'; tx.id = 'wo-cap-txt';
+  tx.textContent = _woNextCopy();
+  cp.appendChild(tg); cp.appendChild(tx);
+  ps.appendChild(cp);
+  ps.querySelectorAll('.wo-photo-frame')[0].classList.add('active');
+  ps.classList.add('active');
+  document.querySelector('.wo-slides').style.display = 'none';
+  document.querySelectorAll('.wo-dot').forEach(function(d){ d.style.display = 'none'; });
+  _woPhotoTimer = setInterval(function() {
+    var frames = ps.querySelectorAll('.wo-photo-frame');
+    frames[_woCurPhoto].classList.remove('active');
+    _woCurPhoto = (_woCurPhoto + 1) % frames.length;
+    frames[_woCurPhoto].classList.add('active');
+    var capTxt = document.getElementById('wo-cap-txt');
+    if (capTxt) {
+      capTxt.classList.add('fade');
+      setTimeout(function(){ capTxt.textContent = _woNextCopy(); capTxt.classList.remove('fade'); }, 600);
+    }
+  }, WO_PHOTO_MS);
+}
+
+function _woGoSlide(n) {
+  document.getElementById('wo-s' + _woCurSlide).classList.remove('active');
+  document.querySelectorAll('.wo-dot')[_woCurSlide].classList.remove('active');
+  _woCurSlide = n % WO_SLIDES;
+  document.getElementById('wo-s' + _woCurSlide).classList.add('active');
+  document.querySelectorAll('.wo-dot')[_woCurSlide].classList.add('active');
+}
+
+function showWaitOverlay() {
+  _woCurSlide = 0;
+  document.querySelectorAll('.wo-slide').forEach(function(s) { s.classList.remove('active'); });
+  document.querySelectorAll('.wo-dot').forEach(function(d) { d.classList.remove('active'); d.style.display = ''; });
+  document.getElementById('wo-s0').classList.add('active');
+  document.querySelectorAll('.wo-dot')[0].classList.add('active');
+  document.getElementById('wo-fill').style.width = '0%';
+  document.querySelector('.wo-slides').style.display = '';
+  document.getElementById('wo-photo-show').classList.remove('active');
+  document.getElementById('wo-photo-show').innerHTML = '';
+  document.getElementById('wait-overlay').classList.add('active');
+
+  _woSlideTimer = setInterval(function() { _woGoSlide(_woCurSlide + 1); }, WO_SLIDE_MS);
+
+  var startMs = Date.now();
+  _woProgTimer = setInterval(function() {
+    var pct = Math.min(((Date.now() - startMs) / 120000) * 92, 92);
+    document.getElementById('wo-fill').style.width = pct + '%';
+  }, 1000);
+
+  fetch(API + '/api/today/public-photos')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (d.photos && d.photos.length >= 2) {
+        clearInterval(_woSlideTimer);
+        _woPhotoStart(d.photos.slice(0, 8));
+      }
+    })
+    .catch(function(){});
+}
+
+function hideWaitOverlay() {
+  clearInterval(_woSlideTimer);
+  clearInterval(_woProgTimer);
+  clearInterval(_woPhotoTimer);
+  document.getElementById('wait-overlay').classList.remove('active');
+}
+
+function finishWaitOverlay() {
+  clearInterval(_woSlideTimer);
+  clearInterval(_woProgTimer);
+  clearInterval(_woPhotoTimer);
+  var fill = document.getElementById('wo-fill');
+  fill.style.transition = 'width .4s ease';
+  fill.style.width = '100%';
+}
+
+// ── 提交 ──
+async function doSubmit() {
+  const name      = document.getElementById('f-name').value.trim();
+  const nickname  = document.getElementById('f-nickname').value.trim();
+  const email     = document.getElementById('f-email').value.trim().toLowerCase();
+  const today_s   = document.getElementById('f-today').value.trim();
+  const last_to   = document.getElementById('f-to').value.trim();
+  const last_msg  = document.getElementById('f-msg').value.trim();
+
+  shots.forEach((s, i) => {
+    const cap = document.getElementById('cap'+i);
+    if (cap && s) s.caption = cap.value;
+  });
+
+  const filled = shots.filter(s => s?.b64);
+  if (!name)  { alert('请输入您的姓名'); return; }
+  if (!email || !email.includes('@')) { alert('请输入您的电子邮件'); return; }
+  if (filled.length < 1) { alert('请至少上传一张照片'); return; }
+  if (!today_s) { alert('请用一句话描述今天'); return; }
+
+  saveLS();
+  document.getElementById('submit-btn').disabled = true;
+  showWaitOverlay();
+
+  const shotPayload = filled.map((s) => ({
+    image_b64: s.b64,
+    caption:   s.caption || '',
+    index:     shots.indexOf(s) + 1,
+  }));
+
+  try {
+    const res = await fetch(API + '/api/today/submit-b64', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        name,
+        nickname: nickname || name,
+        email,
+        is_public: isPublic,
+        shots: shotPayload,
+        today_sentence: today_s,
+        last_to,
+        last_msg,
+        lang: 'zh',
+      })
+    });
+    const data = await res.json();
+    if (!res.ok || data.status === 'error') throw new Error(data.error || '发生了错误');
+    const doc_id = data.id || data.doc_id;
+    finishWaitOverlay();
+    setTimeout(function() {
+      window.location.href = API + '/today/' + doc_id;
+    }, 500);
+  } catch(e) {
+    hideWaitOverlay();
+    document.getElementById('submit-btn').disabled = false;
+    alert('错误：' + e.message);
+  }
+}
+
+// ── 初始化 ──
+(function init() {
+  shots.push({b64: null, caption: ''});
+  shots.push({b64: null, caption: ''});
+  renderShots();
+
+  const filled = loadLS();
+  if (filled) {
+    document.getElementById('autofill-notice').classList.add('show');
+    const to = document.getElementById('f-to').value.trim();
+    if (to) document.getElementById('msg-wrap').style.display = 'block';
+  }
+
+  const savedEmail = document.getElementById('f-email').value.trim();
+  if (savedEmail) {
+    fetch(API + '/api/today/profile?email=' + encodeURIComponent(savedEmail))
+      .then(r => r.json())
+      .then(d => {
+        if (!d.found) return;
+        if (d.name)     document.getElementById('f-name').value     = d.name;
+        if (d.nickname) document.getElementById('f-nickname').value = d.nickname;
+        if (d.identity) document.getElementById('f-today').value    = d.identity;
+        if (d.last_to)  document.getElementById('f-to').value       = d.last_to;
+        if (d.last_msg) document.getElementById('f-msg').value      = d.last_msg;
+        if (typeof d.is_public === 'boolean') setPublic(d.is_public);
+        document.getElementById('autofill-notice').classList.add('show');
+      })
+      .catch(() => {});
+  }
+})();
+</script>
+</body>
+</html>
