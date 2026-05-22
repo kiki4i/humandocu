@@ -82,7 +82,6 @@ textarea::placeholder{color:var(--gold);opacity:.7}
 .photo-caption{width:100%;padding:10px 12px;border:1px solid rgba(200,151,58,.22);border-radius:8px;font-size:13px;font-family:inherit;background:var(--cream2);color:var(--ink);outline:none;resize:none;line-height:1.6;transition:border-color .2s}
 .photo-caption:focus{border-color:var(--amber);background:#fff}
 .photo-caption::placeholder{color:var(--gold);opacity:.65}
-.caption-counter{font-size:11px;color:var(--ink3);text-align:right;margin-top:4px}
 
 /* ── STEP 7 특별 스타일 ── */
 .step-7-bg{background:linear-gradient(160deg,#1a0f05 0%,#2d1f0a 100%);border-radius:12px;padding:24px 20px;margin-bottom:24px}
@@ -218,10 +217,8 @@ textarea::placeholder{color:var(--gold);opacity:.7}
       <span class="ph-limit">최대 10MB</span>
     </div>
     <div class="photo-caption-wrap" id="cap-wrap-1" style="display:none">
-      <textarea class="photo-caption" id="cap-1" rows="2" maxlength="30"
-        placeholder="이 사진을 고른 이유, 또는 그때의 기억 한 줄"
-        oninput="updateCounter(1,this.value)"></textarea>
-      <div class="caption-counter" id="cnt-1">0 / 30</div>
+      <textarea class="photo-caption" id="cap-1" rows="2"
+        placeholder="이 사진을 고른 이유, 또는 그때의 기억"></textarea>
     </div>
   </div>
 </div>
@@ -247,10 +244,8 @@ textarea::placeholder{color:var(--gold);opacity:.7}
       <span class="ph-limit">최대 10MB</span>
     </div>
     <div class="photo-caption-wrap" id="cap-wrap-2" style="display:none">
-      <textarea class="photo-caption" id="cap-2" rows="2" maxlength="30"
-        placeholder="이 사진을 고른 이유, 또는 그때의 기억 한 줄"
-        oninput="updateCounter(2,this.value)"></textarea>
-      <div class="caption-counter" id="cnt-2">0 / 30</div>
+      <textarea class="photo-caption" id="cap-2" rows="2"
+        placeholder="이 사진을 고른 이유, 또는 그때의 기억"></textarea>
     </div>
   </div>
 </div>
@@ -276,10 +271,8 @@ textarea::placeholder{color:var(--gold);opacity:.7}
       <span class="ph-limit">최대 10MB</span>
     </div>
     <div class="photo-caption-wrap" id="cap-wrap-3" style="display:none">
-      <textarea class="photo-caption" id="cap-3" rows="2" maxlength="30"
-        placeholder="이 사진을 고른 이유, 또는 그때의 기억 한 줄"
-        oninput="updateCounter(3,this.value)"></textarea>
-      <div class="caption-counter" id="cnt-3">0 / 30</div>
+      <textarea class="photo-caption" id="cap-3" rows="2"
+        placeholder="이 사진을 고른 이유, 또는 그때의 기억"></textarea>
     </div>
   </div>
 </div>
@@ -305,10 +298,8 @@ textarea::placeholder{color:var(--gold);opacity:.7}
       <span class="ph-limit">최대 10MB</span>
     </div>
     <div class="photo-caption-wrap" id="cap-wrap-4" style="display:none">
-      <textarea class="photo-caption" id="cap-4" rows="2" maxlength="30"
-        placeholder="이 사진을 고른 이유, 또는 그때의 기억 한 줄"
-        oninput="updateCounter(4,this.value)"></textarea>
-      <div class="caption-counter" id="cnt-4">0 / 30</div>
+      <textarea class="photo-caption" id="cap-4" rows="2"
+        placeholder="이 사진을 고른 이유, 또는 그때의 기억"></textarea>
     </div>
   </div>
 </div>
@@ -334,10 +325,8 @@ textarea::placeholder{color:var(--gold);opacity:.7}
       <span class="ph-limit">최대 10MB</span>
     </div>
     <div class="photo-caption-wrap" id="cap-wrap-5" style="display:none">
-      <textarea class="photo-caption" id="cap-5" rows="2" maxlength="30"
-        placeholder="이 사진을 고른 이유, 또는 그때의 기억 한 줄"
-        oninput="updateCounter(5,this.value)"></textarea>
-      <div class="caption-counter" id="cnt-5">0 / 30</div>
+      <textarea class="photo-caption" id="cap-5" rows="2"
+        placeholder="이 사진을 고른 이유, 또는 그때의 기억"></textarea>
     </div>
   </div>
 </div>
@@ -364,10 +353,8 @@ textarea::placeholder{color:var(--gold);opacity:.7}
         <span class="ph-limit">최대 10MB</span>
       </div>
       <div class="photo-caption-wrap" id="cap-wrap-6" style="display:none">
-        <textarea class="photo-caption" id="cap-6" rows="2" maxlength="30"
-          placeholder="이 사진을 고른 이유, 또는 그때의 기억 한 줄"
-          oninput="updateCounter(6,this.value)"></textarea>
-        <div class="caption-counter" id="cnt-6">0 / 30</div>
+        <textarea class="photo-caption" id="cap-6" rows="2"
+          placeholder="이 사진을 고른 이유, 또는 그때의 기억"></textarea>
       </div>
     </div>
   </div>
@@ -510,7 +497,7 @@ function updateProgress(step) {
   btn.textContent = isLast ? '나의 식스샷 완성하기 →' : '다음 →';
   const hint = document.getElementById('nav-hint');
   if (step >= 2 && step <= 7) {
-    hint.textContent = '사진 필수 · 설명 필수 (30자 이내)';
+    hint.textContent = '사진 필수 · 설명 필수';
   } else if (isLast) {
     hint.textContent = '무료 · AI 처리 약 1~2분';
   } else {
@@ -591,12 +578,6 @@ function toggleMsg(val) {
   document.getElementById('msg-wrap').style.display = val.trim() ? 'block' : 'none';
 }
 
-// ── 글자 수 카운터 ──
-function updateCounter(n, val) {
-  const el = document.getElementById('cnt-' + n);
-  if (el) el.textContent = val.length + ' / 30';
-  if (photos[n]) photos[n].caption = val;
-}
 
 // ── 사진 선택 ──
 function pickPhoto(n) {
@@ -649,7 +630,7 @@ function renderPhoto(n) {
     pu.classList.add('has-img');
     if (cw) {
       cw.style.display = 'block';
-      if (cap && p.caption) { cap.value = p.caption; updateCounter(n, p.caption); }
+      if (cap && p.caption) { cap.value = p.caption; }
       setTimeout(() => cap?.focus(), 100);
     }
   } else {
