@@ -137,12 +137,13 @@ textarea::placeholder{color:var(--gold);opacity:.65}
 /* ── Photo slideshow (wait overlay) ── */
 .wo-photo-show{display:none;position:absolute;inset:0;overflow:hidden;z-index:1}
 .wo-photo-show.active{display:block}
-.wo-photo-frame{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease}
+.wo-photo-frame{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease}
 .wo-photo-frame.active{opacity:1}
 .wo-photo-veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65) 0%,rgba(0,0,0,.15) 60%,rgba(0,0,0,.08) 100%)}
-.wo-photo-caption{position:absolute;bottom:72px;left:0;right:0;text-align:center;padding:0 40px}
+.wo-photo-caption{position:absolute;bottom:72px;left:0;right:0;text-align:center;padding:0 40px;z-index:2}
 .wo-photo-cap-tag{font-size:9px;letter-spacing:.28em;color:rgba(200,135,10,.65);text-transform:uppercase;margin-bottom:10px}
-.wo-photo-cap-txt{font-size:15px;font-weight:300;color:rgba(249,246,240,.8);letter-spacing:.04em;line-height:1.9}
+.wo-photo-cap-txt{font-size:15px;font-weight:300;color:rgba(249,246,240,.8);letter-spacing:.04em;line-height:1.9;transition:opacity .6s ease}
+.wo-photo-cap-txt.fade{opacity:0}
 
 /* ── AUTO-FILL BADGE ── */
 .autofill-notice{display:none;background:var(--green-lt);border:1px solid rgba(45,80,22,.2);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--green);margin-bottom:24px;line-height:1.6}
@@ -445,8 +446,28 @@ var WO_SLIDES     = 5;
 var WO_SLIDE_MS   = 3000;
 var WO_PHOTO_MS   = 3500;
 
+var WO_COPIES = [
+  'Someone out there is recording their today, right now',
+  'Ordinary days stack up to make an extraordinary life',
+  'Fewer people remember today than you think',
+  'Photos remain, whether you choose them or someone else does',
+  'AI is turning your day into a poem',
+  "Someone's today might look just like yours",
+];
+var _woCopies = []; var _woCopyIdx = 0;
+function _woShuffleCopies() {
+  var a = WO_COPIES.slice();
+  for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; }
+  _woCopies = a; _woCopyIdx = 0;
+}
+function _woNextCopy() {
+  if (_woCopyIdx >= _woCopies.length) _woShuffleCopies();
+  return _woCopies[_woCopyIdx++];
+}
+
 function _woPhotoStart(photos) {
   _woPhotos = photos; _woCurPhoto = 0;
+  _woShuffleCopies();
   var ps = document.getElementById('wo-photo-show');
   ps.innerHTML = '';
   photos.forEach(function(url) {
@@ -454,13 +475,15 @@ function _woPhotoStart(photos) {
     fr.className = 'wo-photo-frame';
     fr.style.backgroundImage = 'url(' + url + ')';
     var vl = document.createElement('div'); vl.className = 'wo-photo-veil';
-    var cp = document.createElement('div'); cp.className = 'wo-photo-caption';
-    var tg = document.createElement('div'); tg.className = 'wo-photo-cap-tag'; tg.textContent = 'Today Filmography';
-    var tx = document.createElement('div'); tx.className = 'wo-photo-cap-txt'; tx.textContent = 'AI is reading your story';
-    cp.appendChild(tg); cp.appendChild(tx);
-    fr.appendChild(vl); fr.appendChild(cp);
+    fr.appendChild(vl);
     ps.appendChild(fr);
   });
+  var cp = document.createElement('div'); cp.className = 'wo-photo-caption';
+  var tg = document.createElement('div'); tg.className = 'wo-photo-cap-tag'; tg.textContent = 'Today Filmography';
+  var tx = document.createElement('div'); tx.className = 'wo-photo-cap-txt'; tx.id = 'wo-cap-txt';
+  tx.textContent = _woNextCopy();
+  cp.appendChild(tg); cp.appendChild(tx);
+  ps.appendChild(cp);
   ps.querySelectorAll('.wo-photo-frame')[0].classList.add('active');
   ps.classList.add('active');
   document.querySelector('.wo-slides').style.display = 'none';
@@ -470,6 +493,11 @@ function _woPhotoStart(photos) {
     frames[_woCurPhoto].classList.remove('active');
     _woCurPhoto = (_woCurPhoto + 1) % frames.length;
     frames[_woCurPhoto].classList.add('active');
+    var capTxt = document.getElementById('wo-cap-txt');
+    if (capTxt) {
+      capTxt.classList.add('fade');
+      setTimeout(function(){ capTxt.textContent = _woNextCopy(); capTxt.classList.remove('fade'); }, 600);
+    }
   }, WO_PHOTO_MS);
 }
 
