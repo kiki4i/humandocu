@@ -468,7 +468,7 @@ function _woPhotoStart(photos) {
   });
   ps.querySelectorAll('.wo-photo-frame')[0].classList.add('active');
   ps.classList.add('active');
-  document.getElementById('wo-slides').style.display = 'none';
+  document.querySelector('.wo-slides').style.display = 'none';
   document.querySelectorAll('.wo-dot').forEach(function(d){ d.style.display = 'none'; });
   _woPhotoTimer = setInterval(function() {
     var frames = ps.querySelectorAll('.wo-photo-frame');
@@ -493,7 +493,7 @@ function showWaitOverlay() {
   document.getElementById('wo-s0').classList.add('active');
   document.querySelectorAll('.wo-dot')[0].classList.add('active');
   document.getElementById('wo-fill').style.width = '0%';
-  document.getElementById('wo-slides').style.display = '';
+  document.querySelector('.wo-slides').style.display = '';
   document.getElementById('wo-photo-show').classList.remove('active');
   document.getElementById('wo-photo-show').innerHTML = '';
   document.getElementById('wait-overlay').classList.add('active');
