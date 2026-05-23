@@ -722,7 +722,7 @@ footer {
     data-en="Create My Today Film →"
     data-jp="私のToday Filmを作る →"
     data-zh="创建我的Today Film →">나의 투*필 만들기 →</a>
-  <button onclick="document.getElementById('live-sec').scrollIntoView({behavior:'smooth'})" style="flex:1;text-align:center;padding:10px 0;background:transparent;color:#C8870A;border:1px solid rgba(200,135,10,.5);border-radius:20px;font-size:13px;font-weight:500;letter-spacing:.04em;cursor:pointer;"
+  <button onclick="openBrowseModal()" style="flex:1;text-align:center;padding:10px 0;background:transparent;color:#C8870A;border:1px solid rgba(200,135,10,.5);border-radius:20px;font-size:13px;font-weight:500;letter-spacing:.04em;cursor:pointer;"
     data-ko="다른 투*필 둘러보기 →"
     data-en="Browse Today Films →"
     data-jp="他のToday Filmを見る →"
@@ -866,21 +866,6 @@ footer {
      data-zh="然后，把今天的你化为一首诗。">
     그리고 오늘의 당신을 시로 남깁니다.
   </p>
-</div>
-
-<hr class="sec-divider">
-
-<!-- 지금 누군가의 투*필 -->
-<div class="live-sec" id="live-sec">
-  <div style="max-width:480px;margin:0 auto">
-    <div class="sec-label" style="text-align:center" data-ko="✦ 지금 누군가의 투*필" data-en="✦ Someone's Today Filmography right now" data-jp="✦ 誰かのToday Film · 今" data-zh="✦ 此刻某人的Today Film">✦ 지금 누군가의 투*필</div>
-
-    <div class="live-card" id="live-card">
-      <div class="live-loading" id="live-loading" data-ko="불러오는 중..." data-en="Loading..." data-jp="読み込み中..." data-zh="加载中...">불러오는 중...</div>
-    </div>
-
-
-  </div>
 </div>
 
 <hr class="sec-divider">
@@ -1080,7 +1065,7 @@ function loadPrev() {
   renderCard(seenHistory[historyIdx]);
 }
 
-loadNext();
+// loadNext 자동실행 제거
 </script>
 
 
@@ -1121,6 +1106,80 @@ loadNext();
 </script>
 
 
+
+<!-- 투*필 둘러보기 모달 -->
+<div id="browse-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:rgba(0,0,0,0.6);overflow-y:auto;">
+  <div style="max-width:480px;margin:20px auto;background:#FFFBF3;border-radius:16px;padding:20px 16px;position:relative;">
+    <button onclick="closeBrowseModal()" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:22px;color:#8B6A2E;cursor:pointer;">✕</button>
+    <div style="text-align:center;font-size:12px;letter-spacing:.14em;color:#8B6A2E;margin-bottom:14px;">✦ 누군가의 투*필</div>
+    <div id="modal-card" style="min-height:120px;">
+      <div style="text-align:center;padding:32px;color:#8B6A2E;font-size:13px;">불러오는 중...</div>
+    </div>
+    <div style="text-align:center;margin-top:16px;">
+      <button onclick="loadModalNext()" style="padding:10px 28px;background:#C8870A;color:#fff;border:none;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;letter-spacing:.04em;">다음 투*필 →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var modalHistory = [];
+var modalIdx = -1;
+
+function renderModalCard(d) {
+  var card = document.getElementById('modal-card');
+  var poem = extractPoem(d.poems);
+  var poemHtml = poem ? poem.split('\n').filter(function(l){return l.trim();}).map(function(l){
+    return '<div style="line-height:1.9">' + l + '</div>';
+  }).join('') : '';
+  var imgs = d.shot_images || {};
+  var photosHtml = '';
+  for (var i = 1; i <= 3; i++) {
+    if (imgs[String(i)]) {
+      photosHtml += '<img src="' + imgs[String(i)] + '" style="width:100%;border-radius:10px;margin-bottom:10px;object-fit:cover;max-height:200px;" onerror="this.parentNode.removeChild(this)">';
+    }
+  }
+  card.innerHTML =
+    (photosHtml ? '<div>' + photosHtml + '</div>' : '') +
+    '<div style="font-size:15px;font-weight:600;color:#1A1208;margin:10px 0 2px">' + (d.name || '') + '</div>' +
+    '<div style="font-size:12px;color:#8B6A2E;margin-bottom:10px">' + (d.identity || '') + '</div>' +
+    (poemHtml ? '<div style="font-size:14px;color:#3A2A0A;font-family:var(--serif);line-height:1.9;border-left:2px solid #C8870A;padding-left:12px;margin:12px 0">' + poemHtml + '</div>' : '') +
+    '<div style="text-align:center;margin-top:14px">' +
+    '<a href="https://humandocu-server-production.up.railway.app/' + (d.type === 'today' ? 'today' : 'sixshot') + '/' + d.doc_id + '" target="_blank" style="display:inline-block;padding:9px 22px;background:#C8870A;color:#FFF8ED;font-size:13px;font-weight:600;border-radius:20px;text-decoration:none">' + d.name + '님의 투*필 전체 보기 →</a>' +
+    '</div>';
+}
+
+async function loadModalNext() {
+  var card = document.getElementById('modal-card');
+  card.innerHTML = '<div style="text-align:center;padding:32px;color:#8B6A2E;font-size:13px;">불러오는 중...</div>';
+  try {
+    var currentDocId = modalIdx >= 0 ? modalHistory[modalIdx].doc_id : '';
+    var url = API + (currentDocId ? '&exclude=' + encodeURIComponent(currentDocId) : '');
+    var res = await fetch(url);
+    var json = await res.json();
+    if (json.status !== 'ok' || !json.data) {
+      card.innerHTML = '<div style="text-align:center;padding:32px;color:#8B6A2E;font-size:13px;">아직 공개된 투*필이 없어요</div>';
+      return;
+    }
+    var d = json.data;
+    modalHistory.push(d);
+    modalIdx = modalHistory.length - 1;
+    renderModalCard(d);
+  } catch(e) {
+    card.innerHTML = '<div style="text-align:center;padding:32px;color:#8B6A2E;font-size:13px;">잠시 후 다시 시도해주세요</div>';
+  }
+}
+
+function openBrowseModal() {
+  document.getElementById('browse-modal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  if (modalIdx < 0) loadModalNext();
+}
+
+function closeBrowseModal() {
+  document.getElementById('browse-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+</script>
 </body>
 </html>
 
