@@ -763,25 +763,24 @@ function faq(el){const item=el.parentElement;const open=item.classList.contains(
 window.addEventListener('scroll',()=>{document.getElementById('nav').style.padding=window.scrollY>60?'11px 56px':'16px 56px'});
 
 (function(){
+  var PAYMENT_BASE = 'https://humandocu-server-production.up.railway.app/payment/advanced';
   function applyLang(lang){
     var l = lang.toLowerCase();
     var banner = document.getElementById('lang-cs-banner');
-    if(l==='jp'||l==='zh'){
-      banner.style.display='flex';
-      document.body.style.overflow='hidden';
-    } else {
-      banner.style.display='none';
-      document.body.style.overflow='';
-      document.body.style.overflowX='hidden';
-      document.querySelectorAll('[data-ko]').forEach(function(el){
-        var txt = el.getAttribute('data-'+l);
-        if(txt) el.innerHTML = txt;
-      });
-    }
+    // JP/ZH도 이제 지원 — 배너 숨김
+    if(banner) { banner.style.display='none'; document.body.style.overflow=''; document.body.style.overflowX='hidden'; }
+    document.querySelectorAll('[data-ko]').forEach(function(el){
+      var txt = el.getAttribute('data-'+l);
+      if(txt) el.innerHTML = txt;
+    });
     document.querySelectorAll('.lang-btn').forEach(function(b){
       b.classList.toggle('active', b.dataset.lang===lang);
     });
     localStorage.setItem('lang', lang);
+    // 결제 링크에 lang 파라미터 추가
+    document.querySelectorAll('a[href*="payment/advanced"]').forEach(function(a){
+      a.href = PAYMENT_BASE + '?lang=' + lang;
+    });
   }
   window.applyLang = applyLang;
   var saved = localStorage.getItem('lang')||'KO';
