@@ -1122,7 +1122,7 @@ function loadPrev() {
 <script>
 var FEED_API = 'https://humandocu-server-production.up.railway.app/api/today/feed';
 var SERVER_BASE = 'https://humandocu-server-production.up.railway.app';
-var feedCursor = null;
+var feedOffset = 0;
 var feedHasMore = false;
 var FEED_LIMIT = 12;
 
@@ -1142,8 +1142,32 @@ function makeFeedItem(item) {
     + '</div></a>';
 }
 
+async function fetchFeedPage(reset) {
+  var grid = document.getElementById('feed-grid');
+  var btn = document.getElementById('feed-more-btn');
+  try {
+    var url = FEED_API + '?limit=' + FEED_LIMIT + '&offset=' + feedOffset;
+    var res = await fetch(url);
+    var data = await res.json();
+    if (!data.items || data.items.length === 0) {
+      if (reset) grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">아직 공개된 투*필이 없어요</div>';
+      btn.style.display = 'none';
+      return;
+    }
+    if (reset) grid.innerHTML = '';
+    data.items.forEach(function(item) {
+      grid.insertAdjacentHTML('beforeend', makeFeedItem(item));
+    });
+    feedOffset = data.next_offset || (feedOffset + data.items.length);
+    feedHasMore = data.has_more || false;
+    btn.style.display = feedHasMore ? 'inline-block' : 'none';
+  } catch(e) {
+    if (reset) grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">잠시 후 다시 시도해주세요</div>';
+  }
+}
+
 async function loadFeed() {
-  feedCursor = null;
+  feedOffset = 0;
   feedHasMore = false;
   var grid = document.getElementById('feed-grid');
   grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">불러오는 중...</div>';
@@ -1158,33 +1182,6 @@ async function loadMoreFeed() {
   await fetchFeedPage(false);
   btn.textContent = '더 보기 ↓';
   btn.disabled = false;
-}
-
-async function fetchFeedPage(reset) {
-  try {
-    var url = FEED_API + '?limit=' + FEED_LIMIT;
-    if (feedCursor) url += '&cursor=' + encodeURIComponent(feedCursor);
-    var res = await fetch(url);
-    var data = await res.json();
-    var grid = document.getElementById('feed-grid');
-
-    if (!data.items || data.items.length === 0) {
-      if (reset) grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">아직 공개된 투*필이 없어요</div>';
-      document.getElementById('feed-more-btn').style.display = 'none';
-      return;
-    }
-
-    if (reset) grid.innerHTML = '';
-    data.items.forEach(function(item) {
-      grid.insertAdjacentHTML('beforeend', makeFeedItem(item));
-    });
-
-    feedCursor = data.next_cursor || null;
-    feedHasMore = data.has_more || false;
-    document.getElementById('feed-more-btn').style.display = feedHasMore ? 'inline-block' : 'none';
-  } catch(e) {
-    if (reset) document.getElementById('feed-grid').innerHTML = '<div style="text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">잠시 후 다시 시도해주세요</div>';
-  }
 }
 
 function openBrowseModal() {
