@@ -268,41 +268,30 @@ textarea::placeholder{color:var(--gold);opacity:.65}
   <div class="wo-slides">
     <div class="wo-slide active" id="wo-s0">
       <div class="wo-check-ring"><span class="wo-check-icon">✦</span></div>
-      <div class="wo-kicker">Today Filmography</div>
-      <div class="wo-title">제출이 완료되었습니다</div>
-      <div class="wo-body">AI가 사진과 오늘의 이야기를<br>읽고 있어요</div>
+      <div class="wo-kicker">TODAY FILMOGRAPHY</div>
+      <div class="wo-title">사진을 보고 있어요.</div>
+      <div class="wo-body" id="wo-s0-body">잠깐만요, 하나하나 들여다볼게요.</div>
     </div>
     <div class="wo-slide" id="wo-s1">
-      <div class="wo-kicker">✦ 하이쿠란 무엇인가요?</div>
-      <div class="wo-title">5 · 7 · 5 음절의<br>짧은 시 형식입니다</div>
-      <div class="wo-haiku-lines">
-        <div class="wo-haiku-line"><span class="wo-haiku-num">5</span><span class="wo-haiku-text"><span class="wo-haiku-accent">짧기 때문에</span></span></div>
-        <div class="wo-haiku-line"><span class="wo-haiku-num">7</span><span class="wo-haiku-text"><span class="wo-haiku-accent">오히려 본질만 남습니다</span></span></div>
-        <div class="wo-haiku-line"><span class="wo-haiku-num">5</span><span class="wo-haiku-text"><span class="wo-haiku-accent">오늘이 그래요</span></span></div>
-      </div>
-      <div class="wo-small">당신의 오늘도 그렇게 정리됩니다</div>
+      <div class="wo-kicker">✦ AI가 읽는 중</div>
+      <div class="wo-title">와, 멋진 사진이네요.</div>
+      <div class="wo-body" id="wo-s1-body">오늘 하루가 고스란히 담겨있어요.<br>여기에 맞는 글을 짓고 있어요.</div>
     </div>
     <div class="wo-slide" id="wo-s2">
-      <div class="wo-kicker">오늘 하루 어떠셨나요?</div>
-      <div class="wo-title">별거 없었던 것 같아도</div>
-      <div class="wo-body">사진 한 장씩 고르다 보면<br>오늘이 보입니다</div>
+      <div class="wo-kicker">✦ 시를 쓰는 중</div>
+      <div class="wo-title" id="wo-s2-title">오늘 하루를<br>적어보고 있어요.</div>
+      <div class="wo-body">감성 버전, 유머 버전<br>두 가지로 준비할게요.</div>
     </div>
     <div class="wo-slide" id="wo-s3">
-      <div class="wo-kicker">가끔 이렇게 정리하다 보면</div>
-      <div class="wo-title">1년 후엔<br>훌륭한 일기장이 됩니다</div>
-      <div class="wo-stack-lines">
-        <div class="wo-stack-line"></div>
-        <div class="wo-stack-line"></div>
-        <div class="wo-stack-line"></div>
-      </div>
-      <div class="wo-body" style="margin-top:24px">오늘의 나, 기록해두세요</div>
-      <div class="wo-small">투*필은 매일 쌓입니다</div>
+      <div class="wo-kicker">✦ 거의 다 됐어요</div>
+      <div class="wo-title">이제 이메일 보내드리고<br>여기에도 보여드릴게요.</div>
+      <div class="wo-body">너무 놀라지는 마세요.<br>전 칭찬 아주 좋아한답니다 ㅎㅎ</div>
     </div>
     <div class="wo-slide" id="wo-s4">
-      <div class="wo-brand-H">H</div>
-      <div class="wo-brand-name">휴먼다큐닷컴</div>
-      <div class="wo-brand-tagline">우리는 삶을 기록합니다</div>
-      <div class="wo-brand-url">humandocu.com</div>
+      <div class="wo-brand-H">✦</div>
+      <div class="wo-brand-name" id="wo-s4-name">오늘도 최고의 하루!</div>
+      <div class="wo-brand-tagline">매일을 담아보세요.</div>
+      <div class="wo-brand-url">모으면 그것이 당신이에요.</div>
     </div>
   </div>
   <div class="wo-photo-show" id="wo-photo-show"></div>
@@ -533,6 +522,36 @@ function showWaitOverlay() {
   var _pi = document.getElementById('wo-photo-info');
   if (_pi) { _pi.innerHTML = ''; _pi.classList.remove('active'); }
   document.getElementById('wait-overlay').classList.add('active');
+
+  // ── 슬라이드 텍스트 동적 주입 ──
+  (function injectSlideTexts() {
+    var caps = shots.map(function(s){ return (s.caption||'').trim(); }).filter(Boolean);
+    var name = (document.getElementById('f-nickname')?.value || document.getElementById('f-name')?.value || '').trim();
+
+    // SLIDE 1 — 첫 번째 사진 설명
+    var el = document.getElementById('wo-s0-body');
+    if (el && caps[0]) {
+      el.innerHTML = '"' + caps[0].slice(0,20) + '"<br>이 순간이 인상적이네요.';
+    }
+
+    // SLIDE 2 — 두 번째 사진 설명
+    el = document.getElementById('wo-s1-body');
+    if (el && caps[1]) {
+      el.innerHTML = '"' + caps[1].slice(0,20) + '"<br>이것도 담아드릴게요.';
+    }
+
+    // SLIDE 3 — 이름 불러주기
+    el = document.getElementById('wo-s2-title');
+    if (el && name) {
+      el.innerHTML = name + '님의 오늘 하루를<br>적어보고 있어요.';
+    }
+
+    // SLIDE 5 — 응원
+    el = document.getElementById('wo-s4-name');
+    if (el && name) {
+      el.textContent = name + '님, 오늘도 최고의 하루!';
+    }
+  })();
 
   _woSlideTimer = setInterval(function() { _woGoSlide(_woCurSlide + 1); }, WO_SLIDE_MS);
 
