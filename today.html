@@ -1108,7 +1108,6 @@ function loadPrev() {
 
 
 <!-- 투*필 둘러보기 모달 -->
-<!-- 투*필 둘러보기 모달 -->
 <div id="browse-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:rgba(0,0,0,0.65);overflow-y:auto;">
   <div style="max-width:500px;margin:16px auto 40px;background:#FFFBF3;border-radius:16px;padding:18px 14px;position:relative;">
     <button onclick="closeBrowseModal()" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:22px;color:#8B6A2E;cursor:pointer;line-height:1;">&#x2715;</button>
@@ -1136,20 +1135,18 @@ async function loadFeed() {
       grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">아직 공개된 투*필이 없어요</div>';
       return;
     }
-    grid.innerHTML = data.items.map(function(item) {
-      var p1 = item.photo1
-        ? '<img src="'+item.photo1+'" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px 8px 0 0;display:block;" onerror="this.style.display='none'">'
-        : '<div style="width:100%;aspect-ratio:1;background:#F0E8D8;border-radius:8px 8px 0 0;"></div>';
-      var p2 = item.photo2
-        ? '<img src="'+item.photo2+'" style="width:100%;aspect-ratio:1;object-fit:cover;display:block;" onerror="this.style.display='none'">'
-        : '';
-      return '<a href="'+SERVER_BASE+'/today/'+item.doc_id+'" target="_blank" style="text-decoration:none;background:#fff;border-radius:10px;overflow:hidden;border:1px solid rgba(200,135,10,.18);display:block;">'
-        + p1 + p2
-        + '<div style="padding:8px 10px 10px;">'
-        + '<div style="font-size:13px;font-weight:600;color:#1A1208;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + (item.nickname || item.name || '') + '</div>'
-        + (item.identity ? '<div style="font-size:11px;color:#8B6A2E;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + item.identity + '</div>' : '')
-        + '</div></a>';
-    }).join('');
+    var html = '';
+    data.items.forEach(function(item) {
+      var p1 = item.photo1 ? '<img src="' + item.photo1 + '" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px 8px 0 0;display:block;">' : '<div style="width:100%;aspect-ratio:1;background:#F0E8D8;border-radius:8px 8px 0 0;"></div>';
+      var p2 = item.photo2 ? '<img src="' + item.photo2 + '" style="width:100%;aspect-ratio:1;object-fit:cover;display:block;">' : '';
+      html += '<a href="' + SERVER_BASE + '/today/' + item.doc_id + '" target="_blank" style="text-decoration:none;background:#fff;border-radius:10px;overflow:hidden;border:1px solid rgba(200,135,10,.18);display:block;">';
+      html += p1 + p2;
+      html += '<div style="padding:8px 10px 10px;">';
+      html += '<div style="font-size:13px;font-weight:600;color:#1A1208;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + (item.nickname || item.name || '') + '</div>';
+      if (item.identity) html += '<div style="font-size:11px;color:#8B6A2E;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + item.identity + '</div>';
+      html += '</div></a>';
+    });
+    grid.innerHTML = html;
   } catch(e) {
     grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">잠시 후 다시 시도해주세요</div>';
   }
