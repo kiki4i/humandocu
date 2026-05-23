@@ -1111,38 +1111,41 @@ function loadPrev() {
 <!-- 투*필 둘러보기 모달 -->
 <div id="browse-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:rgba(0,0,0,0.65);overflow-y:auto;">
   <div style="max-width:500px;margin:16px auto 40px;background:#FFFBF3;border-radius:16px;padding:18px 14px;position:relative;">
-    <button onclick="closeBrowseModal()" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:22px;color:#8B6A2E;cursor:pointer;line-height:1;">✕</button>
-    <div style="text-align:center;font-size:11px;letter-spacing:.16em;color:#8B6A2E;margin-bottom:16px;">✦ 오늘 누군가의 하루</div>
+    <button onclick="closeBrowseModal()" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:22px;color:#8B6A2E;cursor:pointer;line-height:1;">&#x2715;</button>
+    <div style="text-align:center;font-size:11px;letter-spacing:.16em;color:#8B6A2E;margin-bottom:16px;">&#x2736; 오늘 누군가의 하루</div>
     <div id="feed-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
       <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">불러오는 중...</div>
     </div>
     <div style="text-align:center;margin-top:18px;">
-      <button onclick="loadFeed()" style="padding:10px 28px;background:transparent;color:#C8870A;border:1px solid rgba(200,135,10,.5);border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;letter-spacing:.04em;">새로 보기 →</button>
+      <button onclick="loadFeed()" style="padding:10px 28px;background:transparent;color:#C8870A;border:1px solid rgba(200,135,10,.5);border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;letter-spacing:.04em;">새로 보기 &rarr;</button>
     </div>
   </div>
 </div>
 
 <script>
-const FEED_API = 'https://humandocu-server-production.up.railway.app/api/today/feed?limit=12';
-const SERVER_BASE = 'https://humandocu-server-production.up.railway.app';
+var FEED_API = 'https://humandocu-server-production.up.railway.app/api/today/feed?limit=12';
+var SERVER_BASE = 'https://humandocu-server-production.up.railway.app';
 
 async function loadFeed() {
   var grid = document.getElementById('feed-grid');
   grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">불러오는 중...</div>';
   try {
     var res = await fetch(FEED_API);
-    var json = await res.json();
-    if (!json.items || json.items.length === 0) {
+    var data = await res.json();
+    if (!data.items || data.items.length === 0) {
       grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">아직 공개된 투*필이 없어요</div>';
       return;
     }
-    grid.innerHTML = json.items.map(function(item) {
-      var p1 = item.photo1 ? '<img src="'+item.photo1+'" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px 6px 0 0;" onerror="this.style.display='none'">' : '<div style="width:100%;aspect-ratio:1;background:#F0E8D8;border-radius:6px 6px 0 0;"></div>';
-      var p2 = item.photo2 ? '<img src="'+item.photo2+'" style="width:100%;aspect-ratio:1;object-fit:cover;" onerror="this.style.display='none'">' : '';
-      return '<a href="'+SERVER_BASE+'/today/'+item.doc_id+'" target="_blank" style="text-decoration:none;background:#fff;border-radius:10px;overflow:hidden;border:1px solid rgba(200,135,10,.15);display:block;">'
-        + p1
-        + (p2 ? '<img src="'+item.photo2+'" style="width:100%;aspect-ratio:1;object-fit:cover;" onerror="this.style.display='none'">' : '')
-        + '<div style="padding:8px 10px;">'
+    grid.innerHTML = data.items.map(function(item) {
+      var p1 = item.photo1
+        ? '<img src="'+item.photo1+'" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px 8px 0 0;display:block;" onerror="this.style.display='none'">'
+        : '<div style="width:100%;aspect-ratio:1;background:#F0E8D8;border-radius:8px 8px 0 0;"></div>';
+      var p2 = item.photo2
+        ? '<img src="'+item.photo2+'" style="width:100%;aspect-ratio:1;object-fit:cover;display:block;" onerror="this.style.display='none'">'
+        : '';
+      return '<a href="'+SERVER_BASE+'/today/'+item.doc_id+'" target="_blank" style="text-decoration:none;background:#fff;border-radius:10px;overflow:hidden;border:1px solid rgba(200,135,10,.18);display:block;">'
+        + p1 + p2
+        + '<div style="padding:8px 10px 10px;">'
         + '<div style="font-size:13px;font-weight:600;color:#1A1208;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + (item.nickname || item.name || '') + '</div>'
         + (item.identity ? '<div style="font-size:11px;color:#8B6A2E;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + item.identity + '</div>' : '')
         + '</div></a>';
@@ -1165,5 +1168,3 @@ function closeBrowseModal() {
 </script>
 </body>
 </html>
-
-<!-- og updated Wed May  6 09:07:13 UTC 2026 -->
