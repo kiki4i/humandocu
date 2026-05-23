@@ -1114,7 +1114,7 @@ function loadPrev() {
     <div style="text-align:center;font-size:11px;letter-spacing:.16em;color:#8B6A2E;margin-bottom:16px;">&#x2736; 오늘 누군가의 하루</div>
     <div id="feed-grid" style="display:flex;flex-direction:column;gap:8px;"></div>
     <div style="text-align:center;margin-top:16px;">
-      <button id="feed-more-btn" onclick="loadMoreFeed()" style="display:none;padding:10px 28px;background:transparent;color:#C8870A;border:1px solid rgba(200,135,10,.5);border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;letter-spacing:.04em;">더 보기 &darr;</button>
+      <button id="feed-more-btn" onclick="loadMoreFeed()" style="display:none;padding:10px 28px;background:transparent;color:#C8870A;border:1px solid rgba(200,135,10,.5);border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;letter-spacing:.04em;">더 보기 &#x2193;</button>
     </div>
   </div>
 </div>
@@ -1122,7 +1122,8 @@ function loadPrev() {
 <script>
 var FEED_API = 'https://humandocu-server-production.up.railway.app/api/today/feed';
 var SERVER_BASE = 'https://humandocu-server-production.up.railway.app';
-var feedOffset = 0;
+var feedCursor = null;
+var feedHasMore = false;
 var FEED_LIMIT = 12;
 
 function makeFeedItem(item) {
@@ -1141,61 +1142,49 @@ function makeFeedItem(item) {
     + '</div></a>';
 }
 
-var allFeedItems = [];
-
 async function loadFeed() {
-  allFeedItems = [];
-  feedOffset = 0;
+  feedCursor = null;
+  feedHasMore = false;
   var grid = document.getElementById('feed-grid');
   grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">불러오는 중...</div>';
   document.getElementById('feed-more-btn').style.display = 'none';
-  try {
-    var res = await fetch(FEED_API + '?limit=30');
-    var data = await res.json();
-    if (!data.items || data.items.length === 0) {
-      grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">아직 공개된 투*필이 없어요</div>';
-      return;
-    }
-    allFeedItems = data.items;
-    renderFeedItems();
-  } catch(e) {
-    grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">잠시 후 다시 시도해주세요</div>';
-  }
-}
-
-function renderFeedItems() {
-  var grid = document.getElementById('feed-grid');
-  var batch = allFeedItems.slice(feedOffset, feedOffset + FEED_LIMIT);
-  if (feedOffset === 0) {
-    grid.innerHTML = batch.map(makeFeedItem).join('');
-  } else {
-    batch.forEach(function(item) {
-      grid.insertAdjacentHTML('beforeend', makeFeedItem(item));
-    });
-  }
-  feedOffset += batch.length;
-  var moreBtn = document.getElementById('feed-more-btn');
-  moreBtn.style.display = feedOffset < allFeedItems.length ? 'inline-block' : 'none';
+  await fetchFeedPage(true);
 }
 
 async function loadMoreFeed() {
-  if (feedOffset < allFeedItems.length) {
-    renderFeedItems();
-    return;
-  }
   var btn = document.getElementById('feed-more-btn');
   btn.textContent = '불러오는 중...';
-  try {
-    var res = await fetch(FEED_API + '?limit=30');
-    var data = await res.json();
-    if (data.items && data.items.length > 0) {
-      allFeedItems = data.items;
-      feedOffset = 0;
-      document.getElementById('feed-grid').innerHTML = '';
-      renderFeedItems();
-    }
-  } catch(e) {}
+  btn.disabled = true;
+  await fetchFeedPage(false);
   btn.textContent = '더 보기 ↓';
+  btn.disabled = false;
+}
+
+async function fetchFeedPage(reset) {
+  try {
+    var url = FEED_API + '?limit=' + FEED_LIMIT;
+    if (feedCursor) url += '&cursor=' + encodeURIComponent(feedCursor);
+    var res = await fetch(url);
+    var data = await res.json();
+    var grid = document.getElementById('feed-grid');
+
+    if (!data.items || data.items.length === 0) {
+      if (reset) grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">아직 공개된 투*필이 없어요</div>';
+      document.getElementById('feed-more-btn').style.display = 'none';
+      return;
+    }
+
+    if (reset) grid.innerHTML = '';
+    data.items.forEach(function(item) {
+      grid.insertAdjacentHTML('beforeend', makeFeedItem(item));
+    });
+
+    feedCursor = data.next_cursor || null;
+    feedHasMore = data.has_more || false;
+    document.getElementById('feed-more-btn').style.display = feedHasMore ? 'inline-block' : 'none';
+  } catch(e) {
+    if (reset) document.getElementById('feed-grid').innerHTML = '<div style="text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">잠시 후 다시 시도해주세요</div>';
+  }
 }
 
 function openBrowseModal() {
