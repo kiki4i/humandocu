@@ -1108,71 +1108,54 @@ function loadPrev() {
 
 
 <!-- 투*필 둘러보기 모달 -->
-<div id="browse-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:rgba(0,0,0,0.6);overflow-y:auto;">
-  <div style="max-width:480px;margin:20px auto;background:#FFFBF3;border-radius:16px;padding:20px 16px;position:relative;">
-    <button onclick="closeBrowseModal()" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:22px;color:#8B6A2E;cursor:pointer;">✕</button>
-    <div style="text-align:center;font-size:12px;letter-spacing:.14em;color:#8B6A2E;margin-bottom:14px;">✦ 누군가의 투*필</div>
-    <div id="modal-card" style="min-height:120px;">
-      <div style="text-align:center;padding:32px;color:#8B6A2E;font-size:13px;">불러오는 중...</div>
+<!-- 투*필 둘러보기 모달 -->
+<div id="browse-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:rgba(0,0,0,0.65);overflow-y:auto;">
+  <div style="max-width:500px;margin:16px auto 40px;background:#FFFBF3;border-radius:16px;padding:18px 14px;position:relative;">
+    <button onclick="closeBrowseModal()" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:22px;color:#8B6A2E;cursor:pointer;line-height:1;">✕</button>
+    <div style="text-align:center;font-size:11px;letter-spacing:.16em;color:#8B6A2E;margin-bottom:16px;">✦ 오늘 누군가의 하루</div>
+    <div id="feed-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">불러오는 중...</div>
     </div>
-    <div style="text-align:center;margin-top:16px;">
-      <button onclick="loadModalNext()" style="padding:10px 28px;background:#C8870A;color:#fff;border:none;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;letter-spacing:.04em;">다음 투*필 →</button>
+    <div style="text-align:center;margin-top:18px;">
+      <button onclick="loadFeed()" style="padding:10px 28px;background:transparent;color:#C8870A;border:1px solid rgba(200,135,10,.5);border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;letter-spacing:.04em;">새로 보기 →</button>
     </div>
   </div>
 </div>
 
 <script>
-var modalHistory = [];
-var modalIdx = -1;
+const FEED_API = 'https://humandocu-server-production.up.railway.app/api/today/feed?limit=12';
+const SERVER_BASE = 'https://humandocu-server-production.up.railway.app';
 
-function renderModalCard(d) {
-  var card = document.getElementById('modal-card');
-  var poem = extractPoem(d.poems);
-  var poemHtml = poem ? poem.split('\n').filter(function(l){return l.trim();}).map(function(l){
-    return '<div style="line-height:1.9">' + l + '</div>';
-  }).join('') : '';
-  var imgs = d.shot_images || {};
-  var photosHtml = '';
-  for (var i = 1; i <= 3; i++) {
-    if (imgs[String(i)]) {
-      photosHtml += '<img src="' + imgs[String(i)] + '" style="width:100%;border-radius:10px;margin-bottom:10px;object-fit:cover;max-height:200px;" onerror="this.parentNode.removeChild(this)">';
-    }
-  }
-  card.innerHTML =
-    (photosHtml ? '<div>' + photosHtml + '</div>' : '') +
-    '<div style="font-size:15px;font-weight:600;color:#1A1208;margin:10px 0 2px">' + (d.name || '') + '</div>' +
-    '<div style="font-size:12px;color:#8B6A2E;margin-bottom:10px">' + (d.identity || '') + '</div>' +
-    (poemHtml ? '<div style="font-size:14px;color:#3A2A0A;font-family:var(--serif);line-height:1.9;border-left:2px solid #C8870A;padding-left:12px;margin:12px 0">' + poemHtml + '</div>' : '') +
-    '<div style="text-align:center;margin-top:14px">' +
-    '<a href="https://humandocu-server-production.up.railway.app/' + (d.type === 'today' ? 'today' : 'sixshot') + '/' + d.doc_id + '" target="_blank" style="display:inline-block;padding:9px 22px;background:#C8870A;color:#FFF8ED;font-size:13px;font-weight:600;border-radius:20px;text-decoration:none">' + d.name + '님의 투*필 전체 보기 →</a>' +
-    '</div>';
-}
-
-async function loadModalNext() {
-  var card = document.getElementById('modal-card');
-  card.innerHTML = '<div style="text-align:center;padding:32px;color:#8B6A2E;font-size:13px;">불러오는 중...</div>';
+async function loadFeed() {
+  var grid = document.getElementById('feed-grid');
+  grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">불러오는 중...</div>';
   try {
-    var currentDocId = modalIdx >= 0 ? modalHistory[modalIdx].doc_id : '';
-    var url = API + (currentDocId ? '&exclude=' + encodeURIComponent(currentDocId) : '');
-    var res = await fetch(url);
+    var res = await fetch(FEED_API);
     var json = await res.json();
-    if (json.status !== 'ok' || !json.data) {
-      card.innerHTML = '<div style="text-align:center;padding:32px;color:#8B6A2E;font-size:13px;">아직 공개된 투*필이 없어요</div>';
+    if (!json.items || json.items.length === 0) {
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">아직 공개된 투*필이 없어요</div>';
       return;
     }
-    var d = json.data;
-    modalHistory.push(d);
-    modalIdx = modalHistory.length - 1;
-    renderModalCard(d);
+    grid.innerHTML = json.items.map(function(item) {
+      var p1 = item.photo1 ? '<img src="'+item.photo1+'" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px 6px 0 0;" onerror="this.style.display='none'">' : '<div style="width:100%;aspect-ratio:1;background:#F0E8D8;border-radius:6px 6px 0 0;"></div>';
+      var p2 = item.photo2 ? '<img src="'+item.photo2+'" style="width:100%;aspect-ratio:1;object-fit:cover;" onerror="this.style.display='none'">' : '';
+      return '<a href="'+SERVER_BASE+'/today/'+item.doc_id+'" target="_blank" style="text-decoration:none;background:#fff;border-radius:10px;overflow:hidden;border:1px solid rgba(200,135,10,.15);display:block;">'
+        + p1
+        + (p2 ? '<img src="'+item.photo2+'" style="width:100%;aspect-ratio:1;object-fit:cover;" onerror="this.style.display='none'">' : '')
+        + '<div style="padding:8px 10px;">'
+        + '<div style="font-size:13px;font-weight:600;color:#1A1208;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + (item.nickname || item.name || '') + '</div>'
+        + (item.identity ? '<div style="font-size:11px;color:#8B6A2E;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + item.identity + '</div>' : '')
+        + '</div></a>';
+    }).join('');
   } catch(e) {
-    card.innerHTML = '<div style="text-align:center;padding:32px;color:#8B6A2E;font-size:13px;">잠시 후 다시 시도해주세요</div>';
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">잠시 후 다시 시도해주세요</div>';
   }
 }
 
 function openBrowseModal() {
   document.getElementById('browse-modal').style.display = 'block';
   document.body.style.overflow = 'hidden';
-  if (modalIdx < 0) loadModalNext();
+  loadFeed();
 }
 
 function closeBrowseModal() {
