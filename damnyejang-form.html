@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>프리미엄 답례장 신청 · 휴먼다큐</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#0f0d09;--ink2:#3a2e1e;--ink3:#6b5a3e;
+  --gold:#c8a96e;--gold2:#b8924a;
+  --cream:#f9f6f0;--cream2:#f0ebe0;
+  --serif:'Noto Serif KR',serif;--sans:'Noto Sans KR',sans-serif;--r:6px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);font-family:var(--sans);color:var(--ink);min-height:100vh;}
+.progress-bar{position:sticky;top:0;z-index:100;background:var(--ink);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;}
+.progress-label{font-size:11px;letter-spacing:.14em;color:rgba(249,246,240,.5);text-transform:uppercase;}
+.progress-steps{display:flex;gap:4px;}
+.progress-dot{width:6px;height:6px;border-radius:50%;background:rgba(200,169,110,.25);transition:background .3s;}
+.progress-dot.done{background:var(--gold);}
+.progress-dot.active{background:var(--gold);box-shadow:0 0 0 2px rgba(200,169,110,.3);}
+.step{display:none;animation:fadeIn .35s ease;}
+.step.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.step-inner{max-width:560px;margin:0 auto;padding:32px 20px 120px;}
+.step-kicker{font-size:11px;letter-spacing:.2em;color:var(--gold2);text-transform:uppercase;margin-bottom:12px;}
+.step-title{font-family:var(--serif);font-size:26px;font-weight:300;color:var(--ink);line-height:1.4;margin-bottom:8px;}
+.step-sub{font-size:14px;color:var(--ink3);line-height:1.8;margin-bottom:28px;}
+.q-block{margin-bottom:20px;}
+.q-label{font-size:13px;font-weight:500;color:var(--ink2);margin-bottom:6px;display:flex;align-items:center;gap:4px;}
+.q-req{color:#c0392b;font-size:11px;}
+.q-hint{font-size:12px;color:var(--ink3);margin-bottom:6px;line-height:1.7;}
+input[type=text],input[type=email],input[type=tel],textarea{
+  width:100%;padding:12px 14px;border:1px solid #d4c9b0;border-radius:var(--r);
+  font-family:var(--sans);font-size:14px;color:var(--ink);background:#fff;
+  outline:none;transition:border-color .2s;
+}
+input:focus,textarea:focus{border-color:var(--gold2);}
+textarea{resize:vertical;min-height:90px;line-height:1.7;}
+.photo-slot{margin-bottom:16px;}
+.photo-slot-label{font-size:13px;font-weight:500;color:var(--ink2);margin-bottom:4px;}
+.photo-slot-hint{font-size:11px;color:var(--ink3);margin-bottom:6px;line-height:1.6;}
+.photo-drop{border:1.5px dashed #c8b890;border-radius:var(--r);padding:20px;text-align:center;cursor:pointer;background:#fffdf8;transition:border-color .2s;position:relative;}
+.photo-drop:hover{border-color:var(--gold2);}
+.photo-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.photo-drop-text{font-size:13px;color:var(--ink3);}
+.photo-preview{width:100%;max-height:160px;object-fit:cover;border-radius:var(--r);margin-top:8px;display:none;}
+.photo-preview.show{display:block;}
+.audio-slot{margin-bottom:16px;}
+.audio-preview{margin-top:6px;display:none;width:100%;}
+.audio-preview.show{display:block;}
+.nav-bar{position:fixed;bottom:0;left:0;right:0;background:var(--cream);border-top:1px solid #e0d5c0;padding:14px 20px;display:flex;gap:10px;z-index:100;}
+.btn-prev{flex:1;max-width:100px;padding:14px;border:1.5px solid #d4c9b0;background:transparent;border-radius:var(--r);font-size:14px;color:var(--ink3);cursor:pointer;font-family:var(--sans);}
+.btn-next{flex:1;padding:14px;background:var(--gold2);border:none;border-radius:var(--r);font-size:15px;font-weight:500;color:var(--ink);cursor:pointer;font-family:var(--sans);letter-spacing:.04em;transition:background .2s;}
+.btn-next:hover{background:var(--gold);}
+.btn-next:disabled{opacity:.5;cursor:not-allowed;}
+#done{display:none;text-align:center;padding:80px 20px;}
+.done-icon{font-size:48px;margin-bottom:20px;}
+.done-title{font-family:var(--serif);font-size:24px;font-weight:300;margin-bottom:12px;}
+.done-sub{font-size:14px;color:var(--ink3);line-height:1.8;}
+.divider{border:none;border-top:1px solid #e0d5c0;margin:24px 0;}
+#loading-overlay{display:none;position:fixed;inset:0;background:rgba(15,13,9,.85);z-index:999;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
+#loading-overlay.active{display:flex;}
+.loading-text{color:var(--cream);font-size:15px;letter-spacing:.06em;}
+.loading-dot{display:inline-block;animation:blink 1.4s infinite;}
+.loading-dot:nth-child(2){animation-delay:.2s;}
+.loading-dot:nth-child(3){animation-delay:.4s;}
+@keyframes blink{0%,80%,100%{opacity:0}40%{opacity:1}}
+</style>
+</head>
+<body>
+
+<div class="progress-bar">
+  <span class="progress-label" id="progress-label">1 / 3 · 기본 정보</span>
+  <div class="progress-steps">
+    <div class="progress-dot active" id="dot-1"></div>
+    <div class="progress-dot" id="dot-2"></div>
+    <div class="progress-dot" id="dot-3"></div>
+  </div>
+</div>
+
+<!-- STEP 1: 기본 정보 + 사진 -->
+<div class="step active" id="step-1">
+  <div class="step-inner">
+    <div class="step-kicker">PREMIUM 답례장</div>
+    <div class="step-title">고인과 장례에 대해<br>알려주세요</div>
+    <div class="step-sub">소중한 분을 떠나보낸 후, 감사의 마음을 정성껏 전해드립니다</div>
+
+    <div class="q-block">
+      <div class="q-label">고인 이름 <span class="q-req">*</span></div>
+      <input type="text" id="f-deceased" placeholder="고인의 성함을 입력해주세요">
+    </div>
+
+    <div class="photo-slot">
+      <div class="photo-slot-label">고인 대표사진 <span class="q-req">*</span></div>
+      <div class="photo-slot-hint">사람들이 영원히 기억했으면 하는 이미지 (최대 10MB)</div>
+      <div class="photo-drop">
+        <input type="file" id="file-main" accept="image/*" onchange="previewPhoto('main',this)">
+        <div class="photo-drop-text">📷 탭해서 사진 선택</div>
+        <img class="photo-preview" id="preview-main">
+      </div>
+    </div>
+
+    <hr class="divider">
+    <div style="font-size:12px;font-weight:500;color:var(--ink2);margin-bottom:14px;letter-spacing:.06em;">장례 사진 (최대 5장)</div>
+    <div class="photo-slot-hint" style="margin-bottom:16px;">장례식장, 입관, 조문, 발인, 화장, 모신 곳 등 남기고 싶은 사진</div>
+
+    <div id="funeral-photos"></div>
+    <button type="button" onclick="addFuneralPhoto()" id="add-photo-btn"
+      style="width:100%;padding:12px;border:1.5px dashed #c8b890;background:transparent;border-radius:var(--r);font-size:13px;color:var(--ink3);cursor:pointer;margin-bottom:16px;">
+      + 장례 사진 추가
+    </button>
+
+    <hr class="divider">
+    <div class="photo-slot">
+      <div class="photo-slot-label">유가족 답례 사진</div>
+      <div class="photo-slot-hint">단체사진이나 인사하시는 사진도 좋겠습니다</div>
+      <div class="photo-drop">
+        <input type="file" id="file-family" accept="image/*" onchange="previewPhoto('family',this)">
+        <div class="photo-drop-text">📷 탭해서 사진 선택</div>
+        <img class="photo-preview" id="preview-family">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2: 메시지 + 음성 -->
+<div class="step" id="step-2">
+  <div class="step-inner">
+    <div class="step-kicker">STEP 2 · 메시지 &amp; 음성</div>
+    <div class="step-title">마음을 담은<br>말씀을 전해주세요</div>
+    <div class="step-sub">상주님의 진심 어린 감사 인사를 담아드립니다</div>
+
+    <div class="q-block">
+      <div class="q-label">상주 대표 인사말 <span class="q-req">*</span></div>
+      <div class="q-hint">조문객들에게 전하고 싶은 감사의 말씀을 적어주세요</div>
+      <textarea id="f-message" placeholder="예: 바쁘신 중에도 저희 아버님의 마지막 길을 함께해 주셔서 진심으로 감사드립니다..."></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">상주 이름 <span class="q-req">*</span></div>
+      <input type="text" id="f-chief" placeholder="상주 이름">
+    </div>
+
+    <hr class="divider">
+
+    <div class="audio-slot">
+      <div class="q-label">고인 육성 파일 (선택)</div>
+      <div class="q-hint">예: "안녕하세요. 홍길동입니다. 저의 장례식에 와주셔서 진심으로 감사합니다..."</div>
+      <div class="photo-drop">
+        <input type="file" id="file-voice-deceased" accept="audio/*" onchange="previewAudio('deceased',this)">
+        <div class="photo-drop-text">🎙 음성 파일 선택 (MP3, M4A, WAV)</div>
+      </div>
+      <audio class="audio-preview" id="audio-deceased" controls></audio>
+    </div>
+
+    <div class="audio-slot">
+      <div class="q-label">상주 육성 파일 (선택)</div>
+      <div class="q-hint">예: "저희 아버님 고 홍길동님의 장례에 와주셔서 감사드립니다..."</div>
+      <div class="photo-drop">
+        <input type="file" id="file-voice-chief" accept="audio/*" onchange="previewAudio('chief',this)">
+        <div class="photo-drop-text">🎙 음성 파일 선택 (MP3, M4A, WAV)</div>
+      </div>
+      <audio class="audio-preview" id="audio-chief" controls></audio>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 3: 연락처 + 확인 -->
+<div class="step" id="step-3">
+  <div class="step-inner">
+    <div class="step-kicker">STEP 3 · 최종 확인</div>
+    <div class="step-title">거의 다 됐습니다</div>
+    <div class="step-sub">답례장 링크를 받으실 이메일을 입력해주세요</div>
+
+    <div class="q-block">
+      <div class="q-label">상주 연락처 <span class="q-req">*</span></div>
+      <input type="tel" id="f-phone" placeholder="010-0000-0000">
+    </div>
+    <div class="q-block">
+      <div class="q-label">답례장 링크 받으실 이메일 <span class="q-req">*</span></div>
+      <input type="email" id="f-email" placeholder="example@email.com">
+    </div>
+
+    <div id="summary" style="margin-top:20px;background:#fff;border:1px solid #e0d5c0;border-radius:var(--r);padding:20px;font-size:13px;color:var(--ink2);line-height:2;"></div>
+
+    <div style="margin-top:16px;padding:14px;background:var(--cream2);border-radius:var(--r);font-size:12px;color:var(--ink3);line-height:1.9;">
+      🔒 입력하신 정보는 답례장 제작 목적으로만 사용됩니다
+    </div>
+  </div>
+</div>
+
+<div id="done">
+  <div class="done-icon">✦</div>
+  <div class="done-title">신청이 완료되었습니다</div>
+  <div class="done-sub">잠시 후 이메일로 완성된 답례장 링크를 보내드립니다<br>감사합니다</div>
+</div>
+
+<div class="nav-bar" id="nav-bar">
+  <button class="btn-prev" id="btn-prev" onclick="goPrev()" style="display:none;">← 이전</button>
+  <button class="btn-next" id="btn-next" onclick="goNext()">다음 →</button>
+</div>
+
+<div id="loading-overlay">
+  <div style="font-size:32px;">✦</div>
+  <div class="loading-text">답례장을 준비하고 있습니다<span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></div>
+</div>
+
+<script>
+const API = 'https://humandocu-server-production.up.railway.app';
+const TOTAL_STEPS = 3;
+const STEP_LABELS = ['기본 정보', '메시지 & 음성', '최종 확인'];
+let currentStep = 1;
+const photos = {};
+const audios = {};
+let funeralPhotoCount = 0;
+
+function updateProgress() {
+  document.getElementById('progress-label').textContent = `${currentStep} / ${TOTAL_STEPS} · ${STEP_LABELS[currentStep-1]}`;
+  for (let i = 1; i <= TOTAL_STEPS; i++) {
+    const dot = document.getElementById('dot-' + i);
+    dot.className = 'progress-dot' + (i < currentStep ? ' done' : i === currentStep ? ' active' : '');
+  }
+  document.getElementById('btn-prev').style.display = currentStep > 1 ? 'block' : 'none';
+  document.getElementById('btn-next').textContent = currentStep === TOTAL_STEPS ? '제출하기 →' : '다음 →';
+}
+
+function previewPhoto(key, input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    photos[key] = { b64: e.target.result.split(',')[1], filename: file.name };
+    const prev = document.getElementById('preview-' + key);
+    if (prev) { prev.src = e.target.result; prev.classList.add('show'); }
+  };
+  reader.readAsDataURL(file);
+}
+
+function previewFuneralPhoto(idx, input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    photos['funeral'+idx] = { b64: e.target.result.split(',')[1], filename: file.name };
+    const prev = document.getElementById('preview-funeral'+idx);
+    if (prev) { prev.src = e.target.result; prev.classList.add('show'); }
+  };
+  reader.readAsDataURL(file);
+}
+
+function previewAudio(key, input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    audios[key] = { b64: e.target.result.split(',')[1], filename: file.name };
+    const el = document.getElementById('audio-' + key);
+    if (el) { el.src = e.target.result; el.classList.add('show'); }
+  };
+  reader.readAsDataURL(file);
+}
+
+function addFuneralPhoto() {
+  if (funeralPhotoCount >= 5) { alert('장례 사진은 최대 5장까지 가능합니다'); return; }
+  funeralPhotoCount++;
+  const idx = funeralPhotoCount;
+  const div = document.createElement('div');
+  div.className = 'photo-slot';
+  div.id = 'funeral-slot-' + idx;
+  div.innerHTML = `
+    <div class="photo-slot-label">장례 사진 ${idx}</div>
+    <div class="photo-drop">
+      <input type="file" id="file-funeral${idx}" accept="image/*" onchange="previewFuneralPhoto(${idx},this)">
+      <div class="photo-drop-text">📷 탭해서 사진 선택</div>
+      <img class="photo-preview" id="preview-funeral${idx}">
+    </div>
+    <input type="text" id="cap-funeral${idx}" placeholder="사진 설명 (선택)" style="margin-top:6px;">
+  `;
+  document.getElementById('funeral-photos').appendChild(div);
+  if (funeralPhotoCount >= 5) document.getElementById('add-photo-btn').style.display = 'none';
+}
+
+function validateStep(step) {
+  if (step === 1) {
+    if (!document.getElementById('f-deceased').value.trim()) { alert('고인 이름을 입력해주세요'); return false; }
+    if (!photos['main']) { alert('고인 대표사진을 업로드해주세요'); return false; }
+  }
+  if (step === 2) {
+    if (!document.getElementById('f-message').value.trim()) { alert('상주 인사말을 입력해주세요'); return false; }
+    if (!document.getElementById('f-chief').value.trim()) { alert('상주 이름을 입력해주세요'); return false; }
+  }
+  if (step === 3) {
+    if (!document.getElementById('f-phone').value.trim()) { alert('연락처를 입력해주세요'); return false; }
+    if (!document.getElementById('f-email').value.trim()) { alert('이메일을 입력해주세요'); return false; }
+  }
+  return true;
+}
+
+function buildSummary() {
+  const el = document.getElementById('summary');
+  const funeralCnt = Object.keys(photos).filter(k => k.startsWith('funeral')).length;
+  el.innerHTML = `
+    <strong>고인</strong>: ${v('f-deceased')}<br>
+    <strong>상주</strong>: ${v('f-chief')}<br>
+    <strong>이메일</strong>: ${v('f-email')}<br>
+    <strong>대표사진</strong>: ${photos['main']?'✓':'✗'} · <strong>장례사진</strong>: ${funeralCnt}장<br>
+    <strong>유가족사진</strong>: ${photos['family']?'✓':'없음'}<br>
+    <strong>고인 육성</strong>: ${audios['deceased']?'✓':'없음'} · <strong>상주 육성</strong>: ${audios['chief']?'✓':'없음'}
+  `;
+}
+
+function v(id) { return document.getElementById(id)?.value.trim() || ''; }
+
+function goNext() {
+  if (!validateStep(currentStep)) return;
+  if (currentStep === TOTAL_STEPS) { doSubmit(); return; }
+  if (currentStep === TOTAL_STEPS - 1) buildSummary();
+  document.getElementById('step-' + currentStep).classList.remove('active');
+  currentStep++;
+  document.getElementById('step-' + currentStep).classList.add('active');
+  updateProgress();
+  window.scrollTo(0, 0);
+}
+
+function goPrev() {
+  if (currentStep <= 1) return;
+  document.getElementById('step-' + currentStep).classList.remove('active');
+  currentStep--;
+  document.getElementById('step-' + currentStep).classList.add('active');
+  updateProgress();
+  window.scrollTo(0, 0);
+}
+
+async function doSubmit() {
+  document.getElementById('btn-next').disabled = true;
+  document.getElementById('loading-overlay').classList.add('active');
+
+  const funeralPhotos = [];
+  for (let i = 1; i <= funeralPhotoCount; i++) {
+    if (photos['funeral'+i]) {
+      funeralPhotos.push({
+        index: i,
+        image_b64: photos['funeral'+i].b64,
+        caption: document.getElementById('cap-funeral'+i)?.value.trim() || '',
+      });
+    }
+  }
+
+  const payload = {
+    deceased:         v('f-deceased'),
+    chief:            v('f-chief'),
+    phone:            v('f-phone'),
+    email:            v('f-email'),
+    message:          v('f-message'),
+    main_photo_b64:   photos['main']?.b64 || '',
+    family_photo_b64: photos['family']?.b64 || '',
+    funeral_photos:   funeralPhotos,
+    voice_deceased_b64: audios['deceased']?.b64 || '',
+    voice_chief_b64:    audios['chief']?.b64 || '',
+    pending_id: new URLSearchParams(location.search).get('pending_id') || '',
+  };
+
+  try {
+    const res = await fetch(API + '/webhook/damnyejang-native', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    document.getElementById('loading-overlay').classList.remove('active');
+    document.getElementById('nav-bar').style.display = 'none';
+    document.getElementById('step-3').classList.remove('active');
+    document.getElementById('done').style.display = 'block';
+    window.scrollTo(0, 0);
+  } catch(e) {
+    document.getElementById('loading-overlay').classList.remove('active');
+    document.getElementById('btn-next').disabled = false;
+    alert('오류가 발생했습니다. 다시 시도해주세요.\n' + e.message);
+  }
+}
+
+updateProgress();
+</script>
+</body>
+</html>
