@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创建六镜头 · 人文纪录</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --amber: #C8973A;
+  --amber-dk: #A87828;
+  --amber-lt: rgba(200,151,58,.09);
+  --amber-md: rgba(200,151,58,.2);
+  --gold: #C8A96E;
+  --ink: #1A1208;
+  --ink2: #5A4020;
+  --ink3: #8A6A3A;
+  --cream: #FDFAF5;
+  --cream2: #F7F2E8;
+  --border: rgba(200,151,58,.2);
+  --serif: 'Playfair Display','Noto Serif KR',Georgia,serif;
+  --sans: 'Noto Sans KR',sans-serif;
+  --max: 560px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:15px;font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* ── PROGRESS BAR ── */
+.progress-wrap{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px solid var(--border);padding:12px 20px 10px}
+.progress-inner{max-width:var(--max);margin:0 auto}
+.progress-labels{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.progress-step{font-size:11px;color:var(--amber);letter-spacing:.18em;font-weight:500}
+.progress-title{font-size:12px;color:var(--ink2);font-weight:400}
+.progress-bar-bg{height:3px;background:var(--amber-lt);border-radius:2px}
+.progress-bar-fill{height:100%;background:var(--amber);border-radius:2px;transition:width .4s ease}
+
+/* ── STEP WRAP ── */
+.step{display:none;opacity:0;transition:opacity .35s ease}
+.step.active{display:block;opacity:1}
+
+/* ── WRAP ── */
+.wrap{max-width:var(--max);margin:0 auto;padding:32px 20px 140px}
+
+/* ── STEP HEADER ── */
+.step-kicker{font-size:10px;letter-spacing:.22em;color:var(--amber);font-weight:500;text-transform:uppercase;margin-bottom:10px}
+.step-title{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--ink);line-height:1.35;margin-bottom:8px}
+.step-sub{font-size:13px;color:var(--ink2);line-height:1.8;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+
+/* ── FORM FIELDS ── */
+.q-block{margin-bottom:28px}
+.q-label{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:8px;display:block}
+.q-req{color:var(--amber)}
+input[type=text],input[type=email]{width:100%;padding:13px 16px;border:1px solid var(--border);border-radius:10px;font-size:15px;font-family:inherit;background:#fff;color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s}
+input[type=text]:focus,input[type=email]:focus{border-color:var(--amber);box-shadow:0 0 0 3px var(--amber-lt)}
+input::placeholder{color:var(--gold);opacity:.7}
+textarea{width:100%;padding:13px 16px;border:1px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;background:#fff;color:var(--ink);outline:none;resize:none;line-height:1.7;transition:border-color .2s,box-shadow .2s}
+textarea:focus{border-color:var(--amber);box-shadow:0 0 0 3px var(--amber-lt)}
+textarea::placeholder{color:var(--gold);opacity:.7}
+
+/* ── PHOTO CARD ── */
+.photo-card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:24px}
+.photo-card-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px}
+.photo-badge{font-size:10px;letter-spacing:.14em;color:#fff;background:var(--amber);padding:4px 12px;border-radius:20px;font-weight:600}
+.photo-hint-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:13px;color:var(--ink3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .2s,background .2s}
+.photo-hint-btn:hover{border-color:var(--amber);background:var(--amber-lt)}
+.photo-hint{display:none;padding:12px 16px;background:var(--amber-lt);border-top:1px solid var(--border);font-size:13px;color:var(--ink2);line-height:1.8}
+.photo-hint.open{display:block}
+.photo-upload{position:relative;width:100%;aspect-ratio:4/3;background:var(--cream2);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;border-top:1px solid var(--border);transition:background .2s}
+.photo-upload.has-img{aspect-ratio:unset;min-height:200px}
+.photo-upload:active{background:#ede8dd}
+.photo-upload img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0}
+.ph-icon{font-size:30px;opacity:.35;z-index:1}
+.ph-text{font-size:12px;color:var(--ink3);z-index:1}
+.ph-limit{font-size:11px;color:var(--gold);z-index:1;margin-top:2px}
+.photo-change-btn{position:absolute;bottom:10px;right:10px;z-index:2;background:rgba(200,151,58,.9);color:#fff;border:none;border-radius:6px;font-size:11px;padding:5px 12px;cursor:pointer;font-family:inherit;font-weight:500}
+.photo-caption-wrap{padding:12px 16px;border-top:1px solid var(--border)}
+.photo-caption{width:100%;padding:10px 12px;border:1px solid rgba(200,151,58,.22);border-radius:8px;font-size:13px;font-family:inherit;background:var(--cream2);color:var(--ink);outline:none;resize:none;line-height:1.6;transition:border-color .2s}
+.photo-caption:focus{border-color:var(--amber);background:#fff}
+.photo-caption::placeholder{color:var(--gold);opacity:.65}
+
+/* ── STEP 7 특별 스타일 ── */
+.step-7-bg{background:linear-gradient(160deg,#1a0f05 0%,#2d1f0a 100%);border-radius:12px;padding:24px 20px;margin-bottom:24px}
+.step-7-bg .photo-card{background:rgba(255,248,230,.06);border-color:rgba(200,151,58,.3)}
+.step-7-bg .photo-card-head{background:transparent}
+.step-7-bg .photo-badge{background:#C8870A}
+.step-7-bg .photo-upload{background:rgba(200,151,58,.06)}
+.step-7-bg .photo-hint{background:rgba(200,151,58,.1);border-color:rgba(200,151,58,.2);color:rgba(249,246,240,.75)}
+.step-7-bg .photo-caption{background:rgba(200,151,58,.06);border-color:rgba(200,151,58,.25);color:#f9f6f0}
+.step-7-bg .photo-caption::placeholder{color:rgba(200,151,58,.55)}
+.step-7-title{font-family:var(--serif);font-size:22px;font-weight:400;color:#f9f6f0;line-height:1.4;margin-bottom:6px}
+.step-7-sub{font-size:12px;color:rgba(200,151,58,.75);letter-spacing:.04em;line-height:1.8;margin-bottom:20px}
+
+/* ── RADIO (공개 설정) ── */
+.radio-group{display:flex;flex-direction:column;gap:10px}
+.radio-card{display:flex;align-items:center;gap:14px;padding:14px 16px;background:#fff;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;transition:border-color .2s,background .2s}
+.radio-card:has(input:checked){border-color:var(--amber);background:var(--amber-lt)}
+.radio-card input[type=radio]{accent-color:var(--amber);width:18px;height:18px;flex-shrink:0;cursor:pointer}
+.radio-title{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.radio-desc{font-size:11px;color:var(--ink3);line-height:1.5}
+
+/* ── NAV BUTTONS ── */
+.nav-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(253,250,245,.97);backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:14px 20px 22px;z-index:90}
+.nav-inner{max-width:var(--max);margin:0 auto;display:flex;gap:10px}
+.btn-prev{flex:0 0 auto;padding:14px 20px;background:#fff;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-weight:500;font-family:inherit;color:var(--ink2);cursor:pointer;transition:border-color .2s}
+.btn-prev:hover{border-color:var(--amber)}
+.btn-next{flex:1;padding:14px;background:var(--amber);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;letter-spacing:.05em;transition:background .2s,opacity .2s}
+.btn-next:hover{background:var(--amber-dk)}
+.btn-next:disabled{opacity:.55;cursor:not-allowed}
+.nav-hint{text-align:center;font-size:11px;color:var(--ink3);margin-top:7px}
+
+/* ── 대기 오버레이 ── */
+#wait-overlay{display:none;position:fixed;inset:0;background:#0d0b07;color:#f9f6f0;font-family:'Noto Sans KR',sans-serif;-webkit-font-smoothing:antialiased;z-index:999}
+#wait-overlay.active{display:block}
+.wo-rail{position:absolute;top:0;left:0;right:0;height:2px;background:rgba(200,151,58,.15)}
+.wo-fill{height:100%;width:0%;background:var(--amber);border-radius:0 1px 1px 0;transition:width .6s ease}
+.wo-slides{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.wo-slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 32px;text-align:center;opacity:0;transition:opacity .9s ease;pointer-events:none}
+.wo-slide.active{opacity:1;pointer-events:auto}
+.wo-kicker{font-size:10px;letter-spacing:.28em;color:rgba(200,151,58,.65);text-transform:uppercase;margin-bottom:20px}
+.wo-title{font-size:22px;font-weight:300;color:#f9f6f0;line-height:1.5;margin-bottom:20px;letter-spacing:.02em}
+.wo-body{font-size:15px;color:rgba(249,246,240,.5);line-height:2.2;font-weight:300}
+.wo-small{font-size:11px;color:rgba(200,151,58,.55);letter-spacing:.12em;margin-top:20px}
+.wo-ring{width:64px;height:64px;border-radius:50%;border:1.5px solid rgba(200,151,58,.4);display:flex;align-items:center;justify-content:center;margin:0 auto 28px;animation:wo-pulse 2.4s ease-in-out infinite}
+@keyframes wo-pulse{0%,100%{box-shadow:0 0 0 0 rgba(200,151,58,.15)}50%{box-shadow:0 0 0 12px rgba(200,151,58,0)}}
+.wo-ring-icon{font-size:22px;color:var(--amber)}
+.wo-stack{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.wo-stack-line{height:1.5px;border-radius:1px;background:rgba(200,151,58,.18)}
+.wo-stack-line:nth-child(1){width:80px}
+.wo-stack-line:nth-child(2){width:120px}
+.wo-stack-line:nth-child(3){width:60px}
+.wo-brand-H{font-family:Georgia,serif;font-size:72px;font-weight:400;color:var(--amber);line-height:1;margin-bottom:20px}
+.wo-brand-name{font-size:14px;letter-spacing:.22em;color:rgba(249,246,240,.65);margin-bottom:10px}
+.wo-brand-tagline{font-size:13px;color:rgba(249,246,240,.35);line-height:1.9}
+.wo-brand-url{font-size:10px;color:rgba(200,151,58,.4);letter-spacing:.16em;margin-top:16px}
+.wo-dots{position:absolute;bottom:32px;left:0;right:0;display:flex;justify-content:center;gap:8px}
+.wo-dot{width:6px;height:6px;border-radius:50%;background:rgba(200,151,58,.2);transition:background .4s,transform .4s}
+.wo-dot.active{background:var(--amber);transform:scale(1.25)}
+.wo-photo-show{display:none;position:absolute;top:0;left:0;right:0;height:75vh;overflow:hidden;z-index:1}
+.wo-photo-show.active{display:block}
+.wo-photo-frame{position:absolute;inset:0;width:100%;height:100%;background-size:contain;background-position:center;background-color:#000;background-repeat:no-repeat;opacity:0;transition:opacity 1.4s ease}
+.wo-photo-frame.active{opacity:1}
+.wo-photo-veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65) 0%,rgba(0,0,0,.1) 60%,transparent 100%)}
+.wo-photo-info{display:none;position:absolute;top:75vh;left:0;right:0;padding:20px 40px 0;text-align:center;z-index:2}
+.wo-photo-info.active{display:block}
+.wo-photo-cap-tag{font-size:9px;letter-spacing:.28em;color:rgba(200,151,58,.65);text-transform:uppercase;margin-bottom:10px}
+.wo-photo-cap-txt{font-size:14px;font-weight:300;color:rgba(249,246,240,.75);letter-spacing:.04em;line-height:1.9;transition:opacity .6s ease}
+.wo-photo-cap-txt.fade{opacity:0}
+</style>
+</head>
+<body>
+<script>(function(){fetch('https://humandocu-server-production.up.railway.app/health').then(function(r){if(!r.ok)throw 0}).catch(function(){var b=document.createElement('div');b.style.cssText='position:fixed;top:0;left:0;right:0;z-index:99999;background:#c0392b;color:#fff;text-align:center;padding:12px 16px;font-size:14px;font-family:sans-serif;line-height:1.6';b.textContent='⚠️ 현재 서비스 점검 중입니다. 곧 복구하겠습니다. 불편을 드려 죄송합니다.';document.body.prepend(b)})})();</script>
+
+<!-- 진행바 -->
+<div class="progress-wrap">
+  <div class="progress-inner">
+    <div class="progress-labels">
+      <span class="progress-step" id="prog-step">1 / 8</span>
+      <span class="progress-title" id="prog-title">기본 정보</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="prog-fill" style="width:12.5%"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────────────────────────────────────── -->
+<!-- 스텝 1 — 기본 정보 -->
+<!-- ──────────────────────────────────────────── -->
+<div class="step active" id="step-1">
+<div class="wrap">
+  <div class="step-kicker">인생 식스샷 · LIFE SIX SHOT</div>
+  <div class="step-title">我的人生六镜头</div>
+  <div class="step-sub">用6张照片和故事定义人生<br>AI将你的故事化为诗歌</div>
+
+  <div class="q-block">
+    <label class="q-label" for="f-name">姓名 <span class="q-req">*</span></label>
+    <input type="text" id="f-name" placeholder="真实姓名" maxlength="20" autocomplete="name">
+  </div>
+  <div class="q-block">
+    <label class="q-label" for="f-nickname">昵称 <span class="q-req">*</span></label>
+    <input type="text" id="f-nickname" placeholder="代表你的名字。例：春日小熊" maxlength="24">
+  </div>
+  <div class="q-block">
+    <label class="q-label" for="f-email">电子邮件 <span class="q-req">*</span></label>
+    <input type="email" id="f-email" placeholder="我们将发送完成的链接给您" autocomplete="email">
+    <div style="font-size:11px;color:var(--ink3);margin-top:6px">광고 없음 · 결과 링크만 발송</div>
+  </div>
+
+  <div style="text-align:center;margin-top:8px">
+    <a href="/sixshot.html" style="font-size:12px;color:var(--ink3)">← 식스샷 소개 페이지로</a>
+  </div>
+</div>
+</div>
+
+<!-- ──────────────────────────────────────────── -->
+<!-- 스텝 2 — 사진 01 유년기 -->
+<!-- ──────────────────────────────────────────── -->
+<div class="step" id="step-2">
+<div class="wrap">
+  <div class="step-kicker">인생 식스샷 · SHOT 01</div>
+  <div class="step-title">照片 01 · 童年</div>
+  <div class="step-sub">人生的第一章</div>
+  <div class="photo-card" id="pc-1">
+    <div class="photo-card-head">
+      <span class="photo-badge">SHOT 01</span>
+      <button class="photo-hint-btn" onclick="toggleHint(1)" title="힌트 보기">?</button>
+    </div>
+    <div class="photo-hint" id="hint-1">在父母怀抱中的时光，与兄弟姐妹玩耍的那时候。没有照片也没关系，能让你想起那段岁月的任何东西都行。</div>
+    <div class="photo-upload" id="pu-1" onclick="pickPhoto(1)">
+      <span class="ph-icon">📷</span>
+      <span class="ph-text">点击选择照片</span>
+      <span class="ph-limit">최대 10MB</span>
+    </div>
+    <div class="photo-caption-wrap" id="cap-wrap-1" style="display:none">
+      <textarea class="photo-caption" id="cap-1" rows="2"
+        placeholder="选择这张照片的原因，或那时的记忆"></textarea>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ──────────────────────────────────────────── -->
+<!-- 스텝 3 — 사진 02 학창시절 -->
+<!-- ──────────────────────────────────────────── -->
+<div class="step" id="step-3">
+<div class="wrap">
+  <div class="step-kicker">인생 식스샷 · SHOT 02</div>
+  <div class="step-title">照片 02 · 学生时代</div>
+  <div class="step-sub">只有梦想的那个时代</div>
+  <div class="photo-card" id="pc-2">
+    <div class="photo-card-head">
+      <span class="photo-badge">SHOT 02</span>
+      <button class="photo-hint-btn" onclick="toggleHint(2)" title="힌트 보기">?</button>
+    </div>
+    <div class="photo-hint" id="hint-2">꿈만 있던 시절입니다. 아직 아무것도 시작하지 않아서 그래서 모든 것이 가능할 수 있던 그 때.</div>
+    <div class="photo-upload" id="pu-2" onclick="pickPhoto(2)">
+      <span class="ph-icon">📷</span>
+      <span class="ph-text">点击选择照片</span>
+      <span class="ph-limit">최대 10MB</span>
+    </div>
+    <div class="photo-caption-wrap" id="cap-wrap-2" style="display:none">
+      <textarea class="photo-caption" id="cap-2" rows="2"
+        placeholder="选择这张照片的原因，或那时的记忆"></textarea>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ──────────────────────────────────────────── -->
+<!-- 스텝 4 — 사진 03 청년기 -->
+<!-- ──────────────────────────────────────────── -->
+<div class="step" id="step-4">
+<div class="wrap">
+  <div class="step-kicker">인생 식스샷 · SHOT 03</div>
+  <div class="step-title">照片 03 · 青年期 — 人生的顶峰</div>
+  <div class="step-sub">最有冲劲的时候</div>
+  <div class="photo-card" id="pc-3">
+    <div class="photo-card-head">
+      <span class="photo-badge">SHOT 03</span>
+      <button class="photo-hint-btn" onclick="toggleHint(3)" title="힌트 보기">?</button>
+    </div>
+    <div class="photo-hint" id="hint-3">가장 패기 넘치고 가장 밝았던 때입니다. 스스로 '그때 참 좋았다' 싶은 순간.</div>
+    <div class="photo-upload" id="pu-3" onclick="pickPhoto(3)">
+      <span class="ph-icon">📷</span>
+      <span class="ph-text">点击选择照片</span>
+      <span class="ph-limit">최대 10MB</span>
+    </div>
+    <div class="photo-caption-wrap" id="cap-wrap-3" style="display:none">
+      <textarea class="photo-caption" id="cap-3" rows="2"
+        placeholder="选择这张照片的原因，或那时的记忆"></textarea>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ──────────────────────────────────────────── -->
+<!-- 스텝 5 — 사진 04 가장 사랑하는 것 -->
+<!-- ──────────────────────────────────────────── -->
+<div class="step" id="step-5">
+<div class="wrap">
+  <div class="step-kicker">인생 식스샷 · SHOT 04</div>
+  <div class="step-title">照片 04 · 我最爱的东西</div>
+  <div class="step-sub">一个人、一件事、一个地方、一个爱好 — 都行</div>
+  <div class="photo-card" id="pc-4">
+    <div class="photo-card-head">
+      <span class="photo-badge">SHOT 04</span>
+      <button class="photo-hint-btn" onclick="toggleHint(4)" title="힌트 보기">?</button>
+    </div>
+    <div class="photo-hint" id="hint-4">사람일 수도, 대상일 수도, 장소나 취미일 수도 있어요.</div>
+    <div class="photo-upload" id="pu-4" onclick="pickPhoto(4)">
+      <span class="ph-icon">📷</span>
+      <span class="ph-text">点击选择照片</span>
+      <span class="ph-limit">최대 10MB</span>
+    </div>
+    <div class="photo-caption-wrap" id="cap-wrap-4" style="display:none">
+      <textarea class="photo-caption" id="cap-4" rows="2"
+        placeholder="选择这张照片的原因，或那时的记忆"></textarea>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ──────────────────────────────────────────── -->
+<!-- 스텝 6 — 사진 05 그냥 좋았던 날 -->
+<!-- ──────────────────────────────────────────── -->
+<div class="step" id="step-6">
+<div class="wrap">
+  <div class="step-kicker">인생 식스샷 · SHOT 05</div>
+  <div class="step-title">照片 05 · 就是觉得好的一天</div>
+  <div class="step-sub">不需要特别</div>
+  <div class="photo-card" id="pc-5">
+    <div class="photo-card-head">
+      <span class="photo-badge">SHOT 05</span>
+      <button class="photo-hint-btn" onclick="toggleHint(5)" title="힌트 보기">?</button>
+    </div>
+    <div class="photo-hint" id="hint-5">不需要特别. 그냥 그 순간이 좋았던 것, 그게 전부예요.</div>
+    <div class="photo-upload" id="pu-5" onclick="pickPhoto(5)">
+      <span class="ph-icon">📷</span>
+      <span class="ph-text">点击选择照片</span>
+      <span class="ph-limit">최대 10MB</span>
+    </div>
+    <div class="photo-caption-wrap" id="cap-wrap-5" style="display:none">
+      <textarea class="photo-caption" id="cap-5" rows="2"
+        placeholder="选择这张照片的原因，或那时的记忆"></textarea>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ──────────────────────────────────────────── -->
+<!-- 스텝 7 — 사진 06 화양연화 -->
+<!-- ──────────────────────────────────────────── -->
+<div class="step" id="step-7">
+<div class="wrap">
+  <div class="step-kicker">인생 식스샷 · SHOT 06</div>
+  <div class="step-7-bg">
+    <div class="step-7-title">사진 06 · 화양연화</div>
+    <div class="step-7-sub">나의 베스트 인생샷 — 당신 인생 최고의 한 컷</div>
+    <div class="photo-card" id="pc-6">
+      <div class="photo-card-head">
+        <span class="photo-badge">SHOT 06</span>
+        <button class="photo-hint-btn" onclick="toggleHint(6)" title="힌트 보기">?</button>
+      </div>
+      <div class="photo-hint" id="hint-6">당신 인생 최고의 한 컷입니다. 이것이 나입니다, 라고 말할 수 있는 한 장.</div>
+      <div class="photo-upload" id="pu-6" onclick="pickPhoto(6)">
+        <span class="ph-icon">📷</span>
+        <span class="ph-text">点击选择照片</span>
+        <span class="ph-limit">최대 10MB</span>
+      </div>
+      <div class="photo-caption-wrap" id="cap-wrap-6" style="display:none">
+        <textarea class="photo-caption" id="cap-6" rows="2"
+          placeholder="选择这张照片的原因，或那时的记忆"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ──────────────────────────────────────────── -->
+<!-- 스텝 8 — 마무리 -->
+<!-- ──────────────────────────────────────────── -->
+<div class="step" id="step-8">
+<div class="wrap">
+  <div class="step-kicker">인생 식스샷 · 마무리</div>
+  <div class="step-title">最后</div>
+  <div class="step-sub">您已选完6张照片。<br>现在写写您是怎样的人吧。</div>
+
+  <div class="q-block">
+    <label class="q-label" for="f-intro">我是这样的人 <span class="q-req">*</span></label>
+    <textarea id="f-intro" rows="4"
+      placeholder="6장을 고르고 나면, 당신이 어떤 사람인지 조금 보일 거예요. 툭 나오는 그 말이 진짜입니다."></textarea>
+  </div>
+
+  <div class="q-block">
+    <label class="q-label">留言（可选）</label>
+    <div style="font-size:12px;color:var(--ink3);margin-bottom:12px">누군가에게 전하고 싶은 말이 있다면</div>
+    <input type="text" id="f-to" placeholder="예: 나의 딸에게" maxlength="30" oninput="toggleMsg(this.value)">
+    <div id="msg-wrap" style="display:none;margin-top:10px">
+      <textarea id="f-msg" rows="3" placeholder="전하고 싶은 말을 남겨보세요..."></textarea>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <label class="q-label">公开设置 <span class="q-req">*</span></label>
+    <div class="radio-group">
+      <label class="radio-card">
+        <input type="radio" name="visibility" value="public" checked onchange="setPublic(true)">
+        <div>
+          <div class="radio-title">공개</div>
+          <div class="radio-desc">다른 사람들도 내 이야기를 볼 수 있어요</div>
+        </div>
+      </label>
+      <label class="radio-card">
+        <input type="radio" name="visibility" value="private" onchange="setPublic(false)">
+        <div>
+          <div class="radio-title">비공개</div>
+          <div class="radio-desc">나만 볼 수 있는 링크로 보내드려요</div>
+        </div>
+      </label>
+    </div>
+  </div>
+
+  <div style="margin-top:32px;padding:20px;background:var(--amber-lt);border-radius:12px;border:1px solid var(--border)">
+    <div style="font-size:12px;color:var(--ink2);line-height:1.9">
+      ✦ 무료 · AI 처리 약 1~2분<br>
+      ✦ 결과 링크는 이메일로 발송됩니다<br>
+      ✦ 제출 후 대기 화면에서 기다려주세요
+    </div>
+  </div>
+
+  <div style="margin-top:24px;text-align:center">
+    <a href="https://humandocu.com" style="font-size:11px;color:var(--ink3);letter-spacing:.1em">humandocu.com</a>
+  </div>
+</div>
+</div>
+
+<!-- 하단 네비게이션 바 -->
+<div class="nav-bar">
+  <div class="nav-inner">
+    <button class="btn-prev" id="btn-prev" onclick="goPrev()" style="display:none">← 上一步</button>
+    <button class="btn-next" id="btn-next" onclick="goNext()">下一步 →</button>
+  </div>
+  <div class="nav-hint" id="nav-hint"></div>
+</div>
+
+<!-- 대기 오버레이 -->
+<div id="wait-overlay">
+  <div class="wo-rail"><div class="wo-fill" id="wo-fill"></div></div>
+  <div class="wo-slides">
+    <div class="wo-slide active" id="wo-s0">
+      <div class="wo-ring"><span class="wo-ring-icon">✦</span></div>
+      <div class="wo-kicker">Life Six Shot</div>
+      <div class="wo-title">제출이 완료되었습니다</div>
+      <div class="wo-body">AI가 당신의 인생을<br>읽고 있어요</div>
+    </div>
+    <div class="wo-slide" id="wo-s1">
+      <div class="wo-kicker">✦ 식스샷이란 무엇인가요?</div>
+      <div class="wo-title">인생을 6장으로<br>정의하는 사진 기록</div>
+      <div class="wo-stack">
+        <div class="wo-stack-line"></div>
+        <div class="wo-stack-line"></div>
+        <div class="wo-stack-line"></div>
+      </div>
+      <div class="wo-body" style="margin-top:24px">6장 안에<br>당신의 전부가 들어있어요</div>
+    </div>
+    <div class="wo-slide" id="wo-s2">
+      <div class="wo-kicker">사진을 고르다 보면</div>
+      <div class="wo-title">내가 무엇을 소중히<br>여겼는지 보입니다</div>
+      <div class="wo-body">기억은 흐려지지만<br>사진은 남습니다</div>
+    </div>
+    <div class="wo-slide" id="wo-s3">
+      <div class="wo-kicker">AI가 지금</div>
+      <div class="wo-title">당신의 이야기를<br>시로 쓰고 있습니다</div>
+      <div class="wo-body">조금만 기다려주세요</div>
+      <div class="wo-small">결과는 이메일로도 발송됩니다</div>
+    </div>
+    <div class="wo-slide" id="wo-s4">
+      <div class="wo-brand-H">H</div>
+      <div class="wo-brand-name">휴먼다큐닷컴</div>
+      <div class="wo-brand-tagline">우리는 삶을 기록합니다</div>
+      <div class="wo-brand-url">humandocu.com</div>
+    </div>
+  </div>
+  <div class="wo-photo-show" id="wo-photo-show"></div>
+  <div class="wo-photo-info" id="wo-photo-info"></div>
+  <div class="wo-dots">
+    <div class="wo-dot active"></div>
+    <div class="wo-dot"></div>
+    <div class="wo-dot"></div>
+    <div class="wo-dot"></div>
+    <div class="wo-dot"></div>
+  </div>
+</div>
+
+<script>
+const API = 'https://humandocu-server-production.up.railway.app';
+const TOTAL_STEPS = 8;
+const STEP_TITLES = ['기본 정보','사진 01 · 유년기','照片 02 · 学生时代','사진 03 · 청년기','사진 04 · 사랑하는 것','사진 05 · 좋았던 날','사진 06 · 화양연화','마무리 · 제출'];
+
+let currentStep = 1;
+let isPublic = true;
+let photos = {}; // {1: {b64, caption}, ...}
+
+// ── 진행바 업데이트 ──
+function updateProgress(step) {
+  document.getElementById('prog-step').textContent  = step + ' / ' + TOTAL_STEPS;
+  document.getElementById('prog-title').textContent = STEP_TITLES[step - 1] || '';
+  document.getElementById('prog-fill').style.width  = (step / TOTAL_STEPS * 100) + '%';
+  document.getElementById('btn-prev').style.display = step === 1 ? 'none' : '';
+  const isLast = step === TOTAL_STEPS;
+  const btn = document.getElementById('btn-next');
+  btn.textContent = isLast ? '나의 完成六镜头 →' : '下一步 →';
+  const hint = document.getElementById('nav-hint');
+  if (step >= 2 && step <= 7) {
+    hint.textContent = '사진 필수 · 설명 필수';
+  } else if (isLast) {
+    hint.textContent = '무료 · AI 처리 약 1~2분';
+  } else {
+    hint.textContent = '';
+  }
+}
+
+// ── 스텝 전환 ──
+function goToStep(n) {
+  const prev = document.getElementById('step-' + currentStep);
+  const next = document.getElementById('step-' + n);
+  if (!next) return;
+  prev.classList.remove('active');
+  setTimeout(() => {
+    next.classList.add('active');
+    window.scrollTo({top: 0, behavior: 'instant'});
+  }, 50);
+  currentStep = n;
+  updateProgress(n);
+}
+
+// ── 유효성 검사 ──
+function validateStep(step) {
+  if (step === 1) {
+    const name  = document.getElementById('f-name').value.trim();
+    const nick  = document.getElementById('f-nickname').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    if (!name)  { alert('이름을 입력해주세요'); return false; }
+    if (!nick)  { alert('닉네임을 입력해주세요'); return false; }
+    if (!email || !email.includes('@')) { alert('올바른 이메일을 입력해주세요'); return false; }
+    return true;
+  }
+  const photoStep = step - 1; // step 2→shot1, step 3→shot2, ... step 7→shot6
+  if (photoStep >= 1 && photoStep <= 6) {
+    if (!photos[photoStep] || !photos[photoStep].b64) {
+      alert('사진을 선택해주세요'); return false;
+    }
+    const cap = document.getElementById('cap-' + photoStep);
+    if (!cap || !cap.value.trim()) {
+      alert('사진 설명을 한 줄 써주세요'); return false;
+    }
+    return true;
+  }
+  if (step === 8) {
+    const intro = document.getElementById('f-intro').value.trim();
+    if (!intro) { alert('"나는 이런 사람입니다"를 작성해주세요'); return false; }
+    return true;
+  }
+  return true;
+}
+
+function goNext() {
+  if (!validateStep(currentStep)) return;
+  if (currentStep === TOTAL_STEPS) {
+    doSubmit();
+    return;
+  }
+  goToStep(currentStep + 1);
+}
+
+function goPrev() {
+  if (currentStep > 1) goToStep(currentStep - 1);
+}
+
+// ── 힌트 토글 ──
+function toggleHint(n) {
+  const el = document.getElementById('hint-' + n);
+  el.classList.toggle('open');
+}
+
+// ── 공개 설정 ──
+function setPublic(val) {
+  isPublic = val;
+}
+
+// ── 메시지 필드 토글 ──
+function toggleMsg(val) {
+  document.getElementById('msg-wrap').style.display = val.trim() ? 'block' : 'none';
+}
+
+
+// ── 사진 선택 ──
+function pickPhoto(n) {
+  const inp = document.createElement('input');
+  inp.type = 'file'; inp.accept = 'image/*';
+  inp.onchange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 10 * 1024 * 1024) { alert('10MB 이하 사진만 업로드 가능합니다'); return; }
+    const b64 = await readFile(file);
+    const resized = await resizeImg(b64);
+    photos[n] = { b64: resized, caption: photos[n]?.caption || '' };
+    renderPhoto(n);
+  };
+  inp.click();
+}
+
+function readFile(file) {
+  return new Promise(resolve => {
+    const r = new FileReader();
+    r.onload = e => resolve(e.target.result);
+    r.readAsDataURL(file);
+  });
+}
+
+async function resizeImg(b64) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => {
+      const MAX = 900;
+      let w = img.width, h = img.height;
+      if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+      const c = document.createElement('canvas');
+      c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      resolve(c.toDataURL('image/jpeg', 0.80));
+    };
+    img.src = b64;
+  });
+}
+
+function renderPhoto(n) {
+  const pu = document.getElementById('pu-' + n);
+  const cw = document.getElementById('cap-wrap-' + n);
+  const cap = document.getElementById('cap-' + n);
+  if (!pu) return;
+  const p = photos[n];
+  if (p && p.b64) {
+    pu.innerHTML = `<img src="${p.b64}"><button class="photo-change-btn" onclick="event.stopPropagation();pickPhoto(${n})">바꾸기</button>`;
+    pu.classList.add('has-img');
+    if (cw) {
+      cw.style.display = 'block';
+      if (cap && p.caption) { cap.value = p.caption; }
+      setTimeout(() => cap?.focus(), 100);
+    }
+  } else {
+    pu.innerHTML = `<span class="ph-icon">📷</span><span class="ph-text">点击选择照片</span><span class="ph-limit">최대 10MB</span>`;
+    pu.classList.remove('has-img');
+    if (cw) cw.style.display = 'none';
+  }
+}
+
+// ── 대기 오버레이 ──
+var _woTimer = null, _woProgTimer = null, _woPhotoTimer = null;
+var _woCurSlide = 0, _woCurPhoto = 0;
+var _woPhotos = [], _woCopies = [], _woCopyIdx = 0;
+var WO_SLIDE_MS = 3200, WO_PHOTO_MS = 3500;
+
+var WO_COPIES = [
+  '6장의 사진이 한 사람의 인생이 됩니다',
+  'AI가 당신의 이야기를 읽고 있어요',
+  '사진은 남습니다, 당신이 선택하든 아니든',
+  '인생을 6장으로 정의할 수 있다는 것',
+  '지금 이 순간에도 누군가가 자신의 이야기를 기록하고 있습니다',
+  '잠시만 기다려주세요',
+];
+
+function _woShuffleCopies() {
+  var a = WO_COPIES.slice();
+  for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; }
+  _woCopies = a; _woCopyIdx = 0;
+}
+function _woNextCopy() {
+  if (_woCopyIdx >= _woCopies.length) _woShuffleCopies();
+  return _woCopies[_woCopyIdx++];
+}
+
+function _woGoSlide(n) {
+  var slides = document.querySelectorAll('.wo-slide');
+  var dots   = document.querySelectorAll('.wo-dot');
+  slides[_woCurSlide].classList.remove('active');
+  dots[_woCurSlide].classList.remove('active');
+  _woCurSlide = n % 5;
+  slides[_woCurSlide].classList.add('active');
+  dots[_woCurSlide].classList.add('active');
+}
+
+function _woPhotoStart() {
+  var urls = Object.values(photos).map(p => p.b64).filter(Boolean);
+  if (urls.length === 0) return;
+  _woPhotos = urls; _woCurPhoto = 0;
+  _woShuffleCopies();
+  var ps = document.getElementById('wo-photo-show');
+  ps.innerHTML = '';
+  urls.forEach(function(url) {
+    var fr = document.createElement('div');
+    fr.className = 'wo-photo-frame';
+    fr.style.backgroundImage = 'url(' + url + ')';
+    var vl = document.createElement('div'); vl.className = 'wo-photo-veil';
+    fr.appendChild(vl);
+    ps.appendChild(fr);
+  });
+  var pi = document.getElementById('wo-photo-info');
+  pi.innerHTML = '';
+  var cp = document.createElement('div');
+  cp.innerHTML = '<div class="wo-photo-cap-tag">Life Six Shot</div><div class="wo-photo-cap-txt" id="wo-cap-txt">' + _woNextCopy() + '</div>';
+  pi.appendChild(cp);
+  pi.classList.add('active');
+  ps.querySelectorAll('.wo-photo-frame')[0].classList.add('active');
+  ps.classList.add('active');
+  document.querySelector('.wo-slides').style.display = 'none';
+  document.querySelectorAll('.wo-dot').forEach(function(d){ d.style.display = 'none'; });
+  _woPhotoTimer = setInterval(function() {
+    var frames = ps.querySelectorAll('.wo-photo-frame');
+    frames[_woCurPhoto].classList.remove('active');
+    _woCurPhoto = (_woCurPhoto + 1) % frames.length;
+    frames[_woCurPhoto].classList.add('active');
+    var capTxt = document.getElementById('wo-cap-txt');
+    if (capTxt) {
+      capTxt.classList.add('fade');
+      setTimeout(function(){ capTxt.textContent = _woNextCopy(); capTxt.classList.remove('fade'); }, 600);
+    }
+  }, WO_PHOTO_MS);
+}
+
+function showWaitOverlay() {
+  _woCurSlide = 0;
+  document.querySelectorAll('.wo-slide').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.wo-dot').forEach(function(d){ d.classList.remove('active'); d.style.display = ''; });
+  document.getElementById('wo-s0').classList.add('active');
+  document.querySelectorAll('.wo-dot')[0].classList.add('active');
+  document.getElementById('wo-fill').style.width = '0%';
+  document.querySelector('.wo-slides').style.display = '';
+  document.getElementById('wo-photo-show').classList.remove('active');
+  document.getElementById('wo-photo-show').innerHTML = '';
+  var _pi = document.getElementById('wo-photo-info');
+  if (_pi) { _pi.innerHTML = ''; _pi.classList.remove('active'); }
+  document.getElementById('wait-overlay').classList.add('active');
+
+  _woTimer = setInterval(function(){ _woGoSlide(_woCurSlide + 1); }, WO_SLIDE_MS);
+  var startMs = Date.now();
+  _woProgTimer = setInterval(function(){
+    var pct = Math.min(((Date.now() - startMs) / 150000) * 90, 90);
+    document.getElementById('wo-fill').style.width = pct + '%';
+  }, 1000);
+
+  // 제출한 사진으로 슬라이드쇼 시작 (2초 후)
+  setTimeout(_woPhotoStart, 2000);
+}
+
+function hideWaitOverlay() {
+  clearInterval(_woTimer); clearInterval(_woProgTimer); clearInterval(_woPhotoTimer);
+  document.getElementById('wait-overlay').classList.remove('active');
+}
+
+function finishWaitOverlay() {
+  clearInterval(_woTimer); clearInterval(_woProgTimer); clearInterval(_woPhotoTimer);
+  var fill = document.getElementById('wo-fill');
+  fill.style.transition = 'width .4s ease';
+  fill.style.width = '100%';
+}
+
+// ── 제출 ──
+async function doSubmit() {
+  const name  = document.getElementById('f-name').value.trim();
+  const nick  = document.getElementById('f-nickname').value.trim();
+  const email = document.getElementById('f-email').value.trim().toLowerCase();
+  const intro = document.getElementById('f-intro').value.trim();
+  const msgTo = document.getElementById('f-to').value.trim();
+  const msgBody = document.getElementById('f-msg') ? document.getElementById('f-msg').value.trim() : '';
+
+  // caption 동기화
+  for (var i = 1; i <= 6; i++) {
+    var cap = document.getElementById('cap-' + i);
+    if (cap && photos[i]) photos[i].caption = cap.value.trim();
+  }
+
+  if (!intro) { alert('"나는 이런 사람입니다"를 작성해주세요'); return; }
+
+  const shots = [];
+  for (var i = 1; i <= 6; i++) {
+    shots.push({
+      index: i,
+      image_b64: photos[i]?.b64 || '',
+      caption:   photos[i]?.caption || '',
+    });
+  }
+
+  document.getElementById('btn-next').disabled = true;
+  showWaitOverlay();
+
+  try {
+    const res = await fetch(API + '/api/sixshot/submit-b64', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        name,
+        nickname:     nick || name,
+        email,
+        is_public:    isPublic,
+        shots,
+        self_intro:   intro,
+        message_to:   msgTo,
+        message_body: msgBody,
+      })
+    });
+    const data = await res.json();
+    if (!res.ok || !data.ok) throw new Error(data.error || '오류가 발생했어요');
+    finishWaitOverlay();
+    setTimeout(function() {
+      window.location.href = API + '/sixshot/' + data.doc_id;
+    }, 500);
+  } catch(e) {
+    hideWaitOverlay();
+    document.getElementById('btn-next').disabled = false;
+    alert('오류: ' + e.message);
+  }
+}
+
+// ── 초기화 ──
+(function init() {
+  updateProgress(1);
+})();
+</script>
+</body>
+</html>
