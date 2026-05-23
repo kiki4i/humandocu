@@ -443,28 +443,39 @@ var WO_SLIDES     = 5;
 var WO_SLIDE_MS   = 3000;
 var WO_PHOTO_MS   = 3500;
 
-var WO_COPIES = [
-  '지금 이 순간에도 누군가가 오늘을 기록하고 있습니다',
-  '평범한 하루가 쌓여 특별한 인생이 됩니다',
-  '오늘을 기억하는 사람은 생각보다 적습니다',
-  '사진은 남습니다, 당신이 고르든 남이 고르든',
-  'AI가 오늘을 시로 담고 있습니다',
-  '누군가의 오늘이 당신의 오늘과 닮아있을지도',
-];
-var _woCopies = []; var _woCopyIdx = 0;
-function _woShuffleCopies() {
-  var a = WO_COPIES.slice();
-  for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; }
-  _woCopies = a; _woCopyIdx = 0;
+// 대화형 메시지 — 순서대로 흘러가도록 (셔플 없이 순차 적용)
+var _woCopyIdx = 0;
+var _woCopies = [];
+
+function _buildCopies() {
+  var name = (document.getElementById('f-nickname')?.value || document.getElementById('f-name')?.value || '').trim();
+  var caps = shots.map(function(s){ return (s.caption||'').trim(); }).filter(Boolean);
+  var msgs = [];
+  // 1. 사진 확인
+  msgs.push(caps[0] ? '"' + caps[0].slice(0,18) + '" — 이 순간, 인상적이네요.' : '사진을 하나하나 들여다보고 있어요.');
+  // 2. 두 번째 사진
+  msgs.push(caps[1] ? '"' + caps[1].slice(0,18) + '" — 이것도 담을게요.' : '와, 오늘 하루가 고스란히 담겼네요.');
+  // 3. 시 작성 중
+  msgs.push(name ? name + '님의 오늘을 시로 옮기고 있어요.' : '오늘의 감정을 시로 옮기고 있어요.');
+  // 4. 유머/감성
+  msgs.push('감성 버전, 유머 버전 — 두 가지로 준비할게요.');
+  // 5. 마무리
+  msgs.push('너무 놀라지는 마세요. 전 칭찬 아주 좋아한답니다 ㅎㅎ');
+  // 6. 응원
+  msgs.push(name ? name + '님, 오늘도 최고의 하루 되세요!' : '오늘도 최고의 하루 되세요!');
+  _woCopies = msgs;
+  _woCopyIdx = 0;
 }
+
 function _woNextCopy() {
-  if (_woCopyIdx >= _woCopies.length) _woShuffleCopies();
+  if (_woCopies.length === 0) _buildCopies();
+  if (_woCopyIdx >= _woCopies.length) _woCopyIdx = _woCopies.length - 1; // 마지막 메시지 반복
   return _woCopies[_woCopyIdx++];
 }
 
 function _woPhotoStart(photos) {
   _woPhotos = photos; _woCurPhoto = 0;
-  _woShuffleCopies();
+  _buildCopies();
   var ps = document.getElementById('wo-photo-show');
   ps.innerHTML = '';
   photos.forEach(function(url) {
@@ -561,6 +572,15 @@ function showWaitOverlay() {
     document.getElementById('wo-fill').style.width = pct + '%';
   }, 1000);
 
+  fetch(API + '/api/today/public-photos')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (d.photos && d.photos.length >= 2) {
+        clearInterval(_woSlideTimer);
+        _woPhotoStart(d.photos.slice(0, 8));
+      }
+    })
+    .catch(function(){});
 }
 
 function hideWaitOverlay() {
