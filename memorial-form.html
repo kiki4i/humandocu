@@ -555,7 +555,7 @@ async function doSubmit() {
   };
 
   try {
-    const res = await fetch(API + '/webhook/advanced', {
+    const res = await fetch(API + '/webhook/advanced-native', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
