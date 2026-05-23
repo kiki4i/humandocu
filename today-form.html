@@ -561,15 +561,6 @@ function showWaitOverlay() {
     document.getElementById('wo-fill').style.width = pct + '%';
   }, 1000);
 
-  fetch(API + '/api/today/public-photos')
-    .then(function(r){ return r.json(); })
-    .then(function(d){
-      if (d.photos && d.photos.length >= 2) {
-        clearInterval(_woSlideTimer);
-        _woPhotoStart(d.photos.slice(0, 8));
-      }
-    })
-    .catch(function(){});
 }
 
 function hideWaitOverlay() {
