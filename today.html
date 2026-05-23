@@ -717,7 +717,9 @@ footer {
   </div>
 </nav>
 <div id="quick-bar" style="display:flex;gap:8px;padding:10px 16px;background:#FFFBF3;border-bottom:1px solid rgba(200,135,10,.15);">
-  <a href="/today-form.html" style="flex:1;text-align:center;padding:10px 0;background:#C8870A;color:#fff;border-radius:20px;font-size:13px;font-weight:500;letter-spacing:.04em;text-decoration:none;"
+  <a href="/today-form.html"
+    onclick="var l=localStorage.getItem('lang')||'KO';var m={KO:'/today-form.html',EN:'/today-form-en.html',JP:'/today-form-jp.html',ZH:'/today-form-zh.html'};window.location.href=m[l]||'/today-form.html';return false;"
+    style="flex:1;text-align:center;padding:10px 0;background:#C8870A;color:#fff;border-radius:20px;font-size:13px;font-weight:500;letter-spacing:.04em;text-decoration:none;"
     data-ko="나의 투*필 만들기 →"
     data-en="Create My Today Film →"
     data-jp="私のToday Filmを作る →"
