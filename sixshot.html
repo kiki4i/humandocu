@@ -199,6 +199,18 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
   <button class="lang-btn" data-lang="JP"><span class="flag">🇯🇵</span> 日本語</button>
   <button class="lang-btn" data-lang="ZH"><span class="flag">🇨🇳</span> 中文</button>
 </div>
+<div id="quick-bar" style="display:flex;gap:8px;padding:10px 16px;background:#FFFBF3;border-bottom:1px solid rgba(200,135,10,.15);">
+  <a href="/sixshot-form.html" style="flex:1;text-align:center;padding:10px 0;background:#C8870A;color:#fff;border-radius:20px;font-size:13px;font-weight:500;letter-spacing:.04em;text-decoration:none;"
+    data-ko="나의 식스샷 만들기 →"
+    data-en="Create My Six Shot →"
+    data-jp="マイ·シックスショットを作る →"
+    data-zh="创建我的六镜头 →">나의 식스샷 만들기 →</a>
+  <button onclick="openBrowseModal()" style="flex:1;text-align:center;padding:10px 0;background:transparent;color:#C8870A;border:1px solid rgba(200,135,10,.5);border-radius:20px;font-size:13px;font-weight:500;letter-spacing:.04em;cursor:pointer;"
+    data-ko="다른 식스샷 둘러보기 →"
+    data-en="Browse Six Shots →"
+    data-jp="他のシックスショットを見る →"
+    data-zh="浏览其他六镜头 →">다른 식스샷 둘러보기 →</button>
+</div>
 
 <nav>
   <a href="/index.html" class="logo" style="display:none">휴먼다큐닷컴 <span>/ Six Shot</span></a>
@@ -226,16 +238,6 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
     data-en="Upload 6 photos with short stories.<br>AI turns them into poetry and defines you in one sentence."
     data-jp="6枚の写真と短いエピソードをアップロードすると、<br>AIが詩に昇華し、あなたを一文で定義します。"
     data-zh="上传6张照片与简短故事，<br>AI将为你创作诗歌，用一句话定义你。">사진 6장과 짧은 이야기를 올리면<br>AI가 시로 다듬고, 당신을 한 문장으로 정의합니다.</p>
-  <a href="/sixshot-form.html" class="btn-primary cta-btn"
-    data-ko="나의 식스샷 만들기 →"
-    data-en="Create My Six Shot →"
-    data-jp="マイ·シックスショットを作る →"
-    data-zh="创建我的六镜头 →">나의 식스샷 만들기 →</a>
-  <span class="btn-hint"
-    data-ko="무료 · 3분이면 완성 · 언제든 수정 가능"
-    data-en="Free · Done in 3 min · Edit anytime"
-    data-jp="無料 · 3分で完成 · いつでも修正可能"
-    data-zh="免费 · 3分钟完成 · 随时可修改">무료 · 3분이면 완성 · 언제든 수정 가능</span>
 </div>
 
 <div class="haiku-sec">
@@ -364,28 +366,7 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
 </div>
 
 <!-- TODAY SIXSHOT -->
-<div class="today-sec">
-  <div class="today-sec-label"
-    data-ko="✦ 오늘의 식스샷"
-    data-en="✦ Someone's Six Shot"
-    data-jp="✦ 今日のシックスショット"
-    data-zh="✦ 今日六镜头">✦ 오늘의 식스샷</div>
-  <div class="today-sec-sub"
-    data-ko="공개를 선택한 누군가의 이야기 — 운명처럼 만납니다"
-    data-en="A story from someone who chose to share — meet them by chance"
-    data-jp="公開を選んだ誰かの物語 — 運命のように出会います"
-    data-zh="某人选择公开的故事 — 与你不期而遇">공개를 선택한 누군가의 이야기 — 운명처럼 만납니다</div>
-  <div class="today-card" id="today-card">
-    <div class="today-loading" id="today-loading-init" data-ko="불러오는 중" data-en="Loading..." data-jp="読み込み中..." data-zh="加载中...">불러오는 중</div>
-  </div>
-  <div class="next-bar" id="next-bar">
-    <button class="btn-next-shot" id="btn-next" onclick="handleNextShot()"
-      data-ko="다음 식스샷 보기 →"
-      data-en="Next Six Shot →"
-      data-jp="次のシックスショット →"
-      data-zh="下一个六镜头 →">다음 식스샷 보기 →</button>
-  </div>
-</div>
+
 
 <div class="update-sec">
   <p
@@ -441,16 +422,6 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
     data-en="This very moment<br><em>could be one of your six.</em><br>Capture it."
     data-jp="この瞬間も<br><em>あなたの六枚のうちの一枚です。</em><br>記念してみましょう。"
     data-zh="此刻<br><em>也是你六张之一。</em><br>记录下来吧。">지금 이 순간도<br><em>당신의 여섯 장 중 하나입니다.</em><br>기념해 보세요.</div>
-  <a href="/sixshot-form.html" class="btn-primary cta-btn"
-    data-ko="나의 식스샷 만들기 →"
-    data-en="Create My Six Shot →"
-    data-jp="マイ·シックスショットを作る →"
-    data-zh="创建我的六镜头 →">나의 식스샷 만들기 →</a>
-  <span class="btn-hint"
-    data-ko="무료 · 3분이면 완성 · 언제든 수정 가능"
-    data-en="Free · Done in 3 min · Edit anytime"
-    data-jp="無料 · 3分で完成 · いつでも修正可能"
-    data-zh="免费 · 3分钟完成 · 随时可修改">무료 · 3분이면 완성 · 언제든 수정 가능</span>
 </div>
 
 <div class="connect-strip">
@@ -708,5 +679,64 @@ function loadNextShot() {
 })();
 </script>
 
+
+<!-- 식스샷 둘러보기 모달 -->
+<div id="browse-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:rgba(0,0,0,0.65);overflow-y:auto;">
+  <div style="max-width:500px;margin:16px auto 40px;background:#FFFBF3;border-radius:16px;padding:18px 14px;position:relative;">
+    <button onclick="closeBrowseModal()" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:22px;color:#8B6A2E;cursor:pointer;line-height:1;">&#x2715;</button>
+    <div style="text-align:center;font-size:11px;letter-spacing:.16em;color:#8B6A2E;margin-bottom:16px;">&#x2736; 누군가의 인생 식스샷</div>
+    <div id="feed-grid" style="display:flex;flex-direction:column;gap:8px;">
+      <div style="text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">불러오는 중...</div>
+    </div>
+  </div>
+</div>
+
+<script>
+var SIXSHOT_FEED_API = 'https://humandocu-server-production.up.railway.app/api/sixshot/feed?limit=30';
+var SIXSHOT_SERVER = 'https://humandocu-server-production.up.railway.app';
+
+function makeSixItem(item) {
+  var p1 = item.photo1
+    ? '<img src="' + item.photo1 + '" style="width:50%;aspect-ratio:1;object-fit:cover;display:block;flex-shrink:0;">'
+    : '<div style="width:50%;aspect-ratio:1;background:#F0E8D8;flex-shrink:0;"></div>';
+  var p2 = item.photo2
+    ? '<img src="' + item.photo2 + '" style="width:50%;aspect-ratio:1;object-fit:cover;display:block;flex-shrink:0;">'
+    : '<div style="width:50%;aspect-ratio:1;background:#EDE0CC;flex-shrink:0;"></div>';
+  return '<a href="' + SIXSHOT_SERVER + '/sixshot/' + item.doc_id + '" target="_blank" '
+    + 'style="text-decoration:none;background:#fff;border-radius:10px;overflow:hidden;border:1px solid rgba(200,135,10,.18);display:block;">'
+    + '<div style="display:flex;">' + p1 + p2 + '</div>'
+    + '<div style="padding:8px 12px 10px;">'
+    + '<div style="font-size:13px;font-weight:600;color:#1A1208;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + (item.nickname || item.name || '') + '</div>'
+    + (item.identity ? '<div style="font-size:11px;color:#8B6A2E;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + item.identity + '</div>' : '')
+    + '</div></a>';
+}
+
+async function loadSixFeed() {
+  var grid = document.getElementById('feed-grid');
+  grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">불러오는 중...</div>';
+  try {
+    var res = await fetch(SIXSHOT_FEED_API);
+    var data = await res.json();
+    if (!data.items || data.items.length === 0) {
+      grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">아직 공개된 식스샷이 없어요</div>';
+      return;
+    }
+    grid.innerHTML = data.items.map(makeSixItem).join('');
+  } catch(e) {
+    grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">잠시 후 다시 시도해주세요</div>';
+  }
+}
+
+function openBrowseModal() {
+  document.getElementById('browse-modal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  loadSixFeed();
+}
+
+function closeBrowseModal() {
+  document.getElementById('browse-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+</script>
 </body>
 </html>
