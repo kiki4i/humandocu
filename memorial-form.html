@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>메모리얼 프리미엄 신청 · 휴먼다큐</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:   #0f0d09;
+  --ink2:  #3a2e1e;
+  --ink3:  #6b5a3e;
+  --gold:  #c8a96e;
+  --gold2: #b8924a;
+  --cream: #f9f6f0;
+  --cream2:#f0ebe0;
+  --serif: 'Noto Serif KR', serif;
+  --sans:  'Noto Sans KR', sans-serif;
+  --r: 6px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);font-family:var(--sans);color:var(--ink);min-height:100vh;}
+
+/* 진행바 */
+.progress-bar{position:sticky;top:0;z-index:100;background:var(--ink);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;}
+.progress-label{font-size:11px;letter-spacing:.14em;color:rgba(249,246,240,.5);text-transform:uppercase;}
+.progress-steps{display:flex;gap:4px;}
+.progress-dot{width:6px;height:6px;border-radius:50%;background:rgba(200,169,110,.25);transition:background .3s;}
+.progress-dot.done{background:var(--gold);}
+.progress-dot.active{background:var(--gold);box-shadow:0 0 0 2px rgba(200,169,110,.3);}
+
+/* 스텝 */
+.step{display:none;animation:fadeIn .35s ease;}
+.step.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.step-inner{max-width:560px;margin:0 auto;padding:32px 20px 120px;}
+
+.step-kicker{font-size:11px;letter-spacing:.2em;color:var(--gold2);text-transform:uppercase;margin-bottom:12px;}
+.step-title{font-family:var(--serif);font-size:26px;font-weight:300;color:var(--ink);line-height:1.4;margin-bottom:8px;}
+.step-sub{font-size:14px;color:var(--ink3);line-height:1.8;margin-bottom:28px;}
+
+/* 폼 요소 */
+.q-block{margin-bottom:20px;}
+.q-label{font-size:13px;font-weight:500;color:var(--ink2);margin-bottom:6px;display:flex;align-items:center;gap:4px;}
+.q-req{color:#c0392b;font-size:11px;}
+.q-hint{font-size:12px;color:var(--ink3);margin-bottom:6px;line-height:1.7;}
+input[type=text],input[type=email],input[type=date],input[type=tel],textarea,select{
+  width:100%;padding:12px 14px;border:1px solid #d4c9b0;border-radius:var(--r);
+  font-family:var(--sans);font-size:14px;color:var(--ink);background:#fff;
+  outline:none;transition:border-color .2s;
+}
+input:focus,textarea:focus,select:focus{border-color:var(--gold2);}
+textarea{resize:vertical;min-height:90px;line-height:1.7;}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%236b5a3e'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;}
+
+.radio-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+.radio-opt{cursor:pointer;}
+.radio-opt input{display:none;}
+.radio-opt span{display:inline-block;padding:8px 18px;border:1.5px solid #d4c9b0;border-radius:20px;font-size:13px;color:var(--ink3);transition:all .2s;}
+.radio-opt input:checked + span{border-color:var(--gold2);background:var(--gold2);color:#fff;}
+
+/* 사진 업로드 */
+.photo-slot{margin-bottom:16px;}
+.photo-slot-label{font-size:12px;font-weight:500;color:var(--ink2);margin-bottom:6px;}
+.photo-slot-hint{font-size:11px;color:var(--ink3);margin-bottom:6px;}
+.photo-drop{border:1.5px dashed #c8b890;border-radius:var(--r);padding:20px;text-align:center;cursor:pointer;background:#fffdf8;transition:border-color .2s;position:relative;}
+.photo-drop:hover{border-color:var(--gold2);}
+.photo-drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.photo-drop-text{font-size:13px;color:var(--ink3);}
+.photo-preview{width:100%;max-height:180px;object-fit:cover;border-radius:var(--r);margin-top:8px;display:none;}
+.photo-preview.show{display:block;}
+
+/* 네비 버튼 */
+.nav-bar{position:fixed;bottom:0;left:0;right:0;background:var(--cream);border-top:1px solid #e0d5c0;padding:14px 20px;display:flex;gap:10px;z-index:100;}
+.btn-prev{flex:1;max-width:100px;padding:14px;border:1.5px solid #d4c9b0;background:transparent;border-radius:var(--r);font-size:14px;color:var(--ink3);cursor:pointer;font-family:var(--sans);}
+.btn-next{flex:1;padding:14px;background:var(--gold2);border:none;border-radius:var(--r);font-size:15px;font-weight:500;color:var(--ink);cursor:pointer;font-family:var(--sans);letter-spacing:.04em;transition:background .2s;}
+.btn-next:hover{background:var(--gold);}
+.btn-next:disabled{opacity:.5;cursor:not-allowed;}
+
+/* 완료 화면 */
+#done{display:none;text-align:center;padding:80px 20px;}
+.done-icon{font-size:48px;margin-bottom:20px;}
+.done-title{font-family:var(--serif);font-size:24px;font-weight:300;margin-bottom:12px;}
+.done-sub{font-size:14px;color:var(--ink3);line-height:1.8;}
+
+/* 구분선 */
+.divider{border:none;border-top:1px solid #e0d5c0;margin:24px 0;}
+
+/* 로딩 오버레이 */
+#loading-overlay{display:none;position:fixed;inset:0;background:rgba(15,13,9,.85);z-index:999;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
+#loading-overlay.active{display:flex;}
+.loading-text{color:var(--cream);font-size:15px;letter-spacing:.06em;}
+.loading-dot{display:inline-block;animation:blink 1.4s infinite;}
+.loading-dot:nth-child(2){animation-delay:.2s;}
+.loading-dot:nth-child(3){animation-delay:.4s;}
+@keyframes blink{0%,80%,100%{opacity:0}40%{opacity:1}}
+</style>
+</head>
+<body>
+
+<!-- 진행바 -->
+<div class="progress-bar">
+  <span class="progress-label" id="progress-label">1 / 5 · 기본 정보</span>
+  <div class="progress-steps">
+    <div class="progress-dot active" id="dot-1"></div>
+    <div class="progress-dot" id="dot-2"></div>
+    <div class="progress-dot" id="dot-3"></div>
+    <div class="progress-dot" id="dot-4"></div>
+    <div class="progress-dot" id="dot-5"></div>
+  </div>
+</div>
+
+<!-- STEP 1: 기본 정보 -->
+<div class="step active" id="step-1">
+  <div class="step-inner">
+    <div class="step-kicker">MEMORIAL PREMIUM · 프리미엄 부고</div>
+    <div class="step-title">고인과 상주에 대해<br>알려주세요</div>
+    <div class="step-sub">입력하신 정보는 부고 페이지 제작 목적으로만 사용됩니다</div>
+
+    <div class="q-block">
+      <div class="q-label">고인 성함 <span class="q-req">*</span></div>
+      <input type="text" id="f-deceased" placeholder="고인의 성함을 입력해주세요">
+    </div>
+    <div class="q-block">
+      <div class="q-label">직함 / 직책</div>
+      <input type="text" id="f-title" placeholder="없으시면 비워두세요 (예: 전 ○○교 교장)">
+    </div>
+    <div class="q-block">
+      <div class="q-label">종교 <span class="q-req">*</span></div>
+      <div class="radio-group">
+        <label class="radio-opt"><input type="radio" name="religion" value="기독교"><span>기독교</span></label>
+        <label class="radio-opt"><input type="radio" name="religion" value="천주교"><span>천주교</span></label>
+        <label class="radio-opt"><input type="radio" name="religion" value="불교"><span>불교</span></label>
+        <label class="radio-opt"><input type="radio" name="religion" value="무교 및 기타"><span>무교 및 기타</span></label>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-label">성별 <span class="q-req">*</span></div>
+      <div class="radio-group">
+        <label class="radio-opt"><input type="radio" name="gender" value="남"><span>남</span></label>
+        <label class="radio-opt"><input type="radio" name="gender" value="여"><span>여</span></label>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-label">생년월일 <span class="q-req">*</span></div>
+      <input type="date" id="f-birth">
+    </div>
+    <div class="q-block">
+      <div class="q-label">별세일 <span class="q-req">*</span></div>
+      <input type="date" id="f-death">
+    </div>
+    <div class="q-block">
+      <div class="q-label">고인 한 줄 소개 <span class="q-req">*</span></div>
+      <div class="q-hint">예: 40년간 교단을 지킨 선생님</div>
+      <input type="text" id="f-intro" placeholder="고인을 한 문장으로 표현해주세요">
+    </div>
+    <hr class="divider">
+    <div class="q-block">
+      <div class="q-label">고인과 상주의 관계 <span class="q-req">*</span></div>
+      <select id="f-relation">
+        <option value="">선택해주세요</option>
+        <option>부친</option>
+        <option>모친</option>
+        <option>조부</option>
+        <option>조모</option>
+        <option>배우자</option>
+        <option>기타</option>
+      </select>
+    </div>
+    <div class="q-block">
+      <div class="q-label">상주 성함 <span class="q-req">*</span></div>
+      <input type="text" id="f-chief" placeholder="상주 이름">
+    </div>
+    <div class="q-block">
+      <div class="q-label">신청자 이름 <span class="q-req">*</span></div>
+      <input type="text" id="f-applicant" placeholder="신청자 이름">
+    </div>
+    <div class="q-block">
+      <div class="q-label">신청자 연락처 <span class="q-req">*</span></div>
+      <input type="tel" id="f-phone" placeholder="010-0000-0000">
+    </div>
+    <div class="q-block">
+      <div class="q-label">신청자 이메일 <span class="q-req">*</span></div>
+      <div class="q-hint">완성된 부고 링크를 이메일로 보내드립니다</div>
+      <input type="email" id="f-email" placeholder="example@email.com">
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2: 고인 이야기 -->
+<div class="step" id="step-2">
+  <div class="step-inner">
+    <div class="step-kicker">STEP 2 · 고인 이야기</div>
+    <div class="step-title">기억 속의<br>그 모습을 담아주세요</div>
+    <div class="step-sub">AI가 이 이야기들을 바탕으로 추모글을 작성합니다</div>
+
+    <div class="q-block">
+      <div class="q-label">가장 먼저 떠오르는 모습 <span class="q-req">*</span></div>
+      <div class="q-hint">예: 항상 아침 일찍 밥상을 차리시던 모습 · 퇴근하면 현관에서 환하게 맞아주시던 모습</div>
+      <textarea id="f-memory" placeholder="고인 하면 가장 먼저 떠오르는 장면을 적어주세요"></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q-label">말버릇 또는 늘 하시던 행동 <span class="q-req">*</span></div>
+      <div class="q-hint">예: "밥은 먹었어?"라고 꼭 물어보셨어요 · 아무리 화가 나셔도 절대 큰소리 내지 않으셨어요</div>
+      <textarea id="f-habit" placeholder="고인만의 특별한 말버릇이나 행동이 있었나요?"></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q-label">가장 빛나 보이셨던 순간 <span class="q-req">*</span></div>
+      <div class="q-hint">예: 제 졸업식날 눈물 흘리시며 자랑스러워 하신 · 가족 여행에서 활짝 웃으시던 모습</div>
+      <textarea id="f-shine" placeholder="고인이 가장 수고하셨다 싶은 때, 또는 가장 빛나 보이셨던 순간은요?"></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q-label">끝내 전하지 못한 말 <span class="q-req">*</span></div>
+      <div class="q-hint">예: 고생하셨어요, 덕분에 여기까지 왔어요 · 사랑한다는 말을 더 자주 했어야 했는데</div>
+      <textarea id="f-message" placeholder="고인이 들으셨으면 하는 말을 적어주세요"></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q-label">생애 주요 사건 <span class="q-req">*</span></div>
+      <div class="q-hint">예: 1965년 - 경북 안동에서 태어남 · 1987년 - 결혼, 슬하 2남 1녀 · 기억나시는 것만 적어주세요</div>
+      <textarea id="f-history" style="min-height:120px;" placeholder="연도 - 사건 형식으로 적어주세요"></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q-label">유가족 명단 <span class="q-req">*</span></div>
+      <div class="q-hint">예: 배우자 김○○ 장남 홍○○ / 자부 이○○ 차남 홍○○</div>
+      <textarea id="f-family" placeholder="유가족 명단을 입력해주세요"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 3: 사진 업로드 -->
+<div class="step" id="step-3">
+  <div class="step-inner">
+    <div class="step-kicker">STEP 3 · 사진</div>
+    <div class="step-title">고인의 모습을<br>사진으로 남겨주세요</div>
+    <div class="step-sub">영정사진은 히어로 이미지로, 생애사진은 슬라이드쇼로 사용됩니다</div>
+
+    <div class="photo-slot">
+      <div class="photo-slot-label">영정사진 <span class="q-req">*</span></div>
+      <div class="photo-slot-hint">고인의 대표 이미지로 사용됩니다 (최대 10MB)</div>
+      <div class="photo-drop" id="drop-portrait">
+        <input type="file" id="file-portrait" accept="image/*" onchange="previewPhoto('portrait',this)">
+        <div class="photo-drop-text">📷 탭해서 사진 선택</div>
+        <img class="photo-preview" id="preview-portrait">
+      </div>
+    </div>
+
+    <div class="photo-slot">
+      <div class="photo-slot-label">생애사진 1</div>
+      <div class="photo-slot-hint">마지막 가족여행 때 활짝 웃는 모습 등 (최대 10MB)</div>
+      <div class="photo-drop">
+        <input type="file" id="file-photo1" accept="image/*" onchange="previewPhoto('photo1',this)">
+        <div class="photo-drop-text">📷 탭해서 사진 선택</div>
+        <img class="photo-preview" id="preview-photo1">
+      </div>
+      <input type="text" id="cap-photo1" placeholder="사진 설명 (선택)" style="margin-top:6px;">
+    </div>
+
+    <div class="photo-slot">
+      <div class="photo-slot-label">생애사진 2</div>
+      <div class="photo-drop">
+        <input type="file" id="file-photo2" accept="image/*" onchange="previewPhoto('photo2',this)">
+        <div class="photo-drop-text">📷 탭해서 사진 선택</div>
+        <img class="photo-preview" id="preview-photo2">
+      </div>
+      <input type="text" id="cap-photo2" placeholder="사진 설명 (선택)" style="margin-top:6px;">
+    </div>
+
+    <div class="photo-slot">
+      <div class="photo-slot-label">생애사진 3</div>
+      <div class="photo-drop">
+        <input type="file" id="file-photo3" accept="image/*" onchange="previewPhoto('photo3',this)">
+        <div class="photo-drop-text">📷 탭해서 사진 선택</div>
+        <img class="photo-preview" id="preview-photo3">
+      </div>
+      <input type="text" id="cap-photo3" placeholder="사진 설명 (선택)" style="margin-top:6px;">
+    </div>
+
+    <div class="photo-slot">
+      <div class="photo-slot-label">생애사진 4</div>
+      <div class="photo-drop">
+        <input type="file" id="file-photo4" accept="image/*" onchange="previewPhoto('photo4',this)">
+        <div class="photo-drop-text">📷 탭해서 사진 선택</div>
+        <img class="photo-preview" id="preview-photo4">
+      </div>
+      <input type="text" id="cap-photo4" placeholder="사진 설명 (선택)" style="margin-top:6px;">
+    </div>
+
+    <div class="photo-slot">
+      <div class="photo-slot-label">생애사진 5</div>
+      <div class="photo-drop">
+        <input type="file" id="file-photo5" accept="image/*" onchange="previewPhoto('photo5',this)">
+        <div class="photo-drop-text">📷 탭해서 사진 선택</div>
+        <img class="photo-preview" id="preview-photo5">
+      </div>
+      <input type="text" id="cap-photo5" placeholder="사진 설명 (선택)" style="margin-top:6px;">
+    </div>
+  </div>
+</div>
+
+<!-- STEP 4: 장례 정보 -->
+<div class="step" id="step-4">
+  <div class="step-inner">
+    <div class="step-kicker">STEP 4 · 장례 정보</div>
+    <div class="step-title">장례 일정과<br>장소를 알려주세요</div>
+    <div class="step-sub">부고 페이지에 표시될 장례 정보입니다</div>
+
+    <div class="q-block">
+      <div class="q-label">입실일시</div>
+      <input type="text" id="f-checkin" placeholder="예: 2025년 5월 23일 오후 2시">
+    </div>
+    <div class="q-block">
+      <div class="q-label">입관일시</div>
+      <input type="text" id="f-coffin" placeholder="예: 2025년 5월 24일 오전 10시">
+    </div>
+    <div class="q-block">
+      <div class="q-label">발인일시 <span class="q-req">*</span></div>
+      <input type="text" id="f-funeral" placeholder="예: 2025년 5월 25일 오전 8시">
+    </div>
+    <div class="q-block">
+      <div class="q-label">장례식장 이름 <span class="q-req">*</span></div>
+      <input type="text" id="f-hall-name" placeholder="예: 서울아산병원 장례식장">
+    </div>
+    <div class="q-block">
+      <div class="q-label">장례식장 주소 <span class="q-req">*</span></div>
+      <div class="q-hint">네비게이션과 연동됩니다</div>
+      <input type="text" id="f-hall-addr" placeholder="도로명 주소 입력">
+    </div>
+    <div class="q-block">
+      <div class="q-label">장례식장 전화번호</div>
+      <input type="tel" id="f-hall-tel" placeholder="02-0000-0000">
+    </div>
+    <div class="q-block">
+      <div class="q-label">장지 이름 또는 주소</div>
+      <input type="text" id="f-grave" placeholder="자세한 번지까지는 안 쓰셔도 됩니다">
+    </div>
+    <div class="q-block">
+      <div class="q-label">안내 말씀 <span class="q-req">*</span></div>
+      <div class="q-hint">예: 고인의 뜻에 따라 화환과 조의금은 정중히 사양하오며 깊이 감사드립니다</div>
+      <textarea id="f-notice" placeholder="조문객에게 전할 안내 말씀을 적어주세요"></textarea>
+    </div>
+    <div class="q-block">
+      <div class="q-label">조의금 계좌 <span class="q-req">*</span></div>
+      <input type="text" id="f-account" placeholder="00은행, 계좌번호, 예금주">
+    </div>
+  </div>
+</div>
+
+<!-- STEP 5: 최종 확인 -->
+<div class="step" id="step-5">
+  <div class="step-inner">
+    <div class="step-kicker">STEP 5 · 최종 확인</div>
+    <div class="step-title">모든 준비가<br>완료되었습니다</div>
+    <div class="step-sub">제출하면 약 10분 이내로 완성된 부고 링크를 이메일로 보내드립니다</div>
+
+    <div id="summary" style="background:#fff;border:1px solid #e0d5c0;border-radius:var(--r);padding:20px;font-size:13px;color:var(--ink2);line-height:2;"></div>
+
+    <div style="margin-top:20px;padding:16px;background:var(--cream2);border-radius:var(--r);font-size:12px;color:var(--ink3);line-height:1.9;">
+      🔒 입력하신 정보는 부고 페이지 제작 목적으로만 사용되며, 제3자에게 제공되지 않습니다
+    </div>
+  </div>
+</div>
+
+<!-- 완료 화면 -->
+<div id="done">
+  <div class="done-icon">✦</div>
+  <div class="done-title">신청이 완료되었습니다</div>
+  <div class="done-sub">잠시 후 이메일로 완성된 부고 링크를 보내드립니다<br>약 10분 이내로 도착합니다<br><br>감사합니다</div>
+</div>
+
+<!-- 네비 버튼 -->
+<div class="nav-bar" id="nav-bar">
+  <button class="btn-prev" id="btn-prev" onclick="goPrev()" style="display:none;">← 이전</button>
+  <button class="btn-next" id="btn-next" onclick="goNext()">다음 →</button>
+</div>
+
+<!-- 로딩 오버레이 -->
+<div id="loading-overlay">
+  <div style="font-size:32px;">✦</div>
+  <div class="loading-text">부고를 준비하고 있습니다<span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></div>
+  <div style="font-size:12px;color:rgba(249,246,240,.5);margin-top:4px;">약 10분 이내로 이메일이 도착합니다</div>
+</div>
+
+<script>
+const API = 'https://humandocu-server-production.up.railway.app';
+const TOTAL_STEPS = 5;
+let currentStep = 1;
+const photos = {}; // key: portrait, photo1~photo5
+
+const STEP_LABELS = ['기본 정보', '고인 이야기', '사진', '장례 정보', '최종 확인'];
+
+function updateProgress() {
+  document.getElementById('progress-label').textContent = `${currentStep} / ${TOTAL_STEPS} · ${STEP_LABELS[currentStep-1]}`;
+  for (let i = 1; i <= TOTAL_STEPS; i++) {
+    const dot = document.getElementById('dot-' + i);
+    dot.className = 'progress-dot' + (i < currentStep ? ' done' : i === currentStep ? ' active' : '');
+  }
+  document.getElementById('btn-prev').style.display = currentStep > 1 ? 'block' : 'none';
+  document.getElementById('btn-next').textContent = currentStep === TOTAL_STEPS ? '제출하기 →' : '다음 →';
+}
+
+function previewPhoto(key, input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    photos[key] = { b64: e.target.result.split(',')[1], filename: file.name };
+    const prev = document.getElementById('preview-' + key);
+    if (prev) { prev.src = e.target.result; prev.classList.add('show'); }
+  };
+  reader.readAsDataURL(file);
+}
+
+function validateStep(step) {
+  const required = {
+    1: [
+      { id: 'f-deceased', label: '고인 성함' },
+      { id: 'f-intro',    label: '고인 한 줄 소개' },
+      { id: 'f-relation', label: '고인과 상주의 관계' },
+      { id: 'f-chief',    label: '상주 성함' },
+      { id: 'f-applicant',label: '신청자 이름' },
+      { id: 'f-phone',    label: '신청자 연락처' },
+      { id: 'f-email',    label: '신청자 이메일' },
+    ],
+    2: [
+      { id: 'f-memory',  label: '가장 먼저 떠오르는 모습' },
+      { id: 'f-habit',   label: '말버릇 또는 행동' },
+      { id: 'f-shine',   label: '빛나 보이셨던 순간' },
+      { id: 'f-message', label: '끝내 전하지 못한 말' },
+      { id: 'f-history', label: '생애 주요 사건' },
+      { id: 'f-family',  label: '유가족 명단' },
+    ],
+    3: [], // 영정사진 체크
+    4: [
+      { id: 'f-funeral',   label: '발인일시' },
+      { id: 'f-hall-name', label: '장례식장 이름' },
+      { id: 'f-hall-addr', label: '장례식장 주소' },
+      { id: 'f-notice',    label: '안내 말씀' },
+      { id: 'f-account',   label: '조의금 계좌' },
+    ],
+    5: [],
+  };
+
+  if (step === 1) {
+    const rel = document.querySelector('input[name="religion"]:checked');
+    const gen = document.querySelector('input[name="gender"]:checked');
+    const birth = document.getElementById('f-birth').value;
+    const death = document.getElementById('f-death').value;
+    if (!rel) { alert('종교를 선택해주세요'); return false; }
+    if (!gen) { alert('성별을 선택해주세요'); return false; }
+    if (!birth) { alert('생년월일을 입력해주세요'); return false; }
+    if (!death) { alert('별세일을 입력해주세요'); return false; }
+  }
+  if (step === 3 && !photos['portrait']) {
+    alert('영정사진을 업로드해주세요'); return false;
+  }
+
+  for (const { id, label } of (required[step] || [])) {
+    const el = document.getElementById(id);
+    if (!el || !el.value.trim()) { alert(`${label}을(를) 입력해주세요`); el?.focus(); return false; }
+  }
+  return true;
+}
+
+function buildSummary() {
+  const el = document.getElementById('summary');
+  el.innerHTML = `
+    <strong>고인 성함</strong>: ${v('f-deceased')}<br>
+    <strong>종교</strong>: ${rv('religion')} · <strong>성별</strong>: ${rv('gender')}<br>
+    <strong>생년월일</strong>: ${v('f-birth')} · <strong>별세일</strong>: ${v('f-death')}<br>
+    <strong>상주</strong>: ${v('f-chief')} (${v('f-relation')})<br>
+    <strong>이메일</strong>: ${v('f-email')}<br>
+    <strong>발인</strong>: ${v('f-funeral')}<br>
+    <strong>장례식장</strong>: ${v('f-hall-name')}<br>
+    <strong>사진</strong>: 영정사진 ${photos['portrait']?'✓':'✗'} · 생애사진 ${['photo1','photo2','photo3','photo4','photo5'].filter(k=>photos[k]).length}장
+  `;
+}
+
+function v(id) { return document.getElementById(id)?.value.trim() || ''; }
+function rv(name) { return document.querySelector(`input[name="${name}"]:checked`)?.value || ''; }
+
+function goNext() {
+  if (!validateStep(currentStep)) return;
+  if (currentStep === TOTAL_STEPS) { doSubmit(); return; }
+  if (currentStep === TOTAL_STEPS - 1) buildSummary();
+  document.getElementById('step-' + currentStep).classList.remove('active');
+  currentStep++;
+  document.getElementById('step-' + currentStep).classList.add('active');
+  updateProgress();
+  window.scrollTo(0, 0);
+}
+
+function goPrev() {
+  if (currentStep <= 1) return;
+  document.getElementById('step-' + currentStep).classList.remove('active');
+  currentStep--;
+  document.getElementById('step-' + currentStep).classList.add('active');
+  updateProgress();
+  window.scrollTo(0, 0);
+}
+
+async function doSubmit() {
+  document.getElementById('btn-next').disabled = true;
+  document.getElementById('loading-overlay').classList.add('active');
+
+  // 사진 캡션 수집
+  const lifephotos = [];
+  for (let i = 1; i <= 5; i++) {
+    lifephotos.push({
+      index: i,
+      image_b64: photos['photo'+i]?.b64 || '',
+      caption: document.getElementById('cap-photo'+i)?.value.trim() || '',
+    });
+  }
+
+  const payload = {
+    // 기본 정보
+    deceased:    v('f-deceased'),
+    title:       v('f-title'),
+    religion:    rv('religion'),
+    gender:      rv('gender'),
+    birth:       v('f-birth'),
+    death:       v('f-death'),
+    intro:       v('f-intro'),
+    relation:    v('f-relation'),
+    chief:       v('f-chief'),
+    applicant:   v('f-applicant'),
+    phone:       v('f-phone'),
+    email:       v('f-email'),
+    // 고인 이야기
+    memory:      v('f-memory'),
+    habit:       v('f-habit'),
+    shine:       v('f-shine'),
+    last_message:v('f-message'),
+    history:     v('f-history'),
+    family:      v('f-family'),
+    // 사진
+    portrait_b64: photos['portrait']?.b64 || '',
+    life_photos:  lifephotos,
+    // 장례 정보
+    checkin:     v('f-checkin'),
+    coffin:      v('f-coffin'),
+    funeral:     v('f-funeral'),
+    hall_name:   v('f-hall-name'),
+    hall_addr:   v('f-hall-addr'),
+    hall_tel:    v('f-hall-tel'),
+    grave:       v('f-grave'),
+    notice:      v('f-notice'),
+    account:     v('f-account'),
+    // 결제 pending_id (URL 파라미터)
+    pending_id:  new URLSearchParams(location.search).get('pending_id') || '',
+  };
+
+  try {
+    const res = await fetch(API + '/webhook/advanced', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    document.getElementById('loading-overlay').classList.remove('active');
+    document.getElementById('nav-bar').style.display = 'none';
+    document.getElementById('step-5').classList.remove('active');
+    document.getElementById('done').style.display = 'block';
+    window.scrollTo(0, 0);
+  } catch(e) {
+    document.getElementById('loading-overlay').classList.remove('active');
+    document.getElementById('btn-next').disabled = false;
+    alert('오류가 발생했습니다. 다시 시도해주세요.\n' + e.message);
+  }
+}
+
+updateProgress();
+</script>
+</body>
+</html>
