@@ -45,7 +45,7 @@ a{text-decoration:none;color:inherit}
 
 /* LANG BAR */
 #lang-bar{
-  position:fixed;top:0;left:0;right:0;z-index:300;
+  position:sticky;top:0;left:0;right:0;z-index:300;
   display:flex;justify-content:flex-start;align-items:center;
   height:44px;padding:0 16px;gap:6px;
   background:#ffffff;
@@ -80,7 +80,7 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 .btn-primary{display:inline-block;background:#C8870A;color:#fff;font-size:14px;font-family:var(--sans);font-weight:700;padding:12px 36px;border-radius:var(--r);letter-spacing:.06em;cursor:pointer;border:none;transition:background .2s}
 .btn-primary:hover{background:#A86C00}
 .btn-hint{display:block;font-size:12px;color:#6B5A3A;font-family:var(--sans);font-weight:300;margin-top:8px}
-.haiku-sec{padding:32px 20px;text-align:center;background:var(--amber-lt);border-bottom:1px solid var(--amber-md)}
+.haiku-sec{padding:20px 20px;text-align:center;background:var(--amber-lt);border-bottom:1px solid var(--amber-md)}
 .sec-label{font-size:11px;font-family:var(--sans);font-weight:400;letter-spacing:.18em;color:#6B5A3A;margin-bottom:14px}
 .haiku-text{font-family:var(--serif);font-size:17px;font-weight:300;color:#1A1208;line-height:1.7;letter-spacing:.06em;margin-bottom:14px}
 .haiku-body{font-size:14px;font-family:var(--sans);font-weight:300;color:#5A4020;line-height:1.8;max-width:440px;margin:0 auto}
@@ -92,14 +92,14 @@ nav{position:fixed;top:44px;left:0;right:0;z-index:200;display:flex;align-items:
 .bridge-hook strong{color:var(--amber)}
 .bridge-body{font-size:14px;font-family:var(--sans);font-weight:300;color:#5A4020;line-height:1.8;margin-bottom:20px;max-width:480px;margin-left:auto;margin-right:auto}
 .bridge-link{display:inline-block;font-size:13px;font-family:var(--sans);font-weight:400;color:var(--amber);background:rgba(200,135,10,.08);padding:7px 18px;border-radius:20px;border:1px solid var(--amber-md);letter-spacing:.04em}
-.how-sec{padding:32px 20px;background:#FFF8ED;border-bottom:1px solid var(--amber-md)}
+.how-sec{padding:20px 20px;background:#FFF8ED;border-bottom:1px solid var(--amber-md)}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px;max-width:800px;margin-left:auto;margin-right:auto}
 .step{text-align:center;padding:24px 14px;background:#fff;border-radius:var(--r);border:1px solid var(--amber-md)}
 .step-num{font-size:22px;font-family:var(--serif);font-weight:300;color:var(--gold);margin-bottom:10px}
 .step-title{font-size:14px;font-family:var(--sans);font-weight:500;color:var(--ink);margin-bottom:6px}
 .step-desc{font-size:13px;font-family:var(--sans);font-weight:300;color:var(--ink2);line-height:1.8}
 @media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
-.sample-sec{padding:32px 20px;background:var(--amber-lt);border-bottom:1px solid var(--amber-md)}
+.sample-sec{padding:20px 20px;background:var(--amber-lt);border-bottom:1px solid var(--amber-md)}
 .sample-card{max-width:600px;margin:16px auto 0;border:1px solid var(--amber-md);border-radius:8px;overflow:hidden;background:#fff}
 .sample-header{padding:16px 20px;border-bottom:1px solid var(--amber-md);display:flex;align-items:center;gap:12px}
 .sample-avatar{width:40px;height:40px;border-radius:50%;background:var(--amber-lt);border:1px solid var(--amber-md);display:flex;align-items:center;justify-content:center;font-size:15px;font-family:var(--serif);color:var(--amber);font-weight:400;flex-shrink:0}
@@ -316,51 +316,6 @@ footer{padding:20px 48px;display:flex;justify-content:space-between;align-items:
         data-en="On KakaoTalk,<br>Instagram, or your card"
         data-jp="LINE·Instagram·<br>名刺に添えて"
         data-zh="分享到微信·<br>Instagram·名片">카톡·인스타·명함에<br>담으세요</div>
-    </div>
-  </div>
-</div>
-
-<div class="sample-sec">
-  <div class="sec-label" style="text-align:center"
-    data-ko="완성하면 이렇게 됩니다"
-    data-en="What It Looks Like"
-    data-jp="完成するとこうなります"
-    data-zh="完成后的样子">완성하면 이렇게 됩니다</div>
-  <div class="sample-card">
-    <div class="sample-header">
-      <div class="sample-avatar">비</div>
-      <div>
-        <div class="sample-name">비욘드우</div>
-        <div class="sample-meta">왜 그리 알고 싶은게 많은지, 먹고 싶은게 많은지.. 늘 바쁘네..</div>
-      </div>
-    </div>
-    <div class="sample-photos">
-      <div class="sample-photo" style="background-image:url('https://storage.tally.so/private/20171004_160933.jpg?id=KRONp8&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IktST05wOCIsImZvcm1JZCI6IlpqR3BrMCIsImlhdCI6MTc3NzgxMDUzM30.qlqaeF0l8fbvg9DPA7aOv1hIymMpn4TJ0Nv7IGpcJjY&signature=c40eac3ecb13a7c2a56d4fe0551a1c6857a3455e9037c8c292c3be98bd89b8bb');background-size:cover;background-position:center"></div>
-      <div class="sample-photo" style="background-image:url('https://storage.tally.so/private/IMG_0021.jpg?id=oxgayX&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im94Z2F5WCIsImZvcm1JZCI6IlpqR3BrMCIsImlhdCI6MTc3NzgxMDUzM30.9cllR7uW1kjqxi5DgWFfpepWgcoyAcW7hX0nrfFYrYw&signature=25846571e240d32e09274848b76fce633447216c89ef100be09d534ea39ce0ef');background-size:cover;background-position:center"></div>
-      <div class="sample-photo" style="background-image:url('https://storage.tally.so/private/20120721_115711.jpg.jpeg?id=pZ56rq&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InBaNTZycSIsImZvcm1JZCI6IlpqR3BrMCIsImlhdCI6MTc3NzgxMDUzM30.fbXQKheuwfYq3qIEIwovK6rcphFW_PyY4cIcv3BsX5Q&signature=5e28b9dedea2f8b38fc90f2193503c5352c9e6b6843502057cd9f8d8d8e724bd');background-size:cover;background-position:center"></div>
-      <div class="sample-photo" style="background-image:url('https://storage.tally.so/private/20200222_173501.jpg?id=OVrel7&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ik9WcmVsNyIsImZvcm1JZCI6IlpqR3BrMCIsImlhdCI6MTc3NzgxMDUzM30.S8d04EReMfB95a89DRUYT63evRCRQ0DabNCXzZWNh8w&signature=c93e39f6929c521260e55a5582b13c9156365f931a55ea5670c208439667dec2');background-size:cover;background-position:center"></div>
-      <div class="sample-photo" style="background-image:url('https://storage.tally.so/private/20170723_121136.jpg?id=pZ56Nb&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InBaNTZOYiIsImZvcm1JZCI6IlpqR3BrMCIsImlhdCI6MTc3NzgxMDUzM30.sVgZX6Ro8RnBvaMaU2ZkmhpQfcIF92ObXG2fpzg8hr0&signature=efd5afe224002ff2d6eb2f9517e3120510a23ddda9e60c81ec0dbdf9b6138212');background-size:cover;background-position:center"></div>
-      <div class="sample-photo" style="background-image:url('https://storage.tally.so/private/IMG_5618.JPG?id=oxgaee&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im94Z2FlZSIsImZvcm1JZCI6IlpqR3BrMCIsImlhdCI6MTc3NzgxMDUzM30.GquEGaLMysi5gIl2xBSmxP8cx7PZEepxJ1jaTYYdrp4&signature=e93b0108d0b57045a50b59cd1c26342a070edd112604cb508f704653013d3bcf');background-size:cover;background-position:center"></div>
-    </div>
-    <div class="sample-poem-wrap">
-      <div class="sample-poem-label">AI가 다듬은 시</div>
-      <div class="sample-poem">
-        알고 싶은 것들이 나를 몰았다, 바람처럼<br>
-        형제들 사이에서 세상을 열던 손으로 아내의 손을 잡았고<br>
-        좀만 더 기다려, 내가 햇볕이 되면 갈게
-      </div>
-    </div>
-    <div class="sample-summary-wrap">
-      <div class="sample-summary-label">To. 아내에게</div>
-      <div class="sample-summary">"좀만 더 기다려. 딱 기다려.. 내 곧.."</div>
-    </div>
-    <div class="sample-link-box">
-      <span class="sample-link-url">humandocu.com/sixshot/eb9809fbcb85</span>
-      <a href="https://humandocu-server-production.up.railway.app/sixshot/eb9809fbcb85" target="_blank" class="sample-link-copy"
-        data-ko="전체보기 →"
-        data-en="View Full →"
-        data-jp="全体を見る →"
-        data-zh="查看全文 →">전체보기 →</a>
     </div>
   </div>
 </div>
