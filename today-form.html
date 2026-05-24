@@ -356,7 +356,9 @@ function setPublic(val) {
 
 // ── 메시지 필드 토글 ──
 function toggleMsg(val) {
-  document.getElementById('msg-wrap').style.display = val.trim() ? 'block' : 'none';
+  var show = val.trim() !== '';
+  document.getElementById('msg-wrap').style.display = show ? 'block' : 'none';
+  if (!show) document.getElementById('f-msg').value = '';
 }
 
 // ── 사진 슬롯 ──
