@@ -231,6 +231,14 @@ textarea::placeholder{color:var(--gold);opacity:.65}
     </div>
   </div>
 
+  <!-- 还想说的话（可选）-->
+  <div class="q-block">
+    <div class="q-num">08 · 还有什么想说的吗...</div>
+    <div class="q-title">如果今天还有什么想留下来的，请随意写。AI会读取并融入今天的记录里。</div>
+    <div class="q-sub">💡 可选</div>
+    <textarea id="f-extra" rows="3" placeholder="还有什么想说的吗..."></textarea>
+  </div>
+
   <!-- 07 公开设置 -->
   <div class="q-block">
     <div class="q-num">07 · 公开设置 <span style="color:var(--green)">*</span></div>
@@ -336,6 +344,7 @@ function saveLS() {
       identity: document.getElementById('f-today').value.trim(),
       last_to:  document.getElementById('f-to').value.trim(),
       last_msg: document.getElementById('f-msg').value.trim(),
+      extra:    (document.getElementById('f-extra') ? document.getElementById('f-extra').value.trim() : ''),
       is_public: isPublic,
     }));
   } catch(e) {}
@@ -352,6 +361,7 @@ function loadLS() {
     if (d.identity) document.getElementById('f-today').value   = d.identity;
     if (d.last_to)  { document.getElementById('f-to').value = d.last_to; toggleMsg(d.last_to); }
     if (d.last_msg) document.getElementById('f-msg').value = d.last_msg;
+    if (d.extra && document.getElementById('f-extra')) document.getElementById('f-extra').value = d.extra;
     if (typeof d.is_public === 'boolean') setPublic(d.is_public);
     return !!(d.name || d.email);
   } catch(e) { return false; }
