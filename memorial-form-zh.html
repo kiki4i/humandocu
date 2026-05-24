@@ -104,7 +104,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 
 <!-- 진행바 -->
 <div class="progress-bar">
-  <span class="progress-label" id="progress-label">1 / 5 · 기본 정보</span>
+  <span class="progress-label" id="progress-label">1 / 5 · 基本信息</span>
   <div class="progress-steps">
     <div class="progress-dot active" id="dot-1"></div>
     <div class="progress-dot" id="dot-2"></div>
@@ -118,7 +118,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="step active" id="step-1">
   <div class="step-inner">
     <div class="step-kicker">MEMORIAL PREMIUM</div>
-    <div class="step-title">고인과 상주에 대해<br>알려주세요</div>
+    <div class="step-title">请告诉我们<br>逝者与家属的信息</div>
     <div class="step-sub">您输入的信息仅用于创建讣告页面</div>
 
     <div class="q-block">
@@ -195,7 +195,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="step" id="step-2">
   <div class="step-inner">
     <div class="step-kicker">STEP 2 · 逝者的故事</div>
-    <div class="step-title">기억 속의<br>그 모습을 담아주세요</div>
+    <div class="step-title">请留下记忆中<br>他/她的模样</div>
     <div class="step-sub">AI将根据这些故事撰写追悼文</div>
 
     <div class="q-block">
@@ -235,7 +235,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="step" id="step-3">
   <div class="step-inner">
     <div class="step-kicker">STEP 3 · 照片</div>
-    <div class="step-title">고인의 모습을<br>사진으로 남겨주세요</div>
+    <div class="step-title">请用照片<br>留下逝者的样貌</div>
     <div class="step-sub">遗像将作为主图，生涯照片将用于幻灯片展示</div>
 
     <div class="photo-slot">
@@ -305,7 +305,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="step" id="step-4">
   <div class="step-inner">
     <div class="step-kicker">STEP 4 · 葬礼信息</div>
-    <div class="step-title">장례 일정과<br>장소를 알려주세요</div>
+    <div class="step-title">请告知葬礼日程<br>与地点</div>
     <div class="step-sub">这些信息将显示在讣告页面上</div>
 
     <div class="q-block">
@@ -353,8 +353,8 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="step" id="step-5">
   <div class="step-inner">
     <div class="step-kicker">STEP 5 · 最终确认</div>
-    <div class="step-title">모든 준비가<br>완료되었습니다</div>
-    <div class="step-sub">제출하면 약 10분 이내로 完成的讣告链接将发送至此邮箱</div>
+    <div class="step-title">一切准备就绪<br>可以提交了</div>
+    <div class="step-sub">提交后约10分钟内，完成的讣告链接将发送至此邮箱。</div>
 
     <div id="summary" style="background:#fff;border:1px solid #e0d5c0;border-radius:var(--r);padding:20px;font-size:13px;color:var(--ink2);line-height:2;"></div>
 
@@ -417,8 +417,8 @@ function previewPhoto(key, input) {
 function validateStep(step) {
   const required = {
     1: [
-      { id: 'f-deceased', label: '고인 성함' },
-      { id: 'f-intro',    label: '고인 한 줄 소개' },
+      { id: 'f-deceased', label: '逝者姓名' },
+      { id: 'f-intro',    label: '一句话介绍' },
       { id: 'f-relation', label: '고인과 상주의 관계' },
       { id: 'f-chief',    label: '상주 성함' },
       { id: 'f-applicant',label: '신청자 이름' },
