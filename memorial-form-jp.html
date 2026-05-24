@@ -104,7 +104,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 
 <!-- 진행바 -->
 <div class="progress-bar">
-  <span class="progress-label" id="progress-label">1 / 5 · 기본 정보</span>
+  <span class="progress-label" id="progress-label">1 / 5 · 基本情報</span>
   <div class="progress-steps">
     <div class="progress-dot active" id="dot-1"></div>
     <div class="progress-dot" id="dot-2"></div>
@@ -118,7 +118,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="step active" id="step-1">
   <div class="step-inner">
     <div class="step-kicker">MEMORIAL PREMIUM</div>
-    <div class="step-title">고인과 상주에 대해<br>알려주세요</div>
+    <div class="step-title">故人と喪主について<br>教えてください</div>
     <div class="step-sub">ご入力いただいた情報は訃報ページ作成の目的のみに使用されます</div>
 
     <div class="q-block">
@@ -195,7 +195,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="step" id="step-2">
   <div class="step-inner">
     <div class="step-kicker">STEP 2 · 故人の物語</div>
-    <div class="step-title">기억 속의<br>그 모습을 담아주세요</div>
+    <div class="step-title">記憶の中の<br>その姿を残してください</div>
     <div class="step-sub">AIがこれらの話を基に追悼文を作成します</div>
 
     <div class="q-block">
@@ -235,7 +235,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="step" id="step-3">
   <div class="step-inner">
     <div class="step-kicker">STEP 3 · 写真</div>
-    <div class="step-title">고인의 모습을<br>사진으로 남겨주세요</div>
+    <div class="step-title">故人のお姿を<br>写真で残してください</div>
     <div class="step-sub">遺影はメイン画像として、生涯写真はスライドショーに使用されます</div>
 
     <div class="photo-slot">
@@ -305,7 +305,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="step" id="step-4">
   <div class="step-inner">
     <div class="step-kicker">STEP 4 · 葬儀情報</div>
-    <div class="step-title">장례 일정과<br>장소를 알려주세요</div>
+    <div class="step-title">葬儀の日程と<br>場所を教えてください</div>
     <div class="step-sub">訃報ページに表示される葬儀情報です</div>
 
     <div class="q-block">
@@ -353,8 +353,8 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="step" id="step-5">
   <div class="step-inner">
     <div class="step-kicker">STEP 5 · 最終確認</div>
-    <div class="step-title">모든 준비가<br>완료되었습니다</div>
-    <div class="step-sub">제출하면 약 10분 이내로 完成した訃報リンクをメールでお送りします</div>
+    <div class="step-title">すべての準備が<br>整いました</div>
+    <div class="step-sub">送信後、約10分以内に完成した訃報リンクをメールでお送りします。</div>
 
     <div id="summary" style="background:#fff;border:1px solid #e0d5c0;border-radius:var(--r);padding:20px;font-size:13px;color:var(--ink2);line-height:2;"></div>
 
@@ -417,8 +417,8 @@ function previewPhoto(key, input) {
 function validateStep(step) {
   const required = {
     1: [
-      { id: 'f-deceased', label: '고인 성함' },
-      { id: 'f-intro',    label: '고인 한 줄 소개' },
+      { id: 'f-deceased', label: '故人のお名前' },
+      { id: 'f-intro',    label: '故人の一言紹介' },
       { id: 'f-relation', label: '고인과 상주의 관계' },
       { id: 'f-chief',    label: '상주 성함' },
       { id: 'f-applicant',label: '신청자 이름' },
