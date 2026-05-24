@@ -232,6 +232,14 @@ textarea::placeholder{color:var(--gold);opacity:.65}
     </div>
   </div>
 
+  <!-- 더 하고 싶은 말 (선택) -->
+  <div class="q-block">
+    <div class="q-num">08 · 더 하고 싶은 말이 있다면...</div>
+    <div class="q-title">지금 이 순간, 더 남기고 싶은 이야기가 있다면 자유롭게 써주세요. AI가 읽고 오늘의 기록에 담아드려요.</div>
+    <div class="q-sub">💡 선택 사항이에요</div>
+    <textarea id="f-extra" rows="3" placeholder="더 하고 싶은 말이 있다면..."></textarea>
+  </div>
+
   <!-- 07 공개 여부 -->
   <div class="q-block">
     <div class="q-num">07 · 공개 설정 <span style="color:var(--green)">*</span></div>
@@ -327,6 +335,7 @@ function saveLS() {
       identity: document.getElementById('f-today').value.trim(),
       last_to:  document.getElementById('f-to').value.trim(),
       last_msg: document.getElementById('f-msg').value.trim(),
+      extra:    (document.getElementById('f-extra') ? document.getElementById('f-extra').value.trim() : ''),
       is_public: isPublic,
     }));
   } catch(e) {}
@@ -343,6 +352,7 @@ function loadLS() {
     if (d.identity) document.getElementById('f-today').value   = d.identity;
     if (d.last_to)  { document.getElementById('f-to').value = d.last_to; toggleMsg(d.last_to); }
     if (d.last_msg) document.getElementById('f-msg').value = d.last_msg;
+    if (d.extra && document.getElementById('f-extra')) document.getElementById('f-extra').value = d.extra;
     if (typeof d.is_public === 'boolean') setPublic(d.is_public);
     return !!(d.name || d.email);
   } catch(e) { return false; }
