@@ -1229,7 +1229,9 @@ async function loadFeed(reset) {
         moreBtn.style.display = 'block';
       }
     }
+    feedLoading = false;
   } catch(e) {
+    feedLoading = false;
     grid.innerHTML = '<div style="text-align:center;padding:40px 0;color:#8B6A2E;font-size:13px;">잠시 후 다시 시도해주세요</div>';
   }
 }
