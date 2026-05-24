@@ -363,7 +363,9 @@ function setPublic(val) {
 }
 
 function toggleMsg(val) {
-  document.getElementById('msg-wrap').style.display = val.trim() ? 'block' : 'none';
+  var show = val.trim() !== '';
+  document.getElementById('msg-wrap').style.display = show ? 'block' : 'none';
+  if (!show) document.getElementById('f-msg').value = '';
 }
 
 function renderShots() {
