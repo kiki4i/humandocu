@@ -3,11 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>휴먼다큐 · 필모그래피</title>
+<title>휴먼다큐 · 페이지 이동 중...</title>
 <script>
-  const id = new URLSearchParams(window.location.search).get('id');
+  const params = new URLSearchParams(window.location.search);
+  const id   = params.get('id');
+  const type = params.get('type') || 'sixshot';
+  const BASE = 'https://humandocu-server-production.up.railway.app';
   if (id) {
-    window.location.replace('https://humandocu-server-production.up.railway.app/sixshot/' + id);
+    if (type === 'today') {
+      window.location.replace(BASE + '/today/' + id);
+    } else {
+      window.location.replace(BASE + '/sixshot/' + id);
+    }
   } else {
     window.location.replace('https://humandocu.com');
   }
