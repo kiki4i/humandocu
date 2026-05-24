@@ -377,6 +377,13 @@ textarea::placeholder{color:var(--gold);opacity:.7}
   </div>
 
   <div class="q-block">
+    <label class="q-label" style="color:var(--accent)">✦ 想多介绍一下自己吗？</label>
+    <textarea id="f-extra" rows="4"
+      placeholder="在这6张照片之外，还有什么想留下来的关于你自己的故事吗..." style="margin-top:8px"></textarea>
+    <div style="font-size:11px;color:var(--muted);margin-top:6px">💡 可选 · AI会将其自然融入您的故事</div>
+  </div>
+
+    <div class="q-block">
     <label class="q-label">留言（可选）</label>
     <div style="font-size:12px;color:var(--ink3);margin-bottom:12px">누군가에게 전하고 싶은 말이 있다면</div>
     <input type="text" id="f-to" placeholder="예: 나의 딸에게" maxlength="30" oninput="toggleMsg(this.value)">
@@ -792,6 +799,7 @@ async function doSubmit() {
         self_intro:   intro,
         message_to:   msgTo,
         message_body: msgBody,
+        extra:        (document.getElementById('f-extra') ? document.getElementById('f-extra').value.trim() : ''),
       })
     });
     const data = await res.json();
