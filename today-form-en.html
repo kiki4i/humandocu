@@ -232,6 +232,14 @@ textarea::placeholder{color:var(--gold);opacity:.65}
     </div>
   </div>
 
+  <!-- More to say (optional) -->
+  <div class="q-block">
+    <div class="q-num">08 · Anything more you want to say?</div>
+    <div class="q-title">Anything else you want to capture from today? Claude will read it and reflect it in your poem.</div>
+    <div class="q-sub">💡 Optional</div>
+    <textarea id="f-extra" rows="3" placeholder="Anything more you want to say?"></textarea>
+  </div>
+
   <!-- 07 Visibility -->
   <div class="q-block">
     <div class="q-num">07 · Visibility <span style="color:var(--green)">*</span></div>
@@ -337,6 +345,7 @@ function saveLS() {
       identity: document.getElementById('f-today').value.trim(),
       last_to:  document.getElementById('f-to').value.trim(),
       last_msg: document.getElementById('f-msg').value.trim(),
+      extra:    (document.getElementById('f-extra') ? document.getElementById('f-extra').value.trim() : ''),
       is_public: isPublic,
     }));
   } catch(e) {}
@@ -353,6 +362,7 @@ function loadLS() {
     if (d.identity) document.getElementById('f-today').value   = d.identity;
     if (d.last_to)  { document.getElementById('f-to').value = d.last_to; toggleMsg(d.last_to); }
     if (d.last_msg) document.getElementById('f-msg').value = d.last_msg;
+    if (d.extra && document.getElementById('f-extra')) document.getElementById('f-extra').value = d.extra;
     if (typeof d.is_public === 'boolean') setPublic(d.is_public);
     return !!(d.name || d.email);
   } catch(e) { return false; }
