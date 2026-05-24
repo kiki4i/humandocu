@@ -350,8 +350,8 @@ function loadLS() {
     if (d.nickname) document.getElementById('f-nickname').value = d.nickname;
     if (d.email)    document.getElementById('f-email').value    = d.email;
     if (d.identity) document.getElementById('f-today').value   = d.identity;
-    if (d.last_to)  document.getElementById('f-to').value      = d.last_to;
-    if (d.last_msg) document.getElementById('f-msg').value     = d.last_msg;
+    if (d.last_to)  { document.getElementById('f-to').value = d.last_to; toggleMsg(d.last_to); }
+    if (d.last_msg) document.getElementById('f-msg').value = d.last_msg;
     if (typeof d.is_public === 'boolean') setPublic(d.is_public);
     return !!(d.name || d.email);
   } catch(e) { return false; }
