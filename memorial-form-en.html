@@ -118,7 +118,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="step active" id="step-1">
   <div class="step-inner">
     <div class="step-kicker">MEMORIAL PREMIUM</div>
-    <div class="step-title">고인과 상주에 대해<br>알려주세요</div>
+    <div class="step-title">Tell us about the<br>deceased and family</div>
     <div class="step-sub">Your information is used solely for creating the memorial page</div>
 
     <div class="q-block">
@@ -195,7 +195,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="step" id="step-2">
   <div class="step-inner">
     <div class="step-kicker">STEP 2 · The Deceased's Story</div>
-    <div class="step-title">기억 속의<br>그 모습을 담아주세요</div>
+    <div class="step-title">Capture the memory<br>as you remember them</div>
     <div class="step-sub">AI will create a tribute based on these stories</div>
 
     <div class="q-block">
@@ -235,7 +235,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="step" id="step-3">
   <div class="step-inner">
     <div class="step-kicker">STEP 3 · Photos</div>
-    <div class="step-title">고인의 모습을<br>사진으로 남겨주세요</div>
+    <div class="step-title">Add photos<br>of the deceased</div>
     <div class="step-sub">The portrait will be the hero image; life photos will be used in a slideshow</div>
 
     <div class="photo-slot">
@@ -305,7 +305,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="step" id="step-4">
   <div class="step-inner">
     <div class="step-kicker">STEP 4 · Funeral Information</div>
-    <div class="step-title">장례 일정과<br>장소를 알려주세요</div>
+    <div class="step-title">Funeral schedule<br>and location</div>
     <div class="step-sub">This information will appear on the memorial page</div>
 
     <div class="q-block">
@@ -353,8 +353,8 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 <div class="step" id="step-5">
   <div class="step-inner">
     <div class="step-kicker">STEP 5 · Final Review</div>
-    <div class="step-title">모든 준비가<br>완료되었습니다</div>
-    <div class="step-sub">제출하면 약 10분 이내로 The completed memorial link will be sent to this email</div>
+    <div class="step-title">All set —<br>ready to submit</div>
+    <div class="step-sub">The completed memorial link will be sent to this email within about 10 minutes.</div>
 
     <div id="summary" style="background:#fff;border:1px solid #e0d5c0;border-radius:var(--r);padding:20px;font-size:13px;color:var(--ink2);line-height:2;"></div>
 
@@ -417,8 +417,8 @@ function previewPhoto(key, input) {
 function validateStep(step) {
   const required = {
     1: [
-      { id: 'f-deceased', label: '고인 성함' },
-      { id: 'f-intro',    label: '고인 한 줄 소개' },
+      { id: 'f-deceased', label: 'Deceased Name' },
+      { id: 'f-intro',    label: 'One-line Introduction' },
       { id: 'f-relation', label: '고인과 상주의 관계' },
       { id: 'f-chief',    label: '상주 성함' },
       { id: 'f-applicant',label: '신청자 이름' },
