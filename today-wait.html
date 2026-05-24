@@ -190,12 +190,6 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
   var photoList  = [];
 
   // ── 언어 감지 ──
-  var COPY = {
-    ko: "지금 이 순간에도 누군가가 오늘을 기록하고 있습니다...",
-    en: "Someone out there is recording their today, right now...",
-    ja: "今この瞬間も、誰かが今日を記録しています...",
-    zh: "就在此刻，有人正在记录他们的今天..."
-  };
   function getLang() {
     var l = (params.get("lang") || localStorage.getItem("lang") || navigator.language || "ko").toLowerCase();
     if (l.startsWith("ja")) return "ja";
@@ -203,6 +197,50 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
     if (l.startsWith("en")) return "en";
     return "ko";
   }
+
+  // ── 대기 문구 (사진과 무관, 과정 설명) ──
+  var MESSAGES = {
+    ko: [
+      "사진을 읽고 있어요...",
+      "오늘의 색감과 분위기를 분석하는 중...",
+      "시 한 편을 짓고 있어요...",
+      "오늘 하루를 언어로 옮기는 중...",
+      "조금만 더 기다려주세요...",
+      "당신의 오늘을 정리하고 있어요...",
+      "해시태그를 고르는 중...",
+      "거의 다 됐어요..."
+    ],
+    en: [
+      "Reading your photos...",
+      "Analyzing the mood and colors of your day...",
+      "Writing a poem just for you...",
+      "Turning today into words...",
+      "Almost there...",
+      "Curating your day...",
+      "Picking the right hashtags...",
+      "Just a moment more..."
+    ],
+    ja: [
+      "写真を読み込んでいます...",
+      "今日の色合いと雰囲気を分析中...",
+      "詩を一編書いています...",
+      "今日を言葉に変換中...",
+      "もう少しお待ちください...",
+      "あなたの一日を整理しています...",
+      "ハッシュタグを選んでいます...",
+      "もうすぐできあがります..."
+    ],
+    zh: [
+      "正在读取您的照片...",
+      "分析今天的色调与氛围...",
+      "正在为您创作一首诗...",
+      "将今天转化为文字中...",
+      "请再稍等一下...",
+      "正在整理您的今天...",
+      "挑选合适的标签...",
+      "马上就好..."
+    ]
+  };
 
   // ── 텍스트 슬라이드 전환 ──
   var dots = dotsEl.querySelectorAll(".dot");
@@ -238,7 +276,21 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
       return '<div class="dot' + (i === 0 ? " active" : "") + '"></div>';
     }).join("");
 
-    pCopy.textContent = COPY[getLang()];
+    var lang = getLang();
+    var msgs = MESSAGES[lang];
+    var nickname = params.get("nickname") || params.get("name") || "";
+    var msgIdx = 0;
+
+    function updateCopy() {
+      var prefix = nickname ? (lang === "ko" ? nickname + "님의 오늘, " :
+                               lang === "ja" ? nickname + "さんの今日、" :
+                               lang === "zh" ? nickname + "的今天，" :
+                               nickname + "'s today — ") : "";
+      pCopy.textContent = prefix + msgs[msgIdx % msgs.length];
+      msgIdx++;
+    }
+    updateCopy();
+    setInterval(updateCopy, 3000);
 
     slidesEl.style.display = "none";
     photoShow.classList.add("on");
