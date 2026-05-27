@@ -650,7 +650,7 @@ async function doSubmit() {
   }));
 
   try {
-    const res = await fetch(API + '/api/today/submit-v2', {
+    const res = await fetch(API + '/api/today/submit-b64', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
