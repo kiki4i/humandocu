@@ -331,6 +331,7 @@ const SHOT_TITLES = ['첫 번째 장면','두 번째 장면','세 번째 장면'
 
 let isPublic = true;
 let shots = []; // [{b64, caption}]
+let featuredIdx = 0; // 오대(오늘의 대표) 인덱스 — 기본값 0(첫 번째)
 
 // ── localStorage 저장/로드 ──
 function saveLS() {
@@ -388,13 +389,23 @@ function renderShots() {
   shots.forEach((s, i) => {
     const card = document.createElement('div');
     card.className = 'shot-card';
+    const isOdae = (i === featuredIdx && s.b64);
+    const canSetOdae = (s.b64 && i !== featuredIdx);
+    const odaeBadge = isOdae
+      ? `<span style="background:#C8870A;color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;margin-left:8px;letter-spacing:.04em">👑 오대</span>`
+      : '';
+    const odaeBtn = canSetOdae
+      ? `<button onclick="event.stopPropagation();setFeatured(${i})" style="margin-left:auto;background:transparent;border:1.5px solid var(--amber);color:var(--amber);border-radius:20px;font-size:11px;padding:4px 12px;cursor:pointer;font-family:inherit;font-weight:500;flex-shrink:0;line-height:1.4">⭐ 오대로 지정</button>`
+      : '';
     const imgHtml = s.b64
       ? `<img src="${s.b64}"><button class="shot-change-btn" onclick="event.stopPropagation();pickPhoto(${i})">바꾸기</button>`
       : `<div class="ph-icon">📷</div><div class="ph-text">탭해서 사진 선택</div>`;
     card.innerHTML = `
-      <div class="shot-card-head">
+      <div class="shot-card-head" style="display:flex;align-items:center;gap:0;padding-right:${canSetOdae ? '10px' : '0'}">
         <div class="shot-badge">SHOT ${i+1}</div>
-        <div class="shot-label">${SHOT_TITLES[i] || (i+1)+'번째 장면'}</div>
+        ${odaeBadge}
+        <div class="shot-label" style="flex:1">${SHOT_TITLES[i] || (i+1)+'번째 장면'}</div>
+        ${odaeBtn}
       </div>
       <div class="shot-upload-area" id="spa${i}" onclick="pickPhoto(${i})">${imgHtml}</div>
       ${s.b64 ? `<div class="shot-caption-wrap">
@@ -405,6 +416,11 @@ function renderShots() {
     stack.appendChild(card);
   });
   document.getElementById('add-shot-btn').style.display = shots.length >= MAX_SHOTS ? 'none' : 'flex';
+}
+
+function setFeatured(i) {
+  featuredIdx = i;
+  renderShots();
 }
 
 function addShot() {
@@ -646,10 +662,16 @@ async function doSubmit() {
   document.getElementById('submit-btn').disabled = true;
   showWaitOverlay();
 
-  const shotPayload = filled.map((s) => ({
+  // 오대(featuredIdx)를 반드시 index=1로 — 서버에서 shot_images["1"]이 오대
+  const odaeShot = shots[featuredIdx];
+  const orderedFilled = [];
+  if (odaeShot?.b64) orderedFilled.push(odaeShot);
+  shots.forEach((s, i) => { if (i !== featuredIdx && s?.b64) orderedFilled.push(s); });
+
+  const shotPayload = orderedFilled.map((s, i) => ({
     image_b64: s.b64,
     caption:   s.caption || '',
-    index:     shots.indexOf(s) + 1,
+    index:     i + 1,
   }));
 
   try {
@@ -694,8 +716,7 @@ async function doSubmit() {
 
 // ── 초기화 ──
 (function init() {
-  // 기본 슬롯 2개
-  shots.push({b64: null, caption: ''});
+  // 기본 슬롯 1개 (첫 번째가 오대 기본값)
   shots.push({b64: null, caption: ''});
   renderShots();
 
