@@ -207,6 +207,10 @@ textarea::placeholder{color:var(--gold);opacity:.65}
     <div class="q-num">04 · 오늘 사진 (최대 6장)</div>
     <div class="q-title">오늘 찍은 사진을 올려주세요 <span style="color:var(--green)">*</span></div>
     <div class="q-sub">밥, 하늘, 사람, 풍경 — 무엇이든 괜찮아요<br>사진마다 짧은 설명도 써주세요</div>
+    <div style="margin-bottom:14px;padding:10px 14px;background:rgba(200,135,10,.07);border-radius:8px;border-left:3px solid var(--amber);font-size:12px;color:var(--ink2);line-height:1.7">
+      👑 <strong>첫 번째 사진이 오대(오늘의 대표)</strong>가 됩니다.<br>
+      결과 페이지에서 오대 카드로 저장해 인스타·카카오·배경화면에 바로 쓸 수 있어요.
+    </div>
     <div class="shots-stack" id="shots-stack"></div>
     <button class="add-shot-btn" id="add-shot-btn" onclick="addShot()" style="margin-top:14px">
       <span>＋ 사진 추가</span>
@@ -389,7 +393,7 @@ function renderShots() {
   shots.forEach((s, i) => {
     const card = document.createElement('div');
     card.className = 'shot-card';
-    const isOdae = (i === featuredIdx && s.b64);
+    const isOdae = (i === featuredIdx);
     const canSetOdae = (s.b64 && i !== featuredIdx);
     const odaeBadge = isOdae
       ? `<span style="background:#C8870A;color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;margin-left:8px;letter-spacing:.04em">👑 오대</span>`
