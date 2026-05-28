@@ -90,23 +90,9 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
 
   <!-- SLIDE 2 — 하이쿠란? -->
   <div class="slide" id="s1">
-    <div class="kicker">✦ 하이쿠란 무엇인가요?</div>
-    <div class="slide-title">5 · 7 · 5 음절의<br>짧은 시 형식입니다</div>
-    <div class="haiku-lines">
-      <div class="haiku-line">
-        <span class="haiku-num">5</span>
-        <span class="haiku-text"><span class="haiku-accent">짧기 때문에</span></span>
-      </div>
-      <div class="haiku-line">
-        <span class="haiku-num">7</span>
-        <span class="haiku-text"><span class="haiku-accent">오히려 본질만 남습니다</span></span>
-      </div>
-      <div class="haiku-line">
-        <span class="haiku-num">5</span>
-        <span class="haiku-text"><span class="haiku-accent">오늘이 그래요</span></span>
-      </div>
-    </div>
-    <div class="slide-small">당신의 오늘도 그렇게 정리됩니다</div>
+    <div class="kicker">오늘을 담은 시</div>
+    <div class="slide-title">사진과 글을 보고 딱 맞는 톤으로 써드려요</div>
+    <div class="slide-body">감동명작 · 유쾌한코미디 · 담백한일상 · 열정다큐</div>
   </div>
 
   <!-- SLIDE 3 — 오늘 하루 -->
@@ -278,15 +264,10 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow:hidden}
 
     var lang = getLang();
     var msgs = MESSAGES[lang];
-    var nickname = params.get("nickname") || params.get("name") || "";
     var msgIdx = 0;
 
     function updateCopy() {
-      var prefix = nickname ? (lang === "ko" ? nickname + "님의 오늘, " :
-                               lang === "ja" ? nickname + "さんの今日、" :
-                               lang === "zh" ? nickname + "的今天，" :
-                               nickname + "'s today — ") : "";
-      pCopy.textContent = prefix + msgs[msgIdx % msgs.length];
+      pCopy.textContent = msgs[msgIdx % msgs.length];
       msgIdx++;
     }
     updateCopy();
