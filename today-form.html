@@ -668,6 +668,16 @@ async function doSubmit() {
     const data = await res.json();
     if (!res.ok || data.status === 'error') throw new Error(data.error || '오류가 발생했어요');
     const doc_id = data.id || data.doc_id;
+    // 제출 완료 후 일회성 데이터 초기화 (이름·이메일은 유지)
+    try {
+      const ls = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
+      delete ls.identity;
+      delete ls.last_to;
+      delete ls.last_msg;
+      delete ls.extra;
+      localStorage.setItem(LS_KEY, JSON.stringify(ls));
+    } catch(e) {}
+    shots = [];
     finishWaitOverlay();
     setTimeout(function() {
       window.location.href = API + '/today/' + doc_id;
