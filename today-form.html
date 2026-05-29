@@ -139,7 +139,6 @@ textarea::placeholder{color:var(--gold);opacity:.65}
 
 /* ── 장르 선택 ── */
 .genre-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.genre-grid .genre-card:last-child:nth-child(odd){grid-column:1/-1}
 .genre-card{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:14px 16px;background:#fff;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;transition:border-color .18s,background .18s;user-select:none;-webkit-tap-highlight-color:transparent}
 .genre-card:active{opacity:.85}
 .genre-card.selected{color:#fff}
@@ -232,7 +231,7 @@ textarea::placeholder{color:var(--gold);opacity:.65}
   <div class="q-block">
     <div class="q-num">05 · 장르</div>
     <div class="q-title">🎬 오늘 내 하루의 장르는? <span style="color:var(--green)">*</span></div>
-    <div class="q-sub">오늘 하루가 영화라면 어떤 장르일까요?</div>
+    <div class="q-sub">오늘 하루가 영화라면 어떤 장르일까요? · <strong>6개 중 하나를 꼭 골라주세요</strong></div>
     <div class="genre-grid" id="genre-grid">
       <div class="genre-card" data-genre="감동명작"   data-color="#C8960C" onclick="selectGenre(this)">
         <span class="genre-icon">🎭</span>
@@ -258,6 +257,11 @@ textarea::placeholder{color:var(--gold);opacity:.65}
         <span class="genre-icon">😂</span>
         <span class="genre-name">병맛 코미디</span>
         <span class="genre-sub">이게 내 인생이다</span>
+      </div>
+      <div class="genre-card" data-genre="반전 스릴러" data-color="#6C3483" onclick="selectGenre(this)">
+        <span class="genre-icon">😱</span>
+        <span class="genre-name">반전 스릴러</span>
+        <span class="genre-sub">예상 못한 하루였다</span>
       </div>
     </div>
   </div>
