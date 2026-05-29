@@ -137,6 +137,17 @@ textarea::placeholder{color:var(--gold);opacity:.65}
 .wo-dot{width:6px;height:6px;border-radius:50%;background:rgba(200,135,10,.2);transition:background .4s,transform .4s}
 .wo-dot.active{background:#C8870A;transform:scale(1.25)}
 
+/* ── 장르 선택 ── */
+.genre-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.genre-grid .genre-card:last-child:nth-child(odd){grid-column:1/-1}
+.genre-card{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:14px 16px;background:#fff;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;transition:border-color .18s,background .18s;user-select:none;-webkit-tap-highlight-color:transparent}
+.genre-card:active{opacity:.85}
+.genre-card.selected{color:#fff}
+.genre-card.selected .genre-sub{color:rgba(255,255,255,.75)}
+.genre-icon{font-size:22px;line-height:1;margin-bottom:2px}
+.genre-name{font-size:14px;font-weight:600;color:inherit;line-height:1.3}
+.genre-sub{font-size:11px;color:var(--ink3);line-height:1.5;font-weight:300}
+
 /* ── 사진 슬라이드쇼 (wait overlay) ── */
 .wo-photo-show{display:none;position:absolute;top:0;left:0;right:0;height:75vh;overflow:hidden;z-index:1}
 .wo-photo-show.active{display:block}
@@ -217,9 +228,43 @@ textarea::placeholder{color:var(--gold);opacity:.65}
     </button>
   </div>
 
-  <!-- 05 오늘 하루 한 문장 -->
+  <!-- 05 장르 선택 -->
   <div class="q-block">
-    <div class="q-num">05 · 오늘 하루</div>
+    <div class="q-num">05 · 장르</div>
+    <div class="q-title">🎬 오늘 내 하루의 장르는? <span style="color:var(--green)">*</span></div>
+    <div class="q-sub">오늘 하루가 영화라면 어떤 장르일까요?</div>
+    <div class="genre-grid" id="genre-grid">
+      <div class="genre-card" data-genre="감동명작"   data-color="#C8960C" onclick="selectGenre(this)">
+        <span class="genre-icon">🎭</span>
+        <span class="genre-name">감동명작</span>
+        <span class="genre-sub">오늘이 영화라면</span>
+      </div>
+      <div class="genre-card" data-genre="히어로 액션" data-color="#C0392B" onclick="selectGenre(this)">
+        <span class="genre-icon">🦸</span>
+        <span class="genre-name">히어로 액션</span>
+        <span class="genre-sub">나는 오늘도 싸웠다</span>
+      </div>
+      <div class="genre-card" data-genre="잔잔한 다큐" data-color="#2C3E6B" onclick="selectGenre(this)">
+        <span class="genre-icon">🎬</span>
+        <span class="genre-name">잔잔한 다큐</span>
+        <span class="genre-sub">평범한 하루의 기록</span>
+      </div>
+      <div class="genre-card" data-genre="멜로 로맨스" data-color="#C0527A" onclick="selectGenre(this)">
+        <span class="genre-icon">💕</span>
+        <span class="genre-name">멜로 로맨스</span>
+        <span class="genre-sub">오늘의 감정선</span>
+      </div>
+      <div class="genre-card" data-genre="병맛 코미디" data-color="#E67E22" onclick="selectGenre(this)">
+        <span class="genre-icon">😂</span>
+        <span class="genre-name">병맛 코미디</span>
+        <span class="genre-sub">이게 내 인생이다</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 오늘 하루 한 문장 -->
+  <div class="q-block">
+    <div class="q-num">06 · 오늘 하루</div>
     <div class="q-title">오늘 하루를 한 문장으로 <span style="color:var(--green)">*</span></div>
     <div class="q-example">
       💡 오늘 진짜 솔직하게.<br>
@@ -336,6 +381,20 @@ const SHOT_TITLES = ['첫 번째 장면','두 번째 장면','세 번째 장면'
 let isPublic = true;
 let shots = []; // [{b64, caption}]
 let featuredIdx = 0; // 오대(오늘의 대표) 인덱스 — 기본값 0(첫 번째)
+let selectedGenre = '';
+
+function selectGenre(el) {
+  document.querySelectorAll('.genre-card').forEach(c => {
+    c.classList.remove('selected');
+    c.style.background = '';
+    c.style.borderColor = '';
+  });
+  el.classList.add('selected');
+  const color = el.dataset.color;
+  el.style.background = color;
+  el.style.borderColor = color;
+  selectedGenre = el.dataset.genre;
+}
 
 // ── localStorage 저장/로드 ──
 function saveLS() {
@@ -660,6 +719,7 @@ async function doSubmit() {
   if (!name)  { alert('이름을 입력해주세요'); return; }
   if (!email || !email.includes('@')) { alert('이메일을 입력해주세요'); return; }
   if (filled.length < 1) { alert('사진을 1장 이상 올려주세요'); return; }
+  if (!selectedGenre) { alert('장르를 선택해주세요'); return; }
   if (!today_s) { alert('오늘 하루를 한 문장으로 써주세요'); return; }
 
   saveLS();
@@ -689,6 +749,7 @@ async function doSubmit() {
         is_public: isPublic,
         shots: shotPayload,
         today_sentence: today_s,
+        genre: selectedGenre,
         last_to,
         last_msg,
         lang: 'ko',
