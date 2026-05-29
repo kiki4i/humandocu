@@ -892,14 +892,15 @@ footer {
 <hr class="sec-divider">
 
 <!-- 실제 투*필 샘플 -->
-<div style="max-width:480px;margin:0 auto;padding:0 16px;">
-  <p class="sec-label" style="text-align:center;margin-bottom:16px;"
-    data-ko="✦ 실제 투*필"
-    data-en="✦ Real 투*필"
-    data-jp="✦ 実際의 투*필"
-    data-zh="✦ 真实的 투*필">✦ 실제 투*필</p>
-  <div id="sample-card" style="background:var(--cream2);border-radius:14px;overflow:hidden;border:0.5px solid rgba(200,135,10,.2);">
-    <div style="text-align:center;padding:32px;color:var(--ink3);font-size:13px;">불러오는 중...</div>
+<div style="padding:0 16px;">
+  <p class="sec-label" style="text-align:center;margin-bottom:20px;"
+    data-ko="✦ 최근 투*필"
+    data-en="✦ Recent 투*필"
+    data-jp="✦ 最近의 투*필"
+    data-zh="✦ 最近의 투*필">✦ 최근 투*필</p>
+  <div id="recent-today-cards"
+       style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:700px;margin:0 auto;">
+    <div style="grid-column:1/-1;text-align:center;padding:32px;color:var(--ink3);font-size:13px;">불러오는 중...</div>
   </div>
 </div>
 
@@ -921,29 +922,38 @@ footer {
 </div>
 
 <script>
-(async function loadSampleCard() {
-  var card = document.getElementById('sample-card');
-  if (!card) return;
+(async function loadRecentToday() {
+  var container = document.getElementById('recent-today-cards');
+  if (!container) return;
   try {
-    var res = await fetch('https://humandocu-server-production.up.railway.app/api/today/feed?limit=1&offset=0');
+    var res = await fetch('https://humandocu-server-production.up.railway.app/api/today/feed?limit=3&offset=0');
     var data = await res.json();
-    if (!data.items || !data.items[0]) {
-      card.innerHTML = '<div style="text-align:center;padding:24px;color:var(--ink3);font-size:13px;">아직 공개된 투*필이 없어요</div>';
+    if (!data.items || !data.items.length) {
+      container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--ink3);font-size:13px;">아직 공개된 투*필이 없어요</div>';
       return;
     }
-    var item = data.items[0];
-    var p1 = item.photo1 ? '<img src="' + item.photo1 + '" style="width:50%;aspect-ratio:1;object-fit:cover;display:block;">' : '<div style="width:50%;aspect-ratio:1;background:#F0E8D8;"></div>';
-    var p2 = item.photo2 ? '<img src="' + item.photo2 + '" style="width:50%;aspect-ratio:1;object-fit:cover;display:block;">' : '<div style="width:50%;aspect-ratio:1;background:#EDE0CC;"></div>';
-    card.innerHTML =
-      '<div style="display:flex;">' + p1 + p2 + '</div>' +
-      '<div style="padding:14px 16px;">' +
-      '<div style="font-size:14px;font-weight:500;color:var(--ink1);">' + (item.nickname || item.name || '') + '</div>' +
-      (item.identity ? '<div style="font-size:12px;color:var(--ink3);margin-top:2px;">' + item.identity + '</div>' : '') +
-      '<div style="margin-top:10px;text-align:center;">' +
-      '<a href="https://humandocu-server-production.up.railway.app/today/' + item.doc_id + '" target="_blank" style="font-size:12px;color:#C8870A;text-decoration:none;">전체 보기 →</a>' +
-      '</div></div>';
+    container.innerHTML = data.items.slice(0, 3).map(function(item) {
+      var thumb = item.photo1 || '';
+      var name  = item.nickname || item.name || '';
+      var identity = item.identity || '';
+      var link  = 'https://humandocu-server-production.up.railway.app/today/' + item.doc_id;
+      return (
+        '<div style="background:var(--cream2);border-radius:10px;overflow:hidden;border:0.5px solid rgba(200,135,10,.2);">' +
+        (thumb
+          ? '<img src="' + thumb + '" style="width:100%;aspect-ratio:1;object-fit:cover;display:block;">'
+          : '<div style="width:100%;aspect-ratio:1;background:#F0E8D8;"></div>') +
+        '<div style="padding:12px 14px;">' +
+        '<div style="font-size:13px;font-weight:600;color:var(--ink1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + name + '</div>' +
+        (identity
+          ? '<div style="font-size:12px;color:var(--ink3);margin-top:5px;line-height:1.65;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">' + identity + '</div>'
+          : '') +
+        '<div style="margin-top:10px;text-align:right;">' +
+        '<a href="' + link + '" target="_blank" style="font-size:12px;color:#C8870A;text-decoration:none;font-weight:500;">전체 보기 →</a>' +
+        '</div></div></div>'
+      );
+    }).join('');
   } catch(e) {
-    card.style.display = 'none';
+    container.style.display = 'none';
   }
 })();
 </script>
