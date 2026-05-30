@@ -193,12 +193,12 @@ nav{display:none;position:sticky;top:0;z-index:200;background:var(--ink);padding
 /* ── 3단계 ── */
 .steps-sec{background:var(--ink);padding:40px 18px}
 .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:820px;margin:28px auto 0;border-radius:6px;overflow:hidden;background:rgba(255,255,255,.04)}
-.step{background:rgba(255,255,255,.03);padding:30px 22px;text-align:center;position:relative}
-.step-num{font-family:var(--serif);font-size:44px;font-weight:300;color:rgba(200,169,110,.1);line-height:1;margin-bottom:8px}
-.step-ico{font-size:26px;margin-bottom:12px}
-.step-title{font-size:14px;font-weight:500;color:var(--cream);margin-bottom:6px}
-.step-desc{font-size:12px;color:rgba(249,246,240,.4);line-height:1.6}
-.step-time{font-size:11px;color:var(--gold2);margin-top:10px;font-weight:500}
+.step{background:rgba(255,255,255,.03);padding:22px 18px;text-align:center;position:relative}
+.step-num{font-family:var(--serif);font-size:32px;font-weight:300;color:rgba(200,169,110,.1);line-height:1;margin-bottom:6px}
+.step-ico{font-size:22px;margin-bottom:8px}
+.step-title{font-size:13px;font-weight:500;color:var(--cream);margin-bottom:5px}
+.step-desc{font-size:12px;color:rgba(249,246,240,.4);line-height:1.55}
+.step-time{font-size:11px;color:var(--gold2);margin-top:8px;font-weight:500}
 
 /* ── 후기 ── */
 .testi-sec{background:var(--cream2)}
@@ -315,12 +315,9 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-body">
-    <div class="hero-eyebrow">
-      <span data-ko="humandocu.com · 모바일 부고 서비스" data-en="humandocu.com · Digital Memorial" data-jp="humandocu.com · モバイル訃報サービス" data-zh="humandocu.com · 移动讣告服务">humandocu.com · 모바일 부고 서비스</span>
-    </div>
 
-    <!-- 모바일 청첩장 포지셔닝 — 먼저 -->
-    <div class="hero-analogy">
+    <!-- ① 청첩장 비유 — 가장 먼저 -->
+    <div class="hero-analogy" style="margin-bottom:24px">
       <div class="hero-analogy-row">
         <span class="hero-analogy-ico">💌</span>
         <span data-ko="결혼 소식은 이제 모바일 청첩장으로 전합니다." data-en="Wedding invitations are now sent as mobile cards." data-jp="結婚の知らせは今やモバイル招待状で伝えます。" data-zh="婚礼通知现在通过手机请柬发送。">결혼 소식은 이제 모바일 청첩장으로 전합니다.</span>
@@ -331,10 +328,15 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
       </div>
     </div>
 
-    <h1 class="hero-title" style="margin-top:20px">
+    <!-- ② eyebrow + 타이틀 -->
+    <div class="hero-eyebrow">
+      <span data-ko="humandocu.com · 모바일 부고 서비스" data-en="humandocu.com · Digital Memorial" data-jp="humandocu.com · モバイル訃報サービス" data-zh="humandocu.com · 移动讣告服务">humandocu.com · 모바일 부고 서비스</span>
+    </div>
+    <h1 class="hero-title">
       <span data-ko="세상에서 가장 슬픈 소식이지만,<br><em>가장 아름다운 기록 되도록</em>" data-en="The hardest news to share —<br><em>made into the most meaningful record</em>" data-jp="世界で最も悲しいお知らせですが、<br><em>最も美しい記録となるように</em>" data-zh="世上最悲伤的消息,<br><em>但愿化作最美好的记录</em>">세상에서 가장 슬픈 소식이지만,<br><em>가장 아름다운 기록 되도록</em></span>
     </h1>
 
+    <!-- ③ 요금 카드 — 맨 아래 -->
     <div class="hero-plan" id="pricing">
       <div class="plan-tag" data-ko="✦ 프리미엄 메모리얼 · 단일 플랜" data-en="✦ Premium Memorial · Single Plan" data-jp="✦ プレミアムメモリアル · 単一プラン" data-zh="✦ 高级纪念馆 · 单一套餐">✦ 프리미엄 메모리얼 · 단일 플랜</div>
       <div class="plan-price">₩29,000</div>
@@ -455,69 +457,30 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
 <!-- ③ 메모리얼 페이지 -->
 <section class="memorial-sec" id="memorial-page">
   <div class="si">
-    <div class="memorial-inner">
-      <!-- 폰 목업 -->
-      <div class="memorial-phone">
-        <div class="mp-frame">
-          <div class="mp-bar">
-            <div class="mp-url">humandocu.com/김순자</div>
-            <div style="font-size:10px;color:rgba(200,169,110,.4)">🔒</div>
-          </div>
-          <div class="mp-body">
-            <div class="mp-hero">
-              <div class="mp-photo">🖼</div>
-              <div class="mp-name">故 김순자</div>
-              <div class="mp-years">1943 — 2025 · 향년 82세</div>
-              <div class="mp-quote">"새벽마다 밥을 지으시던 어머니"</div>
-            </div>
-            <div class="mp-tabs">
-              <div class="mp-tab act">생애 연대기</div>
-              <div class="mp-tab">사진</div>
-              <div class="mp-tab">방명록</div>
-            </div>
-            <div class="mp-slide">
-              <div class="mp-slide-ico">📸</div>
-              <div class="mp-slide-caption">1975년 봄, 온 가족이 함께한 소풍</div>
-            </div>
-            <div class="mp-gb-item">
-              <div class="mp-gb-av">이</div>
-              <div class="mp-gb-msg">순자야, 너의 환한 웃음이 너무 그립다.</div>
-            </div>
-            <div class="mp-gb-item">
-              <div class="mp-gb-av">박</div>
-              <div class="mp-gb-msg">늘 따뜻하게 대해주셔서 감사했습니다.</div>
-            </div>
-          </div>
+    <div style="max-width:680px;margin:0 auto">
+      <div class="ey" style="color:rgba(200,169,110,.5)">메모리얼 페이지</div>
+      <h2 class="tt tt-cream" style="margin-bottom:14px" data-ko="링크를 클릭하면,<br><em>그분의 인생이 거기 있습니다.</em>" data-en="Click the link —<br><em>their whole life is there.</em>" data-jp="リンクをクリックすると、<br><em>その方の人生がそこにあります。</em>" data-zh="点击链接，<br><em>他们的一生就在那里。</em>">링크를 클릭하면,<br><em>그분의 인생이 거기 있습니다.</em></h2>
+      <p class="sb" style="color:rgba(249,246,240,.5);margin-bottom:28px" data-ko="부고문은 입구입니다. 안으로 들어오면 — 영정사진, 생애사진 슬라이드쇼, BGM, 고인의 이야기, 디지털 방명록. 조문객은 링크 하나로 그분을 처음 만납니다. 그분이 어떤 삶을 사셨는지, 어떤 분이었는지. 그리고 거기에 자신의 마음을 남깁니다." data-en="The obituary is the entrance. Inside — portrait, life photo slideshow, BGM, the story of their life, a digital guestbook. Mourners meet the person for the first time through a single link. And they leave something of themselves there.">부고문은 입구입니다. 안으로 들어오면 — 영정사진, 생애사진 슬라이드쇼, BGM, 고인의 이야기, 디지털 방명록. 조문객은 링크 하나로 그분을 처음 만납니다. 그분이 어떤 삶을 사셨는지, 어떤 분이었는지. 그리고 거기에 자신의 마음을 남깁니다.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:rgba(255,255,255,.04);border-radius:6px;overflow:hidden;margin-bottom:24px">
+        <div style="background:rgba(255,255,255,.03);padding:18px 16px">
+          <div style="font-size:20px;margin-bottom:8px">🎞</div>
+          <div style="font-size:13px;font-weight:500;color:var(--cream);margin-bottom:4px" data-ko="슬라이드쇼 · BGM" data-en="Slideshow · BGM">슬라이드쇼 · BGM</div>
+          <div style="font-size:12px;color:rgba(249,246,240,.4);line-height:1.5" data-ko="영정사진 액자 + 생애사진이 음악과 함께 흐릅니다." data-en="Portrait frame + life photos flow gently with music.">영정사진 액자 + 생애사진이 음악과 함께 흐릅니다.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.03);padding:18px 16px">
+          <div style="font-size:20px;margin-bottom:8px">📖</div>
+          <div style="font-size:13px;font-weight:500;color:var(--cream);margin-bottom:4px" data-ko="생애 연대기" data-en="Life Timeline">생애 연대기</div>
+          <div style="font-size:12px;color:rgba(249,246,240,.4);line-height:1.5" data-ko="태어나서 지금까지. 가족만이 아는 이야기가 기록으로 남습니다." data-en="From birth to now. Stories only the family knows — preserved.">태어나서 지금까지. 가족만이 아는 이야기가 기록으로 남습니다.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.03);padding:18px 16px">
+          <div style="font-size:20px;margin-bottom:8px">🕯</div>
+          <div style="font-size:13px;font-weight:500;color:var(--cream);margin-bottom:4px" data-ko="디지털 방명록" data-en="Digital Guestbook">디지털 방명록</div>
+          <div style="font-size:12px;color:rgba(249,246,240,.4);line-height:1.5" data-ko="조문객이 마음을 남기고, 상주가 실시간으로 확인합니다." data-en="Mourners leave messages. The family reads them in real time.">조문객이 마음을 남기고, 상주가 실시간으로 확인합니다.</div>
         </div>
       </div>
-      <!-- 카피 -->
-      <div class="memorial-copy">
-        <div class="ey" style="color:rgba(200,169,110,.5)">메모리얼 페이지</div>
-        <h2 class="tt tt-cream" style="margin-bottom:16px" data-ko="링크를 클릭하면,<br><em>그분의 인생이 거기 있습니다.</em>" data-en="Click the link,<br><em>and their whole life is there.</em>" data-jp="リンクをクリックすると、<br><em>その方の人生がそこにあります。</em>" data-zh="点击链接，<br><em>他们的一生就在那里。</em>">링크를 클릭하면,<br><em>그분의 인생이 거기 있습니다.</em></h2>
-        <p class="sb" style="color:rgba(249,246,240,.5);margin-bottom:28px" data-ko="부고문은 입구입니다. 안으로 들어오면 — 영정사진, 생애사진 슬라이드쇼, BGM, 고인의 이야기, 디지털 방명록. 조문객은 링크 하나로 그분을 처음 만납니다. 그분이 어떤 삶을 사셨는지, 어떤 분이었는지. 그리고 거기에 자신의 마음을 남깁니다." data-en="The obituary is just the entrance. Inside — portrait, life photo slideshow, BGM, the story of their life, a digital guestbook. Mourners meet the person for the first time through a single link. They learn who they were, how they lived. And they leave something of themselves there too.">부고문은 입구입니다. 안으로 들어오면 — 영정사진, 생애사진 슬라이드쇼, BGM, 고인의 이야기, 디지털 방명록. 조문객은 링크 하나로 그분을 처음 만납니다. 그분이 어떤 삶을 사셨는지, 어떤 분이었는지. 그리고 거기에 자신의 마음을 남깁니다.</p>
-        <div class="memorial-feat">
-          <div class="memorial-feat-ico">🎞</div>
-          <div>
-            <div class="memorial-feat-t" data-ko="영정사진 액자 + 생애사진 슬라이드쇼 · BGM" data-en="Portrait frame + life photo slideshow · BGM">영정사진 액자 + 생애사진 슬라이드쇼 · BGM</div>
-            <div class="memorial-feat-d" data-ko="그분의 얼굴, 그분의 시간이 음악과 함께 흐릅니다." data-en="Their face, their moments — flowing gently with music.">그분의 얼굴, 그분의 시간이 음악과 함께 흐릅니다.</div>
-          </div>
-        </div>
-        <div class="memorial-feat">
-          <div class="memorial-feat-ico">📖</div>
-          <div>
-            <div class="memorial-feat-t" data-ko="생애 연대기 · 고인의 이야기" data-en="Life timeline · The story of their life">생애 연대기 · 고인의 이야기</div>
-            <div class="memorial-feat-d" data-ko="태어나서 지금까지. 가족만이 아는 이야기가 기록으로 남습니다." data-en="From birth to now. Stories only the family knows — preserved as a record.">태어나서 지금까지. 가족만이 아는 이야기가 기록으로 남습니다.</div>
-          </div>
-        </div>
-        <div class="memorial-feat">
-          <div class="memorial-feat-ico">🕯</div>
-          <div>
-            <div class="memorial-feat-t" data-ko="디지털 방명록 · 49일 유지" data-en="Digital guestbook · 49 days">디지털 방명록 · 49일 유지</div>
-            <div class="memorial-feat-d" data-ko="조문객이 마음을 남기고, 상주가 실시간으로 확인합니다." data-en="Mourners leave their words. The bereaved family reads them in real time.">조문객이 마음을 남기고, 상주가 실시간으로 확인합니다.</div>
-          </div>
-        </div>
-        <a href="https://kiki4i.github.io/humandocu/bugo/adv-memorial-정재무.html" target="_blank" style="font-size:13px;color:var(--gold2);border-bottom:1px solid rgba(200,169,110,.3);padding-bottom:1px" data-ko="메모리얼 페이지 샘플 보기 →" data-en="View memorial page sample →">메모리얼 페이지 샘플 보기 →</a>
-      </div>
+
+      <a href="https://kiki4i.github.io/humandocu/bugo/adv-memorial-정재무.html" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.25);border-radius:var(--r);font-size:13px;color:var(--gold2)" data-ko="메모리얼 페이지 샘플 직접 보기 →" data-en="View memorial page sample →">메모리얼 페이지 샘플 직접 보기 →</a>
     </div>
   </div>
 </section>
@@ -526,7 +489,7 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
 <section class="reply-sec" id="reply">
   <div class="si">
     <div class="sh">
-      <div class="ey" data-ko="발인 다음날 자동 발송" data-en="Auto-sent the day after the funeral">발인 다음날 자동 발송</div>
+      <div class="ey" data-ko="발인 다음날 · 이메일로 수신 후 직접 전달" data-en="Day after funeral · Received by email, shared by you">발인 다음날 · 이메일로 수신 후 직접 전달</div>
       <h2 class="tt" data-ko="세상에 없던 답례장" data-en="A letter of gratitude unlike any other" data-jp="世になかった答礼状" data-zh="世上独一无二的答礼函">세상에 없던 답례장</h2>
       <p class="sb" data-ko="고인의 이야기가, 상주의 마음이 담깁니다." data-en="It carries the story of the deceased — and the heart of the bereaved." data-jp="故人の話と、喪主の心が込められています。" data-zh="融入故人的故事与主丧人的心意。">고인의 이야기가, 상주의 마음이 담깁니다.</p>
     </div>
@@ -665,9 +628,9 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
       <div class="step">
         <div class="step-num">03</div>
         <div class="step-ico">💌</div>
-        <div class="step-title" data-ko="발인 다음날 답례장 자동 발송" data-en="Letter of gratitude auto-sent next day">발인 다음날 답례장 자동 발송</div>
-        <div class="step-desc" data-ko="고인의 생애를 담은 AI 개인화 답례장이 자동으로 이메일 발송됩니다." data-en="An AI-personalized letter of gratitude, rooted in the deceased's story, is sent automatically.">고인의 생애를 담은 AI 개인화 답례장이 자동으로 이메일 발송됩니다.</div>
-        <div class="step-time">발인 다음날 자동</div>
+        <div class="step-title" data-ko="발인 다음날 · 답례장 이메일 수신" data-en="Day after funeral · Receive the letter of gratitude">발인 다음날 · 답례장 이메일 수신</div>
+        <div class="step-desc" data-ko="AI가 고인의 생애를 담아 개인화 답례장을 작성합니다. 이메일로 받아 카카오톡으로 직접 전달하세요." data-en="AI writes a personalized letter rooted in the deceased's story. You receive it by email and share it yourself.">AI가 고인의 생애를 담아 개인화 답례장을 작성합니다. 이메일로 받아 카카오톡으로 직접 전달하세요.</div>
+        <div class="step-time">발인 다음날</div>
       </div>
     </div>
   </div>
