@@ -311,21 +311,17 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
   </div>
 </nav>
 
-<!-- ① HERO -->
+<!-- ① HERO — 타이틀 + 청첩장 비유만 -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-body">
-
-    <!-- ① eyebrow + 타이틀 — 맨 위 -->
+  <div class="hero-body" style="padding-bottom:44px">
     <div class="hero-eyebrow">
       <span data-ko="humandocu.com · 모바일 부고 서비스" data-en="humandocu.com · Digital Memorial" data-jp="humandocu.com · モバイル訃報サービス" data-zh="humandocu.com · 移动讣告服务">humandocu.com · 모바일 부고 서비스</span>
     </div>
     <h1 class="hero-title">
       <span data-ko="세상에서 가장 슬픈 소식이지만,<br><em>가장 아름다운 기록 되도록</em>" data-en="The hardest news to share —<br><em>made into the most meaningful record</em>" data-jp="世界で最も悲しいお知らせですが、<br><em>最も美しい記録となるように</em>" data-zh="世上最悲伤的消息,<br><em>但愿化作最美好的记录</em>">세상에서 가장 슬픈 소식이지만,<br><em>가장 아름다운 기록 되도록</em></span>
     </h1>
-
-    <!-- ② 청첩장 비유 -->
-    <div class="hero-analogy" style="margin-bottom:32px">
+    <div class="hero-analogy">
       <div class="hero-analogy-row">
         <span class="hero-analogy-ico">💌</span>
         <span data-ko="결혼 소식은 이제 모바일 청첩장으로 전합니다." data-en="Wedding invitations are now sent as mobile cards." data-jp="結婚の知らせは今やモバイル招待状で伝えます。" data-zh="婚礼通知现在通过手机请柬发送。">결혼 소식은 이제 모바일 청첩장으로 전합니다.</span>
@@ -335,24 +331,10 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
         <span data-ko="부고도, 이제 달라져야 합니다." data-en="Obituaries deserve the same transformation." data-jp="訃報も、今こそ変わるべきです。" data-zh="讣告，也应该与时俱进了。">부고도, 이제 달라져야 합니다.</span>
       </div>
     </div>
-
-    <!-- ③ 요금 카드 — 스크롤해야 보임 -->
-    <div class="hero-plan" id="pricing">
-      <div class="plan-tag" data-ko="✦ 프리미엄 메모리얼 · 단일 플랜" data-en="✦ Premium Memorial · Single Plan" data-jp="✦ プレミアムメモリアル · 単一プラン" data-zh="✦ 高级纪念馆 · 单一套餐">✦ 프리미엄 메모리얼 · 단일 플랜</div>
-      <div class="plan-price">₩29,000</div>
-      <span class="plan-dur" data-ko="49재까지 함께" data-en="Together for 49 days" data-jp="49日まで一緒に" data-zh="陪伴至四十九天祭">49재까지 함께</span>
-      <ul class="plan-feats">
-        <li data-ko="✅ 10분 내 차별화된 부고문 이메일 도착" data-en="✅ Obituary delivered within 10 minutes" data-jp="✅ 10分以内に訃報文メール到着" data-zh="✅ 10分钟内收到讣告文邮件">✅ 10분 내 차별화된 부고문 이메일 도착</li>
-        <li data-ko="✅ 메모리얼 페이지 — 고인의 생애 · 사진 슬라이드쇼 · BGM · 방명록" data-en="✅ Memorial Page — life story · photo slideshow · BGM · guestbook" data-jp="✅ メモリアルページ — 故人の生涯・写真スライドショー・BGM・芳名録" data-zh="✅ 纪念馆页面 — 生平·幻灯片·背景音乐·留言簿">✅ 메모리얼 페이지 — 고인의 생애 · 사진 슬라이드쇼 · BGM · 방명록</li>
-        <li data-ko="✅ 세상에 없던 답례장 — 고인 육성 · 상주 육성 · AI 추모문구" data-en="✅ A letter of gratitude unlike any other — voice messages · AI tribute" data-jp="✅ 世になかった礼状 — 故人の肉声・喪主の肉声・AI追悼文" data-zh="✅ 世上独一无二的答礼函 — 故人音频·主丧音频·AI追悼文">✅ 세상에 없던 답례장 — 고인 육성 · 상주 육성 · AI 추모문구</li>
-        <li data-ko="✅ 49일 유지 후 휴먼다큐 아카이브 영구 이관" data-en="✅ 49-day memorial then permanent archive transfer" data-jp="✅ 49日維持後ヒューマンドキュアーカイブ永久移管" data-zh="✅ 维持49天后永久移入档案库">✅ 49일 유지 후 휴먼다큐 아카이브 영구 이관</li>
-      </ul>
-      <button onclick="openModal('advanced')" class="plan-btn" data-ko="지금 신청하기 →" data-en="Apply Now →" data-jp="今申し込む →" data-zh="现在申请 →">지금 신청하기 →</button>
-    </div>
-    <p class="hero-note">샘플 직접 보기 · <a href="https://humandocu.com/bugo/adv-정재무.html" target="_blank">부고문</a> &nbsp;·&nbsp; <a href="https://humandocu.com/bugo/damnyejang-정재무.html" target="_blank">답례장</a></p>
   </div>
 </section>
 
+<!-- 요금 카드 섹션 — 비교 다음에 위치 -->
 <!-- ② 비교 -->
 <section class="compare-sec" id="compare">
   <div class="si">
@@ -452,6 +434,24 @@ footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2
     </div>
 
   </div>
+</section>
+
+
+<!-- 요금 카드 섹션 -->
+<section style="background:var(--ink);padding:0 18px 40px;display:flex;flex-direction:column;align-items:center" id="pricing">
+  <div class="hero-plan" style="margin-top:0">
+    <div class="plan-tag" data-ko="✦ 프리미엄 메모리얼 · 단일 플랜" data-en="✦ Premium Memorial · Single Plan" data-jp="✦ プレミアムメモリアル · 単一プラン" data-zh="✦ 高级纪念馆 · 단일 套餐">✦ 프리미엄 메모리얼 · 단일 플랜</div>
+    <div class="plan-price">₩29,000</div>
+    <span class="plan-dur" data-ko="49재까지 함께" data-en="Together for 49 days" data-jp="49日まで一緒に" data-zh="陪伴至四十九天祭">49재까지 함께</span>
+    <ul class="plan-feats">
+      <li data-ko="✅ 10분 내 차별화된 부고문 이메일 도착" data-en="✅ Obituary delivered within 10 minutes" data-jp="✅ 10分以内に訃報文メール到着" data-zh="✅ 10分钟内收到讣告文邮件">✅ 10분 내 차별화된 부고문 이메일 도착</li>
+      <li data-ko="✅ 메모리얼 페이지 — 고인의 생애 · 사진 슬라이드쇼 · BGM · 방명록" data-en="✅ Memorial Page — life story · photo slideshow · BGM · guestbook" data-jp="✅ メモリアルページ — 故人の生涯・写真スライドショー・BGM・芳名録" data-zh="✅ 纪念馆页面 — 生平·幻灯片·背景音乐·留言簿">✅ 메모리얼 페이지 — 고인의 생애 · 사진 슬라이드쇼 · BGM · 방명록</li>
+      <li data-ko="✅ 세상에 없던 답례장 — 고인 육성 · 상주 육성 · AI 추모문구" data-en="✅ A letter of gratitude unlike any other — voice messages · AI tribute" data-jp="✅ 世になかった礼状 — 故人の肉声・喪主の肉声・AI追悼文" data-zh="✅ 世上独一无二的答礼函 — 故人音频·主丧音频·AI追悼文">✅ 세상에 없던 답례장 — 고인 육성 · 상주 육성 · AI 추모문구</li>
+      <li data-ko="✅ 49일 유지 후 휴먼다큐 아카이브 영구 이관" data-en="✅ 49-day memorial then permanent archive transfer" data-jp="✅ 49日維持後ヒューマンドキュアーカイブ永久移管" data-zh="✅ 维持49天后永久移入档案库">✅ 49일 유지 후 휴먼다큐 아카이브 영구 이관</li>
+    </ul>
+    <button onclick="openModal('advanced')" class="plan-btn" data-ko="지금 신청하기 →" data-en="Apply Now →" data-jp="今申し込む →" data-zh="现在申请 →">지금 신청하기 →</button>
+  </div>
+  <p class="hero-note">샘플 직접 보기 · <a href="https://humandocu.com/bugo/adv-정재무.html" target="_blank">부고문</a> &nbsp;·&nbsp; <a href="https://humandocu.com/bugo/damnyejang-정재무.html" target="_blank">답례장</a></p>
 </section>
 
 <!-- ③ 메모리얼 페이지 -->
