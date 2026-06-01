@@ -1,298 +1,708 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>투*필 · 오늘을 시로 — 휴먼다큐</title>
-<meta name="description" content="오늘 사진 2~6장으로 AI가 시를 써드립니다. 무료 · 30초">
-<meta property="og:title" content="투*필 · TODAY FILMOGRAPHY">
-<meta property="og:description" content="오늘 사진으로 만드는 나만의 시">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&family=Noto+Serif+KR:wght@300;400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;overflow-x:hidden}
-body{background:#fdf8f0;color:#1a1610;font-family:'Noto Sans KR',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-x:hidden}
-a{text-decoration:none;color:inherit}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>오늘의 필름 — 휴먼다큐 투·필</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ── 배경 그레인 ── */
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5}
+    :root {
+      --cream: #fdf8f0;
+      --orange: #C8870A;
+      --orange-light: #e9a020;
+      --dark-card: #1a1610;
+      --dark-card2: #2a2018;
+      --text: #1a1610;
+      --text-muted: #6b5e4e;
+      --border: #e8dfd0;
+    }
 
-/* ── NAV ── */
-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:rgba(253,248,240,.88);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,135,10,.12)}
-.nav-logo{display:flex;align-items:center;gap:10px}
-.nav-logo-mark{width:28px;height:28px;background:#C8870A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700}
-.nav-logo-text{font-size:15px;font-weight:500;letter-spacing:.02em}
-.nav-logo-text span{color:#C8870A}
-.nav-right{display:flex;align-items:center;gap:12px}
-.nav-link{font-size:13px;color:rgba(26,22,16,.5);transition:color .2s}
-.nav-link:hover{color:#C8870A}
-.nav-btn{font-size:13px;font-weight:500;color:#fff;background:#C8870A;padding:8px 18px;border-radius:40px;transition:all .2s}
-.nav-btn:hover{background:#a86d08;transform:translateY(-1px)}
+    html { scroll-behavior: smooth; }
 
-/* ── HERO ── */
-.hero{position:relative;padding:64px 24px 52px;text-align:center;overflow:hidden;z-index:1}
-.hero-film{position:absolute;top:0;left:0;right:0;height:6px;background:repeating-linear-gradient(90deg,#1a1610 0,#1a1610 12px,#fdf8f0 12px,#fdf8f0 18px);opacity:.12}
-.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#C8870A;background:rgba(200,135,10,.1);padding:5px 14px;border-radius:40px;margin-bottom:20px}
-.hero-tag::before{content:'✦';font-size:10px}
-.hero-title{font-family:'DM Serif Display',serif;font-size:clamp(36px,7vw,72px);line-height:1.1;letter-spacing:-.02em;color:#1a1610;margin-bottom:8px}
-.hero-title em{font-style:italic;color:#C8870A}
-.hero-sub{font-size:clamp(14px,2vw,18px);color:rgba(26,22,16,.55);line-height:1.7;margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto}
-.hero-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
-.pill{font-size:12px;color:rgba(26,22,16,.6);background:rgba(26,22,16,.06);padding:5px 14px;border-radius:40px}
-.pill strong{color:#C8870A;font-weight:500}
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Noto Sans KR', sans-serif;
+      line-height: 1.6;
+    }
 
-/* ── CTA 버튼 ── */
-.cta-wrap{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.btn-main{display:inline-flex;align-items:center;gap:8px;font-size:16px;font-weight:500;color:#fff;background:#C8870A;padding:16px 36px;border-radius:40px;transition:all .25s;box-shadow:0 4px 20px rgba(200,135,10,.3);font-family:'Noto Sans KR',sans-serif}
-.btn-main:hover{background:#a86d08;transform:translateY(-2px);box-shadow:0 8px 28px rgba(200,135,10,.35)}
-.btn-ghost{display:inline-flex;align-items:center;gap:8px;font-size:15px;color:rgba(26,22,16,.55);border:1.5px solid rgba(26,22,16,.15);padding:15px 28px;border-radius:40px;transition:all .25s}
-.btn-ghost:hover{border-color:#C8870A;color:#C8870A}
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(253, 248, 240, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .logo-badge {
+      width: 34px;
+      height: 34px;
+      background: var(--orange);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .nav-logo span {
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .nav-links a.feed-link {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a.feed-link:hover { color: var(--orange); }
+    .btn-nav {
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .btn-nav:hover { background: var(--orange-light); transform: translateY(-1px); }
 
-/* ── 샘플 카드 ── */
-.sample-sec{padding:52px 24px;background:#fff;position:relative;z-index:1}
-.sample-sec::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,135,10,.2),transparent)}
-.sec-label{text-align:center;font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,135,10,.7);margin-bottom:10px}
-.sec-title{text-align:center;font-family:'DM Serif Display',serif;font-size:clamp(22px,3.5vw,36px);color:#1a1610;margin-bottom:36px;line-height:1.2}
-.sec-title em{font-style:italic;color:#C8870A}
+    /* ── HERO ── */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 1.6rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 .italic-line {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      color: var(--orange);
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 2.2rem;
+    }
+    .badge-pill {
+      background: #fff;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.82rem;
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      font-weight: 500;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 0.8rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.8rem;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--orange-light); transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--border);
+      padding: 0.75rem 1.8rem;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+    .btn-ghost:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
 
-.sample-card{max-width:480px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(26,22,16,.1)}
-.sc-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:#1a1610;height:180px}
-.sc-photo{background:#e8dcc8;display:flex;align-items:center;justify-content:center;font-size:28px;position:relative;overflow:hidden}
-.sc-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,135,10,.15),transparent)}
-.sc-body{background:#1a1610;padding:22px 24px}
-.sc-tag{font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,135,10,.6);margin-bottom:12px}
-.sc-poem{font-family:'DM Serif Display',serif;font-size:17px;font-style:italic;color:rgba(253,248,240,.88);line-height:1.85;margin-bottom:14px}
-.sc-poem span{display:block}
-.sc-meta{display:flex;align-items:center;justify-content:space-between}
-.sc-nick{font-size:11px;color:rgba(253,248,240,.35)}
-.sc-date{font-size:11px;color:rgba(200,135,10,.5)}
+    /* ── SAMPLE CARD ── */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 2.5rem;
+    }
+    .sample-card {
+      max-width: 480px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.14);
+    }
+    .sample-photos {
+      background: var(--dark-card2);
+      padding: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .emoji-box {
+      width: 90px;
+      height: 90px;
+      background: #3a3020;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+    }
+    .sample-poem {
+      background: var(--dark-card);
+      padding: 1.8rem;
+      color: #fff;
+    }
+    .sample-poem p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #e8dfd0;
+      white-space: pre-line;
+      margin-bottom: 1.2rem;
+    }
+    .sample-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+      color: #8a7a6a;
+    }
+    .sample-meta .nick {
+      font-weight: 600;
+      color: var(--orange);
+    }
 
-/* ── 작동 방식 ── */
-.how-sec{padding:52px 24px;background:#fdf8f0;position:relative;z-index:1}
-.steps{display:flex;flex-direction:column;gap:2px;max-width:520px;margin:0 auto}
-.step-item{display:flex;align-items:flex-start;gap:18px;background:#fff;padding:22px 24px;border-radius:0}
-.step-item:first-child{border-radius:12px 12px 0 0}
-.step-item:last-child{border-radius:0 0 12px 12px}
-.step-num{width:36px;height:36px;border-radius:50%;background:rgba(200,135,10,.1);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:18px;color:#C8870A;flex-shrink:0}
-.step-body{}
-.step-title{font-size:15px;font-weight:500;color:#1a1610;margin-bottom:3px}
-.step-desc{font-size:13px;color:rgba(26,22,16,.5);line-height:1.6}
-.step-time{display:inline-block;font-size:10px;font-weight:500;color:#C8870A;background:rgba(200,135,10,.1);padding:2px 8px;border-radius:20px;margin-top:6px}
+    /* ── 3-STEPS ── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    @media (max-width: 768px) {
+      .steps-grid { grid-template-columns: 1fr; }
+    }
+    .step-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+    }
+    .step-num {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+    }
+    .step-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+    .step-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .step-time {
+      font-size: 0.78rem;
+      color: var(--orange);
+      font-weight: 600;
+      background: rgba(200, 135, 10, 0.08);
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+    }
 
-/* ── 피드 미리보기 ── */
-.feed-sec{padding:52px 24px;background:#fff;position:relative;z-index:1}
-.feed-sec::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,135,10,.15),transparent)}
-.feed-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:480px;margin:0 auto}
-.feed-item{border-radius:10px;overflow:hidden;background:#1a1610;aspect-ratio:3/4;display:flex;flex-direction:column;cursor:pointer;transition:transform .2s}
-.feed-item:hover{transform:scale(1.02)}
-.fi-photo{flex:1;display:flex;align-items:center;justify-content:center;font-size:32px;background:#2a2018}
-.fi-body{padding:10px}
-.fi-nick{font-size:9px;color:rgba(200,135,10,.6);margin-bottom:3px}
-.fi-poem{font-family:'DM Serif Display',serif;font-size:10px;font-style:italic;color:rgba(253,248,240,.7);line-height:1.5}
+    /* ── FEED ── */
+    .feed-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+    .feed-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 900px) {
+      .feed-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .feed-grid { grid-template-columns: 1fr; }
+    }
+    .feed-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .feed-card:hover { box-shadow: 0 6px 28px rgba(0,0,0,0.12); transform: translateY(-3px); }
+    .feed-thumb {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      background: #e0d8cc;
+    }
+    .feed-thumb-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #e8dfd0, #d5c9b8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: #b0a090;
+    }
+    .feed-body {
+      padding: 1rem 1.1rem 1.2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .feed-nick {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--orange);
+    }
+    .feed-poem {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--text);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
 
-/* ── 바텀 CTA ── */
-.bottom-cta{padding:56px 24px;text-align:center;background:linear-gradient(135deg,#1a1610 0%,#2d1f0a 100%);position:relative;z-index:1;overflow:hidden}
-.bottom-cta::before{content:'✦';position:absolute;font-size:200px;color:rgba(200,135,10,.04);top:50%;left:50%;transform:translate(-50%,-50%);font-family:'DM Serif Display',serif;pointer-events:none}
-.bc-title{font-family:'DM Serif Display',serif;font-size:clamp(26px,5vw,48px);color:#fdf8f0;margin-bottom:10px;position:relative;z-index:1}
-.bc-title em{font-style:italic;color:#C8870A}
-.bc-sub{font-size:14px;color:rgba(253,248,240,.45);margin-bottom:32px;position:relative;z-index:1}
+    /* skeleton */
+    .skeleton {
+      background: linear-gradient(90deg, #ede8e0 25%, #f5f1ea 50%, #ede8e0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 8px;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .feed-card-skeleton {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .skel-thumb {
+      width: 100%;
+      aspect-ratio: 4/3;
+    }
+    .skel-body { padding: 1rem 1.1rem 1.2rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .skel-line { height: 14px; }
+    .skel-line.short { width: 40%; }
+    .skel-line.long { width: 90%; }
+    .skel-line.mid { width: 70%; }
 
-/* ── FOOTER ── */
-footer{background:#1a1610;padding:24px;text-align:center;position:relative;z-index:1}
-.ft-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
-.ft-links a{font-size:12px;color:rgba(253,248,240,.35);transition:color .2s}
-.ft-links a:hover{color:#C8870A}
-.ft-copy{font-size:11px;color:rgba(253,248,240,.2)}
+    .feed-error {
+      text-align: center;
+      color: var(--text-muted);
+      padding: 2rem;
+      grid-column: 1 / -1;
+    }
+    .feed-more-wrap { text-align: center; }
 
-/* ── 애니메이션 ── */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease,cubic-bezier(.16,1,.3,1)),transform .6s var(--ease)}
-.reveal.visible{opacity:1;transform:translateY(0)}
+    /* ── BOTTOM CTA ── */
+    .bottom-cta {
+      background: var(--dark-card);
+      color: #fff;
+      text-align: center;
+      padding: 5rem 1.5rem;
+    }
+    .bottom-cta h2 {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      margin-bottom: 0.8rem;
+    }
+    .bottom-cta p {
+      font-size: 1rem;
+      color: #8a7a6a;
+      margin-bottom: 2rem;
+    }
 
-@media(max-width:600px){
-  nav{padding:12px 16px}
-  .hero{padding:48px 16px 40px}
-  .sample-sec,.how-sec,.feed-sec,.bottom-cta{padding:40px 16px}
-  .feed-grid{grid-template-columns:repeat(3,1fr);gap:7px}
-}
-</style>
+    /* ── FOOTER ── */
+    footer {
+      background: var(--cream);
+      border-top: 1px solid var(--border);
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 0.8rem;
+    }
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--orange); }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: #b0a090;
+    }
+
+    /* ── REVEAL ANIMATION ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* responsive nav */
+    @media (max-width: 480px) {
+      .nav-logo span { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ── NAV ── -->
 <nav>
-  <a href="/" class="nav-logo">
-    <div class="nav-logo-mark">H</div>
-    <div class="nav-logo-text">휴먼다큐 · <span>투*필</span></div>
-  </a>
-  <div class="nav-right">
-    <a href="/today.html" class="nav-link">피드</a>
-    <a href="/today-form.html" class="nav-btn">오늘 기록하기 →</a>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="logo-badge">H</div>
+      <span>휴먼다큐 · 투·필</span>
+    </a>
+    <div class="nav-links">
+      <a href="#feed" class="feed-link">피드</a>
+      <a href="/today-form.html" class="btn-nav">오늘 기록하기 →</a>
+    </div>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-film"></div>
-  <div class="hero-tag">TODAY FILMOGRAPHY · 무료</div>
-  <h1 class="hero-title">오늘을 사진으로,<br><em>시로 남긴다.</em></h1>
-  <p class="hero-sub">사진 2~6장을 올리면<br>AI가 오늘의 시를 써드립니다.</p>
-  <div class="hero-pills">
-    <div class="pill"><strong>무료</strong></div>
-    <div class="pill">30초 입력</div>
-    <div class="pill">AI 시 생성</div>
-    <div class="pill">카카오 공유</div>
-    <div class="pill">매일 기록</div>
+<!-- ── HERO ── -->
+<section class="hero reveal">
+  <div class="hero-tag">✦ TODAY FILMOGRAPHY · 무료</div>
+  <h1>
+    오늘을 사진으로,<br />
+    <span class="italic-line">시로 남긴다.</span>
+  </h1>
+  <p class="hero-sub">사진 2~6장을 올리면 AI가 오늘의 시를 써드립니다.</p>
+  <div class="hero-badges">
+    <span class="badge-pill">✓ 무료</span>
+    <span class="badge-pill">⚡ 30초 입력</span>
+    <span class="badge-pill">✦ AI 시 생성</span>
+    <span class="badge-pill">💬 카카오 공유</span>
+    <span class="badge-pill">📅 매일 기록</span>
   </div>
-  <div class="cta-wrap">
-    <a href="/today-form.html" class="btn-main">📸 오늘 기록하기 →</a>
-    <a href="/today.html" class="btn-ghost">피드 둘러보기</a>
-  </div>
-</section>
-
-<!-- 샘플 -->
-<section class="sample-sec reveal">
-  <div class="sec-label">실제 결과물</div>
-  <h2 class="sec-title">이렇게 나옵니다</h2>
-  <div class="sample-card">
-    <div class="sc-photos">
-      <div class="sc-photo" style="background:#d4c4a8">☕</div>
-      <div class="sc-photo" style="background:#c8b898">📚</div>
-      <div class="sc-photo" style="background:#e0cfa8">🌅</div>
-    </div>
-    <div class="sc-body">
-      <div class="sc-tag">오늘의 시 · 감동명작</div>
-      <div class="sc-poem">
-        <span>카페 창가에 앉아 책을 폈는데</span>
-        <span>세 페이지만 읽고 창밖을 봤다</span>
-        <span>오늘도 딴짓이 더 재밌었다</span>
-      </div>
-      <div class="sc-meta">
-        <div class="sc-nick">책읽는척하는사람</div>
-        <div class="sc-date">2026. 06. 01</div>
-      </div>
-    </div>
+  <div class="hero-cta">
+    <a href="/today-form.html" class="btn-primary">📸 오늘 기록하기 →</a>
+    <a href="#feed" class="btn-ghost">피드 둘러보기</a>
   </div>
 </section>
 
-<!-- 작동 방식 -->
-<section class="how-sec reveal">
-  <div class="sec-label">어떻게 하나요</div>
-  <h2 class="sec-title">딱 <em>3단계</em>예요</h2>
-  <div class="steps">
-    <div class="step-item">
-      <div class="step-num">1</div>
-      <div class="step-body">
-        <div class="step-title">오늘 사진 2~6장 올리기</div>
-        <div class="step-desc">어떤 사진도 괜찮아요. 밥, 하늘, 책상, 길거리 — 오늘 찍은 것이면 뭐든.</div>
-        <div class="step-time">⏱ 30초</div>
-      </div>
+<!-- ── SAMPLE CARD ── -->
+<section class="section">
+  <div class="reveal">
+    <div class="section-label">실제 결과물</div>
+    <div class="section-title">이렇게 나옵니다</div>
+  </div>
+  <div class="sample-card reveal">
+    <div class="sample-photos">
+      <div class="emoji-box">📷</div>
+      <div class="emoji-box">🌅</div>
+      <div class="emoji-box">☕</div>
     </div>
-    <div class="step-item">
-      <div class="step-num">2</div>
-      <div class="step-body">
-        <div class="step-title">한 줄씩 설명 + 오늘 한 마디</div>
-        <div class="step-desc">사진마다 짧게. 거창하지 않아도 돼요. 솔직한 속마음이면 더 좋아요.</div>
-        <div class="step-time">⏱ 1분</div>
-      </div>
-    </div>
-    <div class="step-item">
-      <div class="step-num">3</div>
-      <div class="step-body">
-        <div class="step-title">AI가 시를 써드려요</div>
-        <div class="step-desc">30초 후, 오늘의 시가 도착해요. 카카오톡으로 바로 공유할 수 있어요.</div>
-        <div class="step-time">⏱ 30초 대기</div>
+    <div class="sample-poem">
+      <p>카페 창가에 앉아 책을 폈는데
+세 페이지만 읽고 창밖을 봤다
+오늘도 딴짓이 더 재밌었다</p>
+      <div class="sample-meta">
+        <span class="nick">책펼치는곰</span>
+        <span>·</span>
+        <span>2026.05.30</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 피드 미리보기 -->
-<section class="feed-sec reveal">
-  <div class="sec-label">다른 사람들의 오늘</div>
-  <h2 class="sec-title">매일 쌓이는 <em>필모그래피</em></h2>
-  <div class="feed-grid" id="feed-grid">
-    <div style="grid-column:1/-1;text-align:center;padding:24px;color:rgba(26,22,16,.4);font-size:13px">불러오는 중...</div>
+<!-- ── 3-STEPS ── -->
+<section class="section">
+  <div class="reveal">
+    <div class="section-title">딱 3단계예요</div>
   </div>
-  <div style="text-align:center;margin-top:24px">
-    <button onclick="loadMoreFeed()" id="feed-more-btn" style="font-size:13px;color:#C8870A;background:none;border:1px solid rgba(200,135,10,.3);padding:9px 22px;border-radius:40px;cursor:pointer;font-family:inherit">더 보기 →</button>
+  <div class="steps-grid">
+    <div class="step-card reveal reveal-delay-1">
+      <div class="step-num">📸</div>
+      <h3>사진 2~6장 올리기</h3>
+      <p>오늘 찍은 사진이면 충분해요</p>
+      <span class="step-time">⏱ 30초</span>
+    </div>
+    <div class="step-card reveal reveal-delay-2">
+      <div class="step-num">✍️</div>
+      <h3>한 줄씩 설명 + 오늘 한 마디</h3>
+      <p>각 사진에 짧게, 마지막엔 오늘을 한 마디로</p>
+      <span class="step-time">⏱ 1분</span>
+    </div>
+    <div class="step-card reveal reveal-delay-3">
+      <div class="step-num">✦</div>
+      <h3>AI가 시를 써드려요</h3>
+      <p>당신의 오늘이 시가 됩니다</p>
+      <span class="step-time">⏱ 30초 대기</span>
+    </div>
   </div>
 </section>
 
-<!-- 바텀 CTA -->
+<!-- ── FEED ── -->
+<section class="feed-section" id="feed">
+  <div class="reveal">
+    <div class="section-title">다른 사람들의 오늘</div>
+  </div>
+  <div class="feed-grid" id="feedGrid"></div>
+  <div class="feed-more-wrap">
+    <button class="btn-ghost" id="feedMoreBtn" style="display:none;" onclick="loadFeed()">더 보기 →</button>
+  </div>
+</section>
+
+<!-- ── BOTTOM CTA ── -->
 <section class="bottom-cta reveal">
-  <h2 class="bc-title">오늘도<br><em>기록할 만했다.</em></h2>
-  <p class="bc-sub">무료 · 매일 · AI가 시로 만들어드립니다</p>
-  <div class="cta-wrap">
-    <a href="/today-form.html" class="btn-main" style="background:#C8870A">📸 오늘 기록하기 →</a>
-  </div>
+  <h2>오늘도 기록할 만했다.</h2>
+  <p>기록이 쌓이면 당신만의 영화가 됩니다.</p>
+  <a href="/today-form.html" class="btn-primary">📸 오늘 기록하기 →</a>
 </section>
 
-<!-- FOOTER -->
+<!-- ── FOOTER ── -->
 <footer>
-  <div class="ft-links">
+  <div class="footer-links">
     <a href="/">휴먼다큐 홈</a>
     <a href="/memorial.html">메모리얼</a>
     <a href="/sixshot.html">식스샷</a>
-    <a href="/today.html">피드</a>
   </div>
-  <div class="ft-copy">© 2026 휴먼다큐 · humandocu.com</div>
+  <p class="footer-copy">© 2026 휴먼다큐</p>
 </footer>
 
 <script>
-// 스크롤 reveal
-var observer = new IntersectionObserver(function(entries){
-  entries.forEach(function(e){
-    if(e.isIntersecting) e.target.classList.add('visible');
-  });
-},{threshold:.15});
-document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el)});
-
-// 피드 실제 데이터 로드
-var feedOffset = 0;
-var feedLoading = false;
-var FEED_API = 'https://humandocu-server-production.up.railway.app/api/today/feed';
-
-async function loadMoreFeed(reset) {
-  if(feedLoading) return;
-  feedLoading = true;
-  var grid = document.getElementById('feed-grid');
-  if(reset){ feedOffset=0; grid.innerHTML=''; }
-  try{
-    var r = await fetch(FEED_API+'?limit=6&offset='+feedOffset);
-    var d = await r.json();
-    if(!d.items||!d.items.length){
-      if(feedOffset===0) grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:24px;color:rgba(26,22,16,.4);font-size:13px">아직 공개된 투*필이 없어요</div>';
-      document.getElementById('feed-more-btn').style.display='none';
-      feedLoading=false; return;
-    }
-    d.items.forEach(function(item){
-      var photo = item.photo1||(item.shot_images&&item.shot_images[1])||'';
-      var nick = item.nickname||item.name||'익명';
-      var poem = '';
-      if(item.poems){
-        var m = item.poems.match(/\[오늘의시\]([\s\S]*?)(?:\[|$)/);
-        if(m) poem = m[1].trim().split('
-').slice(0,2).join('<br>');
+  // ── Reveal Animation ──
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
       }
-      var el = document.createElement('a');
-      el.className = 'feed-item';
-      el.href = 'https://humandocu-server-production.up.railway.app/today/'+item.doc_id;
-      el.target = '_blank';
-      el.style.cssText = 'text-decoration:none';
-      el.innerHTML =
-        '<div class="fi-photo" style="'+(photo?'background:url('+photo+') center/cover no-repeat;font-size:0':'background:#2a2018')+'">'+ (!photo?'📷':'')+'</div>'+
-        '<div class="fi-body"><div class="fi-nick">'+nick+'</div>'+
-        '<div class="fi-poem">'+(poem||'')+'</div></div>';
-      grid.appendChild(el);
     });
-    feedOffset += d.items.length;
-    if(d.items.length < 6) document.getElementById('feed-more-btn').style.display='none';
-  }catch(e){ console.log(e); }
-  feedLoading=false;
-}
-loadMoreFeed(true);
-</script>
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
+  // ── Feed ──
+  const API_BASE = 'https://humandocu-server-production.up.railway.app';
+  let feedOffset = 0;
+  let feedLoading = false;
+
+  function parsePoem(poems) {
+    if (!poems) return '';
+    const tag = '[오늘의시]';
+    const idx = poems.indexOf(tag);
+    let text = idx !== -1 ? poems.slice(idx + tag.length).trim() : poems.trim();
+    // return first 2 lines
+    return text.split('\n').filter(l => l.trim()).slice(0, 2).join('\n');
+  }
+
+  function getThumb(item) {
+    if (item.photo1) return item.photo1;
+    if (item.shot_images) {
+      if (Array.isArray(item.shot_images) && item.shot_images.length > 0) return item.shot_images[0];
+      if (typeof item.shot_images === 'object') {
+        const keys = Object.keys(item.shot_images).sort();
+        if (keys.length > 0) return item.shot_images[keys[0]];
+      }
+    }
+    return null;
+  }
+
+  function createSkeletons(n) {
+    const grid = document.getElementById('feedGrid');
+    for (let i = 0; i < n; i++) {
+      const el = document.createElement('div');
+      el.className = 'feed-card-skeleton skeleton-wrap';
+      el.innerHTML = `<div class="skel-thumb skeleton"></div>
+        <div class="skel-body">
+          <div class="skel-line short skeleton"></div>
+          <div class="skel-line long skeleton"></div>
+          <div class="skel-line mid skeleton"></div>
+        </div>`;
+      grid.appendChild(el);
+    }
+  }
+
+  function removeSkeletons() {
+    document.querySelectorAll('.skeleton-wrap').forEach(el => el.remove());
+  }
+
+  function renderCards(items) {
+    const grid = document.getElementById('feedGrid');
+    items.forEach(item => {
+      const card = document.createElement('a');
+      card.className = 'feed-card reveal';
+      card.href = `${API_BASE}/today/${item.doc_id}`;
+      card.target = '_blank';
+      card.rel = 'noopener';
+
+      const thumb = getThumb(item);
+      const nick = item.nickname || item.name || '익명';
+      const poem = parsePoem(item.poems);
+
+      let thumbHtml;
+      if (thumb) {
+        thumbHtml = `<img class="feed-thumb" src="${thumb}" alt="${nick}" loading="lazy" onerror="this.parentNode.innerHTML='<div class=\\"feed-thumb-placeholder\\">📷</div>'" />`;
+      } else {
+        thumbHtml = `<div class="feed-thumb-placeholder">📷</div>`;
+      }
+
+      card.innerHTML = `${thumbHtml}
+        <div class="feed-body">
+          <div class="feed-nick">${nick}</div>
+          <div class="feed-poem">${poem.replace(/\n/g, '<br />')}</div>
+        </div>`;
+
+      grid.appendChild(card);
+      // observe for reveal
+      revealObserver.observe(card);
+    });
+  }
+
+  async function loadFeed() {
+    if (feedLoading) return;
+    feedLoading = true;
+    const moreBtn = document.getElementById('feedMoreBtn');
+    moreBtn.style.display = 'none';
+
+    createSkeletons(6);
+    try {
+      const res = await fetch(`${API_BASE}/api/today/feed?limit=6&offset=${feedOffset}`);
+      if (!res.ok) throw new Error('fetch failed');
+      const data = await res.json();
+      removeSkeletons();
+
+      const items = data.items || data || [];
+      if (items.length === 0 && feedOffset === 0) {
+        document.getElementById('feedGrid').innerHTML = '<div class="feed-error">아직 피드가 없어요.</div>';
+      } else {
+        renderCards(items);
+        feedOffset += items.length;
+        if (items.length >= 6) {
+          moreBtn.style.display = 'inline-block';
+        }
+      }
+    } catch (e) {
+      removeSkeletons();
+      if (feedOffset === 0) {
+        document.getElementById('feedGrid').innerHTML = '<div class="feed-error">피드를 불러올 수 없어요.</div>';
+      }
+    } finally {
+      feedLoading = false;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadFeed);
+</script>
 </body>
 </html>
