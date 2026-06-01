@@ -461,32 +461,120 @@
     @media (max-width: 480px) {
       .nav-logo span { display: none; }
     }
+
+/* ── LANG BAR (sixshot.html style) ── */
+#lang-bar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 300;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 44px;
+  padding: 0 16px;
+  gap: 6px;
+  background: #FFFBF3;
+  border-bottom: 1px solid rgba(200,135,10,.2);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+#lang-bar::-webkit-scrollbar { display: none; }
+.lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: 1.5px solid #cccccc;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  color: #333333;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-family: 'Noto Sans KR', sans-serif;
+  transition: color .15s, background .15s, border-color .15s;
+  line-height: 1;
+  white-space: nowrap;
+}
+.lang-btn .flag { font-size: 16px; line-height: 1; }
+.lang-btn:hover { background: #f5f1eb; border-color: #b8a87e; color: #111111; }
+.lang-btn.active { background: #c8a96e; border-color: #c8a96e; color: #ffffff; }
+
+/* ── QUICK BAR (action bar) ── */
+#quick-bar {
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #FFFBF3;
+  border-bottom: 1px solid rgba(200,135,10,.15);
+  position: sticky;
+  top: 44px;
+  z-index: 299;
+}
+#quick-bar .qb-primary {
+  flex: 1;
+  text-align: center;
+  padding: 10px 0;
+  background: #C8870A;
+  color: #fff;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  text-decoration: none;
+  transition: background .2s;
+}
+#quick-bar .qb-primary:hover { background: #A86C00; }
+#quick-bar .qb-ghost {
+  flex: 1;
+  text-align: center;
+  padding: 10px 0;
+  background: transparent;
+  color: #C8870A;
+  border: 1px solid rgba(200,135,10,.5);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .2s, border-color .2s;
+}
+#quick-bar .qb-ghost:hover { background: rgba(200,135,10,.1); border-color: #C8870A; }
   </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
-<nav>
-  <div class="nav-inner">
-    <a href="/" class="nav-logo">
-      <div class="logo-badge">H</div>
-      <span>휴먼다큐 · 투·필</span>
-    </a>
-    <div class="nav-links">
-      <a href="#feed" class="feed-link">피드</a>
-      <a href="/today-form.html" class="btn-nav">오늘 기록하기 →</a>
-    </div>
-  </div>
-</nav>
+<div id="lang-bar">
+  <button class="lang-btn active" data-lang="KO"><span class="flag">🇰🇷</span> 한국어</button>
+  <button class="lang-btn" data-lang="EN"><span class="flag">🇺🇸</span> English</button>
+  <button class="lang-btn" data-lang="JP"><span class="flag">🇯🇵</span> 日本語</button>
+  <button class="lang-btn" data-lang="ZH"><span class="flag">🇨🇳</span> 中文</button>
+</div>
+<div id="quick-bar">
+  <a class="qb-primary" href="/today-form.html"
+    data-ko="나의 투*필 만들기 →"
+    data-en="Create My Tu·Fil →"
+    data-jp="マイ투*필を作る →"
+    data-zh="创建我的투*필 →">나의 투*필 만들기 →</a>
+  <a class="qb-ghost" href="#feed"
+    data-ko="다른 투*필 둘러보기 →"
+    data-en="Browse Tu·Fils →"
+    data-jp="他の투*필を見る →"
+    data-zh="浏览其他투*필 →">다른 투*필 둘러보기 →</a>
+</div>
 
 <!-- ── HERO ── -->
 <section class="hero reveal">
-  <div class="hero-tag">✦ TODAY FILMOGRAPHY · 무료</div>
+  <div class="hero-tag" data-ko="✦ TODAY FILMOGRAPHY · 무료" data-en="✦ TODAY FILMOGRAPHY · Free" data-jp="✦ TODAY FILMOGRAPHY · 無料" data-zh="✦ TODAY FILMOGRAPHY · 免费">✦ TODAY FILMOGRAPHY · 무료</div>
   <h1>
-    오늘을 사진으로,<br />
-    <span class="italic-line">시로 남긴다.</span>
+    <span data-ko="오늘을 사진으로," data-en="Today, in photos," data-jp="今日を写真で、" data-zh="今天，用照片，">오늘을 사진으로,</span><br />
+    <span class="italic-line" data-ko="시로 남긴다." data-en="leave it as a poem." data-jp="詩として残す。" data-zh="留作一首诗。">시로 남긴다.</span>
   </h1>
-  <p class="hero-sub">사진 2~6장을 올리면 AI가 오늘의 시를 써드립니다.</p>
+  <p class="hero-sub" data-ko="사진 2~6장을 올리면 AI가 오늘의 시를 써드립니다." data-en="Upload 2–6 photos and AI writes today's poem for you." data-jp="2〜6枚の写真をアップすると、AIが今日の詩を書いてくれます。" data-zh="上传2~6张照片，AI为你写今天的诗。">사진 2~6장을 올리면 AI가 오늘의 시를 써드립니다.</p>
   <div class="hero-badges">
     <span class="badge-pill">✓ 무료</span>
     <span class="badge-pill">⚡ 30초 입력</span>
@@ -495,8 +583,8 @@
     <span class="badge-pill">📅 매일 기록</span>
   </div>
   <div class="hero-cta">
-    <a href="/today-form.html" class="btn-primary">📸 오늘 기록하기 →</a>
-    <a href="#feed" class="btn-ghost">피드 둘러보기</a>
+    <a href="/today-form.html" class="btn-primary" data-ko="📸 오늘 기록하기 →" data-en="📸 Record Today →" data-jp="📸 今日を記録する →" data-zh="📸 记录今天 →">📸 오늘 기록하기 →</a>
+    <a href="#feed" class="btn-ghost" data-ko="피드 둘러보기" data-en="Browse Feed" data-jp="フィードを見る" data-zh="浏览内容">피드 둘러보기</a>
   </div>
 </section>
 
@@ -565,9 +653,9 @@
 
 <!-- ── BOTTOM CTA ── -->
 <section class="bottom-cta reveal">
-  <h2>오늘도 기록할 만했다.</h2>
-  <p>기록이 쌓이면 당신만의 영화가 됩니다.</p>
-  <a href="/today-form.html" class="btn-primary">📸 오늘 기록하기 →</a>
+  <h2 data-ko="오늘도 기록할 만했다." data-en="Today was worth remembering." data-jp="今日も記録する価値があった。" data-zh="今天也值得记录。">오늘도 기록할 만했다.</h2>
+  <p data-ko="기록이 쌓이면 당신만의 영화가 됩니다." data-en="As records pile up, they become your own film." data-jp="記録が積み重なると、あなただけの映画になります。" data-zh="记录积累，便成为你专属的电影。">기록이 쌓이면 당신만의 영화가 됩니다.</p>
+  <a href="/today-form.html" class="btn-primary" data-ko="📸 오늘 기록하기 →" data-en="📸 Record Today →" data-jp="📸 今日を記録する →" data-zh="📸 记录今天 →">📸 오늘 기록하기 →</a>
 </section>
 
 <!-- ── FOOTER ── -->
@@ -703,6 +791,32 @@
   }
 
   document.addEventListener('DOMContentLoaded', loadFeed);
+</script>
+
+<script>
+(function () {
+  function applyLang(lang) {
+    var l = lang.toLowerCase();
+    document.querySelectorAll('[data-ko]').forEach(function (el) {
+      var text = el.getAttribute('data-' + l);
+      if (text) el.innerHTML = text;
+    });
+    document.querySelectorAll('.lang-btn').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+  }
+
+  var saved = localStorage.getItem('lang') || 'KO';
+  applyLang(saved);
+
+  document.querySelectorAll('.lang-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var lang = this.dataset.lang;
+      localStorage.setItem('lang', lang);
+      applyLang(lang);
+    });
+  });
+})();
 </script>
 </body>
 </html>
