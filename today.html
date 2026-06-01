@@ -212,31 +212,10 @@ footer{background:#1a1610;padding:24px;text-align:center;position:relative;z-ind
   <div class="sec-label">다른 사람들의 오늘</div>
   <h2 class="sec-title">매일 쌓이는 <em>필모그래피</em></h2>
   <div class="feed-grid" id="feed-grid">
-    <!-- 서버에서 로드 -->
-    <div class="feed-item">
-      <div class="fi-photo">🌆</div>
-      <div class="fi-body">
-        <div class="fi-nick">저녁노을러</div>
-        <div class="fi-poem">버스 창에<br>노을이 탔다</div>
-      </div>
-    </div>
-    <div class="feed-item">
-      <div class="fi-photo">☕</div>
-      <div class="fi-body">
-        <div class="fi-nick">커피한잔</div>
-        <div class="fi-poem">식기 전에<br>마셨다</div>
-      </div>
-    </div>
-    <div class="feed-item">
-      <div class="fi-photo">📖</div>
-      <div class="fi-body">
-        <div class="fi-nick">책덕후</div>
-        <div class="fi-poem">세 페이지<br>읽고 잠들었다</div>
-      </div>
-    </div>
+    <div style="grid-column:1/-1;text-align:center;padding:24px;color:rgba(26,22,16,.4);font-size:13px">불러오는 중...</div>
   </div>
-  <div style="text-align:center;margin-top:20px">
-    <a href="/today.html" style="font-size:13px;color:#C8870A;border-bottom:1px solid rgba(200,135,10,.3);padding-bottom:1px">더 많은 오늘 보기 →</a>
+  <div style="text-align:center;margin-top:24px">
+    <button onclick="loadMoreFeed()" id="feed-more-btn" style="font-size:13px;color:#C8870A;background:none;border:1px solid rgba(200,135,10,.3);padding:9px 22px;border-radius:40px;cursor:pointer;font-family:inherit">더 보기 →</button>
   </div>
 </section>
 
@@ -270,32 +249,49 @@ var observer = new IntersectionObserver(function(entries){
 document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el)});
 
 // 피드 실제 데이터 로드
-(async function(){
+var feedOffset = 0;
+var feedLoading = false;
+var FEED_API = 'https://humandocu-server-production.up.railway.app/api/today/feed';
+
+async function loadMoreFeed(reset) {
+  if(feedLoading) return;
+  feedLoading = true;
+  var grid = document.getElementById('feed-grid');
+  if(reset){ feedOffset=0; grid.innerHTML=''; }
   try{
-    var r = await fetch('https://humandocu-server-production.up.railway.app/api/today/feed?limit=3&offset=0');
+    var r = await fetch(FEED_API+'?limit=6&offset='+feedOffset);
     var d = await r.json();
-    if(!d.items||!d.items.length) return;
-    var grid = document.getElementById('feed-grid');
-    grid.innerHTML = '';
-    d.items.slice(0,3).forEach(function(item){
+    if(!d.items||!d.items.length){
+      if(feedOffset===0) grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:24px;color:rgba(26,22,16,.4);font-size:13px">아직 공개된 투*필이 없어요</div>';
+      document.getElementById('feed-more-btn').style.display='none';
+      feedLoading=false; return;
+    }
+    d.items.forEach(function(item){
+      var photo = item.photo1||(item.shot_images&&item.shot_images[1])||'';
+      var nick = item.nickname||item.name||'익명';
       var poem = '';
       if(item.poems){
         var m = item.poems.match(/\[오늘의시\]([\s\S]*?)(?:\[|$)/);
-        if(m) poem = m[1].trim().split('\n').slice(0,2).join('\n');
+        if(m) poem = m[1].trim().split('
+').slice(0,2).join('<br>');
       }
-      var photo = (item.shot_images&&item.shot_images[1]) ? item.shot_images[1] : '';
-      var nick = item.nickname||item.name||'익명';
       var el = document.createElement('a');
       el.className = 'feed-item';
       el.href = 'https://humandocu-server-production.up.railway.app/today/'+item.doc_id;
       el.target = '_blank';
-      el.innerHTML = '<div class="fi-photo" style="'+(photo?'background:url('+photo+') center/cover;font-size:0':'')+'">'+(!photo?'📷':'')+'</div>'
-        +'<div class="fi-body"><div class="fi-nick">'+nick+'</div>'
-        +'<div class="fi-poem">'+(poem||'오늘의 시')+'</div></div>';
+      el.style.cssText = 'text-decoration:none';
+      el.innerHTML =
+        '<div class="fi-photo" style="'+(photo?'background:url('+photo+') center/cover no-repeat;font-size:0':'background:#2a2018')+'">'+ (!photo?'📷':'')+'</div>'+
+        '<div class="fi-body"><div class="fi-nick">'+nick+'</div>'+
+        '<div class="fi-poem">'+(poem||'')+'</div></div>';
       grid.appendChild(el);
     });
-  }catch(e){}
-})();
+    feedOffset += d.items.length;
+    if(d.items.length < 6) document.getElementById('feed-more-btn').style.display='none';
+  }catch(e){ console.log(e); }
+  feedLoading=false;
+}
+loadMoreFeed(true);
 </script>
 
 </body>
