@@ -554,20 +554,13 @@ var _woCopies = [];
 
 function _buildCopies() {
   var name = (document.getElementById('f-nickname')?.value || document.getElementById('f-name')?.value || '').trim();
-  var caps = shots.map(function(s){ return (s.caption||'').trim(); }).filter(Boolean);
   var msgs = [];
-  // 1. 사진 확인
-  msgs.push(caps[0] ? '"' + caps[0].slice(0,18) + '" — 이 순간, 인상적이네요.' : '사진을 하나하나 들여다보고 있어요.');
-  // 2. 두 번째 사진
-  msgs.push(caps[1] ? '"' + caps[1].slice(0,18) + '" — 이것도 담을게요.' : '와, 오늘 하루가 고스란히 담겼네요.');
-  // 3. 시 작성 중
+  msgs.push('사진을 하나하나 들여다보고 있어요...');
+  msgs.push('오늘 하루의 장면들을 이어붙이는 중이에요.');
   msgs.push(name ? name + '님의 오늘을 시로 옮기고 있어요.' : '오늘의 감정을 시로 옮기고 있어요.');
-  // 4. 유머/감성
-  msgs.push('오늘의 분위기에 맞는 시를 짓고 있어요.');
-  // 5. 마무리
-  msgs.push('너무 놀라지는 마세요. 전 칭찬 아주 좋아한답니다 ㅎㅎ');
-  // 6. 응원
-  msgs.push(name ? name + '님, 오늘도 최고의 하루 되세요!' : '오늘도 최고의 하루 되세요!');
+  msgs.push('마지막 줄을 고르고 있어요...');
+  msgs.push('거의 다 됐어요. 조금만 더 기다려주세요.');
+  msgs.push('곧 도착합니다 ✦');
   _woCopies = msgs;
   _woCopyIdx = 0;
 }
@@ -641,32 +634,23 @@ function showWaitOverlay() {
 
   // ── 슬라이드 텍스트 동적 주입 ──
   (function injectSlideTexts() {
-    var caps = shots.map(function(s){ return (s.caption||'').trim(); }).filter(Boolean);
     var name = (document.getElementById('f-nickname')?.value || document.getElementById('f-name')?.value || '').trim();
 
-    // SLIDE 1 — 첫 번째 사진 설명
+    // SLIDE 1
     var el = document.getElementById('wo-s0-body');
-    if (el && caps[0]) {
-      el.innerHTML = '"' + caps[0].slice(0,20) + '"<br>이 순간이 인상적이네요.';
-    }
+    if (el) el.innerHTML = '사진을 읽고 있어요.<br>잠시만 기다려주세요.';
 
-    // SLIDE 2 — 두 번째 사진 설명
+    // SLIDE 2
     el = document.getElementById('wo-s1-body');
-    if (el && caps[1]) {
-      el.innerHTML = '"' + caps[1].slice(0,20) + '"<br>이것도 담아드릴게요.';
-    }
+    if (el) el.innerHTML = '오늘의 장면들을<br>이어붙이는 중이에요.';
 
-    // SLIDE 3 — 이름 불러주기
+    // SLIDE 3
     el = document.getElementById('wo-s2-title');
-    if (el && name) {
-      el.innerHTML = name + '님의 오늘 하루를<br>적어보고 있어요.';
-    }
+    if (el) el.innerHTML = name ? name + '님의 오늘을<br>시로 옮기고 있어요.' : '오늘의 감정을<br>시로 옮기고 있어요.';
 
-    // SLIDE 5 — 응원
+    // SLIDE 5
     el = document.getElementById('wo-s4-name');
-    if (el && name) {
-      el.textContent = name + '님, 오늘도 최고의 하루!';
-    }
+    if (el) el.textContent = name ? name + '님, 거의 다 됐어요!' : '거의 다 됐어요!';
   })();
 
   _woSlideTimer = setInterval(function() { _woGoSlide(_woCurSlide + 1); }, WO_SLIDE_MS);
