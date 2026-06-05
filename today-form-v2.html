@@ -212,11 +212,15 @@ function buildSlider() {
 function buildStart() {
   const d = mkEl('div', 'slide', 'slide-start');
   d.innerHTML =
-    '<div class="s0-headline">지금,<br>오늘을</div>' +
+    '<div class="s0-tag">TODAY FILMOGRAPHY</div>' +
+    '<div class="s0-headline">오늘을<br>담아요</div>' +
     '<div class="s0-logo">투<span>*</span>필</div>' +
-    '<div class="s0-sub">TODAY FILMOGRAPHY</div>' +
-    '<button class="s0-btn" id="s0-pick">📸 사진 선택</button>' +
-    '<div class="s0-hint">사진 선택 후 → 옆으로 밀어 진행해요</div>';
+    '<div class="s0-sub">사진 1~6장 · AI가 시로 남겨드려요</div>' +
+    '<div class="s0-btn-row">' +
+      '<button class="s0-btn" id="s0-pick">📸 사진 선택</button>' +
+      '<a class="s0-btn s0-btn-browse" href="/today.html">👀 둘러보기</a>' +
+    '</div>' +
+    '<div class="s0-hint">← 사진 선택 후 옆으로 밀어 진행해요</div>';
   d.querySelector('#s0-pick').onclick = function(){ document.getElementById('file-input').click(); };
   return d;
 }
