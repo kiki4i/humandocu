@@ -18,10 +18,8 @@ input,textarea{-webkit-user-select:text;user-select:text}
 
 /* ── Top nav ── */
 #top-nav{position:fixed;top:0;left:0;right:0;z-index:300;
-  display:flex;align-items:center;justify-content:space-between;
+  display:flex;align-items:center;justify-content:flex-end;
   padding:10px 14px;background:linear-gradient(to bottom,rgba(0,0,0,.6) 0%,rgba(0,0,0,0) 100%)}
-#nav-feed{font-size:11px;color:rgba(255,255,255,.7);text-decoration:none;
-  letter-spacing:.02em;font-weight:400;padding:4px 0;white-space:nowrap}
 #nav-feed:active{opacity:.6}
 #nav-langs{display:flex;gap:4px;flex-wrap:nowrap}
 .nav-lang{display:inline-flex;align-items:center;gap:3px;background:transparent;
@@ -147,7 +145,6 @@ input,textarea{-webkit-user-select:text;user-select:text}
 </head>
 <body>
 <div id="top-nav">
-  <a id="nav-feed" href="/today.html">투*필 피드</a>
   <div id="nav-langs">
     <a href="/today-form-v2.html" class="nav-lang active">🇰🇷 한국어</a>
     <a href="/today-form-en.html" class="nav-lang">🇺🇸 English</a>
@@ -563,6 +560,10 @@ function lsLoad() {
 }
 
 /* ── INIT ── */
+// 항상 슬라이드 0부터 시작
+photos = [];
+selectedGenre = '';
+currentSlide = 0;
 buildSlider();
 </script>
 </body>
