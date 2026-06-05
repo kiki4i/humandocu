@@ -93,6 +93,22 @@ input,textarea{-webkit-user-select:text;user-select:text}
 .fin-submit:disabled{opacity:.3;cursor:not-allowed;box-shadow:none}
 .fin-submit:not(:disabled):active{opacity:.8}
 
+/* ── SLIDE ADD: 사진 추가 카드 ── */
+.slide-add{background:#0a0a0a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
+.add-inner{display:flex;flex-direction:column;align-items:center;gap:20px;padding:32px}
+.add-icon{width:80px;height:80px;border-radius:50%;border:2px dashed rgba(255,255,255,.25);
+  display:flex;align-items:center;justify-content:center;font-size:32px}
+.add-label{font-size:15px;color:rgba(255,255,255,.55);font-weight:300;letter-spacing:.03em}
+.add-count{font-size:12px;color:rgba(255,255,255,.3);margin-top:-12px}
+.add-btn{background:#C8870A;color:#fff;border:none;border-radius:14px;
+  padding:15px 36px;font-size:16px;font-weight:600;font-family:inherit;cursor:pointer;
+  letter-spacing:.03em;transition:opacity .18s}
+.add-btn:active{opacity:.7}
+.add-finish{background:rgba(255,255,255,.06);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;padding:13px 32px;font-size:14px;font-weight:400;font-family:inherit;
+  cursor:pointer;letter-spacing:.02em;transition:opacity .18s}
+.add-finish:active{opacity:.7}
+
 /* ── SLIDE N+2: LOADING ── */
 #slide-loading{background:#000;overflow:hidden}
 #ld-photos{position:absolute;inset:0}
@@ -141,7 +157,7 @@ const LD_MSGS = [
 
 let photos = [];        // [{b64, caption}]
 let currentSlide = 0;
-let totalSlides = 3;    // start + finish + loading (photos = 0)
+let totalSlides = 4;    // start + add + finish + loading (photos = 0)
 let selectedGenre = '';
 let submitting = false;
 let txS = 0, tyS = 0;
@@ -151,11 +167,12 @@ let _ldPhotoTimer = null, _ldMsgTimer = null;
    SLIDER BUILD
 ───────────────────────────────────────────── */
 function buildSlider() {
-  totalSlides = photos.length + 3;
+  totalSlides = photos.length + 4;
   const slider = document.getElementById('slider');
   slider.innerHTML = '';
   slider.appendChild(buildStart());
   photos.forEach(function(_, i){ slider.appendChild(buildPhoto(i)); });
+  slider.appendChild(buildAdd());
   slider.appendChild(buildFinish());
   slider.appendChild(buildLoading());
   posSlider(false);
@@ -196,6 +213,34 @@ function buildPhoto(i) {
   d.querySelector('.sp-btn-next').onclick = function(){
     syncCap();
     goSlide(isLast ? photos.length + 1 : i + 2);
+  };
+  return d;
+}
+
+function buildAdd() {
+  var n = photos.length;
+  var canAdd = n < 6;
+  var d = mkEl('div', 'slide slide-add');
+  d.innerHTML =
+    '<div class="sp-counter">' + n + ' / ' + n + ' · 오늘 기록 완성</div>' +
+    '<div class="add-inner">' +
+      (canAdd
+        ? '<div class="add-icon">+</div>' +
+          '<div class="add-label">사진 더 추가하기</div>' +
+          '<div class="add-count">최대 ' + (6 - n) + '장 더 추가 가능</div>' +
+          '<button class="add-btn" id="add-photo-btn">📸 사진 추가</button>'
+        : '<div class="add-icon">✓</div>' +
+          '<div class="add-label">사진 6장 완성!</div>'
+      ) +
+      '<button class="add-finish" id="add-finish-btn">이대로 완성하기 →</button>' +
+    '</div>';
+  if (canAdd) {
+    d.querySelector('#add-photo-btn').onclick = function(){
+      document.getElementById('file-input-add').click();
+    };
+  }
+  d.querySelector('#add-finish-btn').onclick = function(){
+    goSlide(photos.length + 2);
   };
   return d;
 }
@@ -302,11 +347,11 @@ document.getElementById('app').addEventListener('touchend', function(e){
   var dx = e.changedTouches[0].clientX - txS;
   var dy = e.changedTouches[0].clientY - tyS;
   if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx)) return;
-  var loadingIdx = photos.length + 2;
+  var loadingIdx = photos.length + 3;
   if (currentSlide === loadingIdx) return;
   if (dx < 0) {
     // forward — stop at finish (N+1), don't swipe into loading
-    if (currentSlide < photos.length + 1) { syncCap(); goSlide(currentSlide + 1); }
+    if (currentSlide < photos.length + 2) { syncCap(); goSlide(currentSlide + 1); }
   } else {
     // backward
     if (currentSlide > 0) { syncCap(); goSlide(currentSlide - 1); }
@@ -327,6 +372,21 @@ document.getElementById('file-input').addEventListener('change', async function(
   }));
   selectedGenre = '';
   currentSlide = 1;
+  buildSlider();
+});
+
+document.getElementById('file-input-add').addEventListener('change', async function(){
+  var files = Array.from(this.files).slice(0, 6 - photos.length);
+  if (!files.length) return;
+  this.value = '';
+  var newPhotos = await Promise.all(files.map(async function(f){
+    var b64 = await readFile(f);
+    var resized = await resizeImg(b64);
+    return {b64: resized, caption: ''};
+  }));
+  photos = photos.concat(newPhotos);
+  selectedGenre = '';
+  currentSlide = photos.length; // add 슬라이드로 (마지막 사진 다음)
   buildSlider();
 });
 
@@ -423,7 +483,7 @@ async function doSubmit() {
 
   submitting = true;
   lsSave(name, email);
-  goSlide(photos.length + 2);
+  goSlide(photos.length + 3);
   startLoading();
 
   try {
