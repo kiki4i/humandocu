@@ -205,8 +205,8 @@ function buildFinish() {
   const d = mkEl('div', 'slide', 'slide-finish');
   d.innerHTML =
     '<div class="fin-title">오늘을 완성해요</div>' +
-    '<div class="fin-sub">이름·이메일을 남겨주시면<br>결과 링크와 시를 보내드려요</div>' +
-    '<div class="fin-field"><div class="fin-label">이름 *</div>' +
+    '<div class="fin-sub">닉네임·이메일을 남겨주시면<br>결과 링크와 시를 보내드려요</div>' +
+    '<div class="fin-field"><div class="fin-label">닉네임 *</div>' +
       '<input id="f-name" type="text" class="fin-input" placeholder="닉네임 입력..." maxlength="20" autocomplete="name" value="' + esc(saved.name||'') + '"></div>' +
     '<div class="fin-field"><div class="fin-label">이메일 *</div>' +
       '<input id="f-email" type="email" class="fin-input" placeholder="your@email.com" autocomplete="email" value="' + esc(saved.email||'') + '"></div>' +
@@ -416,7 +416,7 @@ async function doSubmit() {
   var email = emailEl ? emailEl.value.trim().toLowerCase() : '';
   var msg   = msgEl   ? msgEl.value.trim()   : '';
 
-  if (!name)                { alert('이름을 입력해주세요'); if (nameEl) nameEl.focus(); return; }
+  if (!name)                { alert('닉네임을 입력해주세요'); if (nameEl) nameEl.focus(); return; }
   if (!email.includes('@')) { alert('이메일을 입력해주세요'); if (emailEl) emailEl.focus(); return; }
   if (!selectedGenre)       { alert('장르를 선택해주세요'); return; }
   if (!photos.length)       { alert('사진을 1장 이상 올려주세요'); return; }
