@@ -27,10 +27,12 @@ input,textarea{-webkit-user-select:text;user-select:text}
   position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center}
 
 /* ── SLIDE 0: START ── */
-#slide-start{background:#0a0a0a;text-align:center;padding:0 32px}
-.s0-logo{font-size:56px;font-weight:700;color:#fff;line-height:1;margin-bottom:8px}
+#slide-start{background:#0a0a0a;text-align:center;padding:0 32px;justify-content:flex-end;padding-bottom:80px}
+.s0-tag{position:absolute;top:48px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:.25em;color:rgba(255,255,255,.3);font-weight:300}
+.s0-headline{font-size:52px;font-weight:700;color:#fff;line-height:1.15;margin-bottom:36px;letter-spacing:-.01em}
+.s0-logo{font-size:28px;font-weight:700;color:#fff;line-height:1;margin-bottom:6px}
 .s0-logo span{color:#C8870A}
-.s0-sub{font-size:14px;color:rgba(255,255,255,.45);letter-spacing:.1em;font-weight:300;margin-bottom:52px}
+.s0-sub{font-size:13px;color:rgba(255,255,255,.4);letter-spacing:.08em;font-weight:300;margin-bottom:28px}
 .s0-btn{display:inline-flex;align-items:center;gap:10px;background:#C8870A;color:#fff;
   border:none;border-radius:16px;padding:18px 40px;font-size:17px;font-weight:600;font-family:inherit;
   cursor:pointer;letter-spacing:.03em;transition:opacity .18s;box-shadow:0 4px 24px rgba(200,135,10,.3)}
@@ -162,8 +164,10 @@ function buildSlider() {
 function buildStart() {
   const d = mkEl('div', 'slide', 'slide-start');
   d.innerHTML =
+    '<div class="s0-tag">TODAY FILMOGRAPHY</div>' +
+    '<div class="s0-headline">오늘을<br>기록하세요</div>' +
     '<div class="s0-logo">투<span>*</span>필</div>' +
-    '<div class="s0-sub">오늘을 기록하세요</div>' +
+    '<div class="s0-sub">AI가 시로 남겨드려요</div>' +
     '<button class="s0-btn" id="s0-pick">📸 사진 선택</button>' +
     '<div class="s0-hint">1~6장 · AI가 시로 남겨드려요 · 무료</div>';
   d.querySelector('#s0-pick').onclick = function(){ document.getElementById('file-input').click(); };
@@ -203,7 +207,7 @@ function buildFinish() {
     '<div class="fin-title">오늘을 완성해요</div>' +
     '<div class="fin-sub">이름·이메일을 남겨주시면<br>결과 링크와 시를 보내드려요</div>' +
     '<div class="fin-field"><div class="fin-label">이름 *</div>' +
-      '<input id="f-name" type="text" class="fin-input" placeholder="이름 입력..." maxlength="20" autocomplete="name" value="' + esc(saved.name||'') + '"></div>' +
+      '<input id="f-name" type="text" class="fin-input" placeholder="닉네임 입력..." maxlength="20" autocomplete="name" value="' + esc(saved.name||'') + '"></div>' +
     '<div class="fin-field"><div class="fin-label">이메일 *</div>' +
       '<input id="f-email" type="email" class="fin-input" placeholder="your@email.com" autocomplete="email" value="' + esc(saved.email||'') + '"></div>' +
     '<div class="fin-field"><div class="fin-label">오늘 한 마디 (선택)</div>' +
@@ -444,7 +448,7 @@ async function doSubmit() {
     var docId = data.id || data.doc_id;
     stopLoading();
     document.getElementById('prog-fill').style.width = '100%';
-    setTimeout(function(){ window.location.href = API + '/today/' + docId; }, 500);
+    setTimeout(function(){ window.location.href = 'https://humandocu.com/today/' + docId; }, 500);
   } catch(e) {
     stopLoading();
     submitting = false;
