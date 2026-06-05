@@ -18,17 +18,17 @@ input,textarea{-webkit-user-select:text;user-select:text}
 
 /* ── Top nav ── */
 #top-nav{position:fixed;top:0;left:0;right:0;z-index:300;
-  display:flex;align-items:center;justify-content:space-between;
+  display:flex;align-items:center;justify-content:flex-end;
   padding:10px 14px;background:linear-gradient(to bottom,rgba(0,0,0,.6) 0%,rgba(0,0,0,0) 100%)}
 #nav-feed:active{opacity:.6}
 #nav-langs{display:flex;gap:4px;flex-wrap:nowrap}
-.nav-lang{display:inline-flex;align-items:center;gap:3px;background:transparent;
-  border:1px solid rgba(255,255,255,.35);color:rgba(255,255,255,.8);
-  font-size:11px;font-family:inherit;border-radius:20px;
-  padding:4px 8px;cursor:pointer;transition:all .15s;letter-spacing:.01em}
-.nav-lang:active{border-color:#C8870A;color:#C8870A;background:rgba(200,135,10,.06)}
-.nav-lang.active{background:#C8870A;border-color:#C8870A;color:#fff}
-.nav-lang.soon{cursor:default;opacity:.4;pointer-events:none}
+.nav-lang{display:inline-flex;align-items:center;background:transparent;
+  border:1px solid rgba(255,255,255,.25);color:#fff;
+  font-size:18px;font-family:inherit;border-radius:8px;
+  padding:3px 6px;cursor:pointer;transition:all .15s;line-height:1}
+.nav-lang:active{border-color:#C8870A;background:rgba(200,135,10,.15)}
+.nav-lang.active{background:#C8870A;border-color:#C8870A}
+.nav-lang.soon{cursor:default;opacity:.35;pointer-events:none}
 
 /* ── Progress bar ── */
 #prog-bar{position:fixed;top:40px;left:0;right:0;height:2px;background:rgba(255,255,255,.07);z-index:200}
@@ -41,7 +41,7 @@ input,textarea{-webkit-user-select:text;user-select:text}
   position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center}
 
 /* ── SLIDE 0: START ── */
-#slide-start{background:#111;text-align:center;padding:48px 32px 80px;justify-content:flex-end}
+#slide-start{background:#111;text-align:center;padding:56px 28px 72px;justify-content:flex-end}
 .s0-tag{position:absolute;top:48px;left:0;right:0;text-align:center;font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.7);font-weight:400}
 .s0-headline{font-size:52px;font-weight:700;color:#fff;line-height:1.15;margin-bottom:36px;letter-spacing:-.01em}
 .s0-logo{font-size:28px;font-weight:700;color:#fff;line-height:1;margin-bottom:6px}
@@ -151,12 +151,12 @@ input,textarea{-webkit-user-select:text;user-select:text}
 </head>
 <body>
 <div id="top-nav">
-  <a href="/today.html" style="font-size:11px;color:rgba(255,255,255,.65);text-decoration:none;white-space:nowrap;padding:4px 0">둘러보기 →</a>
+  
   <div id="nav-langs">
-    <a href="/today-form-v2.html" class="nav-lang active">🇰🇷 한국어</a>
-    <a href="/today-form-en.html" class="nav-lang">🇺🇸 English</a>
-    <span class="nav-lang soon">🇯🇵 日本語</span>
-    <span class="nav-lang soon">🇨🇳 中文</span>
+    <a href="/today-form-v2.html" class="nav-lang active" title="한국어">🇰🇷</a>
+    <a href="/today-form-en.html" class="nav-lang" title="English">🇺🇸</a>
+    <span class="nav-lang soon" title="日本語">🇯🇵</span>
+    <span class="nav-lang soon" title="中文">🇨🇳</span>
   </div>
 </div>
 <div id="prog-bar"><div id="prog-fill"></div></div>
@@ -215,7 +215,7 @@ function buildStart() {
     '<div class="s0-logo">투<span>*</span>필</div>' +
     '<div class="s0-sub">TODAY FILMOGRAPHY</div>' +
     '<button class="s0-btn" id="s0-pick">📸 사진 선택</button>' +
-    '<div class="s0-hint">사진은 한 장씩 또는 여러 장을 한번에 선택할 수 있어요</div>';
+    '<div class="s0-hint">사진 선택 후 → 옆으로 밀어 진행해요</div>';
   d.querySelector('#s0-pick').onclick = function(){ document.getElementById('file-input').click(); };
   return d;
 }
@@ -279,9 +279,6 @@ function buildFinish() {
   const d = mkEl('div', 'slide', 'slide-finish');
   d.innerHTML =
     '<div class="fin-title">마무리</div>' +
-    '<div class="fin-sub">결과 링크를 이메일로 보내드려요</div>' +
-    '<div class="fin-field"><div class="fin-label">이름 *</div>' +
-      '<input id="f-name" type="text" class="fin-input" placeholder="이름 입력..." maxlength="20" autocomplete="name" value="' + esc(saved.name||'') + '"></div>' +
     '<div class="fin-field"><div class="fin-label">닉네임 <span style="opacity:.5;font-weight:400">선택 · AI가 시 쓸 때 참고해요</span></div>' +
       '<input id="f-nickname" type="text" class="fin-input" placeholder="월요일의 곰, 커피충전중..." maxlength="20" value="' + esc(saved.nickname||'') + '"></div>' +
     '<div class="fin-field"><div class="fin-label">이메일 *</div>' +
@@ -537,7 +534,6 @@ async function doSubmit() {
   var finSlide = document.getElementById('slide-finish');
   var isPublic = finSlide && finSlide._getIsPublic ? finSlide._getIsPublic() : true;
 
-  if (!name)                { alert('이름을 입력해주세요'); if (nameEl) nameEl.focus(); return; }
   if (!email.includes('@')) { alert('이메일을 입력해주세요'); if (emailEl) emailEl.focus(); return; }
   if (!selectedGenre)       { alert('장르를 선택해주세요'); return; }
   if (!photos.length)       { alert('사진을 1장 이상 올려주세요'); return; }
@@ -552,8 +548,8 @@ async function doSubmit() {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        name: name,
-        nickname: nickname || name,
+        name: nickname,
+        nickname: nickname,
         email: email,
         is_public: isPublic,
         extra: extra,
