@@ -509,7 +509,7 @@ async function doSubmit() {
     var docId = data.id || data.doc_id;
     stopLoading();
     document.getElementById('prog-fill').style.width = '100%';
-    setTimeout(function(){ window.location.href = 'https://humandocu.com/today/' + docId; }, 500);
+    setTimeout(function(){ window.location.href = API + '/today/' + docId; }, 500);
   } catch(e) {
     stopLoading();
     submitting = false;
