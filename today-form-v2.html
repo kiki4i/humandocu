@@ -42,7 +42,7 @@ input,textarea{-webkit-user-select:text;user-select:text}
 /* ── SLIDES 1~N: PHOTO ── */
 .slide-photo{justify-content:flex-start;background:#0a0a0a}
 .sp-counter{position:absolute;top:18px;left:0;right:0;text-align:center;z-index:10;
-  font-size:12px;color:rgba(255,255,255,.4);letter-spacing:.12em}
+  font-size:13px;color:rgba(255,255,255,.85);letter-spacing:.08em;font-weight:500;text-shadow:0 1px 4px rgba(0,0,0,.8)}
 .sp-img-wrap{width:100%;height:60vh;height:60dvh;flex-shrink:0;background:#111;overflow:hidden;
   display:flex;align-items:center;justify-content:center}
 .sp-img-wrap img{width:100%;height:100%;object-fit:cover}
@@ -62,10 +62,10 @@ input,textarea{-webkit-user-select:text;user-select:text}
 /* ── SLIDE N+1: FINISH ── */
 #slide-finish{justify-content:flex-start;align-items:stretch;overflow-y:auto;overflow-x:hidden;
   padding:48px 20px 48px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
-.fin-title{font-size:22px;font-weight:700;color:#fff;margin-bottom:6px}
-.fin-sub{font-size:13px;color:rgba(255,255,255,.4);font-weight:300;line-height:1.7;margin-bottom:28px}
-.fin-label{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.1em;font-weight:500;
-  margin-bottom:8px;text-transform:uppercase}
+.fin-title{font-size:26px;font-weight:700;color:#fff;margin-bottom:8px}
+.fin-sub{font-size:14px;color:rgba(255,255,255,.6);font-weight:300;line-height:1.7;margin-bottom:24px}
+.fin-label{font-size:12px;color:rgba(255,255,255,.7);letter-spacing:.05em;font-weight:500;
+  margin-bottom:8px}
 .fin-field{margin-bottom:16px}
 .fin-input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
   border-radius:10px;padding:13px 15px;font-size:15px;font-family:inherit;color:#fff;
@@ -117,6 +117,7 @@ input,textarea{-webkit-user-select:text;user-select:text}
 <div id="prog-bar"><div id="prog-fill"></div></div>
 <div id="app"><div id="slider"></div></div>
 <input type="file" id="file-input" accept="image/*" multiple style="display:none">
+<input type="file" id="file-input-add" accept="image/*" multiple style="display:none">
 
 <script>
 'use strict';
@@ -164,12 +165,11 @@ function buildSlider() {
 function buildStart() {
   const d = mkEl('div', 'slide', 'slide-start');
   d.innerHTML =
-    '<div class="s0-tag">TODAY FILMOGRAPHY</div>' +
-    '<div class="s0-headline">오늘을<br>기록하세요</div>' +
+    '<div class="s0-headline">지금,<br>오늘을</div>' +
     '<div class="s0-logo">투<span>*</span>필</div>' +
-    '<div class="s0-sub">AI가 시로 남겨드려요</div>' +
+    '<div class="s0-sub">TODAY FILMOGRAPHY</div>' +
     '<button class="s0-btn" id="s0-pick">📸 사진 선택</button>' +
-    '<div class="s0-hint">1~6장 · AI가 시로 남겨드려요 · 무료</div>';
+    '<div class="s0-hint">사진은 한 장씩 또는 여러 장을 한번에 선택할 수 있어요</div>';
   d.querySelector('#s0-pick').onclick = function(){ document.getElementById('file-input').click(); };
   return d;
 }
@@ -204,8 +204,8 @@ function buildFinish() {
   const saved = lsLoad();
   const d = mkEl('div', 'slide', 'slide-finish');
   d.innerHTML =
-    '<div class="fin-title">오늘을 완성해요</div>' +
-    '<div class="fin-sub">닉네임·이메일을 남겨주시면<br>결과 링크와 시를 보내드려요</div>' +
+    '<div class="fin-title">마지막</div>' +
+    '<div class="fin-sub">결과는 이메일로 보내드려요</div>' +
     '<div class="fin-field"><div class="fin-label">닉네임 *</div>' +
       '<input id="f-name" type="text" class="fin-input" placeholder="닉네임 입력..." maxlength="20" autocomplete="name" value="' + esc(saved.name||'') + '"></div>' +
     '<div class="fin-field"><div class="fin-label">이메일 *</div>' +
@@ -222,7 +222,7 @@ function buildFinish() {
           '</div>';
       }).join('') +
     '</div>' +
-    '<button class="fin-submit" id="fin-submit" disabled>시 받기 →</button>';
+    '<button class="fin-submit" id="fin-submit" disabled>완성하기 →</button>';
 
   d.querySelectorAll('.fin-genre-card').forEach(function(c){
     c.onclick = function(){
