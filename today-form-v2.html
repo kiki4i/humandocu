@@ -23,11 +23,14 @@ input,textarea{-webkit-user-select:text;user-select:text}
 #nav-feed{font-size:12px;color:rgba(255,255,255,.75);text-decoration:none;
   letter-spacing:.03em;font-weight:400;padding:6px 0}
 #nav-feed:active{opacity:.6}
-#nav-langs{display:flex;gap:6px}
-.nav-lang{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
-  color:rgba(255,255,255,.7);font-size:11px;font-family:inherit;border-radius:6px;
-  padding:4px 8px;cursor:pointer;transition:background .15s,color .15s;letter-spacing:.02em}
-.nav-lang.active,.nav-lang:active{background:rgba(255,255,255,.25);color:#fff;border-color:rgba(255,255,255,.4)}
+#nav-langs{display:flex;gap:6px;flex-wrap:wrap}
+.nav-lang{display:inline-flex;align-items:center;gap:4px;background:transparent;
+  border:1px solid rgba(255,255,255,.35);color:rgba(255,255,255,.8);
+  font-size:12px;font-family:inherit;border-radius:20px;
+  padding:5px 10px;cursor:pointer;transition:all .15s;letter-spacing:.01em}
+.nav-lang:active{border-color:#C8870A;color:#C8870A;background:rgba(200,135,10,.06)}
+.nav-lang.active{background:#C8870A;border-color:#C8870A;color:#fff}
+.nav-lang.soon{cursor:default;opacity:.4;pointer-events:none}
 
 /* ── Progress bar ── */
 #prog-bar{position:fixed;top:44px;left:0;right:0;height:2px;background:rgba(255,255,255,.07);z-index:200}
@@ -144,12 +147,12 @@ input,textarea{-webkit-user-select:text;user-select:text}
 </head>
 <body>
 <div id="top-nav">
-  <a id="nav-feed" href="/today.html">← 다른 투*필 보기</a>
+  <a id="nav-feed" href="/today.html">투*필 피드</a>
   <div id="nav-langs">
-    <button class="nav-lang active" data-lang="KO">한국어</button>
-    <button class="nav-lang" data-lang="EN">EN</button>
-    <button class="nav-lang" data-lang="JP">日</button>
-    <button class="nav-lang" data-lang="ZH">中</button>
+    <a href="/today-form-v2.html" class="nav-lang active">🇰🇷 한국어</a>
+    <a href="/today-form-en.html" class="nav-lang">🇺🇸 English</a>
+    <span class="nav-lang soon">🇯🇵 日本語</span>
+    <span class="nav-lang soon">🇨🇳 中文</span>
   </div>
 </div>
 <div id="prog-bar"><div id="prog-fill"></div></div>
@@ -560,22 +563,6 @@ function lsLoad() {
 }
 
 /* ── INIT ── */
-// 언어 버튼
-document.querySelectorAll('.nav-lang').forEach(function(btn){
-  btn.addEventListener('click', function(){
-    document.querySelectorAll('.nav-lang').forEach(function(b){ b.classList.remove('active'); });
-    btn.classList.add('active');
-    try { localStorage.setItem('lang', btn.dataset.lang); } catch(e){}
-  });
-});
-// 저장된 언어 복원
-try {
-  var savedLang = localStorage.getItem('lang') || 'KO';
-  document.querySelectorAll('.nav-lang').forEach(function(b){
-    b.classList.toggle('active', b.dataset.lang === savedLang);
-  });
-} catch(e){}
-
 buildSlider();
 </script>
 </body>
