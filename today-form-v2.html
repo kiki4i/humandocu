@@ -378,6 +378,7 @@ document.getElementById('file-input').addEventListener('change', async function(
 document.getElementById('file-input-add').addEventListener('change', async function(){
   var files = Array.from(this.files).slice(0, 6 - photos.length);
   if (!files.length) return;
+  var prevCount = photos.length;
   this.value = '';
   var newPhotos = await Promise.all(files.map(async function(f){
     var b64 = await readFile(f);
@@ -386,7 +387,7 @@ document.getElementById('file-input-add').addEventListener('change', async funct
   }));
   photos = photos.concat(newPhotos);
   selectedGenre = '';
-  currentSlide = photos.length; // add 슬라이드로 (마지막 사진 다음)
+  currentSlide = prevCount + 1; // 새로 추가된 첫번째 사진 슬라이드 (1-based: start=0, photo[0]=1)
   buildSlider();
 });
 
