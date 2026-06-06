@@ -10,14 +10,6 @@
 <link rel="manifest" href="/today-manifest.json">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<script>
-// 투*필 폼으로 바로 이동
-(function(){
-  var l = localStorage.getItem('lang') || 'KO';
-  var map = {KO:'/today-form.html', EN:'/today-form-en.html', JP:'/today-form-jp.html', ZH:'/today-form-zh.html'};
-  window.location.replace(map[l] || '/today-form.html');
-})();
-</script>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="투*필">
 <link rel="apple-touch-icon" href="/today-icon-192.png">
