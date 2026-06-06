@@ -175,18 +175,18 @@ const API = 'https://humandocu-server-production.up.railway.app';
 const LS_KEY = 'today_form_v2';
 const MAX_PHOTOS = 6;
 const GENRES = [
-  {id:'감동명작',   icon:'🎭', name:'감동명작',   sub:'오늘이 영화라면',   color:'#B8760A'},
-  {id:'히어로 액션',icon:'🦸', name:'히어로 액션',sub:'나는 오늘도 싸웠다', color:'#A02020'},
-  {id:'잔잔한 다큐',icon:'🎬', name:'잔잔한 다큐',sub:'평범한 하루의 기록', color:'#1C2E5B'},
-  {id:'멜로 로맨스',icon:'💕', name:'멜로 로맨스',sub:'오늘의 감정선',     color:'#A8426A'},
-  {id:'병맛 코미디',icon:'😂', name:'병맛 코미디',sub:'이게 내 인생이다',  color:'#C85E12'},
-  {id:'반전 스릴러',icon:'😱', name:'반전 스릴러',sub:'예상 못한 하루였다', color:'#5C2873'},
+  {id:'감동명작',   icon:'🎭', name:'感人名作',   sub:'温暖人心',   color:'#B8760A'},
+  {id:'히어로 액션',icon:'🦸', name:'英雄动作',sub:'热血沸腾', color:'#A02020'},
+  {id:'잔잔한 다큐',icon:'🎬', name:'平静纪录片',sub:'平淡真实', color:'#1C2E5B'},
+  {id:'멜로 로맨스',icon:'💕', name:'爱情浪漫',sub:'温柔感伤',     color:'#A8426A'},
+  {id:'병맛 코미디',icon:'😂', name:'无厘头喜剧',sub:'搞笑荒诞',  color:'#C85E12'},
+  {id:'반전 스릴러',icon:'😱', name:'反转悬疑',sub:'出乎意料', color:'#5C2873'},
 ];
 const LD_MSGS = [
-  'AI가 사진을 읽고 있어요...',
-  '오늘 하루의 장면을 이어붙이는 중이에요.',
-  '오늘의 감정을 시로 옮기고 있어요.',
-  '마지막 줄을 고르고 있어요...',
+  'AI正在读取您的照片...',
+  '正在拼接今天的场景。',
+  '正在将今天的感受转化为诗。',
+  '正在选择最后一行...',
 ];
 
 let photos = [];        // [{b64, caption}]
@@ -259,7 +259,7 @@ function buildAdd() {
   var canAdd = n < 6;
   var d = mkEl('div', 'slide slide-add');
   d.innerHTML =
-    '<div class="sp-counter">' + n + ' / ' + n + ' · 오늘 기록 완성</div>' +
+    '<div class="sp-counter">' + n + ' / ' + n + ' · 完成</div>' +
     '<div class="add-inner">' +
       (canAdd
         ? '<div class="add-icon">+</div>' +
@@ -269,7 +269,7 @@ function buildAdd() {
         : '<div class="add-icon">✓</div>' +
           '<div class="add-label">사진 6장 완성!</div>'
       ) +
-      '<button class="add-finish" id="add-finish-btn">이대로 완성하기 →</button>' +
+      '<button class="add-finish" id="add-finish-btn">이대로 完成 →</button>' +
     '</div>';
   if (canAdd) {
     d.querySelector('#add-photo-btn').onclick = function(){
@@ -287,22 +287,22 @@ function buildFinish() {
   const d = mkEl('div', 'slide', 'slide-finish');
   d.innerHTML =
     '<div class="fin-title">最后一步</div>' +
-    '<div class="fin-field"><div class="fin-label">닉네임 <span style="opacity:.5;font-weight:400">선택 · AI가 시 쓸 때 참고해요</span></div>' +
-      '<input id="f-nickname" type="text" class="fin-input" placeholder="월요일의 곰, 커피충전중..." maxlength="20" value="' + esc(saved.nickname||'') + '"></div>' +
-    '<div class="fin-field"><div class="fin-label">이메일 *</div>' +
+    '<div class="fin-field"><div class="fin-label">昵称 <span style="opacity:.5;font-weight:400">可选 · AI写诗时参考</span></div>' +
+      '<input id="f-nickname" type="text" class="fin-input" placeholder="周一熊、咖啡上瘾者..." maxlength="20" value="' + esc(saved.nickname||'') + '"></div>' +
+    '<div class="fin-field"><div class="fin-label">电子邮箱 *</div>' +
       '<input id="f-email" type="email" class="fin-input" placeholder="your@email.com" autocomplete="email" value="' + esc(saved.email||'') + '"></div>' +
-    '<div class="fin-field"><div class="fin-label">오늘 한 마디 <span style="opacity:.5;font-weight:400">선택</span></div>' +
-      '<textarea id="f-msg" class="fin-textarea" rows="2" placeholder="오늘 하루를 한 마디로..."></textarea></div>' +
-    '<div class="fin-field"><div class="fin-label">더 남기고 싶은 이야기 <span style="opacity:.5;font-weight:400">선택</span></div>' +
-      '<textarea id="f-extra" class="fin-textarea" rows="3" placeholder="더 남기고 싶은 이야기가 있다면... 진짜 일기가 될 수 있어요"></textarea></div>' +
+    '<div class="fin-field"><div class="fin-label">用一句话描述今天</div>' +
+      '<textarea id="f-msg" class="fin-textarea" rows="2" placeholder="诚实地用一句话描述今天..."></textarea></div>' +
+    '<div class="fin-field"><div class="fin-label">还有什么想留下来的？</div>' +
+      '<textarea id="f-extra" class="fin-textarea" rows="3" placeholder="还有什么想说的吗..."></textarea></div>' +
     '<div class="fin-field">' +
-      '<div class="fin-label">공개 여부</div>' +
+      '<div class="fin-label">公开设置</div>' +
       '<div class="fin-public-wrap" id="fin-public-wrap">' +
-        '<button class="fin-pub-btn active" id="pub-yes" type="button">공개 · 다른 사람들도 볼 수 있어요</button>' +
-        '<button class="fin-pub-btn" id="pub-no" type="button">비공개 · 나만 볼 수 있어요</button>' +
+        '<button class="fin-pub-btn active" id="pub-yes" type="button">公开 · 其他人也可以看到</button>' +
+        '<button class="fin-pub-btn" id="pub-no" type="button">不公开 · 只有自己</button>' +
       '</div>' +
     '</div>' +
-    '<div class="fin-genre-title">🎬 오늘 하루의 장르 *</div>' +
+    '<div class="fin-genre-title">🎬 今天的类型 *</div>' +
     '<div class="fin-genre-grid" id="genre-grid">' +
       GENRES.map(function(g){
         return '<div class="fin-genre-card" data-genre="' + g.id + '" data-color="' + g.color + '">' +
@@ -312,7 +312,7 @@ function buildFinish() {
           '</div>';
       }).join('') +
     '</div>' +
-    '<button class="fin-submit" id="fin-submit" disabled>완성하기 →</button>';
+    '<button class="fin-submit" id="fin-submit" disabled>完成 →</button>';
 
   // 공개/비공개 버튼
   var isPublicVal = true;
@@ -359,7 +359,7 @@ function buildLoading() {
   const d = mkEl('div', 'slide', 'slide-loading');
   d.innerHTML =
     '<div id="ld-photos"></div>' +
-    '<div id="ld-spinner-wrap"><div class="ld-spinner"></div><div class="ld-spinner-txt">AI가 사진을 읽고 있어요...</div></div>' +
+    '<div id="ld-spinner-wrap"><div class="ld-spinner"></div><div class="ld-spinner-txt">AI正在读取您的照片。..</div></div>' +
     '<div id="ld-bottom"><div class="ld-tag">TODAY FILMOGRAPHY</div><div class="ld-msg" id="ld-msg">' + LD_MSGS[0] + '</div></div>';
   return d;
 }
@@ -542,9 +542,9 @@ async function doSubmit() {
   var finSlide = document.getElementById('slide-finish');
   var isPublic = finSlide && finSlide._getIsPublic ? finSlide._getIsPublic() : true;
 
-  if (!email.includes('@')) { alert('이메일을 입력해주세요'); if (emailEl) emailEl.focus(); return; }
-  if (!selectedGenre)       { alert('장르를 선택해주세요'); return; }
-  if (!photos.length)       { alert('사진을 1장 이상 올려주세요'); return; }
+  if (!email.includes('@')) { alert('请输入电子邮箱'); if (emailEl) emailEl.focus(); return; }
+  if (!selectedGenre)       { alert('请选择类型'); return; }
+  if (!photos.length)       { alert('请至少添加1张照片'); return; }
 
   submitting = true;
   lsSave(name, email, nickname);
@@ -570,7 +570,7 @@ async function doSubmit() {
       }),
     });
     var data = await res.json();
-    if (!res.ok || data.status === 'error') throw new Error(data.error || '오류가 발생했어요');
+    if (!res.ok || data.status === 'error') throw new Error(data.error || '发生了错误');
     var docId = data.id || data.doc_id;
     stopLoading();
     document.getElementById('prog-fill').style.width = '100%';
@@ -579,7 +579,7 @@ async function doSubmit() {
     stopLoading();
     submitting = false;
     goSlide(photos.length + 1);
-    alert('오류: ' + e.message);
+    alert('错误：' + e.message);
   }
 }
 
