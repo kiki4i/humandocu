@@ -234,7 +234,7 @@ function buildPhoto(i) {
   const isLast = (i === n - 1);
   d.innerHTML =
     
-    '<div class="sp-img-wrap"><img src="' + photos[i].b64 + '" alt="사진 ' + (i+1) + '"></div>' +
+    '<div class="sp-img-wrap"><img src="' + photos[i].b64 + '" alt="写真 ' + (i+1) + '"></div>' +
     '<div class="sp-bottom">' +
       '<textarea class="sp-caption" id="cap' + i + '" rows="3" placeholder="この瞬間を一言で...">' + esc(photos[i].caption) + '</textarea>' +
       '<div class="sp-nav">' +
@@ -263,11 +263,11 @@ function buildAdd() {
     '<div class="add-inner">' +
       (canAdd
         ? '<div class="add-icon">+</div>' +
-          '<div class="add-label">사진 더 추가하기</div>' +
-          '<div class="add-count">최대 ' + (6 - n) + '장 더 추가 가능</div>' +
-          '<button class="add-btn" id="add-photo-btn">📸 사진 추가</button>'
+          '<div class="add-label">写真を追加する</div>' +
+          '<div class="add-count">あと' + (6 - n) + '枚</div>' +
+          '<button class="add-btn" id="add-photo-btn">📸 写真を追加</button>'
         : '<div class="add-icon">✓</div>' +
-          '<div class="add-label">사진 6장 완성!</div>'
+          '<div class="add-label">写真6枚完成！</div>'
       ) +
       '<button class="add-finish" id="add-finish-btn">이대로 完成 →</button>' +
     '</div>';
