@@ -235,7 +235,7 @@ function buildPhoto(i) {
       '<textarea class="sp-caption" id="cap' + i + '" rows="3" placeholder="이 순간을 한 줄로...">' + esc(photos[i].caption) + '</textarea>' +
       '<div class="sp-nav">' +
         '<button class="sp-btn sp-btn-prev" data-idx="' + i + '">← 이전</button>' +
-        '<button class="sp-btn sp-btn-next" data-idx="' + i + '">' + (isLast ? '마무리 →' : '다음 →') + '</button>' +
+        '<button class="sp-btn sp-btn-next" data-idx="' + i + '">다음 →</button>' +
       '</div>' +
     '</div>';
   d.querySelector('#cap' + i).oninput = function(){ photos[i].caption = this.value; };
