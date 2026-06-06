@@ -234,7 +234,7 @@ function buildStart() {
     '<div class="s0-sub">사진 1~6장 · AI가 시로 남겨드려요</div>' +
     '<div class="s0-btn-row">' +
       '<button class="s0-btn" id="s0-pick">사진 올리기</button>' +
-      '<a class="s0-btn s0-btn-browse" href="/today.html">다른 것 보기</a>' +
+      '<a class="s0-btn s0-btn-browse" href="#" id="browse-open">다른 것 보기</a>' +
     '</div>' +
     '<div class="s0-hint">›</div>';
   d.querySelector('#s0-pick').onclick = function(){ document.getElementById('file-input').click(); };
@@ -621,6 +621,87 @@ photos = [];
 selectedGenre = '';
 currentSlide = 0;
 buildSlider();
+</script>
+
+<!-- ── 피드 모달 ── -->
+<div id="feed-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;
+  background:#0f0e0c;overflow-y:auto;-webkit-overflow-scrolling:touch">
+  <div style="position:sticky;top:0;background:#0f0e0c;border-bottom:1px solid rgba(255,255,255,.08);
+    padding:12px 16px;display:flex;align-items:center;justify-content:space-between;z-index:10">
+    <span style="font-size:12px;letter-spacing:.15em;color:rgba(255,255,255,.4)">TODAY FILMOGRAPHY</span>
+    <button id="feed-close" style="background:none;border:none;color:rgba(255,255,255,.6);
+      font-size:22px;cursor:pointer;padding:4px 8px;line-height:1">✕</button>
+  </div>
+  <div id="feed-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding:12px"></div>
+  <button id="feed-more" style="display:none;width:calc(100% - 24px);margin:0 12px 20px;
+    padding:13px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+    border-radius:10px;color:rgba(255,255,255,.5);font-size:13px;font-family:inherit;cursor:pointer">
+    더 보기
+  </button>
+</div>
+
+<script>
+(function(){
+  var SERVER = 'https://humandocu-server-production.up.railway.app';
+  var offset = 0, limit = 20, loading = false, noMore = false, opened = false;
+
+  function makeCard(item) {
+    var p1 = item.photo1 ? '<img src="'+item.photo1+'" style="width:50%;aspect-ratio:1;object-fit:cover;display:block;flex-shrink:0" loading="lazy">'
+                         : '<div style="width:50%;aspect-ratio:1;background:#2a2520;flex-shrink:0"></div>';
+    var p2 = item.photo2 ? '<img src="'+item.photo2+'" style="width:50%;aspect-ratio:1;object-fit:cover;display:block;flex-shrink:0" loading="lazy">'
+                         : '<div style="width:50%;aspect-ratio:1;background:#2a2520;flex-shrink:0"></div>';
+    var name = item.nickname || item.name || '익명';
+    var identity = item.identity || item.today_sentence || '';
+    return '<a href="'+SERVER+'/today/'+item.doc_id+'" style="text-decoration:none;background:#1a1712;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.06);display:block">'
+      +'<div style="display:flex">'+p1+p2+'</div>'
+      +'<div style="padding:7px 9px 9px">'
+      +'<div style="font-size:12px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+name+'</div>'
+      +(identity?'<div style="font-size:11px;color:rgba(200,169,110,.7);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+identity+'</div>':'')
+      +'</div></a>';
+  }
+
+  async function loadFeed(reset) {
+    if (loading || noMore) return;
+    loading = true;
+    if (reset) { offset = 0; noMore = false; document.getElementById('feed-grid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:rgba(255,255,255,.3);font-size:13px">불러오는 중...</div>'; }
+    try {
+      var res = await fetch(SERVER+'/api/today/feed?limit='+limit+'&offset='+offset);
+      var data = await res.json();
+      var grid = document.getElementById('feed-grid');
+      if (offset === 0) grid.innerHTML = '';
+      if (!data.items || !data.items.length) {
+        if (offset === 0) grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:rgba(255,255,255,.3);font-size:13px">아직 기록이 없어요</div>';
+        noMore = true;
+        document.getElementById('feed-more').style.display = 'none';
+      } else {
+        grid.insertAdjacentHTML('beforeend', data.items.map(makeCard).join(''));
+        offset += data.items.length;
+        document.getElementById('feed-more').style.display = data.has_more ? 'block' : 'none';
+      }
+    } catch(e) {
+      document.getElementById('feed-grid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:rgba(255,255,255,.3);font-size:13px">잠시 후 다시 시도해주세요</div>';
+    }
+    loading = false;
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var openBtn = document.getElementById('browse-open');
+    var modal = document.getElementById('feed-modal');
+    var closeBtn = document.getElementById('feed-close');
+    var moreBtn = document.getElementById('feed-more');
+    if (openBtn) openBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      if (!opened) { opened = true; loadFeed(true); }
+    });
+    if (closeBtn) closeBtn.addEventListener('click', function(){
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    });
+    if (moreBtn) moreBtn.addEventListener('click', function(){ loadFeed(false); });
+  });
+})();
 </script>
 </body>
 </html>
