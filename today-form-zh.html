@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>创建我的 Today Film · Humandocu</title>
+<title>투*필 · Humandocu</title>
+<link rel="manifest" href="/today-manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="투*필">
+<link rel="apple-touch-icon" href="/today-icon-192.png">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -156,7 +160,7 @@ input,textarea{-webkit-user-select:text;user-select:text}
   <div id="nav-langs">
     <a href="/today-form.html" class="nav-lang" title="한국어">🇰🇷</a>
     <a href="/today-form-en.html" class="nav-lang" title="English">🇺🇸</a>
-    <span class="nav-lang soon" title="日本語">🇯🇵</span>
+    <a href="/today-form-jp.html" class="nav-lang" title="日本語">🇯🇵</a>
     <a href="/today-form-zh.html" class="nav-lang active" title="中文">🇨🇳</a>
   </div>
 </div>
@@ -171,12 +175,12 @@ const API = 'https://humandocu-server-production.up.railway.app';
 const LS_KEY = 'today_form_v2';
 const MAX_PHOTOS = 6;
 const GENRES = [
-  {id:'감동명작',   icon:'🎭', name:'感人 名作',   sub:'오늘이 영화라면',   color:'#B8760A'},
-  {id:'히어로 액션',icon:'🦸', name:'英雄 动作',sub:'나는 오늘도 싸웠다', color:'#A02020'},
-  {id:'잔잔한 다큐',icon:'🎬', name:'平静 纪录片',sub:'평범한 하루의 기록', color:'#1C2E5B'},
-  {id:'멜로 로맨스',icon:'💕', name:'爱情 浪漫',sub:'오늘의 감정선',     color:'#A8426A'},
-  {id:'병맛 코미디',icon:'😂', name:'无厘头 喜剧',sub:'이게 내 인생이다',  color:'#C85E12'},
-  {id:'반전 스릴러',icon:'😱', name:'反转 悬疑',sub:'예상 못한 하루였다', color:'#5C2873'},
+  {id:'감동명작',   icon:'🎭', name:'감동명작',   sub:'오늘이 영화라면',   color:'#B8760A'},
+  {id:'히어로 액션',icon:'🦸', name:'히어로 액션',sub:'나는 오늘도 싸웠다', color:'#A02020'},
+  {id:'잔잔한 다큐',icon:'🎬', name:'잔잔한 다큐',sub:'평범한 하루의 기록', color:'#1C2E5B'},
+  {id:'멜로 로맨스',icon:'💕', name:'멜로 로맨스',sub:'오늘의 감정선',     color:'#A8426A'},
+  {id:'병맛 코미디',icon:'😂', name:'병맛 코미디',sub:'이게 내 인생이다',  color:'#C85E12'},
+  {id:'반전 스릴러',icon:'😱', name:'반전 스릴러',sub:'예상 못한 하루였다', color:'#5C2873'},
 ];
 const LD_MSGS = [
   'AI가 사진을 읽고 있어요...',
@@ -216,7 +220,7 @@ function buildStart() {
     '<div class="s0-headline">记录<br>今天</div>' +
     '<div class="s0-sub">1~6张照片 · AI为你写诗 · 免费</div>' +
     '<div class="s0-btn-row">' +
-      '<button class="s0-btn" id="s0-pick">上传照片</button>' +
+      '<button class="s0-btn" id="s0-pick">选择照片</button>' +
       '<a class="s0-btn s0-btn-browse" href="/today.html">浏览他人作品</a>' +
     '</div>' +
     '<div class="s0-hint">›</div>';
@@ -232,7 +236,7 @@ function buildPhoto(i) {
     
     '<div class="sp-img-wrap"><img src="' + photos[i].b64 + '" alt="사진 ' + (i+1) + '"></div>' +
     '<div class="sp-bottom">' +
-      '<textarea class="sp-caption" id="cap' + i + '" rows="3" placeholder="用一句话描述这一刻...">' + esc(photos[i].caption) + '</textarea>' +
+      '<textarea class="sp-caption" id="cap' + i + '" rows="3" placeholder="이 순간을 한 줄로...">' + esc(photos[i].caption) + '</textarea>' +
       '<div class="sp-nav">' +
         '<button class="sp-btn sp-btn-prev" data-idx="' + i + '">← 이전</button>' +
         '<button class="sp-btn sp-btn-next" data-idx="' + i + '">다음 →</button>' +
@@ -284,21 +288,21 @@ function buildFinish() {
   d.innerHTML =
     '<div class="fin-title">最后一步</div>' +
     '<div class="fin-field"><div class="fin-label">닉네임 <span style="opacity:.5;font-weight:400">선택 · AI가 시 쓸 때 참고해요</span></div>' +
-      '<input id="f-nickname" type="text" class="fin-input" placeholder="周一熊、咖啡上瘾者..." maxlength="20" value="' + esc(saved.nickname||'') + '"></div>' +
+      '<input id="f-nickname" type="text" class="fin-input" placeholder="월요일의 곰, 커피충전중..." maxlength="20" value="' + esc(saved.nickname||'') + '"></div>' +
     '<div class="fin-field"><div class="fin-label">이메일 *</div>' +
       '<input id="f-email" type="email" class="fin-input" placeholder="your@email.com" autocomplete="email" value="' + esc(saved.email||'') + '"></div>' +
     '<div class="fin-field"><div class="fin-label">오늘 한 마디 <span style="opacity:.5;font-weight:400">선택</span></div>' +
-      '<textarea id="f-msg" class="fin-textarea" rows="2" placeholder="诚实地用一句话描述今天..."></textarea></div>' +
+      '<textarea id="f-msg" class="fin-textarea" rows="2" placeholder="오늘 하루를 한 마디로..."></textarea></div>' +
     '<div class="fin-field"><div class="fin-label">더 남기고 싶은 이야기 <span style="opacity:.5;font-weight:400">선택</span></div>' +
-      '<textarea id="f-extra" class="fin-textarea" rows="3" placeholder="还有什么想说的吗... 这可以成为你真正的日记"></textarea></div>' +
+      '<textarea id="f-extra" class="fin-textarea" rows="3" placeholder="더 남기고 싶은 이야기가 있다면... 진짜 일기가 될 수 있어요"></textarea></div>' +
     '<div class="fin-field">' +
-      '<div class="fin-label">公开设置</div>' +
+      '<div class="fin-label">공개 여부</div>' +
       '<div class="fin-public-wrap" id="fin-public-wrap">' +
         '<button class="fin-pub-btn active" id="pub-yes" type="button">공개 · 다른 사람들도 볼 수 있어요</button>' +
         '<button class="fin-pub-btn" id="pub-no" type="button">비공개 · 나만 볼 수 있어요</button>' +
       '</div>' +
     '</div>' +
-    '<div class="fin-genre-title">🎬 今天的类型 *</div>' +
+    '<div class="fin-genre-title">🎬 오늘 하루의 장르 *</div>' +
     '<div class="fin-genre-grid" id="genre-grid">' +
       GENRES.map(function(g){
         return '<div class="fin-genre-card" data-genre="' + g.id + '" data-color="' + g.color + '">' +
@@ -308,7 +312,7 @@ function buildFinish() {
           '</div>';
       }).join('') +
     '</div>' +
-    '<button class="fin-submit" id="fin-submit" disabled>完成 →</button>';
+    '<button class="fin-submit" id="fin-submit" disabled>완성하기 →</button>';
 
   // 공개/비공개 버튼
   var isPublicVal = true;
