@@ -64,10 +64,10 @@ html,body{background:#0f0e0c;min-height:100%;font-family:-apple-system,BlinkMacS
 
 <div id="top-bar">
   <div id="lang-row">
-    <a href="/today-form.html" class="lang-btn" id="lb-ko" title="한국어">🇰🇷</a>
-    <a href="/today-form-en.html" class="lang-btn" id="lb-en" title="English">🇺🇸</a>
-    <a href="/today-form-jp.html" class="lang-btn" id="lb-jp" title="日本語">🇯🇵</a>
-    <a href="/today-form-zh.html" class="lang-btn" id="lb-zh" title="中文">🇨🇳</a>
+    <button class="lang-btn" id="lb-ko" data-lang="KO" title="한국어">🇰🇷</button>
+    <button class="lang-btn" id="lb-en" data-lang="EN" title="English">🇺🇸</button>
+    <button class="lang-btn" id="lb-jp" data-lang="JP" title="日本語">🇯🇵</button>
+    <button class="lang-btn" id="lb-zh" data-lang="ZH" title="中文">🇨🇳</button>
   </div>
   <a href="/today-form.html" id="make-btn" data-ko="나의 투*필 만들기 →" data-en="Create My Tu·Fil →" data-jp="투*필을 만들기 →" data-zh="创建我的 투*필 →">나의 투*필 만들기 →</a>
 </div>
@@ -91,12 +91,25 @@ var offset = 0, limit = 20, loading = false, noMore = false;
 // 언어 설정
 var lang = 'KO';
 try { lang = localStorage.getItem('lang') || 'KO'; } catch(e){}
-document.getElementById('lb-' + lang.toLowerCase()).classList.add('active');
-var makeBtn = document.getElementById('make-btn');
 var langMap = {KO:'/today-form.html', EN:'/today-form-en.html', JP:'/today-form-jp.html', ZH:'/today-form-zh.html'};
-makeBtn.href = langMap[lang] || '/today-form.html';
-var makeLabel = makeBtn.getAttribute('data-' + lang.toLowerCase());
-if (makeLabel) makeBtn.textContent = makeLabel;
+
+function applyLang(l) {
+  lang = l;
+  try { localStorage.setItem('lang', l); } catch(e){}
+  document.querySelectorAll('.lang-btn').forEach(function(b){ b.classList.remove('active'); });
+  var lb = document.getElementById('lb-' + l.toLowerCase());
+  if (lb) lb.classList.add('active');
+  var makeBtn = document.getElementById('make-btn');
+  makeBtn.href = langMap[l] || '/today-form.html';
+  var makeLabel = makeBtn.getAttribute('data-' + l.toLowerCase());
+  if (makeLabel) makeBtn.textContent = makeLabel;
+}
+
+document.querySelectorAll('.lang-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){ applyLang(btn.dataset.lang); });
+});
+
+applyLang(lang);
 
 function makeCard(item) {
   var p1 = item.photo1
