@@ -697,17 +697,39 @@ buildSlider();
     var modal = document.getElementById('feed-modal');
     var closeBtn = document.getElementById('feed-close');
     var moreBtn = document.getElementById('feed-more');
-    if (openBtn) openBtn.addEventListener('click', function(e){
-      e.preventDefault();
+    function openFeed() {
       modal.style.display = 'block';
       document.body.style.overflow = 'hidden';
       if (!opened) { opened = true; loadFeed(true); }
-    });
-    if (closeBtn) closeBtn.addEventListener('click', function(){
+      // 히스토리에 #feed 추가 — 뒤로가기 시 모달로 복귀
+      if (location.hash !== '#feed') history.pushState(null, '', '#feed');
+    }
+    function closeFeed() {
       modal.style.display = 'none';
       document.body.style.overflow = '';
+      if (location.hash === '#feed') history.back();
+    }
+    if (openBtn) openBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      openFeed();
+    });
+    if (closeBtn) closeBtn.addEventListener('click', function(){
+      closeFeed();
     });
     if (moreBtn) moreBtn.addEventListener('click', function(){ loadFeed(false); });
+    // 뒤로가기(popstate) 처리
+    window.addEventListener('popstate', function(){
+      if (location.hash === '#feed') {
+        openFeed();
+      } else {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    });
+    // 페이지 로드 시 #feed면 모달 바로 열기
+    if (location.hash === '#feed') {
+      setTimeout(openFeed, 100);
+    }
   });
 })();
 </script>
