@@ -678,31 +678,33 @@ buildSlider();
     loading = false;
   }
 
-  document.addEventListener('DOMContentLoaded', function(){
-    var openBtn = document.getElementById('browse-open');
-    var modal = document.getElementById('feed-modal');
-    var closeBtn = document.getElementById('feed-close');
-    var moreBtn = document.getElementById('feed-more');
-    function openFeed() {
-      modal.style.display = 'block';
-      document.body.style.overflow = 'hidden';
-      if (!opened) { opened = true; loadFeed(true); }
-      // 히스토리에 #feed 추가 — 뒤로가기 시 모달로 복귀
-      if (location.hash !== '#feed') history.pushState(null, '', '#feed');
-    }
-    function closeFeed() {
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
-      if (location.hash === '#feed') history.back();
-    }
-    if (openBtn) openBtn.addEventListener('click', function(e){
+  var modal = document.getElementById('feed-modal');
+  var closeBtn = document.getElementById('feed-close');
+  var moreBtn = document.getElementById('feed-more');
+
+  function openFeed() {
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    if (!opened) { opened = true; loadFeed(true); }
+    if (location.hash !== '#feed') history.pushState(null, '', '#feed');
+  }
+  function closeFeed() {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+    if (location.hash === '#feed') history.back();
+  }
+
+  // 이벤트 위임 — 동적 생성 버튼에도 작동
+  document.addEventListener('click', function(e){
+    if (e.target && e.target.id === 'browse-open') {
       e.preventDefault();
       openFeed();
-    });
-    if (closeBtn) closeBtn.addEventListener('click', function(){
-      closeFeed();
-    });
-    if (moreBtn) moreBtn.addEventListener('click', function(){ loadFeed(false); });
+    }
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeFeed);
+  if (moreBtn) moreBtn.addEventListener('click', function(){ loadFeed(false); });
+
+  document.addEventListener('DOMContentLoaded', function(){
     // 뒤로가기(popstate) 처리
     window.addEventListener('popstate', function(){
       if (location.hash === '#feed') {
@@ -716,10 +718,8 @@ buildSlider();
     if (location.hash === '#feed') {
       setTimeout(openFeed, 100);
     }
-  });
+  }); // DOMContentLoaded end
 })();
 </script>
 </body>
-</html>
-
 </html>
