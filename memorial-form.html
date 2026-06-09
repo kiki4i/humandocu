@@ -79,6 +79,11 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 .photo-preview.show{display:block;}
 
 /* 안내 말씀 예시 박스 */
+.datetime-row{display:flex;gap:8px;align-items:flex-start;}
+.datetime-row .date-selects{flex:1;}
+.datetime-row .time-selects{display:flex;gap:4px;flex-shrink:0;}
+.datetime-row .time-selects select{width:72px;}
+.time-label{font-size:11px;color:var(--ink3);margin-bottom:6px;display:block;}
 .notice-examples{background:#fffdf8;border:1px solid #e0d5c0;border-radius:var(--r);padding:14px 16px;margin-bottom:12px;}
 .notice-examples-title{font-size:11px;letter-spacing:.1em;color:var(--gold2);margin-bottom:10px;font-weight:500;}
 .notice-example-item{margin-bottom:12px;}
@@ -348,15 +353,36 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 
     <div class="q-block">
       <div class="q-label">입실일시</div>
-      <input type="text" id="f-checkin" placeholder="예: 2025년 5월 23일 오후 2시">
+      <div class="datetime-row">
+        <div class="date-selects" id="checkin-date"></div>
+        <div class="time-selects">
+          <select id="f-checkin-ampm"><option value="">-</option><option>오전</option><option>오후</option></select>
+          <select id="f-checkin-h"><option value="">시</option></select>
+          <select id="f-checkin-min"><option value="">분</option></select>
+        </div>
+      </div>
     </div>
     <div class="q-block">
       <div class="q-label">입관일시</div>
-      <input type="text" id="f-coffin" placeholder="예: 2025년 5월 24일 오전 10시">
+      <div class="datetime-row">
+        <div class="date-selects" id="coffin-date"></div>
+        <div class="time-selects">
+          <select id="f-coffin-ampm"><option value="">-</option><option>오전</option><option>오후</option></select>
+          <select id="f-coffin-h"><option value="">시</option></select>
+          <select id="f-coffin-min"><option value="">분</option></select>
+        </div>
+      </div>
     </div>
     <div class="q-block">
       <div class="q-label">발인일시 <span class="q-req">*</span></div>
-      <input type="text" id="f-funeral" placeholder="예: 2025년 5월 25일 오전 8시">
+      <div class="datetime-row">
+        <div class="date-selects" id="funeral-date"></div>
+        <div class="time-selects">
+          <select id="f-funeral-ampm"><option value="">오전</option><option>오후</option></select>
+          <select id="f-funeral-h"><option value="">시</option></select>
+          <select id="f-funeral-min"><option value="">분</option></select>
+        </div>
+      </div>
     </div>
     <div class="q-block">
       <div class="q-label">장례식장 이름 <span class="q-req">*</span></div>
@@ -386,28 +412,33 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
         <div class="notice-examples-title">📋 아래 예시를 탭하면 자동으로 입력됩니다</div>
 
         <div class="notice-example-item">
-          <span class="notice-example-tag">기독교식</span>
-          <div class="notice-example-text" onclick="fillNotice(this)">고인의 뜻에 따라 화환은 정중히 사양하오며, 조의금은 ○○은행 000-0000-0000 (예금주: 홍○○)으로 보내주시면 감사하겠습니다. 하나님의 은혜로 평안히 안식하시길 기도합니다.</div>
+          <span class="notice-example-tag">헌화·묵념</span>
+          <div class="notice-example-text" onclick="fillNotice(this)">헌화와 묵념으로 조의를 표해주시기 바랍니다. 고인의 뜻에 따라 화환과 조의금은 정중히 사양하오며, 멀리서 보내주시는 마음만으로도 큰 위로가 됩니다.</div>
         </div>
 
         <div class="notice-example-item">
-          <span class="notice-example-tag">불교식</span>
-          <div class="notice-example-text" onclick="fillNotice(this)">고인의 유언에 따라 화환과 부의금은 정중히 사양합니다. 고인의 명복을 빌어주시는 것만으로도 큰 위로가 됩니다. 극락왕생을 기원합니다.</div>
+          <span class="notice-example-tag">화환·조의금 사양</span>
+          <div class="notice-example-text" onclick="fillNotice(this)">고인의 유지에 따라 화환과 조의금은 정중히 사양합니다. 조용히 마지막 길을 함께해 주시는 것만으로도 큰 힘이 됩니다.</div>
         </div>
 
         <div class="notice-example-item">
-          <span class="notice-example-tag">무교 · 일반</span>
-          <div class="notice-example-text" onclick="fillNotice(this)">고인의 뜻에 따라 화환과 조의금은 정중히 사양하오며 깊이 감사드립니다. 조용히 마지막 길을 배웅해 주시는 것으로 충분합니다.</div>
+          <span class="notice-example-tag">조의금만 사양</span>
+          <div class="notice-example-text" onclick="fillNotice(this)">화환은 정중히 사양하오나, 조의금은 아래 계좌로 정성껏 받겠습니다. 멀리서 찾아와 주신 모든 분께 진심으로 감사드립니다.</div>
         </div>
 
         <div class="notice-example-item">
-          <span class="notice-example-tag">조의금 계좌 안내형</span>
-          <div class="notice-example-text" onclick="fillNotice(this)">화환은 정중히 사양하오나, 조의금은 아래 계좌로 보내주시면 감사히 받겠습니다. ○○은행 000-0000-0000 (예금주: 홍○○). 먼 길 찾아와 주신 모든 분께 진심으로 감사드립니다.</div>
+          <span class="notice-example-tag">무빈소 장례</span>
+          <div class="notice-example-text" onclick="fillNotice(this)">여러 사정으로 인해 빈소 없이 장례를 치르오니 넓은 양해 부탁드립니다. 고인을 기억해주시는 것만으로도 큰 위로가 됩니다. 조화 및 조의금은 정중히 사양합니다.</div>
         </div>
 
         <div class="notice-example-item">
-          <span class="notice-example-tag">천주교식</span>
-          <div class="notice-example-text" onclick="fillNotice(this)">고인의 유지에 따라 화환은 받지 않으며, 부의금은 ○○은행 000-0000-0000 (예금주: 홍○○)으로 보내주시면 감사하겠습니다. 하느님의 품 안에서 평화롭게 안식하시기를 기도드립니다.</div>
+          <span class="notice-example-tag">가족장 · 소규모</span>
+          <div class="notice-example-text" onclick="fillNotice(this)">고인의 뜻과 유가족의 뜻에 따라 가족장으로 조용히 치르고자 합니다. 조문은 정중히 사양하오며, 마음으로 함께해 주시면 감사하겠습니다.</div>
+        </div>
+
+        <div class="notice-example-item">
+          <span class="notice-example-tag">조문 환영 · 계좌 안내</span>
+          <div class="notice-example-text" onclick="fillNotice(this)">편하신 시간에 조문해 주시면 감사하겠습니다. 화환은 정중히 사양하오며, 조의금은 ○○은행 000-0000-0000 (예금주: 홍○○)으로 보내주시면 감사히 받겠습니다.</div>
         </div>
       </div>
       <textarea id="f-notice" placeholder="위 예시를 탭하거나 직접 입력해주세요"></textarea>
@@ -521,6 +552,47 @@ function initDateSelects() {
   }
   fillDays('f-birth-m','f-birth-d','f-birth-y');
   fillDays('f-death-m','f-death-d','f-death-y');
+
+  // 장례일시 날짜 셀렉트
+  function buildFDSel(containerId, prefix) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    var sy = document.createElement('select'); sy.id='f-'+prefix+'-y';
+    sy.innerHTML = '<option value="">년도</option>';
+    for (var y = curYear+1; y >= curYear-3; y--) {
+      var oy=document.createElement('option'); oy.value=y; oy.textContent=y+'년'; sy.appendChild(oy);
+    }
+    var sm = document.createElement('select'); sm.id='f-'+prefix+'-m';
+    sm.innerHTML = '<option value="">월</option>';
+    for (var m=1; m<=12; m++) {
+      var om=document.createElement('option'); om.value=String(m).padStart(2,'0'); om.textContent=m+'월'; sm.appendChild(om);
+    }
+    var sd = document.createElement('select'); sd.id='f-'+prefix+'-d';
+    function updFD() {
+      var mv=parseInt(sm.value)||0, yv=parseInt(sy.value)||curYear;
+      var max=mv?new Date(yv,mv,0).getDate():31, cur=sd.value;
+      sd.innerHTML='<option value="">일</option>';
+      for (var dd=1;dd<=max;dd++) {
+        var od=document.createElement('option'); od.value=String(dd).padStart(2,'0'); od.textContent=dd+'일';
+        if(String(dd).padStart(2,'0')===cur) od.selected=true; sd.appendChild(od);
+      }
+    }
+    sm.addEventListener('change',updFD); sy.addEventListener('change',updFD); updFD();
+    container.appendChild(sy); container.appendChild(sm); container.appendChild(sd);
+  }
+  buildFDSel('checkin-date','checkin');
+  buildFDSel('coffin-date','coffin');
+  buildFDSel('funeral-date','funeral');
+
+  // 시간 셀렉트
+  ['checkin','coffin','funeral'].forEach(function(p) {
+    var sh=document.getElementById('f-'+p+'-h');
+    for (var h=1;h<=12;h++){var o=document.createElement('option');o.value=h;o.textContent=h+'시';sh.appendChild(o);}
+    var smin=document.getElementById('f-'+p+'-min');
+    [0,10,20,30,40,50].forEach(function(mn){
+      var o=document.createElement('option');o.value=String(mn).padStart(2,'0');o.textContent=(mn===0?'00':mn)+'분';smin.appendChild(o);
+    });
+  });
 }
 initDateSelects();
 
@@ -531,6 +603,23 @@ function getDateVal(prefix) {
   const d = document.getElementById('f-'+prefix+'-d').value;
   if (!y || !m || !d) return '';
   return y + '-' + m + '-' + d;
+}
+
+/* ── 날짜+시간 값 읽기 (장례일시용) ── */
+function getDateTimeVal(prefix) {
+  const yEl=document.getElementById('f-'+prefix+'-y');
+  const mEl=document.getElementById('f-'+prefix+'-m');
+  const dEl=document.getElementById('f-'+prefix+'-d');
+  if (!yEl||!mEl||!dEl) return '';
+  const y=yEl.value, m=mEl.value, d=dEl.value;
+  if (!y||!m||!d) return '';
+  let str = y+'년 '+parseInt(m)+'월 '+parseInt(d)+'일';
+  const ampm=document.getElementById('f-'+prefix+'-ampm');
+  const h=document.getElementById('f-'+prefix+'-h');
+  const mn=document.getElementById('f-'+prefix+'-min');
+  if (ampm&&ampm.value&&h&&h.value) str += ' '+ampm.value+' '+h.value+'시';
+  if (mn&&mn.value&&mn.value!=='00') str += ' '+mn.value+'분';
+  return str;
 }
 
 /* ── 장례식장 전화번호 하이픈 자동입력 ── */
@@ -600,7 +689,7 @@ function validateStep(step) {
     ],
     3: [],
     4: [
-      { id: 'f-funeral',   label: '발인일시' },
+      // 발인일시: 아래 커스텀 체크
       { id: 'f-hall-name', label: '장례식장 이름' },
       { id: 'f-hall-addr', label: '장례식장 주소' },
       { id: 'f-notice',    label: '안내 말씀' },
@@ -623,6 +712,9 @@ function validateStep(step) {
     alert('영정사진을 업로드해주세요'); return false;
   }
 
+  if (step === 4 && !getDateTimeVal('funeral')) {
+    alert('발인일시를 선택해주세요'); return false;
+  }
   for (const { id, label } of (required[step] || [])) {
     const el = document.getElementById(id);
     if (!el || !el.value.trim()) { alert(`${label}을(를) 입력해주세요`); el?.focus(); return false; }
@@ -640,7 +732,7 @@ function buildSummary() {
     <strong>생년월일</strong>: ${birthDisp} · <strong>별세일</strong>: ${deathDisp}<br>
     <strong>상주</strong>: ${v('f-chief')} (${v('f-relation')})<br>
     <strong>이메일</strong>: ${v('f-email')}<br>
-    <strong>발인</strong>: ${v('f-funeral')}<br>
+    <strong>발인</strong>: ${getDateTimeVal('funeral')}<br>
     <strong>장례식장</strong>: ${v('f-hall-name')}<br>
     <strong>사진</strong>: 영정사진 ${photos['portrait']?'✓':'✗'} · 생애사진 ${['photo1','photo2','photo3','photo4','photo5'].filter(k=>photos[k]).length}장
   `;
@@ -703,9 +795,9 @@ async function doSubmit() {
     family:      v('f-family'),
     portrait_b64: photos['portrait']?.b64 || '',
     life_photos:  lifephotos,
-    checkin:     v('f-checkin'),
-    coffin:      v('f-coffin'),
-    funeral:     v('f-funeral'),
+    checkin:     getDateTimeVal('checkin'),
+    coffin:      getDateTimeVal('coffin'),
+    funeral:     getDateTimeVal('funeral'),
     hall_name:   v('f-hall-name'),
     hall_addr:   v('f-hall-addr'),
     hall_tel:    v('f-hall-tel'),
