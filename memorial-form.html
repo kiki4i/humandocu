@@ -48,7 +48,7 @@ body{background:var(--cream);font-family:var(--sans);color:var(--ink);min-height
 .q-label{font-size:13px;font-weight:500;color:var(--ink2);margin-bottom:6px;display:flex;align-items:center;gap:4px;}
 .q-req{color:#c0392b;font-size:11px;}
 .q-hint{font-size:12px;color:var(--ink3);margin-bottom:6px;line-height:1.7;}
-input[type=text],input[type=email],input[type=date],input[type=tel],textarea,select{
+input[type=text],input[type=email],input[type=tel],textarea,select{
   width:100%;padding:12px 14px;border:1px solid #d4c9b0;border-radius:var(--r);
   font-family:var(--sans);font-size:14px;color:var(--ink);background:#fff;
   outline:none;transition:border-color .2s;
@@ -56,6 +56,10 @@ input[type=text],input[type=email],input[type=date],input[type=tel],textarea,sel
 input:focus,textarea:focus,select:focus{border-color:var(--gold2);}
 textarea{resize:vertical;min-height:90px;line-height:1.7;}
 select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%236b5a3e'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;}
+
+/* 날짜 셀렉트 */
+.date-selects{display:flex;gap:8px;}
+.date-selects select{flex:1;}
 
 .radio-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
 .radio-opt{cursor:pointer;}
@@ -73,6 +77,15 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 .photo-drop-text{font-size:13px;color:var(--ink3);}
 .photo-preview{width:100%;max-height:180px;object-fit:cover;border-radius:var(--r);margin-top:8px;display:none;}
 .photo-preview.show{display:block;}
+
+/* 안내 말씀 예시 박스 */
+.notice-examples{background:#fffdf8;border:1px solid #e0d5c0;border-radius:var(--r);padding:14px 16px;margin-bottom:12px;}
+.notice-examples-title{font-size:11px;letter-spacing:.1em;color:var(--gold2);margin-bottom:10px;font-weight:500;}
+.notice-example-item{margin-bottom:12px;}
+.notice-example-tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;background:var(--cream2);color:var(--ink3);margin-bottom:4px;}
+.notice-example-text{font-size:12px;color:var(--ink2);line-height:1.8;cursor:pointer;border-left:2px solid #d4c9b0;padding-left:10px;transition:border-color .2s;}
+.notice-example-text:hover{border-color:var(--gold2);color:var(--ink);}
+.notice-example-text:last-child{margin-bottom:0;}
 
 /* 네비 버튼 */
 .nav-bar{position:fixed;bottom:0;left:0;right:0;background:var(--cream);border-top:1px solid #e0d5c0;padding:14px 20px;display:flex;gap:10px;z-index:100;}
@@ -145,14 +158,39 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
         <label class="radio-opt"><input type="radio" name="gender" value="여"><span>여</span></label>
       </div>
     </div>
+
+    <!-- ① 생년월일: 셀렉트 박스로 교체 -->
     <div class="q-block">
       <div class="q-label">생년월일 <span class="q-req">*</span></div>
-      <input type="date" id="f-birth">
+      <div class="date-selects">
+        <select id="f-birth-y">
+          <option value="">년도</option>
+        </select>
+        <select id="f-birth-m">
+          <option value="">월</option>
+        </select>
+        <select id="f-birth-d">
+          <option value="">일</option>
+        </select>
+      </div>
     </div>
+
+    <!-- 별세일: 마찬가지로 셀렉트 박스 -->
     <div class="q-block">
       <div class="q-label">별세일 <span class="q-req">*</span></div>
-      <input type="date" id="f-death">
+      <div class="date-selects">
+        <select id="f-death-y">
+          <option value="">년도</option>
+        </select>
+        <select id="f-death-m">
+          <option value="">월</option>
+        </select>
+        <select id="f-death-d">
+          <option value="">일</option>
+        </select>
+      </div>
     </div>
+
     <div class="q-block">
       <div class="q-label">고인 한 줄 소개 <span class="q-req">*</span></div>
       <div class="q-hint">예: 40년간 교단을 지킨 선생님</div>
@@ -329,22 +367,55 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
       <div class="q-hint">네비게이션과 연동됩니다</div>
       <input type="text" id="f-hall-addr" placeholder="도로명 주소 입력">
     </div>
+
+    <!-- ② 장례식장 전화번호: type=text로 교체, 하이픈 자동입력 -->
     <div class="q-block">
       <div class="q-label">장례식장 전화번호</div>
-      <input type="tel" id="f-hall-tel" placeholder="02-0000-0000">
+      <input type="text" id="f-hall-tel" placeholder="예: 02-1234-5678" maxlength="13" inputmode="numeric">
     </div>
+
     <div class="q-block">
       <div class="q-label">장지 이름 또는 주소</div>
       <input type="text" id="f-grave" placeholder="자세한 번지까지는 안 쓰셔도 됩니다">
     </div>
+
+    <!-- ③ 안내 말씀: 예시 클릭 자동입력 추가 -->
     <div class="q-block">
       <div class="q-label">안내 말씀 <span class="q-req">*</span></div>
-      <div class="q-hint">예: 고인의 뜻에 따라 화환과 조의금은 정중히 사양하오며 깊이 감사드립니다</div>
-      <textarea id="f-notice" placeholder="조문객에게 전할 안내 말씀을 적어주세요"></textarea>
+      <div class="notice-examples">
+        <div class="notice-examples-title">📋 아래 예시를 탭하면 자동으로 입력됩니다</div>
+
+        <div class="notice-example-item">
+          <span class="notice-example-tag">기독교식</span>
+          <div class="notice-example-text" onclick="fillNotice(this)">고인의 뜻에 따라 화환은 정중히 사양하오며, 조의금은 ○○은행 000-0000-0000 (예금주: 홍○○)으로 보내주시면 감사하겠습니다. 하나님의 은혜로 평안히 안식하시길 기도합니다.</div>
+        </div>
+
+        <div class="notice-example-item">
+          <span class="notice-example-tag">불교식</span>
+          <div class="notice-example-text" onclick="fillNotice(this)">고인의 유언에 따라 화환과 부의금은 정중히 사양합니다. 고인의 명복을 빌어주시는 것만으로도 큰 위로가 됩니다. 극락왕생을 기원합니다.</div>
+        </div>
+
+        <div class="notice-example-item">
+          <span class="notice-example-tag">무교 · 일반</span>
+          <div class="notice-example-text" onclick="fillNotice(this)">고인의 뜻에 따라 화환과 조의금은 정중히 사양하오며 깊이 감사드립니다. 조용히 마지막 길을 배웅해 주시는 것으로 충분합니다.</div>
+        </div>
+
+        <div class="notice-example-item">
+          <span class="notice-example-tag">조의금 계좌 안내형</span>
+          <div class="notice-example-text" onclick="fillNotice(this)">화환은 정중히 사양하오나, 조의금은 아래 계좌로 보내주시면 감사히 받겠습니다. ○○은행 000-0000-0000 (예금주: 홍○○). 먼 길 찾아와 주신 모든 분께 진심으로 감사드립니다.</div>
+        </div>
+
+        <div class="notice-example-item">
+          <span class="notice-example-tag">천주교식</span>
+          <div class="notice-example-text" onclick="fillNotice(this)">고인의 유지에 따라 화환은 받지 않으며, 부의금은 ○○은행 000-0000-0000 (예금주: 홍○○)으로 보내주시면 감사하겠습니다. 하느님의 품 안에서 평화롭게 안식하시기를 기도드립니다.</div>
+        </div>
+      </div>
+      <textarea id="f-notice" placeholder="위 예시를 탭하거나 직접 입력해주세요"></textarea>
     </div>
+
     <div class="q-block">
       <div class="q-label">조의금 계좌 <span class="q-req">*</span></div>
-      <input type="text" id="f-account" placeholder="00은행, 계좌번호, 예금주">
+      <input type="text" id="f-account" placeholder="예: 국민은행 123-456-789012 홍길동">
     </div>
   </div>
 </div>
@@ -388,9 +459,103 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 const API = 'https://humandocu-server-production.up.railway.app';
 const TOTAL_STEPS = 5;
 let currentStep = 1;
-const photos = {}; // key: portrait, photo1~photo5
+const photos = {};
 
 const STEP_LABELS = ['기본 정보', '고인 이야기', '사진', '장례 정보', '최종 확인'];
+
+/* ── 날짜 셀렉트 초기화 ── */
+function initDateSelects() {
+  const now = new Date();
+  const curYear = now.getFullYear();
+
+  // 생년월일: 1900~올해
+  const birthY = document.getElementById('f-birth-y');
+  for (let y = curYear; y >= 1900; y--) {
+    const o = document.createElement('option');
+    o.value = y; o.textContent = y + '년';
+    birthY.appendChild(o);
+  }
+
+  // 별세일: 올해~5년전 (최근 날짜 위에)
+  const deathY = document.getElementById('f-death-y');
+  for (let y = curYear; y >= curYear - 5; y--) {
+    const o = document.createElement('option');
+    o.value = y; o.textContent = y + '년';
+    deathY.appendChild(o);
+  }
+
+  // 월 공통 함수
+  function fillMonths(selId) {
+    const sel = document.getElementById(selId);
+    for (let m = 1; m <= 12; m++) {
+      const o = document.createElement('option');
+      o.value = String(m).padStart(2,'0');
+      o.textContent = m + '월';
+      sel.appendChild(o);
+    }
+  }
+  fillMonths('f-birth-m'); fillMonths('f-death-m');
+
+  // 일: 월 선택 시 동적으로
+  function fillDays(monthSelId, daySelId, yearSelId) {
+    const mSel = document.getElementById(monthSelId);
+    const dSel = document.getElementById(daySelId);
+    const ySel = document.getElementById(yearSelId);
+    function update() {
+      const m = parseInt(mSel.value) || 0;
+      const y = parseInt(ySel.value) || 2000;
+      const maxDay = m ? new Date(y, m, 0).getDate() : 31;
+      const cur = dSel.value;
+      dSel.innerHTML = '<option value="">일</option>';
+      for (let d = 1; d <= maxDay; d++) {
+        const o = document.createElement('option');
+        o.value = String(d).padStart(2,'0');
+        o.textContent = d + '일';
+        if (String(d).padStart(2,'0') === cur) o.selected = true;
+        dSel.appendChild(o);
+      }
+    }
+    mSel.addEventListener('change', update);
+    ySel.addEventListener('change', update);
+    update();
+  }
+  fillDays('f-birth-m','f-birth-d','f-birth-y');
+  fillDays('f-death-m','f-death-d','f-death-y');
+}
+initDateSelects();
+
+/* ── 날짜 값 읽기 헬퍼 ── */
+function getDateVal(prefix) {
+  const y = document.getElementById('f-'+prefix+'-y').value;
+  const m = document.getElementById('f-'+prefix+'-m').value;
+  const d = document.getElementById('f-'+prefix+'-d').value;
+  if (!y || !m || !d) return '';
+  return y + '-' + m + '-' + d;
+}
+
+/* ── 장례식장 전화번호 하이픈 자동입력 ── */
+document.getElementById('f-hall-tel').addEventListener('input', function(e) {
+  let val = e.target.value.replace(/\D/g,'');
+  if (val.length <= 2) {
+    e.target.value = val;
+  } else if (val.startsWith('02')) {
+    // 서울 02: 02-XXX(X)-XXXX
+    if (val.length <= 5) e.target.value = val.slice(0,2)+'-'+val.slice(2);
+    else if (val.length <= 9) e.target.value = val.slice(0,2)+'-'+val.slice(2,5)+'-'+val.slice(5);
+    else e.target.value = val.slice(0,2)+'-'+val.slice(2,6)+'-'+val.slice(6,10);
+  } else {
+    // 지역번호 3자리: 031-XXX(X)-XXXX
+    if (val.length <= 6) e.target.value = val.slice(0,3)+'-'+val.slice(3);
+    else if (val.length <= 10) e.target.value = val.slice(0,3)+'-'+val.slice(3,6)+'-'+val.slice(6);
+    else e.target.value = val.slice(0,3)+'-'+val.slice(3,7)+'-'+val.slice(7,11);
+  }
+});
+
+/* ── 안내 말씀 예시 클릭 자동입력 ── */
+function fillNotice(el) {
+  document.getElementById('f-notice').value = el.textContent.trim();
+  document.getElementById('f-notice').focus();
+}
 
 function updateProgress() {
   document.getElementById('progress-label').textContent = `${currentStep} / ${TOTAL_STEPS} · ${STEP_LABELS[currentStep-1]}`;
@@ -433,7 +598,7 @@ function validateStep(step) {
       { id: 'f-history', label: '생애 주요 사건' },
       { id: 'f-family',  label: '유가족 명단' },
     ],
-    3: [], // 영정사진 체크
+    3: [],
     4: [
       { id: 'f-funeral',   label: '발인일시' },
       { id: 'f-hall-name', label: '장례식장 이름' },
@@ -447,12 +612,12 @@ function validateStep(step) {
   if (step === 1) {
     const rel = document.querySelector('input[name="religion"]:checked');
     const gen = document.querySelector('input[name="gender"]:checked');
-    const birth = document.getElementById('f-birth').value;
-    const death = document.getElementById('f-death').value;
+    const birth = getDateVal('birth');
+    const death = getDateVal('death');
     if (!rel) { alert('종교를 선택해주세요'); return false; }
     if (!gen) { alert('성별을 선택해주세요'); return false; }
-    if (!birth) { alert('생년월일을 입력해주세요'); return false; }
-    if (!death) { alert('별세일을 입력해주세요'); return false; }
+    if (!birth) { alert('생년월일을 선택해주세요'); return false; }
+    if (!death) { alert('별세일을 선택해주세요'); return false; }
   }
   if (step === 3 && !photos['portrait']) {
     alert('영정사진을 업로드해주세요'); return false;
@@ -467,10 +632,12 @@ function validateStep(step) {
 
 function buildSummary() {
   const el = document.getElementById('summary');
+  const birthDisp = getDateVal('birth').replace(/-/g,'. ').replace(/(\d{4})\. (\d{2})\. (\d{2})/, '$1년 $2월 $3일');
+  const deathDisp = getDateVal('death').replace(/-/g,'. ').replace(/(\d{4})\. (\d{2})\. (\d{2})/, '$1년 $2월 $3일');
   el.innerHTML = `
     <strong>고인 성함</strong>: ${v('f-deceased')}<br>
     <strong>종교</strong>: ${rv('religion')} · <strong>성별</strong>: ${rv('gender')}<br>
-    <strong>생년월일</strong>: ${v('f-birth')} · <strong>별세일</strong>: ${v('f-death')}<br>
+    <strong>생년월일</strong>: ${birthDisp} · <strong>별세일</strong>: ${deathDisp}<br>
     <strong>상주</strong>: ${v('f-chief')} (${v('f-relation')})<br>
     <strong>이메일</strong>: ${v('f-email')}<br>
     <strong>발인</strong>: ${v('f-funeral')}<br>
@@ -506,7 +673,6 @@ async function doSubmit() {
   document.getElementById('btn-next').disabled = true;
   document.getElementById('loading-overlay').classList.add('active');
 
-  // 사진 캡션 수집
   const lifephotos = [];
   for (let i = 1; i <= 5; i++) {
     lifephotos.push({
@@ -517,30 +683,26 @@ async function doSubmit() {
   }
 
   const payload = {
-    // 기본 정보
     deceased:    v('f-deceased'),
     title:       v('f-title'),
     religion:    rv('religion'),
     gender:      rv('gender'),
-    birth:       v('f-birth'),
-    death:       v('f-death'),
+    birth:       getDateVal('birth'),
+    death:       getDateVal('death'),
     intro:       v('f-intro'),
     relation:    v('f-relation'),
     chief:       v('f-chief'),
     applicant:   v('f-applicant'),
     phone:       v('f-phone'),
     email:       v('f-email'),
-    // 고인 이야기
     memory:      v('f-memory'),
     habit:       v('f-habit'),
     shine:       v('f-shine'),
     last_message:v('f-message'),
     history:     v('f-history'),
     family:      v('f-family'),
-    // 사진
     portrait_b64: photos['portrait']?.b64 || '',
     life_photos:  lifephotos,
-    // 장례 정보
     checkin:     v('f-checkin'),
     coffin:      v('f-coffin'),
     funeral:     v('f-funeral'),
@@ -550,7 +712,6 @@ async function doSubmit() {
     grave:       v('f-grave'),
     notice:      v('f-notice'),
     account:     v('f-account'),
-    // 결제 pending_id (URL 파라미터)
     pending_id:  new URLSearchParams(location.search).get('pending_id') || '',
   };
 
