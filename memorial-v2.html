@@ -161,17 +161,14 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
 .modal{display:none;position:fixed;inset:0;background:#000;z-index:200;flex-direction:column;}
 .modal.open{display:flex;}
 .modal iframe{flex:1;width:100%;border:none;display:block;}
-.modal-bottom{
-  flex-shrink:0;
-  background:rgba(0,0,0,.95);
-  padding:12px 20px 28px;
-  display:flex;align-items:center;justify-content:center;
-  border-top:1px solid rgba(255,255,255,.08);
+.modal-back-fixed{
+  position:fixed;bottom:24px;right:20px;z-index:210;
 }
 .modal-back{
-  padding:13px 40px;background:var(--gold);border:none;border-radius:8px;
-  font-size:14px;font-weight:500;color:var(--ink);cursor:pointer;
-  font-family:var(--sans);letter-spacing:.06em;width:100%;max-width:280px;
+  padding:12px 22px;background:var(--gold);border:none;border-radius:24px;
+  font-size:13px;font-weight:500;color:var(--ink);cursor:pointer;
+  font-family:var(--sans);letter-spacing:.04em;
+  box-shadow:0 4px 16px rgba(0,0,0,.4);
 }
 </style>
 </head>
@@ -182,7 +179,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
 <!-- S1 청첩장 -->
 <div class="slide">
   <div class="top"><div class="ey">HUMANDOCU · MEMORIAL</div><div class="hl">청첩장 한 장이<br>이렇게 바뀌었습니다</div></div>
-  <div class="wcard">
+  <div class="wcard" onclick="openModal('wedding')" style="cursor:pointer;">
     <div class="wcard-hero">
       <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&q=80&auto=format&fit=crop" 
            alt="웨딩" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45;">
@@ -206,7 +203,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
 <!-- S2 기존 부고 -->
 <div class="slide">
   <div class="top"><div class="ey">지금의 부고는</div><div class="hl">여전히 이렇습니다</div></div>
-  <div class="sms-wrap">
+  <div class="sms-wrap" onclick="openModal('bugo_old')" style="cursor:pointer;position:relative;">
     <div class="sms-bar"><span>오후 11:23</span><span>■■■ 4G</span></div>
     <div class="sms-hd">메시지</div>
     <div class="sms-body">
@@ -292,13 +289,15 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
 <!-- 모달 -->
 <div class="modal" id="modal">
   <iframe id="mf" src="" loading="lazy"></iframe>
-  <div class="modal-bottom">
-    <button class="modal-back" onclick="closeModal()">← 돌아가기</button>
-  </div>
+</div>
+<div class="modal-back-fixed" id="modal-back-btn" style="display:none;">
+  <button class="modal-back" onclick="closeModal()">← 돌아가기</button>
 </div>
 
 <script>
 const URLS={
+  wedding:'https://humandocu.com/sample-wedding.html',
+  bugo_old:'https://humandocu.com/sample-bugo.html',
   bugo:'https://humandocu.com/bugo/adv-정재무.html',
   memorial:'https://humandocu.com/bugo/adv-memorial-정재무.html',
   damnyejang:'https://humandocu.com/bugo/damnyejang-정재무.html',
@@ -344,9 +343,11 @@ goTo(0);
 function openModal(t){
   document.getElementById('mf').src=URLS[t]||URLS.bugo;
   document.getElementById('modal').classList.add('open');
+  document.getElementById('modal-back-btn').style.display='block';
 }
 function closeModal(){
   document.getElementById('modal').classList.remove('open');
+  document.getElementById('modal-back-btn').style.display='none';
   setTimeout(()=>{document.getElementById('mf').src='';},300);
 }
 </script>
