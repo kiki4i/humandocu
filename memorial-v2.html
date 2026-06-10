@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>메모리얼 · 휴먼다큐</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;height:100%;overflow:hidden;}
+
+/* ── 슬라이드 컨테이너 ── */
+.slides{
+  width:100%;height:100%;
+  overflow-y:scroll;
+  scroll-snap-type:y mandatory;
+  -webkit-overflow-scrolling:touch;
+}
+.slide{
+  width:100%;height:100vh;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  padding:40px 28px;
+}
+
+/* ── 진행 도트 ── */
+.dots{
+  position:fixed;right:18px;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:8px;z-index:100;
+}
+.dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(0,0,0,.18);transition:all .3s;cursor:pointer;
+}
+.dot.active{background:#c8a96e;transform:scale(1.4);}
+
+/* ── 슬라이드 1: 오프닝 ── */
+.s1{background:#faf8f4;}
+.s1-eyebrow{
+  font-family:'Noto Sans KR',sans-serif;
+  font-size:11px;letter-spacing:.25em;color:#c8a96e;
+  text-transform:uppercase;margin-bottom:32px;
+}
+.s1-card{
+  background:#fff;border-radius:16px;
+  box-shadow:0 8px 40px rgba(0,0,0,.08);
+  padding:32px 28px;width:100%;max-width:320px;
+  text-align:center;margin-bottom:32px;
+  position:relative;
+}
+.s1-card-tag{
+  font-size:10px;letter-spacing:.2em;color:#bbb;
+  text-transform:uppercase;margin-bottom:20px;
+}
+.s1-card-title{
+  font-family:'Noto Serif KR',serif;
+  font-size:22px;font-weight:300;color:#1a1410;
+  line-height:1.5;margin-bottom:8px;
+}
+.s1-card-sub{font-size:13px;color:#888;margin-bottom:24px;}
+.s1-card-date{
+  font-size:11px;color:#bbb;padding-top:20px;
+  border-top:1px solid #f0ede8;
+}
+.s1-text{
+  font-family:'Noto Serif KR',serif;
+  font-size:17px;font-weight:300;color:#3a2e1e;
+  line-height:1.9;text-align:center;
+}
+.s1-text em{font-style:normal;color:#c8a96e;}
+
+/* ── 슬라이드 2: 문제 제기 ── */
+.s2{background:#1a1410;}
+.s2-label{
+  font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.3);
+  text-transform:uppercase;margin-bottom:24px;
+}
+.s2-sms{
+  background:#2a2420;border-radius:12px;
+  padding:20px;width:100%;max-width:320px;
+  margin-bottom:28px;
+}
+.s2-sms-sender{font-size:11px;color:rgba(255,255,255,.3);margin-bottom:12px;}
+.s2-sms-bubble{
+  background:#3a3430;border-radius:8px;padding:14px 16px;
+  font-size:13px;color:rgba(255,255,255,.7);line-height:1.8;
+}
+.s2-title{
+  font-family:'Noto Serif KR',serif;
+  font-size:22px;font-weight:300;color:#fff;
+  line-height:1.6;text-align:center;margin-bottom:12px;
+}
+.s2-sub{font-size:14px;color:rgba(255,255,255,.45);text-align:center;line-height:1.7;}
+
+/* ── 슬라이드 3: 솔루션 ── */
+.s3{background:#f5f0e8;}
+.s3-label{
+  font-size:11px;letter-spacing:.2em;color:#c8a96e;
+  text-transform:uppercase;margin-bottom:20px;
+}
+.s3-title{
+  font-family:'Noto Serif KR',serif;
+  font-size:22px;font-weight:300;color:#1a1410;
+  line-height:1.6;text-align:center;margin-bottom:24px;
+}
+/* 폰 목업 */
+.phone-mock{
+  width:200px;height:360px;
+  background:#1a1410;border-radius:28px;
+  padding:8px;box-shadow:0 20px 60px rgba(0,0,0,.2);
+  position:relative;flex-shrink:0;
+}
+.phone-screen{
+  width:100%;height:100%;border-radius:22px;overflow:hidden;
+  background:#fff;
+}
+.phone-screen iframe{
+  width:200%;height:200%;
+  transform:scale(.5);transform-origin:top left;
+  border:none;pointer-events:none;
+}
+.s3-features{
+  display:flex;flex-wrap:wrap;gap:8px;
+  justify-content:center;margin-top:20px;max-width:320px;
+}
+.s3-feature{
+  background:#fff;border-radius:20px;padding:6px 14px;
+  font-size:12px;color:#6b5a3e;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+/* ── 슬라이드 4: 답례장 ── */
+.s4{background:#fff;}
+.s4-label{
+  font-size:11px;letter-spacing:.2em;color:#c8a96e;
+  text-transform:uppercase;margin-bottom:20px;
+}
+.s4-title{
+  font-family:'Noto Serif KR',serif;
+  font-size:22px;font-weight:300;color:#1a1410;
+  line-height:1.6;text-align:center;margin-bottom:24px;
+}
+.s4-card{
+  background:#faf8f4;border-radius:16px;
+  padding:28px 24px;width:100%;max-width:320px;
+  text-align:center;border:1px solid #e8e0d0;
+}
+.s4-card-icon{font-size:32px;margin-bottom:16px;}
+.s4-card-title{
+  font-family:'Noto Serif KR',serif;
+  font-size:18px;font-weight:300;color:#1a1410;
+  margin-bottom:10px;
+}
+.s4-card-text{
+  font-size:13px;color:#6b5a3e;line-height:1.9;
+}
+.s4-flow{
+  display:flex;align-items:center;gap:8px;
+  margin-top:20px;flex-wrap:wrap;justify-content:center;
+}
+.s4-flow-item{
+  font-size:12px;color:#6b5a3e;
+  background:#f0ebe0;padding:6px 12px;border-radius:4px;
+}
+.s4-flow-arrow{color:#c8a96e;font-size:14px;}
+
+/* ── 슬라이드 5: CTA ── */
+.s5{background:linear-gradient(160deg,#1a1410 0%,#2e2418 100%);}
+.s5-eyebrow{
+  font-size:11px;letter-spacing:.25em;color:#c8a96e;
+  text-transform:uppercase;margin-bottom:28px;
+}
+.s5-title{
+  font-family:'Noto Serif KR',serif;
+  font-size:28px;font-weight:300;color:#fff;
+  line-height:1.5;text-align:center;margin-bottom:12px;
+}
+.s5-sub{
+  font-size:14px;color:rgba(255,255,255,.5);
+  text-align:center;line-height:1.8;margin-bottom:40px;
+}
+.cta-btn{
+  display:block;width:100%;max-width:280px;
+  padding:18px;background:#c8a96e;
+  border-radius:8px;
+  font-family:'Noto Sans KR',sans-serif;
+  font-size:16px;font-weight:500;color:#1a1410;
+  text-decoration:none;text-align:center;
+  letter-spacing:.06em;margin-bottom:14px;
+  transition:background .2s;
+}
+.cta-btn:hover{background:#b8924a;}
+.cta-btn-sub{
+  display:block;width:100%;max-width:280px;
+  padding:16px;background:transparent;
+  border:1px solid rgba(255,255,255,.2);border-radius:8px;
+  font-family:'Noto Sans KR',sans-serif;
+  font-size:14px;color:rgba(255,255,255,.6);
+  text-decoration:none;text-align:center;
+}
+.s5-badge{
+  margin-top:32px;
+  font-size:11px;color:rgba(255,255,255,.25);
+  letter-spacing:.1em;
+}
+
+/* ── 스크롤 힌트 ── */
+.scroll-hint{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  animation:bounce 2s infinite;
+}
+.scroll-hint span{font-size:10px;letter-spacing:.15em;color:rgba(0,0,0,.3);}
+.scroll-hint svg{width:16px;opacity:.3;}
+.scroll-hint-white span{color:rgba(255,255,255,.3);}
+.scroll-hint-white svg{opacity:.3;filter:invert(1);}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(5px);}}
+</style>
+</head>
+<body>
+
+<div class="dots" id="dots">
+  <div class="dot active" onclick="goTo(0)"></div>
+  <div class="dot" onclick="goTo(1)"></div>
+  <div class="dot" onclick="goTo(2)"></div>
+  <div class="dot" onclick="goTo(3)"></div>
+  <div class="dot" onclick="goTo(4)"></div>
+</div>
+
+<div class="slides" id="slides">
+
+  <!-- SLIDE 1: 오프닝 -->
+  <div class="slide s1">
+    <div class="s1-eyebrow">HUMANDOCU · MEMORIAL</div>
+    <div class="s1-card">
+      <div class="s1-card-tag">청첩장</div>
+      <div class="s1-card-title">저희 두 사람<br>결혼합니다</div>
+      <div class="s1-card-sub">홍길동 · 김영희</div>
+      <div class="s1-card-date">2025년 6월 14일 토요일 오후 2시</div>
+    </div>
+    <div class="s1-text">
+      예전엔 <em>카드 한 장</em>으로<br>
+      결혼 소식을 전했습니다<br><br>
+      이제는 모바일로<br>
+      <em>삶의 순간</em>을 나누는 시대입니다
+    </div>
+    <div class="scroll-hint">
+      <span>SCROLL</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: 문제 제기 -->
+  <div class="slide s2">
+    <div class="s2-label">그런데 부고는</div>
+    <div class="s2-sms">
+      <div class="s2-sms-sender">010-XXXX-XXXX</div>
+      <div class="s2-sms-bubble">
+        부고 알림<br><br>
+        부친상 / 홍길동<br>
+        발인 : 6월 12일 오전 8시<br>
+        서울아산병원 장례식장 3호
+      </div>
+    </div>
+    <div class="s2-title">여전히<br>문자 한 줄입니다</div>
+    <div class="s2-sub">
+      상조회사의 획일화된 틀<br>
+      고인의 이름 석 자만 남는 부고
+    </div>
+    <div class="scroll-hint scroll-hint-white">
+      <span>SCROLL</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: 솔루션 -->
+  <div class="slide s3">
+    <div class="s3-label">이제는 달라집니다</div>
+    <div class="s3-title">고인을 제대로<br>기억하는 방법</div>
+    <div class="phone-mock">
+      <div class="phone-screen">
+        <iframe src="https://humandocu.com/bugo/adv-정재무.html"
+                scrolling="no" loading="lazy"></iframe>
+      </div>
+    </div>
+    <div class="s3-features">
+      <span class="s3-feature">✦ 영정사진</span>
+      <span class="s3-feature">📍 지도·내비</span>
+      <span class="s3-feature">✉️ 카카오 공유</span>
+      <span class="s3-feature">💬 추모 메시지</span>
+      <span class="s3-feature">🎵 추모곡</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: 답례장 -->
+  <div class="slide s4">
+    <div class="s4-label">그리고 그 다음</div>
+    <div class="s4-title">마지막 감사 인사까지<br>함께합니다</div>
+    <div class="s4-card">
+      <div class="s4-card-icon">✉️</div>
+      <div class="s4-card-title">디지털 답례장</div>
+      <div class="s4-card-text">
+        장례를 치르고 나서<br>
+        찾아와 주신 분들께<br>
+        따뜻한 감사 인사를<br>
+        직접 전달합니다
+      </div>
+    </div>
+    <div class="s4-flow">
+      <span class="s4-flow-item">부고 발송</span>
+      <span class="s4-flow-arrow">→</span>
+      <span class="s4-flow-item">장례식</span>
+      <span class="s4-flow-arrow">→</span>
+      <span class="s4-flow-item">답례장</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: CTA -->
+  <div class="slide s5">
+    <div class="s5-eyebrow">WORLD'S FIRST</div>
+    <div class="s5-title">세상에 없던<br>부고 서비스</div>
+    <div class="s5-sub">
+      고인의 삶을 기록하고<br>
+      소중한 분들과 함께 기억합니다
+    </div>
+    <a href="memorial-form.html" class="cta-btn">지금 부고 만들기</a>
+    <a href="damnyejang-form.html" class="cta-btn-sub">답례장 만들기</a>
+    <div class="s5-badge">HUMANDOCU.COM · BETA</div>
+  </div>
+
+</div>
+
+<script>
+const slides = document.getElementById('slides');
+const dots = document.querySelectorAll('.dot');
+let current = 0;
+
+function goTo(n) {
+  slides.scrollTo({top: n * window.innerHeight, behavior: 'smooth'});
+}
+
+slides.addEventListener('scroll', function() {
+  const idx = Math.round(slides.scrollTop / window.innerHeight);
+  if (idx !== current) {
+    current = idx;
+    dots.forEach((d,i) => d.classList.toggle('active', i===idx));
+  }
+});
+
+// 키보드 지원
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowDown' && current < 4) goTo(current+1);
+  if (e.key === 'ArrowUp' && current > 0) goTo(current-1);
+});
+</script>
+
+<footer style="display:none;">
+  <p>휴먼다큐닷컴 · 대표자: 정재우 · 사업자등록번호: 357-50-01268</p>
+  <p>통신판매업신고번호: 제 2026-수원영통-0664 호</p>
+  <p>경기도 수원시 영통구 에듀타운로106번길 46 · 031-539-9709</p>
+</footer>
+</body>
+</html>
