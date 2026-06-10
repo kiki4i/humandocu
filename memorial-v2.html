@@ -7,370 +7,303 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+:root{
+  --ink:#1a1410;
+  --gold:#c8a96e;
+  --cream:#faf7f2;
+  --gray:#6b5a3e;
+  --serif:'Noto Serif KR',serif;
+  --sans:'Noto Sans KR',sans-serif;
+}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-html,body{width:100%;height:100%;overflow:hidden;}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--cream);}
 
+/* ── 슬라이더 ── */
 .slider{
   display:flex;width:600vw;height:100vh;
-  transition:transform .45s cubic-bezier(.4,0,.2,1);
+  transition:transform .42s cubic-bezier(.4,0,.2,1);
   will-change:transform;
 }
 .slide{
-  width:100vw;height:100vh;
+  width:100vw;height:100vh;flex-shrink:0;
+  background:var(--cream);
   display:flex;flex-direction:column;
-  align-items:center;justify-content:flex-start;
-  padding:44px 24px 72px;
-  position:relative;overflow:hidden;flex-shrink:0;
+  align-items:center;justify-content:center;
+  padding:0 28px 68px;
+  gap:0;
 }
 
-/* 하단 네비 */
+/* ── 네비 ── */
 .nav{
   position:fixed;bottom:0;left:0;right:0;
   display:flex;align-items:center;justify-content:center;
-  gap:16px;padding:14px 24px 22px;
+  gap:14px;padding:14px 24px 24px;
+  background:linear-gradient(transparent,rgba(250,247,242,.95));
   z-index:100;
 }
-.dot{width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.15);transition:all .3s;cursor:pointer;}
-.dot.active{background:#c8a96e;transform:scale(1.5);}
-.nav.dark .dot{background:rgba(255,255,255,.2);}
-.nav.dark .dot.active{background:#c8a96e;}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(26,20,16,.12);transition:all .3s;cursor:pointer;}
+.dot.active{background:var(--gold);transform:scale(1.5);}
 .nav-btn{
-  width:34px;height:34px;border-radius:50%;
-  border:1.5px solid rgba(0,0,0,.12);background:rgba(255,255,255,.7);
+  width:32px;height:32px;border-radius:50%;
+  border:1.5px solid rgba(26,20,16,.12);
+  background:rgba(255,255,255,.8);
   display:flex;align-items:center;justify-content:center;
-  cursor:pointer;font-size:13px;color:rgba(0,0,0,.4);
-}
-.nav.dark .nav-btn{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:rgba(255,255,255,.5);}
-
-/* 공통 */
-.eyebrow{font-size:10px;letter-spacing:.25em;text-transform:uppercase;margin-bottom:14px;text-align:center;}
-.headline{font-family:'Noto Serif KR',serif;font-size:22px;font-weight:300;line-height:1.5;text-align:center;}
-.body-text{font-size:13px;line-height:1.9;text-align:center;margin-top:10px;}
-
-/* ══════════════════════
-   S1 청첩장
-══════════════════════ */
-.s1{background:#faf7f2;}
-.s1 .eyebrow{color:#c8a96e;}
-.s1 .headline{color:#1a1410;}
-.s1 .body-text{color:#6b5a3e;}
-
-.compare-wrap{
-  display:flex;gap:10px;width:100%;max-width:340px;
-  margin:16px auto 14px;align-items:flex-start;
-}
-.compare-card{flex:1;border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.1);}
-.compare-label{
-  font-size:9px;letter-spacing:.15em;text-align:center;
-  padding:6px;font-family:'Noto Sans KR',sans-serif;
-}
-.old-card{background:#fff;}
-.old-card .compare-label{background:#f0ede8;color:#888;}
-.old-card-body{padding:16px 12px;text-align:center;}
-.old-card-title{font-family:'Noto Serif KR',serif;font-size:14px;color:#333;margin-bottom:4px;}
-.old-card-names{font-size:11px;color:#888;margin-bottom:8px;}
-.old-card-img{width:100%;height:56px;background:linear-gradient(135deg,#f5f0e8,#e8dcc8);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:8px;}
-.old-card-date{font-size:9px;color:#aaa;}
-
-.new-card{background:#1a1410;}
-.new-card .compare-label{background:#2e2010;color:#c8a96e;}
-.new-card-screen{
-  height:140px;overflow:hidden;position:relative;
-  background:#fff;
-}
-.new-card-screen iframe{
-  width:280%;height:280%;
-  transform:scale(.357);transform-origin:top left;
-  border:none;pointer-events:none;
-}
-.new-card-badge{
-  position:absolute;bottom:6px;left:0;right:0;
-  text-align:center;font-size:9px;color:rgba(255,255,255,.7);
-  background:rgba(0,0,0,.4);padding:3px;
+  cursor:pointer;font-size:13px;color:rgba(26,20,16,.35);
 }
 
-/* ══════════════════════
-   S2 기존 부고
-══════════════════════ */
-.s2{background:#1c1814;}
-.s2 .eyebrow{color:rgba(200,169,110,.7);}
-.s2 .headline{color:#fff;}
-.s2 .body-text{color:rgba(255,255,255,.6);}
+/* ── 공통 타이포 ── */
+.eyebrow{
+  font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:10px;text-align:center;
+}
+.headline{
+  font-family:var(--serif);font-size:24px;font-weight:300;
+  color:var(--ink);line-height:1.5;text-align:center;
+  margin-bottom:20px;
+}
+.caption{
+  font-size:12px;color:var(--gray);line-height:1.9;
+  text-align:center;margin-top:14px;
+}
 
-.sms-mock{
-  background:#252018;border-radius:14px;
-  padding:18px;width:100%;max-width:300px;
-  margin:16px auto;border:1px solid rgba(255,255,255,.06);
+/* ── 비주얼 카드 공통 ── */
+.card{
+  width:100%;max-width:300px;
+  background:#fff;border-radius:18px;
+  box-shadow:0 8px 32px rgba(26,20,16,.1);
+  overflow:hidden;
 }
-.sms-sender{font-size:10px;color:rgba(255,255,255,.35);margin-bottom:10px;}
-.sms-tag{
-  display:inline-block;padding:3px 10px;
-  background:rgba(200,169,110,.2);color:#c8a96e;
-  border-radius:8px;font-size:10px;margin-bottom:8px;
-}
-.sms-bubble{
-  background:#2e2820;border-radius:8px;padding:14px;
-  font-size:13px;color:rgba(255,255,255,.75);line-height:2;
-}
-.sms-x{
-  display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;
-}
-.sms-x-item{
-  font-size:11px;color:rgba(255,255,255,.35);
-  display:flex;align-items:center;gap:4px;
-}
-.sms-x-item::before{content:'✕';color:#c0392b;font-size:10px;}
 
-/* ══════════════════════
-   S3 부고 샘플
-══════════════════════ */
-.s3{background:#f5f0e8;}
-.s3 .eyebrow{color:#c8a96e;}
-.s3 .headline{color:#1a1410;}
-
-.phone-mock{
-  width:160px;flex-shrink:0;margin:14px auto 0;cursor:pointer;
+/* ══ S1 청첩장 ══ */
+.s1-compare{
+  display:flex;gap:10px;width:100%;max-width:300px;
 }
-.phone-frame{
-  width:160px;height:300px;
-  background:#1a1410;border-radius:22px;padding:6px;
-  box-shadow:0 16px 48px rgba(0,0,0,.2);
+.s1-half{flex:1;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.08);}
+.s1-half-label{font-size:9px;letter-spacing:.12em;text-align:center;padding:7px;background:#f5f0e8;color:#999;}
+.s1-old-body{padding:14px 10px;text-align:center;}
+.s1-old-flower{font-size:24px;margin-bottom:8px;}
+.s1-old-title{font-family:var(--serif);font-size:13px;color:var(--ink);margin-bottom:4px;}
+.s1-old-name{font-size:10px;color:#aaa;margin-bottom:6px;}
+.s1-old-date{font-size:9px;color:#bbb;}
+.s1-new-label{background:#1a1410;color:var(--gold);}
+.s1-new-screen{height:110px;overflow:hidden;position:relative;background:#fff;}
+.s1-new-screen iframe{width:250%;height:250%;transform:scale(.4);transform-origin:top left;border:none;pointer-events:none;}
+.s1-new-screen-cover{position:absolute;inset:0;background:linear-gradient(transparent 60%,rgba(26,20,16,.6));display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;}
+.s1-new-screen-cover span{font-size:9px;color:rgba(255,255,255,.8);letter-spacing:.1em;}
+
+/* ══ S2 기존 부고 ══ */
+.s2-card{padding:20px;}
+.s2-sender{font-size:10px;color:#bbb;margin-bottom:8px;}
+.s2-bubble{
+  background:#f5f5f5;border-radius:10px;
+  padding:14px;font-size:13px;color:#555;
+  line-height:2;margin-bottom:14px;
+}
+.s2-lacks{display:flex;flex-wrap:wrap;gap:6px;}
+.s2-lack{
+  font-size:10px;color:#c0392b;
+  background:#fff5f5;border:1px solid #fcd;
+  padding:3px 10px;border-radius:10px;
+}
+
+/* ══ S3/4/5 폰 목업 ══ */
+.phone-card{
+  width:100%;max-width:300px;
+  background:#1a1410;border-radius:18px;
+  padding:10px;box-shadow:0 10px 36px rgba(0,0,0,.18);
+  cursor:pointer;position:relative;
 }
 .phone-screen{
-  width:100%;height:100%;border-radius:18px;
-  overflow:hidden;background:#fff;position:relative;
+  width:100%;height:220px;
+  border-radius:12px;overflow:hidden;
+  background:#fff;position:relative;
 }
 .phone-screen iframe{
-  width:250%;height:250%;
-  transform:scale(.4);transform-origin:top left;
+  width:240%;height:240%;
+  transform:scale(.417);transform-origin:top left;
   border:none;pointer-events:none;
 }
-.phone-tap{
-  position:absolute;inset:0;border-radius:18px;
-  background:rgba(0,0,0,.2);
+.phone-tap-cover{
+  position:absolute;inset:0;border-radius:12px;
+  background:rgba(0,0,0,.18);
   display:flex;align-items:center;justify-content:center;
 }
-.phone-tap span{
-  background:rgba(0,0,0,.55);color:#fff;
-  padding:7px 14px;border-radius:16px;font-size:11px;
-  border:1px solid rgba(255,255,255,.3);letter-spacing:.08em;
+.phone-tap-cover span{
+  background:rgba(0,0,0,.5);color:#fff;
+  padding:6px 14px;border-radius:14px;
+  font-size:11px;letter-spacing:.1em;
+  border:1px solid rgba(255,255,255,.3);
 }
 
-/* ══════════════════════
-   S4 메모리얼
-══════════════════════ */
-.s4{background:#fff;}
-.s4 .eyebrow{color:#c8a96e;}
-.s4 .headline{color:#1a1410;}
-.s4 .body-text{color:#6b5a3e;}
-
-/* ══════════════════════
-   S5 답례장
-══════════════════════ */
-.s5{background:#faf7f2;}
-.s5 .eyebrow{color:#c8a96e;}
-.s5 .headline{color:#1a1410;}
-.s5 .body-text{color:#6b5a3e;}
-
-.flow-row{
-  display:flex;align-items:center;gap:4px;
-  margin:14px auto 14px;
+/* ══ S5 흐름 ══ */
+.flow{display:flex;align-items:center;gap:6px;margin-bottom:14px;}
+.flow-item{
+  flex:1;background:#fff;border:1px solid #e8e0d0;
+  border-radius:10px;padding:10px 6px;text-align:center;
 }
-.flow-chip{
-  padding:8px 12px;background:#fff;
-  border:1px solid #e0d5c0;border-radius:8px;
-  font-size:11px;color:#3a2e1e;text-align:center;line-height:1.5;
-}
-.flow-chip .fi{font-size:16px;display:block;margin-bottom:2px;}
-.flow-arr{color:#c8a96e;font-size:12px;}
-.world-badge{
-  display:inline-block;
-  font-size:10px;letter-spacing:.12em;
-  color:#c8a96e;border:1px solid rgba(200,169,110,.4);
-  padding:5px 14px;border-radius:16px;margin-top:12px;
-}
+.flow-icon{font-size:18px;display:block;margin-bottom:4px;}
+.flow-name{font-size:10px;color:var(--ink);}
+.flow-arr{color:var(--gold);font-size:14px;flex-shrink:0;}
 
-/* ══════════════════════
-   S6 CTA
-══════════════════════ */
-.s6{background:linear-gradient(160deg,#1a1410 0%,#2e2418 100%);}
-.s6 .eyebrow{color:#c8a96e;}
+/* ══ S6 CTA ══ */
+.s6{background:var(--ink);}
+.s6 .eyebrow{color:var(--gold);}
 .s6 .headline{color:#fff;}
-.s6 .body-text{color:rgba(255,255,255,.5);}
-
+.s6 .caption{color:rgba(255,255,255,.4);}
+.s6 .nav{background:linear-gradient(transparent,rgba(26,20,16,.95));}
+.s6 .dot{background:rgba(255,255,255,.2);}
+.s6 .dot.active{background:var(--gold);}
+.s6 .nav-btn{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:rgba(255,255,255,.35);}
+.cta-wrap{width:100%;max-width:280px;display:flex;flex-direction:column;gap:10px;margin-top:4px;}
 .cta-main{
-  display:block;width:100%;max-width:280px;
-  padding:17px;background:#c8a96e;border-radius:8px;
-  font-family:'Noto Sans KR',sans-serif;
-  font-size:15px;font-weight:500;color:#1a1410;
-  text-decoration:none;text-align:center;
-  letter-spacing:.06em;margin-top:24px;
+  display:block;padding:17px;background:var(--gold);border-radius:8px;
+  font-family:var(--sans);font-size:15px;font-weight:500;color:var(--ink);
+  text-decoration:none;text-align:center;letter-spacing:.06em;
 }
 .cta-sub{
-  display:block;width:100%;max-width:280px;
-  padding:14px;margin-top:10px;
+  display:block;padding:14px;
   border:1px solid rgba(255,255,255,.18);border-radius:8px;
-  font-family:'Noto Sans KR',sans-serif;
-  font-size:13px;color:rgba(255,255,255,.55);
+  font-family:var(--sans);font-size:13px;color:rgba(255,255,255,.5);
   text-decoration:none;text-align:center;
 }
-.cta-free{
-  margin-top:20px;font-size:11px;
-  color:rgba(255,255,255,.25);letter-spacing:.1em;text-align:center;
-}
+.cta-badge{font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.12em;text-align:center;margin-top:6px;}
 
-/* ══════════════════════
-   모달
-══════════════════════ */
-.modal-bg{
+/* ── 모달 ── */
+.modal{
   display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.9);z-index:200;
-  flex-direction:column;align-items:center;
+  background:rgba(0,0,0,.92);z-index:200;
+  flex-direction:column;
 }
-.modal-bg.open{display:flex;}
-.modal-topbar{
-  width:100%;display:flex;align-items:center;
-  justify-content:space-between;
-  padding:12px 16px;background:rgba(0,0,0,.8);flex-shrink:0;
+.modal.open{display:flex;}
+.modal-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;background:rgba(0,0,0,.7);flex-shrink:0;
 }
-.modal-topbar-title{font-size:12px;color:rgba(255,255,255,.6);letter-spacing:.1em;}
-.modal-close-btn{
-  padding:6px 14px;background:#c8a96e;
-  border:none;border-radius:16px;
-  font-size:12px;color:#1a1410;cursor:pointer;
-  font-family:'Noto Sans KR',sans-serif;font-weight:500;
+.modal-bar span{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.1em;}
+.modal-back{
+  padding:7px 16px;background:var(--gold);border:none;border-radius:16px;
+  font-size:12px;font-weight:500;color:var(--ink);cursor:pointer;
+  font-family:var(--sans);
 }
-.modal-frame{flex:1;width:100%;border:none;}
+.modal iframe{flex:1;width:100%;border:none;}
 </style>
 </head>
 <body>
 
 <div class="slider" id="slider">
 
-<!-- ── S1 청첩장 ── -->
-<div class="slide s1">
+<!-- ─── S1 청첩장 ─── -->
+<div class="slide">
   <div class="eyebrow">HUMANDOCU · MEMORIAL</div>
-  <div class="headline">예전엔 카드 한 장<br>결혼을 전했습니다</div>
-  <div class="compare-wrap">
-    <div class="compare-card old-card">
-      <div class="compare-label">종이 청첩장</div>
-      <div class="old-card-body">
-        <div class="old-card-img">💐</div>
-        <div class="old-card-title">결혼합니다</div>
-        <div class="old-card-names">홍길동 · 김영희</div>
-        <div class="old-card-date">2025. 06. 14 오후 2시</div>
+  <div class="headline">예전엔 카드 한 장으로<br>결혼을 전했습니다</div>
+  <div class="s1-compare">
+    <div class="s1-half">
+      <div class="s1-half-label">종이 청첩장</div>
+      <div class="s1-old-body">
+        <div class="s1-old-flower">💐</div>
+        <div class="s1-old-title">결혼합니다</div>
+        <div class="s1-old-name">홍길동 · 김영희</div>
+        <div class="s1-old-date">2025. 06. 14</div>
       </div>
     </div>
-    <div class="compare-card new-card">
-      <div class="compare-label">모바일 청첩장</div>
-      <div class="new-card-screen">
+    <div class="s1-half">
+      <div class="s1-half-label s1-new-label">모바일 청첩장</div>
+      <div class="s1-new-screen">
         <iframe src="https://litt.ly/wedding_demo" scrolling="no" loading="lazy"></iframe>
-        <div class="new-card-badge">모바일 링크 하나로 전체를</div>
+        <div class="s1-new-screen-cover"><span>링크 하나로 전체를</span></div>
       </div>
     </div>
   </div>
-  <div class="body-text">
-    이제는 모바일 링크 하나로<br>웨딩 이벤트 전체를 전합니다
-  </div>
+  <div class="caption">이제 삶의 모든 순간이<br>모바일로 전해집니다</div>
 </div>
 
-<!-- ── S2 기존 부고 ── -->
-<div class="slide s2">
+<!-- ─── S2 기존 부고 ─── -->
+<div class="slide">
   <div class="eyebrow">그런데 부고는</div>
   <div class="headline">여전히 단순<br>정보 나열입니다</div>
-  <div class="sms-mock">
-    <div class="sms-sender">수신거부 없음 · 상조회사 발송</div>
-    <div class="sms-tag">부고 안내</div>
-    <div class="sms-bubble">
-      부친상 홍○○ 별세<br>
-      발인 6/12 오전 8시<br>
-      서울아산병원 장례식장 3호<br>
-      유족 홍길동 배상
-    </div>
-    <div class="sms-x">
-      <span class="sms-x-item">고인의 이야기 없음</span>
-      <span class="sms-x-item">사진 없음</span>
-      <span class="sms-x-item">지도 없음</span>
-      <span class="sms-x-item">추모 없음</span>
+  <div class="card">
+    <div class="s2-card">
+      <div class="s2-sender">발신번호 없음 · 상조회사</div>
+      <div class="s2-bubble">
+        부친상 홍○○ 별세<br>
+        발인 6/12 오전 8시<br>
+        서울아산병원 장례식장 3호<br>
+        유족 홍길동 배상
+      </div>
+      <div class="s2-lacks">
+        <span class="s2-lack">사진 없음</span>
+        <span class="s2-lack">이야기 없음</span>
+        <span class="s2-lack">지도 없음</span>
+        <span class="s2-lack">추모 없음</span>
+      </div>
     </div>
   </div>
-  <div class="body-text">상조회사의 획일화된 틀<br>고인의 이름만 남는 부고</div>
+  <div class="caption">상조회사의 획일화된 틀<br>고인의 이름만 남는 부고</div>
 </div>
 
-<!-- ── S3 부고 샘플 ── -->
-<div class="slide s3">
+<!-- ─── S3 부고 샘플 ─── -->
+<div class="slide">
   <div class="eyebrow">이제는 달라집니다</div>
   <div class="headline">고인을 제대로<br>기억하는 부고</div>
-  <div class="phone-mock" onclick="openModal('bugo')">
-    <div class="phone-frame">
-      <div class="phone-screen">
-        <iframe src="https://humandocu.com/bugo/adv-정재무.html" scrolling="no" loading="lazy"></iframe>
-        <div class="phone-tap"><span>탭해서 보기</span></div>
-      </div>
+  <div class="phone-card" onclick="openModal('bugo')">
+    <div class="phone-screen">
+      <iframe src="https://humandocu.com/bugo/adv-정재무.html" scrolling="no" loading="lazy"></iframe>
+      <div class="phone-tap-cover"><span>탭해서 직접 보기</span></div>
     </div>
   </div>
-  <div class="body-text" style="margin-top:12px;font-size:12px;color:#6b5a3e;">
-    AI 추모글 · 영정사진 · 지도·내비<br>카카오 공유 · 추모 메시지
-  </div>
+  <div class="caption">AI 추모글 · 영정사진 · 지도·내비 · 카카오 공유</div>
 </div>
 
-<!-- ── S4 메모리얼 ── -->
-<div class="slide s4">
+<!-- ─── S4 메모리얼 ─── -->
+<div class="slide">
   <div class="eyebrow">기억의 공간</div>
   <div class="headline">고인을 영원히<br>기억하는 메모리얼</div>
-  <div class="phone-mock" onclick="openModal('memorial')" style="margin:14px auto 0;">
-    <div class="phone-frame">
-      <div class="phone-screen">
-        <iframe src="https://humandocu.com/bugo/adv-memorial-정재무.html" scrolling="no" loading="lazy"></iframe>
-        <div class="phone-tap"><span>탭해서 보기</span></div>
-      </div>
+  <div class="phone-card" onclick="openModal('memorial')">
+    <div class="phone-screen">
+      <iframe src="https://humandocu.com/bugo/adv-memorial-정재무.html" scrolling="no" loading="lazy"></iframe>
+      <div class="phone-tap-cover"><span>탭해서 직접 보기</span></div>
     </div>
   </div>
-  <div class="body-text" style="margin-top:12px;font-size:12px;color:#6b5a3e;">
-    생애 기록 · 추모 메시지 · 식스샷 연결<br>영원히 남는 디지털 추모 공간
-  </div>
+  <div class="caption">생애 기록 · 추모 메시지 · 인생 6샷 연결</div>
 </div>
 
-<!-- ── S5 답례장 ── -->
-<div class="slide s5">
+<!-- ─── S5 답례장 ─── -->
+<div class="slide">
   <div class="eyebrow">세상에 없던 서비스</div>
   <div class="headline">부고가 끝이<br>아닙니다</div>
-  <div class="flow-row">
-    <div class="flow-chip"><span class="fi">📨</span>부고</div>
+  <div class="flow">
+    <div class="flow-item"><span class="flow-icon">📨</span><span class="flow-name">부고</span></div>
     <div class="flow-arr">→</div>
-    <div class="flow-chip"><span class="fi">🕯</span>장례식</div>
+    <div class="flow-item"><span class="flow-icon">🕯</span><span class="flow-name">장례식</span></div>
     <div class="flow-arr">→</div>
-    <div class="flow-chip"><span class="fi">✉️</span>답례장</div>
+    <div class="flow-item"><span class="flow-icon">✉️</span><span class="flow-name">답례장</span></div>
   </div>
-  <div class="phone-mock" onclick="openModal('damnyejang')">
-    <div class="phone-frame">
-      <div class="phone-screen">
-        <iframe src="https://humandocu.com/bugo/damnyejang-정재무.html" scrolling="no" loading="lazy"></iframe>
-        <div class="phone-tap"><span>탭해서 보기</span></div>
-      </div>
+  <div class="phone-card" onclick="openModal('damnyejang')">
+    <div class="phone-screen">
+      <iframe src="https://humandocu.com/bugo/damnyejang-정재무.html" scrolling="no" loading="lazy"></iframe>
+      <div class="phone-tap-cover"><span>탭해서 직접 보기</span></div>
     </div>
   </div>
-  <div class="body-text" style="margin-top:10px;font-size:12px;">
-    마지막까지 고인과 상주와 추모객의<br>마음을 연결합니다
-  </div>
-  <div class="world-badge">WORLD'S FIRST MEMORIAL SERVICE</div>
+  <div class="caption">마지막까지 고인과 상주와<br>추모객의 마음을 연결합니다</div>
 </div>
 
-<!-- ── S6 CTA ── -->
+<!-- ─── S6 CTA ─── -->
 <div class="slide s6">
-  <div class="eyebrow" style="margin-top:8px;">HUMANDOCU</div>
+  <div class="eyebrow">HUMANDOCU</div>
   <div class="headline">지금 시작하세요</div>
-  <div class="body-text">고인의 삶을 기록하고<br>소중한 분들과 함께 기억합니다</div>
-  <a href="memorial-form.html" class="cta-main">부고 만들기</a>
-  <a href="damnyejang-form.html" class="cta-sub">답례장 만들기</a>
-  <a href="sixshot-form.html" class="cta-sub">인생 6샷 기록하기</a>
-  <div class="cta-free">BETA · 베타 기간 무료</div>
+  <div class="caption" style="margin-bottom:24px;">베타 기간 무료</div>
+  <div class="cta-wrap">
+    <a href="memorial-form.html" class="cta-main">부고 만들기</a>
+    <a href="damnyejang-form.html" class="cta-sub">답례장 만들기</a>
+    <a href="sixshot-form.html" class="cta-sub">인생 6샷 기록하기</a>
+  </div>
+  <div class="cta-badge" style="margin-top:16px;">HUMANDOCU.COM</div>
 </div>
 
 </div><!-- /slider -->
 
 <!-- 네비 -->
-<div class="nav dark" id="nav">
+<div class="nav" id="nav">
   <button class="nav-btn" onclick="goPrev()">←</button>
   <div style="display:flex;gap:8px;" id="dots">
     <div class="dot active" onclick="goTo(0)"></div>
@@ -384,64 +317,62 @@ html,body{width:100%;height:100%;overflow:hidden;}
 </div>
 
 <!-- 모달 -->
-<div class="modal-bg" id="modal">
-  <div class="modal-topbar">
-    <span class="modal-topbar-title">샘플 페이지</span>
-    <button class="modal-close-btn" onclick="closeModal()">← 돌아가기</button>
+<div class="modal" id="modal">
+  <div class="modal-bar">
+    <span>샘플 페이지</span>
+    <button class="modal-back" onclick="closeModal()">← 돌아가기</button>
   </div>
-  <iframe class="modal-frame" id="modal-frame" src="" loading="lazy"></iframe>
+  <iframe id="modal-frame" src="" loading="lazy"></iframe>
 </div>
 
 <script>
 const URLS = {
-  bugo: 'https://humandocu.com/bugo/adv-정재무.html',
-  memorial: 'https://humandocu.com/bugo/adv-memorial-정재무.html',
-  damnyejang: 'https://humandocu.com/bugo/damnyejang-정재무.html',
+  bugo:'https://humandocu.com/bugo/adv-정재무.html',
+  memorial:'https://humandocu.com/bugo/adv-memorial-정재무.html',
+  damnyejang:'https://humandocu.com/bugo/damnyejang-정재무.html',
 };
+const TOTAL=6; let cur=0;
+const slider=document.getElementById('slider');
+const dots=document.querySelectorAll('.dot');
+const nav=document.getElementById('nav');
 
-const TOTAL = 6;
-let cur = 0;
-const slider = document.getElementById('slider');
-const allDots = document.querySelectorAll('.dot');
-const nav = document.getElementById('nav');
-const lightSlides = new Set([0, 2, 3, 4]); // 밝은 배경
-
-function goTo(n) {
-  if (n < 0 || n >= TOTAL) return;
-  cur = n;
-  slider.style.transform = `translateX(-${n * 100}vw)`;
-  allDots.forEach((d,i) => d.classList.toggle('active', i===n));
-  nav.classList.toggle('dark', !lightSlides.has(n));
-}
-function goNext() { goTo(cur+1); }
-function goPrev() { goTo(cur-1); }
-
-// 터치 스와이프
-let tx=0, ty=0;
-document.addEventListener('touchstart', e=>{ tx=e.touches[0].clientX; ty=e.touches[0].clientY; }, {passive:true});
-document.addEventListener('touchend', e=>{
-  const dx = e.changedTouches[0].clientX - tx;
-  const dy = Math.abs(e.changedTouches[0].clientY - ty);
-  if (Math.abs(dx) > 40 && Math.abs(dx) > dy) {
-    dx < 0 ? goNext() : goPrev();
+function goTo(n){
+  if(n<0||n>=TOTAL)return;
+  cur=n;
+  slider.style.transform=`translateX(-${n*100}vw)`;
+  dots.forEach((d,i)=>d.classList.toggle('active',i===n));
+  // S6만 dark
+  if(n===5){
+    nav.style.background='linear-gradient(transparent,rgba(26,20,16,.95))';
+    dots.forEach(d=>{d.style.background=d.classList.contains('active')?'#c8a96e':'rgba(255,255,255,.2)';});
+    document.querySelectorAll('.nav-btn').forEach(b=>{b.style.borderColor='rgba(255,255,255,.15)';b.style.background='rgba(255,255,255,.06)';b.style.color='rgba(255,255,255,.35)';});
+  } else {
+    nav.style.background='linear-gradient(transparent,rgba(250,247,242,.95))';
+    dots.forEach(d=>{d.style.background=d.classList.contains('active')?'#c8a96e':'rgba(26,20,16,.12)';});
+    document.querySelectorAll('.nav-btn').forEach(b=>{b.style.borderColor='rgba(26,20,16,.12)';b.style.background='rgba(255,255,255,.8)';b.style.color='rgba(26,20,16,.35)';});
   }
-}, {passive:true});
+}
+function goNext(){goTo(cur+1);}
+function goPrev(){goTo(cur-1);}
 
-document.addEventListener('keydown', e=>{
-  if(e.key==='ArrowRight') goNext();
-  if(e.key==='ArrowLeft') goPrev();
-});
+let tx=0,ty=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-tx;
+  const dy=Math.abs(e.changedTouches[0].clientY-ty);
+  if(Math.abs(dx)>40&&Math.abs(dx)>dy){dx<0?goNext():goPrev();}
+},{passive:true});
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')goNext();if(e.key==='ArrowLeft')goPrev();});
 
-// 첫 슬라이드는 밝은 배경이므로 dark 제거
 goTo(0);
 
-function openModal(type) {
-  document.getElementById('modal-frame').src = URLS[type] || URLS.bugo;
+function openModal(type){
+  document.getElementById('modal-frame').src=URLS[type]||URLS.bugo;
   document.getElementById('modal').classList.add('open');
 }
-function closeModal() {
+function closeModal(){
   document.getElementById('modal').classList.remove('open');
-  document.getElementById('modal-frame').src = '';
+  document.getElementById('modal-frame').src='';
 }
 </script>
 
