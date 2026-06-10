@@ -7,75 +7,82 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Noto Sans KR',sans-serif;background:#fff;}
-.hero{width:100%;height:260px;position:relative;overflow:hidden;}
-.hero img{width:100%;height:100%;object-fit:cover;}
-.hero-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to bottom,rgba(0,0,0,.1) 0%,rgba(0,0,0,.5) 100%);
-  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-  padding:20px;text-align:center;color:#fff;
-}
-.hero-badge{font-size:9px;letter-spacing:.22em;color:rgba(255,255,255,.8);margin-bottom:8px;}
-.hero-names{font-family:'Noto Serif KR',serif;font-size:24px;font-weight:300;margin-bottom:4px;}
-.hero-date{font-size:11px;color:rgba(255,255,255,.7);}
-.section{padding:24px 20px;border-bottom:1px solid #f5f5f5;text-align:center;}
-.sec-label{font-size:9px;letter-spacing:.2em;color:#c8a96e;margin-bottom:14px;}
-.invite-text{font-family:'Noto Serif KR',serif;font-size:14px;font-weight:300;color:#333;line-height:2.2;}
-.info-box{background:#faf8f4;border-radius:10px;padding:16px;margin:0 16px 16px;}
+body{font-family:'Noto Sans KR',sans-serif;background:#fff;color:#333;}
+
+/* 상단 초대 텍스트 */
+.invite-top{padding:28px 20px 16px;text-align:center;}
+.invite-badge{font-size:9px;letter-spacing:.22em;color:#c8a96e;margin-bottom:10px;}
+.invite-names{font-family:'Noto Serif KR',serif;font-size:22px;font-weight:300;color:#1a1410;margin-bottom:6px;}
+.invite-date{font-size:12px;color:#888;}
+.invite-text{font-family:'Noto Serif KR',serif;font-size:13px;font-weight:300;color:#555;line-height:2.1;margin-top:12px;}
+
+/* 사진 그리드 - 밝고 화사한 웨딩 사진들 */
+.photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin:14px 0;}
+.photo-main{grid-column:1/-1;height:180px;overflow:hidden;}
+.photo-main img{width:100%;height:100%;object-fit:cover;object-position:center 30%;}
+.photo-sub{height:110px;overflow:hidden;}
+.photo-sub img{width:100%;height:100%;object-fit:cover;}
+
+/* 일정 */
+.info-box{background:#faf8f4;margin:0 14px 14px;border-radius:10px;padding:16px;}
 .info-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;}
 .info-row:last-child{margin-bottom:0;}
-.info-icon{font-size:16px;width:24px;flex-shrink:0;}
-.info-text{font-size:12px;color:#444;line-height:1.7;}
+.info-icon{font-size:15px;width:22px;flex-shrink:0;margin-top:1px;}
+.info-text{font-size:12px;color:#555;line-height:1.7;}
 .info-text strong{display:block;font-size:13px;color:#222;}
-.map-area{margin:0 16px 16px;height:120px;background:#e8e8e8;border-radius:10px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;}
-.map-area::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#ddd 25%,#e8e8e8 25%,#e8e8e8 50%,#ddd 50%,#ddd 75%,#e8e8e8 75%);background-size:16px 16px;opacity:.4;}
-.map-pin{font-size:28px;position:relative;}
-.btn-group{display:flex;gap:8px;padding:0 16px 16px;}
-.btn{flex:1;padding:12px;border-radius:8px;font-size:12px;text-align:center;font-family:'Noto Sans KR',sans-serif;font-weight:500;border:none;cursor:pointer;}
+
+/* 지도 */
+.map-area{margin:0 14px 14px;height:100px;background:#e8e8e8;border-radius:8px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;}
+.map-area::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,#ddd,#ddd 2px,#e8e8e8 2px,#e8e8e8 12px);opacity:.4;}
+.map-pin{font-size:24px;position:relative;}
+
+/* 버튼 */
+.btn-group{display:flex;gap:8px;padding:0 14px 16px;}
+.btn{flex:1;padding:11px;border-radius:7px;font-size:11px;text-align:center;font-family:'Noto Sans KR',sans-serif;font-weight:500;border:none;cursor:pointer;}
 .btn-k{background:#FEE500;color:#3A1D1D;}
 .btn-n{background:#03C75A;color:#fff;}
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
-.gal{aspect-ratio:1;overflow:hidden;background:#f0ebe0;}
-.gal img{width:100%;height:100%;object-fit:cover;}
-.rsvp{padding:20px;text-align:center;}
-.rsvp-title{font-family:'Noto Serif KR',serif;font-size:15px;color:#333;margin-bottom:6px;}
-.rsvp-sub{font-size:11px;color:#999;margin-bottom:14px;}
-.rsvp-btn{display:inline-block;padding:11px 28px;background:#1a1410;color:#fff;border-radius:6px;font-size:12px;}
-footer{padding:16px;text-align:center;font-size:10px;color:#ccc;background:#faf8f4;}
+
+/* 하단 */
+.rsvp{padding:16px 20px;text-align:center;border-top:1px solid #f0f0f0;}
+.rsvp-title{font-family:'Noto Serif KR',serif;font-size:14px;color:#333;margin-bottom:4px;}
+.rsvp-sub{font-size:11px;color:#aaa;margin-bottom:12px;}
+.rsvp-btn{display:inline-block;padding:10px 24px;background:#1a1410;color:#fff;border-radius:6px;font-size:11px;}
+footer{padding:12px;text-align:center;font-size:9px;color:#ccc;background:#faf8f4;}
 </style>
 </head>
 <body>
-<div class="hero">
-  <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=85&auto=format&fit=crop" alt="웨딩">
-  <div class="hero-overlay">
-    <div class="hero-badge">WEDDING INVITATION</div>
-    <div class="hero-names">홍길동 ♥ 김영희</div>
-    <div class="hero-date">2025년 6월 14일 토요일 오후 2시</div>
+
+<div class="invite-top">
+  <div class="invite-badge">WEDDING INVITATION</div>
+  <div class="invite-names">홍길동 ♥ 김영희</div>
+  <div class="invite-date">2025년 6월 14일 토요일 오후 2시</div>
+  <div class="invite-text">저희 두 사람이<br>평생을 함께 걷고자 합니다</div>
+</div>
+
+<div class="photo-grid">
+  <div class="photo-main">
+    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&q=85&auto=format&fit=crop&crop=top" alt="">
+  </div>
+  <div class="photo-sub">
+    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=300&q=80&auto=format&fit=crop" alt="">
+  </div>
+  <div class="photo-sub">
+    <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=300&q=80&auto=format&fit=crop&crop=faces" alt="">
   </div>
 </div>
-<div class="section">
-  <div class="sec-label">INVITATION</div>
-  <div class="invite-text">저희 두 사람이<br>평생을 함께 걷고자 합니다<br>오셔서 축복해 주세요</div>
-</div>
-<div class="section">
-  <div class="sec-label">SCHEDULE</div>
-</div>
+
 <div class="info-box">
   <div class="info-row"><span class="info-icon">📅</span><div class="info-text"><strong>2025년 6월 14일 토요일</strong>오후 2시 본식</div></div>
   <div class="info-row"><span class="info-icon">📍</span><div class="info-text"><strong>그랜드볼룸 웨딩홀 3층</strong>서울 강남구 테헤란로 123</div></div>
-  <div class="info-row"><span class="info-icon">🚗</span><div class="info-text"><strong>주차</strong>지하 2~3층 (2시간 무료)</div></div>
+  <div class="info-row"><span class="info-icon">🚗</span><div class="info-text">지하 2~3층 주차 (2시간 무료)</div></div>
 </div>
+
 <div class="map-area"><span class="map-pin">📍</span></div>
 <div class="btn-group">
   <button class="btn btn-k">💬 카카오로 공유</button>
   <button class="btn btn-n">🗺 길 찾기</button>
 </div>
-<div class="gallery">
-  <div class="gal"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=200&q=70&auto=format&fit=crop" alt=""></div>
-  <div class="gal"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=200&q=70&auto=format&fit=crop" alt=""></div>
-  <div class="gal"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=200&q=70&auto=format&fit=crop" alt=""></div>
-</div>
+
 <div class="rsvp">
   <div class="rsvp-title">참석 여부를 알려주세요</div>
   <div class="rsvp-sub">6월 7일까지 회신 부탁드립니다</div>
