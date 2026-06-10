@@ -2,360 +2,499 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>메모리얼 · 휴먼다큐</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-html,body{width:100%;height:100%;overflow:hidden;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{width:100%;height:100%;overflow:hidden;background:#faf8f4;}
 
-/* ── 슬라이드 컨테이너 ── */
-.slides{
-  width:100%;height:100%;
-  overflow-y:scroll;
-  scroll-snap-type:y mandatory;
-  -webkit-overflow-scrolling:touch;
+/* ── 가로 슬라이드 ── */
+.slider{
+  display:flex;
+  width:600vw;
+  height:100vh;
+  transition:transform .45s cubic-bezier(.4,0,.2,1);
+  will-change:transform;
 }
 .slide{
-  width:100%;height:100vh;
-  scroll-snap-align:start;
-  scroll-snap-stop:always;
+  width:100vw;height:100vh;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
+  padding:48px 28px 80px;
   position:relative;overflow:hidden;
-  padding:40px 28px;
+  flex-shrink:0;
 }
 
-/* ── 진행 도트 ── */
-.dots{
-  position:fixed;right:18px;top:50%;transform:translateY(-50%);
-  display:flex;flex-direction:column;gap:8px;z-index:100;
+/* ── 하단 도트 + 화살표 ── */
+.nav{
+  position:fixed;bottom:0;left:0;right:0;
+  display:flex;align-items:center;justify-content:center;
+  gap:20px;padding:18px 24px 28px;
+  background:linear-gradient(transparent,rgba(0,0,0,.06));
+  z-index:100;
 }
-.dot{
-  width:6px;height:6px;border-radius:50%;
-  background:rgba(0,0,0,.18);transition:all .3s;cursor:pointer;
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.18);transition:all .3s;cursor:pointer;}
+.dot.active{background:#c8a96e;transform:scale(1.5);}
+.dot-white{background:rgba(255,255,255,.3);}
+.dot-white.active{background:#c8a96e;}
+.nav-btn{
+  width:36px;height:36px;border-radius:50%;
+  border:1.5px solid rgba(0,0,0,.15);background:transparent;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;font-size:14px;color:rgba(0,0,0,.4);
 }
-.dot.active{background:#c8a96e;transform:scale(1.4);}
+.nav-btn:hover{background:rgba(0,0,0,.05);}
+.nav-btn.white{border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.5);}
 
-/* ── 슬라이드 1: 오프닝 ── */
+/* ── 공통 타이포 ── */
+.eyebrow{font-size:10px;letter-spacing:.25em;text-transform:uppercase;margin-bottom:24px;}
+.headline{font-family:'Noto Serif KR',serif;font-size:26px;font-weight:300;line-height:1.5;text-align:center;margin-bottom:12px;}
+.subtext{font-size:13px;line-height:1.9;text-align:center;}
+
+/* ════════════════════════════
+   SLIDE 1 — 청첩장
+════════════════════════════ */
 .s1{background:#faf8f4;}
-.s1-eyebrow{
-  font-family:'Noto Sans KR',sans-serif;
-  font-size:11px;letter-spacing:.25em;color:#c8a96e;
-  text-transform:uppercase;margin-bottom:32px;
+.s1 .eyebrow{color:#c8a96e;}
+.s1 .headline{color:#1a1410;}
+.s1 .subtext{color:#6b5a3e;}
+.wedding-card{
+  background:#fff;border-radius:20px;
+  box-shadow:0 12px 48px rgba(0,0,0,.1);
+  padding:32px 28px;width:100%;max-width:300px;
+  text-align:center;margin:0 auto 28px;
 }
-.s1-card{
-  background:#fff;border-radius:16px;
-  box-shadow:0 8px 40px rgba(0,0,0,.08);
-  padding:32px 28px;width:100%;max-width:320px;
-  text-align:center;margin-bottom:32px;
-  position:relative;
-}
-.s1-card-tag{
-  font-size:10px;letter-spacing:.2em;color:#bbb;
+.wedding-card-top{
+  font-size:10px;letter-spacing:.2em;color:#c8a96e;
   text-transform:uppercase;margin-bottom:20px;
 }
-.s1-card-title{
+.wedding-card-names{
   font-family:'Noto Serif KR',serif;
-  font-size:22px;font-weight:300;color:#1a1410;
-  line-height:1.5;margin-bottom:8px;
+  font-size:24px;font-weight:300;color:#1a1410;
+  margin-bottom:6px;
 }
-.s1-card-sub{font-size:13px;color:#888;margin-bottom:24px;}
-.s1-card-date{
-  font-size:11px;color:#bbb;padding-top:20px;
-  border-top:1px solid #f0ede8;
+.wedding-card-date{font-size:12px;color:#888;margin-bottom:20px;}
+.wedding-card-img{
+  width:100%;height:100px;
+  background:linear-gradient(135deg,#f0ebe0,#e8dcc8);
+  border-radius:10px;margin-bottom:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;
 }
-.s1-text{
-  font-family:'Noto Serif KR',serif;
-  font-size:17px;font-weight:300;color:#3a2e1e;
-  line-height:1.9;text-align:center;
+.wedding-card-venue{font-size:11px;color:#aaa;letter-spacing:.05em;}
+.arrow-down{
+  font-size:20px;color:#c8a96e;
+  animation:bounce-x 2s infinite;margin-top:4px;
 }
-.s1-text em{font-style:normal;color:#c8a96e;}
+@keyframes bounce-x{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
 
-/* ── 슬라이드 2: 문제 제기 ── */
-.s2{background:#1a1410;}
-.s2-label{
-  font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.3);
-  text-transform:uppercase;margin-bottom:24px;
+/* ════════════════════════════
+   SLIDE 2 — 기존 부고
+════════════════════════════ */
+.s2{background:#1c1814;}
+.s2 .eyebrow{color:rgba(255,255,255,.3);}
+.s2 .headline{color:#fff;}
+.s2 .subtext{color:rgba(255,255,255,.4);}
+.sms-mock{
+  background:#252018;border-radius:16px;
+  padding:20px;width:100%;max-width:300px;
+  margin:0 auto 28px;
 }
-.s2-sms{
-  background:#2a2420;border-radius:12px;
-  padding:20px;width:100%;max-width:320px;
-  margin-bottom:28px;
+.sms-sender{font-size:10px;color:rgba(255,255,255,.25);margin-bottom:10px;letter-spacing:.05em;}
+.sms-bubble{
+  background:#2e2820;border-radius:10px;
+  padding:14px 16px;
+  font-size:13px;color:rgba(255,255,255,.6);
+  line-height:1.9;
 }
-.s2-sms-sender{font-size:11px;color:rgba(255,255,255,.3);margin-bottom:12px;}
-.s2-sms-bubble{
-  background:#3a3430;border-radius:8px;padding:14px 16px;
-  font-size:13px;color:rgba(255,255,255,.7);line-height:1.8;
+.sms-tag{
+  display:inline-block;padding:3px 10px;
+  background:rgba(200,169,110,.15);color:#c8a96e;
+  border-radius:10px;font-size:10px;
+  letter-spacing:.08em;margin-bottom:10px;
 }
-.s2-title{
-  font-family:'Noto Serif KR',serif;
-  font-size:22px;font-weight:300;color:#fff;
-  line-height:1.6;text-align:center;margin-bottom:12px;
-}
-.s2-sub{font-size:14px;color:rgba(255,255,255,.45);text-align:center;line-height:1.7;}
 
-/* ── 슬라이드 3: 솔루션 ── */
+/* ════════════════════════════
+   SLIDE 3 — 샘플 (부고)
+════════════════════════════ */
 .s3{background:#f5f0e8;}
-.s3-label{
-  font-size:11px;letter-spacing:.2em;color:#c8a96e;
-  text-transform:uppercase;margin-bottom:20px;
+.s3 .eyebrow{color:#c8a96e;}
+.s3 .headline{color:#1a1410;}
+.phone-wrap{
+  position:relative;width:180px;margin:0 auto 20px;cursor:pointer;
 }
-.s3-title{
-  font-family:'Noto Serif KR',serif;
-  font-size:22px;font-weight:300;color:#1a1410;
-  line-height:1.6;text-align:center;margin-bottom:24px;
-}
-/* 폰 목업 */
-.phone-mock{
-  width:200px;height:360px;
-  background:#1a1410;border-radius:28px;
-  padding:8px;box-shadow:0 20px 60px rgba(0,0,0,.2);
-  position:relative;flex-shrink:0;
+.phone-frame{
+  width:180px;height:320px;
+  background:#1a1410;border-radius:24px;
+  padding:7px;
+  box-shadow:0 20px 60px rgba(0,0,0,.2);
 }
 .phone-screen{
-  width:100%;height:100%;border-radius:22px;overflow:hidden;
-  background:#fff;
+  width:100%;height:100%;
+  border-radius:18px;overflow:hidden;background:#fff;
+  position:relative;
 }
 .phone-screen iframe{
-  width:200%;height:200%;
-  transform:scale(.5);transform-origin:top left;
+  width:250%;height:250%;
+  transform:scale(.4);transform-origin:top left;
   border:none;pointer-events:none;
 }
-.s3-features{
-  display:flex;flex-wrap:wrap;gap:8px;
-  justify-content:center;margin-top:20px;max-width:320px;
+.phone-overlay{
+  position:absolute;inset:0;border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.25);
+  font-size:13px;color:#fff;letter-spacing:.1em;
+  font-family:'Noto Sans KR',sans-serif;
 }
-.s3-feature{
-  background:#fff;border-radius:20px;padding:6px 14px;
-  font-size:12px;color:#6b5a3e;
-  box-shadow:0 2px 8px rgba(0,0,0,.06);
+.phone-overlay span{
+  background:rgba(0,0,0,.5);padding:8px 16px;border-radius:20px;
+  border:1px solid rgba(255,255,255,.3);
+}
+.tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:4px;}
+.tag{
+  background:#fff;border-radius:16px;padding:5px 12px;
+  font-size:11px;color:#6b5a3e;
+  box-shadow:0 2px 6px rgba(0,0,0,.06);
 }
 
-/* ── 슬라이드 4: 답례장 ── */
+/* ════════════════════════════
+   SLIDE 4 — 메모리얼 + 식스샷
+════════════════════════════ */
 .s4{background:#fff;}
-.s4-label{
-  font-size:11px;letter-spacing:.2em;color:#c8a96e;
-  text-transform:uppercase;margin-bottom:20px;
+.s4 .eyebrow{color:#c8a96e;}
+.s4 .headline{color:#1a1410;}
+.s4 .subtext{color:#6b5a3e;}
+.memorial-preview{
+  background:linear-gradient(160deg,#1a1410,#2e2010);
+  border-radius:16px;padding:24px;
+  width:100%;max-width:300px;margin:0 auto 20px;
+  color:#fff;
 }
-.s4-title{
+.memorial-preview-tag{font-size:9px;letter-spacing:.2em;color:#c8a96e;margin-bottom:12px;}
+.memorial-preview-name{
   font-family:'Noto Serif KR',serif;
-  font-size:22px;font-weight:300;color:#1a1410;
-  line-height:1.6;text-align:center;margin-bottom:24px;
+  font-size:20px;font-weight:300;margin-bottom:6px;
 }
-.s4-card{
-  background:#faf8f4;border-radius:16px;
-  padding:28px 24px;width:100%;max-width:320px;
-  text-align:center;border:1px solid #e8e0d0;
+.memorial-preview-sub{font-size:11px;color:rgba(255,255,255,.4);margin-bottom:16px;}
+.memorial-features{display:flex;gap:8px;flex-wrap:wrap;}
+.memorial-feat{
+  font-size:10px;color:rgba(255,255,255,.5);
+  background:rgba(255,255,255,.08);
+  padding:4px 10px;border-radius:10px;
 }
-.s4-card-icon{font-size:32px;margin-bottom:16px;}
-.s4-card-title{
-  font-family:'Noto Serif KR',serif;
-  font-size:18px;font-weight:300;color:#1a1410;
-  margin-bottom:10px;
-}
-.s4-card-text{
-  font-size:13px;color:#6b5a3e;line-height:1.9;
-}
-.s4-flow{
+.sixshot-hint{
   display:flex;align-items:center;gap:8px;
-  margin-top:20px;flex-wrap:wrap;justify-content:center;
+  padding:12px 16px;background:#faf8f4;border-radius:10px;
+  border:1px solid #e8e0d0;width:100%;max-width:300px;
+  margin:0 auto;
 }
-.s4-flow-item{
-  font-size:12px;color:#6b5a3e;
-  background:#f0ebe0;padding:6px 12px;border-radius:4px;
-}
-.s4-flow-arrow{color:#c8a96e;font-size:14px;}
+.sixshot-hint-icon{font-size:20px;}
+.sixshot-hint-text{font-size:12px;color:#6b5a3e;line-height:1.6;}
+.sixshot-hint-text strong{color:#1a1410;display:block;margin-bottom:2px;}
 
-/* ── 슬라이드 5: CTA ── */
-.s5{background:linear-gradient(160deg,#1a1410 0%,#2e2418 100%);}
-.s5-eyebrow{
-  font-size:11px;letter-spacing:.25em;color:#c8a96e;
-  text-transform:uppercase;margin-bottom:28px;
+/* ════════════════════════════
+   SLIDE 5 — 답례장
+════════════════════════════ */
+.s5{background:#faf8f4;}
+.s5 .eyebrow{color:#c8a96e;}
+.s5 .headline{color:#1a1410;}
+.s5 .subtext{color:#6b5a3e;}
+.flow{
+  display:flex;align-items:center;gap:0;
+  width:100%;max-width:300px;margin:20px auto;
 }
-.s5-title{
+.flow-item{
+  flex:1;text-align:center;padding:14px 8px;
+  background:#fff;border:1px solid #e8e0d0;
+  font-size:11px;color:#3a2e1e;line-height:1.6;
+}
+.flow-item:first-child{border-radius:10px 0 0 10px;}
+.flow-item:last-child{border-radius:0 10px 10px 0;}
+.flow-item .icon{font-size:18px;display:block;margin-bottom:4px;}
+.flow-arrow{color:#c8a96e;font-size:14px;flex-shrink:0;padding:0 2px;}
+.damnyejang-card{
+  background:#fff;border-radius:16px;
+  border:1px solid #e8e0d0;padding:20px 24px;
+  width:100%;max-width:300px;margin:0 auto;
+  text-align:center;
+}
+.damnyejang-card-title{
   font-family:'Noto Serif KR',serif;
-  font-size:28px;font-weight:300;color:#fff;
-  line-height:1.5;text-align:center;margin-bottom:12px;
+  font-size:16px;font-weight:300;color:#1a1410;
+  margin-bottom:8px;
 }
-.s5-sub{
-  font-size:14px;color:rgba(255,255,255,.5);
-  text-align:center;line-height:1.8;margin-bottom:40px;
+.damnyejang-card-text{font-size:12px;color:#6b5a3e;line-height:1.9;}
+.world-first{
+  display:inline-block;
+  background:linear-gradient(90deg,#c8a96e,#b8924a);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  font-size:11px;letter-spacing:.15em;font-weight:500;
+  margin-top:16px;
 }
+
+/* ════════════════════════════
+   SLIDE 6 — CTA
+════════════════════════════ */
+.s6{background:linear-gradient(160deg,#1a1410 0%,#2e2418 100%);}
+.s6 .eyebrow{color:#c8a96e;}
+.s6 .headline{color:#fff;}
+.s6 .subtext{color:rgba(255,255,255,.45);}
 .cta-btn{
   display:block;width:100%;max-width:280px;
-  padding:18px;background:#c8a96e;
-  border-radius:8px;
+  padding:18px;background:#c8a96e;border-radius:8px;
   font-family:'Noto Sans KR',sans-serif;
-  font-size:16px;font-weight:500;color:#1a1410;
+  font-size:15px;font-weight:500;color:#1a1410;
   text-decoration:none;text-align:center;
-  letter-spacing:.06em;margin-bottom:14px;
-  transition:background .2s;
+  letter-spacing:.06em;margin-bottom:12px;
 }
-.cta-btn:hover{background:#b8924a;}
-.cta-btn-sub{
+.cta-btn-outline{
   display:block;width:100%;max-width:280px;
-  padding:16px;background:transparent;
-  border:1px solid rgba(255,255,255,.2);border-radius:8px;
-  font-family:'Noto Sans KR',sans-serif;
-  font-size:14px;color:rgba(255,255,255,.6);
-  text-decoration:none;text-align:center;
+  padding:15px;border:1px solid rgba(255,255,255,.2);
+  border-radius:8px;font-family:'Noto Sans KR',sans-serif;
+  font-size:13px;color:rgba(255,255,255,.5);
+  text-decoration:none;text-align:center;margin-bottom:12px;
 }
-.s5-badge{
-  margin-top:32px;
-  font-size:11px;color:rgba(255,255,255,.25);
-  letter-spacing:.1em;
+.cta-badge{font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.15em;margin-top:16px;}
+
+/* ── 샘플 모달 ── */
+.modal-bg{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.85);z-index:200;
+  align-items:center;justify-content:center;
+}
+.modal-bg.open{display:flex;}
+.modal-inner{
+  width:100%;max-width:390px;height:90vh;
+  background:#fff;border-radius:20px;
+  overflow:hidden;position:relative;
+}
+.modal-inner iframe{width:100%;height:100%;border:none;}
+.modal-close{
+  position:absolute;top:12px;right:12px;
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(0,0,0,.5);border:none;
+  color:#fff;font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  z-index:10;
 }
 
-/* ── 스크롤 힌트 ── */
-.scroll-hint{
-  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  animation:bounce 2s infinite;
-}
-.scroll-hint span{font-size:10px;letter-spacing:.15em;color:rgba(0,0,0,.3);}
-.scroll-hint svg{width:16px;opacity:.3;}
-.scroll-hint-white span{color:rgba(255,255,255,.3);}
-.scroll-hint-white svg{opacity:.3;filter:invert(1);}
-@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(5px);}}
+/* ── 네비 dot 색 슬라이드별 ── */
+.nav.dark .dot{background:rgba(255,255,255,.25);}
+.nav.dark .dot.active{background:#c8a96e;}
+.nav.dark .nav-btn{border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.4);}
 </style>
 </head>
 <body>
 
-<div class="dots" id="dots">
-  <div class="dot active" onclick="goTo(0)"></div>
-  <div class="dot" onclick="goTo(1)"></div>
-  <div class="dot" onclick="goTo(2)"></div>
-  <div class="dot" onclick="goTo(3)"></div>
-  <div class="dot" onclick="goTo(4)"></div>
-</div>
+<div class="slider" id="slider">
 
-<div class="slides" id="slides">
-
-  <!-- SLIDE 1: 오프닝 -->
+  <!-- S1: 청첩장 -->
   <div class="slide s1">
-    <div class="s1-eyebrow">HUMANDOCU · MEMORIAL</div>
-    <div class="s1-card">
-      <div class="s1-card-tag">청첩장</div>
-      <div class="s1-card-title">저희 두 사람<br>결혼합니다</div>
-      <div class="s1-card-sub">홍길동 · 김영희</div>
-      <div class="s1-card-date">2025년 6월 14일 토요일 오후 2시</div>
+    <div class="eyebrow">HUMANDOCU · MEMORIAL</div>
+    <div class="wedding-card">
+      <div class="wedding-card-top">청 첩 장</div>
+      <div class="wedding-card-img">💐</div>
+      <div class="wedding-card-names">홍길동 · 김영희</div>
+      <div class="wedding-card-date">2025년 6월 14일 토요일 오후 2시</div>
+      <div class="wedding-card-venue">그랜드볼룸 웨딩홀 3층</div>
     </div>
-    <div class="s1-text">
-      예전엔 <em>카드 한 장</em>으로<br>
-      결혼 소식을 전했습니다<br><br>
-      이제는 모바일로<br>
-      <em>삶의 순간</em>을 나누는 시대입니다
+    <div class="headline">예전엔 카드 한 장으로<br>결혼을 전했습니다</div>
+    <div class="subtext" style="margin-top:10px;">
+      이제는 모바일 링크 하나로<br>
+      웨딩 이벤트 전체를 전합니다
     </div>
-    <div class="scroll-hint">
-      <span>SCROLL</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-    </div>
+    <div class="arrow-down">→</div>
   </div>
 
-  <!-- SLIDE 2: 문제 제기 -->
+  <!-- S2: 기존 부고 -->
   <div class="slide s2">
-    <div class="s2-label">그런데 부고는</div>
-    <div class="s2-sms">
-      <div class="s2-sms-sender">010-XXXX-XXXX</div>
-      <div class="s2-sms-bubble">
-        부고 알림<br><br>
-        부친상 / 홍길동<br>
-        발인 : 6월 12일 오전 8시<br>
-        서울아산병원 장례식장 3호
+    <div class="eyebrow">그런데 부고는</div>
+    <div class="sms-mock">
+      <div class="sms-sender">발신번호 없음 · 상조회사</div>
+      <div class="sms-tag">부고 안내</div>
+      <div class="sms-bubble">
+        부친상 홍○○ 별세<br>
+        발인 6/12(목) 오전 8시<br>
+        서울아산병원 장례식장 3호<br>
+        유족 홍길동 배상
       </div>
     </div>
-    <div class="s2-title">여전히<br>문자 한 줄입니다</div>
-    <div class="s2-sub">
+    <div class="headline">여전히<br>단순 정보 나열입니다</div>
+    <div class="subtext" style="margin-top:10px;">
       상조회사의 획일화된 틀<br>
-      고인의 이름 석 자만 남는 부고
-    </div>
-    <div class="scroll-hint scroll-hint-white">
-      <span>SCROLL</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      고인의 이름만 남는 부고
     </div>
   </div>
 
-  <!-- SLIDE 3: 솔루션 -->
+  <!-- S3: 부고 샘플 -->
   <div class="slide s3">
-    <div class="s3-label">이제는 달라집니다</div>
-    <div class="s3-title">고인을 제대로<br>기억하는 방법</div>
-    <div class="phone-mock">
-      <div class="phone-screen">
-        <iframe src="https://humandocu.com/bugo/adv-정재무.html"
-                scrolling="no" loading="lazy"></iframe>
+    <div class="eyebrow">이제는 달라집니다</div>
+    <div class="headline" style="margin-bottom:16px;">고인을 제대로<br>기억하는 부고</div>
+    <div class="phone-wrap" onclick="openModal()">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <iframe src="https://humandocu.com/bugo/adv-정재무.html"
+                  scrolling="no" loading="lazy"></iframe>
+          <div class="phone-overlay"><span>탭해서 직접 보기</span></div>
+        </div>
       </div>
     </div>
-    <div class="s3-features">
-      <span class="s3-feature">✦ 영정사진</span>
-      <span class="s3-feature">📍 지도·내비</span>
-      <span class="s3-feature">✉️ 카카오 공유</span>
-      <span class="s3-feature">💬 추모 메시지</span>
-      <span class="s3-feature">🎵 추모곡</span>
+    <div class="tags">
+      <span class="tag">✦ AI 추모글</span>
+      <span class="tag">📍 지도·내비</span>
+      <span class="tag">💬 추모 메시지</span>
+      <span class="tag">📱 카카오 공유</span>
     </div>
   </div>
 
-  <!-- SLIDE 4: 답례장 -->
+  <!-- S4: 메모리얼 + 식스샷 -->
   <div class="slide s4">
-    <div class="s4-label">그리고 그 다음</div>
-    <div class="s4-title">마지막 감사 인사까지<br>함께합니다</div>
-    <div class="s4-card">
-      <div class="s4-card-icon">✉️</div>
-      <div class="s4-card-title">디지털 답례장</div>
-      <div class="s4-card-text">
-        장례를 치르고 나서<br>
+    <div class="eyebrow">기억의 공간</div>
+    <div class="headline" style="margin-bottom:16px;">고인을 기억하는<br>메모리얼 페이지</div>
+    <div class="memorial-preview">
+      <div class="memorial-preview-tag">MEMORIAL PAGE</div>
+      <div class="memorial-preview-name">故 홍○○ 님을<br>기억합니다</div>
+      <div class="memorial-preview-sub">1945 – 2025</div>
+      <div class="memorial-features">
+        <span class="memorial-feat">영정사진</span>
+        <span class="memorial-feat">생애기록</span>
+        <span class="memorial-feat">추모 메시지</span>
+        <span class="memorial-feat">답례장 연결</span>
+      </div>
+    </div>
+    <div class="sixshot-hint">
+      <div class="sixshot-hint-icon">📷</div>
+      <div class="sixshot-hint-text">
+        <strong>인생 6샷으로 미리 기록하면</strong>
+        나중에 메모리얼 페이지와 자동으로 연결됩니다
+      </div>
+    </div>
+  </div>
+
+  <!-- S5: 답례장 -->
+  <div class="slide s5">
+    <div class="eyebrow">세상에 없던 서비스</div>
+    <div class="headline" style="margin-bottom:4px;">부고가 끝이 아닙니다</div>
+    <div class="subtext" style="margin-bottom:16px;">
+      마지막까지 고인과 상주와<br>추모객들의 마음을 연결합니다
+    </div>
+    <div class="flow">
+      <div class="flow-item">
+        <span class="icon">📨</span>
+        부고 발송
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">
+        <span class="icon">🕯</span>
+        장례식
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">
+        <span class="icon">✉️</span>
+        답례장
+      </div>
+    </div>
+    <div class="damnyejang-card">
+      <div class="damnyejang-card-title">디지털 답례장</div>
+      <div class="damnyejang-card-text">
         찾아와 주신 분들께<br>
-        따뜻한 감사 인사를<br>
+        따뜻한 감사의 마음을<br>
         직접 전달합니다
       </div>
     </div>
-    <div class="s4-flow">
-      <span class="s4-flow-item">부고 발송</span>
-      <span class="s4-flow-arrow">→</span>
-      <span class="s4-flow-item">장례식</span>
-      <span class="s4-flow-arrow">→</span>
-      <span class="s4-flow-item">답례장</span>
-    </div>
+    <div class="world-first">WORLD'S FIRST MEMORIAL SERVICE</div>
   </div>
 
-  <!-- SLIDE 5: CTA -->
-  <div class="slide s5">
-    <div class="s5-eyebrow">WORLD'S FIRST</div>
-    <div class="s5-title">세상에 없던<br>부고 서비스</div>
-    <div class="s5-sub">
+  <!-- S6: CTA -->
+  <div class="slide s6">
+    <div class="eyebrow">HUMANDOCU</div>
+    <div class="headline">지금 시작하세요</div>
+    <div class="subtext" style="margin-bottom:32px;">
       고인의 삶을 기록하고<br>
       소중한 분들과 함께 기억합니다
     </div>
-    <a href="memorial-form.html" class="cta-btn">지금 부고 만들기</a>
-    <a href="damnyejang-form.html" class="cta-btn-sub">답례장 만들기</a>
-    <div class="s5-badge">HUMANDOCU.COM · BETA</div>
+    <a href="memorial-form.html" class="cta-btn">부고 만들기</a>
+    <a href="damnyejang-form.html" class="cta-btn-outline">답례장 만들기</a>
+    <a href="sixshot-form.html" class="cta-btn-outline">인생 6샷 기록하기</a>
+    <div class="cta-badge">HUMANDOCU.COM · BETA · 베타 기간 무료</div>
   </div>
 
 </div>
 
+<!-- 하단 네비 -->
+<div class="nav" id="nav">
+  <button class="nav-btn" id="btn-prev" onclick="goPrev()">←</button>
+  <div id="dot-wrap" style="display:flex;gap:8px;">
+    <div class="dot active" onclick="goTo(0)"></div>
+    <div class="dot" onclick="goTo(1)"></div>
+    <div class="dot" onclick="goTo(2)"></div>
+    <div class="dot" onclick="goTo(3)"></div>
+    <div class="dot" onclick="goTo(4)"></div>
+    <div class="dot" onclick="goTo(5)"></div>
+  </div>
+  <button class="nav-btn" id="btn-next" onclick="goNext()">→</button>
+</div>
+
+<!-- 샘플 모달 -->
+<div class="modal-bg" id="modal">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <iframe src="https://humandocu.com/bugo/adv-정재무.html" loading="lazy"></iframe>
+  </div>
+</div>
+
 <script>
-const slides = document.getElementById('slides');
+const TOTAL = 6;
+let cur = 0;
+const slider = document.getElementById('slider');
 const dots = document.querySelectorAll('.dot');
-let current = 0;
+const nav = document.getElementById('nav');
+
+// 어두운 슬라이드 (dark nav)
+const darkSlides = new Set([1, 5]); // s2(idx1), s6(idx5)
 
 function goTo(n) {
-  slides.scrollTo({top: n * window.innerHeight, behavior: 'smooth'});
+  if (n < 0 || n >= TOTAL) return;
+  cur = n;
+  slider.style.transform = `translateX(-${n * 100}vw)`;
+  dots.forEach((d,i) => d.classList.toggle('active', i===n));
+  // nav 색상
+  if (darkSlides.has(n)) {
+    nav.classList.add('dark');
+  } else {
+    nav.classList.remove('dark');
+  }
 }
 
-slides.addEventListener('scroll', function() {
-  const idx = Math.round(slides.scrollTop / window.innerHeight);
-  if (idx !== current) {
-    current = idx;
-    dots.forEach((d,i) => d.classList.toggle('active', i===idx));
+function goNext() { goTo(cur+1); }
+function goPrev() { goTo(cur-1); }
+
+// 터치 스와이프
+let tx=0, ty=0;
+document.addEventListener('touchstart', e=>{ tx=e.touches[0].clientX; ty=e.touches[0].clientY; }, {passive:true});
+document.addEventListener('touchend', e=>{
+  const dx = e.changedTouches[0].clientX - tx;
+  const dy = e.changedTouches[0].clientY - ty;
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+    dx < 0 ? goNext() : goPrev();
   }
+}, {passive:true});
+
+// 키보드
+document.addEventListener('keydown', e=>{
+  if (e.key==='ArrowRight') goNext();
+  if (e.key==='ArrowLeft') goPrev();
 });
 
-// 키보드 지원
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'ArrowDown' && current < 4) goTo(current+1);
-  if (e.key === 'ArrowUp' && current > 0) goTo(current-1);
-});
+// 모달
+function openModal() {
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+}
 </script>
 
 <footer style="display:none;">
