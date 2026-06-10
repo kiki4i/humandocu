@@ -33,14 +33,14 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
   display:flex;align-items:center;justify-content:center;gap:14px;
   padding:10px 20px 18px;
 }
-.nav-l{background:rgba(250,247,242,1);}
-.nav-d{background:rgba(26,20,16,1);}
-.dot{width:6px;height:6px;border-radius:50%;transition:all .3s;cursor:pointer;}
-.dot-l{background:rgba(26,20,16,.12);}  .dot-l.on{background:var(--gold);transform:scale(1.5);}
-.dot-d{background:rgba(255,255,255,.2);} .dot-d.on{background:var(--gold);transform:scale(1.5);}
-.nbtn{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;border:1.5px solid;}
-.nbtn-l{border-color:rgba(26,20,16,.12);background:rgba(255,255,255,.85);color:rgba(26,20,16,.4);}
-.nbtn-d{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:rgba(255,255,255,.4);}
+.nav-l{background:#faf7f2;border-top:1px solid rgba(26,20,16,.07);}
+.nav-d{background:#1a1410;border-top:1px solid rgba(255,255,255,.07);}
+.dot{width:7px;height:7px;border-radius:50%;transition:all .3s;cursor:pointer;}
+.dot-l{background:rgba(26,20,16,.2);}  .dot-l.on{background:var(--gold);transform:scale(1.4);}
+.dot-d{background:rgba(255,255,255,.3);} .dot-d.on{background:var(--gold);transform:scale(1.4);}
+.nbtn{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;border:1.5px solid;font-weight:500;}
+.nbtn-l{border-color:rgba(26,20,16,.2);background:#fff;color:rgba(26,20,16,.6);box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.nbtn-d{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
 
 /* ── 공통 타이포 ── */
 .ey{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);text-align:center;}
@@ -183,10 +183,13 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
   <div class="top"><div class="ey">HUMANDOCU · MEMORIAL</div><div class="hl">청첩장 한 장이<br>이렇게 바뀌었습니다</div></div>
   <div class="wcard">
     <div class="wcard-hero">
-      <div class="wcard-rings">💍</div>
-      <div class="wcard-badge">WEDDING INVITATION</div>
-      <div class="wcard-couple">홍길동 ♥ 김영희</div>
-      <div class="wcard-date">2025년 6월 14일 토요일 오후 2시</div>
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&q=80&auto=format&fit=crop" 
+           alt="웨딩" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45;">
+      <div style="position:relative;text-align:center;">
+        <div class="wcard-badge">WEDDING INVITATION</div>
+        <div class="wcard-couple">홍길동 ♥ 김영희</div>
+        <div class="wcard-date">2025년 6월 14일 토요일 오후 2시</div>
+      </div>
     </div>
     <div class="wcard-bottom">
       <div class="wcard-venue">📍 그랜드볼룸 웨딩홀 3층<br>서울 강남구 테헤란로 123</div>
