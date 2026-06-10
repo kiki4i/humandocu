@@ -79,11 +79,14 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 .photo-preview.show{display:block;}
 
 /* 안내 말씀 예시 박스 */
-.datetime-row{display:flex;gap:8px;align-items:flex-start;}
-.datetime-row .date-selects{flex:1;}
-.datetime-row .time-selects{display:flex;gap:4px;flex-shrink:0;}
-.datetime-row .time-selects select{width:72px;}
-.time-label{font-size:11px;color:var(--ink3);margin-bottom:6px;display:block;}
+.dt-picker-row{display:flex;gap:8px;align-items:center;}
+.dt-picker-row input[type=date],.dt-picker-row input[type=time]{
+  flex:1;padding:12px 14px;border:1px solid #d4c9b0;border-radius:var(--r);
+  font-family:var(--sans);font-size:14px;color:var(--ink);background:#fff;
+  outline:none;transition:border-color .2s;
+}
+.dt-picker-row input[type=date]:focus,.dt-picker-row input[type=time]:focus{border-color:var(--gold2);}
+.dt-picker-row input[type=time]{max-width:120px;}
 .notice-examples{background:#fffdf8;border:1px solid #e0d5c0;border-radius:var(--r);padding:14px 16px;margin-bottom:12px;}
 .notice-examples-title{font-size:11px;letter-spacing:.1em;color:var(--gold2);margin-bottom:10px;font-weight:500;}
 .notice-example-item{margin-bottom:12px;}
@@ -353,35 +356,23 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 
     <div class="q-block">
       <div class="q-label">입실일시</div>
-      <div class="datetime-row">
-        <div class="date-selects" id="checkin-date"></div>
-        <div class="time-selects">
-          <select id="f-checkin-ampm"><option value="">-</option><option>오전</option><option>오후</option></select>
-          <select id="f-checkin-h"><option value="">시</option></select>
-          <select id="f-checkin-min"><option value="">분</option></select>
-        </div>
+      <div class="dt-picker-row">
+        <input type="date" id="f-checkin-date">
+        <input type="time" id="f-checkin-time">
       </div>
     </div>
     <div class="q-block">
       <div class="q-label">입관일시</div>
-      <div class="datetime-row">
-        <div class="date-selects" id="coffin-date"></div>
-        <div class="time-selects">
-          <select id="f-coffin-ampm"><option value="">-</option><option>오전</option><option>오후</option></select>
-          <select id="f-coffin-h"><option value="">시</option></select>
-          <select id="f-coffin-min"><option value="">분</option></select>
-        </div>
+      <div class="dt-picker-row">
+        <input type="date" id="f-coffin-date">
+        <input type="time" id="f-coffin-time">
       </div>
     </div>
     <div class="q-block">
       <div class="q-label">발인일시 <span class="q-req">*</span></div>
-      <div class="datetime-row">
-        <div class="date-selects" id="funeral-date"></div>
-        <div class="time-selects">
-          <select id="f-funeral-ampm"><option value="">오전</option><option>오후</option></select>
-          <select id="f-funeral-h"><option value="">시</option></select>
-          <select id="f-funeral-min"><option value="">분</option></select>
-        </div>
+      <div class="dt-picker-row">
+        <input type="date" id="f-funeral-date">
+        <input type="time" id="f-funeral-time">
       </div>
     </div>
     <div class="q-block">
@@ -553,46 +544,7 @@ function initDateSelects() {
   fillDays('f-birth-m','f-birth-d','f-birth-y');
   fillDays('f-death-m','f-death-d','f-death-y');
 
-  // 장례일시 날짜 셀렉트
-  function buildFDSel(containerId, prefix) {
-    var container = document.getElementById(containerId);
-    if (!container) return;
-    var sy = document.createElement('select'); sy.id='f-'+prefix+'-y';
-    sy.innerHTML = '<option value="">년도</option>';
-    for (var y = curYear+1; y >= curYear-3; y--) {
-      var oy=document.createElement('option'); oy.value=y; oy.textContent=y+'년'; sy.appendChild(oy);
-    }
-    var sm = document.createElement('select'); sm.id='f-'+prefix+'-m';
-    sm.innerHTML = '<option value="">월</option>';
-    for (var m=1; m<=12; m++) {
-      var om=document.createElement('option'); om.value=String(m).padStart(2,'0'); om.textContent=m+'월'; sm.appendChild(om);
-    }
-    var sd = document.createElement('select'); sd.id='f-'+prefix+'-d';
-    function updFD() {
-      var mv=parseInt(sm.value)||0, yv=parseInt(sy.value)||curYear;
-      var max=mv?new Date(yv,mv,0).getDate():31, cur=sd.value;
-      sd.innerHTML='<option value="">일</option>';
-      for (var dd=1;dd<=max;dd++) {
-        var od=document.createElement('option'); od.value=String(dd).padStart(2,'0'); od.textContent=dd+'일';
-        if(String(dd).padStart(2,'0')===cur) od.selected=true; sd.appendChild(od);
-      }
-    }
-    sm.addEventListener('change',updFD); sy.addEventListener('change',updFD); updFD();
-    container.appendChild(sy); container.appendChild(sm); container.appendChild(sd);
-  }
-  buildFDSel('checkin-date','checkin');
-  buildFDSel('coffin-date','coffin');
-  buildFDSel('funeral-date','funeral');
 
-  // 시간 셀렉트
-  ['checkin','coffin','funeral'].forEach(function(p) {
-    var sh=document.getElementById('f-'+p+'-h');
-    for (var h=1;h<=12;h++){var o=document.createElement('option');o.value=h;o.textContent=h+'시';sh.appendChild(o);}
-    var smin=document.getElementById('f-'+p+'-min');
-    [0,10,20,30,40,50].forEach(function(mn){
-      var o=document.createElement('option');o.value=String(mn).padStart(2,'0');o.textContent=(mn===0?'00':mn)+'분';smin.appendChild(o);
-    });
-  });
 }
 initDateSelects();
 
@@ -607,18 +559,19 @@ function getDateVal(prefix) {
 
 /* ── 날짜+시간 값 읽기 (장례일시용) ── */
 function getDateTimeVal(prefix) {
-  const yEl=document.getElementById('f-'+prefix+'-y');
-  const mEl=document.getElementById('f-'+prefix+'-m');
-  const dEl=document.getElementById('f-'+prefix+'-d');
-  if (!yEl||!mEl||!dEl) return '';
-  const y=yEl.value, m=mEl.value, d=dEl.value;
-  if (!y||!m||!d) return '';
+  const dateEl = document.getElementById('f-'+prefix+'-date');
+  const timeEl = document.getElementById('f-'+prefix+'-time');
+  if (!dateEl || !dateEl.value) return '';
+  const [y, m, d] = dateEl.value.split('-');
   let str = y+'년 '+parseInt(m)+'월 '+parseInt(d)+'일';
-  const ampm=document.getElementById('f-'+prefix+'-ampm');
-  const h=document.getElementById('f-'+prefix+'-h');
-  const mn=document.getElementById('f-'+prefix+'-min');
-  if (ampm&&ampm.value&&h&&h.value) str += ' '+ampm.value+' '+h.value+'시';
-  if (mn&&mn.value&&mn.value!=='00') str += ' '+mn.value+'분';
+  if (timeEl && timeEl.value) {
+    const [hh, mm] = timeEl.value.split(':');
+    const h = parseInt(hh);
+    const ampm = h < 12 ? '오전' : '오후';
+    const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
+    str += ' ' + ampm + ' ' + h12 + '시';
+    if (mm && mm !== '00') str += ' ' + mm + '분';
+  }
   return str;
 }
 
