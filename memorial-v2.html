@@ -9,7 +9,7 @@
 <style>
 :root{
   --ink:#0e0b08;--gold:#c8a96e;--gold2:#b8924a;
-  --cream:#faf7f2;--gray:#9a8a72;
+  --cream:#faf7f2;--gray:#b8a88a;
   --serif:'Noto Serif KR',serif;--sans:'Noto Sans KR',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -184,7 +184,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
 .cta-a{display:block;padding:17px;background:var(--gold);border-radius:8px;font-family:var(--sans);font-size:15px;font-weight:500;color:#1a1410;text-decoration:none;text-align:center;letter-spacing:.06em;}
 .cta-b{display:block;padding:14px;border:1px solid rgba(255,255,255,.15);border-radius:8px;font-family:var(--sans);font-size:13px;color:rgba(255,255,255,.45);text-decoration:none;text-align:center;}
 
-.company-info{font-size:10px;color:rgba(255,255,255,.15);line-height:2.0;padding-top:16px;border-top:1px solid rgba(255,255,255,.06);}
+.company-info{font-size:11px;color:rgba(255,255,255,.4);line-height:2.0;padding-top:16px;border-top:1px solid rgba(255,255,255,.1);}
 
 /* ── 모달 ── */
 .modal{display:none;position:fixed;inset:0;background:#000;z-index:200;}
@@ -203,18 +203,10 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
 <div class="slide">
   <div class="top-copy">결혼식은 카톡링크로 알립니다</div>
   <div class="vis">
-    <div class="wcard" onclick="openModal('wedding')">
-      <div class="wcard-hero">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&q=80&auto=format&fit=crop" alt="">
-        <div class="wcard-text">
-          <div class="wcard-badge">WEDDING INVITATION</div>
-          <div class="wcard-couple">홍길동 ♥ 김영희</div>
-          <div class="wcard-date">2025년 6월 14일 토요일 오후 2시</div>
-        </div>
-      </div>
-      <div class="wcard-foot">
-        <div class="wb wb-k">💬 카카오공유</div>
-        <div class="wb wb-m">🗺 지도보기</div>
+    <div class="phone" onclick="openModal('wedding')">
+      <div class="phone-scr">
+        <iframe src="https://humandocu.com/sample-wedding.html" scrolling="no" loading="lazy"></iframe>
+        <div class="ptap"><span>탭해서 보기</span></div>
       </div>
     </div>
   </div>
@@ -225,12 +217,10 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
 <div class="slide">
   <div class="top-copy">상조회사에서 복붙합니다</div>
   <div class="vis">
-    <div class="scard" onclick="openModal('bugo_old')">
-      <div class="scard-bar"><span>오후 11:23</span><span>■■■ 4G</span></div>
-      <div class="scard-hd">메시지</div>
-      <div class="scard-body">
-        <div class="scard-from">발신번호 없음</div>
-        <div class="scard-bbl">訃告<br>부친 홍○○ 옹께서<br>별세하셨기에 알립니다<br><br>발인 6/12(목) 오전 8시<br>서울아산병원 장례식장 3호<br><br>상주 홍길동 배상</div>
+    <div class="phone" onclick="openModal('bugo_old')">
+      <div class="phone-scr">
+        <iframe src="https://humandocu.com/sample-bugo.html" scrolling="no" loading="lazy"></iframe>
+        <div class="ptap"><span>탭해서 보기</span></div>
       </div>
     </div>
   </div>
