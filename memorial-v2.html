@@ -13,14 +13,14 @@
   --serif:'Noto Serif KR',serif;--sans:'Noto Sans KR',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:column;background:#0e0b08;}
+html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:column;background:#faf7f2;}
 
 /* ── 슬라이더 ── */
 .slider-wrap{flex:1;overflow:hidden;position:relative;min-height:0;}
 .slider{display:flex;width:600vw;height:100%;transition:transform .42s cubic-bezier(.4,0,.2,1);}
 .slide{
   width:100vw;height:100%;flex-shrink:0;
-  background:#0e0b08;
+  background:#faf7f2;
   display:flex;flex-direction:column;
   align-items:center;justify-content:space-between;
   padding:40px 24px 16px;
@@ -30,26 +30,27 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
 .nav{
   flex-shrink:0;display:flex;align-items:center;justify-content:center;
   gap:14px;padding:10px 20px 20px;
-  background:#0e0b08;border-top:1px solid rgba(255,255,255,.06);
+  background:#faf7f2;border-top:1px solid rgba(255,255,255,.06);
 }
-.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.2);transition:all .3s;cursor:pointer;}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(26,20,16,.15);transition:all .3s;cursor:pointer;}
 .dot.on{background:var(--gold);transform:scale(1.4);}
 .nbtn{
   width:36px;height:36px;border-radius:50%;
-  border:1.5px solid rgba(255,255,255,.18);
-  background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(26,20,16,.18);
+  background:#fff;
   display:flex;align-items:center;justify-content:center;
-  cursor:pointer;font-size:14px;color:rgba(255,255,255,.5);
+  cursor:pointer;font-size:14px;color:rgba(26,20,16,.5);
+  box-shadow:0 2px 8px rgba(0,0,0,.07);
 }
 
 /* ── 공통 타이포 ── */
 .top-copy{
   font-family:var(--serif);font-size:20px;font-weight:300;
-  color:#fff;text-align:center;line-height:1.5;
+  color:#1a1410;text-align:center;line-height:1.5;
   flex-shrink:0;
 }
 .bot-copy{
-  font-size:13px;color:var(--gray);
+  font-size:13px;color:#8a7560;
   text-align:center;line-height:1.6;
   flex-shrink:0;padding-bottom:4px;
 }
@@ -141,11 +142,12 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
 .s5-phone .phone{max-width:100%;height:100%;}
 
 /* ── S6 ── */
-.s6{background:#0e0b08 !important;padding:0 !important;overflow:hidden;}
+.s6{background:#faf7f2 !important;padding:0 !important;overflow:hidden;}
 .s6-scroll{
   width:100%;height:100%;
   overflow-y:auto;-webkit-overflow-scrolling:touch;
   padding:40px 24px 80px;
+  background:#1a1410;
 }
 .s6-headline{
   font-family:var(--serif);font-size:22px;font-weight:300;
@@ -267,21 +269,10 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
 <div class="slide">
   <div class="top-copy">추모와 감사를 연결합니다</div>
   <div class="vis">
-    <div class="s5-inner">
-      <div class="flow">
-        <div class="fi"><span class="fi-icon">📨</span><span class="fi-nm">부고</span></div>
-        <div class="fa">→</div>
-        <div class="fi"><span class="fi-icon">🕯</span><span class="fi-nm">장례식</span></div>
-        <div class="fa">→</div>
-        <div class="fi"><span class="fi-icon">✉️</span><span class="fi-nm">답례장</span></div>
-      </div>
-      <div class="s5-phone">
-        <div class="phone" onclick="openModal('damnyejang')">
-          <div class="phone-scr">
-            <iframe src="https://humandocu.com/bugo/damnyejang-정재무.html" scrolling="no" loading="lazy"></iframe>
-            <div class="ptap"><span>탭해서 보기</span></div>
-          </div>
-        </div>
+    <div class="phone" onclick="openModal('damnyejang')">
+      <div class="phone-scr">
+        <iframe src="https://humandocu.com/bugo/damnyejang-정재무.html" scrolling="no" loading="lazy"></iframe>
+        <div class="ptap"><span>탭해서 보기</span></div>
       </div>
     </div>
   </div>
@@ -391,16 +382,15 @@ function goTo(n){
 function goNext(){goTo(c+1);}
 function goPrev(){goTo(c-1);}
 
-let tx=0,ty=0,scrolling=false;
+let tx=0,ty=0;
 document.addEventListener('touchstart',e=>{
-  if(c===5&&e.target.closest('.s6-scroll')){scrolling=true;return;}
-  scrolling=false;tx=e.touches[0].clientX;ty=e.touches[0].clientY;
+  tx=e.touches[0].clientX;ty=e.touches[0].clientY;
 },{passive:true});
 document.addEventListener('touchend',e=>{
-  if(scrolling)return;
+  // S6에서 세로 스크롤 중이면 무시
   const dx=e.changedTouches[0].clientX-tx;
-  const dy=Math.abs(e.changedTouches[0].clientY-ty);
-  if(Math.abs(dx)>40&&Math.abs(dx)>dy){dx<0?goNext():goPrev();}
+  const dy=e.changedTouches[0].clientY-ty;
+  if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40){dx<0?goNext():goPrev();}
 },{passive:true});
 document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight')goNext();
