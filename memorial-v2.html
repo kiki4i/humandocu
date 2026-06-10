@@ -8,142 +8,188 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#1a1410; --gold:#c8a96e;
-  --cream:#faf7f2; --gray:#6b5a3e;
-  --serif:'Noto Serif KR',serif;
-  --sans:'Noto Sans KR',sans-serif;
+  --ink:#1a1410;--gold:#c8a96e;--cream:#faf7f2;--gray:#6b5a3e;
+  --serif:'Noto Serif KR',serif;--sans:'Noto Sans KR',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:column;}
+html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:column;background:var(--cream);}
 
 /* ── 슬라이더 ── */
-.slider-wrap{flex:1;overflow:hidden;position:relative;}
+.slider-wrap{flex:1;overflow:hidden;position:relative;min-height:0;}
 .slider{display:flex;width:600vw;height:100%;transition:transform .42s cubic-bezier(.4,0,.2,1);}
 .slide{
-  width:100vw;height:100vh;flex-shrink:0;
-  background:var(--cream);
+  width:100vw;height:100%;flex-shrink:0;
   display:flex;flex-direction:column;
   align-items:center;justify-content:space-between;
-  padding:40px 24px 96px;
+  padding:36px 24px 16px;
+  background:var(--cream);
 }
 
 /* ── 네비 ── */
 .nav{
-  flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;gap:14px;
-  padding:10px 20px 18px;
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  gap:14px;padding:10px 20px 18px;
+  border-top:1px solid rgba(26,20,16,.07);
+  background:var(--cream);transition:background .3s,border-color .3s;
 }
-.nav-l{background:#faf7f2;border-top:1px solid rgba(26,20,16,.07);}
-.nav-d{background:#1a1410;border-top:1px solid rgba(255,255,255,.07);}
-.dot{width:7px;height:7px;border-radius:50%;transition:all .3s;cursor:pointer;}
-.dot-l{background:rgba(26,20,16,.2);}  .dot-l.on{background:var(--gold);transform:scale(1.4);}
-.dot-d{background:rgba(255,255,255,.3);} .dot-d.on{background:var(--gold);transform:scale(1.4);}
-.nbtn{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;border:1.5px solid;font-weight:500;}
-.nbtn-l{border-color:rgba(26,20,16,.2);background:#fff;color:rgba(26,20,16,.6);box-shadow:0 2px 8px rgba(0,0,0,.08);}
-.nbtn-d{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.nav.dark{background:var(--ink);border-top-color:rgba(255,255,255,.07);}
+.dot{width:7px;height:7px;border-radius:50%;transition:all .3s;cursor:pointer;background:rgba(26,20,16,.18);}
+.dot.on{background:var(--gold);transform:scale(1.4);}
+.nav.dark .dot{background:rgba(255,255,255,.25);}
+.nav.dark .dot.on{background:var(--gold);}
+.nbtn{
+  width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(26,20,16,.18);
+  background:#fff;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:14px;color:rgba(26,20,16,.5);
+  box-shadow:0 2px 8px rgba(0,0,0,.07);
+}
+.nav.dark .nbtn{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:rgba(255,255,255,.5);box-shadow:none;}
 
-/* ── 공통 타이포 ── */
+/* ── 공통 ── */
 .ey{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);text-align:center;}
-.hl{font-family:var(--serif);font-size:22px;font-weight:300;color:var(--ink);line-height:1.5;text-align:center;}
-.cp{font-size:12px;color:var(--gray);line-height:1.85;text-align:center;}
-.cp b{color:var(--ink);font-weight:500;}
+.hl{font-family:var(--serif);font-size:24px;font-weight:300;color:var(--ink);line-height:1.45;text-align:center;}
 .top{display:flex;flex-direction:column;gap:8px;align-items:center;}
-.bot{display:flex;flex-direction:column;gap:0;align-items:center;}
 
-/* ── S1 웨딩 카드 ── */
+/* ── 비주얼 영역 ── */
+.vis{flex:1;min-height:0;width:100%;max-width:300px;display:flex;align-items:center;justify-content:center;margin:12px 0;}
+
+/* S1 웨딩 카드 */
 .wcard{
-  width:100%;max-width:300px;flex:1;min-height:0;
-  background:#fff;border-radius:18px;
-  box-shadow:0 10px 36px rgba(0,0,0,.1);
+  width:100%;height:100%;
+  background:#1a1410;border-radius:18px;
+  box-shadow:0 10px 36px rgba(0,0,0,.15);
   overflow:hidden;display:flex;flex-direction:column;
-  margin:12px 0;
+  cursor:pointer;
 }
 .wcard-hero{
-  flex:1;min-height:0;
-  background:linear-gradient(160deg,#2d2010 0%,#1a1410 40%,#3a2818 100%);
+  flex:1;min-height:0;position:relative;overflow:hidden;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:20px;position:relative;overflow:hidden;
+  padding:20px;
 }
-/* 배경 장식 */
-.wcard-hero::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 30% 40%,rgba(200,169,110,.12) 0%,transparent 60%),
-             radial-gradient(ellipse at 70% 60%,rgba(200,169,110,.08) 0%,transparent 50%);
+.wcard-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45;}
+.wcard-text{position:relative;text-align:center;color:#fff;}
+.wcard-badge{font-size:9px;letter-spacing:.22em;color:var(--gold);margin-bottom:8px;}
+.wcard-couple{font-family:var(--serif);font-size:20px;font-weight:300;margin-bottom:4px;}
+.wcard-date{font-size:11px;color:rgba(255,255,255,.5);}
+.wcard-foot{
+  flex-shrink:0;padding:10px 14px;
+  display:flex;gap:6px;background:rgba(255,255,255,.05);
 }
-.wcard-rings{font-size:28px;margin-bottom:8px;position:relative;}
-.wcard-badge{font-size:9px;letter-spacing:.22em;color:var(--gold);margin-bottom:10px;position:relative;}
-.wcard-couple{font-family:var(--serif);font-size:20px;font-weight:300;color:#fff;margin-bottom:6px;position:relative;}
-.wcard-date{font-size:11px;color:rgba(255,255,255,.45);position:relative;}
-.wcard-bottom{padding:12px 16px;}
-.wcard-venue{font-size:11px;color:#888;margin-bottom:10px;line-height:1.6;}
-.wcard-btns{display:flex;gap:6px;}
-.wcard-btn{flex:1;padding:8px;border-radius:6px;font-size:10px;text-align:center;font-family:var(--sans);}
+.wb{flex:1;padding:8px;border-radius:6px;font-size:10px;text-align:center;font-family:var(--sans);}
 .wb-k{background:#FEE500;color:#3A1D1D;}
-.wb-m{background:#f5f0e8;color:#6b5a3e;}
+.wb-m{background:rgba(255,255,255,.12);color:rgba(255,255,255,.7);}
 
-/* ── S2 문자 ── */
-.sms-wrap{
-  width:100%;max-width:300px;flex:1;min-height:0;
+/* S2 문자 카드 */
+.scard{
+  width:100%;height:100%;
   background:#fff;border-radius:18px;
   box-shadow:0 10px 36px rgba(0,0,0,.1);
   overflow:hidden;display:flex;flex-direction:column;
-  margin:12px 0;
+  cursor:pointer;
 }
-.sms-bar{background:#1c1c1e;padding:8px 14px;display:flex;justify-content:space-between;flex-shrink:0;}
-.sms-bar span{font-size:10px;color:rgba(255,255,255,.45);}
-.sms-hd{background:#f2f2f7;padding:10px;text-align:center;font-size:12px;color:#3a3a3c;font-weight:500;border-bottom:1px solid #e5e5ea;flex-shrink:0;}
-.sms-body{padding:14px;flex:1;overflow:hidden;}
-.sms-from{font-size:10px;color:#8e8e93;margin-bottom:8px;}
-.sms-bbl{background:#e9e9eb;border-radius:14px 14px 14px 4px;padding:12px 14px;font-size:13px;color:#1c1c1e;line-height:2.1;}
-.sms-time{font-size:10px;color:#8e8e93;text-align:center;margin-top:8px;}
+.scard-bar{background:#1c1c1e;padding:8px 14px;display:flex;justify-content:space-between;flex-shrink:0;}
+.scard-bar span{font-size:10px;color:rgba(255,255,255,.4);}
+.scard-hd{background:#f2f2f7;padding:8px;text-align:center;font-size:12px;color:#333;font-weight:500;border-bottom:1px solid #e5e5ea;flex-shrink:0;}
+.scard-body{flex:1;min-height:0;padding:12px 14px;overflow:hidden;}
+.scard-from{font-size:10px;color:#8e8e93;margin-bottom:8px;}
+.scard-bbl{background:#e9e9eb;border-radius:14px 14px 14px 4px;padding:12px 14px;font-size:13px;color:#1c1c1e;line-height:2.1;}
 
-/* ── S3/4/5 폰 ── */
-.phone-wrap{
-  width:100%;max-width:260px;flex:1;min-height:0;
-  margin:12px auto;cursor:pointer;
-}
-.phone-frame{
+/* S3/4/5 폰 목업 */
+.phone{
   width:100%;height:100%;
   background:#111;border-radius:22px;
-  padding:8px;box-shadow:0 12px 40px rgba(0,0,0,.22);
+  padding:8px;box-shadow:0 12px 40px rgba(0,0,0,.2);
+  cursor:pointer;
 }
-.phone-screen{
+.phone-scr{
   width:100%;height:100%;
   border-radius:16px;overflow:hidden;
   background:#fff;position:relative;
 }
-/* iframe: 영정사진 상단부터 보이도록 */
-.phone-screen iframe{
+.phone-scr iframe{
   width:230%;height:230%;
   transform:scale(.435);transform-origin:top left;
   border:none;pointer-events:none;
 }
 .ptap{
   position:absolute;inset:0;border-radius:16px;
-  background:rgba(0,0,0,.12);
+  background:rgba(0,0,0,.1);
   display:flex;align-items:flex-end;justify-content:center;
   padding-bottom:12px;
 }
 .ptap span{
   background:rgba(0,0,0,.55);color:#fff;
-  padding:7px 18px;border-radius:16px;
-  font-size:11px;letter-spacing:.1em;
-  border:1px solid rgba(255,255,255,.35);
+  padding:7px 18px;border-radius:16px;font-size:11px;
+  letter-spacing:.1em;border:1px solid rgba(255,255,255,.3);
 }
 
-/* ── S5 흐름 ── */
-.flow{display:flex;align-items:center;gap:4px;width:100%;max-width:280px;margin-bottom:8px;}
+/* S5 흐름 */
+.s5-vis{
+  flex:1;min-height:0;width:100%;max-width:300px;
+  display:flex;flex-direction:column;gap:8px;
+  margin:12px 0;
+}
+.flow{display:flex;align-items:center;gap:4px;flex-shrink:0;}
 .fi{flex:1;background:#fff;border:1px solid #e8e0d0;border-radius:10px;padding:8px 4px;text-align:center;}
-.fi-icon{font-size:16px;display:block;margin-bottom:3px;}
+.fi-icon{font-size:16px;display:block;margin-bottom:2px;}
 .fi-nm{font-size:10px;color:var(--ink);}
 .fa{color:var(--gold);font-size:12px;flex-shrink:0;}
+.s5-phone{flex:1;min-height:0;width:100%;cursor:pointer;}
+.s5-phone .phone{height:100%;}
 
-/* ── S6 ── */
+/* S6 */
 .s6{background:var(--ink) !important;}
-.s6 .ey{color:var(--gold);}
 .s6 .hl{color:#fff;}
-.s6 .cp{color:rgba(255,255,255,.4);}
-.cta-box{width:100%;max-width:280px;display:flex;flex-direction:column;gap:10px;}
+.s6 .ey{color:var(--gold);}
+
+/* S6 스크롤 영역 */
+.s6-scroll{
+  flex:1;min-height:0;width:100%;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:0 4px;
+}
+.s6-hero{text-align:center;padding:20px 0 24px;}
+.s6-main-copy{
+  font-family:var(--serif);font-size:22px;font-weight:300;
+  color:#fff;line-height:1.6;margin-bottom:8px;
+}
+.s6-main-copy em{font-style:normal;color:var(--gold);}
+.s6-sub-copy{font-size:13px;color:rgba(255,255,255,.45);line-height:1.9;}
+
+.s6-section{margin-bottom:24px;}
+.s6-section-title{
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px;padding-bottom:8px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.s6-list{display:flex;flex-direction:column;gap:10px;}
+.s6-item{display:flex;gap:12px;align-items:flex-start;}
+.s6-item-icon{font-size:18px;flex-shrink:0;width:28px;text-align:center;margin-top:1px;}
+.s6-item-text{flex:1;}
+.s6-item-title{font-size:13px;font-weight:500;color:#fff;margin-bottom:3px;}
+.s6-item-desc{font-size:12px;color:rgba(255,255,255,.45);line-height:1.7;}
+
+.s6-pricing{
+  background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.3);
+  border-radius:12px;padding:18px;margin-bottom:20px;text-align:center;
+}
+.s6-price-main{font-family:var(--serif);font-size:18px;color:#fff;margin-bottom:4px;}
+.s6-price-free{
+  display:inline-block;background:rgba(200,169,110,.2);
+  color:var(--gold);font-size:11px;padding:4px 14px;
+  border-radius:10px;margin-bottom:10px;letter-spacing:.08em;
+}
+.s6-price-items{font-size:11px;color:rgba(255,255,255,.4);line-height:2;}
+
+.s6-faq{margin-bottom:20px;}
+.faq-item{border-bottom:1px solid rgba(255,255,255,.06);padding:12px 0;}
+.faq-q{font-size:13px;color:rgba(255,255,255,.7);cursor:pointer;display:flex;justify-content:space-between;}
+.faq-a{font-size:12px;color:rgba(255,255,255,.4);line-height:1.8;margin-top:8px;display:none;}
+.faq-item.open .faq-a{display:block;}
+.faq-item.open .faq-arr{transform:rotate(45deg);}
+.faq-arr{transition:transform .2s;display:inline-block;color:var(--gold);}
+
+.cta-wrap{display:flex;flex-direction:column;gap:10px;padding-bottom:8px;}
 .cta-a{
   display:block;padding:17px;background:var(--gold);border-radius:8px;
   font-family:var(--sans);font-size:15px;font-weight:500;color:var(--ink);
@@ -155,143 +201,218 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
   font-family:var(--sans);font-size:13px;color:rgba(255,255,255,.5);
   text-decoration:none;text-align:center;
 }
-.cta-note{font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.12em;text-align:center;}
+.s6-company{
+  font-size:10px;color:rgba(255,255,255,.15);
+  text-align:center;line-height:1.9;padding:16px 0;
+}
 
 /* ── 모달 ── */
-.modal{display:none;position:fixed;inset:0;background:#000;z-index:200;flex-direction:column;}
-.modal.open{display:flex;}
-.modal iframe{flex:1;width:100%;border:none;display:block;}
-.modal-back-fixed{
-  position:fixed;bottom:24px;right:20px;z-index:210;
+.modal{display:none;position:fixed;inset:0;background:#000;z-index:200;}
+.modal.open{display:block;}
+.modal iframe{width:100%;height:100%;border:none;display:block;}
+.modal-back-btn{
+  position:fixed;bottom:24px;right:20px;z-index:210;display:none;
 }
-.modal-back{
+.modal-back-btn button{
   padding:12px 22px;background:var(--gold);border:none;border-radius:24px;
   font-size:13px;font-weight:500;color:var(--ink);cursor:pointer;
-  font-family:var(--sans);letter-spacing:.04em;
-  box-shadow:0 4px 16px rgba(0,0,0,.4);
+  font-family:var(--sans);box-shadow:0 4px 16px rgba(0,0,0,.4);
 }
 </style>
 </head>
 <body>
 
-<div class="slider-wrap"><div class="slider" id="slider">
+<div class="slider-wrap">
+<div class="slider" id="slider">
 
-<!-- S1 청첩장 -->
+<!-- S1 청첩장 → 모바일 카톡링크 -->
 <div class="slide">
-  <div class="top"><div class="ey">HUMANDOCU · MEMORIAL</div><div class="hl">청첩장 한 장이<br>이렇게 바뀌었습니다</div></div>
-  <div class="wcard" onclick="openModal('wedding')" style="cursor:pointer;">
-    <div class="wcard-hero">
-      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&q=80&auto=format&fit=crop" 
-           alt="웨딩" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45;">
-      <div style="position:relative;text-align:center;">
-        <div class="wcard-badge">WEDDING INVITATION</div>
-        <div class="wcard-couple">홍길동 ♥ 김영희</div>
-        <div class="wcard-date">2025년 6월 14일 토요일 오후 2시</div>
+  <div class="top">
+    <div class="ey">HUMANDOCU · MEMORIAL</div>
+    <div class="hl">청첩장 → 모바일 카톡링크</div>
+  </div>
+  <div class="vis">
+    <div class="wcard" onclick="openModal('wedding')">
+      <div class="wcard-hero">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&q=80&auto=format&fit=crop" alt="">
+        <div class="wcard-text">
+          <div class="wcard-badge">WEDDING INVITATION</div>
+          <div class="wcard-couple">홍길동 ♥ 김영희</div>
+          <div class="wcard-date">2025년 6월 14일 토요일 오후 2시</div>
+        </div>
       </div>
-    </div>
-    <div class="wcard-bottom">
-      <div class="wcard-venue">📍 그랜드볼룸 웨딩홀 3층<br>서울 강남구 테헤란로 123</div>
-      <div class="wcard-btns">
-        <div class="wcard-btn wb-k">💬 카카오로 공유</div>
-        <div class="wcard-btn wb-m">🗺 지도 보기</div>
+      <div class="wcard-foot">
+        <div class="wb wb-k">💬 카카오로 공유</div>
+        <div class="wb wb-m">🗺 지도 보기</div>
       </div>
     </div>
   </div>
-  <div class="bot"><div class="cp">삶의 모든 순간이 모바일로 전해지는 시대<br><b>부고도 이제 달라져야 합니다</b></div></div>
 </div>
 
-<!-- S2 기존 부고 -->
+<!-- S2 상조회사 부고문자 -->
 <div class="slide">
-  <div class="top"><div class="ey">지금의 부고는</div><div class="hl">여전히 이렇습니다</div></div>
-  <div class="sms-wrap" onclick="openModal('bugo_old')" style="cursor:pointer;position:relative;">
-    <div class="sms-bar"><span>오후 11:23</span><span>■■■ 4G</span></div>
-    <div class="sms-hd">메시지</div>
-    <div class="sms-body">
-      <div class="sms-from">발신번호 없음</div>
-      <div class="sms-bbl">訃告<br>부친 홍○○ 옹께서<br>별세하셨기에 알립니다<br><br>발인 6/12(목) 오전 8시<br>서울아산병원 장례식장 3호<br><br>상주 홍길동 배상</div>
-      <div class="sms-time">오후 11:23</div>
+  <div class="top">
+    <div class="ey">지금의 부고</div>
+    <div class="hl">상조회사 부고문자</div>
+  </div>
+  <div class="vis">
+    <div class="scard" onclick="openModal('bugo_old')">
+      <div class="scard-bar"><span>오후 11:23</span><span>■■■ 4G</span></div>
+      <div class="scard-hd">메시지</div>
+      <div class="scard-body">
+        <div class="scard-from">발신번호 없음</div>
+        <div class="scard-bbl">訃告<br>부친 홍○○ 옹께서<br>별세하셨기에 알립니다<br><br>발인 6/12(목) 오전 8시<br>서울아산병원 장례식장 3호<br><br>상주 홍길동 배상</div>
+      </div>
     </div>
   </div>
-  <div class="bot"><div class="cp">고인의 이야기도, 사진도, 지도도 없습니다<br><b>획일화된 틀 안에 갇힌 마지막 인사</b></div></div>
 </div>
 
-<!-- S3 부고 샘플 -->
+<!-- S3 우리는 고인을 기억합니다 -->
 <div class="slide">
-  <div class="top"><div class="ey">휴먼다큐 부고</div><div class="hl">고인을 제대로<br>기억하는 부고</div></div>
-  <div class="phone-wrap" onclick="openModal('bugo')">
-    <div class="phone-frame">
-      <div class="phone-screen">
+  <div class="top">
+    <div class="ey">휴먼다큐 부고</div>
+    <div class="hl">우리는 고인을<br>기억합니다</div>
+  </div>
+  <div class="vis">
+    <div class="phone" onclick="openModal('bugo')">
+      <div class="phone-scr">
         <iframe src="https://humandocu.com/bugo/adv-정재무.html" scrolling="no" loading="lazy"></iframe>
-        <div class="ptap"><span>탭해서 직접 보기</span></div>
+        <div class="ptap"><span>탭해서 보기</span></div>
       </div>
     </div>
   </div>
-  <div class="bot"><div class="cp"><b>AI 추모글 · 영정사진 · 생애 슬라이드</b><br>지도·내비 · 카카오·문자 공유 · 추모 메시지</div></div>
 </div>
 
-<!-- S4 메모리얼 -->
+<!-- S4 그리고 기념합니다 -->
 <div class="slide">
-  <div class="top"><div class="ey">메모리얼 페이지</div><div class="hl">영원히 남는<br>디지털 추모 공간</div></div>
-  <div class="phone-wrap" onclick="openModal('memorial')">
-    <div class="phone-frame">
-      <div class="phone-screen">
+  <div class="top">
+    <div class="ey">메모리얼 페이지</div>
+    <div class="hl">그리고<br>기념합니다</div>
+  </div>
+  <div class="vis">
+    <div class="phone" onclick="openModal('memorial')">
+      <div class="phone-scr">
         <iframe src="https://humandocu.com/bugo/adv-memorial-정재무.html" scrolling="no" loading="lazy"></iframe>
-        <div class="ptap"><span>탭해서 직접 보기</span></div>
+        <div class="ptap"><span>탭해서 보기</span></div>
       </div>
     </div>
   </div>
-  <div class="bot"><div class="cp"><b>부고 신청 시 자동 생성</b><br>생애 기록 · 추모 메시지 · 인생 6샷 연결</div></div>
 </div>
 
-<!-- S5 답례장 -->
+<!-- S5 추모와 감사 모든 마음을 연결합니다 -->
 <div class="slide">
-  <div class="top"><div class="ey">세상에 없던 서비스</div><div class="hl">마지막 인사까지<br>우리가 함께합니다</div></div>
-  <div style="display:flex;flex-direction:column;align-items:center;flex:1;min-height:0;width:100%;margin:10px 0;">
+  <div class="top">
+    <div class="ey">답례장</div>
+    <div class="hl">추모와 감사<br>모든 마음을 연결합니다</div>
+  </div>
+  <div class="s5-vis">
     <div class="flow">
-      <div class="fi"><span class="fi-icon">📨</span><span class="fi-nm">부고 발송</span></div>
+      <div class="fi"><span class="fi-icon">📨</span><span class="fi-nm">부고</span></div>
       <div class="fa">→</div>
       <div class="fi"><span class="fi-icon">🕯</span><span class="fi-nm">장례식</span></div>
       <div class="fa">→</div>
       <div class="fi"><span class="fi-icon">✉️</span><span class="fi-nm">답례장</span></div>
     </div>
-    <div class="phone-wrap" style="margin:0 auto;" onclick="openModal('damnyejang')">
-      <div class="phone-frame">
-        <div class="phone-screen">
+    <div class="s5-phone">
+      <div class="phone" onclick="openModal('damnyejang')">
+        <div class="phone-scr">
           <iframe src="https://humandocu.com/bugo/damnyejang-정재무.html" scrolling="no" loading="lazy"></iframe>
-          <div class="ptap"><span>탭해서 직접 보기</span></div>
+          <div class="ptap"><span>탭해서 보기</span></div>
         </div>
       </div>
     </div>
   </div>
-  <div class="bot"><div class="cp"><b>장례 후 감사 인사를 직접 전달</b><br>고인 · 상주 · 추모객의 마음을 처음부터 끝까지</div></div>
 </div>
 
-<!-- S6 CTA -->
+<!-- S6 설명 + CTA (스크롤 가능) -->
 <div class="slide s6">
-  <div class="top"><div class="ey">HUMANDOCU</div><div class="hl">지금 시작하세요</div><div class="cp" style="color:rgba(255,255,255,.4);">베타 기간 <b style="color:var(--gold);">무료</b> · 10분 안에 완성</div></div>
-  <div class="cta-box">
-    <a href="memorial-form.html" class="cta-a">부고 만들기 →</a>
-    <a href="damnyejang-form.html" class="cta-b">답례장 만들기</a>
-    <a href="sixshot-form.html" class="cta-b">인생 6샷 기록하기</a>
+  <div class="s6-scroll">
+    <div class="s6-hero">
+      <div class="s6-main-copy">
+        세상에서 가장 슬픈 소식이지만,<br>
+        <em>가장 아름다운 기록이 되도록</em>
+      </div>
+      <div class="s6-sub-copy" style="margin-top:10px;">
+        고인의 삶을 기록하고 소중한 분들과 함께 기억합니다
+      </div>
+    </div>
+
+    <div class="s6-section">
+      <div class="s6-section-title">WHAT WE DO</div>
+      <div class="s6-list">
+        <div class="s6-item"><span class="s6-item-icon">📨</span><div class="s6-item-text"><div class="s6-item-title">AI 부고 페이지</div><div class="s6-item-desc">AI가 고인의 이야기로 추모글을 쓰고, 영정사진·생애사진·지도가 담긴 부고 페이지를 10분 안에 완성합니다</div></div></div>
+        <div class="s6-item"><span class="s6-item-icon">🕯</span><div class="s6-item-text"><div class="s6-item-title">메모리얼 페이지</div><div class="s6-item-desc">부고와 함께 자동 생성. 추모 메시지, 생애 기록, 인생 6샷이 담긴 영원한 디지털 추모 공간</div></div></div>
+        <div class="s6-item"><span class="s6-item-icon">✉️</span><div class="s6-item-text"><div class="s6-item-title">답례장</div><div class="s6-item-desc">세상에 없던 서비스. 장례 후 찾아와 주신 분들께 따뜻한 감사 인사를 직접 전달합니다</div></div></div>
+        <div class="s6-item"><span class="s6-item-icon">📷</span><div class="s6-item-text"><div class="s6-item-title">인생 6샷</div><div class="s6-item-desc">살아있을 때 6장의 사진으로 삶을 기록해두면, 훗날 메모리얼 페이지와 자동으로 연결됩니다</div></div></div>
+      </div>
+    </div>
+
+    <div class="s6-section">
+      <div class="s6-section-title">PRICING</div>
+      <div class="s6-pricing">
+        <div class="s6-price-free">베타 기간 무료</div>
+        <div class="s6-price-main">메모리얼 프리미엄</div>
+        <div class="s6-price-items">
+          AI 추모글 A/B 두 버전 · 영정사진 · 생애사진 슬라이드<br>
+          카카오·문자 공유 · 지도·내비 · 추모 메시지<br>
+          메모리얼 페이지 · 답례장 연결
+        </div>
+      </div>
+    </div>
+
+    <div class="s6-section">
+      <div class="s6-section-title">FAQ</div>
+      <div class="s6-faq">
+        <div class="faq-item open">
+          <div class="faq-q" onclick="faqToggle(this)"><span>얼마나 빨리 완성되나요?</span><span class="faq-arr">+</span></div>
+          <div class="faq-a">신청 후 10분 이내 완성된 부고 페이지가 이메일로 발송됩니다</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="faqToggle(this)"><span>페이지는 얼마나 유지되나요?</span><span class="faq-arr">+</span></div>
+          <div class="faq-a">49재까지 유지되며, 이후 메모리얼 아카이브로 이관 가능합니다</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="faqToggle(this)"><span>답례장은 어떻게 보내나요?</span><span class="faq-arr">+</span></div>
+          <div class="faq-a">장례 후 별도 신청하시면 카카오톡·문자로 전달할 수 있는 링크를 발송해드립니다</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="faqToggle(this)"><span>사진이 없어도 되나요?</span><span class="faq-arr">+</span></div>
+          <div class="faq-a">영정사진 1장만 있으면 충분합니다. 생애사진은 선택사항입니다</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-wrap">
+      <a href="memorial-form.html" class="cta-a">부고 만들기 →</a>
+      <a href="damnyejang-form.html" class="cta-b">답례장 만들기</a>
+      <a href="sixshot-form.html" class="cta-b">인생 6샷 기록하기</a>
+    </div>
+
+    <div class="s6-company">
+      휴먼다큐닷컴 · 대표자: 정재우<br>
+      사업자등록번호: 357-50-01268<br>
+      통신판매업신고번호: 제 2026-수원영통-0664 호<br>
+      경기도 수원시 영통구 에듀타운로106번길 46 · 031-539-9709
+    </div>
   </div>
-  <div class="cta-note">HUMANDOCU.COM</div>
 </div>
 
-</div>
+</div><!-- /slider -->
+</div><!-- /slider-wrap -->
 
 <!-- 네비 -->
-<div class="nav nav-l" id="nav">
-  <button class="nbtn nbtn-l" id="bp" onclick="goPrev()">←</button>
+<div class="nav" id="nav">
+  <button class="nbtn" id="bp" onclick="goPrev()">←</button>
   <div style="display:flex;gap:8px;" id="dw"></div>
-  <button class="nbtn nbtn-l" id="bn" onclick="goNext()">→</button>
+  <button class="nbtn" id="bn" onclick="goNext()">→</button>
 </div>
 
 <!-- 모달 -->
 <div class="modal" id="modal">
   <iframe id="mf" src="" loading="lazy"></iframe>
 </div>
-<div class="modal-back-fixed" id="modal-back-btn" style="display:none;">
-  <button class="modal-back" onclick="closeModal()">← 돌아가기</button>
+<div class="modal-back-btn" id="mbb">
+  <button onclick="closeModal()">← 돌아가기</button>
 </div>
 
 <script>
@@ -311,50 +432,55 @@ const BN=document.getElementById('bn');
 
 for(let i=0;i<T;i++){
   const d=document.createElement('div');
-  d.className='dot dot-l'+(i===0?' on':'');
+  d.className='dot'+(i===0?' on':'');
   d.onclick=()=>goTo(i);
   DW.appendChild(d);
 }
 
 function goTo(n){
-  if(n<0||n>=T)return; c=n;
+  if(n<0||n>=T)return;c=n;
   SL.style.transform=`translateX(-${n*100}vw)`;
+  DW.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===n));
   const dk=n===5;
-  DW.querySelectorAll('.dot').forEach((d,i)=>{
-    d.className='dot '+(dk?'dot-d':'dot-l')+(i===n?' on':'');
-  });
-  NAV.className='nav '+(dk?'nav-d':'nav-l');
-  BP.className='nbtn '+(dk?'nbtn-d':'nbtn-l');
-  BN.className='nbtn '+(dk?'nbtn-d':'nbtn-l');
+  NAV.classList.toggle('dark',dk);
+  [BP,BN].forEach(b=>b.classList.toggle('dark-btn',dk));
 }
 function goNext(){goTo(c+1);}
 function goPrev(){goTo(c-1);}
 
 let tx=0,ty=0;
-document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
+document.addEventListener('touchstart',e=>{
+  // S6 스크롤 중이면 무시
+  if(c===5&&e.target.closest('.s6-scroll'))return;
+  tx=e.touches[0].clientX;ty=e.touches[0].clientY;
+},{passive:true});
 document.addEventListener('touchend',e=>{
+  if(c===5&&e.target.closest('.s6-scroll'))return;
   const dx=e.changedTouches[0].clientX-tx;
   const dy=Math.abs(e.changedTouches[0].clientY-ty);
   if(Math.abs(dx)>40&&Math.abs(dx)>dy){dx<0?goNext():goPrev();}
 },{passive:true});
-document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')goNext();if(e.key==='ArrowLeft')goPrev();});
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight')goNext();
+  if(e.key==='ArrowLeft')goPrev();
+});
 goTo(0);
 
 function openModal(t){
   document.getElementById('mf').src=URLS[t]||URLS.bugo;
   document.getElementById('modal').classList.add('open');
-  document.getElementById('modal-back-btn').style.display='block';
+  document.getElementById('mbb').style.display='block';
 }
 function closeModal(){
   document.getElementById('modal').classList.remove('open');
-  document.getElementById('modal-back-btn').style.display='none';
+  document.getElementById('mbb').style.display='none';
   setTimeout(()=>{document.getElementById('mf').src='';},300);
 }
-</script>
 
-<footer style="display:none;">
-  <p>휴먼다큐닷컴 · 대표자: 정재우 · 사업자등록번호: 357-50-01268</p>
-  <p>통신판매업신고번호: 제 2026-수원영통-0664 호 · 031-539-9709</p>
-</footer>
+function faqToggle(el){
+  const item=el.closest('.faq-item');
+  item.classList.toggle('open');
+}
+</script>
 </body>
 </html>
