@@ -6,32 +6,31 @@
 <title>부고 안내</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:#f5f5f5;color:#333;font-size:14px;}
-.top-bar{background:#4a4a4a;color:#fff;padding:9px 14px;display:flex;justify-content:space-between;font-size:11px;}
-.header{background:#fff;padding:14px;border-bottom:3px solid #333;text-align:center;}
-.header-title{font-size:22px;font-weight:700;letter-spacing:.08em;color:#1a1a1a;}
-.header-sub{font-size:10px;color:#999;margin-top:3px;letter-spacing:.1em;}
+body{font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:#f5f5f5;font-size:14px;}
+.top-bar{background:#4a4a4a;color:#fff;padding:8px 14px;display:flex;justify-content:space-between;font-size:11px;}
+.header{background:#fff;padding:12px;border-bottom:3px solid #333;text-align:center;}
+.header-title{font-size:20px;font-weight:700;letter-spacing:.08em;color:#1a1a1a;}
+.header-sub{font-size:10px;color:#999;margin-top:2px;}
 .content{background:#fff;margin:6px 0;padding:16px;}
-.deceased{text-align:center;padding:14px 0;border-bottom:1px solid #eee;margin-bottom:14px;}
-.chrysanthemum{
+.deceased{text-align:center;padding:12px 0;border-bottom:1px solid #eee;margin-bottom:14px;}
+.chrysanthemum-img{
   width:72px;height:72px;border-radius:50%;
-  background:linear-gradient(135deg,#f0f0f0,#e0e0e0);
-  margin:0 auto 10px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:36px;border:2px solid #ddd;
+  margin:0 auto 10px;overflow:hidden;
+  border:2px solid #ddd;
 }
+.chrysanthemum-img img{width:100%;height:100%;object-fit:cover;}
 .deceased-name{font-size:18px;font-weight:700;color:#1a1a1a;margin-bottom:3px;}
 .deceased-info{font-size:11px;color:#999;}
-table{width:100%;border-collapse:collapse;margin-bottom:14px;}
-td{padding:9px 6px;font-size:12px;border-bottom:1px solid #f0f0f0;}
-.label{color:#999;width:72px;font-size:11px;}
-.value{color:#1a1a1a;font-weight:500;}
-.notice{background:#f9f5ee;border:1px solid #e0d5b5;border-radius:4px;padding:12px;margin-bottom:14px;}
-.notice-title{font-size:10px;font-weight:700;color:#8b6914;letter-spacing:.1em;margin-bottom:6px;}
-.notice-text{font-size:11px;color:#666;line-height:1.9;}
-.btn1{display:block;width:100%;padding:12px;background:#4a4a4a;color:#fff;text-align:center;font-size:13px;font-weight:600;border:none;border-radius:4px;margin-bottom:6px;}
-.btn2{display:block;width:100%;padding:11px;background:#FEE500;color:#3A1D1D;text-align:center;font-size:12px;font-weight:600;border:none;border-radius:4px;}
-footer{background:#333;color:rgba(255,255,255,.4);padding:12px;text-align:center;font-size:10px;line-height:1.8;}
+table{width:100%;border-collapse:collapse;margin-bottom:12px;}
+td{padding:8px 6px;font-size:12px;border-bottom:1px solid #f0f0f0;}
+.lbl{color:#999;width:72px;font-size:11px;}
+.val{color:#1a1a1a;font-weight:500;}
+.notice{background:#f9f5ee;border:1px solid #e0d5b5;border-radius:4px;padding:11px;margin-bottom:12px;}
+.notice-t{font-size:10px;font-weight:700;color:#8b6914;letter-spacing:.1em;margin-bottom:5px;}
+.notice-b{font-size:11px;color:#666;line-height:1.9;}
+.btn1{display:block;width:100%;padding:11px;background:#4a4a4a;color:#fff;text-align:center;font-size:13px;font-weight:600;border:none;border-radius:4px;margin-bottom:6px;cursor:pointer;}
+.btn2{display:block;width:100%;padding:10px;background:#FEE500;color:#3A1D1D;text-align:center;font-size:12px;font-weight:600;border:none;border-radius:4px;cursor:pointer;}
+footer{background:#333;color:rgba(255,255,255,.35);padding:10px;text-align:center;font-size:10px;line-height:1.8;}
 </style>
 </head>
 <body>
@@ -39,21 +38,23 @@ footer{background:#333;color:rgba(255,255,255,.4);padding:12px;text-align:center
 <div class="header"><div class="header-title">訃 告</div><div class="header-sub">삼가 고인의 명복을 빕니다</div></div>
 <div class="content">
   <div class="deceased">
-    <div class="chrysanthemum">🌸</div>
+    <div class="chrysanthemum-img">
+      <img src="https://humandocu.com/chrysanthemum.jpg" alt="국화">
+    </div>
     <div class="deceased-name">故 홍○○ 옹</div>
     <div class="deceased-info">1940년 3월 5일 ~ 2025년 6월 10일 (향년 85세)</div>
   </div>
   <table>
-    <tr><td class="label">별세일시</td><td class="value">2025년 6월 10일 오후 11시</td></tr>
-    <tr><td class="label">발인일시</td><td class="value">2025년 6월 12일 오전 8시</td></tr>
-    <tr><td class="label">장례식장</td><td class="value">서울아산병원 장례식장 3호실</td></tr>
-    <tr><td class="label">장지</td><td class="value">서울추모공원</td></tr>
-    <tr><td class="label">상주</td><td class="value">홍길동 (장남)</td></tr>
-    <tr><td class="label">연락처</td><td class="value">010-0000-0000</td></tr>
+    <tr><td class="lbl">별세일시</td><td class="val">2025년 6월 10일 오후 11시</td></tr>
+    <tr><td class="lbl">발인일시</td><td class="val">2025년 6월 12일 오전 8시</td></tr>
+    <tr><td class="lbl">장례식장</td><td class="val">서울아산병원 장례식장 3호</td></tr>
+    <tr><td class="lbl">장지</td><td class="val">서울추모공원</td></tr>
+    <tr><td class="lbl">상주</td><td class="val">홍길동 (장남)</td></tr>
+    <tr><td class="lbl">연락처</td><td class="val">010-0000-0000</td></tr>
   </table>
   <div class="notice">
-    <div class="notice-title">■ 안내 말씀</div>
-    <div class="notice-text">고인의 뜻에 따라 화환은 정중히 사양하오며,<br>조의금은 아래 계좌로 보내주시면 감사하겠습니다.<br><br>○○은행 000-000-000000 (홍길동)</div>
+    <div class="notice-t">■ 안내 말씀</div>
+    <div class="notice-b">고인의 뜻에 따라 화환은 정중히 사양하오며,<br>조의금은 아래 계좌로 보내주시면 감사합니다.<br><br>○○은행 000-000-000000 (홍길동)</div>
   </div>
   <button class="btn1">📞 장례식장 전화하기</button>
   <button class="btn2">💬 카카오톡으로 전달하기</button>
