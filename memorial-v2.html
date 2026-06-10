@@ -8,17 +8,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#1a1410;
-  --gold:#c8a96e;
-  --cream:#faf7f2;
-  --gray:#6b5a3e;
-  --serif:'Noto Serif KR',serif;
-  --sans:'Noto Sans KR',sans-serif;
+  --ink:#1a1410; --gold:#c8a96e; --gold2:#b8924a;
+  --cream:#faf7f2; --gray:#6b5a3e;
+  --serif:'Noto Serif KR',serif; --sans:'Noto Sans KR',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{width:100%;height:100%;overflow:hidden;background:var(--cream);}
 
-/* ── 슬라이더 ── */
 .slider{
   display:flex;width:600vw;height:100vh;
   transition:transform .42s cubic-bezier(.4,0,.2,1);
@@ -29,7 +25,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--cream);}
   background:var(--cream);
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  padding:0 28px 68px;
+  padding:20px 24px 68px;
   gap:0;
 }
 
@@ -37,124 +33,139 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--cream);}
 .nav{
   position:fixed;bottom:0;left:0;right:0;
   display:flex;align-items:center;justify-content:center;
-  gap:14px;padding:14px 24px 24px;
-  background:linear-gradient(transparent,rgba(250,247,242,.95));
-  z-index:100;
+  gap:14px;padding:12px 24px 22px;
+  z-index:100;transition:all .3s;
 }
-.dot{width:6px;height:6px;border-radius:50%;background:rgba(26,20,16,.12);transition:all .3s;cursor:pointer;}
-.dot.active{background:var(--gold);transform:scale(1.5);}
+.nav-light{background:linear-gradient(transparent,rgba(250,247,242,.97));}
+.nav-dark{background:linear-gradient(transparent,rgba(26,20,16,.97));}
+.dot{width:6px;height:6px;border-radius:50%;transition:all .3s;cursor:pointer;}
+.dot-l{background:rgba(26,20,16,.12);}
+.dot-l.active{background:var(--gold);transform:scale(1.5);}
+.dot-d{background:rgba(255,255,255,.2);}
+.dot-d.active{background:var(--gold);transform:scale(1.5);}
 .nav-btn{
   width:32px;height:32px;border-radius:50%;
-  border:1.5px solid rgba(26,20,16,.12);
-  background:rgba(255,255,255,.8);
   display:flex;align-items:center;justify-content:center;
-  cursor:pointer;font-size:13px;color:rgba(26,20,16,.35);
+  cursor:pointer;font-size:13px;border:1.5px solid;
 }
+.nav-btn-l{border-color:rgba(26,20,16,.12);background:rgba(255,255,255,.8);color:rgba(26,20,16,.35);}
+.nav-btn-d{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);}
 
 /* ── 공통 타이포 ── */
-.eyebrow{
-  font-size:10px;letter-spacing:.28em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:10px;text-align:center;
-}
-.headline{
-  font-family:var(--serif);font-size:24px;font-weight:300;
-  color:var(--ink);line-height:1.5;text-align:center;
-  margin-bottom:20px;
-}
-.caption{
-  font-size:12px;color:var(--gray);line-height:1.9;
-  text-align:center;margin-top:14px;
-}
+.eyebrow{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;text-align:center;}
+.headline{font-family:var(--serif);font-size:24px;font-weight:300;color:var(--ink);line-height:1.5;text-align:center;margin-bottom:16px;}
+.caption{font-size:12px;color:var(--gray);line-height:1.85;text-align:center;margin-top:12px;}
+.caption em{font-style:normal;color:var(--ink);font-weight:500;}
 
-/* ── 비주얼 카드 공통 ── */
-.card{
+/* ══════════════ S1 ══════════════ */
+/* 모바일 청첩장 샘플 카드 */
+.wedding-sample{
   width:100%;max-width:300px;
   background:#fff;border-radius:18px;
-  box-shadow:0 8px 32px rgba(26,20,16,.1);
+  box-shadow:0 10px 36px rgba(0,0,0,.1);
   overflow:hidden;
 }
-
-/* ══ S1 청첩장 ══ */
-.s1-compare{
-  display:flex;gap:10px;width:100%;max-width:300px;
+.ws-top{
+  background:linear-gradient(160deg,#2d2418,#1a1410);
+  padding:24px 20px 20px;text-align:center;color:#fff;
 }
-.s1-half{flex:1;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.08);}
-.s1-half-label{font-size:9px;letter-spacing:.12em;text-align:center;padding:7px;background:#f5f0e8;color:#999;}
-.s1-old-body{padding:14px 10px;text-align:center;}
-.s1-old-flower{font-size:24px;margin-bottom:8px;}
-.s1-old-title{font-family:var(--serif);font-size:13px;color:var(--ink);margin-bottom:4px;}
-.s1-old-name{font-size:10px;color:#aaa;margin-bottom:6px;}
-.s1-old-date{font-size:9px;color:#bbb;}
-.s1-new-label{background:#1a1410;color:var(--gold);}
-.s1-new-screen{height:110px;overflow:hidden;position:relative;background:#fff;}
-.s1-new-screen iframe{width:250%;height:250%;transform:scale(.4);transform-origin:top left;border:none;pointer-events:none;}
-.s1-new-screen-cover{position:absolute;inset:0;background:linear-gradient(transparent 60%,rgba(26,20,16,.6));display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;}
-.s1-new-screen-cover span{font-size:9px;color:rgba(255,255,255,.8);letter-spacing:.1em;}
-
-/* ══ S2 기존 부고 ══ */
-.s2-card{padding:20px;}
-.s2-sender{font-size:10px;color:#bbb;margin-bottom:8px;}
-.s2-bubble{
-  background:#f5f5f5;border-radius:10px;
-  padding:14px;font-size:13px;color:#555;
-  line-height:2;margin-bottom:14px;
+.ws-badge{font-size:9px;letter-spacing:.2em;color:var(--gold);margin-bottom:10px;}
+.ws-couple{font-family:var(--serif);font-size:20px;font-weight:300;margin-bottom:4px;}
+.ws-date{font-size:11px;color:rgba(255,255,255,.5);margin-bottom:14px;}
+.ws-photo{
+  width:100%;height:90px;
+  background:linear-gradient(135deg,#3a2e1e,#5a4a2e);
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;letter-spacing:4px;
 }
-.s2-lacks{display:flex;flex-wrap:wrap;gap:6px;}
-.s2-lack{
-  font-size:10px;color:#c0392b;
-  background:#fff5f5;border:1px solid #fcd;
-  padding:3px 10px;border-radius:10px;
+.ws-bottom{padding:14px 16px;}
+.ws-row{display:flex;justify-content:space-between;margin-bottom:8px;}
+.ws-info{font-size:10px;color:#888;line-height:1.7;}
+.ws-btns{display:flex;gap:6px;margin-top:10px;}
+.ws-btn{
+  flex:1;padding:8px;border-radius:6px;font-size:10px;text-align:center;
+  font-family:var(--sans);
 }
+.ws-btn-k{background:#FEE500;color:#3A1D1D;}
+.ws-btn-m{background:#f5f0e8;color:#6b5a3e;}
 
-/* ══ S3/4/5 폰 목업 ══ */
-.phone-card{
+/* ══════════════ S2 ══════════════ */
+.sms-card{
   width:100%;max-width:300px;
-  background:#1a1410;border-radius:18px;
-  padding:10px;box-shadow:0 10px 36px rgba(0,0,0,.18);
+  background:#fff;border-radius:18px;
+  box-shadow:0 10px 36px rgba(0,0,0,.1);
+  overflow:hidden;
+}
+.sms-statusbar{
+  background:#1c1c1e;padding:8px 14px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.sms-statusbar-txt{font-size:10px;color:rgba(255,255,255,.5);}
+.sms-header{
+  background:#f2f2f7;padding:10px 14px;
+  border-bottom:1px solid #e5e5ea;
+  text-align:center;font-size:12px;color:#3a3a3c;font-weight:500;
+}
+.sms-body{padding:14px;}
+.sms-sender-row{font-size:10px;color:#8e8e93;margin-bottom:8px;}
+.sms-bubble-wrap{display:flex;justify-content:flex-start;}
+.sms-bubble{
+  background:#e9e9eb;border-radius:14px 14px 14px 4px;
+  padding:10px 14px;max-width:85%;
+  font-size:13px;color:#1c1c1e;line-height:2;
+}
+.sms-time{font-size:10px;color:#8e8e93;text-align:center;margin-top:8px;}
+
+/* ══════════════ S3/4/5 폰목업 ══════════════ */
+.phone-card{
+  width:100%;max-width:280px;
+  background:#111;border-radius:20px;
+  padding:8px;
+  box-shadow:0 12px 40px rgba(0,0,0,.2);
   cursor:pointer;position:relative;
 }
+/* 높이를 화면에 맞게 동적으로 */
 .phone-screen{
-  width:100%;height:220px;
-  border-radius:12px;overflow:hidden;
+  width:100%;
+  height:calc(100vh - 280px);
+  min-height:200px;max-height:320px;
+  border-radius:14px;overflow:hidden;
   background:#fff;position:relative;
 }
 .phone-screen iframe{
-  width:240%;height:240%;
-  transform:scale(.417);transform-origin:top left;
+  width:230%;height:230%;
+  transform:scale(.435);transform-origin:top left;
   border:none;pointer-events:none;
 }
-.phone-tap-cover{
-  position:absolute;inset:0;border-radius:12px;
-  background:rgba(0,0,0,.18);
-  display:flex;align-items:center;justify-content:center;
+.phone-tap{
+  position:absolute;inset:0;border-radius:14px;
+  background:rgba(0,0,0,.15);
+  display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:12px;
 }
-.phone-tap-cover span{
-  background:rgba(0,0,0,.5);color:#fff;
-  padding:6px 14px;border-radius:14px;
+.phone-tap span{
+  background:rgba(0,0,0,.55);color:#fff;
+  padding:6px 16px;border-radius:14px;
   font-size:11px;letter-spacing:.1em;
   border:1px solid rgba(255,255,255,.3);
 }
 
-/* ══ S5 흐름 ══ */
-.flow{display:flex;align-items:center;gap:6px;margin-bottom:14px;}
+/* ══════════════ S5 답례장 ══════════════ */
+.s5-wrap{width:100%;max-width:280px;}
+.flow{display:flex;align-items:center;gap:4px;margin-bottom:12px;width:100%;}
 .flow-item{
   flex:1;background:#fff;border:1px solid #e8e0d0;
-  border-radius:10px;padding:10px 6px;text-align:center;
+  border-radius:10px;padding:8px 4px;text-align:center;
 }
-.flow-icon{font-size:18px;display:block;margin-bottom:4px;}
+.flow-icon{font-size:16px;display:block;margin-bottom:3px;}
 .flow-name{font-size:10px;color:var(--ink);}
-.flow-arr{color:var(--gold);font-size:14px;flex-shrink:0;}
+.flow-arr{color:var(--gold);font-size:12px;flex-shrink:0;}
 
-/* ══ S6 CTA ══ */
-.s6{background:var(--ink);}
-.s6 .eyebrow{color:var(--gold);}
+/* ══════════════ S6 CTA ══════════════ */
+.s6{background:var(--ink) !important;}
 .s6 .headline{color:#fff;}
-.s6 .caption{color:rgba(255,255,255,.4);}
-.s6 .nav{background:linear-gradient(transparent,rgba(26,20,16,.95));}
-.s6 .dot{background:rgba(255,255,255,.2);}
-.s6 .dot.active{background:var(--gold);}
-.s6 .nav-btn{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:rgba(255,255,255,.35);}
-.cta-wrap{width:100%;max-width:280px;display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.s6 .eyebrow{color:var(--gold);}
+.cta-wrap{width:100%;max-width:280px;display:flex;flex-direction:column;gap:10px;}
 .cta-main{
   display:block;padding:17px;background:var(--gold);border-radius:8px;
   font-family:var(--sans);font-size:15px;font-weight:500;color:var(--ink);
@@ -163,27 +174,26 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--cream);}
 .cta-sub{
   display:block;padding:14px;
   border:1px solid rgba(255,255,255,.18);border-radius:8px;
-  font-family:var(--sans);font-size:13px;color:rgba(255,255,255,.5);
+  font-family:var(--sans);font-size:13px;color:rgba(255,255,255,.55);
   text-decoration:none;text-align:center;
 }
-.cta-badge{font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.12em;text-align:center;margin-top:6px;}
+.cta-free{font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.12em;text-align:center;margin-top:4px;}
 
 /* ── 모달 ── */
 .modal{
   display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.92);z-index:200;
+  background:rgba(0,0,0,.95);z-index:200;
   flex-direction:column;
 }
 .modal.open{display:flex;}
 .modal-bar{
   display:flex;align-items:center;justify-content:space-between;
-  padding:12px 16px;background:rgba(0,0,0,.7);flex-shrink:0;
+  padding:12px 16px;background:rgba(0,0,0,.8);flex-shrink:0;
 }
-.modal-bar span{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.1em;}
+.modal-bar span{font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.1em;}
 .modal-back{
   padding:7px 16px;background:var(--gold);border:none;border-radius:16px;
-  font-size:12px;font-weight:500;color:var(--ink);cursor:pointer;
-  font-family:var(--sans);
+  font-size:12px;font-weight:500;color:var(--ink);cursor:pointer;font-family:var(--sans);
 }
 .modal iframe{flex:1;width:100%;border:none;}
 </style>
@@ -195,125 +205,142 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--cream);}
 <!-- ─── S1 청첩장 ─── -->
 <div class="slide">
   <div class="eyebrow">HUMANDOCU · MEMORIAL</div>
-  <div class="headline">예전엔 카드 한 장으로<br>결혼을 전했습니다</div>
-  <div class="s1-compare">
-    <div class="s1-half">
-      <div class="s1-half-label">종이 청첩장</div>
-      <div class="s1-old-body">
-        <div class="s1-old-flower">💐</div>
-        <div class="s1-old-title">결혼합니다</div>
-        <div class="s1-old-name">홍길동 · 김영희</div>
-        <div class="s1-old-date">2025. 06. 14</div>
-      </div>
+  <div class="headline">청첩장 한 장이<br>이렇게 바뀌었습니다</div>
+  <div class="wedding-sample">
+    <div class="ws-top">
+      <div class="ws-badge">WEDDING INVITATION</div>
+      <div class="ws-couple">홍길동 ♥ 김영희</div>
+      <div class="ws-date">2025년 6월 14일 토요일 오후 2시</div>
+      <div class="ws-photo">🌸</div>
     </div>
-    <div class="s1-half">
-      <div class="s1-half-label s1-new-label">모바일 청첩장</div>
-      <div class="s1-new-screen">
-        <iframe src="https://litt.ly/wedding_demo" scrolling="no" loading="lazy"></iframe>
-        <div class="s1-new-screen-cover"><span>링크 하나로 전체를</span></div>
+    <div class="ws-bottom">
+      <div class="ws-row">
+        <div class="ws-info">📍 그랜드볼룸 웨딩홀 3층<br>서울 강남구 테헤란로 123</div>
+      </div>
+      <div class="ws-btns">
+        <div class="ws-btn ws-btn-k">💬 카카오로 공유</div>
+        <div class="ws-btn ws-btn-m">🗺 지도 보기</div>
       </div>
     </div>
   </div>
-  <div class="caption">이제 삶의 모든 순간이<br>모바일로 전해집니다</div>
+  <div class="caption">
+    삶의 모든 순간이 모바일로 전해지는 시대<br>
+    <em>부고도 이제 달라져야 합니다</em>
+  </div>
 </div>
 
 <!-- ─── S2 기존 부고 ─── -->
 <div class="slide">
-  <div class="eyebrow">그런데 부고는</div>
-  <div class="headline">여전히 단순<br>정보 나열입니다</div>
-  <div class="card">
-    <div class="s2-card">
-      <div class="s2-sender">발신번호 없음 · 상조회사</div>
-      <div class="s2-bubble">
-        부친상 홍○○ 별세<br>
-        발인 6/12 오전 8시<br>
-        서울아산병원 장례식장 3호<br>
-        유족 홍길동 배상
+  <div class="eyebrow">지금의 부고는</div>
+  <div class="headline">여전히 이렇습니다</div>
+  <div class="sms-card">
+    <div class="sms-statusbar">
+      <span class="sms-statusbar-txt">오후 11:23</span>
+      <span class="sms-statusbar-txt">■■■ 4G</span>
+    </div>
+    <div class="sms-header">메시지</div>
+    <div class="sms-body">
+      <div class="sms-sender-row">발신번호 없음</div>
+      <div class="sms-bubble-wrap">
+        <div class="sms-bubble">
+          訃告<br>
+          부친 홍○○ 옹께서<br>
+          별세하셨기에 알립니다<br><br>
+          발인 6/12(목) 오전 8시<br>
+          서울아산병원 장례식장<br>
+          3호실<br><br>
+          상주 홍길동 배상
+        </div>
       </div>
-      <div class="s2-lacks">
-        <span class="s2-lack">사진 없음</span>
-        <span class="s2-lack">이야기 없음</span>
-        <span class="s2-lack">지도 없음</span>
-        <span class="s2-lack">추모 없음</span>
-      </div>
+      <div class="sms-time">오후 11:23</div>
     </div>
   </div>
-  <div class="caption">상조회사의 획일화된 틀<br>고인의 이름만 남는 부고</div>
+  <div class="caption">
+    고인의 이야기도, 사진도, 지도도 없습니다<br>
+    <em>획일화된 틀 안에 갇힌 마지막 인사</em>
+  </div>
 </div>
 
 <!-- ─── S3 부고 샘플 ─── -->
 <div class="slide">
-  <div class="eyebrow">이제는 달라집니다</div>
+  <div class="eyebrow">휴먼다큐 부고</div>
   <div class="headline">고인을 제대로<br>기억하는 부고</div>
   <div class="phone-card" onclick="openModal('bugo')">
     <div class="phone-screen">
       <iframe src="https://humandocu.com/bugo/adv-정재무.html" scrolling="no" loading="lazy"></iframe>
-      <div class="phone-tap-cover"><span>탭해서 직접 보기</span></div>
+      <div class="phone-tap"><span>탭해서 직접 보기</span></div>
     </div>
   </div>
-  <div class="caption">AI 추모글 · 영정사진 · 지도·내비 · 카카오 공유</div>
+  <div class="caption">
+    <em>AI 추모글 · 영정사진 · 생애 슬라이드</em><br>
+    지도·내비 · 카카오 공유 · 추모 메시지
+  </div>
 </div>
 
 <!-- ─── S4 메모리얼 ─── -->
 <div class="slide">
-  <div class="eyebrow">기억의 공간</div>
-  <div class="headline">고인을 영원히<br>기억하는 메모리얼</div>
+  <div class="eyebrow">메모리얼 페이지</div>
+  <div class="headline">영원히 남는<br>디지털 추모 공간</div>
   <div class="phone-card" onclick="openModal('memorial')">
     <div class="phone-screen">
       <iframe src="https://humandocu.com/bugo/adv-memorial-정재무.html" scrolling="no" loading="lazy"></iframe>
-      <div class="phone-tap-cover"><span>탭해서 직접 보기</span></div>
+      <div class="phone-tap"><span>탭해서 직접 보기</span></div>
     </div>
   </div>
-  <div class="caption">생애 기록 · 추모 메시지 · 인생 6샷 연결</div>
+  <div class="caption">
+    <em>부고 페이지와 함께 자동 생성</em><br>
+    생애 기록 · 추모 메시지 · 인생 6샷 연결<br>
+    삭제되지 않는 고인의 공간
+  </div>
 </div>
 
 <!-- ─── S5 답례장 ─── -->
 <div class="slide">
   <div class="eyebrow">세상에 없던 서비스</div>
-  <div class="headline">부고가 끝이<br>아닙니다</div>
-  <div class="flow">
-    <div class="flow-item"><span class="flow-icon">📨</span><span class="flow-name">부고</span></div>
-    <div class="flow-arr">→</div>
-    <div class="flow-item"><span class="flow-icon">🕯</span><span class="flow-name">장례식</span></div>
-    <div class="flow-arr">→</div>
-    <div class="flow-item"><span class="flow-icon">✉️</span><span class="flow-name">답례장</span></div>
-  </div>
-  <div class="phone-card" onclick="openModal('damnyejang')">
-    <div class="phone-screen">
-      <iframe src="https://humandocu.com/bugo/damnyejang-정재무.html" scrolling="no" loading="lazy"></iframe>
-      <div class="phone-tap-cover"><span>탭해서 직접 보기</span></div>
+  <div class="headline">마지막 인사까지<br>우리가 함께합니다</div>
+  <div class="s5-wrap">
+    <div class="flow">
+      <div class="flow-item"><span class="flow-icon">📨</span><span class="flow-name">부고 발송</span></div>
+      <div class="flow-arr">→</div>
+      <div class="flow-item"><span class="flow-icon">🕯</span><span class="flow-name">장례식</span></div>
+      <div class="flow-arr">→</div>
+      <div class="flow-item"><span class="flow-icon">✉️</span><span class="flow-name">답례장</span></div>
+    </div>
+    <div class="phone-card" onclick="openModal('damnyejang')">
+      <div class="phone-screen">
+        <iframe src="https://humandocu.com/bugo/damnyejang-정재무.html" scrolling="no" loading="lazy"></iframe>
+        <div class="phone-tap"><span>탭해서 직접 보기</span></div>
+      </div>
     </div>
   </div>
-  <div class="caption">마지막까지 고인과 상주와<br>추모객의 마음을 연결합니다</div>
+  <div class="caption">
+    <em>장례 후 감사 인사를 직접 전달</em><br>
+    고인과 상주와 추모객의 마음을<br>처음부터 끝까지 연결합니다
+  </div>
 </div>
 
 <!-- ─── S6 CTA ─── -->
 <div class="slide s6">
   <div class="eyebrow">HUMANDOCU</div>
   <div class="headline">지금 시작하세요</div>
-  <div class="caption" style="margin-bottom:24px;">베타 기간 무료</div>
+  <div class="caption" style="color:rgba(255,255,255,.45);margin-bottom:24px;">
+    <em style="color:var(--gold);">베타 기간 무료</em> · 10분 안에 완성
+  </div>
   <div class="cta-wrap">
-    <a href="memorial-form.html" class="cta-main">부고 만들기</a>
+    <a href="memorial-form.html" class="cta-main">부고 만들기 →</a>
     <a href="damnyejang-form.html" class="cta-sub">답례장 만들기</a>
     <a href="sixshot-form.html" class="cta-sub">인생 6샷 기록하기</a>
   </div>
-  <div class="cta-badge" style="margin-top:16px;">HUMANDOCU.COM</div>
+  <div class="cta-free" style="margin-top:16px;">HUMANDOCU.COM</div>
 </div>
 
 </div><!-- /slider -->
 
 <!-- 네비 -->
-<div class="nav" id="nav">
-  <button class="nav-btn" onclick="goPrev()">←</button>
-  <div style="display:flex;gap:8px;" id="dots">
-    <div class="dot active" onclick="goTo(0)"></div>
-    <div class="dot" onclick="goTo(1)"></div>
-    <div class="dot" onclick="goTo(2)"></div>
-    <div class="dot" onclick="goTo(3)"></div>
-    <div class="dot" onclick="goTo(4)"></div>
-    <div class="dot" onclick="goTo(5)"></div>
-  </div>
-  <button class="nav-btn" onclick="goNext()">→</button>
+<div class="nav nav-light" id="nav">
+  <button class="nav-btn nav-btn-l" id="btn-prev" onclick="goPrev()">←</button>
+  <div style="display:flex;gap:8px;" id="dots"></div>
+  <button class="nav-btn nav-btn-l" id="btn-next" onclick="goNext()">→</button>
 </div>
 
 <!-- 모달 -->
@@ -326,30 +353,43 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--cream);}
 </div>
 
 <script>
-const URLS = {
+const URLS={
   bugo:'https://humandocu.com/bugo/adv-정재무.html',
   memorial:'https://humandocu.com/bugo/adv-memorial-정재무.html',
   damnyejang:'https://humandocu.com/bugo/damnyejang-정재무.html',
 };
 const TOTAL=6; let cur=0;
 const slider=document.getElementById('slider');
-const dots=document.querySelectorAll('.dot');
 const nav=document.getElementById('nav');
+const dotsWrap=document.getElementById('dots');
+const btnPrev=document.getElementById('btn-prev');
+const btnNext=document.getElementById('btn-next');
+
+// 도트 생성
+for(let i=0;i<TOTAL;i++){
+  const d=document.createElement('div');
+  d.className='dot dot-l'+(i===0?' active':'');
+  d.onclick=()=>goTo(i);
+  dotsWrap.appendChild(d);
+}
 
 function goTo(n){
   if(n<0||n>=TOTAL)return;
   cur=n;
   slider.style.transform=`translateX(-${n*100}vw)`;
-  dots.forEach((d,i)=>d.classList.toggle('active',i===n));
-  // S6만 dark
-  if(n===5){
-    nav.style.background='linear-gradient(transparent,rgba(26,20,16,.95))';
-    dots.forEach(d=>{d.style.background=d.classList.contains('active')?'#c8a96e':'rgba(255,255,255,.2)';});
-    document.querySelectorAll('.nav-btn').forEach(b=>{b.style.borderColor='rgba(255,255,255,.15)';b.style.background='rgba(255,255,255,.06)';b.style.color='rgba(255,255,255,.35)';});
+  const allDots=dotsWrap.querySelectorAll('.dot');
+  const dark=(n===5);
+  allDots.forEach((d,i)=>{
+    d.className='dot '+(dark?'dot-d':'dot-l')+(i===n?' active':'');
+  });
+  if(dark){
+    nav.className='nav nav-dark';
+    btnPrev.className='nav-btn nav-btn-d';
+    btnNext.className='nav-btn nav-btn-d';
   } else {
-    nav.style.background='linear-gradient(transparent,rgba(250,247,242,.95))';
-    dots.forEach(d=>{d.style.background=d.classList.contains('active')?'#c8a96e':'rgba(26,20,16,.12)';});
-    document.querySelectorAll('.nav-btn').forEach(b=>{b.style.borderColor='rgba(26,20,16,.12)';b.style.background='rgba(255,255,255,.8)';b.style.color='rgba(26,20,16,.35)';});
+    nav.className='nav nav-light';
+    btnPrev.className='nav-btn nav-btn-l';
+    btnNext.className='nav-btn nav-btn-l';
   }
 }
 function goNext(){goTo(cur+1);}
@@ -372,7 +412,7 @@ function openModal(type){
 }
 function closeModal(){
   document.getElementById('modal').classList.remove('open');
-  document.getElementById('modal-frame').src='';
+  setTimeout(()=>{document.getElementById('modal-frame').src='';},300);
 }
 </script>
 
