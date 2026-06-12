@@ -236,7 +236,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
     <div class="phone" onclick="openModal('wedding')">
       <div class="phone-scr">
         <iframe src="https://humandocu.com/sample-wedding.html" scrolling="no" loading="lazy"></iframe>
-        <div class="ptap"><span>탭해서 보기</span></div>
+        <div class="ptap"><span class="ptap-txt" data-ko="탭해서 보기" data-en="Tap to view" data-jp="タップして見る" data-zh="点击查看">탭해서 보기</span></div>
       </div>
     </div>
   </div>
@@ -250,7 +250,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
     <div class="phone" onclick="openModal('bugo_old')">
       <div class="phone-scr">
         <iframe src="https://humandocu.com/sample-bugo.html" scrolling="no" loading="lazy"></iframe>
-        <div class="ptap"><span>탭해서 보기</span></div>
+        <div class="ptap"><span class="ptap-txt" data-ko="탭해서 보기" data-en="Tap to view" data-jp="タップして見る" data-zh="点击查看">탭해서 보기</span></div>
       </div>
     </div>
   </div>
@@ -264,7 +264,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
     <div class="phone" onclick="openModal('bugo')">
       <div class="phone-scr">
         <iframe src="https://humandocu.com/bugo/adv-정재무.html" scrolling="no" loading="lazy"></iframe>
-        <div class="ptap"><span>탭해서 보기</span></div>
+        <div class="ptap"><span class="ptap-txt" data-ko="탭해서 보기" data-en="Tap to view" data-jp="タップして見る" data-zh="点击查看">탭해서 보기</span></div>
       </div>
     </div>
   </div>
@@ -278,7 +278,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
     <div class="phone" onclick="openModal('memorial')">
       <div class="phone-scr">
         <iframe src="https://humandocu.com/bugo/adv-memorial-정재무.html" scrolling="no" loading="lazy"></iframe>
-        <div class="ptap"><span>탭해서 보기</span></div>
+        <div class="ptap"><span class="ptap-txt" data-ko="탭해서 보기" data-en="Tap to view" data-jp="タップして見る" data-zh="点击查看">탭해서 보기</span></div>
       </div>
     </div>
   </div>
@@ -292,7 +292,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
     <div class="phone" onclick="openModal('damnyejang')">
       <div class="phone-scr">
         <iframe src="https://humandocu.com/bugo/damnyejang-정재무.html" scrolling="no" loading="lazy"></iframe>
-        <div class="ptap"><span>탭해서 보기</span></div>
+        <div class="ptap"><span class="ptap-txt" data-ko="탭해서 보기" data-en="Tap to view" data-jp="タップして見る" data-zh="点击查看">탭해서 보기</span></div>
       </div>
     </div>
   </div>
@@ -463,6 +463,11 @@ function setLang(lang){
   };
   document.querySelectorAll('.fi-nm').forEach((el,i)=>{
     if(fiMap[lang] && fiMap[lang][i]) el.textContent = fiMap[lang][i];
+  });
+  // 탭해서 보기
+  const ptapMap={ko:'탭해서 보기',en:'Tap to view',jp:'タップして見る',zh:'点击查看'};
+  document.querySelectorAll('.ptap-txt').forEach(el=>{
+    el.textContent = ptapMap[lang]||ptapMap.ko;
   });
 }
 </script>
