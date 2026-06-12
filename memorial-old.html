@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>휴먼다큐</title>
+<meta name="description" content="아름다운 작별, 영원한 기억">
+<meta name="application-name" content="휴먼다큐-메모리얼">
+<link rel="manifest" href="/manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="휴먼다큐">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="theme-color" content="#1a1a2e">
+<meta property="og:title" content="휴먼다큐 · 품격 있는 모바일 부고 서비스">
+<meta property="og:description" content="슬픔을 기록으로, 그리움을 위로로. 고인의 생애를 기리는 디지털 추모 아카이브.">
+<meta property="og:url" content="https://humandocu.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0f0d09;--ink2:#2d2a22;--ink3:#575349;
+  --cream:#f9f6f0;--cream2:#f0ebe0;--cream3:#e5dece;
+  --gold:#9e8250;--gold2:#c8a96e;--gold3:#e8d4a8;
+  --teal:#2a6b5e;
+  --serif:'Cormorant Garamond','Noto Serif KR',Georgia,serif;
+  --sans:'Noto Sans KR',sans-serif;
+  --r:3px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;word-break:keep-all}
+a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+
+/* NAV */
+nav{display:none;position:sticky;top:0;z-index:200;background:var(--ink);padding:16px 56px;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(200,169,110,.15)}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:30px;height:30px;background:var(--gold2);border-radius:2px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:15px;color:var(--ink)}
+.logo-text{font-family:var(--serif);font-size:18px;color:var(--cream);letter-spacing:.04em}
+.nav-links{display:flex;gap:26px;list-style:none}
+.nav-links a{font-size:14px;color:rgba(249,246,240,.6);transition:color .2s}
+.nav-links a:hover{color:var(--gold2)}
+.nav-right{display:flex;align-items:center;gap:14px}
+.nav-tel{font-size:13px;color:rgba(249,246,240,.45)}
+.nav-tel a{color:var(--gold2)}
+.nav-btn{font-size:14px;font-weight:500;color:var(--ink);background:var(--gold2);padding:9px 22px;border-radius:var(--r);transition:all .2s}
+
+/* HERO */
+.hero{background:var(--ink);position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(200,169,110,.08) 0%,transparent 60%),repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(200,169,110,.022) 80px),repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(200,169,110,.022) 80px);pointer-events:none}
+.hero-body{display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:48px 20px 56px;position:relative;z-index:1;max-width:820px;margin:0 auto;width:100%}
+.hero-eyebrow{font-size:12px;font-weight:500;letter-spacing:.22em;color:rgba(200,169,110,.6);text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:12px;justify-content:center}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:26px;height:1px;background:var(--gold2);opacity:.45}
+.hero-title{font-family:var(--serif);font-size:clamp(26px,4.8vw,58px);font-weight:300;line-height:1.2;letter-spacing:-.02em;color:var(--cream);margin-bottom:20px;word-break:keep-all}
+.hero-title em{display:block;font-style:italic;color:var(--gold2)}
+.hero-analogy{background:rgba(255,255,255,.04);border:1px solid rgba(200,169,110,.15);border-radius:4px;padding:16px 22px;margin-bottom:28px;max-width:520px;text-align:left}
+.hero-analogy-row{display:flex;align-items:center;gap:10px;font-size:15px;line-height:2;color:rgba(249,246,240,.9);font-weight:400}
+.hero-analogy-ico{flex-shrink:0;font-size:16px}
+.hero-plan{background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.28);border-radius:6px;padding:28px 32px;width:100%;max-width:480px;margin-bottom:20px;text-align:left}
+.plan-tag{font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);margin-bottom:10px}
+.plan-price{font-family:var(--serif);font-size:38px;font-weight:300;color:var(--cream);line-height:1;margin-bottom:4px}
+.plan-dur{font-size:11px;font-weight:500;padding:2px 9px;border-radius:20px;display:inline-block;margin-bottom:18px;background:rgba(42,107,94,.2);color:#7fd4c0;letter-spacing:.06em}
+.plan-feats{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:20px}
+.plan-feats li{font-size:13px;color:rgba(249,246,240,.82);display:flex;gap:8px;align-items:flex-start;line-height:1.5}
+.plan-btn{display:block;width:100%;padding:14px;text-align:center;border-radius:var(--r);font-size:15px;font-weight:500;background:var(--gold2);color:var(--ink);border:none;cursor:pointer;font-family:var(--sans);transition:background .2s}
+.plan-btn:hover{background:var(--gold3)}
+.hero-note{font-size:13px;color:rgba(249,246,240,.28)}
+.hero-note a{color:var(--gold2)}
+
+/* 공통 */
+.sec{padding:36px 18px}
+.si{max-width:1060px;margin:0 auto}
+.ey{font-size:10px;font-weight:500;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.tt{font-family:var(--serif);font-size:clamp(22px,3vw,38px);font-weight:300;line-height:1.2;letter-spacing:-.01em;color:var(--ink);margin-bottom:10px;word-break:keep-all}
+.tt em{font-style:italic;color:var(--gold)}
+.tt-cream{color:var(--cream)}
+.sb{font-size:14px;color:var(--ink2);line-height:1.7;max-width:540px;word-break:keep-all}
+.sh{margin-bottom:28px}
+.ctr{text-align:center}.ctr .sb{margin:10px auto 0}
+
+/* ── 비교 ── */
+.compare-sec{background:var(--cream2);padding:48px 20px}
+.cmp-wrap{display:grid;grid-template-columns:1fr 1fr;gap:3px;border-radius:6px;overflow:hidden;background:rgba(24,22,15,.08);max-width:920px;margin:0 auto}
+.cmp-old{background:#fff;padding:22px 20px}
+.cmp-old-label{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:#f0f0f0;color:#999;padding:3px 10px;border-radius:20px;margin-bottom:14px}
+.cmp-old-head{font-size:13px;color:#999;margin-bottom:16px}
+.kakaotalk-wrap{background:#b5c4d1;border-radius:12px;padding:14px 12px;max-width:280px}
+.kt-header{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.kt-logo{width:28px;height:28px;background:#3a1d6e;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.kt-sender{font-size:12px;font-weight:600;color:#3a1d6e}
+.kt-badge{font-size:9px;background:#3a1d6e;color:#fff;padding:1px 5px;border-radius:3px;margin-left:4px}
+.kt-bubble{background:#fff;border-radius:0 10px 10px 10px;padding:12px 14px;font-size:12px;line-height:1.8;color:#333;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.kt-co-name{font-weight:700;color:#1a1a1a;font-size:13px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #eee}
+.cmp-cons{margin-top:14px;display:flex;flex-direction:column;gap:7px}
+.cmp-con{display:flex;align-items:flex-start;gap:7px;font-size:12px;color:#aaa}
+.cmp-con::before{content:'✕';color:#d44;font-size:10px;font-weight:700;flex-shrink:0;margin-top:2px}
+.cmp-new{background:var(--cream);padding:22px 20px}
+.cmp-new-label{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:rgba(158,130,80,.12);color:var(--gold);padding:2px 9px;border-radius:20px;margin-bottom:10px}
+.cmp-pros{display:flex;flex-direction:column;gap:6px}
+.cmp-pro{display:flex;align-items:flex-start;gap:7px;font-size:13px;color:var(--ink2);line-height:1.6;padding:8px 12px;background:rgba(42,107,94,.06);border-radius:4px;border-left:2px solid rgba(42,107,94,.3)}
+.cmp-pro::before{content:'✓';color:var(--teal);font-size:10px;font-weight:700;flex-shrink:0;margin-top:3px}
+
+/* ── 메모리얼 페이지 섹션 ── */
+.memorial-sec{background:var(--ink);padding:40px 18px}
+.memorial-inner{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;max-width:960px;margin:0 auto}
+.memorial-phone{position:relative}
+.mp-frame{background:rgba(255,255,255,.04);border:1px solid rgba(200,169,110,.15);border-radius:14px;overflow:hidden;max-width:300px;margin:0 auto;box-shadow:0 16px 48px rgba(0,0,0,.3)}
+.mp-bar{background:rgba(200,169,110,.08);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(200,169,110,.1)}
+.mp-url{font-size:9px;color:rgba(200,169,110,.4);font-family:monospace}
+.mp-body{padding:16px}
+.mp-hero{text-align:center;padding:16px 0 14px;border-bottom:1px solid rgba(200,169,110,.1);margin-bottom:14px}
+.mp-photo{width:64px;height:64px;border-radius:50%;background:rgba(200,169,110,.12);border:2px solid rgba(200,169,110,.2);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:24px}
+.mp-name{font-family:var(--serif);font-size:18px;color:var(--cream);margin-bottom:2px}
+.mp-years{font-size:10px;color:rgba(200,169,110,.5)}
+.mp-quote{font-family:var(--serif);font-size:11px;font-style:italic;color:rgba(249,246,240,.5);margin-top:8px;line-height:1.6;padding:0 8px}
+.mp-tabs{display:flex;gap:2px;margin-bottom:12px}
+.mp-tab{flex:1;text-align:center;font-size:9px;padding:5px 2px;border-radius:3px;color:rgba(249,246,240,.4)}
+.mp-tab.act{background:rgba(200,169,110,.15);color:var(--gold2)}
+.mp-slide{background:rgba(255,255,255,.03);border-radius:6px;height:80px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;position:relative;overflow:hidden}
+.mp-slide-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.6));padding:6px 8px;font-size:9px;color:rgba(255,255,255,.7);font-family:var(--serif);font-style:italic}
+.mp-slide-ico{font-size:28px;opacity:.3}
+.mp-gb-item{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start}
+.mp-gb-av{width:22px;height:22px;border-radius:50%;background:rgba(200,169,110,.15);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--gold2);flex-shrink:0}
+.mp-gb-msg{font-size:10px;color:rgba(249,246,240,.5);line-height:1.5;font-family:var(--serif);font-style:italic}
+.memorial-copy{padding-left:8px}
+.memorial-copy .tt{color:var(--cream)}
+.memorial-copy .sb{color:rgba(249,246,240,.55)}
+.memorial-feat{display:flex;align-items:flex-start;gap:12px;margin-bottom:18px}
+.memorial-feat-ico{font-size:22px;flex-shrink:0;margin-top:2px}
+.memorial-feat-t{font-size:14px;font-weight:500;color:var(--cream);margin-bottom:3px}
+.memorial-feat-d{font-size:13px;color:rgba(249,246,240,.45);line-height:1.55}
+
+/* ── 답례장 섹션 ── */
+.reply-sec{background:var(--cream2);padding:40px 18px}
+.reply-inner{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start;max-width:960px;margin:24px auto 0}
+.reply-old{background:#fff;border-radius:8px;padding:22px;margin-bottom:20px}
+.reply-old-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#aaa;margin-bottom:10px}
+.reply-old-msg{font-family:var(--serif);font-size:14px;font-style:italic;color:#999;line-height:1.8;border-left:3px solid #eee;padding-left:12px;margin-bottom:10px}
+.reply-old-foot{font-size:12px;color:#ccc}
+.reply-divider{display:flex;align-items:center;gap:12px;margin:6px 0 20px;font-size:12px;color:var(--ink3)}
+.reply-divider::before,.reply-divider::after{content:'';flex:1;height:1px;background:rgba(24,22,15,.1)}
+.reply-new{background:var(--ink);border-radius:10px;padding:22px}
+.reply-new-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold2);margin-bottom:14px}
+.reply-new-msg{font-family:var(--serif);font-size:13px;font-style:italic;color:rgba(249,246,240,.72);line-height:1.9;border-left:2px solid rgba(200,169,110,.3);padding-left:12px;margin-bottom:10px}
+.reply-new-voice{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border-radius:4px;padding:8px 12px;font-size:12px;color:rgba(249,246,240,.5);margin-bottom:6px}
+.reply-new-voice .play{width:22px;height:22px;border-radius:50%;background:var(--gold2);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--ink);flex-shrink:0}
+.reply-new-footer{font-size:11px;color:rgba(249,246,240,.3);text-align:right;margin-top:8px}
+.reply-feats{display:flex;flex-direction:column;gap:16px}
+.reply-feat{display:flex;align-items:flex-start;gap:12px}
+.reply-feat-ico{font-size:20px;flex-shrink:0;margin-top:2px}
+.reply-feat-t{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:3px}
+.reply-feat-d{font-size:13px;color:var(--ink3);line-height:1.55}
+.reply-verdict{margin-top:24px;padding:18px 20px;background:var(--ink);border-radius:6px;font-family:var(--serif);font-size:15px;font-style:italic;color:rgba(249,246,240,.7);line-height:1.8;border-left:3px solid rgba(200,169,110,.4)}
+
+/* ── 49일 → 영원 ── */
+.forever-sec{background:var(--ink);padding:40px 18px}
+.forever-inner{max-width:800px;margin:0 auto}
+.timeline{margin-top:40px;position:relative}
+.timeline::before{content:'';position:absolute;left:24px;top:0;bottom:0;width:1px;background:rgba(200,169,110,.15)}
+.tl-item{display:flex;gap:20px;align-items:flex-start;margin-bottom:28px;position:relative}
+.tl-dot{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;position:relative;z-index:1}
+.tl-dot.dead{background:rgba(255,60,60,.1);border:1px solid rgba(255,60,60,.3)}
+.tl-dot.live{background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.25)}
+.tl-dot.forever{background:rgba(42,107,94,.2);border:1px solid rgba(42,107,94,.4)}
+.tl-body{padding-top:10px}
+.tl-label{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.tl-label.dead{color:rgba(255,100,100,.6)}
+.tl-label.live{color:var(--gold2)}
+.tl-label.forever{color:#7fd4c0}
+.tl-title{font-family:var(--serif);font-size:18px;font-weight:300;margin-bottom:4px}
+.tl-title.dead{color:rgba(255,80,80,.85);font-weight:400}
+.tl-title.live{color:var(--cream)}
+.tl-title.forever{color:#7fd4c0}
+.tl-desc{font-size:13px;color:rgba(249,246,240,.4);line-height:1.6}
+.tl-desc.live{color:rgba(249,246,240,.55)}
+
+/* ── 준비 섹션 ── */
+.ready-sec{background:var(--cream2);padding:52px 18px}
+.ready-inner{max-width:620px;margin:0 auto;text-align:center}
+.ready-candle{font-size:36px;margin-bottom:28px;display:block}
+.ready-tt{font-family:var(--serif);font-size:clamp(22px,3.5vw,38px);font-weight:300;line-height:1.55;color:var(--ink);margin-bottom:20px;word-break:keep-all}
+.ready-tt em{font-style:italic;color:var(--gold)}
+.ready-sub{font-size:15px;color:var(--ink3);line-height:1.8;margin-bottom:36px}
+.ready-btn{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:500;color:var(--ink);background:var(--gold2);padding:14px 36px;border-radius:var(--r);transition:all .25s;cursor:pointer;border:none;font-family:var(--sans)}
+.ready-btn:hover{background:var(--gold3)}
+.ready-tel{font-size:13px;color:var(--ink3);margin-top:16px}
+.ready-tel a{color:var(--gold)}
+
+/* ── 3단계 ── */
+.steps-sec{background:var(--ink);padding:40px 18px}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:820px;margin:24px auto 0;border-radius:6px;overflow:hidden;background:rgba(200,169,110,.08)}
+.step{background:rgba(255,255,255,.05);padding:24px 18px;text-align:center;position:relative;border:1px solid rgba(200,169,110,.08)}
+.step-num{font-family:var(--serif);font-size:28px;font-weight:300;color:rgba(200,169,110,.15);line-height:1;margin-bottom:4px}
+.step-ico{font-size:22px;margin-bottom:8px}
+.step-title{font-size:13px;font-weight:500;color:var(--cream);margin-bottom:5px}
+.step-desc{font-size:12px;color:rgba(249,246,240,.65);line-height:1.6}
+.step-time{font-size:11px;color:var(--gold2);margin-top:8px;font-weight:500}
+
+/* ── 후기 ── */
+.testi-sec{background:var(--cream2)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(24,22,15,.08);margin-top:28px}
+.tcard{background:var(--cream2);padding:22px 18px}
+.stars{font-size:10px;color:var(--gold);letter-spacing:3px;margin-bottom:10px}
+.ttext{font-family:var(--serif);font-size:13px;font-style:italic;color:var(--ink2);line-height:1.8;margin-bottom:10px}
+.tby{font-size:11px;color:var(--ink3)}
+.tby span{color:var(--gold)}
+.tplan{font-size:9px;font-weight:500;padding:1px 6px;border-radius:20px;background:rgba(158,130,80,.1);color:var(--gold);margin-left:4px}
+
+/* ── FAQ ── */
+.faq-sec{background:var(--cream)}
+.faq-inner{max-width:660px;margin:0 auto}
+.faq-item{border-bottom:1px solid rgba(24,22,15,.09);overflow:hidden}
+.faq-q{padding:15px 0;font-size:14px;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;transition:color .2s}
+.faq-q:hover{color:var(--gold)}
+.faq-arr{font-size:15px;color:var(--gold);flex-shrink:0;transition:transform .3s}
+.faq-item.open .faq-arr{transform:rotate(45deg)}
+.faq-a{font-size:13px;color:var(--ink2);line-height:1.8;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:15px}
+
+/* ── CTA ── */
+.cta-sec{padding:48px 18px;text-align:center;background:var(--ink);position:relative;overflow:hidden}
+.cta-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 100%,rgba(200,169,110,.06) 0%,transparent 65%);pointer-events:none}
+.cta-kicker{font-size:12px;font-weight:500;letter-spacing:.2em;color:rgba(200,169,110,.5);text-transform:uppercase;margin-bottom:16px;position:relative;z-index:1}
+.cta-tt{font-family:var(--serif);font-size:clamp(26px,4.2vw,50px);font-weight:300;line-height:1.2;color:var(--cream);margin-bottom:10px;position:relative;z-index:1;word-break:keep-all}
+.cta-tt em{font-style:italic;color:var(--gold2)}
+.cta-sb{font-size:15px;color:rgba(249,246,240,.5);max-width:400px;margin:0 auto 32px;line-height:1.7;position:relative;z-index:1}
+.cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;margin-bottom:18px}
+.btn-g{display:inline-flex;align-items:center;gap:7px;font-size:15px;font-weight:500;color:var(--ink);background:var(--gold2);padding:14px 36px;border-radius:var(--r);transition:all .25s}
+.btn-g:hover{background:var(--gold3);transform:translateY(-2px)}
+.btn-gh{display:inline-flex;align-items:center;gap:7px;font-size:15px;color:rgba(249,246,240,.55);border:1px solid rgba(249,246,240,.18);padding:14px 36px;border-radius:var(--r);transition:all .25s}
+.btn-gh:hover{border-color:var(--gold2);color:var(--gold2)}
+.cta-contact{font-size:14px;color:rgba(249,246,240,.3);position:relative;z-index:1}
+.cta-contact a{color:var(--gold2)}
+
+/* FOOTER */
+footer{background:#2c2c2c;padding:44px 56px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px}
+.ft-logo{font-family:var(--serif);font-size:18px;color:#f0ede8;margin-bottom:8px;letter-spacing:.04em}
+.ft-logo span{color:var(--gold2)}
+.ft-tag{font-size:13px;color:rgba(240,237,232,.55);line-height:1.8;margin-bottom:12px}
+.ft-ct{font-size:13px;color:rgba(240,237,232,.5);line-height:1.8}
+.ft-ct a{color:var(--gold2)}
+.ft-col-t{font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,237,232,.45);margin-bottom:12px}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:9px}
+.ft-links a{font-size:13px;color:rgba(240,237,232,.45);transition:color .2s}
+.ft-links a:hover{color:var(--gold2)}
+.ft-bot{background:#242424;padding:14px 56px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:7px;border-top:1px solid rgba(255,255,255,.07)}
+.ft-copy{font-size:12px;color:rgba(240,237,232,.35)}
+.kk-btn{position:fixed;bottom:24px;right:24px;z-index:150;width:48px;height:48px;border-radius:50%;background:#FEE500;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.18);font-size:20px;text-decoration:none;transition:transform .2s}
+.kk-btn:hover{transform:scale(1.1)}
+.mi{width:100%;padding:11px 13px;border:1px solid var(--cream3);border-radius:var(--r);font-size:14px;font-family:var(--sans);outline:none;background:var(--cream)}
+.mi:focus{border-color:var(--gold)}
+
+/* LANG BAR */
+#lang-bar{position:sticky;top:0;left:0;right:0;z-index:300;display:flex;gap:4px;padding:7px 16px;background:#0f0d09;border-bottom:1px solid rgba(200,169,110,.2);overflow-x:auto;scrollbar-width:none}
+#lang-bar::-webkit-scrollbar{display:none}
+.lang-btn{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:500;border:1px solid rgba(200,169,110,.28);background:transparent;color:rgba(249,246,240,.55);cursor:pointer;white-space:nowrap;font-family:var(--sans);transition:all .2s}
+.lang-btn .flag{font-size:13px}
+.lang-btn:hover{background:rgba(249,246,240,.06);color:rgba(249,246,240,.9)}
+.lang-btn.active{background:var(--gold2);border-color:var(--gold2);color:var(--ink)}
+
+/* MOBILE */
+.pc-only{display:block}.mo-only{display:none}
+@media(max-width:860px){
+  .pc-only{display:none!important}.mo-only{display:block!important}
+  .hero-body{padding:28px 16px 36px}
+  .hero-plan{padding:18px 16px}
+  .hero-analogy{max-width:100%;padding:12px 16px}
+  .hero-analogy-row{font-size:13px}
+  .cmp-wrap,.memorial-inner,.reply-inner{grid-template-columns:1fr}
+  .cmp-old,.cmp-new{padding:18px 16px}
+  .memorial-copy{padding-left:0;margin-top:0}
+  .reply-inner{margin-top:20px}
+  .steps-grid{grid-template-columns:1fr}
+  .step{padding:20px 16px!important}
+  .testi-grid{grid-template-columns:1fr}
+  .tcard{padding:18px 16px}
+  footer{grid-template-columns:1fr;gap:18px;padding:28px 16px}
+  .ft-bot{padding:10px 16px;flex-direction:column;gap:5px}
+  .sec,.compare-sec,.memorial-sec,.reply-sec,.forever-sec,.ready-sec,.steps-sec,.cta-sec,.faq-sec{padding:28px 16px}
+  .sh{margin-bottom:20px}
+  .testi-grid{gap:1px}
+}
+</style>
+</head>
+<body>
+<script>(function(){fetch('https://humandocu-server-production.up.railway.app/health').then(r=>{if(!r.ok)throw 0}).catch(()=>{var b=document.createElement('div');b.style.cssText='position:fixed;top:0;left:0;right:0;z-index:99999;background:#c0392b;color:#fff;text-align:center;padding:12px 16px;font-size:14px;font-family:sans-serif;line-height:1.6';b.textContent='⚠️ 현재 서비스 점검 중입니다. 곧 복구하겠습니다.';document.body.prepend(b)})})();</script>
+
+<div id="lang-bar">
+  <button class="lang-btn active" data-lang="KO"><span class="flag">🇰🇷</span> 한국어</button>
+  <button class="lang-btn" data-lang="EN"><span class="flag">🇺🇸</span> English</button>
+  <button class="lang-btn" data-lang="JP"><span class="flag">🇯🇵</span> 日本語</button>
+  <button class="lang-btn" data-lang="ZH"><span class="flag">🇨🇳</span> 中文</button>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="logo"><div class="logo-mark">H</div><span class="logo-text">휴먼다큐닷컴</span></a>
+  <ul class="nav-links">
+    <li><a href="#compare">비교</a></li>
+    <li><a href="#memorial-page">메모리얼 페이지</a></li>
+    <li><a href="#reply">답례장</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-tel">문의 <a href="tel:031-539-9709">031-539-9709</a></div>
+    <a href="https://humandocu.com/memorial-form.html" class="nav-btn">부고 만들기 →</a>
+  </div>
+</nav>
+
+<!-- ① HERO — 타이틀 + 청첩장 비유만 -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-body" style="padding-bottom:44px">
+    <div class="hero-eyebrow">
+      <span data-ko="humandocu.com · 모바일 부고 서비스" data-en="humandocu.com · Digital Memorial" data-jp="humandocu.com · モバイル訃報サービス" data-zh="humandocu.com · 移动讣告服务">humandocu.com · 모바일 부고 서비스</span>
+    </div>
+    <h1 class="hero-title">
+      <span data-ko="세상에서 가장 슬픈 소식이지만,<br><em>가장 아름다운 기록 되도록</em>" data-en="The hardest news to share —<br><em>made into the most meaningful record</em>" data-jp="世界で最も悲しいお知らせですが、<br><em>最も美しい記録となるように</em>" data-zh="世上最悲伤的消息,<br><em>但愿化作最美好的记录</em>">세상에서 가장 슬픈 소식이지만,<br><em>가장 아름다운 기록 되도록</em></span>
+    </h1>
+    <div class="hero-analogy">
+      <div class="hero-analogy-row">
+        <span class="hero-analogy-ico">💌</span>
+        <span data-ko="결혼 소식은 이제 모바일 청첩장으로 전합니다." data-en="Wedding invitations are now sent as mobile cards." data-jp="結婚の知らせは今やモバイル招待状で伝えます。" data-zh="婚礼通知现在通过手机请柬发送。">결혼 소식은 이제 모바일 청첩장으로 전합니다.</span>
+      </div>
+      <div class="hero-analogy-row">
+        <span class="hero-analogy-ico">📱</span>
+        <span data-ko="부고도, 이제 달라져야 합니다." data-en="Obituaries deserve the same transformation." data-jp="訃報も、今こそ変わるべきです。" data-zh="讣告，也应该与时俱进了。">부고도, 이제 달라져야 합니다.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 요금 카드 섹션 — 비교 다음에 위치 -->
+<!-- ② 비교 -->
+<section class="compare-sec" id="compare">
+  <div class="si">
+    <div class="sh ctr">
+      <div class="ey" data-ko="기존 vs 휴먼다큐" data-en="Traditional vs Humandocu" data-jp="既存 vs ヒューマンドキュ" data-zh="既有 vs 人文纪录">기존 vs 휴먼다큐</div>
+      <h2 class="tt" data-ko="받는 사람의 마음이<br><em>완전히 달라집니다</em>" data-en="The recipient's experience<br><em>is completely different</em>" data-jp="受け取る人の心が<br><em>まったく変わります</em>" data-zh="接收者的感受<br><em>截然不同</em>">받는 사람의 마음이<br><em>완전히 달라집니다</em></h2>
+    </div>
+    <div class="cmp-wrap">
+      <!-- 왼쪽: 실제 알림톡 재현 -->
+      <div class="cmp-old">
+        <div class="cmp-old-label">기존 — 상조회사 알림톡</div>
+        <div class="cmp-old-head">매번 이런 메시지를 받으셨을 겁니다</div>
+
+        <!-- 카카오 알림톡 실제감 있게 -->
+        <div style="background:#b2c7d8;border-radius:16px;padding:0;overflow:hidden;max-width:290px;box-shadow:0 2px 12px rgba(0,0,0,.15)">
+          <!-- 상단 바 -->
+          <div style="background:#5b2d8e;padding:10px 14px;display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="width:26px;height:26px;background:#fff;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <div style="width:14px;height:10px;background:#5b2d8e;border-radius:2px;position:relative">
+                  <div style="position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:4px solid #5b2d8e"></div>
+                </div>
+              </div>
+              <div>
+                <div style="font-size:12px;font-weight:700;color:#fff;line-height:1.2">○○상조</div>
+                <div style="font-size:9px;color:rgba(255,255,255,.7)">카카오 알림톡</div>
+              </div>
+            </div>
+            <div style="font-size:9px;color:rgba(255,255,255,.5)">오전 10:32</div>
+          </div>
+          <!-- 말풍선 영역 -->
+          <div style="padding:12px 10px">
+            <div style="background:#fff;border-radius:4px 14px 14px 14px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,.1)">
+              <div style="font-size:12px;font-weight:700;color:#222;padding-bottom:9px;margin-bottom:9px;border-bottom:1px solid #f0f0f0;letter-spacing:-.01em">부고 안내</div>
+              <div style="display:flex;gap:0;margin-bottom:3px">
+                <span style="font-size:11px;color:#999;width:36px;flex-shrink:0">고인</span>
+                <span style="font-size:11px;color:#222;font-weight:500">故 홍○○</span>
+              </div>
+              <div style="display:flex;gap:0;margin-bottom:9px">
+                <span style="font-size:11px;color:#999;width:36px;flex-shrink:0">관계</span>
+                <span style="font-size:11px;color:#222;font-weight:500">부친상</span>
+              </div>
+              <div style="border-top:1px solid #f0f0f0;margin-bottom:9px"></div>
+              <div style="display:flex;gap:0;margin-bottom:3px">
+                <span style="font-size:11px;color:#999;width:36px;flex-shrink:0">입실</span>
+                <span style="font-size:11px;color:#222;font-weight:500">3월 16일 오후 2시</span>
+              </div>
+              <div style="display:flex;gap:0;margin-bottom:3px">
+                <span style="font-size:11px;color:#999;width:36px;flex-shrink:0">발인</span>
+                <span style="font-size:11px;color:#222;font-weight:500">3월 17일 오전 9시</span>
+              </div>
+              <div style="display:flex;gap:0;margin-bottom:9px">
+                <span style="font-size:11px;color:#999;width:36px;flex-shrink:0">장지</span>
+                <span style="font-size:11px;color:#222;font-weight:500">○○병원 3호실</span>
+              </div>
+              <div style="background:#f7f7f7;border-radius:4px;padding:8px 10px;font-size:11px;color:#555;line-height:1.6">
+                <strong style="color:#333">조의금</strong><br>
+                신한 110-○○○-○○○○○○<br>홍○○
+              </div>
+            </div>
+            <!-- 하단 버튼 -->
+            <div style="display:flex;gap:1px;margin-top:2px">
+              <div style="flex:1;background:#fff;border-radius:0 0 0 12px;padding:9px 4px;text-align:center;font-size:10px;color:#5b2d8e;font-weight:600">
+                <div style="font-size:13px;margin-bottom:1px">📢</div>부고 공유하기
+              </div>
+              <div style="flex:1;background:#fff;padding:9px 4px;text-align:center;font-size:10px;color:#5b2d8e;font-weight:600">
+                <div style="font-size:13px;margin-bottom:1px">🌸</div>근조화환 보내기
+              </div>
+              <div style="flex:1;background:#fff;border-radius:0 0 12px 0;padding:9px 4px;text-align:center;font-size:10px;color:#5b2d8e;font-weight:600">
+                <div style="font-size:13px;margin-bottom:1px">🛒</div>장례상품 보기
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cmp-cons">
+          <div class="cmp-con" data-ko="고인이 어떤 분이었는지 전혀 알 수 없음" data-en="No sense of who the deceased really was">고인이 어떤 분이었는지 전혀 알 수 없음</div>
+          <div class="cmp-con" data-ko="장례 3일 후 접속도 데이터도 모두 소멸" data-en="Access and data disappear 3 days after the funeral">장례 3일 후 접속도 데이터도 모두 소멸</div>
+          <div class="cmp-con" data-ko="개인화 불가 — 모든 가족이 똑같은 틀" data-en="No personalization — the same template for everyone">개인화 불가 — 모든 가족이 똑같은 틀</div>
+          <div class="cmp-con" data-ko="감사 인사를 전할 방법이 없음" data-en="No way to express gratitude to mourners">감사 인사를 전할 방법이 없음</div>
+        </div>
+      </div>
+
+      <!-- 오른쪽: 텍스트만, 카드 없음 -->
+      <div class="cmp-new">
+        <div class="cmp-new-label">휴먼다큐 — 이렇게 달라집니다</div>
+        <p style="font-size:13px;color:var(--ink3);margin-bottom:20px;line-height:1.6" data-ko="링크 하나로 전달합니다.<br>열면 그분의 인생이 거기 있습니다." data-en="Delivered as a single link.<br>Open it — their whole life is there.">링크 하나로 전달합니다.<br>열면 그분의 인생이 거기 있습니다.</p>
+        <div class="cmp-pros" style="margin-bottom:24px">
+          <div class="cmp-pro" data-ko="<strong>메모리얼 페이지</strong> — 영정사진·생애사진 슬라이드쇼·BGM·고인의 이야기·디지털 방명록" data-en="<strong>Memorial Page</strong> — portrait · life slideshow · BGM · life story · digital guestbook"><strong>메모리얼 페이지</strong> — 영정사진·생애사진 슬라이드쇼·BGM·고인의 이야기·디지털 방명록</div>
+          <div class="cmp-pro" data-ko="<strong>49일 유지 → 아카이브 영구 보존</strong> — 기일마다 알림" data-en="<strong>49 days → permanent archive</strong> — anniversary reminders"><strong>49일 유지 → 아카이브 영구 보존</strong> — 기일마다 알림</div>
+          <div class="cmp-pro" data-ko="<strong>세상에 없던 답례장</strong> — AI 추모문구·고인 육성·상주 육성 인사" data-en="<strong>A letter of gratitude unlike any other</strong> — AI tribute · voice messages"><strong>세상에 없던 답례장</strong> — AI 추모문구·고인 육성·상주 육성 인사</div>
+          <div class="cmp-pro" data-ko="<strong>조문객이 상주에게 위로 문자</strong>를 바로 보낼 수 있음" data-en="<strong>Mourners can reply</strong> with a message of comfort instantly"><strong>조문객이 상주에게 위로 문자</strong>를 바로 보낼 수 있음</div>
+        </div>
+        <a href="https://humandocu.com/bugo/adv-정재무.html" target="_blank" style="display:block;padding:13px 16px;background:var(--gold2);border-radius:var(--r);font-size:14px;font-weight:500;color:var(--ink);text-align:center;margin-bottom:8px" data-ko="부고문 샘플 직접 보기 →" data-en="View obituary sample →">부고문 샘플 직접 보기 →</a>
+        <a href="https://humandocu.com/bugo/damnyejang-정재무.html" target="_blank" style="display:block;padding:12px 16px;border:1px solid rgba(158,130,80,.3);border-radius:var(--r);font-size:14px;color:var(--gold);text-align:center" data-ko="답례장 샘플 직접 보기 →" data-en="View letter of gratitude sample →">답례장 샘플 직접 보기 →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- 요금 카드 섹션 -->
+<section style="background:var(--ink);padding:0 18px 40px;display:flex;flex-direction:column;align-items:center" id="pricing">
+  <div class="hero-plan" style="margin-top:0">
+    <div class="plan-tag" data-ko="✦ 프리미엄 메모리얼 · 단일 플랜" data-en="✦ Premium Memorial · Single Plan" data-jp="✦ プレミアムメモリアル · 単一プラン" data-zh="✦ 高级纪念馆 · 단일 套餐">✦ 프리미엄 메모리얼 · 단일 플랜</div>
+    <div class="plan-price">
+      <span style="color:rgba(249,246,240,.35);text-decoration:line-through;font-size:0.55em;vertical-align:middle">₩29,000</span><br>
+      <span style="color:#a8d878;font-weight:600">베타 기간 무료</span>
+      <div style="font-size:11px;color:rgba(249,246,240,.4);margin-top:6px;font-weight:400">베타 기간 종료 시 유료 전환 예정</div>
+    </div>
+    <span class="plan-dur" data-ko="49재까지 함께" data-en="Together for 49 days" data-jp="49日まで一緒に" data-zh="陪伴至四十九天祭">49재까지 함께</span>
+    <ul class="plan-feats">
+      <li data-ko="✅ 10분 내 차별화된 부고문 이메일 도착" data-en="✅ Obituary delivered within 10 minutes" data-jp="✅ 10分以内に訃報文メール到着" data-zh="✅ 10分钟内收到讣告文邮件">✅ 10분 내 차별화된 부고문 이메일 도착</li>
+      <li data-ko="✅ 메모리얼 페이지 — 고인의 생애 · 사진 슬라이드쇼 · BGM · 방명록" data-en="✅ Memorial Page — life story · photo slideshow · BGM · guestbook" data-jp="✅ メモリアルページ — 故人の生涯・写真スライドショー・BGM・芳名録" data-zh="✅ 纪念馆页面 — 生平·幻灯片·背景音乐·留言簿">✅ 메모리얼 페이지 — 고인의 생애 · 사진 슬라이드쇼 · BGM · 방명록</li>
+      <li data-ko="✅ 세상에 없던 답례장 — 고인 육성 · 상주 육성 · AI 추모문구" data-en="✅ A letter of gratitude unlike any other — voice messages · AI tribute" data-jp="✅ 世になかった礼状 — 故人の肉声・喪主の肉声・AI追悼文" data-zh="✅ 世上独一无二的答礼函 — 故人音频·主丧音频·AI追悼文">✅ 세상에 없던 답례장 — 고인 육성 · 상주 육성 · AI 추모문구</li>
+      <li data-ko="✅ 49일 유지 후 휴먼다큐 아카이브 영구 이관" data-en="✅ 49-day memorial then permanent archive transfer" data-jp="✅ 49日維持後ヒューマンドキュアーカイブ永久移管" data-zh="✅ 维持49天后永久移入档案库">✅ 49일 유지 후 휴먼다큐 아카이브 영구 이관</li>
+    </ul>
+    <a href="https://humandocu.com/memorial-form.html" class="plan-btn" data-ko="지금 신청하기 →" data-en="Apply Now →" data-jp="今申し込む →" data-zh="现在申请 →" style="display:block;text-align:center;text-decoration:none">지금 신청하기 →</a>
+  </div>
+</section>
+
+<!-- ③ 메모리얼 페이지 -->
+<section class="memorial-sec" id="memorial-page">
+  <div class="si">
+    <div style="max-width:680px;margin:0 auto">
+      <div class="ey" style="color:rgba(200,169,110,.5)">메모리얼 페이지</div>
+      <h2 class="tt tt-cream" style="margin-bottom:14px" data-ko="링크를 클릭하면,<br><em>그분의 인생이 거기 있습니다.</em>" data-en="Click the link —<br><em>their whole life is there.</em>" data-jp="リンクをクリックすると、<br><em>その方の人生がそこにあります。</em>" data-zh="点击链接，<br><em>他们的一生就在那里。</em>">링크를 클릭하면,<br><em>그분의 인생이 거기 있습니다.</em></h2>
+      <p class="sb" style="color:rgba(249,246,240,.5);margin-bottom:28px" data-ko="부고문은 입구입니다. 안으로 들어오면 — 영정사진, 생애사진 슬라이드쇼, BGM, 고인의 이야기, 디지털 방명록. 조문객은 링크 하나로 그분을 처음 만납니다. 그분이 어떤 삶을 사셨는지, 어떤 분이었는지. 그리고 거기에 자신의 마음을 남깁니다." data-en="The obituary is the entrance. Inside — portrait, life photo slideshow, BGM, the story of their life, a digital guestbook. Mourners meet the person for the first time through a single link. And they leave something of themselves there.">부고문은 입구입니다. 안으로 들어오면 — 영정사진, 생애사진 슬라이드쇼, BGM, 고인의 이야기, 디지털 방명록. 조문객은 링크 하나로 그분을 처음 만납니다. 그분이 어떤 삶을 사셨는지, 어떤 분이었는지. 그리고 거기에 자신의 마음을 남깁니다.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:rgba(255,255,255,.04);border-radius:6px;overflow:hidden;margin-bottom:24px">
+        <div style="background:rgba(255,255,255,.03);padding:18px 16px">
+          <div style="font-size:20px;margin-bottom:8px">🎞</div>
+          <div style="font-size:13px;font-weight:500;color:var(--cream);margin-bottom:4px" data-ko="슬라이드쇼 · BGM" data-en="Slideshow · BGM">슬라이드쇼 · BGM</div>
+          <div style="font-size:12px;color:rgba(249,246,240,.4);line-height:1.5" data-ko="영정사진 액자 + 생애사진이 음악과 함께 흐릅니다." data-en="Portrait frame + life photos flow gently with music.">영정사진 액자 + 생애사진이 음악과 함께 흐릅니다.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.03);padding:18px 16px">
+          <div style="font-size:20px;margin-bottom:8px">📖</div>
+          <div style="font-size:13px;font-weight:500;color:var(--cream);margin-bottom:4px" data-ko="생애 연대기" data-en="Life Timeline">생애 연대기</div>
+          <div style="font-size:12px;color:rgba(249,246,240,.4);line-height:1.5" data-ko="태어나서 지금까지. 가족만이 아는 이야기가 기록으로 남습니다." data-en="From birth to now. Stories only the family knows — preserved.">태어나서 지금까지. 가족만이 아는 이야기가 기록으로 남습니다.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.03);padding:18px 16px">
+          <div style="font-size:20px;margin-bottom:8px">🕯</div>
+          <div style="font-size:13px;font-weight:500;color:var(--cream);margin-bottom:4px" data-ko="디지털 방명록" data-en="Digital Guestbook">디지털 방명록</div>
+          <div style="font-size:12px;color:rgba(249,246,240,.4);line-height:1.5" data-ko="조문객이 마음을 남기고, 상주가 실시간으로 확인합니다." data-en="Mourners leave messages. The family reads them in real time.">조문객이 마음을 남기고, 상주가 실시간으로 확인합니다.</div>
+        </div>
+      </div>
+
+      <a href="https://kiki4i.github.io/humandocu/bugo/adv-memorial-정재무.html" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.25);border-radius:var(--r);font-size:13px;color:var(--gold2)" data-ko="메모리얼 페이지 샘플 직접 보기 →" data-en="View memorial page sample →">메모리얼 페이지 샘플 직접 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ④ 답례장 -->
+<section class="reply-sec" id="reply">
+  <div class="si">
+    <div class="sh">
+      <div class="ey" data-ko="발인 다음날 · 이메일로 수신 후 직접 전달" data-en="Day after funeral · Received by email, shared by you">발인 다음날 · 이메일로 수신 후 직접 전달</div>
+      <h2 class="tt" data-ko="세상에 없던 답례장" data-en="A letter of gratitude unlike any other" data-jp="世になかった答礼状" data-zh="世上独一无二的答礼函">세상에 없던 답례장</h2>
+      <p class="sb" data-ko="고인의 이야기가, 상주의 마음이 담깁니다." data-en="It carries the story of the deceased — and the heart of the bereaved." data-jp="故人の話と、喪主の心が込められています。" data-zh="融入故人的故事与主丧人的心意。">고인의 이야기가, 상주의 마음이 담깁니다.</p>
+    </div>
+    <div class="reply-inner">
+      <!-- 왼쪽: 기존 → 새로운 -->
+      <div>
+        <div class="reply-old">
+          <div class="reply-old-label">기존 답례장</div>
+          <div class="reply-old-msg">"따뜻한 위로의 말씀 감사드립니다.<br>많은 분들의 마음 덕분에 장례를 잘 마무리했습니다."</div>
+          <div class="reply-old-foot">문자 한 줄. 그게 전부였습니다.</div>
+        </div>
+        <div class="reply-divider">휴먼다큐는 완전히 다른 개념입니다</div>
+        <div class="reply-new">
+          <div class="reply-new-label">휴먼다큐 답례장</div>
+          <div class="reply-new-msg" data-ko="평생 가족의 뒤에서 빛이 되어주신 아버지를 보내는 길에, 소중한 마음들로 함께해 주셔서 마음 깊이 고맙습니다. 어려운 시간을 버텨낼 수 있었던 것은 여러분의 따뜻한 위로 덕분이었습니다." data-en="Thank you from the depths of our hearts for walking with us as we said farewell to our father, who was the quiet light behind our family. Your warmth helped us through the hardest hours.">"평생 가족의 뒤에서 빛이 되어주신 아버지를 보내는 길에, 소중한 마음들로 함께해 주셔서 마음 깊이 고맙습니다."</div>
+          <div class="reply-new-voice">
+            <div class="play">▶</div>
+            <span data-ko="고인 육성 — 생전 감사 인사" data-en="Deceased's voice — recorded gratitude">고인 육성 — 생전 감사 인사</span>
+          </div>
+          <div class="reply-new-voice">
+            <div class="play">▶</div>
+            <span data-ko="상주 육성 — 직접 녹음한 감사 인사" data-en="Bereaved family's voice — personally recorded">상주 육성 — 직접 녹음한 감사 인사</span>
+          </div>
+          <div class="reply-new-footer" data-ko="— 상주 정성연 올림" data-en="— From the bereaved family">— 상주 정성연 올림</div>
+        </div>
+      </div>
+      <!-- 오른쪽: 특징 -->
+      <div class="reply-feats">
+        <div class="reply-feat">
+          <div class="reply-feat-ico">🎬</div>
+          <div>
+            <div class="reply-feat-t" data-ko="장례 전 과정을 영상으로" data-en="The entire funeral journey — in video">장례 전 과정을 영상으로</div>
+            <div class="reply-feat-d" data-ko="장례식부터 발인까지의 과정을 영상으로 담아, 조문객이 다시 한번 그분을 기억할 수 있도록 합니다." data-en="From the funeral service to the final farewell — captured on video, so mourners can remember them once more.">장례식부터 발인까지의 과정을 영상으로 담아, 조문객이 다시 한번 그분을 기억할 수 있도록 합니다.</div>
+          </div>
+        </div>
+        <div class="reply-feat">
+          <div class="reply-feat-ico">🔊</div>
+          <div>
+            <div class="reply-feat-t" data-ko="고인의 마지막 육성 · 상주의 감사 인사" data-en="The deceased's final voice · the family's gratitude">고인의 마지막 육성 · 상주의 감사 인사</div>
+            <div class="reply-feat-d" data-ko="AI가 쓴 문장, 고인의 생전 목소리, 상주가 직접 녹음한 감사 인사가 함께 전해집니다." data-en="AI-written words, the deceased's recorded voice, and the family's own recorded message — all delivered together.">AI가 쓴 문장, 고인의 생전 목소리, 상주가 직접 녹음한 감사 인사가 함께 전해집니다.</div>
+          </div>
+        </div>
+        <div class="reply-feat">
+          <div class="reply-feat-ico">💬</div>
+          <div>
+            <div class="reply-feat-t" data-ko="조문객이 상주에게 위로 문자를 보낼 수 있습니다" data-en="Mourners can send a message of comfort back">조문객이 상주에게 위로 문자를 보낼 수 있습니다</div>
+            <div class="reply-feat-d" data-ko="감사가 위로로, 위로가 다시 감사로. 답례장을 받은 조문객이 한 번의 터치로 상주에게 마음을 전할 수 있습니다." data-en="Gratitude becomes comfort, comfort becomes gratitude. Mourners can reach back to the family with a single tap.">감사가 위로로, 위로가 다시 감사로. 답례장을 받은 조문객이 한 번의 터치로 상주에게 마음을 전할 수 있습니다.</div>
+          </div>
+        </div>
+        <div class="reply-verdict" data-ko="&ldquo;이런 인사는 처음 받아봤어요.&rdquo;" data-en="&ldquo;I've never received anything like this before.&rdquo;" data-jp="&ldquo;こんな挨拶は初めて受け取りました。&rdquo;" data-zh="&ldquo;我从未收到过这样的致谢。&rdquo;">&ldquo;이런 인사는 처음 받아봤어요.&rdquo;</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ 49일 → 영원 -->
+<section class="forever-sec" id="forever">
+  <div class="si">
+    <div class="forever-inner">
+      <div class="sh ctr">
+        <div class="ey" style="color:rgba(200,169,110,.5)">기존 서비스 vs 휴먼다큐</div>
+        <h2 class="tt tt-cream" data-ko="기존 부고는 장례가 끝나면<br><em>접속도, 데이터도 모두 사라집니다.</em>" data-en="With traditional services, once the funeral ends —<br><em>access gone. data gone.</em>" data-jp="既存の訃報サービスは葬儀が終われば<br><em>アクセスも、データもすべて消えます。</em>" data-zh="传统讣告服务，葬礼结束后<br><em>访问和数据全部消失。</em>">기존 부고는 장례가 끝나면<br><em>접속도, 데이터도 모두 사라집니다.</em></h2>
+        <p class="sb ctr" style="color:rgba(249,246,240,.45);margin:12px auto 0" data-ko="우리는 49일, 그리고 영원히." data-en="We stay for 49 days — and then forever." data-jp="私たちは49日、そして永遠に。" data-zh="我们陪伴49天，然后永远。">우리는 49일, 그리고 영원히.</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot dead">⚰️</div>
+          <div class="tl-body">
+            <div class="tl-label dead">기존 서비스</div>
+            <div class="tl-title dead" data-ko="장례 3일 후 — 모두 소멸" data-en="3 days after funeral — everything gone">장례 3일 후 — 모두 소멸</div>
+            <div class="tl-desc" data-ko="접속 불가. 방명록 소멸. 고인의 기록 어디에도 남지 않습니다." data-en="No access. Guestbook gone. No record of the deceased remains anywhere.">접속 불가. 방명록 소멸. 고인의 기록 어디에도 남지 않습니다.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot live">🕯</div>
+          <div class="tl-body">
+            <div class="tl-label live">휴먼다큐</div>
+            <div class="tl-title live" data-ko="49일간 — 온라인 추모관 유지" data-en="49 days — online memorial stays open">49일간 — 온라인 추모관 유지</div>
+            <div class="tl-desc live" data-ko="사진 슬라이드쇼, BGM, 디지털 방명록. 가족과 조문객이 언제든 그분을 기억하고 마음을 남길 수 있습니다." data-en="Photo slideshow, BGM, digital guestbook. Family and mourners can remember and leave messages anytime.">사진 슬라이드쇼, BGM, 디지털 방명록. 가족과 조문객이 언제든 그분을 기억하고 마음을 남길 수 있습니다.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot forever">🗂</div>
+          <div class="tl-body">
+            <div class="tl-label forever">49재 후</div>
+            <div class="tl-title forever" data-ko="아카이브 이관 — 영구 보존" data-en="Archive transfer — preserved forever">아카이브 이관 — 영구 보존</div>
+            <div class="tl-desc live" data-ko="원클릭으로 고인의 모든 기록이 휴먼다큐 아카이브로 이관됩니다." data-en="One click — all records transfer to the Humandocu Archive.">원클릭으로 고인의 모든 기록이 휴먼다큐 아카이브로 이관됩니다.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot forever">🔔</div>
+          <div class="tl-body">
+            <div class="tl-label forever">그 이후</div>
+            <div class="tl-title forever" data-ko="기일마다 알림 — 잊지 않도록" data-en="Anniversary reminders — so you never forget">기일마다 알림 — 잊지 않도록</div>
+            <div class="tl-desc live" data-ko="100일 · 1주기 · 2주기… 기억은 사라지지 않습니다." data-en="100 days · 1st anniversary · 2nd anniversary… Memory doesn't fade.">100일 · 1주기 · 2주기… 기억은 사라지지 않습니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ 준비 섹션 -->
+<section class="ready-sec">
+  <div class="ready-inner">
+    <span class="ready-candle">🕯</span>
+    <h2 class="ready-tt" data-ko="혹시 누군가의 마지막을<br>준비하고 계신가요.<br><br><em>그분은 분명<br>기억받으실 만한 삶을 사셨습니다.</em>" data-en="Are you preparing for<br>someone's final farewell?<br><br><em>They have lived a life<br>worth remembering.</em>" data-jp="どなたかの最期を<br>準備されていますか。<br><br><em>その方は必ず<br>記憶されるべき人生を生きられました。</em>" data-zh="您是否正在准备<br>某人的最后告别?<br><br><em>他们一定过着<br>值得被铭记的人生。</em>">혹시 누군가의 마지막을<br>준비하고 계신가요.<br><br><em>그분은 분명<br>기억받으실 만한 삶을 사셨습니다.</em></h2>
+    <p class="ready-sub" data-ko="휴먼다큐 메모리얼이 함께 합니다." data-en="Humandocu Memorial is here with you." data-jp="ヒューマンドキュ メモリアルが共にいます。" data-zh="人文纪录纪念馆与您同在。">휴먼다큐 메모리얼이 함께 합니다.</p>
+    <a href="https://humandocu.com/memorial-form.html" class="ready-btn" data-ko="지금 신청하기 →" data-en="Apply Now →" data-jp="今申し込む →" data-zh="现在申请 →" style="display:inline-block;text-align:center;text-decoration:none">지금 신청하기 →</a>
+    <div class="ready-tel">또는 전화로 문의하세요 &nbsp;<a href="tel:031-539-9709">031-539-9709</a></div>
+  </div>
+</section>
+
+<!-- ⑦ 3단계 -->
+<section class="steps-sec" id="steps">
+  <div class="si">
+    <div class="sh ctr">
+      <div class="ey" style="color:rgba(200,169,110,.5)">신청 과정</div>
+      <h2 class="tt tt-cream" data-ko="3분 입력 · <em>10분 내 완성</em>" data-en="3 minutes · <em>ready in 10</em>" data-jp="3分入力 · <em>10分以内に完成</em>" data-zh="3分钟输入 · <em>10分钟内完成</em>">3분 입력 · <em>10분 내 완성</em></h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-ico">📱</div>
+        <div class="step-title" data-ko="신청 폼 작성" data-en="Fill out the application form">신청 폼 작성</div>
+        <div class="step-desc" data-ko="고인의 이름 · 생년월일 · 장례 일정 · 가족 이야기를 입력합니다." data-en="Enter the name, dates, funeral schedule, and a few words about the deceased.">고인의 이름 · 생년월일 · 장례 일정 · 가족 이야기를 입력합니다.</div>
+        <div class="step-time">⏱ 3분</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-ico">📧</div>
+        <div class="step-title" data-ko="이메일로 부고 링크 수신" data-en="Receive the obituary link by email">이메일로 부고 링크 수신</div>
+        <div class="step-desc" data-ko="AI가 추모문구를 완성하고 부고 링크가 즉시 도착합니다. 카카오톡으로 바로 공유하세요." data-en="AI completes the tribute and the link arrives instantly. Share it on KakaoTalk right away.">AI가 추모문구를 완성하고 부고 링크가 즉시 도착합니다. 카카오톡으로 바로 공유하세요.</div>
+        <div class="step-time">⏱ 10분 내</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-ico">💌</div>
+        <div class="step-title" data-ko="발인 다음날 · 답례장 이메일 수신" data-en="Day after funeral · Receive the letter of gratitude">발인 다음날 · 답례장 이메일 수신</div>
+        <div class="step-desc" data-ko="AI가 고인의 생애를 담아 개인화 답례장을 작성합니다. 이메일로 받아 카카오톡으로 직접 전달하세요." data-en="AI writes a personalized letter rooted in the deceased's story. You receive it by email and share it yourself.">AI가 고인의 생애를 담아 개인화 답례장을 작성합니다. 이메일로 받아 카카오톡으로 직접 전달하세요.</div>
+        <div class="step-time">발인 다음날</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑧ 후기 -->
+<section class="sec testi-sec">
+  <div class="si">
+    <div class="sh ctr">
+      <div class="ey">이용 후기</div>
+      <h2 class="tt" data-ko="직접 경험하신<br><em>분들의 이야기</em>" data-en="From those<br><em>who experienced it</em>">직접 경험하신<br><em>분들의 이야기</em></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="tcard">
+        <div class="stars">★★★★★</div>
+        <p class="ttext">&ldquo;장례 당일 신청했는데 10분 만에 링크가 왔어요. 조문객분들이 추모 영상 보면서 다들 눈물을 흘리셨습니다.&rdquo;</p>
+        <div class="tby"><span>김○○</span> · 50대 · 서울 <span class="tplan">프리미엄</span></div>
+      </div>
+      <div class="tcard">
+        <div class="stars">★★★★★</div>
+        <p class="ttext">&ldquo;발인 다음날 답례장이 자동으로 왔는데, AI가 써준 문구가 너무 감동적이었어요. '이런 인사는 처음 받아봤다'고 연락이 왔습니다.&rdquo;</p>
+        <div class="tby"><span>박○○</span> · 40대 · 부산 <span class="tplan">프리미엄</span></div>
+      </div>
+      <div class="tcard">
+        <div class="stars">★★★★★</div>
+        <p class="ttext">&ldquo;흑백 사진을 복원해주셔서 아버지의 젊은 시절을 처음 봤어요. 49재가 지나도 아카이브에 남아있어 온 가족이 감사했습니다.&rdquo;</p>
+        <div class="tby"><span>이○○</span> · 60대 · 대구 <span class="tplan">프리미엄</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑨ FAQ -->
+<section class="sec faq-sec" id="faq">
+  <div class="si">
+    <div class="sh ctr" style="max-width:660px;margin:0 auto 36px">
+      <div class="ey">자주 묻는 질문</div>
+      <h2 class="tt"><em>궁금한 점</em>을 해결해 드립니다</h2>
+    </div>
+    <div class="faq-inner">
+      <div class="faq-item open"><div class="faq-q" onclick="faq(this)"><span>얼마나 빨리 완성되나요?</span><span class="faq-arr">+</span></div><div class="faq-a">신청 후 10분 내 차별화된 부고문이 이메일로 발송됩니다. 영정사진·생애사진이 포함된 완성본은 별도 안내 후 완성됩니다.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span>49재 이후에는 어떻게 되나요?</span><span class="faq-arr">+</span></div><div class="faq-a">49재 종료 시 자동으로 안내가 발송됩니다. 원클릭으로 휴먼다큐 아카이브에 이관하시면 기일마다 알림을 받으실 수 있습니다.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span>답례장은 어떻게 발송되나요?</span><span class="faq-arr">+</span></div><div class="faq-a">발인 다음날 AI가 자동으로 개인화 답례장을 작성해 이메일로 발송합니다. 상주분이 카카오톡으로 직접 전달하시면 됩니다.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span>스마트폰 조작이 서툰데 이용할 수 있나요?</span><span class="faq-arr">+</span></div><div class="faq-a">네, 전화나 문자로 도와드립니다. 📞 031-539-9709로 연락 주시면 처음부터 안내해 드립니다.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span>메모리얼 페이지와 부고문의 차이가 뭔가요?</span><span class="faq-arr">+</span></div><div class="faq-a">부고문은 장례 정보와 추모문구가 담긴 입구입니다. 메모리얼 페이지는 그 안에서 고인의 생애 연대기, 생애사진 슬라이드쇼, BGM, 디지털 방명록 등 고인의 이야기 전체를 담은 공간입니다.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 식스샷 섹션 -->
+<section style="background:var(--cream2);padding:60px 18px;text-align:center">
+  <div style="max-width:600px;margin:0 auto">
+    <div style="font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:16px"
+      data-ko="MY SIX SHOT · 인생 식스샷 · 무료"
+      data-en="MY SIX SHOT · Six Shot · Free"
+      data-jp="MY SIX SHOT · 人生シックスショット · 無料"
+      data-zh="MY SIX SHOT · 人生六格照 · 免费">MY SIX SHOT · 인생 식스샷 · 무료</div>
+    <h2 style="font-family:var(--serif);font-size:clamp(24px,4vw,38px);font-weight:300;line-height:1.5;color:var(--ink);margin-bottom:16px;word-break:keep-all"
+      data-ko="언젠가를 위해,<br><em style='font-style:italic;color:var(--amber)'>지금 내 이야기를 남겨두세요</em>"
+      data-en="For the day that comes —<br><em style='font-style:italic;color:var(--amber)'>leave your story now</em>"
+      data-jp="いつかのために、<br><em style='font-style:italic;color:var(--amber)'>今、自分の物語を残しておいて</em>"
+      data-zh="为了那一天，<br><em style='font-style:italic;color:var(--amber)'>现在留下你的故事</em>">언젠가를 위해,<br><em style="font-style:italic;color:var(--amber)">지금 내 이야기를 남겨두세요</em></h2>
+    <p style="font-size:14px;font-weight:300;color:rgba(26,22,16,.58);line-height:1.9;max-width:460px;margin:0 auto 28px"
+      data-ko="부고를 준비할 때 가장 힘든 것 중 하나는 고인의 이야기를 급하게 정리하는 것입니다. 식스샷으로 미리 내 이야기를 남겨두세요."
+      data-en="One of the hardest parts of preparing an obituary is gathering the story in a rush. Leave your story behind in advance with Six Shot."
+      data-jp="訃報を準備するとき、最も辛いことの一つは故人の話を急いでまとめることです。シックスショットで、あらかじめ自分の話を残しておきましょう。"
+      data-zh="准备讣告时最困难的事情之一，就是仓促整理逝者的故事。请提前用六格照留下您自己的故事。">부고를 준비할 때 가장 힘든 것 중 하나는 고인의 이야기를 급하게 정리하는 것입니다. 식스샷으로 미리 내 이야기를 남겨두세요.</p>
+    <a href="/sixshot.html" style="display:inline-block;background:var(--amber);color:#fff;font-family:var(--sans);font-size:14px;font-weight:500;padding:14px 32px;border-radius:var(--r);text-decoration:none;letter-spacing:.04em;margin-bottom:10px;transition:background .2s"
+      data-ko="식스샷 시작하기 →"
+      data-en="Start Six Shot →"
+      data-jp="シックスショットを始める →"
+      data-zh="开始六格照 →">식스샷 시작하기 →</a>
+    <div style="font-size:12px;color:rgba(26,22,16,.38);margin-top:2px"
+      data-ko="사진 6장 + AI 시 · 무료 · 10분"
+      data-en="6 photos + AI poem · Free · 10 min"
+      data-jp="写真6枚 + AI詩 · 無料 · 10分"
+      data-zh="6张照片 + AI诗 · 免费 · 10分钟">사진 6장 + AI 시 · 무료 · 10분</div>
+  </div>
+</section>
+
+<!-- ⑩ CTA -->
+<section class="cta-sec">
+  <div class="cta-kicker">지금 바로 시작하세요</div>
+  <h2 class="cta-tt" data-ko="슬픔을 기록으로,<br><em>그리움을 위로로</em>" data-en="Turn grief into a record,<br><em>longing into comfort</em>">슬픔을 기록으로,<br><em>그리움을 위로로</em></h2>
+  <p class="cta-sb">3분 입력으로 감동적인 부고 링크가 완성됩니다.</p>
+  <div class="cta-btns">
+    <a href="https://humandocu.com/memorial-form.html" class="btn-g">지금 부고 만들기 →</a>
+    <a href="tel:031-539-9709" class="btn-gh">📞 전화 상담</a>
+  </div>
+  <div class="cta-contact">📞 <a href="tel:031-539-9709">031-539-9709</a> &nbsp;·&nbsp; <a href="https://humandocu.com">humandocu.com</a></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="grid-column:1/-1;max-width:480px;margin:0 auto 8px;display:flex;flex-direction:column;gap:10px;width:100%">
+    <div style="font-size:11px;color:#9e8250;letter-spacing:.12em;text-align:center;margin-bottom:4px">휴먼다큐의 다른 서비스</div>
+    <a href="/sixshot.html" style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:rgba(255,255,255,.05);border:1px solid rgba(200,135,10,.2);border-radius:10px;text-decoration:none">
+      <div style="font-size:22px">🎞</div>
+      <div><div style="font-size:13px;font-weight:600;color:#C8870A;margin-bottom:2px">인생 식스샷</div><div style="font-size:11px;color:rgba(249,246,240,.5)">내 인생의 6장면 · AI가 필모그래피로</div></div>
+      <div style="margin-left:auto;color:rgba(200,135,10,.4)">→</div>
+    </a>
+    <a href="/today-form.html" style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:rgba(255,255,255,.05);border:1px solid rgba(200,135,10,.25);border-radius:10px;text-decoration:none">
+      <div style="font-size:22px">📅</div>
+      <div><div style="font-size:13px;font-weight:600;color:#C8870A;margin-bottom:2px">투*필 · 오늘의 필모그래피</div><div style="font-size:11px;color:rgba(249,246,240,.5)">오늘 사진으로 매일 쌓이는 나의 기록</div></div>
+      <div style="margin-left:auto;color:rgba(200,135,10,.5)">→</div>
+    </a>
+
+  </div>
+  <div>
+    <div class="ft-logo">휴먼다큐<span>닷컴</span></div>
+    <p class="ft-tag">슬픔을 기록으로, 그리움을 위로로.<br>고인의 생애를 기리는 디지털 추모 아카이브.</p>
+    <div class="ft-ct">📞 <a href="tel:031-539-9709">031-539-9709</a><br>🌐 <a href="https://humandocu.com">humandocu.com</a></div>
+  </div>
+  <div>
+    <div class="ft-col-t">부고 서비스</div>
+    <ul class="ft-links"><li><a href="#pricing">프리미엄 메모리얼</a></li><li><a href="#memorial-page">메모리얼 페이지</a></li><li><a href="#reply">답례장</a></li></ul>
+  </div>
+  <div>
+    <div class="ft-col-t">안내</div>
+    <ul class="ft-links"><li><a href="#faq">FAQ</a></li><li><a href="/terms.html">이용약관</a></li><li><a href="/privacy.html">개인정보처리방침</a></li><li><a href="/refund.html">환불규정</a></li></ul>
+  </div>
+</footer>
+<div class="ft-bot">
+  <span class="ft-copy">© 2026 휴먼다큐 · humandocu.com · All rights reserved.</span>
+  <span style="font-size:12px;color:rgba(240,237,232,.35)">부고 서비스 · 디지털 추모 아카이브</span>
+</div>
+<div style="background:#1e1e1e;padding:16px 56px;border-top:1px solid rgba(255,255,255,.07)">
+  <p style="font-size:12px;color:rgba(240,237,232,.48);line-height:1.9;max-width:1060px;margin:0 auto">
+    상호: 휴먼다큐 &nbsp;·&nbsp; 대표자: 정재우 &nbsp;·&nbsp; 사업자등록번호: 357-50-01268 &nbsp;·&nbsp; 주소: 경기도 수원시 영통구 에듀타운로 106번길 46, 463호 (이의동, 광교더로프트)<br>
+    통신판매업신고번호: 제 2026-수원영통-0664 호 &nbsp;·&nbsp; 이메일: mongmong4i@gmail.com &nbsp;·&nbsp; 전화: 031-539-9709<br>
+    <strong style="color:rgba(240,237,232,.6)">환불정책:</strong> 서비스 제공 전(링크 발송 전) 전액 환불 가능 · 서비스 제공 후 환불 불가 · 단, 서비스 하자 시 재제작 또는 환불
+  </p>
+</div>
+<a href="tel:031-539-9709" class="kk-btn" title="전화 문의">📞</a>
+
+<!-- 모달 -->
+<div id="modal-advanced" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(15,13,9,.85);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--cream);border-radius:8px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto">
+    <div style="background:var(--ink);padding:22px 24px;border-radius:8px 8px 0 0;display:flex;justify-content:space-between;align-items:flex-start">
+      <div>
+        <div style="font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2);margin-bottom:4px">프리미엄 · <span style="text-decoration:line-through;color:rgba(249,246,240,.35)">₩29,000</span> <span style="color:#a8d878;text-transform:none;text-decoration:none">베타 무료</span></div>
+        <div style="font-family:var(--serif);font-size:20px;font-weight:300;color:var(--cream)">품격 있는 부고 신청</div>
+        <div style="font-size:12px;color:rgba(249,246,240,.65);margin-top:3px">신청 즉시 · 10분 내 부고문 이메일 도착</div>
+      </div>
+      <button onclick="closeModal('advanced')" style="background:none;border:none;font-size:18px;color:rgba(255,255,255,.4);cursor:pointer">✕</button>
+    </div>
+    <div style="padding:26px;display:flex;flex-direction:column;gap:16px;text-align:center">
+      <div style="font-size:15px;color:var(--ink2);line-height:1.8">아래 버튼을 눌러 신청 폼을 작성해 주세요.</div>
+      <div style="background:var(--cream2);border-radius:6px;padding:16px;font-size:13px;color:var(--ink3);line-height:2;text-align:left">
+        신청 즉시 · 10분 내 차별화된 부고문 이메일 도착<br>
+        영정사진 액자 + 생애사진 5장 슬라이드쇼 · BGM<br>
+        49재까지 메모리얼 페이지 유지<br>
+        발인 다음날 AI 개인화 답례장 2가지 버전 제공
+      </div>
+      <a href="https://humandocu.com/memorial-form.html" style="display:block;width:100%;padding:16px;background:var(--gold2);border-radius:var(--r);font-size:16px;font-weight:500;color:var(--ink);letter-spacing:.04em">지금 무료로 신청하기 →</a>
+      <div style="font-size:13px;color:var(--ink3)">베타 기간 무료 · 신청 폼 작성</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal(t){const m=document.getElementById('modal-'+t);if(!m)return;m.style.display='flex';document.body.style.overflow='hidden'}
+function closeModal(t){const m=document.getElementById('modal-'+t);if(!m)return;m.style.display='none';document.body.style.overflow='';document.body.style.overflowX='hidden'}
+document.getElementById('modal-advanced').addEventListener('click',function(e){if(e.target===this)closeModal('advanced')});
+function faq(el){const item=el.parentElement;const open=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!open)item.classList.add('open')}
+window.addEventListener('scroll',()=>{const n=document.getElementById('nav');if(n)n.style.padding=window.scrollY>60?'11px 56px':'16px 56px'});
+(function(){
+  var BASE='https://humandocu-server-production.up.railway.app/payment/advanced';
+  function applyLang(lang){
+    var l=lang.toLowerCase();
+    document.body.style.overflow='';document.body.style.overflowX='hidden';
+    document.querySelectorAll('[data-ko]').forEach(function(el){var t=el.getAttribute('data-'+l);if(t)el.innerHTML=t});
+    document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang)});
+    localStorage.setItem('lang',lang);
+    document.querySelectorAll('a[href*="payment/advanced"]').forEach(function(a){a.href=BASE+'?lang='+lang});
+  }
+  window.applyLang=applyLang;
+  applyLang(localStorage.getItem('lang')||'KO');
+  document.querySelectorAll('.lang-btn').forEach(function(b){b.addEventListener('click',function(){applyLang(this.dataset.lang)})});
+})();
+</script>
+</body>
+</html>
