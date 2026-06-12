@@ -379,7 +379,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
 
 <!-- 모달 -->
 <div class="modal" id="modal"><iframe id="mf" src=""></iframe></div>
-<div class="mbb" id="mbb"><button onclick="closeModal()">← 돌아가기</button></div>
+<div class="mbb" id="mbb"><button id="back-btn" onclick="closeModal()">← 돌아가기</button></div>
 
 <script>
 const URLS={
@@ -469,6 +469,10 @@ function setLang(lang){
   document.querySelectorAll('.ptap-txt').forEach(el=>{
     el.textContent = ptapMap[lang]||ptapMap.ko;
   });
+  // 돌아가기
+  const backMap={ko:'← 돌아가기',en:'← Back',jp:'← 戻る',zh:'← 返回'};
+  const bb=document.getElementById('back-btn');
+  if(bb) bb.textContent = backMap[lang]||backMap.ko;
 }
 </script>
 </body>
