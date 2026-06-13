@@ -118,14 +118,18 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
 }
 .ptap{
   position:absolute;inset:0;border-radius:15px;
-  background:rgba(0,0,0,.15);
-  display:flex;align-items:flex-end;justify-content:center;
-  padding-bottom:10px;
+  background:rgba(0,0,0,.08);
+  display:flex;align-items:center;justify-content:center;
 }
 .ptap span{
-  background:rgba(0,0,0,.6);color:#fff;
-  padding:6px 16px;border-radius:14px;font-size:10px;
-  letter-spacing:.1em;border:1px solid rgba(255,255,255,.25);
+  width:64px;height:64px;
+  background:rgba(0,0,0,.55);color:#fff;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:500;
+  border:2px solid rgba(255,255,255,.5);
+  box-shadow:0 4px 16px rgba(0,0,0,.3);
+  font-family:var(--sans);
 }
 
 /* ── S5 흐름+폰 ── */
