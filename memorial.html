@@ -118,18 +118,22 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
 }
 .ptap{
   position:absolute;inset:0;border-radius:15px;
-  background:rgba(0,0,0,.08);
-  display:flex;align-items:center;justify-content:center;
+  background:transparent;
+  pointer-events:none;
 }
 .ptap span{
-  width:64px;height:64px;
-  background:rgba(0,0,0,.55);color:#fff;
+  position:absolute;
+  bottom:-20px;right:-12px;
+  width:60px;height:60px;
+  background:var(--gold);color:#1a1410;
   border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:500;
-  border:2px solid rgba(255,255,255,.5);
-  box-shadow:0 4px 16px rgba(0,0,0,.3);
+  font-size:12px;font-weight:700;
+  border:3px solid #fff;
+  box-shadow:0 4px 16px rgba(0,0,0,.35);
   font-family:var(--sans);
+  pointer-events:all;cursor:pointer;
+  z-index:10;
 }
 
 /* ── S5 흐름+폰 ── */
@@ -247,7 +251,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
   <div class="vis">
     <div class="phone" onclick="openModal('wedding')">
       <div class="phone-scr">
-        <iframe src="https://humandocu.com/sample-wedding.html" scrolling="no" loading="lazy"></iframe>
+        <div class="phone-scr-inner"><iframe src="https://humandocu.com/sample-wedding.html" scrolling="no" loading="lazy"></iframe></div>
         <div class="ptap"><span class="ptap-txt" data-ko="보기" data-en="View" data-jp="見る" data-zh="查看">보기</span></div>
       </div>
     </div>
@@ -261,7 +265,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
   <div class="vis">
     <div class="phone" onclick="openModal('bugo_old')">
       <div class="phone-scr">
-        <iframe src="https://humandocu.com/sample-bugo.html" scrolling="no" loading="lazy"></iframe>
+        <div class="phone-scr-inner"><iframe src="https://humandocu.com/sample-bugo.html" scrolling="no" loading="lazy"></iframe></div>
         <div class="ptap"><span class="ptap-txt" data-ko="보기" data-en="View" data-jp="見る" data-zh="查看">보기</span></div>
       </div>
     </div>
@@ -275,7 +279,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
   <div class="vis">
     <div class="phone" onclick="openModal('bugo')">
       <div class="phone-scr">
-        <iframe src="https://humandocu.com/bugo/adv-정재무.html" scrolling="no" loading="lazy"></iframe>
+        <div class="phone-scr-inner"><iframe src="https://humandocu.com/bugo/adv-정재무.html" scrolling="no" loading="lazy"></iframe></div>
         <div class="ptap"><span class="ptap-txt" data-ko="보기" data-en="View" data-jp="見る" data-zh="查看">보기</span></div>
       </div>
     </div>
@@ -289,7 +293,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
   <div class="vis">
     <div class="phone" onclick="openModal('memorial')">
       <div class="phone-scr">
-        <iframe src="https://humandocu.com/bugo/adv-memorial-정재무.html" scrolling="no" loading="lazy"></iframe>
+        <div class="phone-scr-inner"><iframe src="https://humandocu.com/bugo/adv-memorial-정재무.html" scrolling="no" loading="lazy"></iframe></div>
         <div class="ptap"><span class="ptap-txt" data-ko="보기" data-en="View" data-jp="見る" data-zh="查看">보기</span></div>
       </div>
     </div>
@@ -303,7 +307,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
   <div class="vis">
     <div class="phone" onclick="openModal('damnyejang')">
       <div class="phone-scr">
-        <iframe src="https://humandocu.com/bugo/damnyejang-정재무.html" scrolling="no" loading="lazy"></iframe>
+        <div class="phone-scr-inner"><iframe src="https://humandocu.com/bugo/damnyejang-정재무.html" scrolling="no" loading="lazy"></iframe></div>
         <div class="ptap"><span class="ptap-txt" data-ko="보기" data-en="View" data-jp="見る" data-zh="查看">보기</span></div>
       </div>
     </div>
