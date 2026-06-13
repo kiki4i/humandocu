@@ -213,8 +213,16 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
 .modal{display:none;position:fixed;inset:0;background:#000;z-index:200;}
 .modal.open{display:block;}
 .modal iframe{width:100%;height:100%;border:none;display:block;}
-.mbb{position:fixed;bottom:24px;right:20px;z-index:210;display:none;}
-.mbb button{padding:12px 22px;background:var(--gold);border:none;border-radius:24px;font-size:13px;font-weight:500;color:#1a1410;cursor:pointer;font-family:var(--sans);box-shadow:0 4px 20px rgba(0,0,0,.5);}
+.mbb{position:fixed;bottom:28px;right:20px;z-index:210;display:none;}
+.mbb button{
+  width:64px;height:64px;
+  background:var(--gold);border:none;border-radius:50%;
+  font-size:12px;font-weight:500;color:#1a1410;
+  cursor:pointer;font-family:var(--sans);
+  box-shadow:0 4px 20px rgba(0,0,0,.5);
+  display:flex;align-items:center;justify-content:center;
+  line-height:1.3;text-align:center;
+}
 </style>
 </head>
 <body>
@@ -236,7 +244,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
     <div class="phone" onclick="openModal('wedding')">
       <div class="phone-scr">
         <iframe src="https://humandocu.com/sample-wedding.html" scrolling="no" loading="lazy"></iframe>
-        <div class="ptap"><span class="ptap-txt" data-ko="탭해서 보기" data-en="Tap to view" data-jp="タップして見る" data-zh="点击查看">탭해서 보기</span></div>
+        <div class="ptap"><span class="ptap-txt" data-ko="보기" data-en="View" data-jp="見る" data-zh="查看">보기</span></div>
       </div>
     </div>
   </div>
@@ -250,7 +258,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
     <div class="phone" onclick="openModal('bugo_old')">
       <div class="phone-scr">
         <iframe src="https://humandocu.com/sample-bugo.html" scrolling="no" loading="lazy"></iframe>
-        <div class="ptap"><span class="ptap-txt" data-ko="탭해서 보기" data-en="Tap to view" data-jp="タップして見る" data-zh="点击查看">탭해서 보기</span></div>
+        <div class="ptap"><span class="ptap-txt" data-ko="보기" data-en="View" data-jp="見る" data-zh="查看">보기</span></div>
       </div>
     </div>
   </div>
@@ -264,7 +272,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
     <div class="phone" onclick="openModal('bugo')">
       <div class="phone-scr">
         <iframe src="https://humandocu.com/bugo/adv-정재무.html" scrolling="no" loading="lazy"></iframe>
-        <div class="ptap"><span class="ptap-txt" data-ko="탭해서 보기" data-en="Tap to view" data-jp="タップして見る" data-zh="点击查看">탭해서 보기</span></div>
+        <div class="ptap"><span class="ptap-txt" data-ko="보기" data-en="View" data-jp="見る" data-zh="查看">보기</span></div>
       </div>
     </div>
   </div>
@@ -278,7 +286,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
     <div class="phone" onclick="openModal('memorial')">
       <div class="phone-scr">
         <iframe src="https://humandocu.com/bugo/adv-memorial-정재무.html" scrolling="no" loading="lazy"></iframe>
-        <div class="ptap"><span class="ptap-txt" data-ko="탭해서 보기" data-en="Tap to view" data-jp="タップして見る" data-zh="点击查看">탭해서 보기</span></div>
+        <div class="ptap"><span class="ptap-txt" data-ko="보기" data-en="View" data-jp="見る" data-zh="查看">보기</span></div>
       </div>
     </div>
   </div>
@@ -292,7 +300,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
     <div class="phone" onclick="openModal('damnyejang')">
       <div class="phone-scr">
         <iframe src="https://humandocu.com/bugo/damnyejang-정재무.html" scrolling="no" loading="lazy"></iframe>
-        <div class="ptap"><span class="ptap-txt" data-ko="탭해서 보기" data-en="Tap to view" data-jp="タップして見る" data-zh="点击查看">탭해서 보기</span></div>
+        <div class="ptap"><span class="ptap-txt" data-ko="보기" data-en="View" data-jp="見る" data-zh="查看">보기</span></div>
       </div>
     </div>
   </div>
@@ -379,7 +387,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
 
 <!-- 모달 -->
 <div class="modal" id="modal"><iframe id="mf" src=""></iframe></div>
-<div class="mbb" id="mbb"><button id="back-btn" onclick="closeModal()">← 돌아가기</button></div>
+<div class="mbb" id="mbb"><button id="back-btn" onclick="closeModal()">←<br>돌아가기</button></div>
 
 <script>
 const URLS={
@@ -465,14 +473,14 @@ function setLang(lang){
     if(fiMap[lang] && fiMap[lang][i]) el.textContent = fiMap[lang][i];
   });
   // 탭해서 보기
-  const ptapMap={ko:'탭해서 보기',en:'Tap to view',jp:'タップして見る',zh:'点击查看'};
+  const ptapMap={ko:'보기',en:'View',jp:'見る',zh:'查看'};
   document.querySelectorAll('.ptap-txt').forEach(el=>{
     el.textContent = ptapMap[lang]||ptapMap.ko;
   });
   // 돌아가기
-  const backMap={ko:'← 돌아가기',en:'← Back',jp:'← 戻る',zh:'← 返回'};
+  const backMap={ko:'←<br>돌아가기',en:'←<br>Back',jp:'←<br>戻る',zh:'←<br>返回'};
   const bb=document.getElementById('back-btn');
-  if(bb) bb.textContent = backMap[lang]||backMap.ko;
+  if(bb) bb.innerHTML = backMap[lang]||backMap.ko;
 }
 </script>
 </body>
