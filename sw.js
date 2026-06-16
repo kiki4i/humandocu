@@ -1,9 +1,11 @@
 // 휴먼다큐 Service Worker
-const CACHE_NAME = 'humandocu-v1';
+const CACHE_NAME = 'tupil-v1';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json'
+  '/today-form.html',
+  '/today.html',
+  '/today-manifest.json',
+  '/today-icon-192.png',
+  '/today-icon-512.png'
 ];
 
 // 설치 — 핵심 파일 캐시
@@ -30,6 +32,7 @@ self.addEventListener('activate', (e) => {
 
 // 요청 처리 — 네트워크 우선, 실패 시 캐시
 self.addEventListener('fetch', (e) => {
+  if (!e.request.url.startsWith('http')) return;
   if (e.request.method !== 'GET') return;
   e.respondWith(
     fetch(e.request)
