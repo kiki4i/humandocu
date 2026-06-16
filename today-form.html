@@ -803,42 +803,57 @@ buildSlider();
 
   function renderHistory() {
     var list = document.getElementById('my-history-list');
-    try {
-      var hist = JSON.parse(localStorage.getItem(MY_KEY) || '[]');
-      if (!hist.length) {
-        list.innerHTML = '<div style="text-align:center;padding:60px 20px;color:rgba(255,255,255,.3);font-size:13px">아직 기록이 없어요</div>';
-        return;
-      }
-      var months = {};
-      hist.forEach(function(item) {
-        var m = (item.created_at || '').slice(0, 7);
-        if (!months[m]) months[m] = [];
-        months[m].push(item);
-      });
-      var html = '';
-      Object.keys(months).sort().reverse().forEach(function(m) {
-        var parts = m.split('-');
-        var label = parts[0] + '년 ' + parseInt(parts[1], 10) + '월';
-        html += '<div style="font-size:11px;letter-spacing:.12em;color:rgba(200,135,10,.7);margin:16px 0 8px">' + label + ' · ' + months[m].length + '편</div>';
-        months[m].forEach(function(item) {
-          var day = (item.created_at || '').slice(0, 10);
-          var nick = esc(item.nickname || '나');
-          var genre = esc(item.genre || '');
-          html += '<a href="' + SERVER + '/today/' + item.doc_id + '" style="display:block;text-decoration:none;background:#1a1712;border-radius:10px;border:1px solid rgba(255,255,255,.07);padding:12px 14px;margin-bottom:8px">'
-            + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">'
-            + '<span style="font-size:14px;font-weight:600;color:#fff">' + nick + '</span>'
-            + '<div style="display:flex;gap:6px;align-items:center">'
-            + (genre ? '<span style="font-size:10px;color:rgba(200,135,10,.7);border:1px solid rgba(200,135,10,.3);border-radius:10px;padding:2px 7px">' + genre + '</span>' : '')
-            + '<span style="font-size:11px;color:rgba(255,255,255,.25)">' + day + '</span>'
-            + '</div></div>'
-            + '<span style="font-size:12px;color:rgba(255,255,255,.3)">보러 가기 →</span>'
-            + '</a>';
-        });
-      });
-      list.innerHTML = html;
-    } catch(e) {
-      list.innerHTML = '<div style="text-align:center;padding:40px;color:rgba(255,255,255,.3);font-size:13px">불러올 수 없어요</div>';
+    var saved = lsLoad();
+    var email = saved.email || '';
+    if (!email) {
+      list.innerHTML = '<div style="text-align:center;padding:60px 20px;color:rgba(255,255,255,.3);font-size:13px">이메일을 먼저 입력해주세요</div>';
+      return;
     }
+    list.innerHTML = '<div style="text-align:center;padding:40px;color:rgba(255,255,255,.3);font-size:13px">불러오는 중...</div>';
+    fetch(SERVER + '/api/today/my-records?email=' + encodeURIComponent(email))
+      .then(function(r){ return r.json(); })
+      .then(function(data) {
+        if (!data.ok || !data.items || !data.items.length) {
+          list.innerHTML = '<div style="text-align:center;padding:60px 20px;color:rgba(255,255,255,.3);font-size:13px">아직 기록이 없어요</div>';
+          return;
+        }
+        var months = {};
+        data.items.forEach(function(item) {
+          var m = (item.created_at || '').slice(0, 7);
+          if (!months[m]) months[m] = [];
+          months[m].push(item);
+        });
+        var html = '';
+        var grid = list;
+        Object.keys(months).sort().reverse().forEach(function(m) {
+          var parts = m.split('-');
+          var label = parts[0] + '년 ' + parseInt(parts[1], 10) + '월';
+          html += '<div style="font-size:11px;letter-spacing:.12em;color:rgba(200,135,10,.7);margin:16px 0 8px">' + label + ' · ' + months[m].length + '편</div>';
+          html += '<div>';
+          months[m].forEach(function(item) {
+            var date = (item.created_at || '').slice(0, 10);
+            var nick = esc(item.nickname || '나');
+            var genre = esc(item.genre || '');
+            var gObj = GENRES.find(function(g){ return g.id === item.genre; });
+            var ge = gObj ? gObj.icon : '📷';
+            var poem = esc(item.poem_first || '');
+            html += '<a href="' + SERVER + '/today/' + item.doc_id + '" style="display:flex;align-items:center;gap:12px;text-decoration:none;background:#1a1712;border-radius:10px;border:1px solid rgba(255,255,255,.07);padding:12px 14px;margin-bottom:8px">'
+              + '<div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:20px">' + ge + '</div>'
+              + '<div style="flex:1;min-width:0">'
+              + '<div style="font-size:13px;color:rgba(255,255,255,.85);font-weight:500">' + nick + (genre ? ' · <span style="font-size:11px;color:rgba(200,169,110,.6)">' + genre + '</span>' : '') + '</div>'
+              + (poem ? '<div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:3px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">' + poem + '</div>' : '')
+              + '<div style="font-size:11px;color:rgba(255,255,255,.25);margin-top:2px">' + date + '</div>'
+              + '</div>'
+              + '<div style="font-size:16px;color:rgba(255,255,255,.2)">›</div>'
+              + '</a>';
+          });
+          html += '</div>';
+        });
+        grid.innerHTML = html;
+      })
+      .catch(function() {
+        list.innerHTML = '<div style="text-align:center;padding:40px;color:rgba(255,255,255,.3);font-size:13px">불러올 수 없어요</div>';
+      });
   }
 
   function openMyModal() {
