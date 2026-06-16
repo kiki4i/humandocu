@@ -236,6 +236,7 @@ function buildStart() {
       '<button class="s0-btn" id="s0-pick">사진 올리기</button>' +
       '<a class="s0-btn s0-btn-browse" href="#" id="browse-open">다른 사람 필름 보기</a>' +
     '</div>' +
+    '<a href="#" id="my-history-btn" style="display:none;margin-top:14px;font-size:12px;color:rgba(255,255,255,.38);text-decoration:underline;text-underline-offset:3px">📂 내 기록 보기</a>' +
     '<div class="s0-hint">›</div>';
   d.querySelector('#s0-pick').onclick = function(){ document.getElementById('file-input').click(); };
   return d;
@@ -585,6 +586,12 @@ async function doSubmit() {
     var data = await res.json();
     if (!res.ok || data.status === 'error') throw new Error(data.error || '오류가 발생했어요');
     var docId = data.id || data.doc_id;
+    try {
+      var _h = JSON.parse(localStorage.getItem('today_my_history') || '[]');
+      _h.unshift({doc_id: docId, nickname: nickname, genre: selectedGenre, created_at: new Date().toISOString()});
+      if (_h.length > 50) _h = _h.slice(0, 50);
+      localStorage.setItem('today_my_history', JSON.stringify(_h));
+    } catch(e) {}
     stopLoading();
     document.getElementById('prog-fill').style.width = '100%';
     setTimeout(function(){ window.location.href = API + '/today/' + docId; }, 500);
@@ -763,6 +770,106 @@ buildSlider();
       setTimeout(openFeed, 100);
     }
   }); // DOMContentLoaded end
+})();
+</script>
+<!-- ── 내 시 모아보기 모달 ── -->
+<div id="my-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;
+  background:#0f0e0c;overflow-y:auto;-webkit-overflow-scrolling:touch">
+  <div style="position:sticky;top:0;background:#0f0e0c;border-bottom:1px solid rgba(255,255,255,.08);
+    padding:12px 16px;display:flex;align-items:center;justify-content:space-between;z-index:10">
+    <span style="font-size:12px;letter-spacing:.15em;color:rgba(255,255,255,.4)">내 투*필 기록</span>
+    <button id="my-modal-close" style="background:none;border:none;color:rgba(255,255,255,.6);
+      font-size:22px;cursor:pointer;padding:4px 8px;line-height:1">✕</button>
+  </div>
+  <div id="my-history-list" style="padding:16px"></div>
+</div>
+
+<script>
+(function(){
+  var MY_KEY = 'today_my_history';
+  var SERVER = 'https://humandocu-server-production.up.railway.app';
+
+  function esc(s) {
+    return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function checkHistory() {
+    try {
+      var hist = JSON.parse(localStorage.getItem(MY_KEY) || '[]');
+      var btn = document.getElementById('my-history-btn');
+      if (btn) btn.style.display = hist.length ? 'inline' : 'none';
+    } catch(e) {}
+  }
+
+  function renderHistory() {
+    var list = document.getElementById('my-history-list');
+    try {
+      var hist = JSON.parse(localStorage.getItem(MY_KEY) || '[]');
+      if (!hist.length) {
+        list.innerHTML = '<div style="text-align:center;padding:60px 20px;color:rgba(255,255,255,.3);font-size:13px">아직 기록이 없어요</div>';
+        return;
+      }
+      var months = {};
+      hist.forEach(function(item) {
+        var m = (item.created_at || '').slice(0, 7);
+        if (!months[m]) months[m] = [];
+        months[m].push(item);
+      });
+      var html = '';
+      Object.keys(months).sort().reverse().forEach(function(m) {
+        var parts = m.split('-');
+        var label = parts[0] + '년 ' + parseInt(parts[1], 10) + '월';
+        html += '<div style="font-size:11px;letter-spacing:.12em;color:rgba(200,135,10,.7);margin:16px 0 8px">' + label + ' · ' + months[m].length + '편</div>';
+        months[m].forEach(function(item) {
+          var day = (item.created_at || '').slice(0, 10);
+          var nick = esc(item.nickname || '나');
+          var genre = esc(item.genre || '');
+          html += '<a href="' + SERVER + '/today/' + item.doc_id + '" style="display:block;text-decoration:none;background:#1a1712;border-radius:10px;border:1px solid rgba(255,255,255,.07);padding:12px 14px;margin-bottom:8px">'
+            + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">'
+            + '<span style="font-size:14px;font-weight:600;color:#fff">' + nick + '</span>'
+            + '<div style="display:flex;gap:6px;align-items:center">'
+            + (genre ? '<span style="font-size:10px;color:rgba(200,135,10,.7);border:1px solid rgba(200,135,10,.3);border-radius:10px;padding:2px 7px">' + genre + '</span>' : '')
+            + '<span style="font-size:11px;color:rgba(255,255,255,.25)">' + day + '</span>'
+            + '</div></div>'
+            + '<span style="font-size:12px;color:rgba(255,255,255,.3)">보러 가기 →</span>'
+            + '</a>';
+        });
+      });
+      list.innerHTML = html;
+    } catch(e) {
+      list.innerHTML = '<div style="text-align:center;padding:40px;color:rgba(255,255,255,.3);font-size:13px">불러올 수 없어요</div>';
+    }
+  }
+
+  function openMyModal() {
+    document.getElementById('my-modal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    renderHistory();
+    if (location.hash !== '#my') history.pushState(null, '', '#my');
+  }
+
+  function closeMyModal() {
+    document.getElementById('my-modal').style.display = 'none';
+    document.body.style.overflow = '';
+    if (location.hash === '#my') history.back();
+  }
+
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'my-history-btn') {
+      e.preventDefault();
+      openMyModal();
+    }
+  });
+  document.getElementById('my-modal-close').addEventListener('click', closeMyModal);
+  window.addEventListener('popstate', function() {
+    if (location.hash !== '#my') {
+      document.getElementById('my-modal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  });
+  document.addEventListener('DOMContentLoaded', function() {
+    checkHistory();
+  });
 })();
 </script>
 <script>if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/sw.js').catch(()=>{}); }</script>
