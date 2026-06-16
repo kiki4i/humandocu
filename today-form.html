@@ -836,15 +836,20 @@ buildSlider();
             var genre = esc(item.genre || '');
             var gObj = GENRES.find(function(g){ return g.id === item.genre; });
             var ge = gObj ? gObj.icon : '📷';
+            var gc = gObj ? gObj.color : 'rgba(200,135,10,.7)';
             var poem = esc(item.poem_first || '');
-            html += '<a href="' + SERVER + '/today/' + item.doc_id + '" style="display:flex;align-items:center;gap:12px;text-decoration:none;background:#1a1712;border-radius:10px;border:1px solid rgba(255,255,255,.07);padding:12px 14px;margin-bottom:8px">'
-              + (item.photo1 ? '<img src="' + item.photo1 + '" style="width:44px;height:44px;border-radius:8px;object-fit:cover;flex-shrink:0">' : '<div style="width:44px;height:44px;border-radius:8px;background:#2a2520;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px">' + ge + '</div>')
-              + '<div style="flex:1;min-width:0">'
-              + '<div style="font-size:13px;color:rgba(255,255,255,.85);font-weight:500">' + nick + (genre ? ' · <span style="font-size:11px;color:rgba(200,169,110,.6)">' + genre + '</span>' : '') + '</div>'
-              + (poem ? '<div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:3px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">' + poem + '</div>' : '')
-              + '<div style="font-size:11px;color:rgba(255,255,255,.25);margin-top:2px">' + date + '</div>'
-              + '</div>'
-              + '<div style="font-size:16px;color:rgba(255,255,255,.2)">›</div>'
+            var p1 = item.photo1 ? '<img src="' + item.photo1 + '" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block" loading="lazy">'
+                                 : '<div style="width:100%;aspect-ratio:16/9;background:#2a2520;display:block"></div>';
+            html += '<a href="' + SERVER + '/today/' + item.doc_id + '" style="text-decoration:none;background:#1a1712;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.07);display:block;margin-bottom:8px">'
+              + '<div style="padding:10px 12px 6px;display:flex;justify-content:space-between;align-items:center">'
+              + '<div style="font-size:14px;font-weight:600;color:#fff">' + nick + '</div>'
+              + '<div style="display:flex;align-items:center;gap:6px">'
+              + (genre ? '<span style="font-size:10px;padding:2px 7px;border-radius:10px;border:1px solid '+gc+';color:'+gc+'">' + ge + ' ' + genre + '</span>' : '')
+              + '<span style="font-size:11px;color:rgba(255,255,255,.25)">' + date + '</span>'
+              + '</div></div>'
+              + '<div style="display:flex;width:100%">' + p1 + '</div>'
+              + (poem ? '<div style="padding:9px 12px 4px;font-size:13px;color:rgba(255,255,255,.85);line-height:1.7;font-style:italic">' + poem + '</div>' : '')
+              + '<div style="height:10px"></div>'
               + '</a>';
           });
           html += '</div>';
