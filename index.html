@@ -1,1 +1,284 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;url=/memorial.html"><title>휴먼다큐</title></head><body></body></html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>휴먼다큐 · 삶을 기록합니다</title>
+<meta name="description" content="부고·메모리얼·식스샷 — 휴먼다큐닷컴">
+<meta property="og:title" content="휴먼다큐 · 삶을 기록합니다">
+<meta property="og:description" content="부고·메모리얼·식스샷 — 휴먼다큐닷컴">
+<meta property="og:url" content="https://humandocu.com/">
+<meta property="og:image" content="https://humandocu.com/og_main.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0f0e0b">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f0e0b;
+  --gold:#c8a96e;
+  --amber:#c8870a;
+  --serif:'Noto Serif KR',serif;
+  --sans:'Noto Sans KR',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{
+  width:100%;min-height:100%;
+  background:var(--bg);
+  color:#fff;
+  font-family:var(--sans);
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── 언어바 ── */
+.lang-bar{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;justify-content:flex-end;align-items:center;
+  padding:10px 14px;gap:6px;
+  pointer-events:none;
+}
+.lang-btn{
+  pointer-events:all;
+  display:flex;align-items:center;gap:4px;
+  padding:5px 10px;border-radius:14px;
+  border:1px solid rgba(255,255,255,.25);
+  background:rgba(0,0,0,.45);
+  font-size:10px;color:rgba(255,255,255,.65);
+  cursor:pointer;font-family:var(--sans);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:border-color .2s,color .2s;
+}
+.lang-btn .flag{font-size:13px;}
+.lang-btn.active{border-color:var(--gold);color:var(--gold);}
+
+/* ── 페이지 레이아웃 ── */
+.page{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  padding:0 20px 32px;
+}
+
+/* ── 브랜드 ── */
+.brand{
+  flex-shrink:0;
+  padding:80px 0 36px;
+  text-align:center;
+}
+.brand-name{
+  font-family:var(--sans);
+  font-size:11px;font-weight:500;
+  letter-spacing:.38em;
+  color:rgba(255,255,255,.35);
+  margin-bottom:18px;
+  text-transform:uppercase;
+}
+.brand-slogan{
+  font-family:var(--serif);
+  font-size:28px;font-weight:300;
+  color:#fff;
+  line-height:1.4;
+  letter-spacing:.04em;
+}
+
+/* ── 카드 영역 ── */
+.cards{
+  flex:1;
+  display:flex;flex-direction:column;
+  gap:14px;
+}
+
+/* ── 서비스 카드 (전체 클릭) ── */
+.card{
+  display:block;
+  text-decoration:none;
+  border-radius:16px;
+  padding:28px 24px 24px;
+  position:relative;overflow:hidden;
+  transition:transform .18s,box-shadow .18s;
+  cursor:pointer;
+}
+.card:active{transform:scale(.985);}
+
+.card-memorial{
+  background:#1c1510;
+  border:1px solid rgba(200,169,110,.3);
+}
+.card-sixshot{
+  background:#1a1500;
+  border:1px solid rgba(200,135,10,.3);
+}
+
+/* 글로우 장식 */
+.card-glow{
+  position:absolute;top:-70px;right:-70px;
+  width:200px;height:200px;border-radius:50%;
+  pointer-events:none;
+}
+.card-memorial .card-glow{background:radial-gradient(circle,rgba(200,169,110,.1) 0%,transparent 70%);}
+.card-sixshot  .card-glow{background:radial-gradient(circle,rgba(200,135,10,.09) 0%,transparent 70%);}
+
+.card-tag{
+  display:block;
+  font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+  font-family:var(--sans);font-weight:500;
+  margin-bottom:12px;
+}
+.card-memorial .card-tag{color:var(--gold);}
+.card-sixshot  .card-tag{color:var(--amber);}
+
+.card-title{
+  font-family:var(--serif);
+  font-size:20px;font-weight:300;
+  color:#fff;line-height:1.5;
+  margin-bottom:10px;
+}
+.card-desc{
+  font-size:13px;color:rgba(255,255,255,.5);
+  line-height:1.75;margin-bottom:22px;
+}
+.card-btn{
+  display:inline-block;
+  padding:11px 22px;border-radius:8px;
+  font-size:13px;font-family:var(--sans);font-weight:500;
+  letter-spacing:.05em;
+  transition:background .18s;
+  text-decoration:none;
+}
+.card-memorial .card-btn{
+  border:1px solid rgba(200,169,110,.45);
+  color:var(--gold);background:transparent;
+}
+.card-sixshot .card-btn{
+  border:1px solid rgba(200,135,10,.45);
+  color:var(--amber);background:transparent;
+}
+.card-memorial:hover .card-btn{background:rgba(200,169,110,.1);}
+.card-sixshot:hover  .card-btn{background:rgba(200,135,10,.1);}
+
+/* ── 푸터 ── */
+footer{
+  flex-shrink:0;
+  margin-top:28px;
+  padding-top:20px;
+  border-top:1px solid rgba(255,255,255,.07);
+}
+.ft-name{
+  font-family:var(--serif);
+  font-size:12px;color:rgba(255,255,255,.3);
+  letter-spacing:.04em;margin-bottom:8px;
+}
+.ft-info{
+  font-size:11px;color:rgba(255,255,255,.2);
+  line-height:2.0;
+}
+
+/* ── 데스크톱 ── */
+@media(min-width:600px){
+  .cards{flex-direction:row;gap:16px;}
+  .card{flex:1;}
+  .brand-slogan{font-size:34px;}
+}
+</style>
+</head>
+<body>
+
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('ko')"><span class="flag">🇰🇷</span>KO</button>
+  <button class="lang-btn" onclick="setLang('en')"><span class="flag">🇺🇸</span>EN</button>
+  <button class="lang-btn" onclick="setLang('jp')"><span class="flag">🇯🇵</span>JP</button>
+  <button class="lang-btn" onclick="setLang('zh')"><span class="flag">🇨🇳</span>ZH</button>
+</div>
+
+<div class="page">
+
+  <!-- 브랜드 -->
+  <div class="brand">
+    <div class="brand-name">HUMANDOCU</div>
+    <div class="brand-slogan"
+      data-ko="삶을 기록합니다"
+      data-en="We document lives."
+      data-jp="人生を記録します"
+      data-zh="记录人生">삶을 기록합니다</div>
+  </div>
+
+  <!-- 카드 -->
+  <div class="cards">
+
+    <!-- 메모리얼 -->
+    <a href="/memorial.html" class="card card-memorial">
+      <div class="card-glow"></div>
+      <span class="card-tag">MEMORIAL</span>
+      <div class="card-title"
+        data-ko="부고 · 메모리얼 · 답례장"
+        data-en="Obituary · Memorial · Thank-You"
+        data-jp="訃報 · メモリアル · 御礼状"
+        data-zh="讣告 · 纪念 · 答谢函">부고 · 메모리얼 · 답례장</div>
+      <div class="card-desc"
+        data-ko="급박한 순간, 10분 안에 AI가 완성해드립니다"
+        data-en="In an urgent moment, AI completes it in 10 minutes"
+        data-jp="緊急の時も、AIが10分で完成させます"
+        data-zh="紧急时刻，AI 10分钟内帮您完成">급박한 순간, 10분 안에 AI가 완성해드립니다</div>
+      <span class="card-btn"
+        data-ko="지금 시작하기 →"
+        data-en="Start Now →"
+        data-jp="今すぐ始める →"
+        data-zh="立即开始 →">지금 시작하기 →</span>
+    </a>
+
+    <!-- 식스샷 -->
+    <a href="/sixshot.html" class="card card-sixshot">
+      <div class="card-glow"></div>
+      <span class="card-tag">SIX SHOT</span>
+      <div class="card-title"
+        data-ko="인생 6샷 · 나의 필모그래피"
+        data-en="Six Life Shots · My Filmography"
+        data-jp="人生6ショット · マイフィルモグラフィー"
+        data-zh="人生六照 · 我的人生影集">인생 6샷 · 나의 필모그래피</div>
+      <div class="card-desc"
+        data-ko="살아있을 때 남기는 6장의 사진 기록"
+        data-en="A record of 6 photos made while you're still alive"
+        data-jp="生きている間に残す6枚の写真記録"
+        data-zh="趁还在的时候，留下6张照片的记录">살아있을 때 남기는 6장의 사진 기록</div>
+      <span class="card-btn"
+        data-ko="기록 시작하기 →"
+        data-en="Start Recording →"
+        data-jp="記録を始める →"
+        data-zh="开始记录 →">기록 시작하기 →</span>
+    </a>
+
+  </div>
+
+  <!-- 푸터 -->
+  <footer>
+    <div class="ft-name">휴먼다큐닷컴</div>
+    <div class="ft-info">
+      대표자: 정재우 &nbsp;·&nbsp; 사업자등록번호: 357-50-01268<br>
+      통신판매업신고번호: 제 2026-수원영통-0664 호<br>
+      경기도 수원시 영통구 에듀타운로100번길 46, 더로프트 463호<br>
+      031-539-9709 &nbsp;·&nbsp; mongmong4i@gmail.com
+    </div>
+  </footer>
+
+</div>
+
+<script>
+const LANGS = ['ko','en','jp','zh'];
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach((b, i) => {
+    b.classList.toggle('active', LANGS[i] === lang);
+  });
+  document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+    const txt = el.getAttribute('data-' + lang);
+    if (txt) el.textContent = txt;
+  });
+  localStorage.setItem('lang', lang);
+}
+(function () {
+  const saved = localStorage.getItem('lang') || 'ko';
+  if (saved !== 'ko') setLang(saved);
+})();
+</script>
+</body>
+</html>
