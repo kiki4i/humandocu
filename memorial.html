@@ -435,6 +435,12 @@ function goTo(n){
 }
 function goNext(){goTo(c+1);}
 function goPrev(){goTo(c-1);}
+// 슬라이드 위치 복원
+(function(){
+  var saved=localStorage.getItem('memorial_slide_pos');
+  if(saved!==null){var n=parseInt(saved,10);if(!isNaN(n)&&n>=0&&n<T)goTo(n);localStorage.removeItem('memorial_slide_pos');}
+})();
+
 let tx=0,ty=0;
 document.addEventListener('touchstart',e=>{
   tx=e.touches[0].clientX;ty=e.touches[0].clientY;
@@ -530,7 +536,7 @@ function loadFeedModal(){
         var name=item.nickname||item.name||'';
         var poem=item.poem_line||'';
         var date=(item.created_at||'').slice(0,10);
-        return '<div onclick="window.open('https://share.mestory.art/today/'+item.doc_id+'','_blank')" '
+        return '<div onclick="window.open(\'https://share.mestory.art/today/'+item.doc_id+'\',\'_blank\')" '
           +'style="display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;cursor:pointer;">'
           +(thumb
             ?'<img src="'+thumb+'" style="width:48px;height:48px;border-radius:6px;object-fit:cover;flex-shrink:0;">'
@@ -550,10 +556,6 @@ function loadFeedModal(){
 }
 
 document.addEventListener('DOMContentLoaded',function(){
-  // 슬라이드 위치 복원
-  var saved=localStorage.getItem('memorial_slide_pos');
-  if(saved!==null){var n=parseInt(saved,10);if(!isNaN(n)&&n>=0&&n<T)goTo(n);localStorage.removeItem('memorial_slide_pos');}
-
   var sec=document.getElementById('sixshot-preview-sec');
   var box=document.getElementById('memorial-six-feed');
   if(!sec||!box)return;
