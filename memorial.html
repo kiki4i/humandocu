@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -370,20 +370,20 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
     </div>
 
     <div class="cta-wrap">
-      <a href="memorial-form.html" class="cta-a" data-ko="부고 만들기 →" data-en="Create Obituary →" data-jp="訃報ページを作成 →" data-zh="创建讣告 →">부고 만들기 →</a>
-      <a href="damnyejang-form.html" class="cta-b1" data-ko="답례장 만들기 →" data-en="Create Thank-You Letter →" data-jp="御礼状を作成 →" data-zh="创建答谢函 →">답례장 만들기 →</a>
+      <a href="memorial-form.html" class="cta-a" onclick="localStorage.setItem('memorial_slide_pos',c)" data-ko="부고 만들기 →" data-en="Create Obituary →" data-jp="訃報ページを作成 →" data-zh="创建讣告 →">부고 만들기 →</a>
+      <a href="damnyejang-form.html" class="cta-b1" onclick="localStorage.setItem('memorial_slide_pos',c)" data-ko="답례장 만들기 →" data-en="Create Thank-You Letter →" data-jp="御礼状を作成 →" data-zh="创建答谢函 →">답례장 만들기 →</a>
     </div>
 
-    <div style="height:1px;background:linear-gradient(to right,transparent,#c8870a55,transparent);margin:14px 0;"></div>
+    <div style="height:2px;background:linear-gradient(to right,transparent,#c8870a99,transparent);margin:14px 0;"></div>
 
-    <div id="sixshot-preview-sec">
-      <div style="font-size:8px;letter-spacing:.2em;color:#c8870a;margin-bottom:6px;">SIX SHOT · 무료</div>
-      <div style="font-size:16px;font-weight:300;color:#f0ebe0;margin-bottom:4px;">살아있을 때 남기는 기록</div>
-      <div style="font-size:11px;color:#8a7560;margin-bottom:12px;">오늘 사진 6장 · AI 한 줄 시 · 나의 필모그래피</div>
+    <div id="sixshot-preview-sec" style="background:rgba(200,135,10,.06);border:1px solid rgba(200,135,10,.2);border-radius:12px;padding:14px;margin-top:4px;">
+      <div style="font-size:11px;letter-spacing:.2em;color:#c8870a;margin-bottom:6px;">SIX SHOT · 무료</div>
+      <div style="font-size:18px;font-weight:300;color:#f0ebe0;margin-bottom:4px;">살아있을 때 남기는 기록</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.6);margin-bottom:12px;">오늘 사진 6장 · AI 한 줄 시 · 나의 필모그래피</div>
       <div id="memorial-six-feed" style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;"></div>
       <div style="display:flex;gap:8px;">
-        <a href="sixshot-form.html" style="flex:1;text-align:center;padding:10px;background:rgba(200,135,10,.2);border:1px solid rgba(200,135,10,.4);border-radius:8px;font-size:12px;color:#c8870a;text-decoration:none;font-weight:500;">나도 기록하기 →</a>
-        <a href="sixshot.html#feed" style="flex:1;text-align:center;padding:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;font-size:12px;color:rgba(255,255,255,.7);text-decoration:none;">둘러보기</a>
+        <a href="sixshot-form.html" onclick="localStorage.setItem('memorial_slide_pos',c)" style="flex:1;text-align:center;padding:10px;background:rgba(200,135,10,.2);border:1px solid rgba(200,135,10,.4);border-radius:8px;font-size:12px;color:#c8870a;text-decoration:none;font-weight:500;">나도 기록하기 →</a>
+        <button onclick="openFeedModal()" style="flex:1;text-align:center;padding:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;font-size:12px;color:rgba(255,255,255,.7);cursor:pointer;font-family:inherit;">둘러보기</button>
       </div>
     </div>
 
@@ -435,6 +435,11 @@ function goTo(n){
 }
 function goNext(){goTo(c+1);}
 function goPrev(){goTo(c-1);}
+// 슬라이드 위치 복원
+(function(){
+  var saved=localStorage.getItem('memorial_slide_pos');
+  if(saved!==null){var n=parseInt(saved,10);if(!isNaN(n)&&n>=0&&n<T)goTo(n);localStorage.removeItem('memorial_slide_pos');}
+})();
 
 let tx=0,ty=0;
 document.addEventListener('touchstart',e=>{
@@ -505,6 +510,51 @@ function setLang(lang){
   if(bb) bb.innerHTML = backMap[lang]||backMap.ko;
 }
 
+
+function openFeedModal(){
+  var m=document.getElementById('feed-modal');
+  m.style.display='block';
+  document.body.style.overflow='hidden';
+  loadFeedModal();
+}
+function closeFeedModal(){
+  document.getElementById('feed-modal').style.display='none';
+  document.body.style.overflow='';
+}
+function loadFeedModal(){
+  var list=document.getElementById('feed-modal-list');
+  list.innerHTML='<div style="text-align:center;padding:40px 0;color:rgba(255,255,255,.4);font-size:13px;">불러오는 중...</div>';
+  fetch('https://humandocu-server-production.up.railway.app/api/today/feed?limit=20')
+    .then(function(r){return r.json();})
+    .then(function(data){
+      if(!data.items||!data.items.length){
+        list.innerHTML='<div style="text-align:center;padding:40px 0;color:rgba(255,255,255,.3);font-size:13px;">아직 공개된 기록이 없어요</div>';
+        return;
+      }
+      list.innerHTML=data.items.map(function(item){
+        var thumb=item.photo1||'';
+        var name=item.nickname||item.name||'';
+        var poem=item.poem_line||'';
+        var date=(item.created_at||'').slice(0,10);
+        return '<div onclick="window.open('https://share.mestory.art/today/'+item.doc_id+'','_blank')" '
+          +'style="display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;cursor:pointer;">'
+          +(thumb
+            ?'<img src="'+thumb+'" style="width:48px;height:48px;border-radius:6px;object-fit:cover;flex-shrink:0;">'
+            :'<div style="width:48px;height:48px;border-radius:6px;background:rgba(200,135,10,.15);flex-shrink:0;"></div>')
+          +'<div style="min-width:0;flex:1;">'
+          +'<div style="font-size:13px;color:#f0ebe0;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+name+'</div>'
+          +(poem?'<div style="font-size:12px;color:rgba(255,255,255,.5);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+poem+'</div>':'')
+          +(date?'<div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:4px;">'+date+'</div>':'')
+          +'</div>'
+          +'<div style="color:rgba(255,255,255,.25);font-size:14px;flex-shrink:0;">→</div>'
+          +'</div>';
+      }).join('');
+    })
+    .catch(function(){
+      list.innerHTML='<div style="text-align:center;padding:40px 0;color:rgba(255,255,255,.3);font-size:13px;">불러오기 실패. 다시 시도해주세요.</div>';
+    });
+}
+
 document.addEventListener('DOMContentLoaded',function(){
   var sec=document.getElementById('sixshot-preview-sec');
   var box=document.getElementById('memorial-six-feed');
@@ -530,6 +580,20 @@ document.addEventListener('DOMContentLoaded',function(){
     .catch(function(){sec.style.display='none';});
 });
 </script>
+
+<!-- 투*필 피드 모달 -->
+<div id="feed-modal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.92);overflow-y:auto;-webkit-overflow-scrolling:touch;">
+  <div style="max-width:480px;margin:0 auto;padding:16px 14px 48px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0 16px;">
+      <div style="font-size:11px;letter-spacing:.22em;color:#c8870a;">TODAY FILMOGRAPHY</div>
+      <button onclick="closeFeedModal()" style="background:none;border:none;color:rgba(255,255,255,.6);font-size:22px;cursor:pointer;line-height:1;padding:4px 8px;">✕</button>
+    </div>
+    <div id="feed-modal-list" style="display:flex;flex-direction:column;gap:10px;">
+      <div style="text-align:center;padding:40px 0;color:rgba(255,255,255,.4);font-size:13px;">불러오는 중...</div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
+
 
