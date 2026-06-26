@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -435,12 +435,6 @@ function goTo(n){
 }
 function goNext(){goTo(c+1);}
 function goPrev(){goTo(c-1);}
-// 슬라이드 위치 복원
-(function(){
-  var saved=localStorage.getItem('memorial_slide_pos');
-  if(saved!==null){var n=parseInt(saved,10);if(!isNaN(n)&&n>=0&&n<T)goTo(n);localStorage.removeItem('memorial_slide_pos');}
-})();
-
 let tx=0,ty=0;
 document.addEventListener('touchstart',e=>{
   tx=e.touches[0].clientX;ty=e.touches[0].clientY;
@@ -556,6 +550,10 @@ function loadFeedModal(){
 }
 
 document.addEventListener('DOMContentLoaded',function(){
+  // 슬라이드 위치 복원
+  var saved=localStorage.getItem('memorial_slide_pos');
+  if(saved!==null){var n=parseInt(saved,10);if(!isNaN(n)&&n>=0&&n<T)goTo(n);localStorage.removeItem('memorial_slide_pos');}
+
   var sec=document.getElementById('sixshot-preview-sec');
   var box=document.getElementById('memorial-six-feed');
   if(!sec||!box)return;
@@ -595,5 +593,6 @@ document.addEventListener('DOMContentLoaded',function(){
 </div>
 </body>
 </html>
+
 
 
