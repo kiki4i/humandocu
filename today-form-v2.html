@@ -536,7 +536,10 @@ async function doSubmit() {
   var msg      = msgEl      ? msgEl.value.trim()      : '';
   var extra    = extraEl    ? extraEl.value.trim()    : '';
   var finSlide = document.getElementById('slide-finish');
-  var isPublic = finSlide && finSlide._getIsPublic ? finSlide._getIsPublic() : true;
+  var isPublic = true;
+  if (finSlide && typeof finSlide._getIsPublic === 'function') {
+    isPublic = finSlide._getIsPublic();
+  }
 
   if (!email.includes('@')) { alert('이메일을 입력해주세요'); if (emailEl) emailEl.focus(); return; }
   if (!selectedGenre)       { alert('장르를 선택해주세요'); return; }
