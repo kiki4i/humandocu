@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+﻿﻿﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -376,7 +376,7 @@ html,body{width:100%;height:100%;overflow:hidden;display:flex;flex-direction:col
 
     <div style="height:2px;background:linear-gradient(to right,transparent,#c8870a99,transparent);margin:14px 0;"></div>
 
-    <div id="sixshot-preview-sec" style="background:rgba(200,135,10,.06);border:1px solid rgba(200,135,10,.2);border-radius:12px;padding:14px;margin-top:4px;">
+    <div id="sixshot-preview-sec" style="background:#1a1200;border:1px solid #c8870a55;border-radius:12px;padding:16px 10px;margin:12px -10px;">
       <div style="font-size:11px;letter-spacing:.2em;color:#c8870a;margin-bottom:6px;">SIX SHOT · 무료</div>
       <div style="font-size:18px;font-weight:300;color:#f0ebe0;margin-bottom:4px;">살아있을 때 남기는 기록</div>
       <div style="font-size:11px;color:rgba(255,255,255,.6);margin-bottom:12px;">오늘 사진 6장 · AI 한 줄 시 · 나의 필모그래피</div>
@@ -435,11 +435,6 @@ function goTo(n){
 }
 function goNext(){goTo(c+1);}
 function goPrev(){goTo(c-1);}
-// 슬라이드 위치 복원
-(function(){
-  var saved=localStorage.getItem('memorial_slide_pos');
-  if(saved!==null){var n=parseInt(saved,10);if(!isNaN(n)&&n>=0&&n<T)goTo(n);localStorage.removeItem('memorial_slide_pos');}
-})();
 
 let tx=0,ty=0;
 document.addEventListener('touchstart',e=>{
@@ -524,7 +519,7 @@ function closeFeedModal(){
 function loadFeedModal(){
   var list=document.getElementById('feed-modal-list');
   list.innerHTML='<div style="text-align:center;padding:40px 0;color:rgba(255,255,255,.4);font-size:13px;">불러오는 중...</div>';
-  fetch('https://humandocu-server-production.up.railway.app/api/today/feed?limit=20')
+  fetch('https://humandocu-server-production.up.railway.app/api/sixshot/feed?limit=20')
     .then(function(r){return r.json();})
     .then(function(data){
       if(!data.items||!data.items.length){
@@ -536,7 +531,7 @@ function loadFeedModal(){
         var name=item.nickname||item.name||'';
         var poem=item.poem_line||'';
         var date=(item.created_at||'').slice(0,10);
-        return '<div onclick="window.open(\'https://share.mestory.art/today/'+item.doc_id+'\',\'_blank\')" '
+        return '<div onclick="window.open(\'https://humandocu-server-production.up.railway.app/sixshot/'+item.doc_id+'\',\'_blank\')" '
           +'style="display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;cursor:pointer;">'
           +(thumb
             ?'<img src="'+thumb+'" style="width:48px;height:48px;border-radius:6px;object-fit:cover;flex-shrink:0;">'
@@ -556,10 +551,20 @@ function loadFeedModal(){
 }
 
 document.addEventListener('DOMContentLoaded',function(){
+  // 슬라이드 위치 복원 (애니메이션 없이 즉시)
+  var _goToIdx=-1;
+  var _saved=localStorage.getItem('memorial_slide_pos');
+  if(_saved!==null){var _n=parseInt(_saved,10);if(!isNaN(_n)&&_n>=0&&_n<T)_goToIdx=_n;localStorage.removeItem('memorial_slide_pos');}
+  if(_goToIdx<0){
+    var _ref=document.referrer||'';
+    if(_ref.indexOf('memorial-form')!==-1||_ref.indexOf('damnyejang-form')!==-1||_ref.indexOf('sixshot-form')!==-1)_goToIdx=T-1;
+  }
+  if(_goToIdx>=0){SL.style.transition='none';goTo(_goToIdx);requestAnimationFrame(function(){SL.style.transition='';});}
+
   var sec=document.getElementById('sixshot-preview-sec');
   var box=document.getElementById('memorial-six-feed');
   if(!sec||!box)return;
-  fetch('https://humandocu-server-production.up.railway.app/api/today/feed?limit=2')
+  fetch('https://humandocu-server-production.up.railway.app/api/sixshot/feed?limit=3')
     .then(function(r){return r.json();})
     .then(function(data){
       if(!data.items||!data.items.length){sec.style.display='none';return;}
@@ -595,6 +600,7 @@ document.addEventListener('DOMContentLoaded',function(){
 </div>
 </body>
 </html>
+
 
 
 
